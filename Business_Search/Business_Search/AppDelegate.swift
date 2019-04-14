@@ -15,7 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        
+        //UIAppearance Proxy
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().barTintColor = UIColor.blue
+        UINavigationBar.appearance().prefersLargeTitles = false
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        window?.rootViewController = CustomNavigationController(rootViewController: CustomTabController())
+//        window?.rootViewController = UINavigationController(rootViewController: CustomTabController())
+
+//        window?.rootViewController = UINavigationController(rootViewController: MapController())
+
+
         return true
     }
 
