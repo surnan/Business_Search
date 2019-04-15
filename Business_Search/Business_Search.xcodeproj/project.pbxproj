@@ -16,6 +16,8 @@
 		84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */; };
 		84BDE30B2263D61C008C9B01 /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30A2263D61C008C9B01 /* MyTabController.swift */; };
 		84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */; };
+		84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30E2263E652008C9B01 /* UNSYNC.swift */; };
+		84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE31022642B27008C9B01 /* YelpClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		84BDE30A2263D61C008C9B01 /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
 		84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		84BDE30E2263E652008C9B01 /* UNSYNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSYNC.swift; sourceTree = "<group>"; };
+		84BDE31022642B27008C9B01 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,7 @@
 		84BDE2E32263D006008C9B01 = {
 			isa = PBXGroup;
 			children = (
+				84BDE30E2263E652008C9B01 /* UNSYNC.swift */,
 				84BDE2EE2263D007008C9B01 /* Business_Search */,
 				84BDE2ED2263D007008C9B01 /* Products */,
 			);
@@ -74,6 +79,7 @@
 		84BDE3012263D367008C9B01 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84BDE31022642B27008C9B01 /* YelpClient.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,6 +183,8 @@
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
+				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
+				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
