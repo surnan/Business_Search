@@ -27,12 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = CustomNavigationController(rootViewController: CustomTabController())
-//        window?.rootViewController = UINavigationController(rootViewController: CustomTabController())
-
-//        window?.rootViewController = UINavigationController(rootViewController: MapController())
-
-
+        window?.rootViewController = CustomNavigationController(rootViewController: FirstController())
         return true
     }
 
