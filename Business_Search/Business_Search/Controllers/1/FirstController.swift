@@ -14,15 +14,14 @@ let search = UISearchController(searchResultsController: nil)
 class FirstController: UIViewController, UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        // print("")
-        // guard let text = searchController.searchBar.text else { return }
-        // print(text)
+         guard let text = searchController.searchBar.text else { return }
+        //_ = Yelp.getAutoInputResults(text: text, latitude: 37.786882, longitude: -122.399972)
     }
     
     func setupNavigationMenu(){
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
-//        search.searchBar.placeholder = "Type something here to search"
+        search.searchBar.placeholder = "Type something here to search"
         search.searchBar.backgroundColor = UIColor.blue
         search.searchBar.tintColor = UIColor.white //Cancel Button when you are typing
         search.searchBar.barStyle = .black      // Black background with light content
@@ -41,8 +40,6 @@ class FirstController: UIViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         setupNavigationMenu()
-        
-        
-        Yelp.getAutoInputResults(text: "p", latitude: 37.786882, longitude: -122.399972) 
+//        _ = Yelp.getAutoInputResults(text: "p", latitude: 37.786882, longitude: -122.399972)
     }
 }
