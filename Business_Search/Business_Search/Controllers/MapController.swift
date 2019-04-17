@@ -45,7 +45,7 @@ class MapController: UITabBarController {
 
             do {
                 let answer = try JSONDecoder().decode(YelpStruct.self, from: dataObject)
-                print(answer)
+                print("answer:\n\(answer)")
             } catch {
                 print("failed: \n\(error)")
             }

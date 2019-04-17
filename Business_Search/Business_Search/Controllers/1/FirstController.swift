@@ -30,7 +30,7 @@ class FirstController: UIViewController, UISearchResultsUpdating {
         navigationItem.searchController = search
         navigationItem.title = "Business Search"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Left", style: .done, target: self, action: #selector(sayHello))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Right", style: .done, target: self, action: #selector(sayHello))        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Right", style: .done, target: self, action: #selector(sayHello))
     }
     
     
@@ -41,5 +41,8 @@ class FirstController: UIViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         setupNavigationMenu()
+        
+        
+        Yelp.getAutoInputResults(text: "p", latitude: 37.786882, longitude: -122.399972) 
     }
 }
