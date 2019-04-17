@@ -36,16 +36,6 @@ class FirstController: UIViewController, UISearchControllerDelegate{
         return search
     }()
     
-    
-    func updateSearchResults(for searchController: UISearchController) {
-//         guard let text = searchController.searchBar.text else { return }
-//        _ = Yelp.getAutoInputResults(text: text, latitude: 37.786882, longitude: -122.399972)
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print("New scope index is now \(selectedScope)")
-    }
-    
     func setupNavigationMenu(){
         navigationItem.searchController = searchController
         navigationItem.title = "Business Search"

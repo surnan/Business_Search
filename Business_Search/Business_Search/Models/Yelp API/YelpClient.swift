@@ -32,15 +32,18 @@ class Yelp{
     } //-1
     
     
-    class func getAutoInputResults(text: String, latitude: Double, longitude: Double)-> URLSessionDataTask{
+    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (AutoCompleteResponse?, Error?)-> Void)-> URLSessionDataTask{
         let url = Endpoints.autocomplete(text, latitude, longitude).url
         
         let task = taskForGetRequest(url: url, decoder: AutoCompleteResponse.self) { (data, err) in
-            if let error = err {
-                print("Error trying to decode data \n\n\(error.localizedDescription)\n\n\(error)")
-            }
-            if let data = data {
-                print("==>\(data)")
+            if let getError = err {
+                print("Error trying to decode data \n\n\(getError.localizedDescription)\n\n\(getError)")
+                return completion(nil, getError)
+            } else if let data = data {
+                // print("==>\(data)")
+                return completion(data, nil)
+            } else {
+                print("getAutoInputResults (data, err) = (nil, nil)")
             }
         }
         return task
@@ -52,15 +55,29 @@ class Yelp{
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
-            if let err = err {print("error:\n\(err)")}
-            guard let dataObject =  data else {print("There's no data"); return}
+            if err != nil {
+                DispatchQueue.main.async {
+                    completion(nil, err)
+                }
+            }
+            
+            guard let dataObject =  data else {
+                print("taskForGetRequest() - There's no data")
+                DispatchQueue.main.async {
+                    completion(nil, nil)
+                }
+                return
+            }
             
             do {
-                let answer = try JSONDecoder().decode(AutoCompleteResponse.self, from: dataObject)
-                print("=========\n\(answer)")
+                let answer = try JSONDecoder().decode(decoder.self, from: dataObject)
+                DispatchQueue.main.async {
+                    completion(answer, nil)
+                }
             } catch {
-                print("URL = \(url)")
-                print("failed: \n\n\(error.localizedDescription)\n=============\n\(error)")
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
             }
         }
         task.resume()
