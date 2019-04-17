@@ -10,13 +10,11 @@
 		8414475C22658AC100A38AAB /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475B22658AC100A38AAB /* FirstController.swift */; };
 		8414475F2266C4D200A38AAB /* AutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* AutoComplete.swift */; };
 		84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE2EF2263D007008C9B01 /* AppDelegate.swift */; };
-		84BDE2F22263D007008C9B01 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE2F12263D007008C9B01 /* MapController.swift */; };
 		84BDE2F72263D009008C9B01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84BDE2F62263D009008C9B01 /* Assets.xcassets */; };
 		84BDE2FA2263D009008C9B01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */; };
 		84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE3042263D3CD008C9B01 /* UIView+Extensions.swift */; };
 		84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE3052263D3CD008C9B01 /* UIColor+Extension.swift */; };
 		84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */; };
-		84BDE30B2263D61C008C9B01 /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30A2263D61C008C9B01 /* MyTabController.swift */; };
 		84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */; };
 		84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30E2263E652008C9B01 /* UNSYNC.swift */; };
 		84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE31022642B27008C9B01 /* YelpClient.swift */; };
@@ -27,14 +25,12 @@
 		8414475E2266C4D200A38AAB /* AutoComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoComplete.swift; sourceTree = "<group>"; };
 		84BDE2EC2263D007008C9B01 /* Business_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Business_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84BDE2EF2263D007008C9B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84BDE2F12263D007008C9B01 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		84BDE2F62263D009008C9B01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84BDE2F92263D009008C9B01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84BDE2FB2263D009008C9B01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84BDE3042263D3CD008C9B01 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		84BDE3052263D3CD008C9B01 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		84BDE30A2263D61C008C9B01 /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
 		84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		84BDE30E2263E652008C9B01 /* UNSYNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSYNC.swift; sourceTree = "<group>"; };
 		84BDE31022642B27008C9B01 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
@@ -130,8 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				8414475A22658A8500A38AAB /* 1 */,
-				84BDE2F12263D007008C9B01 /* MapController.swift */,
-				84BDE30A2263D61C008C9B01 /* MyTabController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -207,11 +201,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
-				84BDE2F22263D007008C9B01 /* MapController.swift in Sources */,
 				8414475C22658AC100A38AAB /* FirstController.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				8414475F2266C4D200A38AAB /* AutoComplete.swift in Sources */,
-				84BDE30B2263D61C008C9B01 /* MyTabController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
