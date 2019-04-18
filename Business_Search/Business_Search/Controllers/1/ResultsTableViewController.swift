@@ -6,65 +6,67 @@
 //  Copyright © 2019 admin. All rights reserved.
 //
 
-/*
- struct BusinessesStruct: Codable {
- var id: String
- var name: String
- }
- 
- struct CategoriesStruct: Codable {
- var alias: String
- var title: String
- }
- 
- struct TermsStruct: Codable {
- var text: String
- }
- */
-
 import UIKit
 let defaultCellID = "defaultCellID"
 
-class ResultsTableViewController:UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    
-    struct BusinessesStruct{
-        var id: String
-        var name: String
-    }
-    
-    struct CategoriesStruct{
-        var alias: String
-        var title: String
-    }
+protocol TestProtocol {
+    var getNameTitle: String {get}
+    var getIdAlias: String   {get}
+}
 
-    let businessScope = 0
-    let categoriesScope = 1
-    
-    var businessArray = [AutoCompleteResponse.BusinessesStruct]()
-    var categoriesArray = [AutoCompleteResponse.CategoriesStruct]()
+struct BusinessesStruct: TestProtocol{
+    var id: String
+    var name: String
+    var getNameTitle: String {return name}
+    var getIdAlias: String {return id}
+}
+
+struct CategoriesStruct: TestProtocol{
+    var alias: String
+    var title: String
+    var getNameTitle: String {return title}
+    var getIdAlias: String {return alias}
+}
+
+enum IndexOf: Int, CaseIterable {
+    case business = 0
+    case categories = 1
+}
+
+
+class ResultsTableViewController:UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+    var tableViewArray = [[TestProtocol]]()
+    var indexValue = 0
+    var inputString = ""
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print("2 - New scope index is now \(selectedScope)")
+        indexValue = selectedScope
+        tableView.reloadData()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
         if text.count != 0 {
+            inputString = text
             _ = Yelp.getAutoInputResults(text: text, latitude: 37.786882, longitude: -122.399972, completion: handleUpdateSearchResult(data:error:))
+            print("")
+            tableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
+        IndexOf.allCases.forEach{_ in tableViewArray.append( [TestProtocol]())}
         tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
-        tableView.backgroundColor = UIColor.orange
+        tableView.backgroundColor = UIColor.lightBlue
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return tableViewArray[indexValue].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
+        cell.myLabel.text = tableViewArray[indexValue][indexPath.row].getNameTitle
         return cell
     }
     
@@ -72,6 +74,9 @@ class ResultsTableViewController:UITableViewController, UISearchResultsUpdating,
         return 50
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
     
     func handleUpdateSearchResult(data: AutoCompleteResponse?, error: Error?){
         if let err = error {
@@ -82,7 +87,20 @@ class ResultsTableViewController:UITableViewController, UISearchResultsUpdating,
             print("No Error and No Data")
             return
         }
-        businessArray = data.businesses
-        categoriesArray = data.categories
+
+        //tableViewArray.removeAll()    //crash
+        tableViewArray[IndexOf.business.rawValue].removeAll()
+        tableViewArray[IndexOf.categories.rawValue].removeAll()
+
+        data.businesses.forEach{tableViewArray[IndexOf.business.rawValue].append(BusinessesStruct(id: $0.id, name: $0.name))}
+        
+        //Yelp will sometimes return categories that don't contain substring
+        data.categories.forEach { (element) in
+            if element.title.contains(inputString){
+                tableViewArray[IndexOf.categories.rawValue].append(CategoriesStruct(alias: element.alias, title: element.title))
+            }
+        }
+        tableView.reloadData()
+        print("")
     }
 }
