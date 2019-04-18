@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 extension ResultsController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewArray[indexValue].count

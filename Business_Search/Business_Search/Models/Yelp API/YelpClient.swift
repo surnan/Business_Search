@@ -7,7 +7,14 @@
 //
 
 import Foundation
-var fetchLimit = 50
+
+
+enum NetworkError: Error {
+    case badURL
+    case urlSessionDataTaskGetError
+    case unableToDecode
+    case noDataNoError
+}
 
 class Yelp{
     enum Endpoints {  //+1
@@ -31,40 +38,21 @@ class Yelp{
         }
     } //-1
     
-    
-    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (AutoCompleteResponse?, Error?)-> Void)-> URLSessionDataTask{
-        let url = Endpoints.autocomplete(text, latitude, longitude).url
-        
-        let task = taskForGetRequest(url: url, decoder: AutoCompleteResponse.self) { (data, err) in
-            if let getError = err {
-                print("Error trying to decode data \n\n\(getError.localizedDescription)\n\n\(getError)")
-                return completion(nil, getError)
-            } else if let data = data {
-                // print("==>\(data)")
-                return completion(data, nil)
-            } else {
-                print("getAutoInputResults (data, err) = (nil, nil)")
-            }
-        }
-        return task
-    }
-    
-    
-    class private func taskForGetRequest<Decoder: Decodable>(url: URL, decoder: Decoder.Type, completion: @escaping (Decoder?, Error?)-> Void) -> URLSessionDataTask{
+    class private func taskForGetRequest<Decoder: Decodable>(url: URL, decoder: Decoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             if err != nil {
                 DispatchQueue.main.async {
-                    completion(nil, err)
+                    completion(.failure(.urlSessionDataTaskGetError))
                 }
             }
             
             guard let dataObject =  data else {
                 print("taskForGetRequest() - There's no data")
                 DispatchQueue.main.async {
-                    completion(nil, nil)
+                    completion(.failure(.noDataNoError))
                 }
                 return
             }
@@ -72,58 +60,31 @@ class Yelp{
             do {
                 let answer = try JSONDecoder().decode(decoder.self, from: dataObject)
                 DispatchQueue.main.async {
-                    completion(answer, nil)
+                    completion(.success(answer))
                 }
             } catch {
                 DispatchQueue.main.async {
-                    completion(nil, error)
+                    completion(.failure(.unableToDecode))
                 }
             }
         }
         task.resume()
         return task
     }
+
+    
+    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<AutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+        let url = Endpoints.autocomplete(text, latitude, longitude).url
+        let task = taskForGetRequest(url: url, decoder: AutoCompleteResponse.self) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Error (localized): \(error.localizedDescription)\n\nError: \(error)")
+                return completion(.failure(error))
+            case .success(let answer):
+                return completion(.success(answer))
+            }
+        }
+        return task
+    }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- struct SearchLocation {
- private static var _address: String?
- private static var _latitude: Double?
- private static var _longitude: Double?
- 
- static func setAddress(address: String){
- self._address = address
- self._longitude = nil
- self._latitude = nil
- }
- 
- static func setAddress(lat: Double, lon: Double){
- self._address = nil
- self._latitude = lat
- self._longitude = lon
- }
- 
- static func getAddress()-> String {
- if let address = _address {
- return "&\"\(address)\""
- }
- 
- guard let lat = _latitude, let lon = _longitude else {return ""}
- return "&latitude=\(lat)&longitude=\(lon)"
- }
- }
- */
