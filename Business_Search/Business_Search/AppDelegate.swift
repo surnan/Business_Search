@@ -8,6 +8,7 @@
 
 import UIKit
 
+var fetchLimit = 50
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
