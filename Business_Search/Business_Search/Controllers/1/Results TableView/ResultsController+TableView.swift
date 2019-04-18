@@ -27,4 +27,10 @@ extension ResultsController {
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newVC =  MyTabController()
+        newVC.category = tableViewArray[indexValue][indexPath.row].getNameTitle
+        present(UINavigationController(rootViewController: newVC), animated: true) //Can't push into it
+    }
 }
