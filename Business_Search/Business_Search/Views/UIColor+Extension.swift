@@ -10,7 +10,7 @@ import UIKit
 
 //Colors from http://www.tayloredmktg.com/rgb/
 
-let colorArray: [UIColor] = [.solidOrange, .lemonChiffon, .paleGreen, .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed, .grey227,  .steelBlue4, .skyBlue4, .grey196, .plum, .dodgerBlue4, .tan, .teal]
+let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon, .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed, .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]
 
 
 extension UIColor {
