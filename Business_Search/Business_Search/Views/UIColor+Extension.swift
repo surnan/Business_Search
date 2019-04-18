@@ -10,6 +10,9 @@ import UIKit
 
 //Colors from http://www.tayloredmktg.com/rgb/
 
+let colorArray: [UIColor] = [.solidOrange, .lemonChiffon, .paleGreen, .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed, .grey227,  .steelBlue4, .skyBlue4, .grey196, .plum, .dodgerBlue4, .tan, .teal]
+
+
 extension UIColor {
     static let solidOrange = UIColor(red: 222/255, green: 136/255, blue: 44/255, alpha: 1)
     static let greyOrange = UIColor(red: 230/255, green: 215/255, blue: 200/255, alpha: 0.5)
@@ -35,4 +38,8 @@ extension UIColor {
     static let darkBlue2 = UIColor(red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
     static let teal = UIColor(red: 48/255, green: 164/255, blue: 182/255, alpha: 1)
     static let lightBlue = UIColor(red: 218/255, green: 235/255, blue: 243/255, alpha: 1)
+    static let lemonChiffon = UIColor(red: 255/255, green: 250/255, blue: 205/255, alpha: 1)
+    static let paleGreen = UIColor(red: 152/255, green: 251/255, blue: 152/255, alpha: 1)
+    static let plum = UIColor(red: 221/255, green: 160/255, blue: 221/255, alpha: 1)
+    static let tan = UIColor(red: 210/255, green: 180/255, blue: 140/255, alpha: 1)
 }

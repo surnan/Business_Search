@@ -67,6 +67,7 @@ class ResultsTableViewController:UITableViewController, UISearchResultsUpdating,
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
         cell.myLabel.text = tableViewArray[indexValue][indexPath.row].getNameTitle
+        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
         return cell
     }
     
