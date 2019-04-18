@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = CustomNavigationController(rootViewController: FirstController())
+        window?.rootViewController = CustomNavigationController(rootViewController: SearchController())
         return true
     }
 

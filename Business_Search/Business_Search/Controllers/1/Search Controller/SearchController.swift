@@ -11,8 +11,8 @@ import UIKit
 
 
 
-class FirstController: UIViewController, UISearchControllerDelegate{
-    let resultsTableController = ResultsTableViewController()
+class SearchController: UIViewController, UISearchControllerDelegate{
+    let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
     
     lazy var searchController: UISearchController = {
