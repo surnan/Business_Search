@@ -25,7 +25,7 @@ class FirstController: UIViewController, UISearchControllerDelegate{
         search.searchBar.tintColor = self.view.tintColor
         search.searchBar.scopeButtonTitles = ["Business Names", "Categories"]
         search.searchBar.barStyle = .black      // Typing Font = white
-        //        search.obscuresBackgroundDuringPresentation = true
+        //search.obscuresBackgroundDuringPresentation = true    //removes .lightContent from navigation item
         
         //DON'T SEE IT
         //        search.searchBar.sizeToFit()
