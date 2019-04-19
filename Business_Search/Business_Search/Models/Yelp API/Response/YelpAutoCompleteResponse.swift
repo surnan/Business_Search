@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AutoCompleteResponse: Codable {
+struct YelpAutoCompleteResponse: Codable {
     struct BusinessesStruct: Codable {
         var id: String
         var name: String

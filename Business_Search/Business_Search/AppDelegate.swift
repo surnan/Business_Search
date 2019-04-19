@@ -8,7 +8,12 @@
 
 import UIKit
 
-var fetchLimit = 50
+var fetchLimit = 5
+var radius = 50
+var latitude = 37.786882
+var longitude = -122.399972
+
+
 let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
                              .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed,
                              .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]

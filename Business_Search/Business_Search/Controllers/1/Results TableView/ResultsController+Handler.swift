@@ -9,11 +9,11 @@
 import UIKit
 
 extension ResultsController {
-    func handleUpdateSearchResult(result: Result<AutoCompleteResponse, NetworkError>){
+    func handleUpdateSearchResult(result: Result<YelpAutoCompleteResponse, NetworkError>){
         
         switch result {
         case .failure(let error):
-            print("-->Error (localized): \(error.localizedDescription)\n-->Error (localized): \(error)")
+            print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
         case .success(let data):
                 //tableViewArray.removeAll()    //crash
                 tableViewArray[IndexOf.business.rawValue].removeAll()
