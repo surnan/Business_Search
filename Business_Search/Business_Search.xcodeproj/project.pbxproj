@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8414475C22658AC100A38AAB /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475B22658AC100A38AAB /* SearchController.swift */; };
-		8414475F2266C4D200A38AAB /* AutoComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* AutoComplete.swift */; };
+		8414475F2266C4D200A38AAB /* AutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* AutoCompleteResponse.swift */; };
 		84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* MyTabController.swift */; };
 		84B3CF912268AAFA0012A75C /* ResultsController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF902268AAFA0012A75C /* ResultsController+TableView.swift */; };
 		84B3CF932268AB790012A75C /* ResultsController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF922268AB790012A75C /* ResultsController+Search.swift */; };
@@ -24,11 +24,13 @@
 		84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE31022642B27008C9B01 /* YelpClient.swift */; };
 		84D3DB9C2266DC0F00E46B2E /* ResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9B2266DC0F00E46B2E /* ResultsController.swift */; };
 		84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */; };
+		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
+		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8414475B22658AC100A38AAB /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
-		8414475E2266C4D200A38AAB /* AutoComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoComplete.swift; sourceTree = "<group>"; };
+		8414475E2266C4D200A38AAB /* AutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteResponse.swift; sourceTree = "<group>"; };
 		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
 		84B3CF902268AAFA0012A75C /* ResultsController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsController+TableView.swift"; sourceTree = "<group>"; };
 		84B3CF922268AB790012A75C /* ResultsController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsController+Search.swift"; sourceTree = "<group>"; };
@@ -46,6 +48,8 @@
 		84BDE31022642B27008C9B01 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		84D3DB9B2266DC0F00E46B2E /* ResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsController.swift; sourceTree = "<group>"; };
 		84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
+		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
+		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 		8414475D2266C49900A38AAB /* Yelp API */ = {
 			isa = PBXGroup;
 			children = (
+				84DC40D322697323003003C4 /* Error Enums */,
 				841447602266C50800A38AAB /* Response */,
 				84BDE31022642B27008C9B01 /* YelpClient.swift */,
 			);
@@ -80,7 +85,8 @@
 		841447602266C50800A38AAB /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				8414475E2266C4D200A38AAB /* AutoComplete.swift */,
+				8414475E2266C4D200A38AAB /* AutoCompleteResponse.swift */,
+				84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -180,6 +186,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		84DC40D322697323003003C4 /* Error Enums */ = {
+			isa = PBXGroup;
+			children = (
+				84DC40D122697319003003C4 /* Error Enums.swift */,
+			);
+			path = "Error Enums";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -250,14 +264,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
+				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				8414475C22658AC100A38AAB /* SearchController.swift in Sources */,
 				84B3CF952268ABD00012A75C /* ResultsController+Handler.swift in Sources */,
 				84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				84B3CF912268AAFA0012A75C /* ResultsController+TableView.swift in Sources */,
-				8414475F2266C4D200A38AAB /* AutoComplete.swift in Sources */,
+				8414475F2266C4D200A38AAB /* AutoCompleteResponse.swift in Sources */,
 				84D3DB9C2266DC0F00E46B2E /* ResultsController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
