@@ -29,9 +29,8 @@ class Yelp{
             }
         }
         var url: URL {
-//            var tempString = toString.replacingOccurrences(of: " ", with: "%20")
-//            return URL(string: tempString)!
-            return URL(string: toString)!
+            var tempString = toString.replacingOccurrences(of: " ", with: "%20")
+            return URL(string: tempString)!
         }
     } //-1
     
@@ -118,7 +117,7 @@ class Yelp{
         guard let verifiedResponse = response else {return nil}
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
-        print("Number of Yelp Calls left today ==> \(httpResponse.allHeaderFields["ratelimit-remaining"])")
+        print("Number of Yelp Calls left today ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
         
         switch httpResponse.statusCode {
         case 200: return nil
