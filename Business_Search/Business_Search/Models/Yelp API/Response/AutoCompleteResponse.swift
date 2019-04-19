@@ -21,6 +21,7 @@ struct AutoCompleteResponse: Codable {
     
     struct TermsStruct: Codable {
         var text: String
+//        var text2: String //purposely made error
     }
     
     var businesses: [BusinessesStruct]

@@ -9,6 +9,9 @@
 import UIKit
 
 var fetchLimit = 50
+let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
+                             .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed,
+                             .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
