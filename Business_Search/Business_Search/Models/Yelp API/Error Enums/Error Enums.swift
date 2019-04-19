@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case connectSuccesfulDownloadDataFail
     case yelpErrorDecoded
     case unableToDecode
-    case noDataNoError
+    case noData_noError
 }
 
 //Note Yelp will not return error if bad decoder is used on our side
