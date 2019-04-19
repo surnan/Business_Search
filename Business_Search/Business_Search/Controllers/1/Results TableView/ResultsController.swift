@@ -38,7 +38,7 @@ class ResultsController:UITableViewController, UISearchResultsUpdating, UISearch
     var tableViewArray = [[TestProtocol]]()
     var indexValue = 0
     var inputString = ""
-    
+    var urlSessionTask: URLSessionDataTask?
 
     
     override func viewDidLoad() {

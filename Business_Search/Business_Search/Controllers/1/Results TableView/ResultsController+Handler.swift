@@ -29,5 +29,6 @@ extension ResultsController {
                 }
                 tableView.reloadData()
         }
+        urlSessionTask = nil
     }
 }

@@ -20,9 +20,25 @@ extension ResultsController {
         guard let text = searchController.searchBar.text else { return }
         if text.count != 0 {
             inputString = text
-            _ = Yelp.getAutoInputResults(text: text, latitude: 37.786882, longitude: -122.399972, completion: handleUpdateSearchResult(result:))
+            urlSessionTask?.cancel()
+            urlSessionTask = Yelp.getAutoInputResults(text: text, latitude: 37.786882, longitude: -122.399972, completion: handleUpdateSearchResult(result:))
             print("Yelp Auto-Complete Call")
             tableView.reloadData()
         }
     }
 }
+
+/*
+ func updateSearchResults(for searchController: UISearchController) {
+ guard let text = searchController.searchBar.text else { return }
+ if text.count != 0 && urlSessionTask == nil {
+ inputString = text
+ urlSessionTask = Yelp.getAutoInputResults(text: text, latitude: 37.786882, longitude: -122.399972, completion: handleUpdateSearchResult(result:))
+ print("Yelp Auto-Complete Call")
+ tableView.reloadData()
+ } else {
+ print("skipped network request")
+ }
+ }
+
+ */
