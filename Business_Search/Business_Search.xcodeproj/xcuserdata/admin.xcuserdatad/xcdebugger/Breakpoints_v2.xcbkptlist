@@ -13,5 +13,98 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
+            timestampString = "577402056.510331"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "checkYelpReturnedStatusCodes(response:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Business_Search.Yelp.(checkYelpReturnedStatusCodes in _7EC255E254E74648450991436E5CA0EB)(response: Swift.Optional&lt;__C.NSURLResponse&gt;) -&gt; Swift.Optional&lt;Business_Search.YelpAPIError&gt;"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "577402056.684065"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1063">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Business_Search.Yelp.(checkYelpReturnedStatusCodes in _7EC255E254E74648450991436E5CA0EB)(response: Swift.Optional&lt;__C.NSURLResponse&gt;) -&gt; Swift.Optional&lt;Business_Search.YelpAPIError&gt;"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "577402056.686336"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1085">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Business_Search.Yelp.(checkYelpReturnedStatusCodes in _7EC255E254E74648450991436E5CA0EB)(response: Swift.Optional&lt;__C.NSURLResponse&gt;) -&gt; Swift.Optional&lt;Business_Search.YelpAPIError&gt;"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "577402056.688848"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1157">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Business_Search.Yelp.(checkYelpReturnedStatusCodes in _7EC255E254E74648450991436E5CA0EB)(response: Swift.Optional&lt;__C.NSURLResponse&gt;) -&gt; Swift.Optional&lt;Business_Search.YelpAPIError&gt;"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "577402056.691172"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1419">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Business_Search.Yelp.(checkYelpReturnedStatusCodes in _7EC255E254E74648450991436E5CA0EB)(response: Swift.Optional&lt;__C.NSURLResponse&gt;) -&gt; Swift.Optional&lt;Business_Search.YelpAPIError&gt;"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "577402056.693548"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "1678">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -11,10 +11,10 @@ import UIKit
 class MyTabController: UITabBarController {
     
     var category: String!
+    var urlSessionTask: URLSessionDataTask?
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.green
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleLeftBarButton))
         
     }
@@ -27,5 +27,6 @@ class MyTabController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("Category= \(category ?? "")")
+        urlSessionTask = Yelp.getNearbyBusinesses(category: category, latitude: latitude, longitude: longitude, completion: handlegetNearbyBusinesses(result:))
     }
 }

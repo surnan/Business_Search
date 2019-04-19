@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8414475C22658AC100A38AAB /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475B22658AC100A38AAB /* SearchController.swift */; };
-		8414475F2266C4D200A38AAB /* AutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* AutoCompleteResponse.swift */; };
+		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* MyTabController.swift */; };
 		84B3CF912268AAFA0012A75C /* ResultsController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF902268AAFA0012A75C /* ResultsController+TableView.swift */; };
 		84B3CF932268AB790012A75C /* ResultsController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF922268AB790012A75C /* ResultsController+Search.swift */; };
@@ -26,11 +26,13 @@
 		84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */; };
 		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
 		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
+		84DC40DB2269F590003003C4 /* MyTabController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40DA2269F590003003C4 /* MyTabController+Extension.swift */; };
+		84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40DC2269F7C0003003C4 /* YelpBusinessResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8414475B22658AC100A38AAB /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
-		8414475E2266C4D200A38AAB /* AutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteResponse.swift; sourceTree = "<group>"; };
+		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
 		84B3CF902268AAFA0012A75C /* ResultsController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsController+TableView.swift"; sourceTree = "<group>"; };
 		84B3CF922268AB790012A75C /* ResultsController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsController+Search.swift"; sourceTree = "<group>"; };
@@ -50,6 +52,8 @@
 		84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
 		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
+		84DC40DA2269F590003003C4 /* MyTabController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyTabController+Extension.swift"; sourceTree = "<group>"; };
+		84DC40DC2269F7C0003003C4 /* YelpBusinessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +89,9 @@
 		841447602266C50800A38AAB /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				8414475E2266C4D200A38AAB /* AutoCompleteResponse.swift */,
+				8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */,
 				84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */,
+				84DC40DC2269F7C0003003C4 /* YelpBusinessResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				84B3CF8B2268A9030012A75C /* MyTabController.swift */,
+				84DC40DA2269F590003003C4 /* MyTabController+Extension.swift */,
 			);
 			path = 2;
 			sourceTree = "<group>";
@@ -273,14 +279,16 @@
 				84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				84B3CF912268AAFA0012A75C /* ResultsController+TableView.swift in Sources */,
-				8414475F2266C4D200A38AAB /* AutoCompleteResponse.swift in Sources */,
+				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				84D3DB9C2266DC0F00E46B2E /* ResultsController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84B3CF932268AB790012A75C /* ResultsController+Search.swift in Sources */,
+				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
+				84DC40DB2269F590003003C4 /* MyTabController+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
