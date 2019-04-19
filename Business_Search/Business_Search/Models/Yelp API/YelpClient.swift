@@ -11,7 +11,6 @@ import Foundation
 class Yelp{
     private enum Endpoints {  //+1
         static let base = "https://api.yelp.com/v3"
-//                static let base = "https://api.yelp.com/v33"    //purposely forced error
         case autocomplete(String, Double, Double)
         case businesses(String)
         var toString: String {
@@ -47,32 +46,22 @@ class Yelp{
     
     class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
         var request = URLRequest(url: url)
-//        request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
-            
-            //Need to handle here because response doesn't escape via completion handler
-            if let respError = checkYelpStatusCodeForError(response: resp) {
-                switch respError {
-                case YelpAPIError.FIELD_REQUIRED: print("--> Yelp Error: 'Field Required' or 'Validation Error'")
-                case YelpAPIError.UNAUTHORIZED: print("--> Yelp Error: 'Unauthorized'")
-                case YelpAPIError.INTERNAL_SERVER_ERROR: print("--> Yelp Error: 'Internal Server Error'")
-                default: print("--> Yelp Error: Undefined'")
-                }
-            }
+            _ = checkYelpStatusCodeForError(response: resp)  //'resp' not in completion handler.  Check now.
             
             if let error = err {
                 switch error._code {
-                case -1001: completion(.failure(.networkTimeOut))
-                case -1200: completion(.failure(.networkConnectionGoodButUnableToConnect))
-                default: completion(.failure(.connectSuccesfulDownloadDataFail))
+                case -1001: return completion(.failure(.networkTimeOut))
+                case -1200: return completion(.failure(.networkConnectionGoodButUnableToConnect))
+                default: return completion(.failure(.connectSuccesfulDownloadDataFail))
                 }
-                return
             }
             
             guard let dataObject =  data else {
                 DispatchQueue.main.async {
-                    completion(.failure(.noDataNoError))
+                    completion(.failure(.noData_noError))
                 }
                 return
             }
@@ -82,43 +71,34 @@ class Yelp{
                 DispatchQueue.main.async {
                     completion(.success(dataDecoded))
                 }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(.failure(.unableToDecode))
+            } catch let decodeError {
+                do {
+                    let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
+                    print("\nYelp Error Decoded: \n\(yelpErrorDecoded)")
+                    DispatchQueue.main.async {
+                        completion(.failure(.yelpErrorDecoded))
+                    }
+                } catch {
+                    print("\nDecoding Error: \n\(decodeError)")
+                    DispatchQueue.main.async {
+                        completion(.failure(.unableToDecode))
+                    }
                 }
             }
-            
-            do {
-                let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
-                print("yelpErrorDecoded: \n\(yelpErrorDecoded)")
-                DispatchQueue.main.async {
-                    completion(.failure(.yelpErrorDecoded))
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(.failure(.unableToDecode))
-                }
-            }
-            
-            
-            
-            
-            
-            
         }
         task.resume()
         return task
     }
     
+    
     class private func checkYelpStatusCodeForError(response: URLResponse?)-> YelpAPIError?{
         let httpResponse = response as! HTTPURLResponse
         switch httpResponse.statusCode {
         case 200: return nil
-        case 400: return YelpAPIError.FIELD_REQUIRED
-        case 401: return YelpAPIError.UNAUTHORIZED
-        case 500: return YelpAPIError.INTERNAL_SERVER_ERROR
-        default: return YelpAPIError.UNKNOWN_ERROR
+        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
+        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.UNAUTHORIZED
+        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.INTERNAL_SERVER_ERROR
+        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.UNKNOWN_ERROR
         }
     }
 }
-
