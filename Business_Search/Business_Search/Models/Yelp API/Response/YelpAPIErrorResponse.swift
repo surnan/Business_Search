@@ -14,8 +14,6 @@ struct YelpAPIErrorResponse: Codable {
         var code: String
         var description: String
         var field: String
-        var instance: String
     }
-
-    var error: [ErrorStruct]
+    var error: ErrorStruct
 }
