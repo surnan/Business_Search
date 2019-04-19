@@ -18,6 +18,7 @@ enum NetworkError: Error {
     case noDataNoError
 }
 
+//Note Yelp will not return error if bad decoder is used on our side
 enum YelpAPIError: Error {
     case FIELD_REQUIRED
     case VALIDATION_ERROR

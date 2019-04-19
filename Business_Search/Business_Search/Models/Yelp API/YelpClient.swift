@@ -11,7 +11,7 @@ import Foundation
 class Yelp{
     private enum Endpoints {  //+1
         static let base = "https://api.yelp.com/v3"
-        //        static let base = "https://api.yelp.com/v33"    //purposely forced error
+//                static let base = "https://api.yelp.com/v33"    //purposely forced error
         case autocomplete(String, Double, Double)
         case businesses(String)
         var toString: String {
@@ -47,7 +47,7 @@ class Yelp{
     
     class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
         var request = URLRequest(url: url)
-        request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
+//        request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             
@@ -57,7 +57,7 @@ class Yelp{
                 case YelpAPIError.FIELD_REQUIRED: print("--> Yelp Error: 'Field Required' or 'Validation Error'")
                 case YelpAPIError.UNAUTHORIZED: print("--> Yelp Error: 'Unauthorized'")
                 case YelpAPIError.INTERNAL_SERVER_ERROR: print("--> Yelp Error: 'Internal Server Error'")
-                default: print("--> Yelp Error: Undefinded'")
+                default: print("--> Yelp Error: Undefined'")
                 }
             }
             
@@ -78,15 +78,33 @@ class Yelp{
             }
             
             do {
-                let answer = try JSONDecoder().decode(decoder.self, from: dataObject)
+                let dataDecoded = try JSONDecoder().decode(decoder.self, from: dataObject)
                 DispatchQueue.main.async {
-                    completion(.success(answer))
+                    completion(.success(dataDecoded))
                 }
             } catch {
                 DispatchQueue.main.async {
                     completion(.failure(.unableToDecode))
                 }
             }
+            
+            do {
+                let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
+                print("yelpErrorDecoded: \n\(yelpErrorDecoded)")
+                DispatchQueue.main.async {
+                    completion(.failure(.yelpErrorDecoded))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(.unableToDecode))
+                }
+            }
+            
+            
+            
+            
+            
+            
         }
         task.resume()
         return task
