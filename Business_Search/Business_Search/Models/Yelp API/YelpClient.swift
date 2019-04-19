@@ -92,7 +92,10 @@ class Yelp{
     
     
     class private func checkYelpStatusCodeForError(response: URLResponse?)-> YelpAPIError?{
-        let httpResponse = response as! HTTPURLResponse
+        
+        guard let verifiedResponse = response else {return nil}
+        
+        let httpResponse = verifiedResponse as! HTTPURLResponse
         switch httpResponse.statusCode {
         case 200: return nil
         case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
