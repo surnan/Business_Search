@@ -45,13 +45,32 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         print("Hello")
     }
     
-    
+    var urlSessionTask: URLSessionDataTask?
 
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         setupNavigationMenu()
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
-        // _ = Yelp.getAutoInputResults(text: "p", latitude: 37.786882, longitude: -122.399972)
+        
+        
+        urlSessionTask?.cancel()
+        urlSessionTask = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
+    }
+    
+    func handleLoadUpBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
+        
+        
+        switch result {
+        case .failure(let error):
+            print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
+        case .success(let data):
+            print("---> Succesfully decoded data")
+            
+            //READY to write to CoreData
+            
+            
+        }
+        urlSessionTask = nil
     }
 }

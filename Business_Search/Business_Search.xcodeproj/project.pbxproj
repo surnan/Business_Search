@@ -31,6 +31,7 @@
 		84DC40DF226A80B1003003C4 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40DE226A80B1003003C4 /* FirstController.swift */; };
 		84DC40E1226A80D3003003C4 /* SecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E0226A80D3003003C4 /* SecondController.swift */; };
 		84DC40E3226A80EB003003C4 /* ThirdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E2226A80EB003003C4 /* ThirdController.swift */; };
+		84DC40E9226B7BD7003003C4 /* YelpData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E7226B7BD7003003C4 /* YelpData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		84DC40DE226A80B1003003C4 /* FirstController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstController.swift; sourceTree = "<group>"; };
 		84DC40E0226A80D3003003C4 /* SecondController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondController.swift; sourceTree = "<group>"; };
 		84DC40E2226A80EB003003C4 /* ThirdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdController.swift; sourceTree = "<group>"; };
+		84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YelpData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		84BDE3012263D367008C9B01 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84DC40E6226B7B89003003C4 /* Core Data */,
 				8414475D2266C49900A38AAB /* Yelp API */,
 			);
 			path = Models;
@@ -207,6 +210,14 @@
 				84DC40D122697319003003C4 /* Error Enums.swift */,
 			);
 			path = "Error Enums";
+			sourceTree = "<group>";
+		};
+		84DC40E6226B7B89003003C4 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				84DC40E7226B7BD7003003C4 /* YelpData.xcdatamodeld */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +308,7 @@
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84B3CF932268AB790012A75C /* ResultsController+Search.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
+				84DC40E9226B7BD7003003C4 /* YelpData.xcdatamodeld in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
@@ -492,6 +504,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84DC40E7226B7BD7003003C4 /* YelpData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */,
+			);
+			currentVersion = 84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */;
+			path = YelpData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 84BDE2E42263D006008C9B01 /* Project object */;
 }

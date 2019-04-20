@@ -17,6 +17,7 @@ class Yelp{
         static let base = "https://api.yelp.com/v3"
         case autocomplete(String, Double, Double)
         case searchForBusinesses(String, Double, Double)
+        case loadUpBusinesses(Double, Double)
         var toString: String {
             switch  self {
             case .autocomplete(let inputString, let latitude, let longitude):    return Endpoints.base
@@ -32,6 +33,13 @@ class Yelp{
                 + "&latitude=\(latitude)"
                 + "&longitude=\(longitude)"
                 + "&radius\(radius)"
+            case .loadUpBusinesses(let latitude, let longitude):    return Endpoints.base
+                + "/businesses"
+                + "/search?latitude=\(latitude)"
+                + "&longitude=\(longitude)"
+                + "&radius=\(radius)"
+                + "&limit=\(limit)"
+                // +  "&offset= "
             }
         }
         var url: URL {
@@ -70,6 +78,20 @@ class Yelp{
         return task
     }
     
+    
+    
+    class func loadUpBusinesses(latitude: Double, longitude: Double, completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+        let url = Endpoints.loadUpBusinesses(latitude, longitude).url
+        let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
+            switch result {
+            case .failure(let error):
+                return completion(.failure(error))
+            case .success(let answer):
+                return completion(.success(answer))
+            }
+        }
+        return task
+    }
     
     
     class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
