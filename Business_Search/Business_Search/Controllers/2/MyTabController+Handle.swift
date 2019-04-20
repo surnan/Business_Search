@@ -17,7 +17,10 @@ extension MyTabController {
         case .failure(let error):
             print("-->Error: \(error)")
         case .success(let data):
-            print("")
+            print("--->handleGetNearbyBusiness below:")
+            data.businesses.forEach{
+                print($0.name ?? "", $0.display_phone ?? "")
+            }
         }
         urlSessionTask = nil
     }

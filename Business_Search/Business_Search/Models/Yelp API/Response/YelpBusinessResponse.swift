@@ -70,3 +70,15 @@ struct UnwrapBusinessStruct {
     var categories: CategoriesStruct
     var location: CoordinatesStruct
 }
+
+class Businesses {
+    var items = [UnwrapBusinessStruct]()
+    
+    class func loadItemArray(businessesStruct: BusinessesStruct){
+        
+        
+        
+        
+        
+    }
+}

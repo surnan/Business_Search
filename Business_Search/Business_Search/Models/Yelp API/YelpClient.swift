@@ -8,6 +8,10 @@
 
 import Foundation
 
+//https://api.yelp.com/v3/businesses/search?categories=pizza&latitude=37.786882&longitude=-122.399972&radius=500&limit=2
+//https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786942&longitude=-122.399643
+
+
 class Yelp{
     private enum Endpoints {  //+1
         static let base = "https://api.yelp.com/v3"
@@ -17,15 +21,17 @@ class Yelp{
             switch  self {
             case .autocomplete(let inputString, let latitude, let longitude):    return Endpoints.base
                 + "/autocomplete?text=\(inputString)"
-                + "&fetch=\(fetchLimit)"
+                + "&limit=\(limit)"
                 + "&latitude=\(latitude)"
                 + "&longitude=\(longitude)"
+                + "&radius\(radius)"
             case .searchForBusinesses(let inputString, let latitude, let longitude):      return Endpoints.base
                 + "/businesses"
                 + "/search?categories=\(inputString)"
-                + "&fetch=\(fetchLimit)"
+                + "&limit=\(limit)"
                 + "&latitude=\(latitude)"
                 + "&longitude=\(longitude)"
+                + "&radius\(radius)"
             }
         }
         var url: URL {
@@ -38,6 +44,7 @@ class Yelp{
     
     class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.autocomplete(text, latitude, longitude).url
+        print("url = \(url)")
         let task = taskForYelpGetRequest(url: url, decoder: YelpAutoCompleteResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
