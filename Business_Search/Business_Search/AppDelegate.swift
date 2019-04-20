@@ -8,7 +8,7 @@
 
 import UIKit
 
-var fetchLimit = 10
+var limit = 10
 var radius = 50
 var latitude = 37.786882
 var longitude = -122.399972
