@@ -20,10 +20,25 @@ extension ResultsController {
         guard let text = searchController.searchBar.text else { return }
         if text.count != 0 {
             inputString = text
-            urlSessionTask?.cancel()
-            urlSessionTask = Yelp.getAutoInputResults(text: text, latitude: latitude, longitude: longitude, completion: handleUpdateSearchResult(result:))
+//            urlSessionTask?.cancel()
+//            urlSessionTask = Yelp.getAutoInputResults(text: text, latitude: latitude, longitude: longitude, completion: handleUpdateSearchResult(result:))
+            
+
+            //Only here so I don't have to keep restarting program to get query
+            urlSessionTask = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
+            
+            
             print("Yelp Auto-Complete Call")
             tableView.reloadData()
         }
     }
+    
+    func handleLoadUpBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
+        
+        print("test")
+        print("test")
+        
+        
+    }
+    
 }
