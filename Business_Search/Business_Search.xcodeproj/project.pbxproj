@@ -31,7 +31,10 @@
 		84DC40DF226A80B1003003C4 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40DE226A80B1003003C4 /* FirstController.swift */; };
 		84DC40E1226A80D3003003C4 /* SecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E0226A80D3003003C4 /* SecondController.swift */; };
 		84DC40E3226A80EB003003C4 /* ThirdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E2226A80EB003003C4 /* ThirdController.swift */; };
-		84DC40E9226B7BD7003003C4 /* YelpData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E7226B7BD7003003C4 /* YelpData.xcdatamodeld */; };
+		84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */; };
+		84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40EA226BCB2C003003C4 /* DataController.swift */; };
+		84DC40ED226BFCC3003003C4 /* Business+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40EC226BFCC3003003C4 /* Business+Extension.swift */; };
+		84F1B470226CD23300EDBABC /* SearchController+FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B46F226CD23300EDBABC /* SearchController+FetchRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		84DC40E0226A80D3003003C4 /* SecondController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondController.swift; sourceTree = "<group>"; };
 		84DC40E2226A80EB003003C4 /* ThirdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdController.swift; sourceTree = "<group>"; };
 		84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YelpData.xcdatamodel; sourceTree = "<group>"; };
+		84DC40EA226BCB2C003003C4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		84DC40EC226BFCC3003003C4 /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
+		84F1B46F226CD23300EDBABC /* SearchController+FetchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchController+FetchRequest.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				84B3CF8F2268AA8C0012A75C /* Results TableView */,
-				84B3CF8E2268AA800012A75C /* Search Controller */,
 			);
 			path = 1;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				8414475B22658AC100A38AAB /* SearchController.swift */,
+				84F1B46F226CD23300EDBABC /* SearchController+FetchRequest.swift */,
 			);
 			path = "Search Controller";
 			sourceTree = "<group>";
@@ -190,6 +196,7 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84B3CF8E2268AA800012A75C /* Search Controller */,
 				8414475A22658A8500A38AAB /* 1 */,
 				84B3CF8A2268A8B30012A75C /* 2 */,
 			);
@@ -215,7 +222,9 @@
 		84DC40E6226B7B89003003C4 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				84DC40E7226B7BD7003003C4 /* YelpData.xcdatamodeld */,
+				84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */,
+				84DC40EA226BCB2C003003C4 /* DataController.swift */,
+				84DC40EC226BFCC3003003C4 /* Business+Extension.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -296,19 +305,22 @@
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				8414475C22658AC100A38AAB /* SearchController.swift in Sources */,
+				84F1B470226CD23300EDBABC /* SearchController+FetchRequest.swift in Sources */,
 				84B3CF952268ABD00012A75C /* ResultsController+Handler.swift in Sources */,
 				84DC40E3226A80EB003003C4 /* ThirdController.swift in Sources */,
 				84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				84B3CF912268AAFA0012A75C /* ResultsController+TableView.swift in Sources */,
+				84DC40ED226BFCC3003003C4 /* Business+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				84D3DB9C2266DC0F00E46B2E /* ResultsController.swift in Sources */,
+				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				84DC40DF226A80B1003003C4 /* FirstController.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84B3CF932268AB790012A75C /* ResultsController+Search.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
-				84DC40E9226B7BD7003003C4 /* YelpData.xcdatamodeld in Sources */,
+				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
@@ -506,13 +518,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		84DC40E7226B7BD7003003C4 /* YelpData.xcdatamodeld */ = {
+		84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */,
 			);
 			currentVersion = 84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */;
-			path = YelpData.xcdatamodeld;
+			path = YelpDataModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

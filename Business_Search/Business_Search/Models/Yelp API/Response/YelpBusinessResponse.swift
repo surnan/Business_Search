@@ -51,34 +51,3 @@ struct YelpBusinessResponse: Codable {
     var businesses: [BusinessesStruct]
 }
 
-struct UnwrapBusinessStruct {
-    struct CoordinatesStruct{
-        var latitude: Double
-        var longitude: Double
-    }
-    
-    struct CategoriesStruct: Codable {
-        var alias: String?
-        var title: String?
-    }
-    
-    var displayAddress: String
-    var phoneNumber: String
-    var price: String
-    var rating: String
-    var distance: Double
-    var categories: CategoriesStruct
-    var location: CoordinatesStruct
-}
-
-class Businesses {
-    var items = [UnwrapBusinessStruct]()
-    
-    class func loadItemArray(businessesStruct: BusinessesStruct){
-        
-        
-        
-        
-        
-    }
-}
