@@ -34,6 +34,8 @@ extension SearchController {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //print("DID CHANGE")
+        locationArray.removeAll()
+        locationArray = getAllLocations()
     }
     
     

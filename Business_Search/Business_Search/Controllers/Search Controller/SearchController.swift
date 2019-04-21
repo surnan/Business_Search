@@ -37,7 +37,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     func setupNavigationMenu(){
         navigationItem.searchController = searchController
         navigationItem.title = "Business Search"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Left", style: .done, target: self, action: #selector(sayHello))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Location", style: .done, target: self, action: #selector(getNewLocation))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(deleteAll))
     }
     
@@ -63,17 +63,20 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     var locationArray = [Location]()
    
+
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         setupNavigationMenu()
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
-        
         locationArray = getAllLocations()
-        
-        
         if isMyLocationSaved(lat: latitude, lon: longitude) {return}
-        
+        getNewLocationData()
+    }
+    
+
+    func getNewLocationData() {
         dataController.viewContext.perform {
             let internalViewContext = self.dataController.viewContext
             let newLocation = Location(context: internalViewContext)
@@ -81,9 +84,10 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             newLocation.longititude = longitude
             try? internalViewContext.save()
         }
-
+        
         _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
+    
     
     func isMyLocationSaved(lat: Double, lon: Double)-> Bool{
         for (_, element) in locationArray.enumerated() {
