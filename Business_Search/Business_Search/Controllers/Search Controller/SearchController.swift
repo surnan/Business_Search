@@ -136,7 +136,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     func addLocation(data: YelpBusinessResponse){
         let backgroundContext = dataController.backGroundContext!
-        
         let newLocation = Location(context: backgroundContext)
         newLocation.latitude = data.region.center.latitude
         newLocation.longititude = data.region.center.longitude
@@ -145,31 +144,10 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         
         do {
             try backgroundContext.save()
+            newLocation.addBusinesses(yelpData: data, dataController: dataController)
         } catch {
             print("Error saving func addLocation() --\n\(error)")
         }
-        
-        
     }
-    
-    
 }
 
-
-
-
-
-/*
- //            for (_,currentBusiness) in data.businesses.enumerated() {//+2.5
- context.perform { //+3
- let newBusiness = Business(context: self.dataController.viewContext)
- newBusiness.fromJSON(locationID: locationID, yelpData: data, dataController: self.dataController)
- do {    //+4
- try self.dataController.viewContext.save()
- } catch let saveErr { //+4.1
- print("Error: Core Data Save Error when adding New Business.\nCode: \(saveErr.localizedDescription)")
- print("Full Error Details: \(saveErr)")
- } //-4.1
- } //-3
- //            } //2.5
- */

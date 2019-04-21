@@ -11,44 +11,52 @@ import CoreData
 
 //var dataController: DataController!
 
-extension Business {
-    func fromJSON(locationID: NSManagedObjectID, yelpData: YelpBusinessResponse, dataController: DataController){
+
+extension Location {
+    func addBusinesses(yelpData: YelpBusinessResponse, dataController: DataController){
         
-        let parentLocation = dataController.viewContext.object(with: locationID) as! Location
+        let backgroundContext = dataController.backGroundContext!
         
-        yelpData.businesses.forEach { (current) in
-            self.alias = current.alias ?? ""
-            self.displayAddress = current.location.display_address.first ?? ""
-            self.displayPhone = current.display_phone ?? ""
-            self.distance = current.distance ?? 0
-            self.id = current.id ?? ""
-            self.imageURL = current.image_url ?? ""
-            self.isClosed = current.is_closed ?? false
-            self.latitude = current.coordinates.latitude ?? 0
-            self.longitude = current.coordinates.longitude ?? 0
-            self.name = current.name ?? ""
-            self.price = current.price ?? ""
-            self.rating = current.rating ?? 0
-            self.reviewCount = Int32(current.review_count ?? 0)
-            self.url = current.url ?? ""
-            self.parentLocation = parentLocation
+        yelpData.businesses.forEach { (item) in
+            print(item.name)
+            let currentBusiness = Business(context: backgroundContext)
+            currentBusiness.parentLocation = self
+            currentBusiness.alias = item.alias
+            currentBusiness.displayAddress = item.location.display_address.reduce("", +)
+            currentBusiness.displayPhone = item.display_phone
+            currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
+            currentBusiness.id = item.id
+            currentBusiness.imageURL = item.image_url
+//            currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
+            currentBusiness.latitude = item.coordinates.latitude
+            currentBusiness.longitude = item.coordinates.longitude
+            currentBusiness.name = item.name
+            currentBusiness.price = item.price
+            currentBusiness.rating = item.rating ?? 0
+            currentBusiness.reviewCount = Int32(item.review_count ?? 0)
+            currentBusiness.url = item.url
+
+            do {
+                try backgroundContext.save()
+//                currentBusiness.addToCategories(item.categories)
+            } catch {
+                print("Error saving Business to Location Entity --> func addBusinesses()\n\(error)")
+            }
             
-            current.categories.forEach({ (categoryStruct) in
-                let newCategory = Category(context: dataController.viewContext)
-                newCategory.title = categoryStruct.title
-                newCategory.alias = categoryStruct.alias
-                newCategory.business = self
-            })
             
-//            current.categories.forEach({ (categoryStruct) in
-//                let newCategory = Category(context: dataController.viewContext)
-//                newCategory.title = categoryStruct.title
-//                newCategory.alias = categoryStruct.alias
-//                //                newCategory.business = newCategory
-//            })
-//            
         }
+        
     }
+}
+
+extension Business {
+    //[YelpBusinessResponse.CategoriesStruct]
+    func addCategories(categories: [YelpBusinessResponse.CategoriesStruct]){
+        
+        
+    }
+
+    
 }
 
 
