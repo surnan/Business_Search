@@ -30,45 +30,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "577562177.792832"
+            timestampString = "577562557.037913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Business_Search.SearchController.viewDidLoad() -&gt; ()"
-                  moduleName = "Business_Search"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController.swift"
-                  timestampString = "577562177.942542"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "751">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Business_Search.SearchController.viewDidLoad() -&gt; ()"
-                  moduleName = "Business_Search"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController.swift"
-                  timestampString = "577562177.9454761"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "57">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
