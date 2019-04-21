@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 //var dataController: DataController!
 
 extension Business {
-    func fromJSON(yelpData: YelpBusinessResponse, dataController: DataController){
+    func fromJSON(locationID: NSManagedObjectID, yelpData: YelpBusinessResponse, dataController: DataController){
+        
+        let parentLocation = dataController.viewContext.object(with: locationID) as! Location
+        
         yelpData.businesses.forEach { (current) in
             self.alias = current.alias ?? ""
             self.displayAddress = current.location.display_address.first ?? ""
@@ -27,21 +31,22 @@ extension Business {
             self.rating = current.rating ?? 0
             self.reviewCount = Int32(current.review_count ?? 0)
             self.url = current.url ?? ""
+            self.parentLocation = parentLocation
             
             current.categories.forEach({ (categoryStruct) in
                 let newCategory = Category(context: dataController.viewContext)
                 newCategory.title = categoryStruct.title
                 newCategory.alias = categoryStruct.alias
-//                newCategory.business = newCategory
+                newCategory.business = self
             })
             
-            current.categories.forEach({ (categoryStruct) in
-                let newCategory = Category(context: dataController.viewContext)
-                newCategory.title = categoryStruct.title
-                newCategory.alias = categoryStruct.alias
-                //                newCategory.business = newCategory
-            })
-            
+//            current.categories.forEach({ (categoryStruct) in
+//                let newCategory = Category(context: dataController.viewContext)
+//                newCategory.title = categoryStruct.title
+//                newCategory.alias = categoryStruct.alias
+//                //                newCategory.business = newCategory
+//            })
+//            
         }
     }
 }

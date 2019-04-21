@@ -59,11 +59,11 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var urlSessionTask: URLSessionDataTask?
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
-
+    
     
     var locationArray = [Location]()
-   
-
+    
+    
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
@@ -75,17 +75,28 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         getNewLocationData()
     }
     
-
+    @objc func getNewLocation(){
+        getNewLocationData()
+    }
+    
+    
     func getNewLocationData() {
+        
         dataController.viewContext.perform {
             let internalViewContext = self.dataController.viewContext
             let newLocation = Location(context: internalViewContext)
             newLocation.latitude = latitude
             newLocation.longititude = longitude
-            try? internalViewContext.save()
+            
+            do {
+                try internalViewContext.save()
+                _ = Yelp.loadUpBusinesses(locationID: newLocation.objectID, latitude: latitude, longitude: longitude,
+                                          completion: self.handleLoadUpBusinesses(locationID:result:))
+            } catch {
+                print("Error in getNewLocationData() \n\(error)")
+            }
         }
         
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
     
     
@@ -104,20 +115,9 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     }
     
     
-    func handleLoadUpBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
     
-        
-        switch result {
-        case .failure(let error):
-            print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
-        case .success(let data):
-            print("---> Succesfully decoded data")
-            print("Number of Records returned = \(data.businesses.count)")
-        }
-        urlSessionTask = nil
-    }
     
-
+    
     func connectCategoryToBusiness(businessID: NSManagedObjectID?, alias: String?, title: String?){
         guard let _businessID = businessID else {return}
         let backgroundContext: NSManagedObjectContext! = dataController.backGroundContext
@@ -136,45 +136,30 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             }
         }
     }
+    
+    func handleLoadUpBusinesses(locationID: NSManagedObjectID, result: Result<YelpBusinessResponse, NetworkError>){ //+1
+        switch result { //+2
+        case .failure(let error):
+            print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
+        case .success(let data):
+            print("---> Succesfully decoded data")
+            print("Number of Records returned = \(data.businesses.count)")
+            
+            let context = dataController.viewContext
+            
+            
+//            for (_,currentBusiness) in data.businesses.enumerated() {//+2.5
+                context.perform { //+3
+                    let newBusiness = Business(context: self.dataController.viewContext)
+                    newBusiness.fromJSON(locationID: locationID, yelpData: data, dataController: self.dataController)
+                    do {    //+4
+                        try self.dataController.viewContext.save()
+                    } catch let saveErr { //+4.1
+                        print("Error: Core Data Save Error when adding New Business.\nCode: \(saveErr.localizedDescription)")
+                        print("Full Error Details: \(saveErr)")
+                    } //-4.1
+                } //-3
+//            } //2.5
+        } //-2
+    } //-1
 }
-
-
-/*
- func handleLoadUpBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
- switch result {
- case .failure(let error):
- print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
- case .success(let data):
- print("---> Succesfully decoded data")
- print("Number of Records returned = \(data.businesses.count)")
- 
- let context = dataController.viewContext
- var businessObjectId: NSManagedObjectID?
- 
- context.perform { //+1
- let newBusiness = Business(context: self.dataController.viewContext)
- newBusiness.fromJSON(yelpData: data, dataController: self.dataController)
- businessObjectId = newBusiness.objectID
- 
- 
- let temp = newBusiness.categories
- 
- 
- do {
- try self.dataController.viewContext.save()
- } catch let saveErr {
- print("Error: Core Data Save Error when adding New Business.\nCode: \(saveErr.localizedDescription)")
- print("Full Error Details: \(saveErr)")
- }
- }  //-1
- 
- //            data.businesses.forEach { (currentBusiness) in
- //                currentBusiness.categories.forEach({ (currentCategory) in
- //                    connectCategoryToBusiness(businessID: businessObjectId, alias: currentCategory.alias, title: currentCategory.title)
- //                })
- //            }
- 
- }
- urlSessionTask = nil
- }
- */

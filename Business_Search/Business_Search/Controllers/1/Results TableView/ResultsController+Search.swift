@@ -25,9 +25,6 @@ extension ResultsController {
             
 
             //Only here so I don't have to keep restarting program to get query
-            urlSessionTask = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
-            
-            
             print("Yelp Auto-Complete Call")
             tableView.reloadData()
         }

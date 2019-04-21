@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 //https://api.yelp.com/v3/businesses/search?categories=pizza&latitude=37.786882&longitude=-122.399972&radius=500&limit=2
 //https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786942&longitude=-122.399643
@@ -80,14 +81,14 @@ class Yelp{
     
     
     
-    class func loadUpBusinesses(latitude: Double, longitude: Double, completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    class func loadUpBusinesses(locationID: NSManagedObjectID, latitude: Double, longitude: Double, completion: @escaping (NSManagedObjectID, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.loadUpBusinesses(latitude, longitude).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
-                return completion(.failure(error))
+                return completion(locationID, .failure(error))
             case .success(let answer):
-                return completion(.success(answer))
+                return completion(locationID, .success(answer))
             }
         }
         return task
