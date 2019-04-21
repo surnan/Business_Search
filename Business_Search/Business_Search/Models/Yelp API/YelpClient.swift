@@ -43,7 +43,7 @@ class Yelp{
             }
         }
         var url: URL {
-            var tempString = toString.replacingOccurrences(of: " ", with: "%20")
+            let tempString = toString.replacingOccurrences(of: " ", with: "%20")
             return URL(string: tempString)!
         }
     } //-1

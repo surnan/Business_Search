@@ -22,10 +22,15 @@ let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var dataController = DataController(modelName: "YelpDataModels")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(urls[urls.count-1] as URL)    //prints app directory path
+        
+        dataController.load()
         
         //UIAppearance Proxy
         UINavigationBar.appearance().isTranslucent = false
@@ -37,7 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = CustomNavigationController(rootViewController: SearchController())
+        let startingVC = SearchController()
+        startingVC.dataController = dataController
+        window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
         return true
     }
 
