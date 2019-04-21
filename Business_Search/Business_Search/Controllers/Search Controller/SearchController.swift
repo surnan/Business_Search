@@ -81,7 +81,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     
     func getNewLocationData() {
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(lat:lon:result:))
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
     
     
@@ -122,16 +122,39 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         }
     }
     
-    func handleLoadUpBusinesses(lat: Double, lon: Double, result: Result<YelpBusinessResponse, NetworkError>){ //+1
+    func handleLoadUpBusinesses(result: Result<YelpBusinessResponse, NetworkError>){ //+1
         switch result { //+2
         case .failure(let error):
             print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
         case .success(let data):
             print("---> Succesfully decoded data")
             print("Number of Records returned = \(data.businesses.count)")
+            addLocation(data: data)
         } //-2
     } //-1
+    
+    
+    func addLocation(data: YelpBusinessResponse){
+        let backgroundContext = dataController.backGroundContext!
+        
+        let newLocation = Location(context: backgroundContext)
+        newLocation.latitude = data.region.center.latitude
+        newLocation.longititude = data.region.center.longitude
+        newLocation.totalBusinesses = Int32(data.total)
+        newLocation.radius = Int32(radius) //AppDelegate
+        
+        do {
+            try backgroundContext.save()
+        } catch {
+            print("Error saving func addLocation() --\n\(error)")
+        }
+        
+        
+    }
+    
+    
 }
+
 
 
 
