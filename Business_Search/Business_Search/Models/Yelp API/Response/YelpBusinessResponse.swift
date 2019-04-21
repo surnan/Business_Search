@@ -49,5 +49,17 @@ struct YelpBusinessResponse: Codable {
         var distance: Double?
     }
     var businesses: [BusinessesStruct]
+    
+    struct CenterStruct: Codable {
+        var longitude: Double
+        var latitude: Double
+    }
+    
+    struct RegionStruct: Codable {
+        var center: CenterStruct
+    }
+    
+    var total: Int
+    var region: RegionStruct
 }
 

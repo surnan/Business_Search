@@ -26,11 +26,13 @@
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longititude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="radius" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalBusinesses" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="businesses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Business" inverseName="parentLocation" inverseEntity="Business" syncable="YES"/>
     </entity>
     <elements>
         <element name="Business" positionX="-468.5234375" positionY="-83.48828125" width="128" height="283"/>
         <element name="Category" positionX="-117.6796875" positionY="274.21484375" width="128" height="90"/>
-        <element name="Location" positionX="-720.24609375" positionY="-32.3984375" width="128" height="88"/>
+        <element name="Location" positionX="-720.00390625" positionY="-33.62890625" width="128" height="28"/>
     </elements>
 </model>
