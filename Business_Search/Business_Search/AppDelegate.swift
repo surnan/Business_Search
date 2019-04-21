@@ -10,9 +10,11 @@ import UIKit
 
 var limit = 10
 var radius = 50
-var latitude = 37.786882
-var longitude = -122.399972
+//var latitude = 37.786882
+//var longitude = -122.399972
 
+var latitude = 40.708872
+var longitude = -74.010125
 
 let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
                              .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed,
