@@ -81,14 +81,14 @@ class Yelp{
     
     
     
-    class func loadUpBusinesses(locationID: NSManagedObjectID, latitude: Double, longitude: Double, completion: @escaping (NSManagedObjectID, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    class func loadUpBusinesses(latitude: Double, longitude: Double, completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.loadUpBusinesses(latitude, longitude).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
-                return completion(locationID, .failure(error))
+                return completion(.failure(error))
             case .success(let answer):
-                return completion(locationID, .success(answer))
+                return completion(.success(answer))
             }
         }
         return task

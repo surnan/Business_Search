@@ -81,22 +81,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     
     func getNewLocationData() {
-        
-        dataController.viewContext.perform {
-            let internalViewContext = self.dataController.viewContext
-            let newLocation = Location(context: internalViewContext)
-            newLocation.latitude = latitude
-            newLocation.longititude = longitude
-            
-            do {
-                try internalViewContext.save()
-                _ = Yelp.loadUpBusinesses(locationID: newLocation.objectID, latitude: latitude, longitude: longitude,
-                                          completion: self.handleLoadUpBusinesses(locationID:result:))
-            } catch {
-                print("Error in getNewLocationData() \n\(error)")
-            }
-        }
-        
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(lat:lon:result:))
     }
     
     
@@ -137,29 +122,31 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         }
     }
     
-    func handleLoadUpBusinesses(locationID: NSManagedObjectID, result: Result<YelpBusinessResponse, NetworkError>){ //+1
+    func handleLoadUpBusinesses(lat: Double, lon: Double, result: Result<YelpBusinessResponse, NetworkError>){ //+1
         switch result { //+2
         case .failure(let error):
             print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
         case .success(let data):
             print("---> Succesfully decoded data")
             print("Number of Records returned = \(data.businesses.count)")
-            
-            let context = dataController.viewContext
-            
-            
-//            for (_,currentBusiness) in data.businesses.enumerated() {//+2.5
-                context.perform { //+3
-                    let newBusiness = Business(context: self.dataController.viewContext)
-                    newBusiness.fromJSON(locationID: locationID, yelpData: data, dataController: self.dataController)
-                    do {    //+4
-                        try self.dataController.viewContext.save()
-                    } catch let saveErr { //+4.1
-                        print("Error: Core Data Save Error when adding New Business.\nCode: \(saveErr.localizedDescription)")
-                        print("Full Error Details: \(saveErr)")
-                    } //-4.1
-                } //-3
-//            } //2.5
         } //-2
     } //-1
 }
+
+
+
+
+/*
+ //            for (_,currentBusiness) in data.businesses.enumerated() {//+2.5
+ context.perform { //+3
+ let newBusiness = Business(context: self.dataController.viewContext)
+ newBusiness.fromJSON(locationID: locationID, yelpData: data, dataController: self.dataController)
+ do {    //+4
+ try self.dataController.viewContext.save()
+ } catch let saveErr { //+4.1
+ print("Error: Core Data Save Error when adding New Business.\nCode: \(saveErr.localizedDescription)")
+ print("Full Error Details: \(saveErr)")
+ } //-4.1
+ } //-3
+ //            } //2.5
+ */
