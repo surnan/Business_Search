@@ -8,8 +8,8 @@
 
 import UIKit
 
-var limit = 10
-var radius = 50
+var limit = 50
+var radius = 750
 //var latitude = 37.786882
 //var longitude = -122.399972
 
