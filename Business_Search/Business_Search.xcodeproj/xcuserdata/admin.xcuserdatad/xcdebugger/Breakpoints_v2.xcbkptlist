@@ -30,28 +30,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/AppDelegate.swift"
-            timestampString = "577601944.496896"
+            timestampString = "577635427.979452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Models/Core Data/Business+Extension.swift"
-            timestampString = "577601944.497542"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "addBusinesses(yelpData:dataController:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

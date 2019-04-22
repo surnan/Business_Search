@@ -99,10 +99,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         return myFetchController.fetchedObjects ?? []
     }
     
-    
-    
-    
-    
+     
     func connectCategoryToBusiness(businessID: NSManagedObjectID?, alias: String?, title: String?){
         guard let _businessID = businessID else {return}
         let backgroundContext: NSManagedObjectContext! = dataController.backGroundContext

@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+//https://api.yelp.com/v3/categories?locale=en_US
 //https://api.yelp.com/v3/businesses/search?categories=pizza&latitude=37.786882&longitude=-122.399972&radius=500&limit=2
 //https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786942&longitude=-122.399643
 
@@ -19,6 +20,7 @@ class Yelp{
         case autocomplete(String, Double, Double)
         case searchForBusinesses(String, Double, Double)
         case loadUpBusinesses(Double, Double)
+        case getAllCategories(String)
         var toString: String {
             switch  self {
             case .autocomplete(let inputString, let latitude, let longitude):    return Endpoints.base
@@ -41,7 +43,11 @@ class Yelp{
                 + "&radius=\(radius)"
                 + "&limit=\(limit)"
                 // +  "&offset= "
+            case .getAllCategories(let locale): return Endpoints.base
+                + "/categories"
+                + "?locale=\(locale)"
             }
+            
         }
         var url: URL {
             let tempString = toString.replacingOccurrences(of: " ", with: "%20")
@@ -49,6 +55,20 @@ class Yelp{
         }
     } //-1
     
+    
+    class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask{
+        let url = Endpoints.getAllCategories(locale).url
+        print("GetAllCategories URL = \(url)")
+        let task = taskForYelpGetRequest(url: url, decoder: YelpAllCategoriesResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
+            switch result {
+            case .failure(let error):
+                return completion(.failure(error))
+            case .success(let answer):
+                return completion(.success(answer))
+            }
+        }
+        return task
+    }
     
     
     class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{

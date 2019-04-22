@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AllCategories" representedClassName="AllCategories" syncable="YES" codeGenerationType="class">
+        <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Business" representedClassName="Business" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayAddress" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,8 +34,9 @@
         <relationship name="businesses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Business" inverseName="parentLocation" inverseEntity="Business" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Business" positionX="-468.5234375" positionY="-83.48828125" width="128" height="268"/>
-        <element name="Category" positionX="-117.6796875" positionY="274.21484375" width="128" height="90"/>
-        <element name="Location" positionX="-720.00390625" positionY="-33.62890625" width="128" height="28"/>
+        <element name="Business" positionX="-493.05859375" positionY="-30.921875" width="128" height="268"/>
+        <element name="Category" positionX="-209.7578125" positionY="294.0234375" width="128" height="90"/>
+        <element name="Location" positionX="-689.16015625" positionY="-178.06640625" width="128" height="118"/>
+        <element name="AllCategories" positionX="-441" positionY="99" width="128" height="73"/>
     </elements>
 </model>
