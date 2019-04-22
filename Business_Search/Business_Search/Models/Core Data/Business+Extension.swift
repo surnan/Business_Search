@@ -35,33 +35,20 @@ extension Location {
             currentBusiness.rating = item.rating ?? 0
             currentBusiness.reviewCount = Int32(item.review_count ?? 0)
             currentBusiness.url = item.url
-
+            
+            item.categories.forEach({ (itemCategory) in
+                let currentCategory = Category(context: backgroundContext)
+                currentCategory.alias = itemCategory.alias
+                currentCategory.title = itemCategory.title
+                currentCategory.business = currentBusiness
+            })
+            
             do {
                 try backgroundContext.save()
-//                currentBusiness.addToCategories(item.categories)
             } catch {
                 print("Error saving Business to Location Entity --> func addBusinesses()\n\(error)")
             }
-            
-            
         }
-        
     }
 }
 
-extension Business {
-    //[YelpBusinessResponse.CategoriesStruct]
-    func addCategories(categories: [YelpBusinessResponse.CategoriesStruct]){
-        
-        
-    }
-
-    
-}
-
-
-extension Category {
-    func add(business: Business){
-        
-    }
-}
