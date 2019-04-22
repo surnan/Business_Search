@@ -18,7 +18,7 @@ extension Location {
         let backgroundContext = dataController.backGroundContext!
         
         yelpData.businesses.forEach { (item) in
-            print(item.name)
+            // print(item.name)
             let currentBusiness = Business(context: backgroundContext)
             currentBusiness.parentLocation = self
             currentBusiness.alias = item.alias
@@ -27,7 +27,7 @@ extension Location {
             currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
             currentBusiness.id = item.id
             currentBusiness.imageURL = item.image_url
-//            currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
+            // currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
             currentBusiness.latitude = item.coordinates.latitude
             currentBusiness.longitude = item.coordinates.longitude
             currentBusiness.name = item.name
