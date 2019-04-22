@@ -14,14 +14,14 @@ protocol TestProtocol {
     var getIdAlias: String   {get}
 }
 
-struct BusinessesStruct: Codable, TestProtocol{
+struct BusinessesStructForArray: Codable, TestProtocol{
     var id: String
     var name: String
     var getNameTitle: String {return name}
     var getIdAlias: String {return id}
 }
 
-struct CategoriesStruct: Codable, TestProtocol{
+struct CategoriesStructForArray: Codable, TestProtocol{
     var alias: String
     var title: String
     var getNameTitle: String {return title}
