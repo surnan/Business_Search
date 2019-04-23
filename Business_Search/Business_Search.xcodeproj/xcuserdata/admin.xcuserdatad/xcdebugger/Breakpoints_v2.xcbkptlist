@@ -30,7 +30,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/AppDelegate.swift"
-            timestampString = "577726314.395633"
+            timestampString = "577729592.835588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -46,11 +46,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "577726314.39572"
+            timestampString = "577729592.835669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "addLocation(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "577726314.396183"
+            timestampString = "577729592.836431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "buildYelpCategoryArray(data:)"
             landmarkType = "7">
          </BreakpointContent>

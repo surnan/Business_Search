@@ -9,26 +9,34 @@
 import UIKit
 import CoreData
 
+struct YelpCategoryElement: Equatable {
+    var alias: String
+    var title: String
+    var businessID: String
+    static func == (lhs: YelpCategoryElement, rhs: YelpCategoryElement) -> Bool {
+        return lhs.title == rhs.title
+    }
+}
+
+struct YelpBusinessElement {
+    var title: String
+    var address: String
+    var state: String
+    var zipCode: String
+    var businessID: String
+}
+
 class SearchController: UIViewController, UISearchControllerDelegate{
-    
     var urlSessionTask: URLSessionDataTask?
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
     var locationArray = [Location]()
     var yelpCategoryArray = [[YelpCategoryElement]]()
-    
+    var yelpBusinessArray = [YelpBusinessElement]()
     let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
     
-    struct YelpCategoryElement: Equatable {
-        var alias: String
-        var title: String
-        var index: Int
-        static func == (lhs: YelpCategoryElement, rhs: YelpCategoryElement) -> Bool {
-            return lhs.title == rhs.title
-        }
-    }
-    
+
     lazy var searchController: UISearchController = {
         var search = UISearchController(searchResultsController: resultsTableController)
         search.delegate = self
@@ -50,29 +58,22 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         return search
     }()
     
-    
-    func isMyLocationSaved(lat: Double, lon: Double)-> Bool{
-        for (_, element) in locationArray.enumerated() {
-            if element.latitude == lat && element.longititude == lon {
-                return true //can't exit out of $0 loop prematurely
-            }
-        }
-        return false
-    }
-
     func buildYelpCategoryArray(data: YelpBusinessResponse){
         var index = -1
         data.businesses.forEach { (business) in
             index += 1
+            guard let title = business.name, let id = business.id, let address = business.location.address1,
+                let state = business.location.city, let zipCode = business.location.zip_code else {return}
+            let tempBusiness = YelpBusinessElement(title: title, address: address, state: state, zipCode: zipCode, businessID: id)
+            yelpBusinessArray.append(tempBusiness)
             business.categories.forEach({ (category) in
                 guard let title = category.title, let alias = category.alias else {return}
                 print("title = \(title)")
-                let temp = YelpCategoryElement(alias: alias, title: title, index: index)
+                let temp = YelpCategoryElement(alias: alias, title: title, businessID: id)
                 if yelpCategoryArray.isEmpty {
                     yelpCategoryArray.append([temp])
                     return
                 }
-                
                 for i in 0 ... yelpCategoryArray.count - 1 {
                     if yelpCategoryArray[i].first == temp {
                         yelpCategoryArray[i].append(temp)
