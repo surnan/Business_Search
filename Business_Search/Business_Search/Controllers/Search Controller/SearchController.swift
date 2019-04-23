@@ -133,15 +133,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     var categoryArray = [[String]]()
     
-    func addLocation(data: YelpBusinessResponse){
-        let backgroundContext = dataController.backGroundContext!
-        let newLocation = Location(context: backgroundContext)
-        newLocation.latitude = data.region.center.latitude
-        newLocation.longititude = data.region.center.longitude
-        newLocation.totalBusinesses = Int32(data.total)
-        newLocation.radius = Int32(radius) //AppDelegate
-    
-        //var categoryArray = [[String]]()
+    func buildCategoryArray(data: YelpBusinessResponse){
         data.businesses.forEach { (business) in
             business.categories.forEach({ (category) in
                 guard let title = category.title else {return}
@@ -163,6 +155,70 @@ class SearchController: UIViewController, UISearchControllerDelegate{
                 }
             })
         }
+    }
+    
+    
+    struct YelpCategoryElement: Equatable {
+        var alias: String
+        var title: String
+        var index: Int
+        
+        static func == (lhs: YelpCategoryElement, rhs: YelpCategoryElement) -> Bool {
+            return lhs.title == rhs.title
+        }
+        
+    }
+    
+    var yelpCategoryArray = [[YelpCategoryElement]]()
+    func buildYelpCategoryArray(data: YelpBusinessResponse){
+        var index = 0
+        
+        data.businesses.forEach { (business) in
+            business.categories.forEach({ (category) in
+                guard let title = category.title, let alias = category.alias else {return}
+                print("title = \(title)")
+                
+                let temp = YelpCategoryElement(alias: alias, title: title, index: index)
+                index += 1
+                if yelpCategoryArray.isEmpty {
+                    yelpCategoryArray.append([temp])
+                    return
+                }
+                
+                for i in 0 ... yelpCategoryArray.count - 1 {
+                    if yelpCategoryArray[i].first == temp {
+                        yelpCategoryArray[i].append(temp)
+                        break
+                    } else if i == yelpCategoryArray.count - 1 {
+                        yelpCategoryArray.append([temp])
+                        break
+                    }
+                }
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func addLocation(data: YelpBusinessResponse){
+        let backgroundContext = dataController.backGroundContext!
+        let newLocation = Location(context: backgroundContext)
+        newLocation.latitude = data.region.center.latitude
+        newLocation.longititude = data.region.center.longitude
+        newLocation.totalBusinesses = Int32(data.total)
+        newLocation.radius = Int32(radius) //AppDelegate
+
+        //buildCategoryArray(data: data)
+        buildYelpCategoryArray(data: data)
+        
+        
         
         
         
