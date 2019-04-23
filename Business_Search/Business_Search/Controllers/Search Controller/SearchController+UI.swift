@@ -21,6 +21,14 @@ extension SearchController {
         return myFetchController.fetchedObjects ?? []
     }
     
+    func isMyLocationSaved(lat: Double, lon: Double)-> Bool{
+        for (_, element) in locationArray.enumerated() {
+            if element.latitude == lat && element.longititude == lon {
+                return true //can't exit out of $0 loop prematurely
+            }
+        }
+        return false
+    }
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
