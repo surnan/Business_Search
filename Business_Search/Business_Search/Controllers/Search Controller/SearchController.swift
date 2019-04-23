@@ -61,13 +61,13 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     }
 
     func buildYelpCategoryArray(data: YelpBusinessResponse){
-        var index = 0
+        var index = -1
         data.businesses.forEach { (business) in
+            index += 1
             business.categories.forEach({ (category) in
                 guard let title = category.title, let alias = category.alias else {return}
                 print("title = \(title)")
                 let temp = YelpCategoryElement(alias: alias, title: title, index: index)
-                index += 1
                 if yelpCategoryArray.isEmpty {
                     yelpCategoryArray.append([temp])
                     return
