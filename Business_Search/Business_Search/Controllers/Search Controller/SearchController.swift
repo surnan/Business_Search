@@ -15,7 +15,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
     var locationArray = [Location]()
-    var categoryArray = [[String]]()
     var yelpCategoryArray = [[YelpCategoryElement]]()
     
     let resultsTableController = ResultsController()
@@ -51,9 +50,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         return search
     }()
     
-
     
-
     func isMyLocationSaved(lat: Double, lon: Double)-> Bool{
         for (_, element) in locationArray.enumerated() {
             if element.latitude == lat && element.longititude == lon {
@@ -62,8 +59,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         }
         return false
     }
-    
-    
 
     func buildYelpCategoryArray(data: YelpBusinessResponse){
         var index = 0
@@ -71,7 +66,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             business.categories.forEach({ (category) in
                 guard let title = category.title, let alias = category.alias else {return}
                 print("title = \(title)")
-                
                 let temp = YelpCategoryElement(alias: alias, title: title, index: index)
                 index += 1
                 if yelpCategoryArray.isEmpty {
@@ -91,7 +85,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             })
         }
     }
-    
     
     func addLocation(data: YelpBusinessResponse){
         let backgroundContext = dataController.backGroundContext!

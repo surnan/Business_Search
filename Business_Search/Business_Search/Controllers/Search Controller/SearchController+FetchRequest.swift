@@ -11,7 +11,6 @@ import CoreData
 
 extension SearchController {
     
-    
     func setupFetchController(){
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]
@@ -26,8 +25,6 @@ extension SearchController {
         }
     }
     
-    
-    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //print("WILL CHANGE")
     }
@@ -37,7 +34,6 @@ extension SearchController {
         locationArray.removeAll()
         locationArray = getAllLocations()
     }
-    
     
     //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
     //        switch type {

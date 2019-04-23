@@ -40,8 +40,4 @@ extension SearchController {
     func getNewLocationData() {
         _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
-    
-    
-    
-    
 }
