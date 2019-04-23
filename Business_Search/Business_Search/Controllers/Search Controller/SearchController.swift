@@ -131,7 +131,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     } //-1
     
     
-    var categoryArray = [String]()
+    var categoryArray = [[String]]()
     
     func addLocation(data: YelpBusinessResponse){
         let backgroundContext = dataController.backGroundContext!
@@ -140,25 +140,38 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         newLocation.longititude = data.region.center.longitude
         newLocation.totalBusinesses = Int32(data.total)
         newLocation.radius = Int32(radius) //AppDelegate
-        
+    
+        //var categoryArray = [[String]]()
         data.businesses.forEach { (business) in
             business.categories.forEach({ (category) in
-                if let title = category.title {
-                    categoryArray.append(title)
+                guard let title = category.title else {return}
+                print("title = \(title)")
+                
+                if categoryArray.isEmpty {
+                    categoryArray.append([title])
+                    return
+                }
+                
+                for i in 0 ... categoryArray.count - 1 {
+                    if categoryArray[i].first == title {
+                        categoryArray[i].append(title)
+                        break
+                    } else if i == categoryArray.count - 1 {
+                        categoryArray.append([title])
+                        break
+                    }
                 }
             })
         }
         
+        
+        
+        
         do {
             try backgroundContext.save()
             newLocation.addBusinesses(yelpData: data, dataController: dataController)
-            
-            
-            
-            
         } catch {
             print("Error saving func addLocation() --\n\(error)")
         }
     }
 }
-
