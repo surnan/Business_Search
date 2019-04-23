@@ -18,6 +18,7 @@ extension SearchController {
         case .success(let data):
             print("---> Succesfully decoded data")
             print("Number of Records returned = \(data.businesses.count)")
+            print("Total = \(data.total)")
             addLocation(data: data)
         } //-2
     } //-1
@@ -37,7 +38,5 @@ extension SearchController {
         getNewLocationData()
     }
     
-    func getNewLocationData() {
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
-    }
+
 }

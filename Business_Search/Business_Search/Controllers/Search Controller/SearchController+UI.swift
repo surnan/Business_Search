@@ -39,4 +39,9 @@ extension SearchController {
         if isMyLocationSaved(lat: latitude, lon: longitude) {return}
         getNewLocationData()
     }
+    
+    func getNewLocationData() {
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
+    }
+    
 }
