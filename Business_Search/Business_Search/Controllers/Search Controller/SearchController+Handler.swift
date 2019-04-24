@@ -16,7 +16,7 @@ extension SearchController {
         case .failure(let error):
             print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
         case .success(let data):
-            print("Number of Records returned = \(data.businesses.count)")
+            // print("Number of Records returned = \(data.businesses.count)")
             print("Total = \(data.total)")
             print("first name = \(data.businesses.first?.name ?? "")")
             addLocationToCoreData(data: data)
@@ -29,23 +29,25 @@ extension SearchController {
         newLocation.latitude = data.region.center.latitude
         newLocation.longititude = data.region.center.longitude
         newLocation.totalBusinesses = Int32(data.total)
-        newLocation.radius = Int32(radius) //AppDelegate
-        buildYelpCategoryArray(data: data)
+        newLocation.radius = Int32(radius)  //AppDelegate
+        buildYelpCategoryArray(data: data)  //Array built but data not saved
         do {
             try backgroundContext.save()
             currentLocationID = newLocation.objectID
-            newLocation.addBusinesses(yelpData: data, dataController: dataController)
-            samePinMoreBusinesses()
+            newLocation.addBusinesses(yelpData: data, dataController: dataController)  //Because Location is empty
+            continueCallingBusinesses()
         } catch {
             print("Error saving func addLocation() --\n\(error)")
         }
     }
     
-    
-    
-    func samePinMoreBusinesses(){
+    func continueCallingBusinesses(){
         _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: 50 ,completion: handleSamePin(result:))
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: 100 ,completion: handleSamePin(result:))
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: 150 ,completion: handleSamePin(result:))
     }
+    
+    
     
     func handleSamePin(result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
@@ -53,18 +55,17 @@ extension SearchController {
             print("handleSamePin() failed --> \(error.localizedDescription)")
         case .success(let data):
             print("first name = \(data.businesses.first?.name ?? "")")
-            var currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
+            buildYelpCategoryArray(data: data)
+            let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
             currentLocation.addBusinesses(yelpData: data, dataController: dataController)
+//            print("--------")
+//            yelpCategoryArray.forEach{print($0.first?.title)}
+//            print("")
         }
     }
     
     
-    
-    
-    
-    
-    
-    
+    //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
     @objc func handleDeleteAll(){
         do {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
@@ -77,8 +78,6 @@ extension SearchController {
     }
     
     @objc func handleGetNewLocation(){
-        getNewLocationData()
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
-    
-
 }

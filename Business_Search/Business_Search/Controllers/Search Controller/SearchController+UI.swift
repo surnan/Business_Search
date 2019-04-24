@@ -16,11 +16,7 @@ extension SearchController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     
-    
-    
-    
-    
-    
+
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         setupNavigationMenu()
@@ -28,7 +24,7 @@ extension SearchController {
         setupFetchController()
         locationArray = getAllLocations()
         if isMyLocationSaved(lat: latitude, lon: longitude) {return}
-        getNewLocationData()
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
     
     func getAllLocations()-> [Location]{
@@ -43,9 +39,4 @@ extension SearchController {
         }
         return false
     }
-    
-    func getNewLocationData() {
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
-    }
-    
 }

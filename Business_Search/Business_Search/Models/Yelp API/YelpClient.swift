@@ -55,6 +55,19 @@ class Yelp{
         }
     } //-1
     
+    class func loadUpBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+        let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
+        let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
+            switch result {
+            case .failure(let error):
+                return completion(.failure(error))
+            case .success(let answer):
+                return completion(.success(answer))
+            }
+        }
+        return task
+    }
+    
     
     class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask{
         let url = Endpoints.getAllCategories(locale).url
@@ -101,25 +114,14 @@ class Yelp{
     
     
     
-    class func loadUpBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
-        let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
-        let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
-            switch result {
-            case .failure(let error):
-                return completion(.failure(error))
-            case .success(let answer):
-                return completion(.success(answer))
-            }
-        }
-        return task
-    }
+
     
     
     class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
-        print("url to Yelp API = \(request.url!)")
+//        print("url to Yelp API = \(request.url!)")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
@@ -170,7 +172,7 @@ class Yelp{
         guard let verifiedResponse = response else {return nil}
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
-        print("Number of Yelp Calls left today ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
+//        print("Number of Yelp Calls left today ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
         
         switch httpResponse.statusCode {
         case 200: return nil
