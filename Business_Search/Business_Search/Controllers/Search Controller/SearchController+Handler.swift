@@ -19,11 +19,11 @@ extension SearchController {
             print("Number of Records returned = \(data.businesses.count)")
             print("Total = \(data.total)")
             print("first name = \(data.businesses.first?.name ?? "")")
-            addLocation(data: data)
+            addLocationToCoreData(data: data)
         } //-2
     } //-1
     
-    func addLocation(data: YelpBusinessResponse){
+    func addLocationToCoreData(data: YelpBusinessResponse){
         let backgroundContext = dataController.backGroundContext!
         let newLocation = Location(context: backgroundContext)
         newLocation.latitude = data.region.center.latitude
