@@ -10,7 +10,7 @@ import UIKit
 
 var limit = 50
 var offset = 50
-var radius = 250
+var radius = 350
 //var latitude = 37.786882
 //var longitude = -122.399972
 
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        print(urls[urls.count-1] as URL)    //prints app directory path
+        print(urls[urls.count-1] as URL)    //prints app directory path
         
         dataController.load()
         

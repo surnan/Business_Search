@@ -23,8 +23,8 @@ extension SearchController {
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
         locationArray = getAllLocations()
-        if isMyLocationSaved(lat: latitude, lon: longitude) {return}
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
+//        if isMyLocationSaved(lat: latitude, lon: longitude) {return}
+//        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
     
     func getAllLocations()-> [Location]{

@@ -60,6 +60,8 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         return search
     }()
     
+
+    
     func buildYelpCategoryArray(data: YelpBusinessResponse){
         var index: Int
         
@@ -103,6 +105,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
                 }
             })
         }
-        print("YelpBusinessArray.Count --> \(yelpBusinessArray.count)")
+        print("--------> YelpBusinessArray.Count --> \(yelpBusinessArray.count)")
     }
 }

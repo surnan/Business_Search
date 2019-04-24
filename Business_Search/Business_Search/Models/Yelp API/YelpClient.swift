@@ -121,7 +121,8 @@ class Yelp{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
-//        print("url to Yelp API = \(request.url!)")
+        
+//        print("--------> url to Yelp API = \(request.url!)")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
@@ -173,7 +174,7 @@ class Yelp{
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
 //        print("Number of Yelp Calls left today ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
-        
+        print("checkYelpReturnedStatusCodes Error --> \(String(describing: response?.url))")
         switch httpResponse.statusCode {
         case 200: return nil
         case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
