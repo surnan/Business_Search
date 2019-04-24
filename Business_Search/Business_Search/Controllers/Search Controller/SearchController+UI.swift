@@ -17,6 +17,20 @@ extension SearchController {
     }
     
     
+    
+    
+    
+    
+    override func viewDidLoad() {
+        view.backgroundColor = UIColor.white
+        setupNavigationMenu()
+        definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
+        setupFetchController()
+        locationArray = getAllLocations()
+        if isMyLocationSaved(lat: latitude, lon: longitude) {return}
+        getNewLocationData()
+    }
+    
     func getAllLocations()-> [Location]{
         return myFetchController.fetchedObjects ?? []
     }
@@ -28,16 +42,6 @@ extension SearchController {
             }
         }
         return false
-    }
-    
-    override func viewDidLoad() {
-        view.backgroundColor = UIColor.white
-        setupNavigationMenu()
-        definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
-        setupFetchController()
-        locationArray = getAllLocations()
-        if isMyLocationSaved(lat: latitude, lon: longitude) {return}
-        getNewLocationData()
     }
     
     func getNewLocationData() {
