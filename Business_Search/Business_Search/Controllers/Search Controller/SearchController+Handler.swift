@@ -23,6 +23,23 @@ extension SearchController {
         } //-2
     } //-1
     
+    func addLocation(data: YelpBusinessResponse){
+        let backgroundContext = dataController.backGroundContext!
+        let newLocation = Location(context: backgroundContext)
+        newLocation.latitude = data.region.center.latitude
+        newLocation.longititude = data.region.center.longitude
+        newLocation.totalBusinesses = Int32(data.total)
+        newLocation.radius = Int32(radius) //AppDelegate
+        buildYelpCategoryArray(data: data)
+        do {
+            try backgroundContext.save()
+            newLocation.addBusinesses(yelpData: data, dataController: dataController)
+        } catch {
+            print("Error saving func addLocation() --\n\(error)")
+        }
+    }
+    
+    
     @objc func handleDeleteAll(){
         do {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")

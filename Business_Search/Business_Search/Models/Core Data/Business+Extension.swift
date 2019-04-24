@@ -15,11 +15,11 @@ import CoreData
 extension Location {
     func addBusinesses(yelpData: YelpBusinessResponse, dataController: DataController){
         
-        let backgroundContext = dataController.backGroundContext!
+        //  let backgroundContext = dataController.backGroundContext!
         
         yelpData.businesses.forEach { (item) in
             // print(item.name)
-            let currentBusiness = Business(context: backgroundContext)
+            let currentBusiness = Business(context: dataController.backGroundContext)
             currentBusiness.parentLocation = self
             currentBusiness.alias = item.alias
             currentBusiness.displayAddress = item.location.display_address.reduce("", +)
@@ -37,14 +37,14 @@ extension Location {
             currentBusiness.url = item.url
             
             item.categories.forEach({ (itemCategory) in
-                let currentCategory = Category(context: backgroundContext)
+                let currentCategory = Category(context: dataController.backGroundContext)
                 currentCategory.alias = itemCategory.alias
                 currentCategory.title = itemCategory.title
                 currentCategory.business = currentBusiness
             })
             
             do {
-                try backgroundContext.save()
+                try dataController.backGroundContext.save()
             } catch {
                 print("Error saving Business to Location Entity --> func addBusinesses()\n\(error)")
             }
