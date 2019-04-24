@@ -19,7 +19,7 @@ class Yelp{
         static let base = "https://api.yelp.com/v3"
         case autocomplete(String, Double, Double)
         case searchForBusinesses(String, Double, Double)
-        case loadUpBusinesses(Double, Double)
+        case loadUpBusinesses(Double, Double, Int)
         case getAllCategories(String)
         var toString: String {
             switch  self {
@@ -36,13 +36,13 @@ class Yelp{
                 + "&latitude=\(latitude)"
                 + "&longitude=\(longitude)"
                 + "&radius\(radius)"
-            case .loadUpBusinesses(let latitude, let longitude):    return Endpoints.base
+            case .loadUpBusinesses(let latitude, let longitude, let offset):    return Endpoints.base
                 + "/businesses"
                 + "/search?latitude=\(latitude)"
                 + "&longitude=\(longitude)"
                 + "&radius=\(radius)"
                 + "&limit=\(limit)"
-                // +  "&offset= "
+                + "&offset=\(offset)"
             case .getAllCategories(let locale): return Endpoints.base
                 + "/categories"
                 + "?locale=\(locale)"
@@ -101,8 +101,8 @@ class Yelp{
     
     
     
-    class func loadUpBusinesses(latitude: Double, longitude: Double, completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
-        let url = Endpoints.loadUpBusinesses(latitude, longitude).url
+    class func loadUpBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+        let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
