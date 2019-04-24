@@ -33,6 +33,8 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var locationArray = [Location]()
     var yelpCategoryArray = [[YelpCategoryElement]]()
     var yelpBusinessArray = [YelpBusinessElement]()
+    var currentLocationID: NSManagedObjectID?
+    
     let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
     

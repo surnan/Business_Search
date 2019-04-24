@@ -16,9 +16,9 @@ extension SearchController {
         case .failure(let error):
             print("-->Error (localized): \(error.localizedDescription)\n-->Error (Full): \(error)")
         case .success(let data):
-            print("---> Succesfully decoded data")
             print("Number of Records returned = \(data.businesses.count)")
             print("Total = \(data.total)")
+            print("first name = \(data.businesses.first?.name ?? "")")
             addLocation(data: data)
         } //-2
     } //-1
@@ -33,11 +33,36 @@ extension SearchController {
         buildYelpCategoryArray(data: data)
         do {
             try backgroundContext.save()
+            currentLocationID = newLocation.objectID
             newLocation.addBusinesses(yelpData: data, dataController: dataController)
+            samePinMoreBusinesses()
         } catch {
             print("Error saving func addLocation() --\n\(error)")
         }
     }
+    
+    
+    
+    func samePinMoreBusinesses(){
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: 50 ,completion: handleSamePin(result:))
+    }
+    
+    func handleSamePin(result: Result<YelpBusinessResponse, NetworkError>){
+        switch result {
+        case .failure(let error):
+            print("handleSamePin() failed --> \(error.localizedDescription)")
+        case .success(let data):
+            print("first name = \(data.businesses.first?.name ?? "")")
+            var currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
+            currentLocation.addBusinesses(yelpData: data, dataController: dataController)
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     
     @objc func handleDeleteAll(){
