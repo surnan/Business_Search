@@ -61,11 +61,27 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     }()
     
     func buildYelpCategoryArray(data: YelpBusinessResponse){
-        var index = -1
+        var index: Int
+        
+        if yelpCategoryArray.isEmpty {
+            index = -1
+        } else {
+            index = yelpBusinessArray.count - 1
+        }
+        
+        
+        
         data.businesses.forEach { (business) in
             index += 1
-            guard let title = business.name, let id = business.id, let address = business.location.address1,
-                let state = business.location.city, let zipCode = business.location.zip_code else {return}
+            guard let title = business.name,
+                let id = business.id,
+                let address = business.location.address1,
+                let state = business.location.city,
+                let zipCode = business.location.zip_code
+                else {
+                    return
+            }
+            
             let tempBusiness = YelpBusinessElement(title: title, address: address, state: state, zipCode: zipCode, businessID: id)
             yelpBusinessArray.append(tempBusiness)
             business.categories.forEach({ (category) in
@@ -87,7 +103,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
                 }
             })
         }
+        print("YelpBusinessArray.Count --> \(yelpBusinessArray.count)")
     }
-    
-
 }
