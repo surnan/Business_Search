@@ -16,6 +16,7 @@ enum NetworkError: Error {
     case yelpErrorDecoded
     case unableToDecode
     case noData_noError
+    case needToRetry
 }
 
 //Note Yelp will not return error if bad decoder is used on our side
