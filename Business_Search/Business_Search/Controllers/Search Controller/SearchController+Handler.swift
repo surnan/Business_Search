@@ -38,6 +38,9 @@ extension SearchController {
         case .failure(let error):
             if error == NetworkError.needToRetry {
                 print("handleLoadBusiness --> Retry.  temp = \(String(describing: temp))")
+                guard let temp = temp else {return}
+                networkQueueData.append(temp)
+                print("")
             } else {
                 print("Error that is not 'needToRetry' --> error = \(error)")
             }
