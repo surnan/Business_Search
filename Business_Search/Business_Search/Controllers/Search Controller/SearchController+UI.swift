@@ -63,6 +63,6 @@ extension SearchController {
     }
     
     @objc func handleGetNewLocation(){
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(result:))
     }
 }
