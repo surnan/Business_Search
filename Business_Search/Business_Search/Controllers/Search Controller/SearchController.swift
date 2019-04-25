@@ -111,6 +111,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
                 }
             })
         }
-        print("--------> YelpBusinessArray.Count --> \(yelpBusinessArray.count)")
+//        print("--------> YelpBusinessArray.Count --> \(yelpBusinessArray.count)")
     }
 }

@@ -30,7 +30,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/AppDelegate.swift"
-            timestampString = "577919731.768265"
+            timestampString = "577922213.4998699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -46,11 +46,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "577919731.768654"
+            timestampString = "577922213.499946"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "checkYelpReturnedStatusCodes(response:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "577919731.768973"
+            timestampString = "577922213.5003591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "loadUpBusinesses(latitude:longitude:offset:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,44 +78,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "577919731.769563"
+            timestampString = "577922213.500656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "loadUpBusinesses(latitude:longitude:offset:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
-            timestampString = "577919731.770017"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "handleLoadBusinesses(temp:result:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
-            timestampString = "577919731.770892"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "continueCallingBusinesses(total:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

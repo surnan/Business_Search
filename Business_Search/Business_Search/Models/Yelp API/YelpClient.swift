@@ -67,6 +67,7 @@ class Yelp{
                     print("Retry URL")
                 }
                 let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
+                print("Returning Error ===> \(temp)")
                 return completion(temp, .failure(error))
             case .success(let answer):
                 return completion(nil, .success(answer))
@@ -187,13 +188,14 @@ class Yelp{
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
 //        print("Number of Yelp Calls left today ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
-        print("checkYelpReturnedStatusCodes Error --> \(String(describing: response?.url))")
+//        print("checkYelpReturnedStatusCodes Error --> \(String(describing: response?.url))")
         switch httpResponse.statusCode {
         case 200: return nil
         case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
         case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.UNAUTHORIZED
         case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.INTERNAL_SERVER_ERROR
-        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.UNKNOWN_ERROR
+            default: return YelpAPIError.UNKNOWN_ERROR
+//        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.UNKNOWN_ERROR
         }
     }
 }
