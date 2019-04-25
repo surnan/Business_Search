@@ -27,7 +27,6 @@
 		84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */; };
 		84D9C710226F5E540023D1F7 /* SearchController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9C70F226F5E540023D1F7 /* SearchController+Handler.swift */; };
 		84D9C712226F608E0023D1F7 /* SearchController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9C711226F608E0023D1F7 /* SearchController+UI.swift */; };
-		84D9C717227123190023D1F7 /* TESTING.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D9C716227123190023D1F7 /* TESTING.swift */; };
 		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
 		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
 		84DC40DB2269F590003003C4 /* MyTabController+Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40DA2269F590003003C4 /* MyTabController+Handle.swift */; };
@@ -65,7 +64,6 @@
 		84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		84D9C70F226F5E540023D1F7 /* SearchController+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchController+Handler.swift"; sourceTree = "<group>"; };
 		84D9C711226F608E0023D1F7 /* SearchController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchController+UI.swift"; sourceTree = "<group>"; };
-		84D9C716227123190023D1F7 /* TESTING.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TESTING.swift; sourceTree = "<group>"; };
 		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
 		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
 		84DC40DA2269F590003003C4 /* MyTabController+Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyTabController+Handle.swift"; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 		84BDE2E32263D006008C9B01 = {
 			isa = PBXGroup;
 			children = (
-				84D9C715227123030023D1F7 /* test */,
 				84BDE30E2263E652008C9B01 /* UNSYNC.swift */,
 				84BDE2EE2263D007008C9B01 /* Business_Search */,
 				84BDE2ED2263D007008C9B01 /* Products */,
@@ -224,14 +221,6 @@
 				84D3DB9D2266DF5200E46B2E /* DefaultCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		84D9C715227123030023D1F7 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				84D9C716227123190023D1F7 /* TESTING.swift */,
-			);
-			path = test;
 			sourceTree = "<group>";
 		};
 		84DC40D322697323003003C4 /* Error Enums */ = {
@@ -336,7 +325,6 @@
 				84D3DB9E2266DF5200E46B2E /* DefaultCell.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				84B3CF912268AAFA0012A75C /* ResultsController+TableView.swift in Sources */,
-				84D9C717227123190023D1F7 /* TESTING.swift in Sources */,
 				84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				84D3DB9C2266DC0F00E46B2E /* ResultsController.swift in Sources */,

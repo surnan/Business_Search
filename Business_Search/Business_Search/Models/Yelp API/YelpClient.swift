@@ -63,11 +63,7 @@ class Yelp{
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
-                if error == .needToRetry {
-                    print("Retry URL")
-                }
                 let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
-                print("Returning Error ===> \(temp)")
                 return completion(temp, .failure(error))
             case .success(let answer):
                 return completion(nil, .success(answer))
@@ -76,7 +72,9 @@ class Yelp{
         return task
     }
     
-    class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
+    class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type,
+                                                                                          errorDecoder: ErrorDecoder.Type,
+                                                                                          completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
@@ -103,24 +101,26 @@ class Yelp{
                 DispatchQueue.main.async {
                     completion(.success(dataDecoded))
                 }
+                return
             } catch let decodeError {
                 do {
                     let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
-                    print("\nYelp Error Decoded: \n\(yelpErrorDecoded)")
                     if yelpErrorDecoded.error.code == "TOO_MANY_REQUESTS_PER_SECOND" {
-                        print("Queue??")
                         DispatchQueue.main.async {
                             completion(.failure(.needToRetry))
                         }
+                        return
                     }
                     DispatchQueue.main.async {
                         completion(.failure(.yelpErrorDecoded))
                     }
+                    return
                 } catch {
                     print("\nDecoding Error: \n\(decodeError) & \(String(describing: request.url))")
                     DispatchQueue.main.async {
                         completion(.failure(.unableToDecode))
                     }
+                    return
                 }
             }
         }
@@ -174,15 +174,7 @@ class Yelp{
         return task
     }
     
-    
-    
-    
-    
-    
-    
-    
-   
-    
+
     class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> YelpAPIError?{
         guard let verifiedResponse = response else {return nil}
         let httpResponse = verifiedResponse as! HTTPURLResponse

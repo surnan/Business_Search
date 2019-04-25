@@ -94,7 +94,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             yelpBusinessArray.append(tempBusiness)
             business.categories.forEach({ (category) in
                 guard let title = category.title, let alias = category.alias else {return}
-                //  print("title = \(title)")
                 let temp = YelpCategoryElement(alias: alias, title: title, businessID: id)
                 if yelpCategoryArray.isEmpty {
                     yelpCategoryArray.append([temp])
@@ -111,6 +110,5 @@ class SearchController: UIViewController, UISearchControllerDelegate{
                 }
             })
         }
-//        print("--------> YelpBusinessArray.Count --> \(yelpBusinessArray.count)")
     }
 }

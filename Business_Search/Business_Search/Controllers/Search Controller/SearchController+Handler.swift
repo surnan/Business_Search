@@ -11,8 +11,6 @@ import CoreData
 
 extension SearchController {
     
-
-    
     func addLocationToCoreData(data: YelpBusinessResponse){
         let backgroundContext = dataController.backGroundContext!
         backgroundContext.perform {
@@ -33,20 +31,18 @@ extension SearchController {
         }
     }
     
- 
-    
     //po String(data: data, format: .utf8)
     //networkQueueData
     func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
-            print("handleLoadBusinesses() failed --> \(error.localizedDescription)")
             if error == NetworkError.needToRetry {
-                print("Retry")
+                print("handleLoadBusiness --> Retry.  temp = \(String(describing: temp))")
+            } else {
+                print("Error that is not 'needToRetry' --> error = \(error)")
             }
         case .success(let data):
             if yelpCategoryArray.isEmpty {
-                print("Total = \(data.total)")
                 print("\nfirst name = \(data.businesses.first?.name ?? "")")
                 addLocationToCoreData(data: data)
             } else {
@@ -54,16 +50,12 @@ extension SearchController {
                 buildYelpCategoryArray(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.addBusinessesAndCategories(yelpData: data, dataController: dataController)
-                //            print("--------")
-                //            yelpCategoryArray.forEach{print($0.first?.title)}
-                //            print("")
             }
         }
     }
     
     func continueCallingBusinesses(total: Int){
         while offset <= total {
-            print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
             _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
             offset += limit
         }
