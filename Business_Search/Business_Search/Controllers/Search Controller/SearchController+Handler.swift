@@ -64,7 +64,7 @@ extension SearchController {
         }
         
         if offset > total {
-            offset = limit
+            offset = 0 //set to Zero because the call that is used to create Location isn't used
         }
     }
 }
