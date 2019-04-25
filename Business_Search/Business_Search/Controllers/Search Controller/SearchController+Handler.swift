@@ -67,24 +67,9 @@ extension SearchController {
             _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
             offset += limit
         }
+        
+        if offset > total {
+            offset = limit
+        }
     }
 }
-
-
-
-/*
- func continueCallingBusinesses2(total: Int){
- print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
- let extraIteration = total % limit == 0 ? 0 : 1
- let indexMax = (total / limit + extraIteration) - 1 // -1 because first loop already run
- let queue = OperationQueue()
- queue.maxConcurrentOperationCount = 1
- for index in 1...indexMax {
- let currentOffset = offset * index
- queue.addOperation {
- _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: self.handleLoadBusinesses(temp:result:))
- }
- }
- queue.waitUntilAllOperationsAreFinished()
- }
- */
