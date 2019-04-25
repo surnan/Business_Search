@@ -24,8 +24,6 @@ extension SearchController {
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
         locationArray = getAllLocations()
-//        if isMyLocationSaved(lat: latitude, lon: longitude) {return}
-//        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
     
     @objc func handleGetNewLocation(){
@@ -49,14 +47,8 @@ extension SearchController {
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
     @objc func handleDeleteAll(){
         do {
-            
             yelpBusinessArray.removeAll()
             yelpCategoryArray.removeAll()
-            
-            print("yelpBusinessArray.count = \(yelpBusinessArray.count)")
-            print("yelpCategoryArray = \(yelpCategoryArray.count)")
-            
-            
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
             let request = NSBatchDeleteRequest(fetchRequest: fetch)
             try self.dataController.backGroundContext.execute(request)
@@ -65,6 +57,4 @@ extension SearchController {
             print ("There was an error deleting Locations from CoreData")
         }
     }
-    
- 
 }

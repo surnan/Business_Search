@@ -20,7 +20,6 @@ extension Location {
         
         dataController.backGroundContext.perform {
             yelpData.businesses.forEach { (item) in //+1
-                // print(item.name)
                 let currentBusiness = Business(context: dataController.backGroundContext)
                 currentBusiness.parentLocation = self
                 currentBusiness.alias = item.alias
