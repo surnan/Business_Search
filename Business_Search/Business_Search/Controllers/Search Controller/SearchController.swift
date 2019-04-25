@@ -10,10 +10,6 @@ import UIKit
 import CoreData
 
 struct YelpCategoryElement: Equatable {
-    
-    
-    
-    
     var alias: String
     var title: String
     var businessID: String
