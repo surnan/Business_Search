@@ -33,48 +33,17 @@ extension SearchController {
         }
     }
     
-    func continueCallingBusinesses(total: Int){
-        print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
-        let extraIteration = total % limit == 0 ? 0 : 1
-        let indexMax = (total / limit + extraIteration) - 1 // -1 because first loop already run
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        
-        for index in 1...indexMax {
-            let currentOffset = offset * index
-            queue.addOperation {
-                _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: currentOffset ,completion: self.handleLoadBusinesses(result:))
-            }
-        }
-        queue.waitUntilAllOperationsAreFinished()
-    }
-    
-    
-    func continueCallingBusinesses2(total: Int){
-        print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
-        let extraIteration = total % limit == 0 ? 0 : 1
-        let indexMax = (total / limit + extraIteration) - 1 // -1 because first loop already run
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        
-        for index in 1...indexMax {
-            let currentOffset = offset * index
-            queue.addOperation {
-                _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: currentOffset ,completion: self.handleLoadBusinesses(result:))
-            }
-        }
-        queue.waitUntilAllOperationsAreFinished()
-    }
-    
-    
+ 
     
     //po String(data: data, format: .utf8)
-    func handleLoadBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
-        print("hi = \(hi)")
-        hi += 1
+    //networkQueueData
+    func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
             print("handleLoadBusinesses() failed --> \(error.localizedDescription)")
+            if error == NetworkError.needToRetry {
+                print("Retry")
+            }
         case .success(let data):
             if yelpCategoryArray.isEmpty {
                 print("Total = \(data.total)")
@@ -91,4 +60,31 @@ extension SearchController {
             }
         }
     }
+    
+    func continueCallingBusinesses(total: Int){
+        while offset <= total {
+            print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
+            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
+            offset += limit
+        }
+    }
 }
+
+
+
+/*
+ func continueCallingBusinesses2(total: Int){
+ print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
+ let extraIteration = total % limit == 0 ? 0 : 1
+ let indexMax = (total / limit + extraIteration) - 1 // -1 because first loop already run
+ let queue = OperationQueue()
+ queue.maxConcurrentOperationCount = 1
+ for index in 1...indexMax {
+ let currentOffset = offset * index
+ queue.addOperation {
+ _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: self.handleLoadBusinesses(temp:result:))
+ }
+ }
+ queue.waitUntilAllOperationsAreFinished()
+ }
+ */

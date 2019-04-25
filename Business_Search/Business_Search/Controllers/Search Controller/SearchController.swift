@@ -28,8 +28,7 @@ struct YelpBusinessElement {
 
 
 class SearchController: UIViewController, UISearchControllerDelegate{
-    var hi = 0
-    
+
     var urlSessionTask: URLSessionDataTask?
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
@@ -37,6 +36,10 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var yelpCategoryArray = [[YelpCategoryElement]]()
     var yelpBusinessArray = [YelpBusinessElement]()
     var currentLocationID: NSManagedObjectID?
+    
+    
+    var networkQueueData = [YelpInputDataStruct]()
+    
     
     let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work

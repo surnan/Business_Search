@@ -55,18 +55,79 @@ class Yelp{
         }
     } //-1
     
-    class func loadUpBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    
+    //This can fail for big queries because there's no gaurantee
+    //this Yelp request happens before other calls cause throttling
+    class func loadUpBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (YelpInputDataStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
-                return completion(.failure(error))
+                if error == .needToRetry {
+                    print("Retry URL")
+                }
+                let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
+                return completion(temp, .failure(error))
             case .success(let answer):
-                return completion(.success(answer))
+                return completion(nil, .success(answer))
             }
         }
         return task
     }
+    
+    class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
+            _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
+            
+            if let error = err {
+                switch error._code {
+                case -1001: return completion(.failure(.networkTimeOut))
+                case -1200: return completion(.failure(.networkConnectionGoodButUnableToConnect))
+                default: return completion(.failure(.connectSuccesfulDownloadDataFail))
+                }
+            }
+            
+            guard let dataObject =  data else {
+                DispatchQueue.main.async {
+                    completion(.failure(.noData_noError))
+                }
+                return
+            }
+            
+            do {
+                let dataDecoded = try JSONDecoder().decode(decoder.self, from: dataObject)
+                DispatchQueue.main.async {
+                    completion(.success(dataDecoded))
+                }
+            } catch let decodeError {
+                do {
+                    let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
+                    print("\nYelp Error Decoded: \n\(yelpErrorDecoded)")
+                    if yelpErrorDecoded.error.code == "TOO_MANY_REQUESTS_PER_SECOND" {
+                        print("Queue??")
+                        DispatchQueue.main.async {
+                            completion(.failure(.needToRetry))
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        completion(.failure(.yelpErrorDecoded))
+                    }
+                } catch {
+                    print("\nDecoding Error: \n\(decodeError) & \(String(describing: request.url))")
+                    DispatchQueue.main.async {
+                        completion(.failure(.unableToDecode))
+                    }
+                }
+            }
+        }
+        task.resume()
+        return task
+    }
+    
+    
     
     
     class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask{
@@ -114,62 +175,9 @@ class Yelp{
     
     
     
-
     
     
-    class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type, errorDecoder: ErrorDecoder.Type, completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
-        var request = URLRequest(url: url)
-        request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
-        
-        
-//        print("--------> url to Yelp API = \(request.url!)")
-        
-        
-        
-        let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
-            _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
-            
-            if let error = err {
-                switch error._code {
-                case -1001: return completion(.failure(.networkTimeOut))
-                case -1200: return completion(.failure(.networkConnectionGoodButUnableToConnect))
-                default: return completion(.failure(.connectSuccesfulDownloadDataFail))
-                }
-            }
-            
-            guard let dataObject =  data else {
-                DispatchQueue.main.async {
-                    completion(.failure(.noData_noError))
-                }
-                return
-            }
-            
-            do {
-                let dataDecoded = try JSONDecoder().decode(decoder.self, from: dataObject)
-                DispatchQueue.main.async {
-                    completion(.success(dataDecoded))
-                }
-            } catch let decodeError {
-                do {
-                    let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
-                    print("\nYelp Error Decoded: \n\(yelpErrorDecoded)")
-                    if yelpErrorDecoded.error.code == "TOO_MANY_REQUESTS_PER_SECOND" {
-                        print("Queue??")
-                    }
-                    DispatchQueue.main.async {
-                        completion(.failure(.yelpErrorDecoded))
-                    }
-                } catch {
-                    print("\nDecoding Error: \n\(decodeError) & \(request.url)")
-                    DispatchQueue.main.async {
-                        completion(.failure(.unableToDecode))
-                    }
-                }
-            }
-        }
-        task.resume()
-        return task
-    }
+    
     
     
    
