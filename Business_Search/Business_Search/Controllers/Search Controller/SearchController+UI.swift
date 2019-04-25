@@ -28,6 +28,10 @@ extension SearchController {
 //        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
     
+    @objc func handleGetNewLocation(){
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(result:))
+    }
+    
     func getAllLocations()-> [Location]{
         return myFetchController.fetchedObjects ?? []
     }
@@ -62,7 +66,5 @@ extension SearchController {
         }
     }
     
-    @objc func handleGetNewLocation(){
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(result:))
-    }
+ 
 }

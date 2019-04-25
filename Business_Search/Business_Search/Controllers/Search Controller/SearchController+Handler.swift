@@ -25,7 +25,7 @@ extension SearchController {
                 try backgroundContext.save()
                 self.buildYelpCategoryArray(data: data)  //Array built but data not saved
                 self.currentLocationID = newLocation.objectID
-                newLocation.addBusinesses(yelpData: data, dataController: self.dataController)  //Because Location is empty
+                newLocation.addBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
                 self.continueCallingBusinesses(total: data.total)
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
@@ -50,6 +50,24 @@ extension SearchController {
     }
     
     
+    func continueCallingBusinesses2(total: Int){
+        print("limit = \(limit) .... offset = \(offset) ..... total = \(total)")
+        let extraIteration = total % limit == 0 ? 0 : 1
+        let indexMax = (total / limit + extraIteration) - 1 // -1 because first loop already run
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        
+        for index in 1...indexMax {
+            let currentOffset = offset * index
+            queue.addOperation {
+                _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: currentOffset ,completion: self.handleLoadBusinesses(result:))
+            }
+        }
+        queue.waitUntilAllOperationsAreFinished()
+    }
+    
+    
+    
     //po String(data: data, format: .utf8)
     func handleLoadBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
         print("hi = \(hi)")
@@ -66,7 +84,7 @@ extension SearchController {
                 print("\nfirst name = \(data.businesses.first?.name ?? "")")
                 buildYelpCategoryArray(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
-                currentLocation.addBusinesses(yelpData: data, dataController: dataController)
+                currentLocation.addBusinessesAndCategories(yelpData: data, dataController: dataController)
                 //            print("--------")
                 //            yelpCategoryArray.forEach{print($0.first?.title)}
                 //            print("")

@@ -13,7 +13,7 @@ import CoreData
 
 
 extension Location {
-    func addBusinesses(yelpData: YelpBusinessResponse, dataController: DataController){
+    func addBusinessesAndCategories(yelpData: YelpBusinessResponse, dataController: DataController){
         
         //  let backgroundContext = dataController.backGroundContext!
         
