@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension SearchController {
     func setupNavigationMenu(){
@@ -38,5 +39,30 @@ extension SearchController {
             }
         }
         return false
+    }
+    
+    
+    //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
+    @objc func handleDeleteAll(){
+        do {
+            
+            yelpBusinessArray.removeAll()
+            yelpCategoryArray.removeAll()
+            
+            print("yelpBusinessArray.count = \(yelpBusinessArray.count)")
+            print("yelpCategoryArray = \(yelpCategoryArray.count)")
+            
+            
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+            let request = NSBatchDeleteRequest(fetchRequest: fetch)
+            try self.dataController.backGroundContext.execute(request)
+            try self.dataController.backGroundContext.save()
+        } catch {
+            print ("There was an error deleting Locations from CoreData")
+        }
+    }
+    
+    @objc func handleGetNewLocation(){
+        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadUpBusinesses(result:))
     }
 }

@@ -13,7 +13,6 @@ struct YelpAPIErrorResponse: Codable {
     struct ErrorStruct: Codable {
         var code: String
         var description: String
-        var field: String
     }
     var error: ErrorStruct
 }
