@@ -10,6 +10,10 @@ import UIKit
 import CoreData
 
 struct YelpCategoryElement: Equatable {
+    
+    
+    
+    
     var alias: String
     var title: String
     var businessID: String
@@ -26,7 +30,10 @@ struct YelpBusinessElement {
     var businessID: String
 }
 
+
 class SearchController: UIViewController, UISearchControllerDelegate{
+    var hi = 0
+    
     var urlSessionTask: URLSessionDataTask?
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!

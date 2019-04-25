@@ -124,6 +124,8 @@ class Yelp{
         
 //        print("--------> url to Yelp API = \(request.url!)")
         
+        
+        
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
             
@@ -151,11 +153,14 @@ class Yelp{
                 do {
                     let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
                     print("\nYelp Error Decoded: \n\(yelpErrorDecoded)")
+                    if yelpErrorDecoded.error.code == "TOO_MANY_REQUESTS_PER_SECOND" {
+                        print("Queue??")
+                    }
                     DispatchQueue.main.async {
                         completion(.failure(.yelpErrorDecoded))
                     }
                 } catch {
-                    print("\nDecoding Error: \n\(decodeError)")
+                    print("\nDecoding Error: \n\(decodeError) & \(request.url)")
                     DispatchQueue.main.async {
                         completion(.failure(.unableToDecode))
                     }
