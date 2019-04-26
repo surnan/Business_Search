@@ -9,8 +9,15 @@
 import Foundation
 
 
-struct YelpInputDataStruct {
+struct YelpInputDataStruct: Equatable {
     var latitude: Double
     var longitude: Double
     var offset: Int
+    
+    
+    static func == (lhs: YelpInputDataStruct, rhs: YelpInputDataStruct) -> Bool{
+        return lhs.offset == rhs.offset
+    }
+    
+    
 }
