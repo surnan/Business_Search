@@ -29,19 +29,14 @@ extension SearchController {
             } else {
                 print("first name = \(data.businesses.first?.name ?? "")")
                 
-//                networkQueueData.removeAll { (element) -> Bool in
-//                    guard let temp = temp else {return false}
-//                    return element.offset == temp.offset
-//                }
-                
                 let filterIndex = networkQueueData.firstIndex { (element) -> Bool in
-                    print("element.offset ... \(element.offset)  &&  temp.offset ... \(temp?.offset)")
-                    return element.offset == temp?.offset
-                    }
+                    guard let temp = temp else {return false}
+                    return element.offset == temp.offset
+                }
                 
-                
-                
-                
+                if let index = filterIndex {
+                    networkQueueData.remove(at: index)
+                }
                 
                 
                 buildYelpCategoryArray(data: data)
@@ -98,7 +93,6 @@ extension SearchController {
     
     func downloadAllBusinesses(){
         for (_, element) in networkQueueData.enumerated(){
-            print("element.offset being called ---> \(element.offset)")
             _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: handleLoadBusinesses(temp:result:))
         }
     }
