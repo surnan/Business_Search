@@ -19,6 +19,7 @@ extension SearchController {
             newLocation.longititude = data.region.center.longitude
             newLocation.totalBusinesses = Int32(data.total)
             newLocation.radius = Int32(radius)  //AppDelegate
+            recordCountAtLocation = data.total
             do {
                 try backgroundContext.save()
                 self.buildYelpCategoryArray(data: data)  //Array built but data not saved
@@ -31,13 +32,16 @@ extension SearchController {
         }
     }
     
+    
+    
+    
     //po String(data: data, format: .utf8)
     //networkQueueData
     func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
             if error == NetworkError.needToRetry {
-                print("handleLoadBusiness --> Retry.  temp = \(String(describing: temp))")
+                print("handleLoadBusiness --> Retry -> \(error) ... temp = \(String(describing: temp))")
                 guard let temp = temp else {return}
                 networkQueueData.append(temp)
                 print("")
@@ -46,10 +50,10 @@ extension SearchController {
             }
         case .success(let data):
             if yelpCategoryArray.isEmpty {
-                print("\nfirst name = \(data.businesses.first?.name ?? "")")
+                print("first name = \(data.businesses.first?.name ?? "")")
                 addLocationToCoreData(data: data)
             } else {
-                print("\nfirst name = \(data.businesses.first?.name ?? "")")
+                print("first name = \(data.businesses.first?.name ?? "")")
                 buildYelpCategoryArray(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.addBusinessesAndCategories(yelpData: data, dataController: dataController)
@@ -57,14 +61,57 @@ extension SearchController {
         }
     }
     
-    func continueCallingBusinesses(total: Int){
+    func continueCallingBusinesses2(total: Int){
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
         while offset <= total {
-            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
-            offset += limit
+                        queue.addOperation {
+                            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
+                        offset += limit
+                        }
         }
-        
         if offset > total {
             offset = 0 //set to Zero because the call that is used to create Location isn't used
         }
     }
+    
+    
+    @objc func selectContinueCallingBusinesses(total: Int){
+        continueCallingBusinesses(total: total)
+    }
+    
+    
+    func continueCallingBusinesses(total: Int){ //+1
+        print("Total = \(total) .... Offset = \(offset)")
+        
+        while offset <= recordCountAtLocation {
+            if offset <= recordCountAtLocation {
+                print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
+                _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
+                offset += limit
+            }
+        }
+        
+        if offset > recordCountAtLocation {
+            offset = limit
+        }
+        
+        
+        
+        
+    }   //-1
 }
+
+/*
+ func continueCallingBusinesses(total: Int){
+ print("Total = \(total) .... Offset = \(offset)")
+ 
+ if offset <= myTotal {
+ print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
+ _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
+ offset += limit
+ } else {
+ offset = limit //set to Zero because the call that is used to create Location isn't used
+ }
+ }
+ */

@@ -41,6 +41,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var networkQueueData = [YelpInputDataStruct]()
     
     
+    
     let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
     

@@ -12,8 +12,8 @@ import CoreData
 extension SearchController {
     func setupNavigationMenu(){
         navigationItem.searchController = searchController
-        navigationItem.title = "Business Search"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Location", style: .done, target: self, action: #selector(handleGetNewLocation))
+        navigationItem.title = "-"
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "New Location", style: .done, target: self, action: #selector(handleGetNewLocation)), UIBarButtonItem(title: "-ONE-", style: .done, target: self, action: #selector(selectContinueCallingBusinesses))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     

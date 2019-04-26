@@ -17,8 +17,8 @@ struct YelpBusinessResponse: Codable {
     
     struct BusinessesStruct: Codable{
         struct CoordinatesStruct: Codable {
-            var latitude: Double
-            var longitude: Double
+            var latitude: Double?
+            var longitude: Double?
         }
         
         struct LocationStruct: Codable {

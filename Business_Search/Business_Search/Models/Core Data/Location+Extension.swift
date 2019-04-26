@@ -29,8 +29,8 @@ extension Location {
                 currentBusiness.id = item.id
                 currentBusiness.imageURL = item.image_url
                 // currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
-                currentBusiness.latitude = item.coordinates.latitude
-                currentBusiness.longitude = item.coordinates.longitude
+                currentBusiness.latitude = item.coordinates.latitude ?? 0.0
+                currentBusiness.longitude = item.coordinates.longitude ?? 0.0
                 currentBusiness.name = item.name
                 currentBusiness.price = item.price
                 currentBusiness.rating = item.rating ?? 0
