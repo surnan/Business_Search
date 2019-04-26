@@ -38,11 +38,7 @@ extension SearchController {
     func addLocationToCoreData(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
-        createSaveLocationEntity(backgroundContext, data)
-        //  getMoreBusinesses(total: data.total)
-    }
-    
-    func createSaveLocationEntity(_ backgroundContext: NSManagedObjectContext, _ data: YelpBusinessResponse) {  //+1
+        
         backgroundContext.perform { //+2
             let newLocation = Location(context: backgroundContext)
             newLocation.latitude = data.region.center.latitude
@@ -55,21 +51,26 @@ extension SearchController {
                 self.buildYelpCategoryArray(data: data)  //Array but Saved = Location & No Businesses
                 self.currentLocationID = newLocation.objectID
                 newLocation.addBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
+                self.getMoreBusinesses(total: data.total)    //Because background context, best way to time save happens first
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }   //-3
         }   //-2
-    }   //-1
+        
+        
+        
+    }
+
     
     func getMoreBusinesses(total: Int){ //+1
-        print("Total = \(total) .... Offset = \(offset)")
         while offset <= recordCountAtLocation {
-            if offset <= recordCountAtLocation {
                 print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
-                offset += limit
-            }
+            networkQueueData.append(YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset))
+            offset += limit
         }
+        
         if offset > recordCountAtLocation {
+            print("OUTSIDE ==> Total = \(total) .... Offset = \(offset)")
             offset = limit
         }
     }   //-1
