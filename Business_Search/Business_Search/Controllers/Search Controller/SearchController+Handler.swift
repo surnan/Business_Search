@@ -11,42 +11,16 @@ import CoreData
 
 extension SearchController {
     
-    func addLocationToCoreData(data: YelpBusinessResponse){
-        let backgroundContext = dataController.backGroundContext!
-        backgroundContext.perform {
-            let newLocation = Location(context: backgroundContext)
-            newLocation.latitude = data.region.center.latitude
-            newLocation.longititude = data.region.center.longitude
-            newLocation.totalBusinesses = Int32(data.total)
-            newLocation.radius = Int32(radius)  //AppDelegate
-            recordCountAtLocation = data.total
-            do {
-                try backgroundContext.save()
-                self.buildYelpCategoryArray(data: data)  //Array built but data not saved
-                self.currentLocationID = newLocation.objectID
-                newLocation.addBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
-                self.continueCallingBusinesses(total: data.total)
-            } catch {
-                print("Error saving func addLocation() --\n\(error)")
-            }
-        }
-    }
-    
-    
-    
-    
     //po String(data: data, format: .utf8)
-    //networkQueueData
     func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
             if error == NetworkError.needToRetry {
-                print("handleLoadBusiness --> Retry -> \(error) ... temp = \(String(describing: temp))")
                 guard let temp = temp else {return}
-                networkQueueData.append(temp)
-                print("")
+                print("handleLoadBusiness --> Retry -> \(error) ... temp = \(temp)")
             } else {
                 print("Error that is not 'needToRetry' --> error = \(error)")
+                //networkQueueData.append(temp) //DELETE FROM 'networkQueue'
             }
         case .success(let data):
             if yelpCategoryArray.isEmpty {
@@ -61,57 +35,46 @@ extension SearchController {
         }
     }
     
-    func continueCallingBusinesses2(total: Int){
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        while offset <= total {
-                        queue.addOperation {
-                            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
-                        offset += limit
-                        }
-        }
-        if offset > total {
-            offset = 0 //set to Zero because the call that is used to create Location isn't used
-        }
+    func addLocationToCoreData(data: YelpBusinessResponse){
+        //Save Location Entity and Business Entities for the same API Call
+        let backgroundContext = dataController.backGroundContext!
+        createSaveLocationEntity(backgroundContext, data)
+        //  getMoreBusinesses(total: data.total)
     }
     
+    func createSaveLocationEntity(_ backgroundContext: NSManagedObjectContext, _ data: YelpBusinessResponse) {  //+1
+        backgroundContext.perform { //+2
+            let newLocation = Location(context: backgroundContext)
+            newLocation.latitude = data.region.center.latitude
+            newLocation.longititude = data.region.center.longitude
+            newLocation.totalBusinesses = Int32(data.total)
+            newLocation.radius = Int32(radius)  //AppDelegate
+            recordCountAtLocation = data.total
+            do {    //+3
+                try backgroundContext.save()
+                self.buildYelpCategoryArray(data: data)  //Array but Saved = Location & No Businesses
+                self.currentLocationID = newLocation.objectID
+                newLocation.addBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
+            } catch {
+                print("Error saving func addLocation() --\n\(error)")
+            }   //-3
+        }   //-2
+    }   //-1
     
-    @objc func selectContinueCallingBusinesses(total: Int){
-        continueCallingBusinesses(total: total)
-    }
-    
-    
-    func continueCallingBusinesses(total: Int){ //+1
+    func getMoreBusinesses(total: Int){ //+1
         print("Total = \(total) .... Offset = \(offset)")
-        
         while offset <= recordCountAtLocation {
             if offset <= recordCountAtLocation {
                 print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
-                _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
                 offset += limit
             }
         }
-        
         if offset > recordCountAtLocation {
             offset = limit
         }
-        
-        
-        
-        
     }   //-1
 }
 
-/*
- func continueCallingBusinesses(total: Int){
- print("Total = \(total) .... Offset = \(offset)")
- 
- if offset <= myTotal {
- print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
- _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
- offset += limit
- } else {
- offset = limit //set to Zero because the call that is used to create Location isn't used
- }
- }
- */
+
+//_ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
+//networkQueueData
