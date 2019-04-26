@@ -12,7 +12,7 @@ import CoreData
 extension SearchController {
     
     //po String(data: data, format: .utf8)
-    func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){
+    func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){  //+1
         switch result {
         case .failure(let error):
             if error == NetworkError.needToRetry {
@@ -20,7 +20,6 @@ extension SearchController {
                 print("handleLoadBusiness --> Retry -> \(error) ... temp = \(temp)")
             } else {
                 print("Error that is not 'needToRetry' --> error = \(error)")
-                //networkQueueData.append(temp) //DELETE FROM 'networkQueue'
             }
         case .success(let data):
             if yelpCategoryArray.isEmpty {
@@ -28,16 +27,13 @@ extension SearchController {
                 addLocationToCoreData(data: data)
             } else {
                 print("first name = \(data.businesses.first?.name ?? "")")
-                
                 let filterIndex = networkQueueData.firstIndex { (element) -> Bool in
                     guard let temp = temp else {return false}
                     return element.offset == temp.offset
                 }
-                
                 if let index = filterIndex {
                     networkQueueData.remove(at: index)
                 }
-                
                 
                 buildYelpCategoryArray(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
@@ -48,9 +44,9 @@ extension SearchController {
                 }
             }
         }
-    }
+    }   //-1
     
-    func addLocationToCoreData(data: YelpBusinessResponse){
+    func addLocationToCoreData(data: YelpBusinessResponse){ //+1
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
         
@@ -71,21 +67,16 @@ extension SearchController {
                 print("Error saving func addLocation() --\n\(error)")
             }   //-3
         }   //-2
-        
-        
-        
-    }
+    }   //-1
 
     
     func getMoreBusinesses(total: Int){ //+1
         while offset <= recordCountAtLocation {
-//                print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
             networkQueueData.append(YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset))
             offset += limit
         }
         
         if offset > recordCountAtLocation {
-//            print("OUTSIDE ==> Total = \(total) .... Offset = \(offset)")
             offset = limit
             downloadAllBusinesses()
         }
