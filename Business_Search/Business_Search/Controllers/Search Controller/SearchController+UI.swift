@@ -43,6 +43,9 @@ extension SearchController {
         return false
     }
     
+    @objc func selectContinueCallingBusinesses(total: Int){
+        getMoreBusinesses(total: total)
+    }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
     @objc func handleDeleteAll(){
