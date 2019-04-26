@@ -28,9 +28,29 @@ extension SearchController {
                 addLocationToCoreData(data: data)
             } else {
                 print("first name = \(data.businesses.first?.name ?? "")")
+                
+//                networkQueueData.removeAll { (element) -> Bool in
+//                    guard let temp = temp else {return false}
+//                    return element.offset == temp.offset
+//                }
+                
+                let filterIndex = networkQueueData.firstIndex { (element) -> Bool in
+                    print("element.offset ... \(element.offset)  &&  temp.offset ... \(temp?.offset)")
+                    return element.offset == temp?.offset
+                    }
+                
+                
+                
+                
+                
+                
                 buildYelpCategoryArray(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.addBusinessesAndCategories(yelpData: data, dataController: dataController)
+                
+                networkQueueData.forEach{
+                    print("Success / delete --> outcome --> \($0.offset)")
+                }
             }
         }
     }
@@ -64,18 +84,22 @@ extension SearchController {
     
     func getMoreBusinesses(total: Int){ //+1
         while offset <= recordCountAtLocation {
-                print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
+//                print("INSIDE ==> Total = \(total) .... Offset = \(offset)")
             networkQueueData.append(YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset))
             offset += limit
         }
         
         if offset > recordCountAtLocation {
-            print("OUTSIDE ==> Total = \(total) .... Offset = \(offset)")
+//            print("OUTSIDE ==> Total = \(total) .... Offset = \(offset)")
             offset = limit
+            downloadAllBusinesses()
         }
     }   //-1
+    
+    func downloadAllBusinesses(){
+        for (_, element) in networkQueueData.enumerated(){
+            print("element.offset being called ---> \(element.offset)")
+            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: handleLoadBusinesses(temp:result:))
+        }
+    }
 }
-
-
-//_ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: offset ,completion: self.handleLoadBusinesses(temp:result:))
-//networkQueueData

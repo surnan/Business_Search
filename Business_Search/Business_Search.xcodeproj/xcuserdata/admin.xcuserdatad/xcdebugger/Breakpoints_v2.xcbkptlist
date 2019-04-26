@@ -30,7 +30,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/AppDelegate.swift"
-            timestampString = "578008766.174837"
+            timestampString = "578011157.5139641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -46,13 +46,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "578008766.175245"
+            timestampString = "578012777.391827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "checkYelpReturnedStatusCodes(response:)"
-            landmarkType = "7">
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "Yelp"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -62,7 +62,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "578008766.175558"
+            timestampString = "578012777.392681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -78,11 +78,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "578008766.175842"
+            timestampString = "578012777.3930531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "loadUpBusinesses(latitude:longitude:offset:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,29 +94,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "578008766.1761169"
+            timestampString = "578012777.3934309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "taskForYelpGetRequest(url:decoder:errorDecoder:completion:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
-            timestampString = "578008766.1763901"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "getMoreBusinesses(total:)"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static Business_Search.Yelp.(taskForYelpGetRequest in _7EC255E254E74648450991436E5CA0EB)&lt;A, B where A: Swift.Decodable, B: Swift.Decodable&gt;(url: Foundation.URL, decoder: A.Type, errorDecoder: B.Type, completion: (Swift.Result&lt;A, Business_Search.NetworkError&gt;) -&gt; ()) -&gt; __C.NSURLSessionDataTask"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "578012777.530043"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "5260">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 () -&gt; () in closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static Business_Search.Yelp.(taskForYelpGetRequest in _7EC255E254E74648450991436E5CA0EB)&lt;A, B where A: Swift.Decodable, B: Swift.Decodable&gt;(url: Foundation.URL, decoder: A.Type, errorDecoder: B.Type, completion: (Swift.Result&lt;A, Business_Search.NetworkError&gt;) -&gt; ()) -&gt; __C.NSURLSessionDataTask"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
+                  timestampString = "578012777.53248"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "114">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
