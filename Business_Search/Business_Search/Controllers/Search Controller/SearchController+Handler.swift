@@ -12,44 +12,82 @@ import CoreData
 extension SearchController {
     
     //po String(data: data, format: .utf8)
-    func handleLoadBusinesses(temp: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){  //+1
+    //NEED THE ERROR CASE FOR TOO MANY REQUESTS IN ONE SECOND
+    
+    func handleLoadBusinesses(inputData: YelpInputDataStruct?, result: Result<YelpBusinessResponse, NetworkError>){  //+1
+        
+        let filterIndex = urlsQueue.firstIndex { (element) -> Bool in
+            guard let inputData = inputData else {return false}
+            return element.offset == inputData.offset
+        }
+        print("Current Offset = \(inputData?.offset ?? -999) ... filterIndex = \(filterIndex ?? -999)")
+        
+        
         switch result {
+            
         case .failure(let error):
-            if error == NetworkError.needToRetry {
-                guard let temp = temp else {return}
-                print("handleLoadBusiness --> Retry -> \(error) ... temp = \(temp)")
+            if error == NetworkError.needToRetry {  //NEED THE ERROR CASE FOR TOO MANY REQUESTS IN ONE SECOND
+                print("handleLoadBusiness --> Retry -> \(error) ... inputData = \(String(describing: inputData))")
             } else {
                 print("Error that is not 'needToRetry' --> error = \(error)")
+                if let indexToRemove = filterIndex {
+                    urlsQueue.remove(at: indexToRemove)
+                }
             }
+            
         case .success(let data):
             if yelpCategoryArray.isEmpty {
                 print("first name = \(data.businesses.first?.name ?? "")")
                 addLocationToCoreData(data: data)
             } else {
                 print("first name = \(data.businesses.first?.name ?? "")")
-                let filterIndex = networkQueueData.firstIndex { (element) -> Bool in
-                    guard let temp = temp else {return false}
-                    return element.offset == temp.offset
-                }
+
                 if let index = filterIndex {
-                    networkQueueData.remove(at: index)
+                    urlsQueue.remove(at: index)
                 }
-                
                 buildYelpCategoryArray(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.addBusinessesAndCategories(yelpData: data, dataController: dataController)
-                
-                networkQueueData.forEach{
-                    print("Success / delete --> outcome --> \($0.offset)")
-                }
             }
         }
+    }   //-1
+    
+    
+    func runDownloadAgain(){
+        let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            print("Timer fired!")
+            self.downloadAllBusinesses()
+        }
+        timer.fire()
+    }
+
+    func downloadAllBusinesses(){
+        if urlsQueue.isEmpty {return}
+        let semaphore = DispatchSemaphore(value: 2)
+        
+        for (index, element) in urlsQueue.enumerated(){
+            semaphore.wait()
+            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { (yelpDataStruct, result) in
+                defer {
+                    semaphore.signal()
+                }
+                self.handleLoadBusinesses(inputData: yelpDataStruct, result: result)
+            })
+        }
+    }
+    
+    
+    
+    func getMoreBusinesses(total: Int){ //+1
+        for index in stride(from: limit, to: recordCountAtLocation, by: limit){
+            urlsQueue.append(YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: index))
+        }
+        downloadAllBusinesses()
     }   //-1
     
     func addLocationToCoreData(data: YelpBusinessResponse){ //+1
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
-        
         backgroundContext.perform { //+2
             let newLocation = Location(context: backgroundContext)
             newLocation.latitude = data.region.center.latitude
@@ -68,23 +106,65 @@ extension SearchController {
             }   //-3
         }   //-2
     }   //-1
-
     
-    func getMoreBusinesses(total: Int){ //+1
-        while offset <= recordCountAtLocation {
-            networkQueueData.append(YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset))
-            offset += limit
-        }
-        
-        if offset > recordCountAtLocation {
-            offset = limit
-            downloadAllBusinesses()
-        }
-    }   //-1
     
-    func downloadAllBusinesses(){
-        for (_, element) in networkQueueData.enumerated(){
-            _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: handleLoadBusinesses(temp:result:))
-        }
-    }
+    
 }
+
+
+//func downloadAllBusinesses(){
+//    if urlsQueue.isEmpty {return}
+//
+//
+//    //        let dispatchGroup = DispatchGroup()
+//    let semaphore = DispatchSemaphore(value: 2)
+//
+//    for (index, element) in urlsQueue.enumerated(){
+//        //            dispatchGroup.enter()
+//        semaphore.wait()
+//        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { (yelpDataStruct, result) in
+//            defer {
+//                semaphore.signal()
+//                //                    dispatchGroup.leave()
+//            }
+//            self.handleLoadBusinesses(inputData: yelpDataStruct, result: result)
+//        })
+//    }
+//
+//    //        dispatchGroup.notify(queue: .main, execute: runDownloadAgain)
+//
+//}
+
+
+
+
+/*
+ func getMoreBusinesses(total: Int){ //+1
+ while offset <= recordCountAtLocation {
+ networkQueueData.append(YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset))
+ offset += limit
+ }
+ 
+ if offset > recordCountAtLocation {
+ offset = limit
+ downloadAllBusinesses()
+ }
+ }   //-1
+ */
+
+/*
+ dispatchGroup.notify(queue: .main) {[weak self] in
+ print("\n\nCompleted all the looping")
+ print("NetworkQueData.count =  \(self?.networkQueueData.count ?? -111)")
+ 
+ self?.networkQueueData.forEach{
+ print($0.offset, terminator: "...")
+ }
+ 
+ if self?.networkQueueData.count != 0 {
+ self?.runDownloadAgain()
+ }
+ print("\n")
+ }
+ 
+ */
