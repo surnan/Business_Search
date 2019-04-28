@@ -56,7 +56,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             index = businesses.count - 1
         }
         
-        print("data.total =  \(data.total)")
         data.businesses.forEach { (currentBusiness) in
             businesses.append(YelpBusinessElement(title: currentBusiness.name ?? "",
                                                   address: currentBusiness.location.display_address.first ?? "",
@@ -81,6 +80,5 @@ class SearchController: UIViewController, UISearchControllerDelegate{
                 }
             })
         }
-        print("Businesses Total at conclusion of 'loadCategoriesAndBusinesses' = \(businesses.count)")
     }
 }
