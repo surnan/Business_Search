@@ -107,7 +107,6 @@ class YelpClient{
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
         print("Number of Yelp Calls left until GMT Midnight  ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
-        //  print("checkYelpReturnedStatusCodes Error --> \(String(describing: response?.url))")
         switch httpResponse.statusCode {
         case 200: return nil
         case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED

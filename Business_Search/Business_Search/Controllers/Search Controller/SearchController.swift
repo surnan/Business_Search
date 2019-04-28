@@ -11,7 +11,7 @@ import CoreData
 
 
 class SearchController: UIViewController, UISearchControllerDelegate{
-    //Mark: Injected
+    //MARK: Injected
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
     

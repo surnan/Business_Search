@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 extension SearchController {
-    
     func setupFetchController(){
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]

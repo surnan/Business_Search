@@ -11,7 +11,6 @@ import CoreData
 
 //po String(data: data, format: .utf8)
 extension SearchController {
-    
     func addLocationToCoreData(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
@@ -69,7 +68,7 @@ extension SearchController {
     
     func downloadAllBusinesses(){
         if urlsQueue.isEmpty {return}
-        let semaphore = DispatchSemaphore(value: 5)
+        let semaphore = DispatchSemaphore(value: 4)
         let dispatchGroup = DispatchGroup()
         
         for (index, element) in urlsQueue.enumerated(){
@@ -90,7 +89,7 @@ extension SearchController {
     
     func runDownloadAgain(){
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
-        let timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { [weak self] timer in
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadAllBusinesses()
         }
         timer.fire()
