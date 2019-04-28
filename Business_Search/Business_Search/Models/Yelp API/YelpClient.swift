@@ -14,8 +14,8 @@ import CoreData
 //https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786942&longitude=-122.399643
 
 
-class APIclient{
-    private enum Endpoints {  //+1
+class YelpClient{
+    private enum Endpoints {
         static let base = "https://api.yelp.com/v3"
         case autocomplete(String, Double, Double)
         case searchForBusinesses(String, Double, Double)
@@ -53,36 +53,76 @@ class APIclient{
             let tempString = toString.replacingOccurrences(of: " ", with: "%20")
             return URL(string: tempString)!
         }
-    } //-1
+    }
     
     
-    //This can fail for big queries because there's no gaurantee
-    //this Yelp request happens before other calls cause throttling
-    class func loadUpBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (YelpInputDataStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    class func getNearbyBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (YelpGetNearbyBusinessStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
-                let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
-                print("\nFAIL & offset = \(temp.offset)")
-                return completion(temp, .failure(error))
+                let urlsQueueElement = YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: offset)
+                return completion(urlsQueueElement, .failure(error))
             case .success(let answer):
-                let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
-                print("\nSUCCESS & offset = \(temp.offset)")
-                return completion(temp, .success(answer))
+                let urlsQueueElement = YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: offset)
+                return completion(urlsQueueElement, .success(answer))
             }
         }
         return task
     }
     
+    
+    class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask{
+        let url = Endpoints.getAllCategories(locale).url
+        print("GetAllCategories URL = \(url)")
+        let task = taskForYelpGetRequest(url: url, decoder: YelpAllCategoriesResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
+            switch result {
+            case .failure(let error):
+                return completion(.failure(error))
+            case .success(let answer):
+                return completion(.success(answer))
+            }
+        }
+        return task
+    }
+    
+    
+    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+        let url = Endpoints.autocomplete(text, latitude, longitude).url
+        print("url = \(url)")
+        let task = taskForYelpGetRequest(url: url, decoder: YelpAutoCompleteResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
+            switch result {
+            case .failure(let error):
+                return completion(.failure(error))
+            case .success(let answer):
+                return completion(.success(answer))
+            }
+        }
+        return task
+    }
+
+    
+    class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> YelpAPIError?{
+        guard let verifiedResponse = response else {return nil}
+        let httpResponse = verifiedResponse as! HTTPURLResponse
+        
+        print("Number of Yelp Calls left until GMT Midnight  ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
+        //  print("checkYelpReturnedStatusCodes Error --> \(String(describing: response?.url))")
+        switch httpResponse.statusCode {
+        case 200: return nil
+        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
+        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.UNAUTHORIZED
+        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.INTERNAL_SERVER_ERROR
+        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.UNKNOWN_ERROR
+        }
+    }
+    
+    //MARK: Generic Yelp Get Request utilized by all other Yelp Class Functions
     class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type,
                                                                                           errorDecoder: ErrorDecoder.Type,
                                                                                           completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
-        
-//        print("\n _URL = \(String(describing: request.url))")
-        
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
             
@@ -131,68 +171,5 @@ class APIclient{
         }
         task.resume()
         return task
-    }
-    
-    
-    
-    
-    class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask{
-        let url = Endpoints.getAllCategories(locale).url
-        print("GetAllCategories URL = \(url)")
-        let task = taskForYelpGetRequest(url: url, decoder: YelpAllCategoriesResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
-            switch result {
-            case .failure(let error):
-                return completion(.failure(error))
-            case .success(let answer):
-                return completion(.success(answer))
-            }
-        }
-        return task
-    }
-    
-    
-    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{
-        let url = Endpoints.autocomplete(text, latitude, longitude).url
-        print("url = \(url)")
-        let task = taskForYelpGetRequest(url: url, decoder: YelpAutoCompleteResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
-            switch result {
-            case .failure(let error):
-                return completion(.failure(error))
-            case .success(let answer):
-                return completion(.success(answer))
-            }
-        }
-        return task
-    }
-    
-    
-    class func getNearbyBusinesses(category: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
-        let url = Endpoints.searchForBusinesses(category, latitude, longitude).url
-        let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
-            switch result {
-            case .failure(let error):
-                return completion(.failure(error))
-            case .success(let answer):
-                return completion(.success(answer))
-            }
-        }
-        return task
-    }
-    
-
-    class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> YelpAPIError?{
-        guard let verifiedResponse = response else {return nil}
-        let httpResponse = verifiedResponse as! HTTPURLResponse
-        
-//        print("Number of Yelp Calls left today ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
-//        print("checkYelpReturnedStatusCodes Error --> \(String(describing: response?.url))")
-        switch httpResponse.statusCode {
-        case 200: return nil
-        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
-        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.UNAUTHORIZED
-        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.INTERNAL_SERVER_ERROR
-            default: return YelpAPIError.UNKNOWN_ERROR
-//        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.UNKNOWN_ERROR
-        }
     }
 }
