@@ -27,7 +27,7 @@ extension SearchController {
     }
     
     @objc func handleGetNewLocation(){
-        _ = APIclient.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
+        _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
     }
     
     func getAllLocations()-> [Location]{
@@ -50,8 +50,8 @@ extension SearchController {
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
     @objc func handleDeleteAll(){
         do {
-            yelpBusinessArray.removeAll()
-            yelpCategoryArray.removeAll()
+            businesses.removeAll()
+            categories.removeAll()
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
             let request = NSBatchDeleteRequest(fetchRequest: fetch)
             try self.dataController.backGroundContext.execute(request)

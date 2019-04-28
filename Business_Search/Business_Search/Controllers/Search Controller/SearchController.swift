@@ -9,40 +9,23 @@
 import UIKit
 import CoreData
 
-struct YelpCategoryElement: Equatable {
-    var alias: String
-    var title: String
-    var businessID: String
-    static func == (lhs: YelpCategoryElement, rhs: YelpCategoryElement) -> Bool {
-        return lhs.title == rhs.title
-    }
-}
-
-struct YelpBusinessElement {
-    var title: String
-    var address: String
-    var state: String
-    var zipCode: String
-    var businessID: String
-}
-
 
 class SearchController: UIViewController, UISearchControllerDelegate{
-
-    var urlSessionTask: URLSessionDataTask?
+    //Mark: Injected
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
+    
+    //MARK: Local
     var locationArray = [Location]()
-    var yelpCategoryArray = [[YelpCategoryElement]]()
-    var yelpBusinessArray = [YelpBusinessElement]()
+    var categories = [[YelpCategoryElement]]()
+    var businesses = [YelpBusinessElement]()
     var currentLocationID: NSManagedObjectID?
-    
-    var urlsQueue = [YelpInputDataStruct]()
-    
+    var urlSessionTask: URLSessionDataTask?
+    var urlsQueue = [YelpGetNearbyBusinessStruct]() //enumeration loop for semaphores
     let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
     
-
+    
     lazy var searchController: UISearchController = {
         var search = UISearchController(searchResultsController: resultsTableController)
         search.delegate = self
@@ -54,7 +37,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         search.searchBar.scopeButtonTitles = ["Business Names", "Categories"]
         search.searchBar.barStyle = .black      // TyLocationg Font = white
         //search.obscuresBackgroundDuringPresentation = true    //removes .lightContent from navigation item
-        
         //DON'T SEE IT
         //        search.searchBar.sizeToFit()
         //        search.dimsBackgroundDuringPresentation = true
@@ -64,18 +46,15 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         return search
     }()
     
-
     
-    func buildYelpCategoryArray(data: YelpBusinessResponse){
+    
+    func loadCategories(data: YelpBusinessResponse){
         var index: Int
-        
-        if yelpCategoryArray.isEmpty {
-            index = -1
+        if categories.isEmpty {
+            index = -1  //index incremented by one once array initialized
         } else {
-            index = yelpBusinessArray.count - 1
+            index = businesses.count - 1
         }
-        
-        
         
         data.businesses.forEach { (business) in
             index += 1
@@ -89,20 +68,20 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             }
             
             let tempBusiness = YelpBusinessElement(title: title, address: address, state: state, zipCode: zipCode, businessID: id)
-            yelpBusinessArray.append(tempBusiness)
+            businesses.append(tempBusiness)
             business.categories.forEach({ (category) in
                 guard let title = category.title, let alias = category.alias else {return}
                 let temp = YelpCategoryElement(alias: alias, title: title, businessID: id)
-                if yelpCategoryArray.isEmpty {
-                    yelpCategoryArray.append([temp])
+                if categories.isEmpty {
+                    categories.append([temp])
                     return
                 }
-                for i in 0 ... yelpCategoryArray.count - 1 {
-                    if yelpCategoryArray[i].first == temp {
-                        yelpCategoryArray[i].append(temp)
+                for i in 0 ... categories.count - 1 {
+                    if categories[i].first == temp {
+                        categories[i].append(temp)
                         break
-                    } else if i == yelpCategoryArray.count - 1 {
-                        yelpCategoryArray.append([temp])
+                    } else if i == categories.count - 1 {
+                        categories.append([temp])
                         break
                     }
                 }

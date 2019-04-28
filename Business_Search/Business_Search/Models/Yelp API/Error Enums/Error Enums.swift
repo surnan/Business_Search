@@ -8,11 +8,9 @@
 
 import Foundation
 
-//TOO_MANY_REQUESTS_PER_SECOND
-
 enum NetworkError: Error {
     case badURL
-    case networkTimeOut //error passed back to main
+    case networkTimeOut
     case networkConnectionGoodButUnableToConnect
     case connectSuccesfulDownloadDataFail
     case tooManyRequestsPerSecond
@@ -22,7 +20,7 @@ enum NetworkError: Error {
     case needToRetry
 }
 
-//Note Yelp will not return error if bad decoder is used on our side
+
 enum YelpAPIError: Error {
     case FIELD_REQUIRED
     case VALIDATION_ERROR
