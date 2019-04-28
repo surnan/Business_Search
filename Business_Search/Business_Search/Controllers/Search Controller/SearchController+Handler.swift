@@ -23,7 +23,6 @@ extension SearchController {
             recordCountAtLocation = data.total
             do {
                 try backgroundContext.save()
-                self.loadCategories(data: data)  //Array but Saved = Location & No Businesses
                 self.currentLocationID = newLocation.objectID
                 newLocation.saveBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
                 self.getMoreBusinesses(total: data.total)    //Because background context, best way to time save happens first
@@ -44,6 +43,7 @@ extension SearchController {
         case .success(let data):
             if categories.isEmpty {
                 addLocationToCoreData(data: data)
+                loadCategoriesAndBusinesses(data: data)
             } else {
                 let filterIndex = urlsQueue.firstIndex { (element) -> Bool in
                     guard let inputData = inputData else {return false}
@@ -52,11 +52,18 @@ extension SearchController {
                 if let indexToDelete = filterIndex {
                     urlsQueue.remove(at: indexToDelete)
                 }
-                loadCategories(data: data)
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.saveBusinessesAndCategories(yelpData: data, dataController: dataController)
+                loadCategoriesAndBusinesses(data: data)
             }
         }
+        
+        var sum = 0
+        categories.forEach { (array) in
+            sum += array.count
+        }
+        print("Sum of Categories = \(sum)")
+        print("Businesses Count = \(businesses.count)")
     }
     
     func getMoreBusinesses(total: Int){
@@ -89,6 +96,14 @@ extension SearchController {
     
     func runDownloadAgain(){
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
+        print("Category Count = \(categories.count)")
+        
+        var sum = 0
+        categories.forEach { (currentArray) in
+            sum += currentArray.count
+        }
+        
+        print("Business Count = \(businesses.count)")
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadAllBusinesses()
         }
