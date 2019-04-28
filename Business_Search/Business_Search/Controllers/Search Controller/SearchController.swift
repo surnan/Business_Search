@@ -37,10 +37,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var yelpBusinessArray = [YelpBusinessElement]()
     var currentLocationID: NSManagedObjectID?
     
-    
-    var networkQueueData = [YelpInputDataStruct]()
-    
-    
+    var urlsQueue = [YelpInputDataStruct]()
     
     let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
