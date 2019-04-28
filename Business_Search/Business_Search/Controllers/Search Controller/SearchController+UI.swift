@@ -12,8 +12,8 @@ import CoreData
 extension SearchController {
     func setupNavigationMenu(){
         navigationItem.searchController = searchController
-        navigationItem.title = "-"
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "New Location", style: .done, target: self, action: #selector(handleGetNewLocation)), UIBarButtonItem(title: "-ONE-", style: .done, target: self, action: #selector(selectContinueCallingBusinesses))]
+        navigationItem.title = "🔷 Business 🔷"
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleGatherBusinesses)), UIBarButtonItem(title: " ⏸ ", style: .done, target: self, action: #selector(JumpToBreakPoint))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     
@@ -23,28 +23,14 @@ extension SearchController {
         setupNavigationMenu()
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
-        locationArray = getAllLocations()
     }
     
-    @objc func handleGetNewLocation(){
+    @objc func handleGatherBusinesses(){
         _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
     }
     
-    func getAllLocations()-> [Location]{
-        return myFetchController.fetchedObjects ?? []
-    }
-    
-    func isMyLocationSaved(lat: Double, lon: Double)-> Bool{
-        for (_, element) in locationArray.enumerated() {
-            if element.latitude == lat && element.longititude == lon {
-                return true //can't exit out of $0 loop prematurely
-            }
-        }
-        return false
-    }
-    
-    @objc func selectContinueCallingBusinesses(total: Int){
-        getMoreBusinesses(total: total)
+    @objc func JumpToBreakPoint(total: Int){
+        print("")
     }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()

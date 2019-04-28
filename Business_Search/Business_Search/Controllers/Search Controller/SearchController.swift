@@ -16,7 +16,6 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     var myFetchController: NSFetchedResultsController<Location>!
     
     //MARK: Local
-    var locationArray = [Location]()
     var categories = [[YelpCategoryElement]]()
     var businesses = [YelpBusinessElement]()
     var currentLocationID: NSManagedObjectID?
@@ -82,5 +81,3 @@ class SearchController: UIViewController, UISearchControllerDelegate{
         }
     }
 }
-
-//
