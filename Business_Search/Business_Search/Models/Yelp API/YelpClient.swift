@@ -14,7 +14,7 @@ import CoreData
 //https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786942&longitude=-122.399643
 
 
-class Yelp{
+class APIclient{
     private enum Endpoints {  //+1
         static let base = "https://api.yelp.com/v3"
         case autocomplete(String, Double, Double)
@@ -64,9 +64,11 @@ class Yelp{
             switch result {
             case .failure(let error):
                 let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
+                print("\nFAIL & offset = \(temp.offset)")
                 return completion(temp, .failure(error))
             case .success(let answer):
                 let temp = YelpInputDataStruct(latitude: latitude, longitude: longitude, offset: offset)
+                print("\nSUCCESS & offset = \(temp.offset)")
                 return completion(temp, .success(answer))
             }
         }
@@ -79,7 +81,7 @@ class Yelp{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
-        print("\n _URL = \(String(describing: request.url))")
+//        print("\n _URL = \(String(describing: request.url))")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
@@ -110,7 +112,7 @@ class Yelp{
                     let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
                     if yelpErrorDecoded.error.code == "TOO_MANY_REQUESTS_PER_SECOND" {
                         DispatchQueue.main.async {
-                            completion(.failure(.needToRetry))
+                            completion(.failure(.tooManyRequestsPerSecond))
                         }
                         return
                     }
