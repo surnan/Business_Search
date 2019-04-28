@@ -48,7 +48,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     
     
-    func loadCategories(data: YelpBusinessResponse){
+    func loadCategoriesAndBusinesses(data: YelpBusinessResponse){
         var index: Int
         if categories.isEmpty {
             index = -1  //index incremented by one once array initialized
@@ -56,36 +56,31 @@ class SearchController: UIViewController, UISearchControllerDelegate{
             index = businesses.count - 1
         }
         
-        data.businesses.forEach { (business) in
+        print("data.total =  \(data.total)")
+        data.businesses.forEach { (currentBusiness) in
+            businesses.append(YelpBusinessElement(title: currentBusiness.name ?? "",
+                                                  address: currentBusiness.location.display_address.first ?? "",
+                                                  state: currentBusiness.location.state ?? "",
+                                                  zipCode: currentBusiness.location.zip_code ?? "",
+                                                  businessID: currentBusiness.id ?? ""))
             index += 1
-            guard let title = business.name,
-                let id = business.id,
-                let address = business.location.address1,
-                let state = business.location.city,
-                let zipCode = business.location.zip_code
-                else {
-                    return
-            }
-            
-            let tempBusiness = YelpBusinessElement(title: title, address: address, state: state, zipCode: zipCode, businessID: id)
-            businesses.append(tempBusiness)
-            business.categories.forEach({ (category) in
-                guard let title = category.title, let alias = category.alias else {return}
-                let temp = YelpCategoryElement(alias: alias, title: title, businessID: id)
+            currentBusiness.categories.forEach({ (currentCategory) in
+                let newCategory = YelpCategoryElement(alias: currentCategory.alias ?? "", title: currentCategory.title ?? "", businessID: currentBusiness.id ?? "")
                 if categories.isEmpty {
-                    categories.append([temp])
+                    categories.append([newCategory])
                     return
                 }
                 for i in 0 ... categories.count - 1 {
-                    if categories[i].first == temp {
-                        categories[i].append(temp)
+                    if categories[i].first == newCategory {
+                        categories[i].append(newCategory)
                         break
                     } else if i == categories.count - 1 {
-                        categories.append([temp])
+                        categories.append([newCategory])
                         break
                     }
                 }
             })
         }
+        print("Businesses Total at conclusion of 'loadCategoriesAndBusinesses' = \(businesses.count)")
     }
 }

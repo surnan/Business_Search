@@ -29,14 +29,119 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Business_Search/AppDelegate.swift"
-            timestampString = "578116824.491223"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
+            timestampString = "578121880.830189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "handleLoadBusinesses(inputData:result:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
+                  timestampString = "578119008.424051"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "441">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
+                  timestampString = "578119008.427146"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "471">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
+                  timestampString = "578119008.430077"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "1815">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
+            timestampString = "578121880.8316"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "handleLoadBusinesses(inputData:result:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
+            timestampString = "578121880.832348"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "handleLoadBusinesses(inputData:result:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
+            timestampString = "578121880.8330621"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "handleLoadBusinesses(inputData:result:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
