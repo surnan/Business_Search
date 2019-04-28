@@ -27,7 +27,7 @@ extension SearchController {
     }
     
     @objc func handleGetNewLocation(){
-        _ = Yelp.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
+        _ = APIclient.loadUpBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
     }
     
     func getAllLocations()-> [Location]{

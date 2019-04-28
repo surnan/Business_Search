@@ -8,11 +8,14 @@
 
 import Foundation
 
+//TOO_MANY_REQUESTS_PER_SECOND
+
 enum NetworkError: Error {
     case badURL
     case networkTimeOut //error passed back to main
     case networkConnectionGoodButUnableToConnect
     case connectSuccesfulDownloadDataFail
+    case tooManyRequestsPerSecond
     case yelpErrorDecoded
     case unableToDecode
     case noData_noError
