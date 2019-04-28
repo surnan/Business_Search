@@ -25,7 +25,7 @@ extension SearchController {
                 try backgroundContext.save()
                 self.currentLocationID = newLocation.objectID
                 newLocation.saveBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
-                self.getMoreBusinesses(total: data.total)    //Because background context, best way to time save happens first
+                self.getNearbyBusinesses(total: data.total)    //Because background context, best way to time save happens first
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }
@@ -59,7 +59,7 @@ extension SearchController {
         }
     }
     
-    func getMoreBusinesses(total: Int){
+    func getNearbyBusinesses(total: Int){
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){
             urlsQueue.append(YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: index))
         }

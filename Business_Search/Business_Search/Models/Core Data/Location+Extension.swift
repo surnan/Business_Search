@@ -9,9 +9,6 @@
 import UIKit
 import CoreData
 
-//var dataController: DataController!
-
-
 extension Location {
     func saveBusinessesAndCategories(yelpData: YelpBusinessResponse, dataController: DataController){
         dataController.backGroundContext.perform {

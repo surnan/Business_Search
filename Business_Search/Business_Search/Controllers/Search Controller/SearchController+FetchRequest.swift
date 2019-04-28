@@ -30,8 +30,6 @@ extension SearchController {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //print("DID CHANGE")
-        locationArray.removeAll()
-        locationArray = getAllLocations()
     }
     
     //    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
