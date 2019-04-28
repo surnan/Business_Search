@@ -102,6 +102,7 @@
 			children = (
 				84DC40D322697323003003C4 /* Error Enums */,
 				841447602266C50800A38AAB /* Response */,
+				84CF692622755B0B00109C96 /* Yelp Struct */,
 				84BDE31022642B27008C9B01 /* YelpClient.swift */,
 			);
 			path = "Yelp API";
@@ -114,7 +115,6 @@
 				84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */,
 				84DC40DC2269F7C0003003C4 /* YelpBusinessResponse.swift */,
 				84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */,
-				848B8E0F227202B000F761F5 /* YelpStruct.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -213,6 +213,14 @@
 				84B3CF8A2268A8B30012A75C /* 2 */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		84CF692622755B0B00109C96 /* Yelp Struct */ = {
+			isa = PBXGroup;
+			children = (
+				848B8E0F227202B000F761F5 /* YelpStruct.swift */,
+			);
+			path = "Yelp Struct";
 			sourceTree = "<group>";
 		};
 		84D3DB9F22675B0B00E46B2E /* Cells */ = {
