@@ -57,13 +57,6 @@ extension SearchController {
                 loadCategoriesAndBusinesses(data: data)
             }
         }
-        
-        var sum = 0
-        categories.forEach { (array) in
-            sum += array.count
-        }
-        print("Sum of Categories = \(sum)")
-        print("Businesses Count = \(businesses.count)")
     }
     
     func getMoreBusinesses(total: Int){
