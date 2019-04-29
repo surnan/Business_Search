@@ -41,9 +41,8 @@ extension SearchController {
                 print("Error that is not 'needToRetry' --> error = \(error)")
             }
         case .success(let data):
-            if categories.isEmpty {
+            if myCategories.isEmpty {
                 createLocation(data: data)
-                loadCategoriesAndBusinessesIntoArrays(data: data)
             } else {
                 let filterIndex = urlsQueue.firstIndex { (element) -> Bool in
                     guard let inputData = inputData else {return false}
@@ -54,7 +53,6 @@ extension SearchController {
                 }
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.saveBusinessesAndCategories(yelpData: data, dataController: dataController)
-                loadCategoriesAndBusinessesIntoArrays(data: data)
             }
         }
     }
@@ -89,14 +87,17 @@ extension SearchController {
     
     func runDownloadAgain(){
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
-        print("Category Count = \(categories.count)")
+        print("Category Count = \(myCategories.count)")
+        
+        fetchDataToMakeBusinessArray2()
+        convertBusinessToCategories()
         
         var sum = 0
-        categories.forEach { (currentArray) in
+        myCategories.forEach { (currentArray) in
             sum += currentArray.count
         }
         
-        print("Business Count = \(businesses.count)")
+        print("Business Count = \(myBusinesses.count)")
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadAllBusinesses()
         }
