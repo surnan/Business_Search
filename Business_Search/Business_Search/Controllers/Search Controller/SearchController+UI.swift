@@ -32,9 +32,13 @@ extension SearchController {
     
     //var myBusinesses = [Business]()
     func fetchDataToMakeBusinessArray2(){
+        
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-        //        let predicate = NSPredicate(format: "latitude == %@", [latitude])
-        //        fetchRequest.predicate = predicate
+        let predicate = NSPredicate(format: "(longitude == %@) AND (latitude == %@)", argumentArray: [longitude, latitude])
+        
+        fetchRequest.predicate = predicate
+        let sortDescriptor = NSSortDescriptor(key: "totalBusinesses", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         do {
             myLocations = try dataController.backGroundContext.fetch(fetchRequest)
             myLocations.first?.businesses?.forEach{
@@ -44,23 +48,7 @@ extension SearchController {
             print("Error = \(error)")
         }
     }
-    
-    
-    //    //var myBusinesses = [Business]()
-    //    func fetchDataToMakeBusinessArray(){
-    //        let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-    //        let predicate = NSPredicate(format: "latitude == %@", [latitude])
-    //        //        fetchRequest.predicate = predicate
-    //        do {
-    //            myBusinesses = try dataController.backGroundContext.fetch(fetchRequest)
-    //        } catch {
-    //            print("Error = \(error)")
-    //        }
-    //    }
-    
-    
-    
-    
+
     
     @objc func handleDownloadBusinesses(){
         _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
@@ -83,5 +71,4 @@ extension SearchController {
             print ("There was an error deleting Locations from CoreData")
         }
     }
-
 }

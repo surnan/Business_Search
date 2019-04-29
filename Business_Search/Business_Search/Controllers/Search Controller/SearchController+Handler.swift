@@ -17,7 +17,7 @@ extension SearchController {
         backgroundContext.perform {
             let newLocation = Location(context: backgroundContext)
             newLocation.latitude = data.region.center.latitude
-            newLocation.longititude = data.region.center.longitude
+            newLocation.longitude = data.region.center.longitude
             newLocation.totalBusinesses = Int32(data.total)
             newLocation.radius = Int32(radius)  //AppDelegate
             recordCountAtLocation = data.total
