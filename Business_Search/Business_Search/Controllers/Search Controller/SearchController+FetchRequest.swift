@@ -25,13 +25,10 @@ import CoreData
 
 extension SearchController {
     func setupFetchController(){
-        let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-        
+        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
         let predicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
         fetchRequest.predicate = predicate
-        
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "totalBusinesses", ascending: true)]
         myFetchController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                        managedObjectContext: dataController.viewContext,
                                                        sectionNameKeyPath: nil,
