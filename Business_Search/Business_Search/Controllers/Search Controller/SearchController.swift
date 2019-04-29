@@ -18,6 +18,7 @@ class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedR
     var myCategories = [[Category]]()
     var myBusinesses = [Business]()
     var myLocations = [Location]()
+    var doesLocationExist = false
     
     //MARK: Local
     var currentLocationID: NSManagedObjectID?

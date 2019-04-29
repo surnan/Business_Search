@@ -41,8 +41,10 @@ extension SearchController {
                 print("Error that is not 'needToRetry' --> error = \(error)")
             }
         case .success(let data):
-            if myCategories.isEmpty {
+            
+            if !doesLocationExist {
                 createLocation(data: data)
+                doesLocationExist = true
             } else {
                 let filterIndex = urlsQueue.firstIndex { (element) -> Bool in
                     guard let inputData = inputData else {return false}

@@ -40,7 +40,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/1/Results TableView/ResultsController+Search.swift"
-            timestampString = "578146575.542955"
+            timestampString = "578256160.030046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -56,7 +56,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/1/Results TableView/ResultsController+Search.swift"
-            timestampString = "578146575.543047"
+            timestampString = "578256160.030435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578246657.891508"
+            timestampString = "578256160.030705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "convertBusinessToCategories()"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,124 +88,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578246657.892125"
+            timestampString = "578256160.031104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "convertBusinessToCategories()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+UI.swift"
-            timestampString = "578246657.8924201"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "JumpToBreakPoint(total:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
-            timestampString = "578246657.892764"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "handleLoadBusinesses(inputData:result:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+UI.swift"
-            timestampString = "578246670.795598"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "handleDownloadBusinesses()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
-            timestampString = "578246688.209761"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "handleLoadBusinesses(inputData:result:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
-                  moduleName = "Business_Search"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
-                  timestampString = "578246688.215673"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "357">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
-                  moduleName = "Business_Search"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
-                  timestampString = "578246688.218756"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "387">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
-                  moduleName = "Business_Search"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
-                  timestampString = "578246688.221694"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "1731">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
