@@ -24,7 +24,7 @@
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longititude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="radius" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalBusinesses" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="businesses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Business" inverseName="parentLocation" inverseEntity="Business" syncable="YES"/>
@@ -32,6 +32,6 @@
     <elements>
         <element name="Business" positionX="-493.05859375" positionY="-30.921875" width="128" height="268"/>
         <element name="Category" positionX="-209.7578125" positionY="294.0234375" width="128" height="90"/>
-        <element name="Location" positionX="-689.16015625" positionY="-178.06640625" width="128" height="118"/>
+        <element name="Location" positionX="-689.16015625" positionY="-178.06640625" width="128" height="30"/>
     </elements>
 </model>

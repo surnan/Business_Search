@@ -15,6 +15,7 @@ class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedR
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Business>!
     
+    var myCategories = [Category]()
     var myBusinesses = [Business]()
     var myLocations = [Location]()
     
