@@ -68,15 +68,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
+            timestampString = "578246657.891508"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "convertBusinessToCategories()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
+            timestampString = "578246657.892125"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "convertBusinessToCategories()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController+UI.swift"
-            timestampString = "578244012.914145"
+            timestampString = "578246657.8924201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "JumpToBreakPoint(total:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -84,49 +116,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578244012.914875"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
+            timestampString = "578246657.892764"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "convertBusinessToCategories()"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "handleLoadBusinesses(inputData:result:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578244012.915504"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+UI.swift"
+            timestampString = "578246670.795598"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "convertBusinessToCategories()"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "handleDownloadBusinesses()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578244012.9159729"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+Handler.swift"
+            timestampString = "578246688.209761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "convertBusinessToCategories()"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "handleLoadBusinesses(inputData:result:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
+                  timestampString = "578246688.215673"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "357">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
+                  timestampString = "578246688.218756"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "387">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Business_Search.SearchController.handleLoadBusinesses(inputData: Swift.Optional&lt;Business_Search.YelpGetNearbyBusinessStruct&gt;, result: Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()"
+                  moduleName = "Business_Search"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Controllers/Search%20Controller/SearchController+Handler.swift"
+                  timestampString = "578246688.221694"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "1731">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
