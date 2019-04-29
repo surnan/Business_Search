@@ -10,10 +10,13 @@ import UIKit
 import CoreData
 
 
-class SearchController: UIViewController, UISearchControllerDelegate{
+class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedResultsControllerDelegate{
     //MARK: Injected
     var dataController: DataController!
-    var myFetchController: NSFetchedResultsController<Location>!
+    var myFetchController: NSFetchedResultsController<Business>!
+    
+    var myBusinesses = [Business]()
+    var myLocations = [Location]()
     
     //MARK: Local
     var categories = [[YelpCategoryElement]]()
@@ -47,7 +50,7 @@ class SearchController: UIViewController, UISearchControllerDelegate{
     
     
     
-    func loadCategoriesAndBusinesses(data: YelpBusinessResponse){
+    func loadCategoriesAndBusinessesIntoArrays(data: YelpBusinessResponse){
         var index: Int
         if categories.isEmpty {
             index = -1  //index incremented by one once array initialized

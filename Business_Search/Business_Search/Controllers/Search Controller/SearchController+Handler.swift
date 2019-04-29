@@ -11,7 +11,7 @@ import CoreData
 
 //po String(data: data, format: .utf8)
 extension SearchController {
-    func addLocationToCoreData(data: YelpBusinessResponse){
+    func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
         backgroundContext.perform {
@@ -25,7 +25,7 @@ extension SearchController {
                 try backgroundContext.save()
                 self.currentLocationID = newLocation.objectID
                 newLocation.saveBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
-                self.getNearbyBusinesses(total: data.total)    //Because background context, best way to time save happens first
+                self.buildURLsQueueForDownloadingBusinesses(total: data.total)    //Because background context, best way to time save happens first
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }
@@ -42,8 +42,8 @@ extension SearchController {
             }
         case .success(let data):
             if categories.isEmpty {
-                addLocationToCoreData(data: data)
-                loadCategoriesAndBusinesses(data: data)
+                createLocation(data: data)
+                loadCategoriesAndBusinessesIntoArrays(data: data)
             } else {
                 let filterIndex = urlsQueue.firstIndex { (element) -> Bool in
                     guard let inputData = inputData else {return false}
@@ -54,12 +54,12 @@ extension SearchController {
                 }
                 let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
                 currentLocation.saveBusinessesAndCategories(yelpData: data, dataController: dataController)
-                loadCategoriesAndBusinesses(data: data)
+                loadCategoriesAndBusinessesIntoArrays(data: data)
             }
         }
     }
     
-    func getNearbyBusinesses(total: Int){
+    func buildURLsQueueForDownloadingBusinesses(total: Int){
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){
             urlsQueue.append(YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: index))
         }

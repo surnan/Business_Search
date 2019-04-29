@@ -33,7 +33,17 @@ enum IndexOf: Int, CaseIterable {
     case categories = 1
 }
 
-class ResultsController:UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+
+protocol ResultsControllerDelegate {
+    func refreshCollectionView()
+}
+
+class ResultsController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, ResultsControllerDelegate {
+    
+    func refreshCollectionView() {
+        print("")
+    }
+    
     var tableViewArray = [[TestProtocol]]()
     var indexValue = 0
     var inputString = ""
