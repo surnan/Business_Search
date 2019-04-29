@@ -24,31 +24,9 @@ extension SearchController {
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
         myFetchController.delegate = self
-        // fetchDataToMakeBusinessArray()
         fetchDataToMakeBusinessArray2()
+        convertBusinessToCategories()
     }
-    
-    
-    
-    //var myBusinesses = [Business]()
-    func fetchDataToMakeBusinessArray2(){
-        
-        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-        let predicate = NSPredicate(format: "(longitude == %@) AND (latitude == %@)", argumentArray: [longitude, latitude])
-        
-        fetchRequest.predicate = predicate
-        let sortDescriptor = NSSortDescriptor(key: "totalBusinesses", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        do {
-            myLocations = try dataController.backGroundContext.fetch(fetchRequest)
-            myLocations.first?.businesses?.forEach{
-                myBusinesses.append($0 as! Business)
-            }
-        } catch {
-            print("Error = \(error)")
-        }
-    }
-
     
     @objc func handleDownloadBusinesses(){
         _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))

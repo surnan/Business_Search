@@ -10,8 +10,9 @@ import UIKit
 
 var limit = 50
 var offset = 50
-var radius = 250
+var radius = 150
 var recordCountAtLocation = 0
+var categoryMatch = 0
 
 //var latitude = 37.786882
 //var longitude = -122.399972
