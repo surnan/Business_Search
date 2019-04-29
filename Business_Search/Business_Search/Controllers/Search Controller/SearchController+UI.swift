@@ -36,6 +36,9 @@ extension SearchController {
     
     @objc func JumpToBreakPoint(total: Int){
         print("")
+        print("myBusinesses.count - ", myBusinesses.count)
+        print("myCategories.count - ", myCategories.count)
+        
     }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
