@@ -43,7 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8414475B22658AC100A38AAB /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		8414475B22658AC100A38AAB /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		848B8E0F227202B000F761F5 /* YelpStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpStruct.swift; sourceTree = "<group>"; };
 		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };

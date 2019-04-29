@@ -40,7 +40,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/1/Results TableView/ResultsController+Search.swift"
-            timestampString = "578256160.030046"
+            timestampString = "578256994.643557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -56,7 +56,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/1/Results TableView/ResultsController+Search.swift"
-            timestampString = "578256160.030435"
+            timestampString = "578256994.643955"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578256160.030705"
+            timestampString = "578263290.113143"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "convertBusinessToCategories()"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,12 +88,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/Search Controller/SearchController.swift"
-            timestampString = "578256160.031104"
+            timestampString = "578263290.113766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "convertBusinessToCategories()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+UI.swift"
+            timestampString = "578263290.114242"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "JumpToBreakPoint(total:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Business_Search/Controllers/Search Controller/SearchController+UI.swift"
+            timestampString = "578263290.114547"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "JumpToBreakPoint(total:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

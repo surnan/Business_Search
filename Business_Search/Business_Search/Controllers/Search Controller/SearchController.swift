@@ -13,11 +13,12 @@ import CoreData
 class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedResultsControllerDelegate{
     //MARK: Injected
     var dataController: DataController!
-    var myFetchController: NSFetchedResultsController<Business>!
+    var myFetchController: NSFetchedResultsController<Location>!
     
     var myCategories = [[Category]]()
     var myBusinesses = [Business]()
     var myLocations = [Location]()
+    var currentLocation: Location!
     var doesLocationExist = false
     
     //MARK: Local
@@ -47,6 +48,69 @@ class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedR
         return search
     }()
     
+    
+    func getCurrentLocation()->[Location]{
+        //The whole setupFetchedResultsController was for this line
+        return myFetchController.fetchedObjects ?? []
+    }
+    
+    
+    func loadBusinessArray(){
+        myBusinesses = (currentLocation.businesses?.toArray())!
+        loadCategoryArray()
+    }
+    
+    func loadCategoryArray(){
+        myBusinesses.forEach { (currentBusiness) in
+            let categoriesOnThisBusiness: [Category] = (currentBusiness.categories?.toArray())!
+            categoriesOnThisBusiness.forEach({ (currentCategory) in
+                
+                if myCategories.isEmpty {
+                    myCategories.append([currentCategory])
+                    return
+                }
+                
+                for i in 0 ..< myCategories.count {
+                    let doesItMatch = (myCategories[i].first?.matches(rhs: currentCategory))!
+                    if doesItMatch {
+                        myCategories[i].append(currentCategory)
+                    } else if i == myCategories.count - 1 {
+                        myCategories.append([currentCategory])
+                    }
+                }
+            })
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func convertBusinessToCategories(){
          var totalIndex = 0
         myBusinesses.forEach { (currentBusiness) in
@@ -71,6 +135,7 @@ class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedR
             })
         }
     }
+
 
     func fetchDataToMakeBusinessArray2(){
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
