@@ -13,7 +13,7 @@ extension SearchController {
     func setupNavigationMenu(){
         navigationItem.searchController = searchController
         navigationItem.title = "🔷 Business 🔷"
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleGatherBusinesses)), UIBarButtonItem(title: " ⏸ ", style: .done, target: self, action: #selector(JumpToBreakPoint))]
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)), UIBarButtonItem(title: " ⏸ ", style: .done, target: self, action: #selector(JumpToBreakPoint))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     
@@ -23,9 +23,46 @@ extension SearchController {
         setupNavigationMenu()
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
+        myFetchController.delegate = self
+        // fetchDataToMakeBusinessArray()
+        fetchDataToMakeBusinessArray2()
     }
     
-    @objc func handleGatherBusinesses(){
+    
+    
+    //var myBusinesses = [Business]()
+    func fetchDataToMakeBusinessArray2(){
+        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        //        let predicate = NSPredicate(format: "latitude == %@", [latitude])
+        //        fetchRequest.predicate = predicate
+        do {
+            myLocations = try dataController.backGroundContext.fetch(fetchRequest)
+            myLocations.first?.businesses?.forEach{
+                myBusinesses.append($0 as! Business)
+            }
+        } catch {
+            print("Error = \(error)")
+        }
+    }
+    
+    
+    //    //var myBusinesses = [Business]()
+    //    func fetchDataToMakeBusinessArray(){
+    //        let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
+    //        let predicate = NSPredicate(format: "latitude == %@", [latitude])
+    //        //        fetchRequest.predicate = predicate
+    //        do {
+    //            myBusinesses = try dataController.backGroundContext.fetch(fetchRequest)
+    //        } catch {
+    //            print("Error = \(error)")
+    //        }
+    //    }
+    
+    
+    
+    
+    
+    @objc func handleDownloadBusinesses(){
         _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
     }
     
@@ -46,4 +83,5 @@ extension SearchController {
             print ("There was an error deleting Locations from CoreData")
         }
     }
+
 }
