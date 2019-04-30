@@ -9,20 +9,6 @@
 import UIKit
 import CoreData
 
-//func setupFetchController(){
-//    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-//    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "latitude", ascending: true)]
-//    myFetchController = NSFetchedResultsController(fetchRequest: fetchRequest,
-//                                                   managedObjectContext: dataController.viewContext,
-//                                                   sectionNameKeyPath: nil,
-//                                                   cacheName: nil)
-//    do {
-//        try myFetchController.performFetch()
-//    } catch {
-//        fatalError("Unable to setup Fetch Controller: \n\(error)")
-//    }
-//}
-
 extension SearchController {
     func setupFetchController(){
         let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()

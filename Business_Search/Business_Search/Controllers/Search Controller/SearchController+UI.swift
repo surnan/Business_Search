@@ -28,7 +28,8 @@ extension SearchController {
             print("This Location is not in Core Data")
             return
         }
-        currentLocation = firstLocation
+        
+        currentLocation = firstLocation //hard-coding latitude & longitude
         loadBusinessArray()
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.convertBusinessToCategories()
