@@ -10,27 +10,29 @@ import UIKit
 import CoreData
 
 extension ResultsController {
-//    func setupFetchController(){
-//        let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-//        myFetchController = NSFetchedResultsController(fetchRequest: fetchRequest,
-//                                                       managedObjectContext: dataController.viewContext,
-//                                                       sectionNameKeyPath: nil,
-//                                                       cacheName: nil)
-//        do {
-//            try myFetchController.performFetch()
-//        } catch {
-//            fatalError("Unable to setup Fetch Controller: \n\(error)")
+
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let text = searchController.searchBar.text else { return }
+//        if text.count != 0 {
+//            inputString = text
+//            urlSessionTask?.cancel()
+//            urlSessionTask = Yelp.getAutoInputResults(text: text, latitude: latitude, longitude: longitude, completion: handleUpdateSearchResult(result:))
+//            print("Yelp Auto-Complete Call")
+//            tableView.reloadData()
 //        }
 //    }
-
+    
     func updateSearchResults(for searchController: UISearchController) {
         let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
+
+        
+        
+        guard let text = searchController.searchBar.text else { return }
 //        let text = "G"
         
+        print("text = \(text)")
         
-//        let text = searchController.
-        let predicate = NSPredicate(format: "name CONTAINS [c] %@", text)
+        let predicate = NSPredicate(format: "name BEGINSWITH [c] %@", text)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         myFetchController = NSFetchedResultsController(fetchRequest: fetchRequest,

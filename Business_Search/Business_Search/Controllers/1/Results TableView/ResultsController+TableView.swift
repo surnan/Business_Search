@@ -15,11 +15,6 @@ extension ResultsController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
-//        cell.myLabel.text = tableViewArray[indexValue][indexPath.row].getNameTitle
-//        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
         let business = myFetchController.object(at: indexPath)
         cell.myLabel.text = business.name
