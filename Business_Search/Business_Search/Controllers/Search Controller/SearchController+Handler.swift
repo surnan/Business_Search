@@ -63,10 +63,10 @@ extension SearchController {
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){
             urlsQueue.append(YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: index))
         }
-        downloadAllBusinesses()
+        downloadYelpBusinesses()
     }
     
-    func downloadAllBusinesses(){
+    func downloadYelpBusinesses(){
         if urlsQueue.isEmpty {return}
         let semaphore = DispatchSemaphore(value: 4)
         let dispatchGroup = DispatchGroup()
@@ -91,8 +91,6 @@ extension SearchController {
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
         print("Category Count = \(myCategories.count)")
         
-        fetchDataToMakeBusinessArray2()
-        convertBusinessToCategories()
         
         var sum = 0
         myCategories.forEach { (currentArray) in
@@ -101,7 +99,7 @@ extension SearchController {
         
         print("Business Count = \(myBusinesses.count)")
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
-            self?.downloadAllBusinesses()
+            self?.downloadYelpBusinesses()
         }
         timer.fire()
     }

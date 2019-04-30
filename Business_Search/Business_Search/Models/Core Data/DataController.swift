@@ -24,7 +24,6 @@ class DataController {
     }
     
     
-    
     func configureContexts(){
         backGroundContext = persistentContainer.newBackgroundContext()
         viewContext.automaticallyMergesChangesFromParent = true
