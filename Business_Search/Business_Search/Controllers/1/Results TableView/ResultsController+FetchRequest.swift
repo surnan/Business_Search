@@ -12,6 +12,9 @@ import CoreData
 extension ResultsController: NSFetchedResultsControllerDelegate {
     func setupFetchController(){
         let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
+        let text = "the c"
+        let predicate = NSPredicate(format: "name CONTAINS [c] %@", text)
+        fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         myFetchController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                        managedObjectContext: dataController.viewContext,
