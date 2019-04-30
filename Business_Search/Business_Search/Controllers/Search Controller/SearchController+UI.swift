@@ -24,17 +24,16 @@ extension SearchController {
         definesPresentationContext = true //Keeps the navigation & search menu on screen and forces tableView underneath
         setupFetchController()
         myFetchController.delegate = self
-        
-        
         guard let firstLocation = getCurrentLocation().first else {
             print("This Location is not in Core Data")
             return
         }
-        
         currentLocation = firstLocation
         loadBusinessArray()
-//        fetchDataToMakeBusinessArray2()
-//        convertBusinessToCategories()
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
+            self?.convertBusinessToCategories()
+        }
+        timer.fire()
     }
     
     @objc func handleDownloadBusinesses(){
@@ -47,13 +46,6 @@ extension SearchController {
         print("")
         print("myBusinesses.count - ", myBusinesses.count)
         print("myCategories.count - ", myCategories.count)
-        
-        print("======")
-        myCategories.forEach { (catArray) in
-            print(catArray.first?.title ?? "", catArray.count)
-        }
-        
-        
     }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
