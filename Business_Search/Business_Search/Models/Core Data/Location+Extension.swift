@@ -40,6 +40,7 @@ extension Location {
                 do {
                     try context.save()
                 } catch {
+                    print("Short Error: \(error.localizedDescription)")
                     print("Error saving Business to Location Entity --> func Location.addBusinesses()\n\(error)")
                 }
             }
