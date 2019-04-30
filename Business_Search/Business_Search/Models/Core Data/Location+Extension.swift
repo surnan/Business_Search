@@ -10,10 +10,10 @@ import UIKit
 import CoreData
 
 extension Location {
-    func saveBusinessesAndCategories(yelpData: YelpBusinessResponse, dataController: DataController){
-        dataController.backGroundContext.perform {
+    func saveBusinessesAndCategories(yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
+//        dataController.backGroundContext.perform {
             yelpData.businesses.forEach { (item) in //+1
-                let currentBusiness = Business(context: dataController.backGroundContext)
+                let currentBusiness = Business(context: context)
                 currentBusiness.parentLocation = self
                 currentBusiness.alias = item.alias
                 currentBusiness.displayAddress = item.location.display_address.reduce("", +)
@@ -31,19 +31,56 @@ extension Location {
                 currentBusiness.url = item.url
                 
                 item.categories.forEach({ (itemCategory) in
-                    let currentCategory = Category(context: dataController.backGroundContext)
+                    let currentCategory = Category(context: context)
                     currentCategory.alias = itemCategory.alias
                     currentCategory.title = itemCategory.title
                     currentCategory.business = currentBusiness
                 })
                 
                 do {
-                    try dataController.backGroundContext.save()
+                    try context.save()
                 } catch {
                     print("Error saving Business to Location Entity --> func Location.addBusinesses()\n\(error)")
                 }
             }
-        }
+//        }
     }
 }
 
+/*
+ func saveBusinessesAndCategories(yelpData: YelpBusinessResponse, dataController: DataController){
+ dataController.backGroundContext.perform {
+ yelpData.businesses.forEach { (item) in //+1
+ let currentBusiness = Business(context: dataController.backGroundContext)
+ currentBusiness.parentLocation = self
+ currentBusiness.alias = item.alias
+ currentBusiness.displayAddress = item.location.display_address.reduce("", +)
+ currentBusiness.displayPhone = item.display_phone
+ currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
+ currentBusiness.id = item.id
+ currentBusiness.imageURL = item.image_url
+ // currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
+ currentBusiness.latitude = item.coordinates.latitude ?? 0.0
+ currentBusiness.longitude = item.coordinates.longitude ?? 0.0
+ currentBusiness.name = item.name
+ currentBusiness.price = item.price
+ currentBusiness.rating = item.rating ?? 0
+ currentBusiness.reviewCount = Int32(item.review_count ?? 0)
+ currentBusiness.url = item.url
+ 
+ item.categories.forEach({ (itemCategory) in
+ let currentCategory = Category(context: dataController.backGroundContext)
+ currentCategory.alias = itemCategory.alias
+ currentCategory.title = itemCategory.title
+ currentCategory.business = currentBusiness
+ })
+ 
+ do {
+ try dataController.backGroundContext.save()
+ } catch {
+ print("Error saving Business to Location Entity --> func Location.addBusinesses()\n\(error)")
+ }
+ }
+ }
+ }
+ */

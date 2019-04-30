@@ -24,7 +24,11 @@ extension SearchController {
             do {
                 try backgroundContext.save()
                 self.currentLocationID = newLocation.objectID
-                newLocation.saveBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
+                
+//                newLocation.saveBusinessesAndCategories(yelpData: data, dataController: self.dataController)  //Because Location is empty
+                newLocation.saveBusinessesAndCategories(yelpData: data, context: backgroundContext)
+                
+                
                 self.buildURLsQueueForDownloadingBusinesses(total: data.total)    //Because background context, best way to time save happens first
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
@@ -53,8 +57,18 @@ extension SearchController {
                 if let indexToDelete = filterIndex {
                     urlsQueue.remove(at: indexToDelete)
                 }
-                let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
-                currentLocation.saveBusinessesAndCategories(yelpData: data, dataController: dataController)
+                
+//                let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
+//                currentLocation.saveBusinessesAndCategories(yelpData: data, dataController: dataController)
+//
+                dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
+                    let currentLocation = context.object(with: self.currentLocationID!) as! Location
+                    currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
+                }
+                
+                
+                
+                
             }
         }
     }

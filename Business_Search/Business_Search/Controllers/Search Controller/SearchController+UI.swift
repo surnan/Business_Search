@@ -50,15 +50,32 @@ extension SearchController {
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
     @objc func handleDeleteAll(){
-        do {
-            myBusinesses.removeAll()
-            myCategories.removeAll()
+//        do {
+//            myBusinesses.removeAll()
+//            myCategories.removeAll()
+//            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+//            let request = NSBatchDeleteRequest(fetchRequest: fetch)
+//            try self.dataController.backGroundContext.execute(request)
+//            try self.dataController.backGroundContext.save()
+//        } catch {
+//            print ("There was an error deleting Locations from CoreData")
+//        }
+//
+        
+        myBusinesses.removeAll()
+        myCategories.removeAll()
+        
+        let context = dataController.viewContext
+        
+        context.perform {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
             let request = NSBatchDeleteRequest(fetchRequest: fetch)
-            try self.dataController.backGroundContext.execute(request)
-            try self.dataController.backGroundContext.save()
-        } catch {
-            print ("There was an error deleting Locations from CoreData")
+            do {
+                try context.execute(request)
+                try context.save()
+            } catch {
+                print ("There was an error deleting Locations from CoreData \n\(error)")
+            }
         }
     }
 }
