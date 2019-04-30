@@ -14,7 +14,8 @@ extension SearchController {
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
-        backgroundContext.perform {
+        backgroundContext.performAndWait {
+            //Synchronous to make sure //1 occurs before //2
             let newLocation = Location(context: backgroundContext)
             newLocation.latitude = data.region.center.latitude
             newLocation.longitude = data.region.center.longitude
@@ -22,9 +23,9 @@ extension SearchController {
             newLocation.radius = Int32(radius)  //AppDelegate
             recordCountAtLocation = data.total
             do {
-                try backgroundContext.save()
+                try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
-                newLocation.saveBusinessesAndCategories(yelpData: data, context: backgroundContext)
+                newLocation.saveBusinessesAndCategories(yelpData: data, context: backgroundContext) //2
                 self.buildURLsQueueForDownloadingBusinesses(total: data.total)    //Because background context, best way to time save happens first
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
@@ -53,10 +54,8 @@ extension SearchController {
                     urlsQueue.remove(at: indexToDelete)
                 }
                 
-//                let currentLocation = dataController.backGroundContext.object(with: currentLocationID!) as! Location
-//                currentLocation.saveBusinessesAndCategories(yelpData: data, dataController: dataController)
-//
                 dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
+                    //Giving Core Data the chance to perform multiple instances in parallel
                     let currentLocation = context.object(with: self.currentLocationID!) as! Location
                     currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
                 }
