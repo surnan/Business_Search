@@ -1,20 +1,18 @@
 //
-//  SearchController+FetchRequest.swift
+//  ResultsController+FetchRequest.swift
 //  Business_Search
 //
-//  Created by admin on 4/21/19.
+//  Created by admin on 4/30/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-extension SearchController: NSFetchedResultsControllerDelegate {
+extension ResultsController: NSFetchedResultsControllerDelegate {
     func setupFetchController(){
-        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-        let predicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "totalBusinesses", ascending: true)]
+        let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         myFetchController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                        managedObjectContext: dataController.viewContext,
                                                        sectionNameKeyPath: nil,

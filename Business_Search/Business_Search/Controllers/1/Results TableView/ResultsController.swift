@@ -7,26 +7,10 @@
 //
 
 import UIKit
+import CoreData
+
 let defaultCellID = "defaultCellID"
 
-protocol TestProtocol {
-    var getNameTitle: String {get}
-    var getIdAlias: String   {get}
-}
-
-struct BusinessesStructForArray: Codable, TestProtocol{
-    var id: String
-    var name: String
-    var getNameTitle: String {return name}
-    var getIdAlias: String {return id}
-}
-
-struct CategoriesStructForArray: Codable, TestProtocol{
-    var alias: String
-    var title: String
-    var getNameTitle: String {return title}
-    var getIdAlias: String {return alias}
-}
 
 enum IndexOf: Int, CaseIterable {
     case business = 0
@@ -39,19 +23,34 @@ protocol ResultsControllerDelegate {
 }
 
 class ResultsController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, ResultsControllerDelegate {
+    var dataController: DataController!
+    var myFetchController: NSFetchedResultsController<Business>!
+    
+    
     
     func refreshCollectionView() {
         print("")
     }
     
-    var tableViewArray = [[TestProtocol]]()
     var indexValue = 0
     var inputString = ""
-    var urlSessionTask: URLSessionDataTask?
-
+    var delegate: SearchControllerProtocol?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("Results Appeared")
+        print("Businesses")
+        
+//        delegate?.getBusinesses().forEach({ (element) in
+//            print(element.name)
+//        })
+        
+    }
     
     override func viewDidLoad() {
-        IndexOf.allCases.forEach{_ in tableViewArray.append( [TestProtocol]())}
+        print("Results Loaded")
+        super.viewDidLoad()
+        setupFetchController()
         tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
         tableView.backgroundColor = UIColor.lightBlue
     }

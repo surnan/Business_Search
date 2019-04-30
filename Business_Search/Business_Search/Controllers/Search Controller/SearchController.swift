@@ -10,7 +10,26 @@ import UIKit
 import CoreData
 
 
-class SearchController: UIViewController, UISearchControllerDelegate, NSFetchedResultsControllerDelegate{
+protocol SearchControllerProtocol {
+    func getBusinesses()->[Business]
+    func getCategories()->[[Category]]
+}
+
+
+
+
+class SearchController: UIViewController, UISearchControllerDelegate, SearchControllerProtocol{
+    func getBusinesses()-> [Business] {
+        return myBusinesses
+    }
+    
+    func getCategories()-> [[Category]] {
+        return myCategories
+    }
+    
+    
+    
+    
     //MARK: Injected
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
