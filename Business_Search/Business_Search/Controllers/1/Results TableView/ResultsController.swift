@@ -38,13 +38,6 @@ class ResultsController: UITableViewController, UISearchResultsUpdating, UISearc
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("Results Appeared")
-        print("Businesses")
-        
-//        delegate?.getBusinesses().forEach({ (element) in
-//            print(element.name)
-//        })
-        
     }
     
     override func viewDidLoad() {
