@@ -19,7 +19,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var dataController: DataController!  //MARK: Injected
     var tableView = UITableView()
-    var searchFooter = SearchFooter()
     let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
     
     var filteredCandies = [Candy]()
@@ -61,46 +60,32 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.dataSource = self
         tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
         
-        [tableView, searchFooter].forEach{
-//        [tableView].forEach{
+
+        [tableView].forEach{
             $0.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview($0)
         }
-        tableView.tableFooterView = searchFooter
-        
-//        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: searchFooter.topAnchor)
-//
-//        searchFooter.anchor(leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor)
-//        searchFooter.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
 
-        let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
+        let safe = view.safeAreaLayoutGuide
         
+        tableView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
+        let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
+
         let imageView = UIImageView(image: logo)
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
-        
-        
-        
-                tableView.fillSuperview()
-        
     }
 }
 
 extension OpeningController: UITableViewDataSource, UITableViewDelegate {
-
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            searchFooter.setIsFilteringToShow(filteredItemCount: filteredCandies.count, of: candies.count)
             return filteredCandies.count
         }
-
-        searchFooter.setNotFiltering()
         return candies.count
     }
     
@@ -115,13 +100,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel!.text = candy.name
         return cell
     }
-    
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 45
-//    }
-    
-    
 }
 
 
@@ -136,7 +114,6 @@ extension OpeningController: UISearchResultsUpdating {
     
     
     // MARK: - Private instance methods
-    
     func searchBarIsEmpty() -> Bool {
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
@@ -147,7 +124,6 @@ extension OpeningController: UISearchResultsUpdating {
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredCandies = candies.filter({( candy : Candy) -> Bool in
             let doesCategoryMatch = (scope == "All") || (candy.category == scope)
-            
             if searchBarIsEmpty() {
                 return doesCategoryMatch
             } else {
@@ -157,13 +133,7 @@ extension OpeningController: UISearchResultsUpdating {
         tableView.reloadData()
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     //When user clicks in searchField, Active = TRUE
     //If nothing is typed, return all items
     func isFiltering() -> Bool {
