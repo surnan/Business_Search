@@ -20,7 +20,6 @@ extension SearchController {
 
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        resultsTableController.delegate = self
         resultsTableController.dataController = dataController
         
         setupNavigationMenu()

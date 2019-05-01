@@ -11,7 +11,7 @@ import UIKit
 
 extension ResultsController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myFetchController.fetchedObjects?.count ?? 0
+        return myFetchController?.fetchedObjects?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -29,6 +29,11 @@ extension ResultsController {
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return myFetchController?.sections?.count ?? 1
+    }
+    
     
 //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let newVC =  MyTabController()
