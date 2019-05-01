@@ -10,26 +10,9 @@ import UIKit
 import CoreData
 
 
-protocol SearchControllerProtocol {
-    func getBusinesses()->[Business]
-    func getCategories()->[[Category]]
-}
 
 
-
-
-class SearchController: UIViewController, UISearchControllerDelegate, SearchControllerProtocol{
-    func getBusinesses()-> [Business] {
-        return myBusinesses
-    }
-    
-    func getCategories()-> [[Category]] {
-        return myCategories
-    }
-    
-    
-    
-    
+class SearchController: UIViewController, UISearchControllerDelegate{
     //MARK: Injected
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Location>!
@@ -43,29 +26,35 @@ class SearchController: UIViewController, UISearchControllerDelegate, SearchCont
     //MARK: Local
     var currentLocationID: NSManagedObjectID?
     var urlSessionTask: URLSessionDataTask?
-    var urlsQueue = [YelpGetNearbyBusinessStruct]() //enumeration loop for semaphores
-    let resultsTableController = ResultsController()
     //var resultsTableController: ResultsTableViewController? //Can't make it work
+    var urlsQueue = [YelpGetNearbyBusinessStruct]() //enumeration loop for semaphores
     
+    
+    let resultsTableController = ResultsController()
     lazy var searchController: UISearchController = {
         var search = UISearchController(searchResultsController: resultsTableController)
-        search.delegate = self
+        search.delegate = resultsTableController
         search.searchResultsUpdater = resultsTableController
         search.searchBar.delegate = resultsTableController
         search.searchBar.placeholder = "Search place"
         search.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
         search.searchBar.tintColor = self.view.tintColor
         search.searchBar.scopeButtonTitles = ["Business Names", "Categories"]
-        search.searchBar.barStyle = .black      // TyLocationg Font = white
-        //search.obscuresBackgroundDuringPresentation = true    //removes .lightContent from navigation item
-        //DON'T SEE IT
-        //        search.searchBar.sizeToFit()
-        //        search.dimsBackgroundDuringPresentation = true
-        //        search.loadViewIfNeeded()
-        //        search.hidesNavigationBarDuringPresentation = false
-        //        search.searchBar.barTintColor = UIColor.orange
+        search.searchBar.barStyle = .black
         return search
     }()
+    
+    
+    
+    // TyLocationg Font = white
+    //search.obscuresBackgroundDuringPresentation = true    //removes .lightContent from navigation item
+    //DON'T SEE IT
+    //        search.searchBar.sizeToFit()
+    //        search.dimsBackgroundDuringPresentation = true
+    //        search.loadViewIfNeeded()
+    //        search.hidesNavigationBarDuringPresentation = false
+    //        search.searchBar.barTintColor = UIColor.orange
+    
     
     
     func getCurrentLocation()->[Location]{

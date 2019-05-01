@@ -18,32 +18,25 @@ enum IndexOf: Int, CaseIterable {
 }
 
 
-protocol ResultsControllerDelegate {
-    func refreshCollectionView()
-}
-
-class ResultsController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, ResultsControllerDelegate {
+class ResultsController: UITableViewController, UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate{
     var dataController: DataController!
     var myFetchController: NSFetchedResultsController<Business>!
+
+
     
     
-    
-    func refreshCollectionView() {
-        print("")
-    }
-    
-    var indexValue = 0
-    var inputString = ""
-    var delegate: SearchControllerProtocol?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        myFetchController?.delegate = nil
+         self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
         print("Results Loaded")
         super.viewDidLoad()
         setupFetchController()
+        tableView.delegate = self
         tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
         tableView.backgroundColor = UIColor.lightBlue
     }

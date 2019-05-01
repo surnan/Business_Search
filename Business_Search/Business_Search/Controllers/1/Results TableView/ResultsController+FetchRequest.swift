@@ -20,6 +20,7 @@ extension ResultsController: NSFetchedResultsControllerDelegate {
                                                        managedObjectContext: dataController.viewContext,
                                                        sectionNameKeyPath: nil,
                                                        cacheName: nil)
+        myFetchController.delegate = self
         do {
             try myFetchController.performFetch()
         } catch {
