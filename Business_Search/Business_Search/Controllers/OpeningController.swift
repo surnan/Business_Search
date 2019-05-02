@@ -48,7 +48,37 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchBusinessController = {   //+4
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
                     fetchRequest.predicate = self.fetchPredicate
-                    let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
+                    
+                    
+//                    let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
+                    let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.name, ascending: true)
+                    
+                    
+                    fetchRequest.sortDescriptors = [ sortDescriptor2]
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
+    
+    
+    var fetchCategoryController: NSFetchedResultsController<Category>? { //+1
+        didSet {    //+2
+            if fetchCategoryController == nil { //+3
+                fetchCategoryController = {   //+4
+                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+                    fetchRequest.predicate = self.fetchPredicate
+                    let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
                     fetchRequest.sortDescriptors = sortDescriptor
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,

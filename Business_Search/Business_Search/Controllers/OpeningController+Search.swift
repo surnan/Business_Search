@@ -13,6 +13,7 @@ extension OpeningController: UISearchResultsUpdating {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fetchPredicate = nil
         fetchBusinessController = nil
+        fetchCategoryController = nil
         tableView.reloadData()
     }
 
@@ -27,7 +28,8 @@ extension OpeningController: UISearchResultsUpdating {
         }
         
         print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
-        fetchPredicate = NSPredicate(format: "name CONTAINS [c] %@", argumentArray: [searchController.searchBar.text!])
+        fetchPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        //d = diacritics.  Like accent marks
         fetchBusinessController = nil
         tableView.reloadData()
     }
