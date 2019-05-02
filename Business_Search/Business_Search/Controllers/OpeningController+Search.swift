@@ -14,7 +14,20 @@ extension OpeningController: UISearchResultsUpdating {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         print("updateSearchResults --> \(scope)  ... searchController.searchBar.Text = \(searchController.searchBar.text!)")
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        
+        
+        fetchPredicate = NSPredicate(format: "name CONTAINS [c] %@", argumentArray: [searchController.searchBar.text!])
+        myFetchController = nil
+        
+        filteredResults = myFetchController?.fetchedObjects
+        
+        guard let filteredResults = filteredResults else {return}
+        
+        print("filteredResults.count = \(filteredResults.count)")
+        
+        filteredResults.forEach{
+            print($0.name)
+        }
     }
     
     //NOW IMPLEMENTS SEARCH SCOPE GROUPS
