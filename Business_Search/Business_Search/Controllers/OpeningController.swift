@@ -17,13 +17,11 @@ struct Candy {
 
 let defaultCellID = "defaultCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
-    
     var dataController: DataController!  //MARK: Injected
     var myCategories = [[Category]]()
     var myLocations = [Location]()
     var currentLocation: Location!
     var doesLocationExist = false
-    
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -67,11 +65,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter search term ..."
         searchController.searchBar.barStyle = .black
+                searchController.searchBar.delegate = self
+                searchController.searchResultsUpdater = self
         return searchController
     }()
     
@@ -84,11 +82,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         let safe = view.safeAreaLayoutGuide
         tableView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
         setupNavigationMenu()
-        
-        //        fetchPredicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
         fetchPredicate = nil
         myFetchController = nil
-//        definesPresentationContext set to YES
         definesPresentationContext = true
     }
     
@@ -127,7 +122,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         Candy(category:"Other", name:"Liquorice"),
         Candy(category:"Hard", name:"Toffee Apple")
     ]
-    
 }
 
 
