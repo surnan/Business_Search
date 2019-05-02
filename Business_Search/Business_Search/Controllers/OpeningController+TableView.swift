@@ -24,10 +24,15 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
         
-        let candy: Candy
+        
         if isFiltering() {
-            candy = filteredCandies[indexPath.row]
-            cell.textLabel!.text = candy.name
+            
+            guard let filteredResults = filteredResults else {
+                return UITableViewCell()
+            }
+            
+            let business3 = filteredResults[indexPath.row]
+            cell.textLabel?.text = business3.name
             return cell
         } else {
             guard let business2 = myFetchController?.object(at: indexPath) else {
