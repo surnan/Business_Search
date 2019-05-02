@@ -29,7 +29,6 @@ extension OpeningController: UISearchResultsUpdating {
         print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
         fetchPredicate = NSPredicate(format: "name CONTAINS [c] %@", argumentArray: [searchController.searchBar.text!])
         myFetchController = nil
-        _ = myFetchController?.fetchedObjects
         tableView.reloadData()
     }
     

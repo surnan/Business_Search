@@ -27,6 +27,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
         return tableView
     }()
@@ -72,15 +73,30 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 searchController.searchResultsUpdater = self
         return searchController
     }()
-    
 
-    
+    let nothingFoundView: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 350, height: 350))
+        label.backgroundColor = .clear
+        label.alpha = 0
+        label.text = "That's all Folks"
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = false
+        let textAttributes:[NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.lightGray,
+            NSAttributedString.Key.foregroundColor: UIColor.green,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
+            NSAttributedString.Key.strokeWidth: -1.0
+        ]
+        label.attributedText = NSAttributedString(string: "No matches found", attributes: textAttributes)
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        let safe = view.safeAreaLayoutGuide
-        tableView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
+        nothingFoundView.center = view.center
+        view.insertSubview(nothingFoundView, aboveSubview: tableView)
+        tableView.fillSuperview()
         setupNavigationMenu()
         fetchPredicate = nil
         myFetchController = nil
