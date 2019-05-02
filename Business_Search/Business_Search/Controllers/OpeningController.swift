@@ -14,36 +14,16 @@ struct Candy {
     let name : String
 }
 
-/*
- func numberOfSections(in tableView: UITableView) -> Int {
- return 1
- }
- 
- func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
- if isFiltering() {
- return filteredCandies.count
- }
- return candies.count
- }
- 
- func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
- let candy: Candy
- if isFiltering() {
- candy = filteredCandies[indexPath.row]
- } else {
- candy = candies[indexPath.row]
- }
- cell.textLabel!.text = candy.name
- return cell
- }
- */
 
-//let defaultCellID = "defaultCellID"
+let defaultCellID = "defaultCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
     var dataController: DataController!  //MARK: Injected
-//    var tableView = UITableView()
+    var myCategories = [[Category]]()
+    var myBusinesses = [Business]()
+    var myLocations = [Location]()
+    var currentLocation: Location!
+    var doesLocationExist = false
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -53,7 +33,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         return tableView
     }()
     
-    
     var fetchPredicate : NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil)
@@ -61,7 +40,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }
     }
 
-    //    var myFetchController: NSFetchedResultsController<Location>!
     var myFetchController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
             if myFetchController == nil { //+3
@@ -86,13 +64,17 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
+        searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Enter search term ..."
+        return searchController
+    }()
     
-    var myCategories = [[Category]]()
-    var myBusinesses = [Business]()
-    var myLocations = [Location]()
-    var currentLocation: Location!
-    var doesLocationExist = false
+
     
 
     override func viewDidLoad() {
@@ -101,27 +83,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         let safe = view.safeAreaLayoutGuide
         tableView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
         setupNavigationMenu()
+        
+        fetchPredicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
+        
+        
     }
-    
-    
-    lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
-        searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
-//        searchController.
-        return searchController
-    }()
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     func setupNavigationMenu(){

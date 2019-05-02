@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-let defaultCellID = "defaultCellID"
+//let defaultCellID = "defaultCellID"
 
 
 enum IndexOf: Int, CaseIterable {
