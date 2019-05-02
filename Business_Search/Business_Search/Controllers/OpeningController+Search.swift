@@ -9,11 +9,19 @@
 import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchPredicate = nil
+        myFetchController = nil
+        tableView.reloadData()
+    }
+
+    
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
-        
         if searchBarIsEmpty() {
             fetchPredicate = nil
+            myFetchController = nil
             tableView.reloadData()
             return
         }
