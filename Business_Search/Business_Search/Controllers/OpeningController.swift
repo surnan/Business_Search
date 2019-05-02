@@ -66,11 +66,12 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
-        searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter search term ..."
+        searchController.searchBar.barStyle = .black
         return searchController
     }()
     
@@ -84,9 +85,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
         setupNavigationMenu()
         
-        fetchPredicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
+        //        fetchPredicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
+        fetchPredicate = nil
+        myFetchController = nil
         
-        
+        // myBusinesses = (currentLocation.businesses?.toArray())!
     }
     
     
