@@ -9,7 +9,7 @@
 import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
-    //UPDATE FOR SCOPE BAR
+    //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
@@ -32,13 +32,11 @@ extension OpeningController: UISearchResultsUpdating {
     
     // MARK: - Private instance methods
     func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
     
-    //When user clicks in searchField, Active = TRUE
-    //If nothing is typed, return all items
+    //When user clicks in searchField, Active = TRUE & If nothing is typed, return all items
     func isFiltering() -> Bool {
         let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
         return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
@@ -48,7 +46,7 @@ extension OpeningController: UISearchResultsUpdating {
 extension OpeningController {
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print("selectedScope --> \(selectedScope)  ... selectedScope = \(selectedScope)")
+        print("selectedScope --> \(selectedScope)  ... selectedScope = \(searchController.searchBar.text!)")
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
