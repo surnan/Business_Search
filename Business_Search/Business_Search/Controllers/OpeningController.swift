@@ -15,7 +15,10 @@ struct Candy {
 }
 
 
-let defaultCellID = "defaultCellID"
+
+let businessCellID = "businessCellID"
+
+
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var dataController: DataController!  //MARK: Injected
     var myCategories = [[Category]]()
@@ -28,21 +31,21 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
+        tableView.register(DefaultCell.self, forCellReuseIdentifier: businessCellID)
         return tableView
     }()
     
     var fetchPredicate : NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
-            myFetchController?.fetchRequest.predicate = fetchPredicate
+            fetchBusinessController?.fetchRequest.predicate = fetchPredicate
         }
     }
 
-    var myFetchController: NSFetchedResultsController<Business>? { //+1
+    var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
-            if myFetchController == nil { //+3
-                myFetchController = {   //+4
+            if fetchBusinessController == nil { //+3
+                fetchBusinessController = {   //+4
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
                     fetchRequest.predicate = self.fetchPredicate
                     let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
@@ -99,7 +102,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.fillSuperview()
         setupNavigationMenu()
         fetchPredicate = nil
-        myFetchController = nil
+        fetchBusinessController = nil
         definesPresentationContext = true
     }
     

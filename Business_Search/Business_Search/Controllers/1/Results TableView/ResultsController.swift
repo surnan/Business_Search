@@ -37,7 +37,7 @@ class ResultsController: UITableViewController, UISearchControllerDelegate, UISe
         super.viewDidLoad()
         setupFetchController()
         tableView.delegate = self
-        tableView.register(DefaultCell.self, forCellReuseIdentifier: defaultCellID)
+        tableView.register(DefaultCell.self, forCellReuseIdentifier: businessCellID)
         tableView.backgroundColor = UIColor.lightBlue
     }
 }

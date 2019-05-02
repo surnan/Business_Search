@@ -13,15 +13,15 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let state = myFetchController?.fetchedObjects?.count ?? 0
+        let state = fetchBusinessController?.fetchedObjects?.count ?? 0
         ShowNothingLabelIfNoResults()
         return state
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! DefaultCell
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        guard let currentBusiness = myFetchController?.object(at: indexPath) else {
+        guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
             print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
             return UITableViewCell()
         }
@@ -40,7 +40,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func ShowNothingLabelIfNoResults(){
-        if myFetchController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+        if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
             showNothingFoundView()
         } else {
             hideNothingFoundView()
