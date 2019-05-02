@@ -26,7 +26,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var doesLocationExist = false
     
     
-    var filteredResults: [Business]?
+    var filteredBusinesses: [Business]?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

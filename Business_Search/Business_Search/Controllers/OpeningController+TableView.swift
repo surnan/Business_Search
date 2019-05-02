@@ -14,8 +14,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            return filteredCandies.count
+            print("numberOfRowsInSection - filteredBusinesses.count ---> \(filteredBusinesses!.count)")
+            return filteredBusinesses!.count
         }
+        
         return myFetchController?.fetchedObjects?.count ?? 0
     }
     
@@ -25,46 +27,25 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
         
         
-        if isFiltering() {
-            
-            guard let filteredResults = filteredResults else {
-                return UITableViewCell()
+        if searchController.isActive {
+            if searchBarIsEmpty() {
+                fetchPredicate = nil
+                myFetchController = nil
+            } else {
+                let business4 = filteredBusinesses![indexPath.row]
+                cell.textLabel?.text = business4.name
+                return cell
             }
-            
-            let business3 = filteredResults[indexPath.row]
-            cell.textLabel?.text = business3.name
-            return cell
-        } else {
-            guard let business2 = myFetchController?.object(at: indexPath) else {
-                let failCell = UITableViewCell()
-                failCell.backgroundColor = UIColor.darkBlue
-                failCell.textLabel?.text = "Failed to Get Data"
-                return failCell
-            }
-            cell.textLabel!.text = business2.name
-            return cell
         }
+        
+        guard let business2 = myFetchController?.object(at: indexPath) else {
+            let failCell = UITableViewCell()
+            failCell.backgroundColor = UIColor.darkBlue
+            failCell.textLabel?.text = "Failed to Get Data"
+            return failCell
+        }
+        cell.textLabel!.text = business2.name
+        return cell
     }
 }
 
-
-/*
- func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
- if isFiltering() {
- return filteredCandies.count
- }
- return candies.count
- }
- 
- func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
- let cell = tableView.dequeueReusableCell(withIdentifier: defaultCellID, for: indexPath) as! DefaultCell
- let candy: Candy
- if isFiltering() {
- candy = filteredCandies[indexPath.row]
- } else {
- candy = candies[indexPath.row]
- }
- cell.textLabel!.text = candy.name
- return cell
- }
- */
