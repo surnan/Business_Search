@@ -21,6 +21,15 @@ var latitude = 40.708872
 var longitude = -74.010125
 var locale = "en_US"
 
+//  If context.has changes --> context.save on app goes to sleep or ends
+/*
+ do {
+ } catch let error as NSError {
+ print("Error = \(error), \(error.userInfo)")
+ } 
+ */
+
+
 let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
                              .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed,
                              .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]
