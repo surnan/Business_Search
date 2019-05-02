@@ -14,33 +14,14 @@ extension OpeningController: UISearchResultsUpdating {
         
         if searchBarIsEmpty() {
             fetchPredicate = nil
-            filteredBusinesses = nil
-            filteredBusinesses = nil
             tableView.reloadData()
             return
         }
         
-        
-//        let searchBar = searchController.searchBar
-//        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-//        print("updateSearchResults --> \(scope)")
-
         print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
         fetchPredicate = NSPredicate(format: "name CONTAINS [c] %@", argumentArray: [searchController.searchBar.text!])
         myFetchController = nil
-        filteredBusinesses = myFetchController?.fetchedObjects
-        
-        print("filteredResults.count = \(filteredBusinesses!.count)")
-        filteredBusinesses!.forEach{
-            print($0.name!)
-        }
-        
-        print("========")
-        print("myFetchController?.fetchedObjects.count = \(myFetchController?.fetchedObjects?.count  ?? -987654321)")
-        myFetchController?.fetchedObjects?.forEach{
-            print($0.name!)
-        }
-        
+        _ = myFetchController?.fetchedObjects
         tableView.reloadData()
     }
     
@@ -68,10 +49,6 @@ extension OpeningController: UISearchResultsUpdating {
         let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
         return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
     }
-    
-    
-    
-    
 }
 
 extension OpeningController {
@@ -82,31 +59,3 @@ extension OpeningController {
     }
 }
 
-/*
- func updateSearchResults(for searchController: UISearchController) {
- 
- if searchBarIsEmpty() {
- fetchPredicate = nil
- filteredBusinesses = nil
- filteredBusinesses = nil
- tableView.reloadData()
- return
- }
- 
- 
- let searchBar = searchController.searchBar
- let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
- print("updateSearchResults --> \(scope)")
- print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
- 
- fetchPredicate = NSPredicate(format: "name CONTAINS [c] %@", argumentArray: [searchController.searchBar.text!])
- myFetchController = nil
- filteredBusinesses = myFetchController?.fetchedObjects
- guard let filteredResults = filteredBusinesses else {return}
- print("filteredResults.count = \(filteredResults.count)")
- filteredResults.forEach{
- print($0.name)
- }
- tableView.reloadData()
- }
- */
