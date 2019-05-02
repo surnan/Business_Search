@@ -23,6 +23,7 @@ extension OpeningController: UISearchResultsUpdating {
         if searchBarIsEmpty() {
             fetchPredicate = nil
             fetchBusinessController = nil
+            fetchCategoryController = nil
             tableView.reloadData()
             return
         }
@@ -31,6 +32,7 @@ extension OpeningController: UISearchResultsUpdating {
         fetchPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         //d = diacritics.  Like accent marks
         fetchBusinessController = nil
+        fetchCategoryController = nil
         tableView.reloadData()
     }
     

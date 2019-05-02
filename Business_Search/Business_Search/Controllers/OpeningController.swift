@@ -17,6 +17,7 @@ struct Candy {
 
 
 let businessCellID = "businessCellID"
+let categoryCellID = "categoryCellID"
 
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
@@ -31,7 +32,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        tableView.register(DefaultCell.self, forCellReuseIdentifier: businessCellID)
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         return tableView
     }()
     
@@ -39,6 +41,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
             fetchBusinessController?.fetchRequest.predicate = fetchPredicate
+            fetchCategoryController?.fetchRequest.predicate = fetchPredicate
         }
     }
 
@@ -133,6 +136,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         setupNavigationMenu()
         fetchPredicate = nil
         fetchBusinessController = nil
+        fetchCategoryController = nil
         definesPresentationContext = true
     }
     

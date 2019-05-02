@@ -8,7 +8,15 @@
 
 import UIKit
 
-class DefaultCell: UITableViewCell {
+class CategoryCell: UITableViewCell {
+    
+    
+    var category: Category? {
+        didSet {
+            name = category?.title
+        }
+    }
+    
     
     var name: String? {
         didSet {

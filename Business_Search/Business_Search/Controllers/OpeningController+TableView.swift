@@ -13,19 +13,32 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let state = fetchBusinessController?.fetchedObjects?.count ?? 0
+//        let state = fetchBusinessController?.fetchedObjects?.count ?? 0
+//        ShowNothingLabelIfNoResults()
+//        return state
+        let state = fetchCategoryController?.fetchedObjects?.count ?? 0
         ShowNothingLabelIfNoResults()
         return state
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! DefaultCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! DefaultCell
+//        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+//        guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
+//            print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
+//            return UITableViewCell()
+//        }
+//        cell.textLabel!.text = currentBusiness.name
+//        return cell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
+        guard let currentCategory = fetchCategoryController?.object(at: indexPath) else {
             print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
             return UITableViewCell()
         }
-        cell.textLabel!.text = currentBusiness.name
+        cell.category = currentCategory
         return cell
     }
     
