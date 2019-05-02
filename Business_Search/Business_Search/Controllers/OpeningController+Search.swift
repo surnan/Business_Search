@@ -9,21 +9,13 @@
 import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
-    // MARK: - UISearchResultsUpdating Delegate
     //UPDATE FOR SCOPE BAR
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        print("updateSearchResults --> \(scope)  ... searchController.searchBar.Text = \(searchController.searchBar.text!)")
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
-    
-    
-    // MARK: - Private instance methods
-    func searchBarIsEmpty() -> Bool {
-        // Returns true if the text is empty or nil
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
     
     //NOW IMPLEMENTS SEARCH SCOPE GROUPS
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
@@ -38,6 +30,12 @@ extension OpeningController: UISearchResultsUpdating {
         tableView.reloadData()
     }
     
+    // MARK: - Private instance methods
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
     
     //When user clicks in searchField, Active = TRUE
     //If nothing is typed, return all items
@@ -50,6 +48,7 @@ extension OpeningController: UISearchResultsUpdating {
 extension OpeningController {
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        print("selectedScope --> \(selectedScope)  ... selectedScope = \(selectedScope)")
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
