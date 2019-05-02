@@ -54,26 +54,46 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }()
     
     
+    var fetchPredicate : NSPredicate? {
+        didSet {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil)
+            myFetchController?.fetchRequest.predicate = fetchPredicate
+        }
+    }
+
+    //    var myFetchController: NSFetchedResultsController<Location>!
+    var myFetchController: NSFetchedResultsController<Business>? { //+1
+        didSet {    //+2
+            if myFetchController == nil { //+3
+                myFetchController = {   //+4
+                    let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
+                    fetchRequest.predicate = self.fetchPredicate
+                    let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
+                    fetchRequest.sortDescriptors = sortDescriptor
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
     
+
     
-    
-    
-    var myFetchController: NSFetchedResultsController<Location>!
     var myCategories = [[Category]]()
     var myBusinesses = [Business]()
     var myLocations = [Location]()
     var currentLocation: Location!
     var doesLocationExist = false
     
-    
-    
-    
-    
-    
-    
-    
-    
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
