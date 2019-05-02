@@ -20,13 +20,10 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var dataController: DataController!  //MARK: Injected
     var myCategories = [[Category]]()
-    var myBusinesses = [Business]()
     var myLocations = [Location]()
     var currentLocation: Location!
     var doesLocationExist = false
     
-    
-    var filteredBusinesses: [Business]?
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -38,7 +35,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var fetchPredicate : NSPredicate? {
         didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil)
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
             myFetchController?.fetchRequest.predicate = fetchPredicate
         }
     }
@@ -91,8 +88,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         //        fetchPredicate = NSPredicate(format: "latitude == %@ && longitude == %@", argumentArray: [latitude, longitude])
         fetchPredicate = nil
         myFetchController = nil
-        
-        // myBusinesses = (currentLocation.businesses?.toArray())!
+//        definesPresentationContext set to YES
+        definesPresentationContext = true
     }
     
     
