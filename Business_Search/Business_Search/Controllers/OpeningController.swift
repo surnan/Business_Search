@@ -99,6 +99,37 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    
+    //By default, fetch returns .ManagedObjectResultType = Actual Objects
+    // This will be .dictionaryResultType  = {"Property" : value}
+    var fetchDictionaryCategoryController: NSFetchedResultsController<Category>? { //+1
+        didSet {    //+2
+            if fetchCategoryController == nil { //+3
+                fetchCategoryController = {   //+4
+                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+                    fetchRequest.predicate = self.fetchPredicate
+                    let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+                    fetchRequest.sortDescriptors = sortDescriptor
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
+    
+    
+    
+    
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
@@ -138,7 +169,16 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         fetchBusinessController = nil
         fetchCategoryController = nil
         definesPresentationContext = true
+
+        getCategoriesAndCount()
+        
+        
     }
+    
+    
+  
+    
+    
     
     
     func setupNavigationMenu(){
@@ -181,3 +221,38 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
 
 
 
+extension OpeningController {
+    func getCategoriesAndCount(){
+        let resultsArray = getDictionary()
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        resultsArray.forEach { (element) in
+            let tempString = element.value(forKey: "title") as! String
+            // let predicate = NSPredicate(format: "%K == %@", \Category.title, tempString)
+            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
+            fetchRequest.predicate = predicate2
+            do {
+                let count = try dataController.viewContext.count(for: fetchRequest)
+                print("\(tempString) ---> \(count)")
+            } catch {
+                print("GetNumber Error:\n\(error)")
+            }
+        }
+    }
+    
+    
+    func getDictionary()-> [NSDictionary]{
+        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["title"]
+        fetchRequest.returnsDistinctResults = true
+        
+        print("==========")
+        do {
+            let results = try dataController.viewContext.fetch(fetchRequest)
+            return results
+        } catch {
+            print("GetDictionary Error:\n\(error)")
+        }
+        return []
+    }
+}
