@@ -28,6 +28,8 @@ extension OpeningController: UISearchResultsUpdating {
         
         print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        fetchCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        
         fetchBusinessController = nil
         tableView.reloadData()
     }
