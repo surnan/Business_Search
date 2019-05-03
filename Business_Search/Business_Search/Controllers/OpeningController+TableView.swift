@@ -29,10 +29,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        
         switch GROUP_INDEX {
         case 0:
             guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
