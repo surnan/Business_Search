@@ -170,10 +170,57 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         fetchCategoryController = nil
         definesPresentationContext = true
 
-        getCategoriesAndCount()
+//        getCategoriesAndCount()
+        fetchResultsGetCategoriesAndCount()
         
         
     }
+    
+
+    func fetchResultsGetCategoriesAndCount(){
+        
+        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["title"]
+        fetchRequest.returnsDistinctResults = true
+        
+        let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+        fetchRequest.sortDescriptors = sortDescriptor
+        
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: dataController.viewContext,
+            sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
+            cacheName: nil              // and nil = dont cache
+        )
+        
+        
+        do {
+            try controller.performFetch()
+            print("DO")
+            controller.fetchedObjects?.forEach({ (element) in
+                let tempString = element.value(forKey: "title") as! String
+                
+                print(tempString)
+            })
+        } catch {
+            print("ERROR = \(error)")
+        }
+        
+        //
+        //    controller.delegate = self
+        //    do {
+        //    ry aFetchedResultsController.performFetch()
+        //    } catch  {
+        //    print("Error in fetchResultsGetCategoriesAndCount: \n  )
+        //    }
+        //    }
+    }
+    
+    
+    
+    
+    
     
     
   
