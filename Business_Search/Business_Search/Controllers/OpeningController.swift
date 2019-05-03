@@ -94,7 +94,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     //By default, fetch returns .ManagedObjectResultType = Actual Objects
     // This will be .dictionaryResultType  = {"Property" : value}
-    lazy var categoryFinalArray: [String] = {   //+1
+    lazy var categoryFinalArray: [String]? = {   //+1
         let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["title"]
