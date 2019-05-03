@@ -155,8 +155,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         fetchBusinessController = nil
         fetchCategoryController = nil
         definesPresentationContext = true
-//        fetchResultsGetCategoriesAndCount()
         
+//        fetchResultsGetCategoriesAndCount()
 //        categoryFinalArray.forEach{
 //            print("CategoryFinalArray --> \($0)")
 //        }
