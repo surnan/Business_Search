@@ -30,22 +30,7 @@ extension OpeningController: UISearchResultsUpdating {
         
         print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
         fetchPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        //d = diacritics.  Like accent marks
         fetchBusinessController = nil
-        fetchCategoryController = nil
-        tableView.reloadData()
-    }
-    
-    //NOW IMPLEMENTS SEARCH SCOPE GROUPS
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredCandies = candies.filter({( candy : Candy) -> Bool in
-            let doesCategoryMatch = (scope == "All") || (candy.category == scope)
-            if searchBarIsEmpty() {
-                return doesCategoryMatch
-            } else {
-                return doesCategoryMatch && candy.name.lowercased().contains(searchText.lowercased())
-            }
-        })
         tableView.reloadData()
     }
     
@@ -66,7 +51,8 @@ extension OpeningController {
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         print("selectedScope --> \(selectedScope)  ... selectedScope = \(searchController.searchBar.text!)")
-        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+        GROUP_INDEX = selectedScope
+        tableView.reloadData()
     }
 }
 
