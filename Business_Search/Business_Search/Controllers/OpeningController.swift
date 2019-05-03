@@ -175,18 +175,17 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         
         
     }
+
+    
     
 
     func fetchResultsGetCategoriesAndCount(){
-        
         let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["title"]
         fetchRequest.returnsDistinctResults = true
-        
         let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
         fetchRequest.sortDescriptors = sortDescriptor
-        
         let controller = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: dataController.viewContext,
@@ -195,36 +194,29 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         )
         
         
+        let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        
         do {
             try controller.performFetch()
             print("DO")
             controller.fetchedObjects?.forEach({ (element) in
                 let tempString = element.value(forKey: "title") as! String
                 
-                print(tempString)
+                let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
+                _fetchRequest.predicate = predicate2
+                
+                do {
+                    let count = try dataController.viewContext.count(for: _fetchRequest)
+                    print("f - \(tempString) ---> \(count)")
+                }catch {
+                    print("Error inside inner do/catch on fetchResultsGetCategoriesAndCount:\n\(error)")
+                }
             })
         } catch {
             print("ERROR = \(error)")
         }
-        
-        //
-        //    controller.delegate = self
-        //    do {
-        //    ry aFetchedResultsController.performFetch()
-        //    } catch  {
-        //    print("Error in fetchResultsGetCategoriesAndCount: \n  )
-        //    }
-        //    }
     }
-    
-    
-    
-    
-    
-    
-    
-  
-    
     
     
     
