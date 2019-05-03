@@ -19,7 +19,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             ShowNothingLabelIfNoResults()
             return state
         case 1:
-            let state = categoryFinalArray.count
+            let state = categoryFinalArray?.count ?? 0
             ShowNothingLabelIfNoResults()
             return state
         default:
@@ -40,14 +40,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel!.text = currentBusiness.name
             return cell
         case 1:
-            let currentCategoryName = categoryFinalArray[indexPath.row]
+            let currentCategoryName = categoryFinalArray?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName)
+            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
             _fetchRequest.predicate = predicate2
             let count: Int
             do {
                 count = try dataController.viewContext.count(for: _fetchRequest)
-                cell.textLabel?.text = "\(currentCategoryName) ..... count = \(count)"
+                cell.textLabel?.text = "\(currentCategoryName ?? "NO CATEGORY LISTED HERE") ..... count = \(count)"
                 return cell
             } catch {
                 print("Failed to get Count inside cellForRowAt: \n\(error)")
