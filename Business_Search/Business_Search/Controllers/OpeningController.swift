@@ -51,10 +51,10 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         return tableView
     }()
     
-    var fetchPredicate : NSPredicate? {
+    var fetchBusinessPredicate : NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
-            fetchBusinessController?.fetchRequest.predicate = fetchPredicate
+            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
         }
     }
 
@@ -63,7 +63,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchBusinessController == nil { //+3
                 fetchBusinessController = {   //+4
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-                    fetchRequest.predicate = self.fetchPredicate
+                    fetchRequest.predicate = self.fetchBusinessPredicate
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -148,7 +148,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
-        fetchPredicate = nil
+        fetchBusinessPredicate = nil
         fetchBusinessController = nil
         definesPresentationContext = true
     }

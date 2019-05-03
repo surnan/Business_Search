@@ -11,7 +11,7 @@ import UIKit
 extension OpeningController: UISearchResultsUpdating {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        fetchPredicate = nil
+        fetchBusinessPredicate = nil
         fetchBusinessController = nil
         tableView.reloadData()
     }
@@ -20,14 +20,14 @@ extension OpeningController: UISearchResultsUpdating {
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() {
-            fetchPredicate = nil
+            fetchBusinessPredicate = nil
             fetchBusinessController = nil
             tableView.reloadData()
             return
         }
         
         print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
-        fetchPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         fetchBusinessController = nil
         tableView.reloadData()
     }
