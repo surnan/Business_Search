@@ -51,38 +51,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchBusinessController = {   //+4
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
                     fetchRequest.predicate = self.fetchPredicate
-                    
-                    
-//                    let sortDescriptor = [NSSortDescriptor(key: "name", ascending: true)]
                     let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.name, ascending: true)
-                    
-                    
                     fetchRequest.sortDescriptors = [ sortDescriptor2]
-                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                               managedObjectContext: dataController.viewContext,
-                                                                               sectionNameKeyPath: nil,
-                                                                               cacheName: nil)
-                    aFetchedResultsController.delegate = self
-                    do {
-                        try aFetchedResultsController.performFetch()
-                    } catch let error {
-                        fatalError("Unresolved error \(error)")
-                    }
-                    return aFetchedResultsController
-                }() //-4
-            }   //-3
-        }   //-2
-    }   //-1
-    
-    
-    var fetchCategoryController: NSFetchedResultsController<Category>? { //+1
-        didSet {    //+2
-            if fetchCategoryController == nil { //+3
-                fetchCategoryController = {   //+4
-                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-                    fetchRequest.predicate = self.fetchPredicate
-                    let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
-                    fetchRequest.sortDescriptors = sortDescriptor
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
@@ -169,17 +139,41 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         fetchBusinessController = nil
         fetchCategoryController = nil
         definesPresentationContext = true
-
-//        getCategoriesAndCount()
-        fetchResultsGetCategoriesAndCount()
+//        fetchResultsGetCategoriesAndCount()
         
+        categoryFinalArray.forEach{
+            print("CategoryFinalArray --> \($0)")
+        }
         
     }
 
-    
-    
+    var fetchCategoryController: NSFetchedResultsController<Category>? { //+1
+        didSet {    //+2
+            if fetchCategoryController == nil { //+3
+                fetchCategoryController = {   //+4
+                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+                    fetchRequest.predicate = self.fetchPredicate
+                    let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+                    fetchRequest.sortDescriptors = sortDescriptor
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
 
-    func fetchResultsGetCategoriesAndCount(){
+    
+    
+    lazy var categoryFinalArray: [String] = {   //+1
         let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["title"]
@@ -192,31 +186,25 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
             cacheName: nil              // and nil = dont cache
         )
-        
-        
-        let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-        
-        
         do {
             try controller.performFetch()
-            print("DO")
-            controller.fetchedObjects?.forEach({ (element) in
+            let temp = controller.fetchedObjects
+            var answer = [String]()
+            
+            temp?.forEach({ (element) in
                 let tempString = element.value(forKey: "title") as! String
-                
-                let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
-                _fetchRequest.predicate = predicate2
-                
-                do {
-                    let count = try dataController.viewContext.count(for: _fetchRequest)
-                    print("f - \(tempString) ---> \(count)")
-                }catch {
-                    print("Error inside inner do/catch on fetchResultsGetCategoriesAndCount:\n\(error)")
-                }
+                answer.append(tempString)
             })
+            
+            
+            return answer
         } catch {
-            print("ERROR = \(error)")
+            print("Fail to PerformFetch inside categoryFinalArray:")
         }
-    }
+        return []
+    }() //-1
+    
+
     
     
     
@@ -260,38 +248,112 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
 
 
 
-extension OpeningController {
-    func getCategoriesAndCount(){
-        let resultsArray = getDictionary()
-        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-        resultsArray.forEach { (element) in
-            let tempString = element.value(forKey: "title") as! String
-            // let predicate = NSPredicate(format: "%K == %@", \Category.title, tempString)
-            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
-            fetchRequest.predicate = predicate2
-            do {
-                let count = try dataController.viewContext.count(for: fetchRequest)
-                print("\(tempString) ---> \(count)")
-            } catch {
-                print("GetNumber Error:\n\(error)")
-            }
-        }
-    }
-    
-    
-    func getDictionary()-> [NSDictionary]{
-        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
-        fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["title"]
-        fetchRequest.returnsDistinctResults = true
-        
-        print("==========")
-        do {
-            let results = try dataController.viewContext.fetch(fetchRequest)
-            return results
-        } catch {
-            print("GetDictionary Error:\n\(error)")
-        }
-        return []
-    }
-}
+//extension OpeningController {
+
+//    var fetchCategoryController: NSFetchedResultsController<Category>? { //+1
+//        didSet {    //+2
+//            if fetchCategoryController == nil { //+3
+//                fetchCategoryController = {   //+4
+//                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+//                    fetchRequest.predicate = self.fetchPredicate
+//                    let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+//                    fetchRequest.sortDescriptors = sortDescriptor
+//                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+//                                                                               managedObjectContext: dataController.viewContext,
+//                                                                               sectionNameKeyPath: nil,
+//                                                                               cacheName: nil)
+//                    aFetchedResultsController.delegate = self
+//                    do {
+//                        try aFetchedResultsController.performFetch()
+//                    } catch let error {
+//                        fatalError("Unresolved error \(error)")
+//                    }
+//                    return aFetchedResultsController
+//                }() //-4
+//            }   //-3
+//        }   //-2
+//    }   //-1
+
+
+
+
+
+
+//    func fetchResultsGetCategoriesAndCount(){
+//        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
+//        fetchRequest.resultType = .dictionaryResultType
+//        fetchRequest.propertiesToFetch = ["title"]
+//        fetchRequest.returnsDistinctResults = true
+//        let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+//        fetchRequest.sortDescriptors = sortDescriptor
+//        let controller = NSFetchedResultsController(
+//            fetchRequest: fetchRequest,
+//            managedObjectContext: dataController.viewContext,
+//            sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
+//            cacheName: nil              // and nil = dont cache
+//        )
+//
+//
+//        let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+//
+//
+//        do {
+//            try controller.performFetch()
+//            print("DO")
+//
+//
+//            let temp = controller.fetchedObjects
+//
+//            controller.fetchedObjects?.forEach({ (element) in
+//                let tempString = element.value(forKey: "title") as! String
+//
+//                let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
+//                _fetchRequest.predicate = predicate2
+//
+//                do {
+//                    let count = try dataController.viewContext.count(for: _fetchRequest)
+//                    print("f - \(tempString) ---> \(count)")
+//                }catch {
+//                    print("Error inside inner do/catch on fetchResultsGetCategoriesAndCount:\n\(error)")
+//                }
+//            })
+//        } catch {
+//            print("ERROR = \(error)")
+//        }
+//    }
+
+
+//    func getCategoriesAndCount(){
+//        let resultsArray = getDictionary()
+//        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+//        resultsArray.forEach { (element) in
+//            let tempString = element.value(forKey: "title") as! String
+//            // let predicate = NSPredicate(format: "%K == %@", \Category.title, tempString)
+//            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
+//            fetchRequest.predicate = predicate2
+//            do {
+//                let count = try dataController.viewContext.count(for: fetchRequest)
+//                print("\(tempString) ---> \(count)")
+//            } catch {
+//                print("GetNumber Error:\n\(error)")
+//            }
+//        }
+//    }
+//
+//
+//    func getDictionary()-> [NSDictionary]{
+//        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
+//        fetchRequest.resultType = .dictionaryResultType
+//        fetchRequest.propertiesToFetch = ["title"]
+//        fetchRequest.returnsDistinctResults = true
+//
+//        print("==========")
+//        do {
+//            let results = try dataController.viewContext.fetch(fetchRequest)
+//            return results
+//        } catch {
+//            print("GetDictionary Error:\n\(error)")
+//        }
+//        return []
+//    }
+//}

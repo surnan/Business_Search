@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+//categoryFinalArray
+
 extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
@@ -16,14 +18,18 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
 //        let state = fetchBusinessController?.fetchedObjects?.count ?? 0
 //        ShowNothingLabelIfNoResults()
 //        return state
-        let state = fetchCategoryController?.fetchedObjects?.count ?? 0
+        
+        
+//       let state = fetchCategoryController?.fetchedObjects?.count ?? 0
+        let state = categoryFinalArray.count
+        
         ShowNothingLabelIfNoResults()
         return state
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! DefaultCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
 //        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
 //        guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
 //            print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
@@ -32,13 +38,38 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
 //        cell.textLabel!.text = currentBusiness.name
 //        return cell
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+//        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+//        guard let currentCategory = fetchCategoryController?.object(at: indexPath) else {
+//            print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
+//            return UITableViewCell()
+//        }
+//        cell.category = currentCategory
+//        return cell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        guard let currentCategory = fetchCategoryController?.object(at: indexPath) else {
-            print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
-            return UITableViewCell()
+    
+        
+        let currentCategoryName = categoryFinalArray[indexPath.row]
+        
+        
+        let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName)
+        _fetchRequest.predicate = predicate2
+        
+        let count: Int
+        
+        do {
+            count = try dataController.viewContext.count(for: _fetchRequest)
+            cell.textLabel?.text = "\(currentCategoryName) ..... count = \(count)"
+            return cell
+        } catch {
+            print("Failed to get Count inside cellForRowAt: \n\(error)")
         }
-        cell.category = currentCategory
+        
+        
+        cell.textLabel?.text = "Failed to get Count at \(indexPath)"
         return cell
     }
     
