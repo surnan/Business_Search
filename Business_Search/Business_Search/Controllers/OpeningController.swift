@@ -15,12 +15,28 @@ struct Candy {
 }
 
 
+//var fetchRequestPredicate = NSCompoundPredicate()
+//let expressionLHS = NSExpression(forKeyPath: item)
+//let expressionRHS = NSExpression(forConstantValue: searchText)
+//let comparisonPredicate = NSComparisonPredicate(leftExpression: expressionLHS,
+//                                                rightExpression: expressionRHS,
+//                                                modifier: .direct,
+//                                                type: .contains,
+//                                                options: [.caseInsensitive])
+
+
+
+
 
 let businessCellID = "businessCellID"
 let categoryCellID = "categoryCellID"
 
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
+    
+    var GROUP_INDEX = 0 //WILL BE SUBSITITUED WITH INT ENUM
+    
+    
     var dataController: DataController!  //MARK: Injected
     var myCategories = [[Category]]()
     var myLocations = [Location]()
@@ -141,9 +157,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         definesPresentationContext = true
 //        fetchResultsGetCategoriesAndCount()
         
-        categoryFinalArray.forEach{
-            print("CategoryFinalArray --> \($0)")
-        }
+//        categoryFinalArray.forEach{
+//            print("CategoryFinalArray --> \($0)")
+//        }
         
     }
 
@@ -215,145 +231,4 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         self.navigationItem.titleView = imageView
         navigationItem.searchController = searchController
     }
-    
-    
-    var filteredCandies = [Candy]()
-    var candies: [Candy] = [
-        Candy(category:"Chocolate", name:"Chocolate Bar"),
-        Candy(category:"Chocolate", name:"Chocolate Chip"),
-        Candy(category:"Chocolate", name:"Dark Chocolate"),
-        Candy(category:"Hard", name:"Lollipop"),
-        Candy(category:"Hard", name:"Candy Cane"),
-        Candy(category:"Hard", name:"Jaw Breaker"),
-        Candy(category:"Other", name:"Caramel"),
-        Candy(category:"Other", name:"Sour Chew"),
-        Candy(category:"Other", name:"Gummi Bear"),
-        Candy(category:"Other", name:"Candy Floss"),
-        Candy(category:"Chocolate", name:"Chocolate Coin"),
-        Candy(category:"Chocolate", name:"Chocolate Egg"),
-        Candy(category:"Other", name:"Jelly Beans"),
-        Candy(category:"Other", name:"Liquorice"),
-        Candy(category:"Hard", name:"Toffee Apple"),
-        Candy(category:"Other", name:"Gummi Bear"),
-        Candy(category:"Other", name:"Candy Floss"),
-        Candy(category:"Chocolate", name:"Chocolate Coin"),
-        Candy(category:"Chocolate", name:"Chocolate Egg"),
-        Candy(category:"Other", name:"Jelly Beans"),
-        Candy(category:"Other", name:"Liquorice"),
-        Candy(category:"Hard", name:"Toffee Apple")
-    ]
 }
-
-
-
-
-
-//extension OpeningController {
-
-//    var fetchCategoryController: NSFetchedResultsController<Category>? { //+1
-//        didSet {    //+2
-//            if fetchCategoryController == nil { //+3
-//                fetchCategoryController = {   //+4
-//                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-//                    fetchRequest.predicate = self.fetchPredicate
-//                    let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
-//                    fetchRequest.sortDescriptors = sortDescriptor
-//                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-//                                                                               managedObjectContext: dataController.viewContext,
-//                                                                               sectionNameKeyPath: nil,
-//                                                                               cacheName: nil)
-//                    aFetchedResultsController.delegate = self
-//                    do {
-//                        try aFetchedResultsController.performFetch()
-//                    } catch let error {
-//                        fatalError("Unresolved error \(error)")
-//                    }
-//                    return aFetchedResultsController
-//                }() //-4
-//            }   //-3
-//        }   //-2
-//    }   //-1
-
-
-
-
-
-
-//    func fetchResultsGetCategoriesAndCount(){
-//        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
-//        fetchRequest.resultType = .dictionaryResultType
-//        fetchRequest.propertiesToFetch = ["title"]
-//        fetchRequest.returnsDistinctResults = true
-//        let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
-//        fetchRequest.sortDescriptors = sortDescriptor
-//        let controller = NSFetchedResultsController(
-//            fetchRequest: fetchRequest,
-//            managedObjectContext: dataController.viewContext,
-//            sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
-//            cacheName: nil              // and nil = dont cache
-//        )
-//
-//
-//        let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-//
-//
-//        do {
-//            try controller.performFetch()
-//            print("DO")
-//
-//
-//            let temp = controller.fetchedObjects
-//
-//            controller.fetchedObjects?.forEach({ (element) in
-//                let tempString = element.value(forKey: "title") as! String
-//
-//                let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
-//                _fetchRequest.predicate = predicate2
-//
-//                do {
-//                    let count = try dataController.viewContext.count(for: _fetchRequest)
-//                    print("f - \(tempString) ---> \(count)")
-//                }catch {
-//                    print("Error inside inner do/catch on fetchResultsGetCategoriesAndCount:\n\(error)")
-//                }
-//            })
-//        } catch {
-//            print("ERROR = \(error)")
-//        }
-//    }
-
-
-//    func getCategoriesAndCount(){
-//        let resultsArray = getDictionary()
-//        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-//        resultsArray.forEach { (element) in
-//            let tempString = element.value(forKey: "title") as! String
-//            // let predicate = NSPredicate(format: "%K == %@", \Category.title, tempString)
-//            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), tempString)
-//            fetchRequest.predicate = predicate2
-//            do {
-//                let count = try dataController.viewContext.count(for: fetchRequest)
-//                print("\(tempString) ---> \(count)")
-//            } catch {
-//                print("GetNumber Error:\n\(error)")
-//            }
-//        }
-//    }
-//
-//
-//    func getDictionary()-> [NSDictionary]{
-//        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
-//        fetchRequest.resultType = .dictionaryResultType
-//        fetchRequest.propertiesToFetch = ["title"]
-//        fetchRequest.returnsDistinctResults = true
-//
-//        print("==========")
-//        do {
-//            let results = try dataController.viewContext.fetch(fetchRequest)
-//            return results
-//        } catch {
-//            print("GetDictionary Error:\n\(error)")
-//        }
-//        return []
-//    }
-//}
