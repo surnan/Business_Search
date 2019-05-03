@@ -13,7 +13,6 @@ extension OpeningController: UISearchResultsUpdating {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fetchPredicate = nil
         fetchBusinessController = nil
-        fetchCategoryController = nil
         tableView.reloadData()
     }
 
@@ -23,7 +22,6 @@ extension OpeningController: UISearchResultsUpdating {
         if searchBarIsEmpty() {
             fetchPredicate = nil
             fetchBusinessController = nil
-            fetchCategoryController = nil
             tableView.reloadData()
             return
         }
