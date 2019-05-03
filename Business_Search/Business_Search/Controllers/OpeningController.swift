@@ -57,6 +57,16 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
         }
     }
+    
+    
+    var fetchCategoryPredicate : NSPredicate? {
+        didSet {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
+            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
+        }
+    }
+    
+    
 
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
