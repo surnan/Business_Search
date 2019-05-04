@@ -13,6 +13,9 @@ extension OpeningController: UISearchResultsUpdating {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fetchBusinessPredicate = nil
         fetchBusinessController = nil
+        fetchCategoryPredicate = nil
+        fetchCategoryArray = nil
+
         tableView.reloadData()
     }
 
@@ -22,6 +25,10 @@ extension OpeningController: UISearchResultsUpdating {
         if searchBarIsEmpty() {
             fetchBusinessPredicate = nil
             fetchBusinessController = nil
+            
+            fetchCategoryPredicate = nil
+            fetchCategoryArray = nil
+            
             tableView.reloadData()
             return
         }
@@ -30,6 +37,7 @@ extension OpeningController: UISearchResultsUpdating {
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         fetchCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         
+        fetchBusinessController = nil
         fetchBusinessController = nil
         tableView.reloadData()
     }
