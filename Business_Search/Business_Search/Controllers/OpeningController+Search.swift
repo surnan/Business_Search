@@ -38,7 +38,7 @@ extension OpeningController: UISearchResultsUpdating {
         fetchCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         
         fetchBusinessController = nil
-        fetchBusinessController = nil
+        fetchCategoryArray = nil
         tableView.reloadData()
     }
     
