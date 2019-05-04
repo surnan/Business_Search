@@ -201,7 +201,59 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
         navigationItem.searchController = searchController
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)), UIBarButtonItem(title: " ⏸ ", style: .done, target: self, action: #selector(JumpToBreakPoint))]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
+
+    @objc func handleDownloadBusinesses(){
+        deleteAll()
+        ////////////////////////////////////////////////
+        self.fetchBusinessController = nil
+        self.fetchCategoriesController = nil
+        ////////////////////////////////////////////////
+//        _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
+        
+    }
+    
+    @objc func JumpToBreakPoint(total: Int){
+        print("")
+        
+        
+        ////////////////////////////////////////////////
+        print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
+        print("fetchCategoryArray.count - ", fetchCategoryArray?.count ?? -999)
+        ////////////////////////////////////////////////
+        
+        
+    }
+    
+    //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
+    @objc func handleDeleteAll(){
+        deleteAll()
+    }
+    
+    
+    func deleteAll(){
+        doesLocationExist = false
+        let context: NSManagedObjectContext!  = dataController.backGroundContext
+        context.perform {
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+            
+            ////////////////////////////////////////////////
+            self.fetchBusinessController = nil
+            self.fetchCategoriesController = nil
+            ////////////////////////////////////////////////
+            
+            do {
+                _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+                //  context.reset()
+            } catch {
+                print("Error deleting All \(error)")
+            }
+        }
+    }
+    
     
 
 }
