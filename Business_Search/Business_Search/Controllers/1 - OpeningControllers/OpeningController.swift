@@ -13,6 +13,7 @@ import CoreData
 
 
 let businessCellID = "businessCellID"
+let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
 
@@ -40,6 +41,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.tableFooterView = UIView()
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
+        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
         return tableView
     }()
     
