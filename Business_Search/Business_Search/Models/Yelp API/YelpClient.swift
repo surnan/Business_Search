@@ -56,15 +56,15 @@ class YelpClient{
     }
     
     
-    class func getNearbyBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (YelpGetNearbyBusinessStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    class func getNearbyBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (CreateYelpURLDuringLoopingStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
-                let urlsQueueElement = YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: offset)
+                let urlsQueueElement = CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: offset)
                 return completion(urlsQueueElement, .failure(error))
             case .success(let answer):
-                let urlsQueueElement = YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: offset)
+                let urlsQueueElement = CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: offset)
                 return completion(urlsQueueElement, .success(answer))
             }
         }
