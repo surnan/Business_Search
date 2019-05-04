@@ -51,22 +51,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         return tableView
     }()
     
-    var fetchBusinessPredicate : NSPredicate? {
-        didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
-            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
-        }
-    }
-    
-    
-    var fetchCategoryPredicate : NSPredicate? {
-        didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
-            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
-        }
-    }
-    
-    
+
 
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
@@ -92,37 +77,82 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    
+    var fetchBusinessPredicate : NSPredicate? {
+        didSet {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
+            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
+        }
+    }
+    
+    lazy var fetchCategoryPredicate : NSPredicate? = nil
+    
     //By default, fetch returns .ManagedObjectResultType = Actual Objects
     // This will be .dictionaryResultType  = {"Property" : value}
-    lazy var categoryFinalArray: [String]? = {   //+1
-        let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
-        fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["title"]
-        fetchRequest.returnsDistinctResults = true
-        let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
-        fetchRequest.sortDescriptors = sortDescriptor
-        let controller = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: dataController.viewContext,
-            sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
-            cacheName: nil              // and nil = dont cache
-        )
-        do {
-            try controller.performFetch()
-            let temp = controller.fetchedObjects
-            var answer = [String]()
-            
-            temp?.forEach({ (element) in
-                let tempString = element.value(forKey: "title") as! String
-                answer.append(tempString)
-            })
-            return answer
-        } catch {
-            print("Fail to PerformFetch inside categoryFinalArray:")
-        }
-        return []
-    }() //-1
-
+    var fetchCategoryArray: [String]? {   //+1
+        didSet {    //+2
+            if fetchCategoryArray == nil {    //+3
+                let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
+                fetchRequest.resultType = .dictionaryResultType
+                fetchRequest.propertiesToFetch = ["title"]
+                fetchRequest.returnsDistinctResults = true
+                let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+                fetchRequest.sortDescriptors = sortDescriptor
+                
+                
+                if let predicateDefined = fetchCategoryPredicate {
+                    fetchRequest.predicate = predicateDefined
+                }
+                
+                
+                
+                let controller = NSFetchedResultsController(
+                    fetchRequest: fetchRequest,
+                    managedObjectContext: dataController.viewContext,
+                    sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
+                    cacheName: nil              // and nil = dont cache
+                )
+                
+                do {
+                    try controller.performFetch()
+                    let temp = controller.fetchedObjects
+                    var answer = [String]()
+                    
+                    temp?.forEach({ (element) in
+                        let tempString = element.value(forKey: "title") as! String
+                        answer.append(tempString)
+                    })
+                    fetchCategoryArray = answer
+                } catch {
+                    print("Fail to PerformFetch inside categoryFinalArray:")
+                }
+            }   //-3
+        }   //-2
+    }   //-1
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
@@ -160,6 +190,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         setupNavigationMenu()
         fetchBusinessPredicate = nil
         fetchBusinessController = nil
+        
+        fetchCategoryArray = nil
+        
         definesPresentationContext = true
     }
 
