@@ -97,11 +97,22 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             guard let currentCategory = fetchCategoryArray?[indexPath.row] else {return}
             
             print("Clicked Category @ \(indexPath)  .... name = \(currentCategory)")
+            listBusinesses(category: currentCategory)
         } else {
             print("Clicked Business @ \(indexPath)")
         }
     }
     
     
+    func listBusinesses(category: String){
+        selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
+        fetchCategoriesController = nil
+        
+        
+        fetchCategoriesController?.fetchedObjects?.forEach({ (currentCategory) in
+            print(currentCategory.business?.name ?? "EMPTY")
+        })
+        
+    }
 }
 

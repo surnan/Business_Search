@@ -139,6 +139,37 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         fetchCategoryArray = nil
     }
     
+    
+    var selectedCategoryPredicate: NSPredicate?
+    
+    var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
+        didSet {    //+2
+            if fetchCategoriesController == nil { //+3
+                fetchCategoriesController = {   //+4
+                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+                    fetchRequest.predicate = self.selectedCategoryPredicate
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
+                    fetchRequest.sortDescriptors = [ sortDescriptor]
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
+    
+    
+    
+    
+    
     //MARK:- UI
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
