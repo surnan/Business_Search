@@ -28,6 +28,12 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         return TableIndex.business.rawValue
     }
     
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
@@ -115,7 +121,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         })
         
         businessArray.forEach { (currentBusiness) in
-            print(currentBusiness.name ?? "", currentBusiness.objectID)
+            print(currentBusiness.name ?? "", currentBusiness.displayAddress ?? "")
         }
         
         let newvc =  GroupsController()
