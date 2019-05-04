@@ -16,7 +16,7 @@ extension Location {
                 let currentBusiness = Business(context: context)
                 currentBusiness.parentLocation = self
                 currentBusiness.alias = item.alias
-                currentBusiness.displayAddress = item.location.display_address.reduce("", +)
+                currentBusiness.displayAddress = item.location.display_address.joined(separator: "?")   //Assuming '?' isn't part of address anywhere on Yelp
                 currentBusiness.displayPhone = item.display_phone
                 currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
                 currentBusiness.id = item.id
