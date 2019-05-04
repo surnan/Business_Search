@@ -40,7 +40,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         return tableView
     }()
-
+    
     let nothingFoundView: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 350, height: 350))
         label.backgroundColor = .clear
@@ -176,12 +176,13 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter search term ..."
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         searchController.searchBar.barStyle = .black
-                searchController.searchBar.delegate = self
-                searchController.searchResultsUpdater = self
         return searchController
     }()
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -192,7 +193,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         resetAllPredicateRelatedVar()
         definesPresentationContext = true
     }
-
+    
+    
     func setupNavigationMenu(){
         let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
         let imageView = UIImageView(image: logo)
@@ -200,4 +202,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         self.navigationItem.titleView = imageView
         navigationItem.searchController = searchController
     }
+    
+
 }
+
