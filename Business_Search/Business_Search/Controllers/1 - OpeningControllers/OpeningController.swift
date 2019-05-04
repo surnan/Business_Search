@@ -21,7 +21,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var dataController: DataController!  //MARK: Injected
     var currentLocation: Location!
     var doesLocationExist = false
-    var urlsQueue = [YelpGetNearbyBusinessStruct]() //enumeration loop for semaphores
+    var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
     var currentLocationID: NSManagedObjectID?
     
     var searchGroupIndex = 0 //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
@@ -284,11 +284,11 @@ extension OpeningController {
         }
     }
     
-    func handleLoadBusinesses(inputData: YelpGetNearbyBusinessStruct?, result: Result<YelpBusinessResponse, NetworkError>){
+    func handleLoadBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
             if error == NetworkError.needToRetry || error == NetworkError.tooManyRequestsPerSecond {
-                print("handleLoadBusiness --> Retry -> \(error) ... inputData = \(String(describing: inputData))")
+                print("handleLoadBusiness --> Retry -> \(error))")
             } else {
                 print("Error that is not 'needToRetry' --> error = \(error)")
             }
@@ -316,7 +316,7 @@ extension OpeningController {
     
     func buildURLsQueueForDownloadingBusinesses(total: Int){
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){
-            urlsQueue.append(YelpGetNearbyBusinessStruct(latitude: latitude, longitude: longitude, offset: index))
+            urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: index))
         }
         downloadYelpBusinesses()
     }
