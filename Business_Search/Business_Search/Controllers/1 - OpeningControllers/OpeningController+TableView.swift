@@ -90,5 +90,18 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             print("ShowNothingLabelIfNoResults --> is very unhappy")
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableViewArrayType == TableIndex.category.rawValue {
+            
+            guard let currentCategory = fetchCategoryArray?[indexPath.row] else {return}
+            
+            print("Clicked Category @ \(indexPath)  .... name = \(currentCategory)")
+        } else {
+            print("Clicked Business @ \(indexPath)")
+        }
+    }
+    
+    
 }
 
