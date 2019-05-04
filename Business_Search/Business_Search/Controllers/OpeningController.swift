@@ -9,22 +9,6 @@
 import UIKit
 import CoreData
 
-struct Candy {
-    let category : String
-    let name : String
-}
-
-
-//var fetchRequestPredicate = NSCompoundPredicate()
-//let expressionLHS = NSExpression(forKeyPath: item)
-//let expressionRHS = NSExpression(forConstantValue: searchText)
-//let comparisonPredicate = NSComparisonPredicate(leftExpression: expressionLHS,
-//                                                rightExpression: expressionRHS,
-//                                                modifier: .direct,
-//                                                type: .contains,
-//                                                options: [.caseInsensitive])
-
-
 
 
 
@@ -33,6 +17,25 @@ let categoryCellID = "categoryCellID"
 
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
+
+    struct TableGroups {
+        static var index: Int {
+            get {
+                    return currentIndex
+            }
+        }
+
+        static private var currentIndex = 0
+        static func isBusiness(){
+            currentIndex = 0
+        }
+
+        static func isCategory(){
+            currentIndex = 1
+        }
+    }
+    
+    
     
     var GROUP_INDEX = 0 //WILL BE SUBSITITUED WITH INT ENUM
     
