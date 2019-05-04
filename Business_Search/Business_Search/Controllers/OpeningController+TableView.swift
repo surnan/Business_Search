@@ -16,14 +16,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         switch GROUP_INDEX {
         case 0:
             let state = fetchBusinessController?.fetchedObjects?.count ?? 0
-            ShowNothingLabelIfNoResults()
+            ShowNothingLabelIfNoResults(group: GROUP_INDEX)
             return state
         case 1:
             let state = fetchCategoryArray?.count ?? 0
-            ShowNothingLabelIfNoResults()
+            ShowNothingLabelIfNoResults(group: GROUP_INDEX)
             return state
         default:
-            print("WHOOOOOPS!!")
+            print("numberOfRowsInSection --> WHOOOOOPS!!")
         }
         return 0
     }
@@ -70,11 +70,23 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         nothingFoundView.alpha = 0
     }
     
-    func ShowNothingLabelIfNoResults(){
-        if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-            showNothingFoundView()
-        } else {
-            hideNothingFoundView()
+    
+    func ShowNothingLabelIfNoResults(group: Int){
+        switch group {
+        case 0:
+            if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+                showNothingFoundView()
+            } else {
+                hideNothingFoundView()
+            }
+        case 1:
+            if fetchCategoryArray?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+                showNothingFoundView()
+            } else {
+                hideNothingFoundView()
+            }
+        default:
+            print("ShowNothingLabelIfNoResults --> is very unhappy")
         }
     }
 }
