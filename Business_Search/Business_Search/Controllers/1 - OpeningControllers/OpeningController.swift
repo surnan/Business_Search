@@ -99,9 +99,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     lazy var fetchCategoryPredicate : NSPredicate? = nil
     
-    var fetchCategoryArray: [String]? {   //+1
+    var fetchCategoryNames: [String]? {   //+1
         didSet {    //+2
-            if fetchCategoryArray == nil {    //+3
+            if fetchCategoryNames == nil {    //+3
                 //By default, returns .ManagedObjectResultType = Actual Objects
                 // .dictionaryResultType used for 'returnsDistinctResults'
                 let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
@@ -128,7 +128,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                         let tempString = element.value(forKey: "title") as! String
                         answer.append(tempString)
                     })
-                    fetchCategoryArray = answer
+                    fetchCategoryNames = answer
                 } catch {
                     print("Fail to PerformFetch inside categoryFinalArray:")
                 }
@@ -140,7 +140,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         fetchBusinessPredicate = nil
         fetchCategoryPredicate = nil
         fetchBusinessController = nil
-        fetchCategoryArray = nil
+        fetchCategoryNames = nil
     }
     
     
@@ -227,7 +227,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         
         ////////////////////////////////////////////////
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", fetchCategoryArray?.count ?? -999)
+        print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
         ////////////////////////////////////////////////
         
         
@@ -353,7 +353,7 @@ extension OpeningController {
         tableView.reloadData()
         
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", fetchCategoryArray?.count ?? -999)
+        print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
         
         
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
