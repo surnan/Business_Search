@@ -11,11 +11,7 @@ import UIKit
 extension OpeningController: UISearchResultsUpdating {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        fetchBusinessPredicate = nil
-        fetchBusinessController = nil
-        fetchCategoryPredicate = nil
-        fetchCategoryArray = nil
-
+        resetAllPredicateRelatedVar()
         tableView.reloadData()
     }
 
@@ -23,22 +19,15 @@ extension OpeningController: UISearchResultsUpdating {
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() {
-            fetchBusinessPredicate = nil
-            fetchBusinessController = nil
-            
-            fetchCategoryPredicate = nil
-            fetchCategoryArray = nil
-            
+            resetAllPredicateRelatedVar()
             tableView.reloadData()
             return
         }
         
-        print("searchController.searchBar.text! = \(searchController.searchBar.text!)")
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         fetchCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        
-        fetchBusinessController = nil
-        fetchCategoryArray = nil
+        fetchBusinessController = nil   //Fetches with Predicate
+        fetchCategoryArray = nil        //Fetches with Predicate
         tableView.reloadData()
     }
     
@@ -53,15 +42,12 @@ extension OpeningController: UISearchResultsUpdating {
         let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
         return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
     }
-}
-
-extension OpeningController {
+    
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         print("selectedScope --> \(selectedScope)  ... selectedScope = \(searchController.searchBar.text!)")
-        GROUP_INDEX = selectedScope
+        searchGroupIndex = selectedScope
         tableView.reloadData()
-        ShowNothingLabelIfNoResults(group: GROUP_INDEX)
+        ShowNothingLabelIfNoResults(group: tableViewArrayType)
     }
 }
-
