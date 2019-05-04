@@ -61,6 +61,7 @@ extension OpeningController {
         print("selectedScope --> \(selectedScope)  ... selectedScope = \(searchController.searchBar.text!)")
         GROUP_INDEX = selectedScope
         tableView.reloadData()
+        ShowNothingLabelIfNoResults(group: GROUP_INDEX)
     }
 }
 
