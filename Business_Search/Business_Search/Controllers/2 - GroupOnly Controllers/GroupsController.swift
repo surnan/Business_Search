@@ -24,16 +24,22 @@ class GroupsController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+//        cell.myLabel.text = businesses[indexPath.row].name
+//        return cell
         
-        cell.myLabel.text = businesses[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
+        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+        cell.currentBusiness = businesses[indexPath.row]
         return cell
+        
     }
     
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+//        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
         setupNavigationMenu()
     }
     
