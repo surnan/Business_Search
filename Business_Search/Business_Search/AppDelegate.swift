@@ -31,7 +31,7 @@ var locale = "en_US"
 
 
 let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
-                             .ghostWhite, .greyOrange, .darkOrange, .fbWhite, .lightRed,
+                             .ghostWhite, .greyOrange, .darkOrange, .white, .lightRed,
                              .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]
 
 @UIApplicationMain

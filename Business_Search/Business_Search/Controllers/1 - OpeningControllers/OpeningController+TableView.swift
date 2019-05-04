@@ -108,10 +108,17 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
         fetchCategoriesController = nil
         
+        var businessArray = [Business]()
         
         fetchCategoriesController?.fetchedObjects?.forEach({ (currentCategory) in
-            print(currentCategory.business?.name ?? "EMPTY")
+            businessArray.append(currentCategory.business!)
         })
+        
+        businessArray.forEach { (currentBusiness) in
+            print(currentBusiness.name, currentBusiness.objectID)
+        }
+        
+        
         
     }
 }
