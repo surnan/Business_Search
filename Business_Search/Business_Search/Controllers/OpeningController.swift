@@ -98,13 +98,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchRequest.returnsDistinctResults = true
                 let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
                 fetchRequest.sortDescriptors = sortDescriptor
-                
-                
-                if let predicateDefined = fetchCategoryPredicate {
-                    fetchRequest.predicate = predicateDefined
-                }
-                
-                
+                fetchRequest.predicate = fetchCategoryPredicate
                 
                 let controller = NSFetchedResultsController(
                     fetchRequest: fetchRequest,
