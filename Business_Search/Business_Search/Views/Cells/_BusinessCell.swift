@@ -8,6 +8,45 @@
 
 import UIKit
 
+
+
+class _BusinessCell: UITableViewCell {
+    var currentBusiness: Business? {
+        didSet {
+            if let displayAddresses = currentBusiness?.displayAddress,
+                let addresse = displayAddresses.split(separator: "?").first,
+                let name = currentBusiness?.name {
+                let tempString = name + "\n" + addresse
+                myLabel.text = tempString
+            }
+        }
+    }
+            
+    
+    let myLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = -1
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(myLabel)
+        myLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        myLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+/*
 class _BusinessCell: UITableViewCell {
     var currentBusiness: Business? {
         didSet {
@@ -84,3 +123,4 @@ class _BusinessCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+*/
