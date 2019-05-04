@@ -17,32 +17,19 @@ let categoryCellID = "categoryCellID"
 
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
-
-    struct TableGroups {
-        static var index: Int {
-            get {
-                    return currentIndex
-            }
-        }
-
-        static private var currentIndex = 0
-        static func isBusiness(){
-            currentIndex = 0
-        }
-
-        static func isCategory(){
-            currentIndex = 1
-        }
-    }
-    
-    
-    
-    var GROUP_INDEX = 0 //WILL BE SUBSITITUED WITH INT ENUM
-    
     
     var dataController: DataController!  //MARK: Injected
     var currentLocation: Location!
     var doesLocationExist = false
+    
+    var searchGroupIndex = 0 //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
+    var tableViewArrayType: Int {
+        return searchGroupIndex
+    }
+    
+    enum TableIndex:Int {
+        case business = 0, category
+    }
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -53,9 +40,32 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         return tableView
     }()
+
+    let nothingFoundView: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 350, height: 350))
+        label.backgroundColor = .clear
+        label.alpha = 0
+        label.text = "That's all Folks"
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = false
+        let textAttributes:[NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.lightGray,
+            NSAttributedString.Key.foregroundColor: UIColor.green,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
+            NSAttributedString.Key.strokeWidth: -1.0
+        ]
+        label.attributedText = NSAttributedString(string: "No matches found", attributes: textAttributes)
+        return label
+    }()
     
-
-
+    //MARK:- Predicates
+    var fetchBusinessPredicate : NSPredicate? {
+        didSet {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
+            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
+        }
+    }
+    
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
             if fetchBusinessController == nil { //+3
@@ -81,20 +91,15 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }   //-1
     
     
-    var fetchBusinessPredicate : NSPredicate? {
-        didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
-            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
-        }
-    }
+    
     
     lazy var fetchCategoryPredicate : NSPredicate? = nil
     
-    //By default, fetch returns .ManagedObjectResultType = Actual Objects
-    // This will be .dictionaryResultType  = {"Property" : value}
     var fetchCategoryArray: [String]? {   //+1
         didSet {    //+2
             if fetchCategoryArray == nil {    //+3
+                //By default, returns .ManagedObjectResultType = Actual Objects
+                // .dictionaryResultType used for 'returnsDistinctResults'
                 let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
                 fetchRequest.resultType = .dictionaryResultType
                 fetchRequest.propertiesToFetch = ["title"]
@@ -127,29 +132,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    func resetAllPredicateRelatedVar() {
+        fetchBusinessPredicate = nil
+        fetchCategoryPredicate = nil
+        fetchBusinessController = nil
+        fetchCategoryArray = nil
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //MARK:- UI
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
@@ -161,23 +151,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         return searchController
     }()
 
-    let nothingFoundView: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 350, height: 350))
-        label.backgroundColor = .clear
-        label.alpha = 0
-        label.text = "That's all Folks"
-        label.textAlignment = .center
-        label.isUserInteractionEnabled = false
-        let textAttributes:[NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.strokeColor: UIColor.lightGray,
-            NSAttributedString.Key.foregroundColor: UIColor.green,
-            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
-            NSAttributedString.Key.strokeWidth: -1.0
-        ]
-        label.attributedText = NSAttributedString(string: "No matches found", attributes: textAttributes)
-        return label
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -185,11 +158,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
-        fetchBusinessPredicate = nil
-        fetchBusinessController = nil
-        
-        fetchCategoryArray = nil
-        
+        resetAllPredicateRelatedVar()
         definesPresentationContext = true
     }
 

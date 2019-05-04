@@ -13,33 +13,34 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch GROUP_INDEX {
-        case 0:
+        switch tableViewArrayType {
+        case TableIndex.business.rawValue:
             let state = fetchBusinessController?.fetchedObjects?.count ?? 0
-            ShowNothingLabelIfNoResults(group: GROUP_INDEX)
+            ShowNothingLabelIfNoResults(group: tableViewArrayType)
             return state
-        case 1:
+        case TableIndex.category.rawValue:
             let state = fetchCategoryArray?.count ?? 0
-            ShowNothingLabelIfNoResults(group: GROUP_INDEX)
+            ShowNothingLabelIfNoResults(group: tableViewArrayType)
             return state
         default:
             print("numberOfRowsInSection --> WHOOOOOPS!!")
         }
-        return 0
+        return TableIndex.business.rawValue
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        switch GROUP_INDEX {
-        case 0:
+        
+        switch tableViewArrayType {
+        case TableIndex.business.rawValue:
             guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
                 print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
                 return UITableViewCell()
             }
             cell.textLabel!.text = currentBusiness.name
             return cell
-        case 1:
+        case TableIndex.category.rawValue:
             let currentCategoryName = fetchCategoryArray?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
@@ -60,26 +61,26 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func showNothingFoundView(){
+    private func showNothingFoundView(){
         UIView.animate(withDuration: 1.0) {[unowned self] in
             self.nothingFoundView.alpha = 1
         }
     }
     
-    func hideNothingFoundView(){
+    private func hideNothingFoundView(){
         nothingFoundView.alpha = 0
     }
     
     
     func ShowNothingLabelIfNoResults(group: Int){
         switch group {
-        case 0:
+        case TableIndex.business.rawValue:
             if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
                 showNothingFoundView()
             } else {
                 hideNothingFoundView()
             }
-        case 1:
+        case TableIndex.category.rawValue:
             if fetchCategoryArray?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
                 showNothingFoundView()
             } else {
