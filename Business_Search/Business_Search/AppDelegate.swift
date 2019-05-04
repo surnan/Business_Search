@@ -58,8 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow()
         window?.makeKeyAndVisible()
-//        let startingVC = SearchController()
-        
         
         let startingVC = OpeningController()
         startingVC.dataController = dataController

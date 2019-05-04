@@ -12,21 +12,38 @@ import CoreData
 
 class GroupsController: UITableViewController {
     var dataController: DataController! //injected
-    
-    
-    var businesses = [Business]()
-    
-    var fetchCategoryPredicate : NSPredicate? = nil
+    var businesses = [Business]()   //injected
+    var categoryName: String! //injected
     
 
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return businesses.count
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+        
+        cell.myLabel.text = businesses[indexPath.row].name
+        return cell
+    }
     
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        setupNavigationMenu()
     }
     
-    
+    func setupNavigationMenu(){
+        let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
+        let imageView = UIImageView(image: logo)
+        imageView.contentMode = .scaleAspectFit
+        self.navigationItem.title = categoryName
+        
+    }
     
     
 }

@@ -115,10 +115,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         })
         
         businessArray.forEach { (currentBusiness) in
-            print(currentBusiness.name, currentBusiness.objectID)
+            print(currentBusiness.name ?? "", currentBusiness.objectID)
         }
         
-        
+        let newvc =  GroupsController()
+        newvc.dataController = dataController
+        newvc.businesses = businessArray
+        newvc.categoryName = category
+        navigationController?.pushViewController(newvc, animated: true)
         
     }
 }
