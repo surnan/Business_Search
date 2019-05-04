@@ -19,7 +19,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             ShowNothingLabelIfNoResults(group: tableViewArrayType)
             return state
         case TableIndex.category.rawValue:
-            let state = fetchCategoryArray?.count ?? 0
+            let state = fetchCategoryNames?.count ?? 0
             ShowNothingLabelIfNoResults(group: tableViewArrayType)
             return state
         default:
@@ -36,29 +36,32 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableViewArrayType {
+            
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
             return cell
+            
         case TableIndex.category.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             
-            let currentCategoryName = fetchCategoryArray?[indexPath.row]
+            let currentCategoryName = fetchCategoryNames?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-            let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-            _fetchRequest.predicate = predicate2
-            let count: Int
+            _fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
+            
+            cell.name = currentCategoryName
+            
             do {
-                count = try dataController.viewContext.count(for: _fetchRequest)
-                cell.textLabel?.text = "\(currentCategoryName ?? "NO CATEGORY LISTED HERE") ..... count = \(count)"
-                return cell
+                let count = try dataController.viewContext.count(for: _fetchRequest)
+                cell.count = count
             } catch {
+                cell.count = 0
                 print("Failed to get Count inside cellForRowAt: \n\(error)")
             }
-            cell.textLabel?.text = "Failed to get Count at \(indexPath)"
             return cell
+            
         default:
             print("Something Bad HAPPENED inside cellForRowAt:")
             return UITableViewCell()
@@ -85,7 +88,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
                 hideNothingFoundView()
             }
         case TableIndex.category.rawValue:
-            if fetchCategoryArray?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+            if fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
                 showNothingFoundView()
             } else {
                 hideNothingFoundView()
@@ -98,7 +101,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableViewArrayType == TableIndex.category.rawValue {
             
-            guard let currentCategory = fetchCategoryArray?[indexPath.row] else {return}
+            guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
             
             print("Clicked Category @ \(indexPath)  .... name = \(currentCategory)")
             listBusinesses(category: currentCategory)
