@@ -35,18 +35,16 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
-            guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {
-                print("tableView.cellForRowAt could not get cellData at indexPath: \(indexPath)")
-                return UITableViewCell()
-            }
-            cell.textLabel!.text = currentBusiness.name
+            let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
+            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+            cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
             return cell
         case TableIndex.category.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+            
             let currentCategoryName = fetchCategoryArray?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             let predicate2 = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
