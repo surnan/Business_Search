@@ -36,10 +36,19 @@ class MenuController: UIViewController {
     
     var nonDistanceSearchButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .purple
+        button.backgroundColor = .lightRed
         button.setTitle("     Search all categories     ", for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(handleNonDistanceSearchButton), for: .touchUpInside)
+        return button
+    }()
+    
+    var searchByAddressButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .purple
+        button.setTitle("Search By Address", for: .normal)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(handleSearchByAddressButton), for: .touchUpInside)
         return button
     }()
     
@@ -55,8 +64,8 @@ class MenuController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
-        [nearMeSearchButton, overThereSearchButton, nonDistanceSearchButton].forEach{verticalStackView.addArrangedSubview($0)}
+        view.backgroundColor = .lightGray
+        [nearMeSearchButton, overThereSearchButton, searchByAddressButton, nonDistanceSearchButton].forEach{verticalStackView.addArrangedSubview($0)}
         [verticalStackView].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
@@ -64,6 +73,13 @@ class MenuController: UIViewController {
             verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
         ])
+    }
+    
+    
+    @objc func handleSearchByAddressButton(){
+        let newVC = SearchByAddressController()
+        newVC.dataController = dataController
+        navigationController?.pushViewController(newVC, animated: true)
     }
     
     
