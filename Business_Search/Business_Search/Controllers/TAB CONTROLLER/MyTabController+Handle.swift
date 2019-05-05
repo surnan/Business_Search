@@ -22,8 +22,5 @@ extension MyTabController {
                 print($0.name ?? "", $0.display_phone ?? "")
             }
         }
-        urlSessionTask = nil
     }
-    
-    
 }
