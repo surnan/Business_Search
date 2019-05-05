@@ -100,13 +100,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableViewArrayType == TableIndex.category.rawValue {
-            
             guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
-            
-            print("Clicked Category @ \(indexPath)  .... name = \(currentCategory)")
             listBusinesses(category: currentCategory)
-        } else {
-            print("Clicked Business @ \(indexPath)")
         }
     }
     
@@ -125,12 +120,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             print(currentBusiness.name ?? "", currentBusiness.displayAddress ?? "")
         }
         
-        let newvc =  GroupsController()
-        newvc.dataController = dataController
-        newvc.businesses = businessArray
-        newvc.categoryName = category
-        navigationController?.pushViewController(newvc, animated: true)
-        
+        let newVC2 = MyTabController()
+        newVC2.businesses = businessArray
+        newVC2.categoryName = category
+        navigationController?.pushViewController(newVC2, animated: true)
     }
 }
 
