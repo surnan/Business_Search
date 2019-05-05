@@ -67,18 +67,38 @@ class SearchByAddressController: UIViewController {
             }
             self?.globalLocation = location
             DispatchQueue.main.async {[weak self] in
-                let newVC = OpeningController()
-                newVC.dataController = self?.dataController
-                newVC.searchLocationCoordinate = self?.globalLocation.coordinate
+
                 print("globalLocation --> \(String(describing: self?.globalLocation))")
-                self?.navigationController?.pushViewController(newVC, animated: true)
+                
+                
+                /*
+ let tempAnnotation = MKPointAnnotation()
+ tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+ tempAnnotation.title = business.name ?? ""
+ annotations.append(tempAnnotation)
+ */
+                
+//                let coordinate = CLLocationCoordinate2D(latitude: (self?.globalLocation.coordinate.latitude)!, longitude: (self?.globalLocation.coordinate.longitude)!)
+                let tempAnnotation = MKPointAnnotation()
+                tempAnnotation.coordinate = (self?.globalLocation.coordinate)!
+                self?.mapView.addAnnotation(tempAnnotation)
+                self?.mapView.setCenter(tempAnnotation.coordinate, animated: false)
             }
         }
+    }
+    
+    @objc func handleRight(){
+        let newVC = OpeningController()
+        newVC.dataController = dataController
+        newVC.searchLocationCoordinate = globalLocation.coordinate
+        navigationController?.pushViewController(newVC, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .skyBlue4
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "NEXT", style: .done, target: self, action: #selector(handleRight))
         
         let stackView: UIStackView = {
             let stack = UIStackView()
@@ -96,7 +116,7 @@ class SearchByAddressController: UIViewController {
         }
         
         
-        [stackView, locationImageView].forEach{view.addSubview($0)}
+        [stackView, locationImageView, mapView].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
             locationImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             locationImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -104,7 +124,13 @@ class SearchByAddressController: UIViewController {
             stackView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 50),
             locationTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
             findLocationButton.widthAnchor.constraint(equalTo: locationTextField.widthAnchor),
+            mapView.topAnchor.constraint(equalTo: findLocationButton.bottomAnchor, constant: 15),
+            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
+        
+        
     }
     
 }
