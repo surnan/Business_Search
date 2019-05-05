@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import MapKit
 
 
 
@@ -19,8 +19,10 @@ let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
+    
     var dataController: DataController!  //MARK: Injected
-    var currentLocation: Location!
+    var searchLocationCoordinate: CLLocationCoordinate2D!
+    var searchLocation: Location!
     var doesLocationExist = false
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
     var currentLocationID: NSManagedObjectID?
@@ -205,10 +207,16 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
         navigationItem.searchController = searchController
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)), UIBarButtonItem(title: " ⏸ ", style: .done, target: self, action: #selector(JumpToBreakPoint))]
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "←", style: .done, target: self, action: #selector(handleBack)), UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)), UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
 
+    
+    @objc func handleBack(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     @objc func handleDownloadBusinesses(){
 
         deleteAll()

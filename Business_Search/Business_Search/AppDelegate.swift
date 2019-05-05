@@ -59,9 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-//        let startingVC = OpeningController()
         let startingVC = MenuController()
-        
         startingVC.dataController = dataController
         window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
         return true
