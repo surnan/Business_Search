@@ -11,10 +11,15 @@ import CoreData
 
 
 class GroupsController: UITableViewController {
-    var dataController: DataController! //injected
     var businesses = [Business]()   //injected
     var categoryName: String! //injected
 
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return businesses.count
     }
@@ -33,13 +38,5 @@ class GroupsController: UITableViewController {
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
-        setupNavigationMenu()
-    }
-    
-    func setupNavigationMenu(){
-        let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
-        let imageView = UIImageView(image: logo)
-        imageView.contentMode = .scaleAspectFit
-        self.navigationItem.title = categoryName
     }
 }
