@@ -27,7 +27,7 @@ class MenuController: UIViewController {
     var overThereSearchButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .red
-        button.setTitle("     Specify a search location     ", for: .normal)
+        button.setTitle("Search By Map", for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(handleOverThereSearchButton), for: .touchUpInside)
         return button
@@ -37,7 +37,7 @@ class MenuController: UIViewController {
     var nonDistanceSearchButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .purple
-        button.setTitle("Search all categories", for: .normal)
+        button.setTitle("     Search all categories     ", for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(handleNonDistanceSearchButton), for: .touchUpInside)
         return button
@@ -74,7 +74,7 @@ class MenuController: UIViewController {
     }
     
     @objc func handleOverThereSearchButton(){
-        let newVC = OpeningController()
+        let newVC = OverThereController()
         newVC.dataController = dataController
         navigationController?.pushViewController(newVC, animated: true)
     }

@@ -16,6 +16,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     var mapView = MKMapView()
     var businesses = [Business]()   //injected
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
