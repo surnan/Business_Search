@@ -36,6 +36,7 @@ class GroupsController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = UIColor.white
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
     }

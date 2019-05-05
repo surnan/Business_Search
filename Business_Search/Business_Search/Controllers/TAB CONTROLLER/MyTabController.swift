@@ -10,14 +10,12 @@ import UIKit
 
 class MyTabController: UITabBarController {
     
+    //MARK:- Injection Start
     var category: String!
-    var urlSessionTask: URLSessionDataTask?
-    
-    
-//    var dataController: DataController! //injected
     var businesses = [Business]()   {
         didSet {
-            firstController.businesses = businesses
+            firstController.businesses = businesses //Populate TableView
+            secondController.businesses = businesses    //populate array to build map
         }
     }
     
@@ -27,8 +25,9 @@ class MyTabController: UITabBarController {
         }
     }
 
+    //MARK:- Local Var
     let firstController = GroupsController()
-    let secondController = GroupsController()
+    let secondController = MapController()
     
     
     override func viewDidLoad() {
@@ -36,14 +35,9 @@ class MyTabController: UITabBarController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleLeftBarButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "STOP", style: .done, target: self, action: #selector(handleRight))
         navigationItem.title = categoryName
-
         
-        firstController.businesses = businesses
-        firstController.categoryName = categoryName
-        
-        
-        firstController.tabBarItem =  UITabBarItem(title: "ONE", image: #imageLiteral(resourceName: "map-here2"), selectedImage: #imageLiteral(resourceName: "map-here"))
-        secondController.tabBarItem = UITabBarItem(title: "TWO", image: #imageLiteral(resourceName: "map-here2"), selectedImage: #imageLiteral(resourceName: "map-here"))
+        firstController.tabBarItem =  UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "map-here2"), selectedImage: #imageLiteral(resourceName: "map-here"))
+        secondController.tabBarItem = UITabBarItem(title: "MAP", image: #imageLiteral(resourceName: "map-here2"), selectedImage: #imageLiteral(resourceName: "map-here"))
         
         let tabBarList = [firstController, secondController]
         viewControllers = tabBarList
