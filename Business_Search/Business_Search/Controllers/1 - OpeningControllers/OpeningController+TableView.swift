@@ -111,14 +111,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         fetchCategoriesController = nil
         
         var businessArray = [Business]()
-        
-        fetchCategoriesController?.fetchedObjects?.forEach({ (currentCategory) in
-            businessArray.append(currentCategory.business!)
-        })
-        
-        businessArray.forEach { (currentBusiness) in
-            print(currentBusiness.name ?? "", currentBusiness.displayAddress ?? "")
-        }
+        fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
         
         let newVC2 = MyTabController()
         newVC2.businesses = businessArray

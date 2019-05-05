@@ -28,32 +28,24 @@ class MapController: UIViewController, MKMapViewDelegate {
     func setupMap(){
         convertLocationsToAnnotations()
         self.mapView.addAnnotations(annotations)  //There's a singular & plural for 'addAnnotation'.  OMG
+        zoomMapaFitAnnotations()
     }
-
     
-//    private func convertLocationsToAnnotations2(){
-//        for dictionary in locations {
-//            let latitude = CLLocationDegrees(dictionary[locationsIndex.latitude.rawValue] as! Double)
-//            let longitude = CLLocationDegrees(dictionary[locationsIndex.longitude.rawValue] as! Double)
-//            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//
-//            let firstName = dictionary[locationsIndex.firstName.rawValue] as! String
-//            let lastName = dictionary[locationsIndex.lastName.rawValue] as! String
-//            let mediaURL = dictionary[locationsIndex.mediaURL.rawValue] as! String
-//
-//            let tempAnnotation = MKPointAnnotation()
-//            tempAnnotation.coordinate = coordinate
-//            tempAnnotation.title = "\(firstName) \(lastName)"
-//            tempAnnotation.subtitle = mediaURL
-//            annotations.append(tempAnnotation)
-//        }
-//    }
+    
+    func zoomMapaFitAnnotations() {
+        var zoomRect = MKMapRect.null
+        for annotation in mapView.annotations {
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+            let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0, height: 0)
+            zoomRect = zoomRect.union(pointRect)
+        }
+        mapView.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50), animated: true)
+    }
     
     private func convertLocationsToAnnotations(){
         for business in businesses {
             let latitude = CLLocationDegrees(business.latitude)
             let longitude = CLLocationDegrees(business.longitude)
-            
             let tempAnnotation = MKPointAnnotation()
             tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             tempAnnotation.title = business.name ?? ""
