@@ -50,14 +50,5 @@ class MyTabController: UITabBarController {
     @objc func handleLeftBarButton(){
         navigationController?.popViewController(animated: true)
     }
-    
-
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //Can't set these in ViewDidLoad
-        print("Category= \(category ?? "")")
-//        urlSessionTask = Yelp.getNearbyBusinesses(category: category, latitude: latitude, longitude: longitude, completion: handlegetNearbyBusinesses(result:))
-    }
 }
 
