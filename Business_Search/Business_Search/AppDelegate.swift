@@ -17,7 +17,7 @@ var categoryMatch = 0
 var locale = "en_US"
 
 //PAIR - DONE
-//var latitude = 40.705199; var longitude = -74.007086    //100 Wall Street 10005
+var latitude = 40.705199; var longitude = -74.007086    //100 Wall Street 10005
 //var latitude = 40.706324; var longitude = -74.007808  //70 Pine Street 10005
 
 //PAIR
@@ -25,7 +25,7 @@ var locale = "en_US"
 //var latitude = 37.786650; var longitude = -122.399520 //149 New Montgomery St, San Francisco, CA 94105
 
 //PAIR - DONE
-var latitude = 40.76013750; var longitude = -73.91786550  //31-47 Steinway Street
+//var latitude = 40.76013750; var longitude = -73.91786550  //31-47 Steinway Street
 //var latitude = 40.759153; var longitude = -73.919044     //31-90 Steinway St, Astoria, NY 11103
 
 

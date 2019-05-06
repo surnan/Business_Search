@@ -11,11 +11,9 @@ import CoreData
 import MapKit
 
 
-
 let businessCellID = "businessCellID"
 let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
-
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var dataController: DataController!  //MARK: Injected
@@ -24,7 +22,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var doesLocationExist = false
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
     var currentLocationID: NSManagedObjectID?
-    
     var searchGroupIndex = 0 //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
     var tableViewArrayType: Int {
         return searchGroupIndex
@@ -66,14 +63,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
         didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
             fetchCategoriesController?.fetchRequest.predicate = fetchBusinessPredicate
         }
     }
     
     var fetchBusinessPredicate : NSPredicate? {
         didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
             fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
         }
     }
@@ -216,30 +213,15 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         return searchController
     }()
     
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        var searchLocationCoordinate: CLLocationCoordinate2D!
-//        var searchLocation: Location!
-        print("===="); print("====")
-        print("searchLocationCoordinate ---> \(String(describing: searchLocationCoordinate))")
-
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let answer = isLocationNew(); print("isLocationNew == \(answer)")
-        
         view.addSubview(tableView)
         nothingFoundView.center = view.center
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
-        
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        
         resetAllPredicateRelatedVar()
         definesPresentationContext = true
     }
@@ -268,7 +250,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     
     @objc func handleDownloadBusinesses(){
-//        deleteAll()
+        //  deleteAll()
         self.fetchBusinessController = nil
         self.fetchCategoriesController = nil
         _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
@@ -276,14 +258,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     @objc func JumpToBreakPoint(total: Int){
         print("")
-        
-        
-        ////////////////////////////////////////////////
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-        ////////////////////////////////////////////////
-        
-        
     }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
@@ -298,10 +274,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         context.perform {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-            
             do {
                 _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
-                
                 self.fetchBusinessController = nil
                 self.fetchCategoriesController = nil
                 DispatchQueue.main.async {
@@ -399,16 +373,11 @@ extension OpeningController {
     
     func runDownloadAgain(){
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
-
-        
         self.fetchBusinessController = nil
         self.fetchCategoriesController = nil
         tableView.reloadData()
-        
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-        
-        
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses()
         }
