@@ -65,6 +65,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }()
     
     //MARK:- Predicates
+    var selectedCategoryPredicate: NSPredicate?
     var fetchBusinessPredicate : NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case I later turn on NSFetchResults Cache
@@ -73,16 +74,15 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }
     
     
-    var selectedCategoryPredicate: NSPredicate?
+    var fetchPredicateInput: String?
     
-    
-    var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
+    var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
-            if fetchCategoriesController == nil { //+3
-                fetchCategoriesController = {   //+4
-                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-                    fetchRequest.predicate = self.selectedCategoryPredicate
-                    let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
+            if fetchBusinessController == nil { //+3
+                fetchBusinessController = {   //+4
+                    let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
+                    fetchRequest.predicate = self.fetchBusinessPredicate
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
@@ -100,13 +100,13 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
+    var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
         didSet {    //+2
-            if fetchBusinessController == nil { //+3
-                fetchBusinessController = {   //+4
-                    let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-                    fetchRequest.predicate = self.fetchBusinessPredicate
-                    let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
+            if fetchCategoriesController == nil { //+3
+                fetchCategoriesController = {   //+4
+                    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+                    fetchRequest.predicate = self.selectedCategoryPredicate
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
