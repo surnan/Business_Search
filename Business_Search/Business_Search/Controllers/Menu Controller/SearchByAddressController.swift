@@ -90,7 +90,8 @@ class SearchByAddressController: UIViewController {
     @objc func handleRight(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        newVC.searchLocationCoordinate = globalLocation.coordinate
+        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
+        newVC.possibleInsertLocationCoordinate = temp
         navigationController?.pushViewController(newVC, animated: true)
     }
     

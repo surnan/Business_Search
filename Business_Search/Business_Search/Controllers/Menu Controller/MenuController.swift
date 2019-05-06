@@ -77,7 +77,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func handleOverThereSearchButton(){
-        let newVC = OverThereController()
+        let newVC = MapOverThereController()
         newVC.dataController = dataController
         navigationController?.pushViewController(newVC, animated: true)
     }

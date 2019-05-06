@@ -17,8 +17,10 @@ let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var dataController: DataController!  //MARK: Injected
-    var searchLocationCoordinate: CLLocationCoordinate2D!
+    
+    var possibleInsertLocationCoordinate: CLLocation!
     var searchLocation: Location!
+    
     var doesLocationExist = false
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
     var currentLocationID: NSManagedObjectID?
@@ -188,10 +190,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    
-
-    
-
     func resetAllPredicateRelatedVar() {
         fetchBusinessPredicate = nil
         fetchCategoryArrayNamesPredicate = nil
@@ -215,21 +213,29 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let answer = isLocationNew(); print("isLocationNew == \(answer)")
+        
+        //Check if location exists
+        _ = isLocationNew()
+        
         view.addSubview(tableView)
-        nothingFoundView.center = view.center
+        nothingFoundView.center = view.center   //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
-        fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         resetAllPredicateRelatedVar()
         definesPresentationContext = true
     }
     
     func isLocationNew()-> Bool{
         fetchLocationController = nil
+        print("Location = \(possibleInsertLocationCoordinate.coordinate)")
         let locationArray = fetchLocationController?.fetchedObjects
-        locationArray?.forEach{print($0.latitude, $0.longitude)}
+        locationArray?.forEach{
+            let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+            let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+            let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+            print("Distance to [\($0.latitude), \($0.longitude)]= \(String(format: "%.2f", miles)) miles")
+        }
         return false
     }
     
@@ -290,6 +296,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
 }
 
 //po String(data: data, format: .utf8)
+    //MARK:-
 extension OpeningController {
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call

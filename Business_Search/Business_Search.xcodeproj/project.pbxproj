@@ -18,7 +18,7 @@
 		846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846509B9227A0C06008ABA9F /* OpeningController.swift */; };
 		848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* 2 - MapController.swift */; };
 		848761D0227F176F000CECC7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MenuController.swift */; };
-		848761D3227F221D000CECC7 /* OverThereController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* OverThereController.swift */; };
+		848761D3227F221D000CECC7 /* MapOverThereController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* MapOverThereController.swift */; };
 		848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */; };
 		848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */; };
 		848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */; };
@@ -58,7 +58,7 @@
 		846509B9227A0C06008ABA9F /* OpeningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CC227E856C000CECC7 /* 2 - MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2 - MapController.swift"; sourceTree = "<group>"; };
 		848761CF227F176F000CECC7 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		848761D2227F221D000CECC7 /* OverThereController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverThereController.swift; sourceTree = "<group>"; };
+		848761D2227F221D000CECC7 /* MapOverThereController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOverThereController.swift; sourceTree = "<group>"; };
 		848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressController.swift; sourceTree = "<group>"; };
 		848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringKeys.swift; sourceTree = "<group>"; };
 		848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 			children = (
 				848761CF227F176F000CECC7 /* MenuController.swift */,
 				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
-				848761D2227F221D000CECC7 /* OverThereController.swift */,
+				848761D2227F221D000CECC7 /* MapOverThereController.swift */,
 			);
 			path = "Menu Controller";
 			sourceTree = "<group>";
@@ -326,7 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				848761D3227F221D000CECC7 /* OverThereController.swift in Sources */,
+				848761D3227F221D000CECC7 /* MapOverThereController.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
