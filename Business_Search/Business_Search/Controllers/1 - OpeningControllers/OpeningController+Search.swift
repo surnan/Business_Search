@@ -25,7 +25,7 @@ extension OpeningController: UISearchResultsUpdating {
         }
         
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        fetchCategoryPredicateForArray = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         fetchBusinessController = nil   //Fetches with Predicate
         fetchCategoryNames = nil        //Fetches with Predicate
         tableView.reloadData()
