@@ -8,12 +8,11 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 
-class MenuController: UIViewController {
-    
+class MenuController: UIViewController, CLLocationManagerDelegate {
     var dataController: DataController!  //MARK: Injected
-    
     
     var nearMeSearchButton: UIButton = {
         let button = UIButton()
@@ -33,20 +32,10 @@ class MenuController: UIViewController {
         return button
     }()
     
-    
-    var nonDistanceSearchButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .lightRed
-        button.setTitle("     Search all categories     ", for: .normal)
-        button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(handleNonDistanceSearchButton), for: .touchUpInside)
-        return button
-    }()
-    
     var searchByAddressButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .purple
-        button.setTitle("Search By Address", for: .normal)
+        button.setTitle("           Search By Address           ", for: .normal)
         button.layer.cornerRadius = 10
         button.addTarget(self, action: #selector(handleSearchByAddressButton), for: .touchUpInside)
         return button
@@ -61,13 +50,11 @@ class MenuController: UIViewController {
         return stack
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        [nearMeSearchButton, overThereSearchButton, searchByAddressButton, nonDistanceSearchButton].forEach{verticalStackView.addArrangedSubview($0)}
+        [nearMeSearchButton, overThereSearchButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}
         [verticalStackView].forEach{view.addSubview($0)}
-        
         NSLayoutConstraint.activate([
             verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
             verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -75,10 +62,11 @@ class MenuController: UIViewController {
         ])
     }
     
-    
     @objc func handleNearMeSearchButton(){
+        determineMyCurrentLocation()
         let newVC = OpeningController()
         newVC.dataController = dataController
+        // BROKEN -- newVC.searchLocationCoordinate = userLocation.coordinate
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -94,8 +82,27 @@ class MenuController: UIViewController {
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    @objc func handleNonDistanceSearchButton(){
-        print("")
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Below is to get coordinates - It's untested.  Problems working it in simulator
+    var locationManager: CLLocationManager!
+    var userLocation: CLLocation!
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        userLocation = locations[0] as CLLocation
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+    }
+    
+    func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
     }
 }
 

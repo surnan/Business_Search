@@ -20,22 +20,20 @@ class OverThereController: UIViewController, MKMapViewDelegate{
         imageView.isUserInteractionEnabled = false
         imageView.backgroundColor = .clear
          imageView.contentMode = .center
-//        imageView.contentMode = .scaleAspectFit
+        // imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
 
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
+        //Set Center for MapView
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         mapView.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.delegate = self
         return mapView
     }()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +44,6 @@ class OverThereController: UIViewController, MKMapViewDelegate{
     func setupUI(){
         [mapView, pinImageView].forEach{view.addSubview($0)}
         mapView.fillSafeSuperView()
-        
         NSLayoutConstraint.activate([
             pinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
@@ -55,8 +52,8 @@ class OverThereController: UIViewController, MKMapViewDelegate{
     }
     
     func setupNavigationMenu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)), UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
-    }
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
+                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]}
     
     @objc func handlePause(){
         print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")
