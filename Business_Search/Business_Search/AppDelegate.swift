@@ -25,8 +25,8 @@ var locale = "en_US"
 //var latitude = 37.786650; var longitude = -122.399520 //149 New Montgomery St, San Francisco, CA 94105
 
 //PAIR - DONE
-//var latitude = 40.76013750; var longitude = -73.91786550  //31-47 Steinway Street
-var latitude = 40.759153; var longitude = -73.919044     //31-90 Steinway St, Astoria, NY 11103
+var latitude = 40.76013750; var longitude = -73.91786550  //31-47 Steinway Street
+//var latitude = 40.759153; var longitude = -73.919044     //31-90 Steinway St, Astoria, NY 11103
 
 
 
@@ -69,8 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-//        let startingVC = MenuController()
-        let startingVC = OpeningController()
+        let startingVC = MenuController()
+//        let startingVC = OpeningController()
         
         
         startingVC.dataController = dataController

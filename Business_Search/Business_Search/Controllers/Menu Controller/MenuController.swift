@@ -76,15 +76,14 @@ class MenuController: UIViewController {
     }
     
     
-    @objc func handleSearchByAddressButton(){
-        let newVC = SearchByAddressController()
+    @objc func handleNearMeSearchButton(){
+        let newVC = OpeningController()
         newVC.dataController = dataController
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    
-    @objc func handleNearMeSearchButton(){
-        let newVC = OpeningController()
+    @objc func handleSearchByAddressButton(){
+        let newVC = SearchByAddressController()
         newVC.dataController = dataController
         navigationController?.pushViewController(newVC, animated: true)
     }

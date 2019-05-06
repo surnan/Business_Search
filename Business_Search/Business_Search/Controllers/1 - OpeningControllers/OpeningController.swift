@@ -104,6 +104,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    
     var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
         didSet {    //+2
             if fetchCategoriesController == nil { //+3
@@ -214,6 +215,16 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         searchController.searchBar.barStyle = .black
         return searchController
     }()
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        var searchLocationCoordinate: CLLocationCoordinate2D!
+//        var searchLocation: Location!
+        print("===="); print("====")
+        print("searchLocationCoordinate ---> \(String(describing: searchLocationCoordinate))")
+
+    }
     
     
     override func viewDidLoad() {
@@ -405,3 +416,39 @@ extension OpeningController {
     }
 }
 
+
+/*
+ class AnyFetchedResultsController<T>: CustomDebugStringConvertible {
+ var descImpl: () -> String
+ var performImple: () throws -> ()
+ 
+ init<T>(_ controller: NSFetchedResultsController<T>) where T: ManagedObjectDisplayType {
+ descImpl = { controller.debugDescription }
+ performImpl = { try controller.performFetch() }
+ }
+ 
+ func performFetch() throws {
+ try performImpl()
+ }
+ 
+ var debugDescription: String {
+ return "wrapping \(descImpl())"
+ }
+ }
+ 
+ 
+ let locationFRC = NSFetchedResultsController<Location>(fetchRequest: Location,
+ managedObjectContext:mainManagedObjectContext,
+ sectionNameKeyPath: nil,
+ cacheName: nil)
+ 
+ let businessFRC = NSFetchedResultsController<Business>(fetchRequest: Location,
+ managedObjectContext:mainManagedObjectContext,
+ sectionNameKeyPath: nil,
+ cacheName: nil)
+ 
+ let categoryFRC = NSFetchedResultsController<Category>(fetchRequest: Location,
+ managedObjectContext:mainManagedObjectContext,
+ sectionNameKeyPath: nil,
+ cacheName: nil)
+ */
