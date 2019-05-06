@@ -11,9 +11,11 @@ import MapKit
 import CoreLocation
 
 
-class OverThereController: UIViewController, MKMapViewDelegate{
+class MapOverThereController: UIViewController, MKMapViewDelegate{
     var dataController: DataController!
     var searchLocationCoordinate: CLLocationCoordinate2D!
+    
+    var globalLocation = CLLocation()
     
     let pinImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin2"))
@@ -62,12 +64,14 @@ class OverThereController: UIViewController, MKMapViewDelegate{
     @objc func handleNext(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        newVC.searchLocationCoordinate = searchLocationCoordinate
+        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
+        newVC.possibleInsertLocationCoordinate = temp
         navigationController?.pushViewController(newVC, animated: true)
     }
     
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        globalLocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         searchLocationCoordinate = mapView.centerCoordinate
     }
     
