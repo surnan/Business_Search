@@ -124,33 +124,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
 
-    var fetchLocationController: NSFetchedResultsController<Location>? { //+1
-        didSet {    //+2
-            if fetchLocationController == nil { //+3
-                fetchLocationController = {   //+4
-                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-                    //                    fetchRequest.predicate = self.fetchBusinessPredicate
-                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
-                    fetchRequest.sortDescriptors = [ sortDescriptor]
-                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                               managedObjectContext: dataController.viewContext,
-                                                                               sectionNameKeyPath: nil,
-                                                                               cacheName: nil)
-                    aFetchedResultsController.delegate = self
-                    do {
-                        try aFetchedResultsController.performFetch()
-                    } catch let error {
-                        fatalError("Unresolved error \(error)")
-                    }
-                    return aFetchedResultsController
-                }() //-4
-            }   //-3
-        }   //-2
-    }   //-1
-    
-    
-    
-    lazy var fetchCategoryPredicate : NSPredicate? = nil
+    lazy var fetchCategoryPredicateForArray : NSPredicate? = nil
     
     var fetchCategoryNames: [String]? {   //+1
         didSet {    //+2
@@ -163,7 +137,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchRequest.returnsDistinctResults = true
                 let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
                 fetchRequest.sortDescriptors = sortDescriptor
-                fetchRequest.predicate = fetchCategoryPredicate
+                fetchRequest.predicate = fetchCategoryPredicateForArray
                 
                 let controller = NSFetchedResultsController(
                     fetchRequest: fetchRequest,
@@ -189,9 +163,35 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    
+    var fetchLocationController: NSFetchedResultsController<Location>? { //+1
+        didSet {    //+2
+            if fetchLocationController == nil { //+3
+                fetchLocationController = {   //+4
+                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+                    //                    fetchRequest.predicate = self.fetchBusinessPredicate
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
+                    fetchRequest.sortDescriptors = [ sortDescriptor]
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
+    
+
     func resetAllPredicateRelatedVar() {
         fetchBusinessPredicate = nil
-        fetchCategoryPredicate = nil
+        fetchCategoryPredicateForArray = nil
         fetchBusinessController = nil
         fetchCategoryNames = nil
     }
