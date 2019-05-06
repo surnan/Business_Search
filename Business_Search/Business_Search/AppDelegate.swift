@@ -14,12 +14,22 @@ var radius = 155
 var recordCountAtLocation = 0
 var categoryMatch = 0
 
-//var latitude = 37.786882
-//var longitude = -122.399972
-
-var latitude = 40.708872
-var longitude = -74.010125
 var locale = "en_US"
+
+//PAIR - DONE
+//var latitude = 40.705199; var longitude = -74.007086    //100 Wall Street 10005
+//var latitude = 40.706324; var longitude = -74.007808  //70 Pine Street 10005
+
+//PAIR
+//var latitude = 37.786882; var longitude = -122.399972 //140 Montgomery St, San Francisco, CA 94105
+//var latitude = 37.786650; var longitude = -122.399520 //149 New Montgomery St, San Francisco, CA 94105
+
+//PAIR - DONE
+//var latitude = 40.76013750; var longitude = -73.91786550  //31-47 Steinway Street
+var latitude = 40.759153; var longitude = -73.919044     //31-90 Steinway St, Astoria, NY 11103
+
+
+
 
 //  If context.has changes --> context.save on app goes to sleep or ends
 /*
@@ -59,7 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        let startingVC = MenuController()
+//        let startingVC = MenuController()
+        let startingVC = OpeningController()
+        
+        
         startingVC.dataController = dataController
         window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
         return true
