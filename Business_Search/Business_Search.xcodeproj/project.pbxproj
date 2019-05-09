@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
+		842AD7D52284D74D00590B1A /* OpeningController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D42284D74D00590B1A /* OpeningController+UI.swift */; };
+		842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */; };
 		8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */; };
 		8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */; };
 		8435B1D8227A54B600E95B4E /* OpeningController+Fetched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */; };
@@ -49,6 +51,8 @@
 /* Begin PBXFileReference section */
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		842AD7D42284D74D00590B1A /* OpeningController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+UI.swift"; sourceTree = "<group>"; };
+		842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+Handler.swift"; sourceTree = "<group>"; };
 		8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "OpeningController+Search.swift"; path = "Business_Search/Controllers/1 - OpeningControllers/OpeningController+Search.swift"; sourceTree = SOURCE_ROOT; };
 		8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "OpeningController+TableView.swift"; path = "Business_Search/Controllers/1 - OpeningControllers/OpeningController+TableView.swift"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+Fetched.swift"; sourceTree = "<group>"; };
@@ -136,9 +140,11 @@
 			isa = PBXGroup;
 			children = (
 				846509B9227A0C06008ABA9F /* OpeningController.swift */,
+				842AD7D42284D74D00590B1A /* OpeningController+UI.swift */,
 				8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */,
 				8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */,
 				8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */,
+				842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */,
 			);
 			path = "1 - OpeningControllers";
 			sourceTree = "<group>";
@@ -344,10 +350,12 @@
 				84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */,
+				842AD7D52284D74D00590B1A /* OpeningController+UI.swift in Sources */,
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */,
 				8435B1D8227A54B600E95B4E /* OpeningController+Fetched.swift in Sources */,
+				842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
