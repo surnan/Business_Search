@@ -33,7 +33,7 @@ extension OpeningController {
         }
     }
     
-    func handleLoadBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
+    func handleGetNearbyBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
             if error == NetworkError.needToRetry || error == NetworkError.tooManyRequestsPerSecond {
@@ -42,9 +42,9 @@ extension OpeningController {
                 print("Error that is not 'needToRetry' --> error = \(error)")
             }
         case .success(let data):
-            if !doesLocationExist {
+            if !doesLocationEntityExist {
                 createLocation(data: data)
-                doesLocationExist = true
+                doesLocationEntityExist = true
             } else {
                 let filterIndex = urlsQueue.firstIndex { (element) -> Bool in
                     guard let inputData = inputData else {return false}
@@ -83,7 +83,7 @@ extension OpeningController {
                     semaphore.signal()
                     dispatchGroup.leave()
                 }
-                self?.handleLoadBusinesses(inputData: yelpDataStruct, result: result)
+                self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
             })
         }
         dispatchGroup.notify(queue: .main) {[weak self] in

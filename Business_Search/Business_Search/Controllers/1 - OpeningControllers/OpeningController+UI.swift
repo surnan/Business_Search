@@ -54,7 +54,9 @@ extension OpeningController {
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
         navigationItem.searchController = searchController
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "←", style: .done, target: self, action: #selector(handleBack)), UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)), UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "←", style: .done, target: self, action: #selector(handleBack)),
+                                             UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)),
+                                             UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     
@@ -68,7 +70,7 @@ extension OpeningController {
         //  deleteAll()
         self.fetchBusinessController = nil
         self.fetchCategoriesController = nil
-        _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleLoadBusinesses(inputData:result:))
+        _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
     }
     
     @objc func JumpToBreakPoint(total: Int){
@@ -84,7 +86,7 @@ extension OpeningController {
     
     
     func deleteAll(){
-        doesLocationExist = false
+        doesLocationEntityExist = false
         let context: NSManagedObjectContext!  = dataController.backGroundContext
         context.perform {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")

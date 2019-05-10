@@ -21,7 +21,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var possibleInsertLocationCoordinate: CLLocation!
     var searchLocation: Location!
     
-    var doesLocationExist = false
+    var doesLocationEntityExist = false
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
     var currentLocationID: NSManagedObjectID?
     var searchGroupIndex = 0 //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
@@ -208,5 +208,4 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
 }
 
 //po String(data: data, format: .utf8)
-    //MARK:-
 
