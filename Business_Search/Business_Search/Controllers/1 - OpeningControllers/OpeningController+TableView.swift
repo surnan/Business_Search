@@ -36,23 +36,18 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableViewArrayType {
-            
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
             return cell
-            
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-            
             let currentCategoryName = fetchCategoryNames?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             _fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-            
             cell.name = currentCategoryName
-            
             do {
                 let count = try dataController.viewContext.count(for: _fetchRequest)
                 cell.count = count
@@ -61,7 +56,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
                 print("Failed to get Count inside cellForRowAt: \n\(error)")
             }
             return cell
-            
         default:
             print("Something Bad HAPPENED inside cellForRowAt:")
             return UITableViewCell()
@@ -103,6 +97,21 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
             listBusinesses(category: currentCategory)
         }
+        
+        if tableViewArrayType == TableIndex.business.rawValue {
+            guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
+            showBusinessInfo(currentBusiness: currentBusiness)
+        }
+        
+    }
+    
+    
+    
+    func showBusinessInfo(currentBusiness: Business){
+        let newVC = BusinessController()
+        newVC.business = currentBusiness
+        navigationController?.pushViewController(newVC, animated: true)
+        
     }
     
     
