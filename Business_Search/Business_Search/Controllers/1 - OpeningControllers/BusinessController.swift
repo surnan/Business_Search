@@ -15,20 +15,71 @@ class BusinessController: UIViewController {
     
     var business: Business! {
         didSet {
-            if let name = business.name { nameLabel.text = "Name: \(name)" }
-            if let price = business.price { priceLabel.text = "Price: \(price)" }
-            ratingLabel.text = "Rating: \(business.rating)"
+            if let name = business.name {
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .foregroundColor : UIColor.black,
+                    .font: UIFont.boldSystemFont(ofSize: 28),
+                ]
+                nameLabel.attributedText = NSAttributedString(string: name, attributes: attributes)
+                nameLabel.textAlignment = .center
+            }
             
             if let address = business.displayAddress {
                 let replaced = address.replacingOccurrences(of: "?", with: "\n")
-                addressLabel.text = replaced
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .foregroundColor : UIColor.black,
+                    .font: UIFont(name: "Georgia", size: 25) as Any,
+                ]
+                addressLabel.attributedText = NSAttributedString(string: replaced, attributes: attributes)
+                addressLabel.textAlignment = .center
             }
+            
+            
+            if let phoneNumber = business.displayPhone {
+                let phoneText = "tel://\(phoneNumber)"
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .foregroundColor : UIColor.blue,
+                    .font: UIFont(name: "Arial", size: 25) as Any,
+                    //                    NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+                ]
+                phoneNumberLabel.attributedText = NSAttributedString(string: phoneText, attributes: attributes)
+                phoneNumberLabel.textAlignment = .center
+            }
+            
+            if let phoneNumber = business.displayPhone {
+                let phoneText = "\(phoneNumber)"
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .foregroundColor : UIColor.blue,
+                    .font: UIFont(name: "Georgia", size: 25) as Any,
+                ]
+                
+                let myNormalAttributedTitle = NSAttributedString(string: phoneText,
+                                                                 attributes: attributes)
+                phoneNumberButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
+            }
+            
+            
+            
+            if let price = business.price {
+                let text = "Price: \(price)"
+                priceLabel.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
+                priceLabel.textAlignment = .center
+            }
+            
+            let ratingText = "Rating: \(business.rating)"
+            ratingLabel.attributedText = NSAttributedString(string: ratingText, attributes: black25textAttributes)
+            ratingLabel.textAlignment = .center
         }
+    }
+    
+    @objc func handlePhoneButton(){
+        print("Button Pressed")
     }
     
     
     var nameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -49,15 +100,29 @@ class BusinessController: UIViewController {
     }()
     
     var websiteButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setTitle("Load Website from Yelp", for: .normal)
+        return button
+    }()
+    
+    var phoneNumberLabel: UILabel = {
+        let label = UILabel()
+        let text = ""
+        label.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var phoneNumberButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(phoneTapped(sender:)), for: .touchUpInside)
         return button
     }()
     
     var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 3
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -65,14 +130,32 @@ class BusinessController: UIViewController {
     
     
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.orange
-        
-        [nameLabel, addressLabel, priceLabel, ratingLabel].forEach{stackView.addArrangedSubview($0)}
-        [stackView].forEach{view.addSubview($0)}
-        
+        view.backgroundColor = UIColor.white
+        [addressLabel, phoneNumberButton, priceLabel, ratingLabel].forEach{stackView.addArrangedSubview($0)}
+        [nameLabel, stackView].forEach{view.addSubview($0)}
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        
+        stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15).isActive = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "pause", style: .done, target: self, action: #selector(pauseFunc))
     }
+    
+    
+    @objc func phoneTapped(sender: UIButton){
+        print("phone tapped")
+        print("title = \(sender.titleLabel?.text ?? "")")
+        guard let numberString = sender.titleLabel?.text else {return}
+        let number = numberString.filter("0123456789".contains)
+        let call = number
+        print("call --> \(call)")
+        if let url = URL(string: "tel://\(call)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    
+    @objc func pauseFunc(){
+        print("")
+    }
+    
 }
