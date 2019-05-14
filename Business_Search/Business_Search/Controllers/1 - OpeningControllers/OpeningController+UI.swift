@@ -13,6 +13,8 @@ import MapKit
 
 extension OpeningController {
     
+    
+    
     func resetAllPredicateRelatedVar() {
         fetchBusinessPredicate = nil
         fetchCategoryArrayNamesPredicate = nil
@@ -37,7 +39,9 @@ extension OpeningController {
     
     func isLocationNew()-> Bool{
         fetchLocationController = nil
-        print("Location = \(possibleInsertLocationCoordinate.coordinate)")
+        
+        print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
+
         let locationArray = fetchLocationController?.fetchedObjects
         locationArray?.forEach{
             let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)

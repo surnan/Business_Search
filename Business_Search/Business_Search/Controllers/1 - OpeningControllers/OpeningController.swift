@@ -18,6 +18,7 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var dataController: DataController!  //MARK: Injected
     
+    
     var possibleInsertLocationCoordinate: CLLocation!
     var searchLocation: Location!
     
