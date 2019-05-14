@@ -66,6 +66,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         determineMyCurrentLocation()
         let newVC = OpeningController()
         newVC.dataController = dataController
+        newVC.possibleInsertLocationCoordinate = userLocation
         // BROKEN -- newVC.searchLocationCoordinate = userLocation.coordinate
         navigationController?.pushViewController(newVC, animated: true)
     }
