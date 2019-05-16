@@ -18,6 +18,8 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var dataController: DataController!  //MARK: Injected
     
+    var tempObject: Any!
+    
     let activityView: UIActivityIndicatorView = {
         let activityVC = UIActivityIndicatorView()
         activityVC.hidesWhenStopped = true
