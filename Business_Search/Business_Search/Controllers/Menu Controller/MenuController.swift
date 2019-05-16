@@ -42,13 +42,19 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     }()
     
     var verticalStackView: UIStackView = {
-       let stack = UIStackView()
+        let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 20
         stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
+    func setupNotificationCenter(){
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name("GettingLocation"), object: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,26 +65,20 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
             verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
             verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-        ])
+            ])
     }
     
-    @objc func handleNearMeSearchButton(){
-        determineMyCurrentLocation()
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        newVC.possibleInsertLocationCoordinate = userLocation
-        // BROKEN -- newVC.searchLocationCoordinate = userLocation.coordinate
-        navigationController?.pushViewController(newVC, animated: true)
-    }
+    
     
     @objc func handleSearchByAddressButton(){
+        determineMyCurrentLocation()
         let newVC = SearchByAddressController()
         newVC.dataController = dataController
         navigationController?.pushViewController(newVC, animated: true)
     }
     
     @objc func handleOverThereSearchButton(){
-        let newVC = MapOverThereController()
+        let newVC = SearchByMapController()
         newVC.dataController = dataController
         navigationController?.pushViewController(newVC, animated: true)
     }
@@ -88,12 +88,24 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     ////////////////////////////////////////////////////////////////////////////////
     //Below is to get coordinates - It's untested.  Problems working it in simulator
     var locationManager: CLLocationManager!
-    var userLocation: CLLocation!
+    var userLocation: CLLocation!   //CLLocation value provided via Apple GPS
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations[0] as CLLocation
-        print("user latitude = \(userLocation.coordinate.latitude)")
-        print("user longitude = \(userLocation.coordinate.longitude)")
+        let nc = NotificationCenter.default
+        nc.post(name: Notification.Name("locationFound"), object: nil)
+        print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
+        locationManager.stopUpdatingLocation()
+    }
+    
+    
+    @objc func handleNearMeSearchButton(){
+        determineMyCurrentLocation()
+        let newVC = OpeningController()
+        newVC.dataController = dataController
+        newVC.possibleInsertLocationCoordinate = userLocation
+        // BROKEN -- newVC.searchLocationCoordinate = userLocation.coordinate
+        navigationController?.pushViewController(newVC, animated: true)
     }
     
     func determineMyCurrentLocation() {

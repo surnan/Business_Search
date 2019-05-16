@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 
-class MapOverThereController: UIViewController, MKMapViewDelegate{
+class SearchByMapController: UIViewController, MKMapViewDelegate{
     var dataController: DataController!
     var searchLocationCoordinate: CLLocationCoordinate2D!
     

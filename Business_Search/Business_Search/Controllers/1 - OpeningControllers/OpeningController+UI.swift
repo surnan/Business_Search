@@ -22,32 +22,50 @@ extension OpeningController {
         fetchCategoryNames = nil
     }
     
+    func setupNotificationReceiver(){
+        activityView.center = view.center
+        activityView.startAnimating()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(locationFound), name: Notification.Name("GettingLocation"), object: nil)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Check if location exists
-        _ = isLocationNew()
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
         
-        view.addSubview(tableView)
+        //Check if location exists
+//        _ = isLocationNew()
+        
+        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
+        
+        [tableView, activityView].forEach{view.addSubview($0)}
         nothingFoundView.center = view.center   //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
         resetAllPredicateRelatedVar()
         definesPresentationContext = true
+        setupNotificationReceiver()
+    }
+    
+    @objc func locationFound(){
+        print("location found called")
     }
     
     func isLocationNew()-> Bool{
         fetchLocationController = nil
-        
-        print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
-
-        let locationArray = fetchLocationController?.fetchedObjects
-        locationArray?.forEach{
-            let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
-            let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
-            let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-            print("Distance to [\($0.latitude), \($0.longitude)]= \(String(format: "%.2f", miles)) miles")
+        if possibleInsertLocationCoordinate != nil {
+            print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
+            let locationArray = fetchLocationController?.fetchedObjects
+            locationArray?.forEach{
+                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                print("Distance to [\($0.latitude), \($0.longitude)]= \(String(format: "%.2f", miles)) miles")
+            }
         }
         return false
     }

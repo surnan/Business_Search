@@ -26,32 +26,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/1 - OpeningControllers/OpeningController+UI.swift"
-            timestampString = "579530487.859078"
+            timestampString = "579726160.257876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "isLocationNew()"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "locationFound()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Controllers/1 - OpeningControllers/OpeningController+UI.swift"
-            timestampString = "579530487.85956"
+            timestampString = "579726160.2584209"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "isLocationNew()"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "locationFound()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
