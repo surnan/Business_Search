@@ -14,6 +14,7 @@ import CoreLocation
 class MenuController: UIViewController, CLLocationManagerDelegate {
     var dataController: DataController!  //MARK: Injected
     
+
     var nearMeSearchButton: UIButton = {
         let button = UIButton()
         button.setTitle("Search near me", for: .normal)
@@ -49,13 +50,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    
-    func setupNotificationCenter(){
-        let nc = NotificationCenter.default
-        nc.post(name: Notification.Name("GettingLocation"), object: nil)
-    }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
@@ -89,15 +84,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     //Below is to get coordinates - It's untested.  Problems working it in simulator
     var locationManager: CLLocationManager!
     var userLocation: CLLocation!   //CLLocation value provided via Apple GPS
-    let nc = NotificationCenter.default
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations[0] as CLLocation
-        locationManager.stopUpdatingLocation()
-        nc.post(name: Notification.Name("locationFound"), object: nil)
-        print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
-    }
-    
     
     @objc func handleNearMeSearchButton(){
         determineMyCurrentLocation()
@@ -105,6 +91,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         newVC.dataController = dataController
         newVC.possibleInsertLocationCoordinate = userLocation
         // BROKEN -- newVC.searchLocationCoordinate = userLocation.coordinate
+        
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -116,6 +103,12 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        userLocation = locations[0] as CLLocation
+        print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
+        NotificationCenter.default.post(name: Notification.Name("locationFound"), object: nil)
     }
 }
 

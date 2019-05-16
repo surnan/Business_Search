@@ -13,8 +13,6 @@ import MapKit
 
 extension OpeningController {
     
-    
-    
     func resetAllPredicateRelatedVar() {
         fetchBusinessPredicate = nil
         fetchCategoryArrayNamesPredicate = nil
@@ -22,23 +20,18 @@ extension OpeningController {
         fetchCategoryNames = nil
     }
     
+    
     func setupNotificationReceiver(){
         activityView.center = view.center
         activityView.startAnimating()
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(locationFound), name: Notification.Name("GettingLocation"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("GettingLocation"), object: tempObject)
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        nc.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-        
-        //Check if location exists
-//        _ = isLocationNew()
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
+
         print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
         
         [tableView, activityView].forEach{view.addSubview($0)}
@@ -51,19 +44,13 @@ extension OpeningController {
         setupNotificationReceiver()
     }
     
+    
     @objc func locationFound(){
         activityView.stopAnimating()
         
-        if locationPassedIn {
-            return
-        }
-        
-        locationPassedIn = true
-        nc.removeObserver("locationFound")
-        
+        print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
         fetchLocationController = nil
         if possibleInsertLocationCoordinate != nil {
-            print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
             let locationArray = fetchLocationController?.fetchedObjects
             locationArray?.forEach{
                 let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
