@@ -89,13 +89,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     //Below is to get coordinates - It's untested.  Problems working it in simulator
     var locationManager: CLLocationManager!
     var userLocation: CLLocation!   //CLLocation value provided via Apple GPS
+    let nc = NotificationCenter.default
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations[0] as CLLocation
-        let nc = NotificationCenter.default
+        locationManager.stopUpdatingLocation()
         nc.post(name: Notification.Name("locationFound"), object: nil)
         print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
-        locationManager.stopUpdatingLocation()
     }
     
     

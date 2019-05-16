@@ -33,7 +33,7 @@ extension OpeningController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nc = NotificationCenter.default
+        
         nc.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
         
         //Check if location exists
@@ -52,8 +52,36 @@ extension OpeningController {
     }
     
     @objc func locationFound(){
-        print("location found called")
+        activityView.stopAnimating()
+        
+        if locationPassedIn {
+            return
+        }
+        
+        locationPassedIn = true
+        nc.removeObserver("locationFound")
+        
+        fetchLocationController = nil
+        if possibleInsertLocationCoordinate != nil {
+            print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
+            let locationArray = fetchLocationController?.fetchedObjects
+            locationArray?.forEach{
+                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+            }
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func isLocationNew()-> Bool{
         fetchLocationController = nil

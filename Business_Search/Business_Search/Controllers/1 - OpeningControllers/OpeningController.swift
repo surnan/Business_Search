@@ -27,6 +27,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var possibleInsertLocationCoordinate: CLLocation!
     var searchLocation: Location!
+    let nc = NotificationCenter.default
+    var locationPassedIn = false
     
     var doesLocationEntityExist = false
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
