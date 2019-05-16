@@ -17,6 +17,7 @@ var categoryMatch = 0
 var locale = "en_US"
 
 //PAIR - DONE
+//Download - TOP
 var latitude = 40.705199; var longitude = -74.007086    //100 Wall Street 10005
 //var latitude = 40.706324; var longitude = -74.007808  //70 Pine Street 10005
 

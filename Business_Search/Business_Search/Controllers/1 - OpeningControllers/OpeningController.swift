@@ -18,6 +18,12 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var dataController: DataController!  //MARK: Injected
     
+    let activityView: UIActivityIndicatorView = {
+        let activityVC = UIActivityIndicatorView()
+        activityVC.hidesWhenStopped = true
+        activityVC.style = .gray
+        return activityVC
+    }()
     
     var possibleInsertLocationCoordinate: CLLocation!
     var searchLocation: Location!
