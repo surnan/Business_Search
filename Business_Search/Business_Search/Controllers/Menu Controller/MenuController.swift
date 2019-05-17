@@ -36,12 +36,12 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         return button
     }()
     
-    var overThereSearchButton: UIButton = {
+    var searchByMapButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .red
         button.setTitle("Search By Map", for: .normal)
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(handleOverThereSearchButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSearchByMapButton), for: .touchUpInside)
         return button
     }()
     
@@ -65,8 +65,9 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .lightGray
-        [nearMeSearchButton, overThereSearchButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}
+        [nearMeSearchButton, searchByMapButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}
         [verticalStackView].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
             verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
@@ -75,8 +76,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
             ])
     }
     
-    
-    
     @objc func handleSearchByAddressButton(){
         determineMyCurrentLocation()
         let newVC = SearchByAddressController()
@@ -84,9 +83,11 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    @objc func handleOverThereSearchButton(){
+    @objc func handleSearchByMapButton(){
+        determineMyCurrentLocation()
         let newVC = SearchByMapController()
         newVC.dataController = dataController
+        newVC.delegate = self
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -98,7 +99,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         determineMyCurrentLocation()
         let newVC = OpeningController()
         newVC.dataController = dataController
-        newVC.possibleInsertLocationCoordinate = userLocation
         newVC.delegate = self
         navigationController?.pushViewController(newVC, animated: true)
     }
@@ -119,7 +119,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations[0] as CLLocation
-        print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
+        //  print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
         NotificationCenter.default.post(name: Notification.Name("locationFound"), object: nil)
     }
 }
