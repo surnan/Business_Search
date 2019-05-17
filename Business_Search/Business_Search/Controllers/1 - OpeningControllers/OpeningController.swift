@@ -20,8 +20,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var delegate: MenuControllerProtocol?
     
-    var tempObject: Any!
-    
     let activityView: UIActivityIndicatorView = {
         let activityVC = UIActivityIndicatorView()
         activityVC.hidesWhenStopped = true

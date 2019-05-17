@@ -24,16 +24,13 @@ extension OpeningController {
     func setupNotificationReceiver(){
         activityView.center = view.center
         activityView.startAnimating()
-        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("GettingLocation"), object: tempObject)
+        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
+        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-
-        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
-        
         [tableView, activityView].forEach{view.addSubview($0)}
         nothingFoundView.center = view.center   //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
@@ -47,16 +44,11 @@ extension OpeningController {
     
     @objc func locationFound(){
         activityView.stopAnimating()
-        
         guard let temp = delegate?.getUserLocation() else { return }
-
         possibleInsertLocationCoordinate = temp
         delegate?.stopGPS()
-        
         print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
         fetchLocationController = nil
-        
-        
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects
             locationArray?.forEach{
@@ -66,19 +58,7 @@ extension OpeningController {
                 print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
             }
         }
-        
-        
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     func isLocationNew()-> Bool{
         fetchLocationController = nil
