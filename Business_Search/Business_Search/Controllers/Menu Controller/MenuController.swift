@@ -11,9 +11,21 @@ import CoreData
 import CoreLocation
 
 
-class MenuController: UIViewController, CLLocationManagerDelegate {
+protocol MenuControllerProtocol {
+    func getUserLocation()->CLLocation?
+    func stopGPS()
+}
+
+class MenuController: UIViewController, CLLocationManagerDelegate, MenuControllerProtocol {
+    func getUserLocation() -> CLLocation? {
+        return userLocation
+    }
+    
+
     var dataController: DataController!  //MARK: Injected
     
+    var locationManager: CLLocationManager!
+    var userLocation: CLLocation!   //CLLocation value provided via Apple GPS
 
     var nearMeSearchButton: UIButton = {
         let button = UIButton()
@@ -78,21 +90,21 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////
     //Below is to get coordinates - It's untested.  Problems working it in simulator
-    var locationManager: CLLocationManager!
-    var userLocation: CLLocation!   //CLLocation value provided via Apple GPS
     
     @objc func handleNearMeSearchButton(){
         determineMyCurrentLocation()
         let newVC = OpeningController()
         newVC.dataController = dataController
         newVC.possibleInsertLocationCoordinate = userLocation
-        // BROKEN -- newVC.searchLocationCoordinate = userLocation.coordinate
-        
+        newVC.delegate = self
         navigationController?.pushViewController(newVC, animated: true)
+    }
+    
+    func stopGPS() {
+        locationManager.stopUpdatingLocation()
     }
     
     func determineMyCurrentLocation() {
