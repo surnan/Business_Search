@@ -22,13 +22,7 @@ extension OpeningController {
             newLocation.totalBusinesses = Int32(data.total)
             newLocation.radius = Int32(radius)  //AppDelegate
             recordCountAtLocation = data.total
-            
-//            dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
-//                //Giving Core Data the chance to perform multiple instances in parallel
-//                let currentLocation = context.object(with: self.currentLocationID!) as! Location
-//                currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
-//            }
-            
+
             do {
                 try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
@@ -41,6 +35,16 @@ extension OpeningController {
                 
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
+            }
+        }
+    }
+    
+    func queueForSavingBusinesses(_ data: (YelpBusinessResponse)) {
+        myQueue.addOperation {
+            self.dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
+                //Giving Core Data the chance to perform multiple instances in parallel
+                let currentLocation = context.object(with: self.currentLocationID!) as! Location
+                currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
             }
         }
     }
@@ -65,15 +69,14 @@ extension OpeningController {
                 if let indexToDelete = filterIndex {
                     urlsQueue.remove(at: indexToDelete)
                 }
-                
-                dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
-                    //Giving Core Data the chance to perform multiple instances in parallel
-                    let currentLocation = context.object(with: self.currentLocationID!) as! Location
-                    currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
-                }
+                queueForSavingBusinesses(data)
             }
         }
     }
+    
+    
+
+    
     
     func buildURLsQueueForDownloadingBusinesses(total: Int){
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){

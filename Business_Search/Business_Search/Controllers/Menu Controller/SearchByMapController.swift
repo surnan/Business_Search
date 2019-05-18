@@ -52,7 +52,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        activityView.startAnimating()
         view.backgroundColor = .white
         setupUI()
     }
@@ -71,7 +70,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     func setupNotificationReceiver(){
         activityView.center = view.center
-//        activityView.startAnimating()
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
         print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
@@ -110,6 +108,9 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         newVC.dataController = dataController
         let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
         newVC.possibleInsertLocationCoordinate = temp
+        
+        
+        
         navigationController?.pushViewController(newVC, animated: true)
     }
     

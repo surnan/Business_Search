@@ -91,10 +91,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    ////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////
-    //Below is to get coordinates - It's untested.  Problems working it in simulator
-    
     @objc func handleNearMeSearchButton(){
         determineMyCurrentLocation()
         let newVC = OpeningController()
@@ -102,6 +98,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         newVC.delegate = self
         navigationController?.pushViewController(newVC, animated: true)
     }
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    //Below is to get coordinates - It's untested.  Problems working it in simulator
+    
+
     
     func stopGPS() {
         locationManager.stopUpdatingLocation()

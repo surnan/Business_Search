@@ -43,8 +43,8 @@ extension OpeningController {
 
     @objc func locationFound(){
         activityView.stopAnimating()
-        guard let temp = delegate?.getUserLocation() else { return }
-        possibleInsertLocationCoordinate = temp
+        guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
+        possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
         delegate?.stopGPS()
         
         //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
@@ -56,14 +56,16 @@ extension OpeningController {
             if locationArray!.isEmpty && !locationPassedIn{
                 locationPassedIn = true
                 _ = YelpClient.getNearbyBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+                return
             }
-            
-            locationArray?.forEach{
-                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
-                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
-                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
-            }
+//            else {
+                locationArray?.forEach{
+                    let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                    let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+                    let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                    print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+                }
+//            }
         }
     }
     
@@ -134,7 +136,6 @@ extension OpeningController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                //  context.reset()
             } catch {
                 print("Error deleting All \(error)")
             }
