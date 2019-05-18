@@ -17,7 +17,8 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        textField.resignFirstResponder()
+        print("= = EDITING ENDED")
+        textField.resignFirstResponder()
         view.endEditing(true)
     }
     
@@ -25,6 +26,11 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        view.endEditing(true)
+        return true
+    }
     
     var dataController: DataController!
     var delegate: MenuControllerProtocol?
@@ -142,6 +148,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         setupNavigationManu()
         setupUI()
         setupNotificationReceiver()
+        locationTextField.delegate = self
     }
     
     
@@ -159,7 +166,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         possibleInsertLocationCoordinate = temp
         delegate?.stopGPS()
         mapView.isHidden = false
-        print("SearchByMapController --> locationFound --> possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
+//        print("SearchByMapController --> locationFound --> possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
         let coordinate = possibleInsertLocationCoordinate.coordinate
         mapView.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
     }
