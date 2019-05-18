@@ -15,19 +15,11 @@ let customUIHeightSize: CGFloat = 55
 
 class SearchByAddressController: UIViewController, UITextFieldDelegate {
     
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("= = EDITING ENDED")
-        textField.resignFirstResponder()
         view.endEditing(true)
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
         view.endEditing(true)
         return true
     }
@@ -76,7 +68,6 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     }()
     
     @objc func handleFindButton(_ sender: UIButton){
-        
         view.endEditing(true)
         
         geoCoder.geocodeAddressString(locationTextField.text ?? "") { [weak self] (clplacement, error) in
@@ -155,13 +146,13 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     //MARK:- Notification Observer
     func setupNotificationReceiver(){
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
+//        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
     
     
     @objc func locationFound(){
-        let temp2 = delegate?.getUserLocation()
-        print("delegate --> \(String(describing: temp2))")
+//        let temp2 = delegate?.getUserLocation()
+//        print("delegate --> \(String(describing: temp2))")
         guard let temp = delegate?.getUserLocation() else { return }
         possibleInsertLocationCoordinate = temp
         delegate?.stopGPS()

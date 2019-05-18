@@ -105,8 +105,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     
     @objc func locationFound(){
-        let temp2 = delegate?.getUserLocation()
-        print("delegate --> \(String(describing: temp2))")
+//        let temp2 = delegate?.getUserLocation()
+//        print("delegate --> \(String(describing: temp2))")
         guard let temp = delegate?.getUserLocation() else { return }
         activityView.stopAnimating()
         possibleInsertLocationCoordinate = temp
