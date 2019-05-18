@@ -80,6 +80,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         determineMyCurrentLocation()
         let newVC = SearchByAddressController()
         newVC.dataController = dataController
+        newVC.delegate = self   //To center slide-Map at current location
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -87,7 +88,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         determineMyCurrentLocation()
         let newVC = SearchByMapController()
         newVC.dataController = dataController
-        newVC.delegate = self
+        newVC.delegate = self   //To center slide-Map at current location
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -122,7 +123,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations[0] as CLLocation
-        //  print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
+        print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
         NotificationCenter.default.post(name: Notification.Name("locationFound"), object: nil)
     }
 }

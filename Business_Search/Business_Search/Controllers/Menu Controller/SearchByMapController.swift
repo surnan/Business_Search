@@ -50,12 +50,40 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         return mapView
     }()
     
+
+    
+    
+    //MARK:- Map Delegate Function
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        globalLocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        searchLocationCoordinate = mapView.centerCoordinate
+    }
+    
+    
+    //MARK:- UI
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
+        setupNotificationReceiver()
     }
     
+    func setupNavigationMenu(){
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
+                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
+    }
+    
+    @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
+    
+    @objc func handleNext(){
+        let newVC = OpeningController()
+        newVC.dataController = dataController
+        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
+        newVC.possibleInsertLocationCoordinate = temp
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+
     func setupUI(){
         [mapView, pinImageView, activityView].forEach{view.addSubview($0)}
         mapView.fillSafeSuperView()
@@ -64,10 +92,11 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
             ])
         setupNavigationMenu()
-        setupNotificationReceiver()
+//        setupNotificationReceiver()
     }
     
     
+    //MARK:- Notification Observer
     func setupNotificationReceiver(){
         activityView.center = view.center
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
@@ -76,15 +105,10 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     
     @objc func locationFound(){
-        
-        
         let temp2 = delegate?.getUserLocation()
         print("delegate --> \(String(describing: temp2))")
-        
         guard let temp = delegate?.getUserLocation() else { return }
-        
         activityView.stopAnimating()
-        
         possibleInsertLocationCoordinate = temp
         delegate?.stopGPS()
         mapView.isHidden = false
@@ -92,32 +116,5 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         let coordinate = possibleInsertLocationCoordinate.coordinate
         mapView.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         pinImageView.isHidden = false
-        
     }
-    
-    func setupNavigationMenu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
-                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]}
-    
-    @objc func handlePause(){
-        print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")
-    }
-    
-    @objc func handleNext(){
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
-        newVC.possibleInsertLocationCoordinate = temp
-        
-        
-        
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-    
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        globalLocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        searchLocationCoordinate = mapView.centerCoordinate
-    }
-    
 }
