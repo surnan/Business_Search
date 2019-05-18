@@ -12,6 +12,8 @@ import CoreData
 extension Location {
     //Since context is passed in, Concurrency will be handled by parent function
     func saveBusinessesAndCategories(yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
+        
+        
             yelpData.businesses.forEach { (item) in //+1
                 let currentBusiness = Business(context: context)
                 currentBusiness.parentLocation = self

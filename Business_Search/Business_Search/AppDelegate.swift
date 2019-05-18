@@ -10,7 +10,7 @@ import UIKit
 
 var limit = 50
 var offset = 50
-var radius = 155
+var radius = 550
 var recordCountAtLocation = 0
 var categoryMatch = 0
 
