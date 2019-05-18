@@ -14,12 +14,14 @@ let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
 class SearchByAddressController: UIViewController {
+    
     var dataController: DataController!
-    
-    
+    var delegate: MenuControllerProtocol?
     
     var globalLocation = CLLocation()
     let geoCoder = CLGeocoder()
+    var searchLocationCoordinate: CLLocationCoordinate2D!
+    var possibleInsertLocationCoordinate: CLLocation!
     
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))
@@ -28,14 +30,13 @@ class SearchByAddressController: UIViewController {
         return imageView
     }()
     
-    var mapView: MKMapView = {
+    lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        mapView.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 150, longitudinalMeters: 150)
+        mapView.isScrollEnabled = false
         return mapView
     }()
-    
     
     var locationTextField: UITextField = {
         let textField = UITextField()
@@ -44,7 +45,6 @@ class SearchByAddressController: UIViewController {
         return textField
     }()
     
-
     
     var findLocationButton: UIButton = {
         let button = UIButton()
@@ -67,18 +67,7 @@ class SearchByAddressController: UIViewController {
             }
             self?.globalLocation = location
             DispatchQueue.main.async {[weak self] in
-
                 print("globalLocation --> \(String(describing: self?.globalLocation))")
-                
-                
-                /*
- let tempAnnotation = MKPointAnnotation()
- tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
- tempAnnotation.title = business.name ?? ""
- annotations.append(tempAnnotation)
- */
-                
-//                let coordinate = CLLocationCoordinate2D(latitude: (self?.globalLocation.coordinate.latitude)!, longitude: (self?.globalLocation.coordinate.longitude)!)
                 let tempAnnotation = MKPointAnnotation()
                 tempAnnotation.coordinate = (self?.globalLocation.coordinate)!
                 self?.mapView.addAnnotation(tempAnnotation)
@@ -95,12 +84,13 @@ class SearchByAddressController: UIViewController {
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .skyBlue4
-        
+    
+    func setupNavigationManu(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "NEXT", style: .done, target: self, action: #selector(handleRight))
-        
+    }
+    
+    
+    func setupUI(){
         let stackView: UIStackView = {
             let stack = UIStackView()
             stack.axis = .vertical
@@ -130,8 +120,33 @@ class SearchByAddressController: UIViewController {
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
-        
-        
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .skyBlue4
+        setupNavigationManu()
+        setupUI()
+        setupNotificationReceiver()
+    }
+    
+    
+    //MARK:- Notification Observer
+    func setupNotificationReceiver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
+        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
+    }
+    
+    
+    @objc func locationFound(){
+        let temp2 = delegate?.getUserLocation()
+        print("delegate --> \(String(describing: temp2))")
+        guard let temp = delegate?.getUserLocation() else { return }
+        possibleInsertLocationCoordinate = temp
+        delegate?.stopGPS()
+        mapView.isHidden = false
+        print("SearchByMapController --> locationFound --> possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
+        let coordinate = possibleInsertLocationCoordinate.coordinate
+        mapView.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+    }
 }
