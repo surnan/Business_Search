@@ -22,11 +22,23 @@ extension OpeningController {
             newLocation.totalBusinesses = Int32(data.total)
             newLocation.radius = Int32(radius)  //AppDelegate
             recordCountAtLocation = data.total
+            
+//            dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
+//                //Giving Core Data the chance to perform multiple instances in parallel
+//                let currentLocation = context.object(with: self.currentLocationID!) as! Location
+//                currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
+//            }
+            
             do {
                 try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
                 newLocation.saveBusinessesAndCategories(yelpData: data, context: backgroundContext) //2
                 self.buildURLsQueueForDownloadingBusinesses(total: data.total)    //Because background context, best way to time save happens first
+                
+                fetchBusinessController = nil
+                fetchCategoriesController = nil
+                tableView.reloadData()
+                
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }
@@ -69,6 +81,29 @@ extension OpeningController {
         }
         downloadYelpBusinesses()
     }
+
+    
+    func downloadYelpBusinesses(latitiude: Double, longitude: Double){
+        if urlsQueue.isEmpty {return}
+        let semaphore = DispatchSemaphore(value: 4)
+        let dispatchGroup = DispatchGroup()
+        
+        for (index, element) in urlsQueue.enumerated(){
+            dispatchGroup.enter()
+            semaphore.wait()
+            _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
+                defer {
+                    semaphore.signal()
+                    dispatchGroup.leave()
+                }
+                self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
+            })
+        }
+        dispatchGroup.notify(queue: .main) {[weak self] in
+            self?.runDownloadAgain()
+        }
+    }
+    
     
     func downloadYelpBusinesses(){
         if urlsQueue.isEmpty {return}

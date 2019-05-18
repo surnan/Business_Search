@@ -40,17 +40,24 @@ extension OpeningController {
         definesPresentationContext = true
         setupNotificationReceiver()
     }
-    
-    
+
     @objc func locationFound(){
         activityView.stopAnimating()
         guard let temp = delegate?.getUserLocation() else { return }
         possibleInsertLocationCoordinate = temp
         delegate?.stopGPS()
-        print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
-        fetchLocationController = nil
+        
+        //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
+        fetchLocationController = nil   //locations only reset here in this app
+        
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects
+            let coord = possibleInsertLocationCoordinate.coordinate
+            if locationArray!.isEmpty && !locationPassedIn{
+                locationPassedIn = true
+                _ = YelpClient.getNearbyBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+            }
+            
             locationArray?.forEach{
                 let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
@@ -94,9 +101,11 @@ extension OpeningController {
     
     
     @objc func handleDownloadBusinesses(){
-        //  deleteAll()
+        //  1 - Delete all existing data in Core Data and run Yelp.xxx to re-download everything for (latitude/longitude)
+        deleteAll()
         self.fetchBusinessController = nil
         self.fetchCategoriesController = nil
+        //  -1
         _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
     }
     
