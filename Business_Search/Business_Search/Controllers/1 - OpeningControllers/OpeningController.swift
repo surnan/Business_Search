@@ -16,12 +16,23 @@ let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
-    var dataController: DataController!  //MARK: Injected
+    var dataController: DataController!                 //MARK: Injected
+    var delegate: MenuControllerProtocol?               //Get Coordinates from 'Search Nearby'
+    var possibleInsertLocationCoordinate: CLLocation!   //SearchByMapController
+    var searchLocation: Location!                       //SearchController textField
+    var locationPassedIn = false                        // after delegate.stopGPS(), NSNotification still fires a couple more times
+    var doesLocationEntityExist = false                 //set true after we create location or find location
+    var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
+    var currentLocationID: NSManagedObjectID?
+    var searchGroupIndex = 0                            //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
+    let nc = NotificationCenter.default
+    var tableViewArrayType: Int {
+        return searchGroupIndex
+    }
     
-    var delegate: MenuControllerProtocol?
     
     var myQueue: OperationQueue = {
-       let queue = OperationQueue()
+        let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
@@ -32,19 +43,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         activityVC.style = .gray
         return activityVC
     }()
-    
-    var possibleInsertLocationCoordinate: CLLocation!
-    var searchLocation: Location!
-    let nc = NotificationCenter.default
-    var locationPassedIn = false
-    
-    var doesLocationEntityExist = false
-    var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
-    var currentLocationID: NSManagedObjectID?
-    var searchGroupIndex = 0 //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
-    var tableViewArrayType: Int {
-        return searchGroupIndex
-    }
     
     enum TableIndex:Int {
         case business = 0, category
