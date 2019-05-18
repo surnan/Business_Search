@@ -13,7 +13,18 @@ import MapKit
 let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
-class SearchByAddressController: UIViewController {
+class SearchByAddressController: UIViewController, UITextFieldDelegate {
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+//        textField.resignFirstResponder()
+        view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
     
     var dataController: DataController!
     var delegate: MenuControllerProtocol?
@@ -59,6 +70,9 @@ class SearchByAddressController: UIViewController {
     }()
     
     @objc func handleFindButton(_ sender: UIButton){
+        
+        view.endEditing(true)
+        
         geoCoder.geocodeAddressString(locationTextField.text ?? "") { [weak self] (clplacement, error) in
             guard let placemarks = clplacement, let location = placemarks.first?.location else {
                 print("UNABLE to convert to CLL Coordinates")
