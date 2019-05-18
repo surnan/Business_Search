@@ -20,6 +20,12 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var delegate: MenuControllerProtocol?
     
+    var myQueue: OperationQueue = {
+       let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
     let activityView: UIActivityIndicatorView = {
         let activityVC = UIActivityIndicatorView()
         activityVC.hidesWhenStopped = true

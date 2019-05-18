@@ -146,8 +146,8 @@
 				8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */,
 				8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */,
 				8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */,
-				842AD7D8228538B900590B1A /* BusinessController.swift */,
 				842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */,
+				842AD7D8228538B900590B1A /* BusinessController.swift */,
 			);
 			path = "1 - OpeningControllers";
 			sourceTree = "<group>";
