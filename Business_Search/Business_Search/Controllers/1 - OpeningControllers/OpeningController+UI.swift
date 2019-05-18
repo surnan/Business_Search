@@ -39,17 +39,54 @@ extension OpeningController {
         resetAllPredicateRelatedVar()
         definesPresentationContext = true
         setupNotificationReceiver()
+        
+        if let _ = possibleInsertLocationCoordinate {
+            noGPS()
+        }
     }
 
     @objc func locationFound(){
         activityView.stopAnimating()
+        if let _ = delegate {
+            fromNearbySearch()
+            return
+        }
+    }
+    
+    
+    
+    func noGPS(){
+        //Location passed in from SearchByMapController
+        
+        activityView.stopAnimating()
+        
+        let coord = possibleInsertLocationCoordinate.coordinate
+        
+        fetchLocationController = nil   //locations only reset here in this app
+        if possibleInsertLocationCoordinate != nil {
+            let locationArray = fetchLocationController?.fetchedObjects
+            // let coord = possibleInsertLocationCoordinate.coordinate
+            if locationArray!.isEmpty && !locationPassedIn{
+                locationPassedIn = true
+                _ = YelpClient.getNearbyBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+                return
+            }
+            
+            locationArray?.forEach{
+                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+            }
+        }
+    }
+    
+    func fromNearbySearch(){
         guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
         possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
         delegate?.stopGPS()
-        
         //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
         fetchLocationController = nil   //locations only reset here in this app
-        
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects
             let coord = possibleInsertLocationCoordinate.coordinate
@@ -58,16 +95,16 @@ extension OpeningController {
                 _ = YelpClient.getNearbyBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
                 return
             }
-//            else {
-                locationArray?.forEach{
-                    let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
-                    let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
-                    let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-                    print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
-                }
-//            }
+            
+            locationArray?.forEach{
+                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+            }
         }
     }
+    
     
     func isLocationNew()-> Bool{
         fetchLocationController = nil
