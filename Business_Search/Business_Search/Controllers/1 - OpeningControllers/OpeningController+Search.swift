@@ -10,6 +10,14 @@ import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
     
+    func resetAllPredicateRelatedVar() {
+        fetchBusinessPredicate = nil
+        fetchCategoryArrayNamesPredicate = nil
+        fetchBusinessController = nil
+        fetchCategoryNames = nil
+    }
+    
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         resetAllPredicateRelatedVar()
         tableView.reloadData()

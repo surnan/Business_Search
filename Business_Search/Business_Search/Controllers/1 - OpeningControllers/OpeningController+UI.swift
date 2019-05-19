@@ -13,22 +13,47 @@ import MapKit
 
 extension OpeningController {
     
-    func resetAllPredicateRelatedVar() {
-        fetchBusinessPredicate = nil
-        fetchCategoryArrayNamesPredicate = nil
-        fetchBusinessController = nil
-        fetchCategoryNames = nil
-    }
-    
-    
+    //MARK:- Notification Center
     func setupNotificationReceiver(){
         activityView.center = view.center
         activityView.startAnimating()
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
         print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
-
     
+    @objc func locationFound(){
+        activityView.stopAnimating()
+        if let _ = delegate {
+            fromNearbySearch()
+            return
+        }
+    }
+    
+    func fromNearbySearch(){  //Push directly from MenuController
+        guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
+        possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
+        delegate?.stopGPS()
+        //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
+        fetchLocationController = nil   //locations only reset here in this app
+        if possibleInsertLocationCoordinate != nil {
+            let locationArray = fetchLocationController?.fetchedObjects
+            let coord = possibleInsertLocationCoordinate.coordinate
+            if locationArray!.isEmpty && !locationPassedIn{
+                locationPassedIn = true
+                _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+                return
+            }
+            locationArray?.forEach{
+                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+            }
+        }
+    }
+    
+    
+    //MARK:- ViewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         [tableView, activityView].forEach{view.addSubview($0)}
@@ -40,86 +65,87 @@ extension OpeningController {
         definesPresentationContext = true
         setupNotificationReceiver()
         
+        //Check if previous controller is MenuController()
         if let _ = possibleInsertLocationCoordinate {
             noGPS()
         }
     }
-
-    @objc func locationFound(){
+    
+    func noGPS(){   //Push by SearchByMapController
         activityView.stopAnimating()
-        if let _ = delegate {
-            fromNearbySearch()
-            return
-        }
-    }
-    
-    
-    
-    func noGPS(){
-        //Location passed in from SearchByMapController
-        
-        activityView.stopAnimating()
-        
         let coord = possibleInsertLocationCoordinate.coordinate
-        
         fetchLocationController = nil   //locations only reset here in this app
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects
-            // let coord = possibleInsertLocationCoordinate.coordinate
+            
             if locationArray!.isEmpty && !locationPassedIn{
                 locationPassedIn = true
-                _ = YelpClient.getNearbyBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+                _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
                 return
             }
+            
+            
             
             locationArray?.forEach{
                 let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
                 let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+                
                 print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+                if miles < 1.0 {
+                    print("---> Inside miles if-statement")
+                    
+                    
+//                    fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+//                    fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+
+                    let parentLatitude = #keyPath(Business.parentLocation.latitude)
+                    let parentLongitude = #keyPath(Business.parentLocation.longitude)
+                    
+                    fetchBusinessPredicate = NSPredicate(format: "(\(parentLatitude) == %@) AND (\(parentLongitude) == %@)" , argumentArray: [$0.latitude, $0.longitude])
+                    
+                    fetchBusinessController = nil
+                    fetchCategoriesController = nil
+                    
+                    
+                }
+                
+                
             }
         }
     }
     
-    func fromNearbySearch(){
-        guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
-        possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
-        delegate?.stopGPS()
-        //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
-        fetchLocationController = nil   //locations only reset here in this app
-        if possibleInsertLocationCoordinate != nil {
-            let locationArray = fetchLocationController?.fetchedObjects
-            let coord = possibleInsertLocationCoordinate.coordinate
-            if locationArray!.isEmpty && !locationPassedIn{
-                locationPassedIn = true
-                _ = YelpClient.getNearbyBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
-                return
-            }
-            
-            locationArray?.forEach{
-                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
-                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
-                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
-            }
-        }
-    }
+//    func isLocationNew()-> Bool{
+//        fetchLocationController = nil
+//        if possibleInsertLocationCoordinate != nil {
+//            print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
+//            let locationArray = fetchLocationController?.fetchedObjects
+//            locationArray?.forEach{
+//                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+//                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+//                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+//                print("Distance to [\($0.latitude), \($0.longitude)]= \(String(format: "%.2f", miles)) miles")
+//            }
+//        }
+//        return false
+//    }
+    
+
     
     
-    func isLocationNew()-> Bool{
-        fetchLocationController = nil
-        if possibleInsertLocationCoordinate != nil {
-            print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
-            let locationArray = fetchLocationController?.fetchedObjects
-            locationArray?.forEach{
-                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
-                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
-                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-                print("Distance to [\($0.latitude), \($0.longitude)]= \(String(format: "%.2f", miles)) miles")
-            }
-        }
-        return false
-    }
+
+    
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    //MARK:- Navigation Menu
     
     func setupNavigationMenu(){
         let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
@@ -133,11 +159,9 @@ extension OpeningController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     
-    
     @objc func handleBack(){
         navigationController?.popViewController(animated: true)
     }
-    
     
     @objc func handleDownloadBusinesses(){
         //  1 - Delete all existing data in Core Data and run Yelp.xxx to re-download everything for (latitude/longitude)
@@ -145,11 +169,12 @@ extension OpeningController {
         self.fetchBusinessController = nil
         self.fetchCategoriesController = nil
         //  -1
-        _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+        _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
     }
     
     @objc func JumpToBreakPoint(total: Int){
         print("")
+        tableView.reloadData()
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
     }
@@ -158,7 +183,6 @@ extension OpeningController {
     @objc func handleDeleteAll(){
         deleteAll()
     }
-    
     
     func deleteAll(){
         doesLocationEntityExist = false
@@ -178,4 +202,5 @@ extension OpeningController {
             }
         }
     }
+    
 }

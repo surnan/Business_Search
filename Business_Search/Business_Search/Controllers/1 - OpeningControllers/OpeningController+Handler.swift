@@ -97,7 +97,7 @@ extension OpeningController {
         for (index, element) in urlsQueue.enumerated(){
             dispatchGroup.enter()
             semaphore.wait()
-            _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
+            _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
                 defer {
                     semaphore.signal()
                     dispatchGroup.leave()
@@ -119,7 +119,7 @@ extension OpeningController {
         for (index, element) in urlsQueue.enumerated(){
             dispatchGroup.enter()
             semaphore.wait()
-            _ = YelpClient.getNearbyBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
+            _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
                 defer {
                     semaphore.signal()
                     dispatchGroup.leave()
