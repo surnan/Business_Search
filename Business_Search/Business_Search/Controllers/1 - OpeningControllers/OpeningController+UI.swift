@@ -84,7 +84,10 @@ extension OpeningController {
                 return
             }
             
-            
+            guard locationArray != nil else {
+                print("empty Location Array & possibleInsertLocationCoordinate = NIL")
+                return
+            }
             
             locationArray?.forEach{
                 let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
@@ -95,23 +98,19 @@ extension OpeningController {
                 if miles < 1.0 {
                     print("---> Inside miles if-statement")
                     
-                    
-//                    fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-//                    fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+                    //  fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+                    //  fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
 
                     let parentLatitude = #keyPath(Business.parentLocation.latitude)
                     let parentLongitude = #keyPath(Business.parentLocation.longitude)
                     
                     fetchBusinessPredicate = NSPredicate(format: "(\(parentLatitude) == %@) AND (\(parentLongitude) == %@)" , argumentArray: [$0.latitude, $0.longitude])
-                    
-                    fetchBusinessController = nil
-                    fetchCategoriesController = nil
-                    
-                    
+                    resetAllPredicateRelatedVar()
+                    return
                 }
-                
-                
             }
+            //This is a new LOCATION
+            _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
         }
     }
     
