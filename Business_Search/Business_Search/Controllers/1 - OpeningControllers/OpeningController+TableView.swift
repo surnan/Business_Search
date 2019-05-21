@@ -102,7 +102,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
             showBusinessInfo(currentBusiness: currentBusiness)
         }
-        
     }
     
     
@@ -111,7 +110,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         let newVC = BusinessController()
         newVC.business = currentBusiness
         navigationController?.pushViewController(newVC, animated: true)
-        
     }
     
     
