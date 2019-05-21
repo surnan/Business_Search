@@ -83,9 +83,13 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     let latKey = \Business.parentLocation?.latitude
     let lonKey = \Business.parentLocation?.longitude
-    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [latKey, currentLatitude])
-    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [latKey, currentLongitude])
-
+    //lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [latKey, currentLatitude])
+    //lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [lonKey, currentLongitude])
+    
+    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), currentLatitude])
+    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), currentLongitude])
+    
+    
     
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
@@ -103,6 +107,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }
     
     lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
+    var predicateTest = false
     
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
@@ -111,12 +116,16 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
                     
                     
-                    
                     if let fetchBusinessPredicate = fetchBusinessPredicate {
-                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchBusinessPredicate, predicateLatitude, predicateLongitude])
+                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchBusinessPredicate,
+                                                                                                     predicateLatitude,
+                                                                                                     predicateLongitude])
                     }
-                    
-                    
+                     else {
+                       fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateLatitude,
+                                                                                                    predicateLongitude])
+                     }
+
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -167,7 +176,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-
+    
     var fetchCategoryNames: [String]? {   //+1
         didSet {    //+2
             if fetchCategoryNames == nil {    //+3
@@ -181,7 +190,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchRequest.sortDescriptors = sortDescriptor
                 
                 
-            
+                
                 if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
                     fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate])
                 }
@@ -211,7 +220,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-
+    
     var fetchLocationController: NSFetchedResultsController<Location>? { //+1
         didSet {    //+2
             if fetchLocationController == nil { //+3
@@ -236,7 +245,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }   //-1
     
     
-
+    
     //MARK:- UI
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results

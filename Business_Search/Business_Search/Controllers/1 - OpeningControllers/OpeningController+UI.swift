@@ -18,7 +18,6 @@ extension OpeningController {
         activityView.center = view.center
         activityView.startAnimating()
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-        //print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
     
     @objc func locationFound(){
@@ -65,7 +64,7 @@ extension OpeningController {
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
-        fetchAllNoPredicate()
+        //fetchAllNoPredicate()
         definesPresentationContext = true
         setupNotificationReceiver()
         
@@ -78,7 +77,7 @@ extension OpeningController {
     func noGPS(){   //Push by SearchByMapController
         activityView.stopAnimating()
         let coord = possibleInsertLocationCoordinate.coordinate
-        currentLatitude = coord.latitude; currentLongitude = coord.longitude
+        
         
 
         fetchLocationController = nil   //locations only reset here in this app
@@ -87,36 +86,38 @@ extension OpeningController {
             
             if locationArray!.isEmpty && !locationPassedIn{
                 locationPassedIn = true
+                currentLatitude = coord.latitude; currentLongitude = coord.longitude
                 _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
                 return
             }
             
-            guard locationArray != nil else {
-                print("empty Location Array & possibleInsertLocationCoordinate = NIL")
-                return
-            }
             
-            locationArray?.forEach{
-                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+            guard let _locationArray = locationArray else {return}
+            
+            
+            var index = 0
+            
+            while index < _locationArray.count {
+                //let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
+                let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
                 let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
                 
                 //print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
                 if miles < 1.0 {
-                    print("---> Inside miles if-statement")
-                    
-                    //  fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-                    //  fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-
-                    let parentLatitude = #keyPath(Business.parentLocation.latitude)
-                    let parentLongitude = #keyPath(Business.parentLocation.longitude)
-                    
-                    fetchBusinessPredicate = NSPredicate(format: "(\(parentLatitude) == %@) AND (\(parentLongitude) == %@)" , argumentArray: [$0.latitude, $0.longitude])
-                    fetchAllNoPredicate()
+                    //currentLatitude = $0.latitude; currentLongitude = $0.longitude
+                    currentLatitude = _locationArray[index].latitude; currentLongitude = _locationArray[index].longitude
+                    //fetchAllNoPredicate()
+                    fetchBusinessController = nil
+                    tableView.reloadData()
                     return
                 }
+                index += 1
             }
+
+            
             //This is a new LOCATION
+            currentLatitude = coord.latitude; currentLongitude = coord.longitude
             _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
         }
     }
@@ -154,6 +155,12 @@ extension OpeningController {
         tableView.reloadData()
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
+        
+        print("====  fetchBusinessController?.fetchedObjects?.forEach   =====")
+        fetchBusinessController?.fetchedObjects?.forEach{
+            print("name = \($0.name ?? "")")
+        }
+        predicateTest = false
     }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
