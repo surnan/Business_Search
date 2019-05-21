@@ -176,7 +176,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchRequest.sortDescriptors = sortDescriptor
                 
                 
-                fetchRequest.predicate = fetchCategoryArrayNamesPredicate
+                // fetchRequest.predicate = fetchCategoryArrayNamesPredicate
                 if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
                     fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate])
                 }
