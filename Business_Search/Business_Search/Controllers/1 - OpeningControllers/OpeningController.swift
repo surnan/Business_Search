@@ -81,6 +81,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var currentLatitude = 0.0
     var currentLongitude = 0.0
     
+    let latKey = \Business.parentLocation?.latitude
+    let lonKey = \Business.parentLocation?.longitude
+    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [latKey, currentLatitude])
+    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [latKey, currentLongitude])
+
     
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
@@ -106,9 +111,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
                     
                     
-                    // fetchRequest.predicate = self.fetchBusinessPredicate
+                    
                     if let fetchBusinessPredicate = fetchBusinessPredicate {
-                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchBusinessPredicate])
+                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchBusinessPredicate, predicateLatitude, predicateLongitude])
                     }
                     
                     
@@ -138,7 +143,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
                     
                     
-                    //fetchRequest.predicate = self.selectedCategoryPredicate
+                    
                     if let selectedCategoryPredicate = selectedCategoryPredicate {
                         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [selectedCategoryPredicate])
                     }
@@ -176,7 +181,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchRequest.sortDescriptors = sortDescriptor
                 
                 
-                // fetchRequest.predicate = fetchCategoryArrayNamesPredicate
+            
                 if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
                     fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate])
                 }
@@ -212,7 +217,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchLocationController == nil { //+3
                 fetchLocationController = {   //+4
                     let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-                    //                    fetchRequest.predicate = self.fetchBusinessPredicate
                     let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,

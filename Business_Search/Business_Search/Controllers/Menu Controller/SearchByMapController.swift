@@ -100,7 +100,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     func setupNotificationReceiver(){
         activityView.center = view.center
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
+        //print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
     
     

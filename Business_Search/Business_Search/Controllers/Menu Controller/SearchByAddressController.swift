@@ -78,7 +78,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
             }
             self?.globalLocation = location
             DispatchQueue.main.async {[weak self] in
-                print("globalLocation --> \(String(describing: self?.globalLocation))")
+                //print("globalLocation --> \(String(describing: self?.globalLocation))")
                 let tempAnnotation = MKPointAnnotation()
                 tempAnnotation.coordinate = (self?.globalLocation.coordinate)!
                 self?.mapView.addAnnotation(tempAnnotation)
