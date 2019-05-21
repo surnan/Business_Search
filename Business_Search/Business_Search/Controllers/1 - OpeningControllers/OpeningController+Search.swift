@@ -10,32 +10,41 @@ import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
     
-    func resetAllPredicateRelatedVar() {
+    func fetchAllNoPredicate() {
         fetchBusinessPredicate = nil
         fetchCategoryArrayNamesPredicate = nil
         fetchBusinessController = nil
         fetchCategoryNames = nil
     }
     
+    func fetchWithPredicate() {
+        fetchBusinessController = nil
+        fetchCategoryNames = nil
+    }
+    
+    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resetAllPredicateRelatedVar()
+        fetchAllNoPredicate()
         tableView.reloadData()
     }
 
+//    let coord = possibleInsertLocationCoordinate.coordinate
+//    currentLatitude = coord.latitude; currentLongitude = coord.longitude
     
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() {
-            resetAllPredicateRelatedVar()
+            fetchAllNoPredicate()
             tableView.reloadData()
             return
         }
         
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        fetchBusinessController = nil   //Fetches with Predicate
-        fetchCategoryNames = nil        //Fetches with Predicate
+        //fetchBusinessController = nil   //Fetches with Predicate
+        //fetchCategoryNames = nil        //Fetches with Predicate
+        fetchWithPredicate()
         tableView.reloadData()
     }
     

@@ -16,11 +16,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Business_Search/Models/Yelp API/YelpClient.swift"
-            timestampString = "580114822.498481"
+            timestampString = "580136145.6450861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -29,14 +29,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "default argument 2 of static Business_Search.YelpClient.getBusinesses(latitude: Swift.Double, longitude: Swift.Double, offset: Swift.Int, completion: (Swift.Optional&lt;Business_Search.CreateYelpURLDuringLoopingStruct&gt;, Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()) -&gt; __C.NSURLSessionDataTask"
                   moduleName = "Business_Search"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
-                  timestampString = "580114822.670015"
+                  timestampString = "580135842.653996"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -44,14 +44,14 @@
                   offsetFromSymbolStart = "6">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "static Business_Search.YelpClient.getBusinesses(latitude: Swift.Double, longitude: Swift.Double, offset: Swift.Int, completion: (Swift.Optional&lt;Business_Search.CreateYelpURLDuringLoopingStruct&gt;, Swift.Result&lt;Business_Search.YelpBusinessResponse, Business_Search.NetworkError&gt;) -&gt; ()) -&gt; __C.NSURLSessionDataTask"
                   moduleName = "Business_Search"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/GIT/_Business_Search/Business_Search/Business_Search/Models/Yelp%20API/YelpClient.swift"
-                  timestampString = "580114822.672087"
+                  timestampString = "580135842.656038"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "60"

@@ -18,7 +18,7 @@ extension OpeningController {
         activityView.center = view.center
         activityView.startAnimating()
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
+        //print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
     
     @objc func locationFound(){
@@ -32,6 +32,10 @@ extension OpeningController {
     func fromNearbySearch(){  //Push directly from MenuController
         guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
         possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
+        
+        let coord = possibleInsertLocationCoordinate.coordinate
+        currentLatitude = coord.latitude; currentLongitude = coord.longitude
+
         delegate?.stopGPS()
         //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
         fetchLocationController = nil   //locations only reset here in this app
@@ -47,7 +51,7 @@ extension OpeningController {
                 let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
                 let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+                //print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
             }
         }
     }
@@ -61,7 +65,7 @@ extension OpeningController {
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
-        resetAllPredicateRelatedVar()
+        fetchAllNoPredicate()
         definesPresentationContext = true
         setupNotificationReceiver()
         
@@ -74,6 +78,9 @@ extension OpeningController {
     func noGPS(){   //Push by SearchByMapController
         activityView.stopAnimating()
         let coord = possibleInsertLocationCoordinate.coordinate
+        currentLatitude = coord.latitude; currentLongitude = coord.longitude
+        
+
         fetchLocationController = nil   //locations only reset here in this app
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects
@@ -94,7 +101,7 @@ extension OpeningController {
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
                 let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
                 
-                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+                //print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
                 if miles < 1.0 {
                     print("---> Inside miles if-statement")
                     
@@ -105,7 +112,7 @@ extension OpeningController {
                     let parentLongitude = #keyPath(Business.parentLocation.longitude)
                     
                     fetchBusinessPredicate = NSPredicate(format: "(\(parentLatitude) == %@) AND (\(parentLongitude) == %@)" , argumentArray: [$0.latitude, $0.longitude])
-                    resetAllPredicateRelatedVar()
+                    fetchAllNoPredicate()
                     return
                 }
             }
