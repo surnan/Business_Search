@@ -16,20 +16,20 @@ let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
+    
     var dataController: DataController!                 //MARK: Injected
-    var delegate: MenuControllerProtocol?               //Get Coordinates from 'Search Nearby'
     var possibleInsertLocationCoordinate: CLLocation!   //SearchByMapController
     var searchLocation: Location!                       //SearchController textField
-    var locationPassedIn = false                        // after delegate.stopGPS(), NSNotification still fires a couple more times
-    var doesLocationEntityExist = false                 //set true after we create location or find location
-    var urlsQueue = [CreateYelpURLDuringLoopingStruct]() //enumeration loop for semaphores
-    var currentLocationID: NSManagedObjectID?
-    var searchGroupIndex = 0                            //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
-    let nc = NotificationCenter.default
-    var tableViewArrayType: Int {
-        return searchGroupIndex
-    }
     
+    var delegate: MenuControllerProtocol?       //Get Coordinates from 'Search Nearby'
+    var currentLocationID: NSManagedObjectID?   //Used to connect newly downloaded Business to Location
+    
+    var locationPassedIn = false            //after delegate.stopGPS(), NSNotification still fires a couple more times
+    var doesLocationEntityExist = false     //set true after we create location or find location
+    
+    var urlsQueue = [CreateYelpURLDuringLoopingStruct]()    //enumeration loop for semaphores
+    var searchGroupIndex = 0                                //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
+    var tableViewArrayType: Int { return searchGroupIndex } //Enables functions to know which SearchGroup is selected
     
     var myQueue: OperationQueue = {
         let queue = OperationQueue()
