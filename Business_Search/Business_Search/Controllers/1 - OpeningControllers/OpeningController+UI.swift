@@ -113,36 +113,7 @@ extension OpeningController {
             _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
         }
     }
-    
-//    func isLocationNew()-> Bool{
-//        fetchLocationController = nil
-//        if possibleInsertLocationCoordinate != nil {
-//            print("--> Location = \(possibleInsertLocationCoordinate.coordinate)")
-//            let locationArray = fetchLocationController?.fetchedObjects
-//            locationArray?.forEach{
-//                let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
-//                let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
-//                let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-//                print("Distance to [\($0.latitude), \($0.longitude)]= \(String(format: "%.2f", miles)) miles")
-//            }
-//        }
-//        return false
-//    }
-    
 
-    
-    
-
-    
-    
-    
-
-    
-
-    
-    
-
-    
     
     //MARK:- Navigation Menu
     
