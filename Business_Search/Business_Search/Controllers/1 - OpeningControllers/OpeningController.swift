@@ -77,6 +77,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }()
     
     //MARK:- Predicates
+    
+    var currentLatitude = 0.0
+    var currentLongitude = 0.0
+    
+    
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
         didSet {
@@ -99,7 +104,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchBusinessController == nil { //+3
                 fetchBusinessController = {   //+4
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-                    fetchRequest.predicate = self.fetchBusinessPredicate
+                    
+                    
+                    // fetchRequest.predicate = self.fetchBusinessPredicate
+                    if let fetchBusinessPredicate = fetchBusinessPredicate {
+                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchBusinessPredicate])
+                    }
+                    
+                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -124,7 +136,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchCategoriesController == nil { //+3
                 fetchCategoriesController = {   //+4
                     let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-                    fetchRequest.predicate = self.selectedCategoryPredicate
+                    
+                    
+                    //fetchRequest.predicate = self.selectedCategoryPredicate
+                    if let selectedCategoryPredicate = selectedCategoryPredicate {
+                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [selectedCategoryPredicate])
+                    }
+                    
+                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -143,31 +162,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    var fetchLocationController: NSFetchedResultsController<Location>? { //+1
-        didSet {    //+2
-            if fetchLocationController == nil { //+3
-                fetchLocationController = {   //+4
-                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-                    //                    fetchRequest.predicate = self.fetchBusinessPredicate
-                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
-                    fetchRequest.sortDescriptors = [ sortDescriptor]
-                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                               managedObjectContext: dataController.viewContext,
-                                                                               sectionNameKeyPath: nil,
-                                                                               cacheName: nil)
-                    aFetchedResultsController.delegate = self
-                    do {
-                        try aFetchedResultsController.performFetch()
-                    } catch let error {
-                        fatalError("Unresolved error \(error)")
-                    }
-                    return aFetchedResultsController
-                }() //-4
-            }   //-3
-        }   //-2
-    }   //-1
-    
-    
+
     var fetchCategoryNames: [String]? {   //+1
         didSet {    //+2
             if fetchCategoryNames == nil {    //+3
@@ -179,7 +174,13 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 fetchRequest.returnsDistinctResults = true
                 let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
                 fetchRequest.sortDescriptors = sortDescriptor
+                
+                
                 fetchRequest.predicate = fetchCategoryArrayNamesPredicate
+                if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
+                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate])
+                }
+                
                 
                 let controller = NSFetchedResultsController(
                     fetchRequest: fetchRequest,
@@ -206,6 +207,29 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }   //-1
     
 
+    var fetchLocationController: NSFetchedResultsController<Location>? { //+1
+        didSet {    //+2
+            if fetchLocationController == nil { //+3
+                fetchLocationController = {   //+4
+                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+                    //                    fetchRequest.predicate = self.fetchBusinessPredicate
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
+                    fetchRequest.sortDescriptors = [ sortDescriptor]
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
     
     
 
