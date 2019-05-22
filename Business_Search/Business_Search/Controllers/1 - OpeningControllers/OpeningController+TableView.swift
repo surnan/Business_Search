@@ -119,6 +119,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     
     func listBusinesses(category: String){
+        //Not shown in this tableView.  It's to create array to push into next VC's tableView
         selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
         fetchCategoriesController = nil
         
