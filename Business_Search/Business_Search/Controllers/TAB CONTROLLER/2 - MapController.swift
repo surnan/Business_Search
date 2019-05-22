@@ -22,7 +22,8 @@ class MapController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         view.backgroundColor = UIColor.black
         [mapView].forEach{view.addSubview($0)}
-        mapView.fillSuperview()
+//        mapView.fillSuperview()
+        mapView.fillSafeSuperView()
         setupMap()
     }
     
