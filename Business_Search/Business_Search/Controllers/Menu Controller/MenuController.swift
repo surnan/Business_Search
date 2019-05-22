@@ -86,10 +86,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     @objc func handleSearchByMapButton(){
         determineMyCurrentLocation()
-        let newVC = SearchByMapController()
-        newVC.dataController = dataController
-        newVC.delegate = self   //To center slide-Map at current location
-        navigationController?.pushViewController(newVC, animated: true)
     }
     
     @objc func handleNearMeSearchButton(){
@@ -125,6 +121,14 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         userLocation = locations[0] as CLLocation
         print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
         NotificationCenter.default.post(name: Notification.Name("locationFound"), object: nil)
+        
+        
+        
+        let newVC = SearchByMapController()
+        newVC.dataController = dataController
+        newVC.delegate = self   //To center slide-Map at current location
+        navigationController?.pushViewController(newVC, animated: true)
+        
     }
 }
 

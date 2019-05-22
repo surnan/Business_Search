@@ -138,7 +138,13 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchCategoriesController == nil { //+3
                 fetchCategoriesController = {   //+4
                     let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [selectedCategoryPredicate!])
+                    
+                    
+                    if let _selectedPredicate = selectedCategoryPredicate {
+                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [_selectedPredicate])
+                    }
+                    
+                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -246,7 +252,19 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         searchController.searchBar.barStyle = .black
         return searchController
     }()
+    
+    
+    deinit {
+        fetchLocationController = nil
+        fetchBusinessController = nil
+        fetchCategoriesController = nil
+        fetchCategoryNames = nil
+    }
+    
+    
 }
+
+
 
 //po String(data: data, format: .utf8)
 

@@ -161,6 +161,12 @@ extension OpeningController {
             print("name = \($0.name ?? "")")
         }
         predicateTest = false
+        
+        fetchLocationController = nil
+        fetchBusinessController = nil
+        fetchCategoriesController = nil
+        fetchCategoryNames = nil
+        tableView.reloadData()
     }
     
     //MARK:- Below is Bar Button functions or Called in ViewDidLoad()
@@ -187,4 +193,9 @@ extension OpeningController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        //Status bar sometimes turns black when typing into search bar
+        //Setting color scheme here just to play it safe
+        return .lightContent
+    }
 }
