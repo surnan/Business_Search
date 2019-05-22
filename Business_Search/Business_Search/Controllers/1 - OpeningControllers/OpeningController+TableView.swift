@@ -47,8 +47,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             let currentCategoryName = fetchCategoryNames?[indexPath.row]
+            
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-            _fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
+            let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
+            
+            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [myPredicate,
+                                                                                         predicateCatLatitude,
+                                                                                         predicateCatLongitude])
+            
             cell.name = currentCategoryName
             
             do {
