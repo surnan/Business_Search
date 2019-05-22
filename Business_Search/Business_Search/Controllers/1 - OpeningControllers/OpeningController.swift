@@ -80,8 +80,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var currentLatitude = 0.0
     var currentLongitude = 0.0
     
-    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), currentLatitude])
-    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), currentLongitude])
+    //lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), currentLatitude])
+    //lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), currentLongitude])
     
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
@@ -138,14 +138,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchCategoriesController == nil { //+3
                 fetchCategoriesController = {   //+4
                     let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-                    
-                    
-                    
-                    if let selectedCategoryPredicate = selectedCategoryPredicate {
-                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [selectedCategoryPredicate])
-                    }
-                    
-                    
+                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [selectedCategoryPredicate!])
                     let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -164,6 +157,12 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), currentLatitude])
+    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), currentLongitude])
+    
+    lazy var predicateCatLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), currentLatitude])
+    lazy var predicateCatLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), currentLongitude])
+    
     
     var fetchCategoryNames: [String]? {   //+1
         didSet {    //+2
@@ -177,12 +176,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
                 fetchRequest.sortDescriptors = sortDescriptor
                 
-                
-                
                 if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
-                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate])
+                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate,
+                                                                                                 predicateCatLatitude,
+                                                                                                 predicateCatLongitude])
+                } else {
+                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateCatLatitude,
+                                                                                                 predicateCatLongitude])
                 }
-                
                 
                 let controller = NSFetchedResultsController(
                     fetchRequest: fetchRequest,
