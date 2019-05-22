@@ -86,14 +86,18 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     @objc func handleSearchByMapButton(){
         determineMyCurrentLocation()
+        let newVC = SearchByMapController()
+        newVC.dataController = dataController
+        newVC.delegate = self   //To center slide-Map at current location
+        navigationController?.pushViewController(newVC, animated: true)
     }
     
     @objc func handleNearMeSearchButton(){
         determineMyCurrentLocation()
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        newVC.delegate = self
-        navigationController?.pushViewController(newVC, animated: true)
+//        let newVC = OpeningController()
+//        newVC.dataController = dataController
+//        newVC.delegate = self
+//        navigationController?.pushViewController(newVC, animated: true)
     }
     
     
@@ -120,15 +124,18 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations[0] as CLLocation
         print("(latitude, longitude) = \(userLocation.coordinate.latitude) .... \(userLocation.coordinate.longitude)")
-        NotificationCenter.default.post(name: Notification.Name("locationFound"), object: nil)
         
         
+        //var possibleInsertLocationCoordinate: CLLocation!
         
-        let newVC = SearchByMapController()
+        let newVC = OpeningController()
         newVC.dataController = dataController
-        newVC.delegate = self   //To center slide-Map at current location
+        //newVC.delegate = self
+        newVC.possibleInsertLocationCoordinate = userLocation
+        locationManager.stopUpdatingLocation()
         navigationController?.pushViewController(newVC, animated: true)
         
+        //NotificationCenter.default.post(name: Notification.Name("locationFound"), object: nil)
     }
 }
 
