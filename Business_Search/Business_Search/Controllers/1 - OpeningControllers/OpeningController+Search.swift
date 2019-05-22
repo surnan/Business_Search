@@ -29,9 +29,6 @@ extension OpeningController: UISearchResultsUpdating {
         tableView.reloadData()
     }
 
-//    let coord = possibleInsertLocationCoordinate.coordinate
-//    currentLatitude = coord.latitude; currentLongitude = coord.longitude
-    
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() {
