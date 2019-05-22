@@ -41,6 +41,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
             return cell
+            
+            
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
@@ -48,6 +50,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             _fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
             cell.name = currentCategoryName
+            
             do {
                 let count = try dataController.viewContext.count(for: _fetchRequest)
                 cell.count = count
@@ -56,6 +59,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
                 print("Failed to get Count inside cellForRowAt: \n\(error)")
             }
             return cell
+            
         default:
             print("Something Bad HAPPENED inside cellForRowAt:")
             return UITableViewCell()
@@ -93,6 +97,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
         if tableViewArrayType == TableIndex.category.rawValue {
             guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
             listBusinesses(category: currentCategory)
@@ -119,6 +124,11 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         
         var businessArray = [Business]()
         fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
+
+        businessArray = businessArray.filter{
+            return $0.parentLocation?.latitude == currentLatitude &&
+                $0.parentLocation?.longitude == currentLongitude }
+        
         
         let newVC2 = MyTabController()
         newVC2.businesses = businessArray
