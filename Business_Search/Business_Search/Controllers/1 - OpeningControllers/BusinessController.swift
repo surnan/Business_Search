@@ -40,7 +40,7 @@ class BusinessController: UIViewController {
                 let attributes: [NSAttributedString.Key: Any] = [
                     .foregroundColor : UIColor.blue,
                     .font: UIFont(name: "Arial", size: 25) as Any,
-                    //                    NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+                    // NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
                 ]
                 phoneNumberLabel.attributedText = NSAttributedString(string: phoneText, attributes: attributes)
                 phoneNumberLabel.textAlignment = .center
