@@ -10,10 +10,8 @@ import UIKit
 import CoreLocation
 import MapKit
 
-let cornerRadiusSize: CGFloat = 5.0
-let customUIHeightSize: CGFloat = 55
 
-class SearchByAddressController: UIViewController, UITextFieldDelegate {
+class SearchByAddressController2: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         view.endEditing(true)
@@ -25,6 +23,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     }
     
     var dataController: DataController!
+    var delegate: MenuControllerProtocol?
     
     var globalLocation = CLLocation()
     let geoCoder = CLGeocoder()
@@ -41,6 +40,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         mapView.isScrollEnabled = false
         return mapView
     }()
@@ -85,33 +85,19 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @objc func handleNext(){
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
-        newVC.possibleInsertLocationCoordinate = temp
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-    
-    
     @objc func handleRight(){
         let newVC = OpeningController()
         newVC.dataController = dataController
         let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
         newVC.possibleInsertLocationCoordinate = temp
-        //newVC.possibleInsertLocationCoordinate = globalLocation
         navigationController?.pushViewController(newVC, animated: true)
     }
     
     
     func setupNavigationManu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight)),
-                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "NEXT", style: .done, target: self, action: #selector(handleRight))
     }
     
-    @objc func handlePause() {
-        print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")
-    }
     
     func setupUI(){
         let stackView: UIStackView = {
@@ -150,6 +136,27 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .skyBlue4
         setupNavigationManu()
         setupUI()
+        setupNotificationReceiver()
         locationTextField.delegate = self
+    }
+    
+    
+    //MARK:- Notification Observer
+    func setupNotificationReceiver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
+        //        print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
+    }
+    
+    
+    @objc func locationFound(){
+        //        let temp2 = delegate?.getUserLocation()
+        //        print("delegate --> \(String(describing: temp2))")
+        guard let temp = delegate?.getUserLocation() else { return }
+        possibleInsertLocationCoordinate = temp
+        delegate?.stopGPS()
+        mapView.isHidden = false
+        //        print("SearchByMapController --> locationFound --> possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
+        let coordinate = possibleInsertLocationCoordinate.coordinate
+        mapView.region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
     }
 }

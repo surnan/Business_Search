@@ -109,7 +109,8 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         case 2:
             let newVC = SearchByAddressController()
             newVC.dataController = dataController
-            newVC.delegate = self   //To center slide-Map at current location
+            newVC.possibleInsertLocationCoordinate = userLocation
+            //newVC.delegate = self   //To center slide-Map at current location
             navigationController?.pushViewController(newVC, animated: true)
         default:
             break
