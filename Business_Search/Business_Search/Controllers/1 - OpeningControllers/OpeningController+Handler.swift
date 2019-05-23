@@ -26,16 +26,11 @@ extension OpeningController {
             do {
                 try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
-                
                 queueForSavingBusinesses(data)
-                
-//                newLocation.saveBusinessesAndCategories(yelpData: data, context: backgroundContext) //2
                 self.buildURLsQueueForDownloadingBusinesses(total: data.total)    //Because background context, best way to time save happens first
-                
                 fetchBusinessController = nil
                 fetchCategoriesController = nil
                 tableView.reloadData()
-                
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }

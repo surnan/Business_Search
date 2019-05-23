@@ -32,9 +32,6 @@ extension OpeningController {
         guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
         possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
 
-        currentLatitude = latitude
-        currentLongitude = longitude
-        
         fetchLocationController = nil   //locations only reset here in this app
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects
@@ -48,7 +45,7 @@ extension OpeningController {
                 let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
                 let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-                //print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
+                print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
             }
         }
     }
@@ -84,7 +81,7 @@ extension OpeningController {
             
             if locationArray!.isEmpty && !locationPassedIn{
                 locationPassedIn = true
-                currentLatitude = coord.latitude; currentLongitude = coord.longitude
+                latitude = coord.latitude; longitude = coord.longitude
                 _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
                 return
             }
@@ -96,16 +93,12 @@ extension OpeningController {
             var index = 0
             
             while index < _locationArray.count {
-                //let tempLocation = CLLocation(latitude: $0.latitude, longitude: $0.longitude)
                 let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
                 let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
                 let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
                 
-                //print("[\($0.latitude), \($0.longitude)]====> \(String(format: "%.2f", miles)) miles")
                 if miles < 1.0 {
-                    //currentLatitude = $0.latitude; currentLongitude = $0.longitude
-                    currentLatitude = _locationArray[index].latitude; currentLongitude = _locationArray[index].longitude
-                    //fetchAllNoPredicate()
+                    latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
                     fetchBusinessController = nil
                     tableView.reloadData()
                     return
@@ -115,7 +108,7 @@ extension OpeningController {
 
             
             //This is a new LOCATION
-            currentLatitude = coord.latitude; currentLongitude = coord.longitude
+            latitude = coord.latitude; longitude = coord.longitude
             _ = YelpClient.getBusinesses(latitude: coord.latitude, longitude: coord.longitude, completion: handleGetNearbyBusinesses(inputData:result:))
         }
     }
@@ -160,6 +153,7 @@ extension OpeningController {
         }
         predicateTest = false
         
+        //FetchController Reset NOT predicate reset
         fetchLocationController = nil
         fetchBusinessController = nil
         fetchCategoriesController = nil

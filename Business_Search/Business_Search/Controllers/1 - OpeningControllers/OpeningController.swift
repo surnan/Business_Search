@@ -87,11 +87,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }()
     
     //MARK:- Predicates
-    var currentLatitude = 0.0
-    var currentLongitude = 0.0
-    
-    //lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), currentLatitude])
-    //lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), currentLongitude])
     
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
@@ -173,11 +168,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), currentLatitude])
-    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), currentLongitude])
+    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude ?? 0.0])
+    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude ?? 0.0])
     
-    lazy var predicateCatLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), currentLatitude])
-    lazy var predicateCatLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), currentLongitude])
+    lazy var predicateCatLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude ?? 0.0])
+    lazy var predicateCatLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude ?? 0.0])
     
     
     var fetchCategoryNames: [String]? {   //+1
