@@ -127,8 +127,6 @@ class BusinessController: UIViewController {
         return stack
     }()
     
-    
-    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
         [addressLabel, phoneNumberButton, priceLabel, ratingLabel].forEach{stackView.addArrangedSubview($0)}
@@ -153,9 +151,7 @@ class BusinessController: UIViewController {
         }
     }
     
-    
     @objc func pauseFunc(){
         print("")
     }
-    
 }

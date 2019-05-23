@@ -18,7 +18,8 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     var latitude: Double!                                       //MARK: Injected
     var longitude: Double!                                      //MARK: Injected
-    var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
+    var moc: NSManagedObjectContext!                            //Parent-Context
+    var privateMoc: NSManagedObjectContext!                     //Child-Context for CoreData Concurrency
     var dataController: DataController!{                        //MARK: Injected
         didSet {
             moc = dataController.viewContext
@@ -27,30 +28,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }
     }
     
-    var moc: NSManagedObjectContext!
-    var privateMoc: NSManagedObjectContext!
-    
-    
-    
-    var locationPassedIn = false                                //after delegate.stopGPS(), NSNotification still fires a couple more times
+    var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
     var doesLocationEntityExist = false                         //set true after we create location or find location
-    
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]()        //enumeration loop for semaphores
     var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
     var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
-    
-    var myQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        return queue
-    }()
-    
-    let activityView: UIActivityIndicatorView = {
-        let activityVC = UIActivityIndicatorView()
-        activityVC.hidesWhenStopped = true
-        activityVC.style = .gray
-        return activityVC
-    }()
     
     enum TableIndex:Int {
         case business = 0, category
@@ -141,13 +123,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             if fetchCategoriesController == nil { //+3
                 fetchCategoriesController = {   //+4
                     let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-                    
-                    
                     if let _selectedPredicate = selectedCategoryPredicate {
                         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [_selectedPredicate])
                     }
-                    
-                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -166,15 +144,15 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude ?? 0.0])
-    lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude ?? 0.0])
-    lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude ?? 0.0])
-    lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude ?? 0.0])
+    //latitude and longitude MUST when this Controller is created
+    lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
+    lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude!])
+    lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude!])
+    lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude!])
     
-    
-    var fetchCategoryNames: [String]? {   //+1
-        didSet {    //+2
-            if fetchCategoryNames == nil {    //+3
+    var fetchCategoryNames: [String]? {
+        didSet {
+            if fetchCategoryNames == nil {
                 //By default, returns .ManagedObjectResultType = Actual Objects
                 // .dictionaryResultType used for 'returnsDistinctResults'
                 let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
@@ -204,7 +182,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     try controller.performFetch()
                     let temp = controller.fetchedObjects
                     var answer = [String]()
-                    
                     temp?.forEach({ (element) in
                         let tempString = element.value(forKey: "title") as! String
                         answer.append(tempString)
@@ -213,15 +190,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 } catch {
                     print("Fail to PerformFetch inside categoryFinalArray:")
                 }
-            }   //-3
-        }   //-2
-    }   //-1
+            }
+        }
+    }
     
-    
-    var fetchLocationController: NSFetchedResultsController<Location>? { //+1
-        didSet {    //+2
-            if fetchLocationController == nil { //+3
-                fetchLocationController = {   //+4
+    var fetchLocationController: NSFetchedResultsController<Location>? {
+        didSet {
+            if fetchLocationController == nil {
+                fetchLocationController = {
                     let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
                     let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
@@ -236,12 +212,10 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                         fatalError("Unresolved error \(error)")
                     }
                     return aFetchedResultsController
-                }() //-4
-            }   //-3
-        }   //-2
-    }   //-1
-    
-    
+                }()
+            }
+        }
+    }
     
     //MARK:- UI
     lazy var searchController: UISearchController = {
@@ -254,16 +228,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         searchController.searchBar.barStyle = .black
         return searchController
     }()
-    
-    
-    deinit {
-        fetchLocationController = nil
-        fetchBusinessController = nil
-        fetchCategoriesController = nil
-        fetchCategoryNames = nil
-    }
-    
-    
 }
 
 

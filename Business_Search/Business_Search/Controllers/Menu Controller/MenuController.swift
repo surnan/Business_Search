@@ -67,10 +67,10 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     var previousCoordinates: CLLocation?
     
     @objc func handleButtons(_ sender: UIButton){
-//        determineMyCurrentLocation()
-//        controllerIndex = sender.tag
-//        activityView.startAnimating()
-        handleButtons2(sender)
+        determineMyCurrentLocation()
+        controllerIndex = sender.tag
+        activityView.startAnimating()
+//        handleButtons2(sender)
     }
     
     

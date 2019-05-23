@@ -15,30 +15,32 @@ extension OpeningController {
     
     //MARK:- ViewDidLoad()
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent                                                                //Status bar sometimes turns black when typing into search bar
-    }                                                                                       //Setting color scheme here just to play it safe
+        return .lightContent       //Status bar sometimes turns black when typing into search bar
+    }                              //Setting color scheme here just to play it safe
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        noGPS()
+        readOrCreateLocation()
     }
     
     func setupUI(){
-        [tableView, activityView].forEach{view.addSubview($0)}
-        nothingFoundView.center = view.center                                               //UILabel When tableView is empty
+        [tableView].forEach{view.addSubview($0)}
+        nothingFoundView.center = view.center                               //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
         setupNavigationMenu()
         definesPresentationContext = true
     }
     
-    func noGPS(){  //Check if location exists or download
-        fetchLocationController = nil                                                       //Only time Locations should be loaded
+    func readOrCreateLocation(){  //Check if location exists or download
+        fetchLocationController = nil                                       //Only time Locations should be loaded
         let locationArray = fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
-            _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+            _ = YelpClient.getBusinesses(latitude: latitude,
+                                         longitude: longitude,
+                                         completion: handleGetNearbyBusinesses(inputData:result:))
             return
         }
         
@@ -46,20 +48,21 @@ extension OpeningController {
         let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
         
         //While Loop so the return can break out of the function with 'return'
-        while index < _locationArray.count {    //+1
+        while index < _locationArray.count {
             let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
             let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
             
-            if miles < 1.0 {   //+2
+            if miles < 1.0 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
-                fetchBusinessController = nil
-                tableView.reloadData()
-                return                                                                      //Exit the function
-            }   //-2
+                reloadFetchControllers()
+                return                           //Exit the function
+            }
             index += 1
-        }   //-1
-        _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
+        }
+        _ = YelpClient.getBusinesses(latitude: latitude,
+                                     longitude: longitude,
+                                     completion: handleGetNearbyBusinesses(inputData:result:))
     }
     
     //MARK:- Navigation Menu
@@ -80,11 +83,8 @@ extension OpeningController {
     }
     
     @objc func handleDownloadBusinesses(){
-        //  1 - Delete all existing data in Core Data and run Yelp.xxx to re-download everything for (latitude/longitude)
         deleteAll()
-        self.fetchBusinessController = nil
-        self.fetchCategoriesController = nil
-        //  -1
+        reloadFetchControllers()
         _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
     }
     
@@ -97,29 +97,17 @@ extension OpeningController {
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
             do {
                 _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
-                self.fetchBusinessController = nil
-                self.fetchCategoriesController = nil
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.reloadFetchControllers()
             } catch {
                 print("Error deleting All \(error)")
             }
         }
     }
     
-    
-    
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-
-        //FetchController Reset NOT predicate reset
-        fetchLocationController = nil
-        fetchBusinessController = nil
-        fetchCategoriesController = nil
-        fetchCategoryNames = nil
         tableView.reloadData()
     }
 }

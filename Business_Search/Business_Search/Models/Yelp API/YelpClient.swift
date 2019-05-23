@@ -125,8 +125,6 @@ class YelpClient{
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
             
-            print("-----> URL = \(url)\n\n")
-            
             if let error = err {
                 switch error._code {
                 case -1001: return completion(.failure(.networkTimeOut))
