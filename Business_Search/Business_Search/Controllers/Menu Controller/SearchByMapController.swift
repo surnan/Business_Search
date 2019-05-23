@@ -40,11 +40,12 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         return imageView
     }()
 
+    
+    
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         //Set Center for MapView
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         mapView.delegate = self
         mapView.isHidden = true
         return mapView
@@ -92,7 +93,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
             ])
         setupNavigationMenu()
-//        setupNotificationReceiver()
     }
     
     
@@ -100,13 +100,10 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     func setupNotificationReceiver(){
         activityView.center = view.center
         NotificationCenter.default.addObserver(self, selector: #selector(locationFound), name: Notification.Name("locationFound"), object: nil)
-        //print("possibleInsertLocationCoordinate ==> \(String(describing: possibleInsertLocationCoordinate))")
     }
     
     
     @objc func locationFound(){
-//        let temp2 = delegate?.getUserLocation()
-//        print("delegate --> \(String(describing: temp2))")
         guard let temp = delegate?.getUserLocation() else { return }
         activityView.stopAnimating()
         possibleInsertLocationCoordinate = temp
