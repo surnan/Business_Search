@@ -38,11 +38,14 @@ extension OpeningController {
     }
     
     func queueForSavingBusinesses(_ data: (YelpBusinessResponse)) {
-        myQueue.addOperation {
-            self.dataController.persistentContainer.performBackgroundTask {[unowned self] (context) in
-                //Giving Core Data the chance to perform multiple instances in parallel
-                let currentLocation = context.object(with: self.currentLocationID!) as! Location
-                currentLocation.saveBusinessesAndCategories(yelpData: data, context: context)
+        privateMoc.performAndWait {[weak self] in
+            guard let self = self else {return}
+            let currentLocation = self.privateMoc.object(with: self.currentLocationID!) as! Location
+            currentLocation.saveBusinessesAndCategories(yelpData: data, context: self.privateMoc)
+            do {
+                try self.moc.save()
+            } catch {
+                print("Error saving parent context 'func queueForSavingBusinesses'")
             }
         }
     }

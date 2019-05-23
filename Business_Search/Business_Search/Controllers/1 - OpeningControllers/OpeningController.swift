@@ -16,24 +16,21 @@ let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
-    
-    var dataController: DataController!                         //MARK: Injected
-    
-    
-//    var possibleInsertLocationCoordinate: CLLocation!  {        //SearchByMapController
-//        didSet {
-//            let coord = possibleInsertLocationCoordinate.coordinate
-//            latitude = coord.latitude
-//            longitude = coord.longitude
-//        }
-//    }
-    
-    
-    
-    var latitude: Double!
-    var longitude: Double!
-    
+    var latitude: Double!                                       //MARK: Injected
+    var longitude: Double!                                      //MARK: Injected
     var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
+    var dataController: DataController!{                        //MARK: Injected
+        didSet {
+            moc = dataController.viewContext
+            privateMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            privateMoc.parent = moc
+        }
+    }
+    
+    var moc: NSManagedObjectContext!
+    var privateMoc: NSManagedObjectContext!
+    
+    
     
     var locationPassedIn = false                                //after delegate.stopGPS(), NSNotification still fires a couple more times
     var doesLocationEntityExist = false                         //set true after we create location or find location
