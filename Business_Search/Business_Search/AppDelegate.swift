@@ -19,8 +19,8 @@ var locale = "en_US"
 //PAIR - DONE
 //Download - TOP
 
-var latitude: Double!
-var longitude: Double!
+//var latitude: Double!
+//var longitude: Double!
 
 
 //var latitude = 40.705199; var longitude = -74.007086    //100 Wall Street 10005
