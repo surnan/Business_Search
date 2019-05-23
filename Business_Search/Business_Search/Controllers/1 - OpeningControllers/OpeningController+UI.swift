@@ -31,12 +31,10 @@ extension OpeningController {
     func fromNearbySearch(){  //Push directly from MenuController
         guard let tempPossibleInsertLocationCoordinate = delegate?.getUserLocation() else { return }
         possibleInsertLocationCoordinate = tempPossibleInsertLocationCoordinate
-        
-        let coord = possibleInsertLocationCoordinate.coordinate
-        currentLatitude = coord.latitude; currentLongitude = coord.longitude
 
-        delegate?.stopGPS()
-        //print("possibleInsertLocationCoordinate ----> \(String(describing: possibleInsertLocationCoordinate))")
+        currentLatitude = latitude
+        currentLongitude = longitude
+        
         fetchLocationController = nil   //locations only reset here in this app
         if possibleInsertLocationCoordinate != nil {
             let locationArray = fetchLocationController?.fetchedObjects

@@ -18,8 +18,18 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
     var dataController: DataController!                 //MARK: Injected
-    var possibleInsertLocationCoordinate: CLLocation!   //SearchByMapController
     var searchLocation: Location!                       //SearchController textField
+    
+    var possibleInsertLocationCoordinate: CLLocation!  { //SearchByMapController
+        didSet {
+            let coord = possibleInsertLocationCoordinate.coordinate
+            latitude = coord.latitude
+            longitude = coord.longitude
+        }
+    }
+    var latitude: Double!
+    var longitude: Double!
+    
     
     var delegate: MenuControllerProtocol?       //Get Coordinates from 'Search Nearby'
     var currentLocationID: NSManagedObjectID?   //Used to connect newly downloaded Business to Location
