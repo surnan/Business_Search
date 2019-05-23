@@ -79,17 +79,11 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @objc func _______________handleNext(){
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        newVC.possibleInsertLocationCoordinate = locationToForward
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-    
     @objc func handleRight(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        newVC.possibleInsertLocationCoordinate = locationToForward
+        newVC.latitude = locationToForward.coordinate.latitude
+        newVC.longitude = locationToForward.coordinate.longitude
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -154,13 +148,3 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     }
 }
 
-/*
- @objc func handleRight(){
- let newVC = OpeningController()
- newVC.dataController = dataController
- let temp = CLLocation(latitude: locationToForward.coordinate.latitude, longitude: locationToForward.coordinate.longitude)
- newVC.possibleInsertLocationCoordinate = temp
- //newVC.possibleInsertLocationCoordinate = globalLocation
- navigationController?.pushViewController(newVC, animated: true)
- }
- */

@@ -52,8 +52,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
             
             _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [myPredicate,
-                                                                                         predicateCatLatitude,
-                                                                                         predicateCatLongitude])
+                                                                                         predicateCategoryLatitude,
+                                                                                         predicateCategoryLongitude])
             
             cell.name = currentCategoryName
             

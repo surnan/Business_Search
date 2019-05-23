@@ -54,7 +54,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     @objc func handleNext(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        newVC.possibleInsertLocationCoordinate = locationToForward
+        newVC.latitude = locationToForward.coordinate.latitude
+        newVC.longitude = locationToForward.coordinate.longitude
         navigationController?.pushViewController(newVC, animated: true)
     }
 

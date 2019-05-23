@@ -17,29 +17,32 @@ let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
-    var dataController: DataController!                 //MARK: Injected
-    var searchLocation: Location!                       //SearchController textField
+    var dataController: DataController!                         //MARK: Injected
     
-    var possibleInsertLocationCoordinate: CLLocation!  { //SearchByMapController
-        didSet {
-            let coord = possibleInsertLocationCoordinate.coordinate
-            latitude = coord.latitude
-            longitude = coord.longitude
-        }
-    }
+    
+//    var possibleInsertLocationCoordinate: CLLocation!  {        //SearchByMapController
+//        didSet {
+//            let coord = possibleInsertLocationCoordinate.coordinate
+//            latitude = coord.latitude
+//            longitude = coord.longitude
+//        }
+//    }
+    
+    
+    
     var latitude: Double!
     var longitude: Double!
     
     
-    var delegate: MenuControllerProtocol?       //Get Coordinates from 'Search Nearby'
-    var currentLocationID: NSManagedObjectID?   //Used to connect newly downloaded Business to Location
+    var delegate: MenuControllerProtocol?                       //Get Coordinates from 'Search Nearby'
+    var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
     
-    var locationPassedIn = false            //after delegate.stopGPS(), NSNotification still fires a couple more times
-    var doesLocationEntityExist = false     //set true after we create location or find location
+    var locationPassedIn = false                                //after delegate.stopGPS(), NSNotification still fires a couple more times
+    var doesLocationEntityExist = false                         //set true after we create location or find location
     
-    var urlsQueue = [CreateYelpURLDuringLoopingStruct]()    //enumeration loop for semaphores
-    var searchGroupIndex = 0                                //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
-    var tableViewArrayType: Int { return searchGroupIndex } //Enables functions to know which SearchGroup is selected
+    var urlsQueue = [CreateYelpURLDuringLoopingStruct]()        //enumeration loop for semaphores
+    var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
+    var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
     
     var myQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -113,11 +116,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
                     if let fetchBusinessPredicate = fetchBusinessPredicate {
                         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchBusinessPredicate,
-                                                                                                     predicateLatitude,
-                                                                                                     predicateLongitude])
+                                                                                                     predicateBusinessLatitude,
+                                                                                                     predicateBusinessLongitude])
                     } else {
-                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateLatitude,
-                                                                                                     predicateLongitude])
+                        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateBusinessLatitude,
+                                                                                                     predicateBusinessLongitude])
                     }
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
@@ -168,11 +171,10 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    lazy var predicateLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude ?? 0.0])
-    lazy var predicateLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude ?? 0.0])
-    
-    lazy var predicateCatLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude ?? 0.0])
-    lazy var predicateCatLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude ?? 0.0])
+    lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude ?? 0.0])
+    lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude ?? 0.0])
+    lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude ?? 0.0])
+    lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude ?? 0.0])
     
     
     var fetchCategoryNames: [String]? {   //+1
@@ -189,11 +191,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 
                 if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
                     fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate,
-                                                                                                 predicateCatLatitude,
-                                                                                                 predicateCatLongitude])
+                                                                                                 predicateCategoryLatitude,
+                                                                                                 predicateCategoryLongitude])
                 } else {
-                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateCatLatitude,
-                                                                                                 predicateCatLongitude])
+                    fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateCategoryLatitude,
+                                                                                                 predicateCategoryLongitude])
                 }
                 
                 let controller = NSFetchedResultsController(

@@ -19,8 +19,6 @@
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
 		844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Categories+Extension.swift */; };
 		846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846509B9227A0C06008ABA9F /* OpeningController.swift */; };
-		847935882296370300537895 /* ManuController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847935872296370300537895 /* ManuController2.swift */; };
-		8479358C2296775900537895 /* BACKUP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479358B2296775900537895 /* BACKUP.swift */; };
 		848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* 2 - MapController.swift */; };
 		848761D0227F176F000CECC7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -64,8 +62,6 @@
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844F64B52277B3E0003E6A93 /* Categories+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categories+Extension.swift"; sourceTree = "<group>"; };
 		846509B9227A0C06008ABA9F /* OpeningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		847935872296370300537895 /* ManuController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManuController2.swift; sourceTree = "<group>"; };
-		8479358B2296775900537895 /* BACKUP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BACKUP.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* 2 - MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2 - MapController.swift"; sourceTree = "<group>"; };
 		848761CF227F176F000CECC7 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -160,9 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				848761CF227F176F000CECC7 /* MenuController.swift */,
-				847935872296370300537895 /* ManuController2.swift */,
 				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
-				8479358B2296775900537895 /* BACKUP.swift */,
 				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
 			);
 			path = "Menu Controller";
@@ -209,9 +203,9 @@
 		84BDE3022263D36E008C9B01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84D3DB9F22675B0B00E46B2E /* Cells */,
 				848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */,
 				848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */,
-				84D3DB9F22675B0B00E46B2E /* Cells */,
 				84BDE3052263D3CD008C9B01 /* UIColor+Extension.swift */,
 				84BDE3042263D3CD008C9B01 /* UIView+Extensions.swift */,
 				84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */,
@@ -346,7 +340,6 @@
 				8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
-				847935882296370300537895 /* ManuController2.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
@@ -362,7 +355,6 @@
 				848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */,
 				842AD7D52284D74D00590B1A /* OpeningController+UI.swift in Sources */,
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
-				8479358C2296775900537895 /* BACKUP.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessController.swift in Sources */,
 				843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */,
