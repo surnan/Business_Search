@@ -19,6 +19,7 @@
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
 		844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Categories+Extension.swift */; };
 		846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846509B9227A0C06008ABA9F /* OpeningController.swift */; };
+		847935882296370300537895 /* ManuController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847935872296370300537895 /* ManuController2.swift */; };
 		848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* 2 - MapController.swift */; };
 		848761D0227F176F000CECC7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -62,6 +63,7 @@
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844F64B52277B3E0003E6A93 /* Categories+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categories+Extension.swift"; sourceTree = "<group>"; };
 		846509B9227A0C06008ABA9F /* OpeningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		847935872296370300537895 /* ManuController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManuController2.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* 2 - MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2 - MapController.swift"; sourceTree = "<group>"; };
 		848761CF227F176F000CECC7 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				848761CF227F176F000CECC7 /* MenuController.swift */,
+				847935872296370300537895 /* ManuController2.swift */,
 				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
 				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
 			);
@@ -340,6 +343,7 @@
 				8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
+				847935882296370300537895 /* ManuController2.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,

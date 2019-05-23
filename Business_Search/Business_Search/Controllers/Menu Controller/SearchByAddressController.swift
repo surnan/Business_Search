@@ -42,7 +42,6 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         mapView.isScrollEnabled = false
         return mapView
     }()
