@@ -117,10 +117,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
             verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             ])
     }
-   
-    func stopGPS() {
-        locationManager.stopUpdatingLocation()
-    }
     
     func determineMyCurrentLocation() {
         locationManager = CLLocationManager()
