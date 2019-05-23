@@ -83,7 +83,8 @@ extension OpeningController {
     
     func buildURLsQueueForDownloadingBusinesses(total: Int){
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){
-            urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: index))
+            let coord = possibleInsertLocationCoordinate.coordinate
+            urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: coord.latitude, longitude: coord.longitude, offset: index))
         }
         downloadYelpBusinesses()
     }

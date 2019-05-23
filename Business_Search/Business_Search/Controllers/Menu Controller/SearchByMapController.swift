@@ -12,11 +12,10 @@ import CoreLocation
 
 
 class SearchByMapController: UIViewController, MKMapViewDelegate{
-    var dataController: DataController!
-    var searchLocationCoordinate: CLLocationCoordinate2D!
+    var dataController: DataController!                 //Injected from MenuController()
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     
-    var globalLocation = CLLocation()
+    var locationToForward = CLLocation()                //Pushing into newController()
     
     let pinImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin2"))
@@ -47,8 +46,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     //MARK:- Map Delegate Function
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        globalLocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        searchLocationCoordinate = mapView.centerCoordinate
+        locationToForward = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
     }
     
     @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
@@ -56,8 +54,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     @objc func handleNext(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
-        newVC.possibleInsertLocationCoordinate = temp
+        newVC.possibleInsertLocationCoordinate = locationToForward
         navigationController?.pushViewController(newVC, animated: true)
     }
 
