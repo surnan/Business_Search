@@ -112,17 +112,9 @@ extension OpeningController {
     
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
-        print("")
-        tableView.reloadData()
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-        
-        print("====  fetchBusinessController?.fetchedObjects?.forEach   =====")
-        fetchBusinessController?.fetchedObjects?.forEach{
-            print("name = \($0.name ?? "")")
-        }
-        predicateTest = false
-        
+
         //FetchController Reset NOT predicate reset
         fetchLocationController = nil
         fetchBusinessController = nil
