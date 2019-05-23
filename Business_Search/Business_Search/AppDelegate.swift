@@ -35,17 +35,6 @@ var locale = "en_US"
 //var latitude = 40.759153; var longitude = -73.919044     //31-90 Steinway St, Astoria, NY 11103
 
 
-
-
-//  If context.has changes --> context.save on app goes to sleep or ends
-/*
- do {
- } catch let error as NSError {
- print("Error = \(error), \(error.userInfo)")
- } 
- */
-
-
 let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
                              .ghostWhite, .greyOrange, .darkOrange, .white, .lightRed,
                              .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]
@@ -76,9 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let startingVC = MenuController()
-//        let startingVC = OpeningController()
-        
-        
         startingVC.dataController = dataController
         window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
         return true
