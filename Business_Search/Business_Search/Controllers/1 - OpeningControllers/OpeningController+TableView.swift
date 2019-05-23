@@ -133,8 +133,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
 
         businessArray = businessArray.filter{
-            return $0.parentLocation?.latitude == currentLatitude &&
-                $0.parentLocation?.longitude == currentLongitude }
+            return $0.parentLocation?.latitude == latitude &&
+                $0.parentLocation?.longitude == longitude }
         
         
         let newVC2 = MyTabController()
