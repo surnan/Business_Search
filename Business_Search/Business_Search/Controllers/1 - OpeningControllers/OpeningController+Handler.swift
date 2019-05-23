@@ -22,15 +22,12 @@ extension OpeningController {
             newLocation.totalBusinesses = Int32(data.total)
             newLocation.radius = Int32(radius)  //AppDelegate
             recordCountAtLocation = data.total
-
             do {
                 try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
                 queueForSavingBusinesses(data)
-                self.buildURLsQueueForDownloadingBusinesses(total: data.total)    //Because background context, best way to time save happens first
-                fetchBusinessController = nil
-                fetchCategoriesController = nil
-                tableView.reloadData()
+                self.buildURLsQueueForDownloadingBusinesses(total: data.total)
+                reloadFetchControllers()
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }
@@ -81,8 +78,6 @@ extension OpeningController {
     
     func buildURLsQueueForDownloadingBusinesses(total: Int){
         for index in stride(from: limit, to: recordCountAtLocation, by: limit){
-            //let coord = possibleInsertLocationCoordinate.coordinate
-            //urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: coord.latitude, longitude: coord.longitude, offset: index))
             urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: index))
         }
         downloadYelpBusinesses()
@@ -133,10 +128,8 @@ extension OpeningController {
     }
     
     func runDownloadAgain(){
+        reloadFetchControllers()
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
-        self.fetchBusinessController = nil
-        self.fetchCategoriesController = nil
-        tableView.reloadData()
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in

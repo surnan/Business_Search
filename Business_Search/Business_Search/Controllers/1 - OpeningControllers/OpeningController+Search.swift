@@ -10,37 +10,35 @@ import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
     
-    func fetchAllNoPredicate() {
+    func reloadResetFetchControllers() {
         fetchBusinessPredicate = nil
         fetchCategoryArrayNamesPredicate = nil
         fetchBusinessController = nil
         fetchCategoryNames = nil
+        tableView.reloadData()
     }
     
-    func fetchWithPredicate() {
+    func reloadFetchControllers() {
         fetchBusinessController = nil
         fetchCategoryNames = nil
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
-    
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        fetchAllNoPredicate()
-        tableView.reloadData()
+        reloadResetFetchControllers()
     }
 
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() {
-            fetchAllNoPredicate()
-            tableView.reloadData()
+            reloadResetFetchControllers()
             return
         }
-        
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        fetchWithPredicate()
-        tableView.reloadData()
+        reloadFetchControllers()
     }
     
     // MARK: - Private instance methods

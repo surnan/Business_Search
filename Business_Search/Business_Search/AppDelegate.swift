@@ -41,16 +41,13 @@ let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     var dataController = DataController(modelName: "YelpDataModels")
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         print(urls[urls.count-1] as URL)    //prints app directory path
-        
         dataController.load()
         
         //UIAppearance Proxy

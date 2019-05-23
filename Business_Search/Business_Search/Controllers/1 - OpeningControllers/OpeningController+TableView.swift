@@ -41,22 +41,16 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
             return cell
-            
-            
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
             let currentCategoryName = fetchCategoryNames?[indexPath.row]
-            
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-            
             _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [myPredicate,
                                                                                          predicateCategoryLatitude,
                                                                                          predicateCategoryLongitude])
-            
             cell.name = currentCategoryName
-            
             do {
                 let count = try dataController.viewContext.count(for: _fetchRequest)
                 cell.count = count
@@ -65,7 +59,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
                 print("Failed to get Count inside cellForRowAt: \n\(error)")
             }
             return cell
-            
         default:
             print("Something Bad HAPPENED inside cellForRowAt:")
             return UITableViewCell()
@@ -103,15 +96,25 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        if tableViewArrayType == TableIndex.category.rawValue {
+        //        if tableViewArrayType == TableIndex.category.rawValue {
+        //            guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
+        //            listBusinesses(category: currentCategory)
+        //        }
+        //
+        //        if tableViewArrayType == TableIndex.business.rawValue {
+        //            guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
+        //            showBusinessInfo(currentBusiness: currentBusiness)
+        //        }
+        
+        switch tableViewArrayType {
+        case TableIndex.category.rawValue:
             guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
             listBusinesses(category: currentCategory)
-        }
-        
-        if tableViewArrayType == TableIndex.business.rawValue {
+        case TableIndex.business.rawValue:
             guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
             showBusinessInfo(currentBusiness: currentBusiness)
+        default:
+            print("Illegal Value inside tableViewArrayType")
         }
     }
     
@@ -129,18 +132,17 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
         fetchCategoriesController = nil
         
-        var businessArray = [Business]()
+        var businessArray = [Business]()    //Pushed into next ViewController
         fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
-
         businessArray = businessArray.filter{
             return $0.parentLocation?.latitude == latitude &&
-                $0.parentLocation?.longitude == longitude }
-        
-        
-        let newVC2 = MyTabController()
-        newVC2.businesses = businessArray
-        newVC2.categoryName = category
-        navigationController?.pushViewController(newVC2, animated: true)
+                $0.parentLocation?.longitude == longitude
+        }
+
+        let newVC = MyTabController()
+        newVC.businesses = businessArray
+        newVC.categoryName = category
+        navigationController?.pushViewController(newVC, animated: true)
     }
 }
 

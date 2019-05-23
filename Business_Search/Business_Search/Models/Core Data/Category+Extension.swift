@@ -14,7 +14,6 @@ extension Category {
         if  rhs.title == self.title {
             categoryMatch += 1
         }
-        
         return rhs.title == self.title
     }
 }

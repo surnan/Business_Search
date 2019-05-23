@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct YelpAPIErrorResponse: Codable {
     struct ErrorStruct: Codable {
         var code: String
