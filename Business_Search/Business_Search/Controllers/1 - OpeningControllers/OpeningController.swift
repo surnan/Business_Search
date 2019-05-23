@@ -33,8 +33,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var latitude: Double!
     var longitude: Double!
     
-    
-    var delegate: MenuControllerProtocol?                       //Get Coordinates from 'Search Nearby'
     var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
     
     var locationPassedIn = false                                //after delegate.stopGPS(), NSNotification still fires a couple more times

@@ -11,21 +11,11 @@ import CoreData
 import CoreLocation
 
 
-protocol MenuControllerProtocol {
-    func getUserLocation()->CLLocation?
-    func stopGPS()
-}
+class MenuController: UIViewController, CLLocationManagerDelegate {
 
-class MenuController: UIViewController, CLLocationManagerDelegate, MenuControllerProtocol {
-    func getUserLocation() -> CLLocation? {
-        return userLocation
-    }
-    
-
-    var dataController: DataController!  //MARK: Injected
-    
+    var dataController: DataController!     //MARK: Injected
     var locationManager: CLLocationManager!
-    var userLocation: CLLocation!   //CLLocation value provided via Apple GPS
+    var userLocation: CLLocation!           //CLLocation value provided via Apple GPS
 
     var nearMeSearchButton: UIButton = {
         let button = UIButton()
