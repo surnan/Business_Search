@@ -29,7 +29,13 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.region = MKCoordinateRegion(center: possibleInsertLocationCoordinate.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        
+        if let _ = possibleInsertLocationCoordinate {
+            mapView.region = MKCoordinateRegion(center: possibleInsertLocationCoordinate.coordinate,
+                                                latitudinalMeters: 500,
+                                                longitudinalMeters: 500)
+        }
+        
         mapView.delegate = self
         return mapView
     }()

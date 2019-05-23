@@ -17,6 +17,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     var locationManager: CLLocationManager!
     var userLocation: CLLocation!           //CLLocation value provided via Apple GPS
 
+    let activityView: UIActivityIndicatorView = {
+        let activityVC = UIActivityIndicatorView()
+        activityVC.hidesWhenStopped = true
+        activityVC.style = .gray
+        return activityVC
+    }()
+    
     var nearMeSearchButton: UIButton = {
         let button = UIButton()
         button.setTitle("Search near me", for: .normal)
@@ -60,9 +67,21 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     var previousCoordinates: CLLocation?
     
     @objc func handleButtons(_ sender: UIButton){
-        determineMyCurrentLocation()
-        controllerIndex = sender.tag
+//        determineMyCurrentLocation()
+//        controllerIndex = sender.tag
+//        activityView.startAnimating()
+        handleButtons2(sender)
     }
+    
+    
+    func handleButtons2(_ sender: UIButton){
+        let newVC = SearchByAddressController()
+        newVC.dataController = dataController
+        newVC.possibleInsertLocationCoordinate = userLocation
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations.last
@@ -79,6 +98,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     
     
     func pushNextController(){
+        activityView.stopAnimating()
         switch controllerIndex {
         case 0:
             let newVC = OpeningController()
@@ -103,6 +123,8 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        activityView.center = view.center
+        [activityView].forEach{view.addSubview($0)}
         previousCoordinates = nil
     }
     
