@@ -13,13 +13,12 @@ import MapKit
 let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
-class SearchByAddressController: UIViewController, UITextFieldDelegate {
+class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     var dataController: DataController!                 //Injected from MenuController()
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
-    
     var locationToForward = CLLocation()                //Pushing into newController()
-    let geoCoder = CLGeocoder()
     
+    let geoCoder = CLGeocoder()
 
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))
@@ -31,6 +30,10 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.region = MKCoordinateRegion(center: possibleInsertLocationCoordinate.coordinate,
+                                            latitudinalMeters: 500,
+                                            longitudinalMeters: 500)
+        mapView.delegate = self
         mapView.isScrollEnabled = false
         return mapView
     }()
@@ -57,7 +60,6 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
     
     @objc func handleFindButton(_ sender: UIButton){
         view.endEditing(true)
-        
         geoCoder.geocodeAddressString(locationTextField.text ?? "") { [weak self] (clplacement, error) in
             guard let placemarks = clplacement, let location = placemarks.first?.location else {
                 print("UNABLE to convert to CLL Coordinates")
@@ -65,10 +67,8 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
                 return
             }
             self?.locationToForward = location
-            //DispatchQueue.main.async {[weak self] in
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else {return}
-                //print("globalLocation --> \(String(describing: self?.globalLocation))")
                 let tempAnnotation = MKPointAnnotation()
                 tempAnnotation.coordinate = (self.locationToForward.coordinate)
                 self.mapView.addAnnotation(tempAnnotation)
