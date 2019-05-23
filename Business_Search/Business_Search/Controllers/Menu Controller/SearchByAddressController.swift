@@ -14,23 +14,13 @@ let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
 class SearchByAddressController: UIViewController, UITextFieldDelegate {
+    var dataController: DataController!                 //Injected from MenuController()
+    var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        view.endEditing(true)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        return true
-    }
-    
-    var dataController: DataController!
-    
-    var globalLocation = CLLocation()
+    var locationToForward = CLLocation()                //Pushing into newController()
     let geoCoder = CLGeocoder()
-    var searchLocationCoordinate: CLLocationCoordinate2D!
-    var possibleInsertLocationCoordinate: CLLocation!
     
+
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))
         imageView.contentMode = .scaleAspectFit
@@ -74,32 +64,32 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
                 sender.isSelected = false
                 return
             }
-            self?.globalLocation = location
+            self?.locationToForward = location
+            //DispatchQueue.main.async {[weak self] in
             DispatchQueue.main.async {[weak self] in
+                guard let self = self else {return}
                 //print("globalLocation --> \(String(describing: self?.globalLocation))")
                 let tempAnnotation = MKPointAnnotation()
-                tempAnnotation.coordinate = (self?.globalLocation.coordinate)!
-                self?.mapView.addAnnotation(tempAnnotation)
-                self?.mapView.setCenter(tempAnnotation.coordinate, animated: false)
+                tempAnnotation.coordinate = (self.locationToForward.coordinate)
+                self.mapView.addAnnotation(tempAnnotation)
+                self.mapView.setCenter(tempAnnotation.coordinate, animated: false)
+                let coord = self.mapView.centerCoordinate
+                self.locationToForward =  CLLocation(latitude: coord.latitude, longitude: coord.longitude)
             }
         }
     }
     
-    @objc func handleNext(){
+    @objc func _______________handleNext(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
-        newVC.possibleInsertLocationCoordinate = temp
+        newVC.possibleInsertLocationCoordinate = locationToForward
         navigationController?.pushViewController(newVC, animated: true)
     }
-    
     
     @objc func handleRight(){
         let newVC = OpeningController()
         newVC.dataController = dataController
-        let temp = CLLocation(latitude: globalLocation.coordinate.latitude, longitude: globalLocation.coordinate.longitude)
-        newVC.possibleInsertLocationCoordinate = temp
-        //newVC.possibleInsertLocationCoordinate = globalLocation
+        newVC.possibleInsertLocationCoordinate = locationToForward
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -152,4 +142,25 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate {
         setupUI()
         locationTextField.delegate = self
     }
+    
+    //MARK:- TextField Delegate
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
 }
+
+/*
+ @objc func handleRight(){
+ let newVC = OpeningController()
+ newVC.dataController = dataController
+ let temp = CLLocation(latitude: locationToForward.coordinate.latitude, longitude: locationToForward.coordinate.longitude)
+ newVC.possibleInsertLocationCoordinate = temp
+ //newVC.possibleInsertLocationCoordinate = globalLocation
+ navigationController?.pushViewController(newVC, animated: true)
+ }
+ */
