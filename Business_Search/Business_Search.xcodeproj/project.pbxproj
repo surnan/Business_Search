@@ -37,6 +37,7 @@
 		84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */; };
 		84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30E2263E652008C9B01 /* UNSYNC.swift */; };
 		84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE31022642B27008C9B01 /* YelpClient.swift */; };
+		84CC285D2297774800A82BBE /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC285C2297774800A82BBE /* SettingsController.swift */; };
 		84D3DB9E2266DF5200E46B2E /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */; };
 		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
 		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
@@ -82,6 +83,7 @@
 		84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		84BDE30E2263E652008C9B01 /* UNSYNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSYNC.swift; sourceTree = "<group>"; };
 		84BDE31022642B27008C9B01 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
+		84CC285C2297774800A82BBE /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
 		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
@@ -220,11 +222,20 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84CC285B2297772700A82BBE /* Settings Controller */,
 				848761D1227F1779000CECC7 /* Menu Controller */,
 				843C66F6227D2569003A64D1 /* 1 - OpeningControllers */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		84CC285B2297772700A82BBE /* Settings Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84CC285C2297774800A82BBE /* SettingsController.swift */,
+			);
+			path = "Settings Controller";
 			sourceTree = "<group>";
 		};
 		84CF692622755B0B00109C96 /* Yelp Struct */ = {
@@ -362,6 +373,7 @@
 				842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
+				84CC285D2297774800A82BBE /* SettingsController.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
