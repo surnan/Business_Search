@@ -80,8 +80,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         newVC.possibleInsertLocationCoordinate = userLocation
         navigationController?.pushViewController(newVC, animated: true)
     }
-
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations.last
@@ -95,7 +93,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
             pushNextController()
         }
     }
-    
     
     func pushNextController(){
         activityView.stopAnimating()
@@ -138,6 +135,15 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
             verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             ])
+        setupNavigationMenu()
+    }
+    
+    func setupNavigationMenu(){
+        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "❁", style: .done, target: self, action: #selector(handleBack))]
+    }
+    
+    @objc func handleBack(){
+        present(SettingsController(), animated: true, completion: nil)
     }
     
     func determineMyCurrentLocation() {
@@ -150,4 +156,3 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         }
     }
 }
-

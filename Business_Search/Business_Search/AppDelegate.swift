@@ -64,6 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let startingVC = MenuController()
         startingVC.dataController = dataController
         window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
+        //window?.rootViewController = SettingsController()
         return true
     }
 
