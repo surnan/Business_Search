@@ -10,8 +10,13 @@ import UIKit
 import CoreData
 import CoreLocation
 
+protocol MenuControllerDelegate{
+    func undoBlur()
+}
 
-class MenuController: UIViewController, CLLocationManagerDelegate {
+class MenuController: UIViewController, CLLocationManagerDelegate, MenuControllerDelegate {
+
+    
 
     var dataController: DataController!     //MARK: Injected
     var locationManager: CLLocationManager!
@@ -149,8 +154,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     @objc func handleRight(){
         print("Right Pressed")
         blurredEffectView2.removeFromSuperview()
-        
     }
+    
+    func undoBlur() {
+        blurredEffectView2.removeFromSuperview()
+    }
+    
+    
     
     lazy var blurredEffectView2: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
@@ -164,12 +174,8 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     @objc func handleBack(){
         view.addSubview(blurredEffectView2)
         newVC.modalPresentationStyle = .overCurrentContext
-        
+        newVC.delegate = self
         present(newVC, animated: true, completion:nil)
-        
-//        present(newVC, animated: true, completion: {
-//            self.blurredEffectView2.removeFromSuperview()
-//        })
     }
     
     func determineMyCurrentLocation() {
