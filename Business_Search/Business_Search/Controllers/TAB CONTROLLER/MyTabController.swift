@@ -29,11 +29,12 @@ class MyTabController: UITabBarController {
     let firstController = GroupsController()
     let secondController = MapController()
     
+
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.green
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleLeftBarButton))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "STOP", style: .done, target: self, action: #selector(handleRight))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "STOP", style: .done, target: self, action: #selector(handleRight))
         navigationItem.title = categoryName
         
         firstController.tabBarItem =  UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "map-here2"), selectedImage: #imageLiteral(resourceName: "map-here"))
