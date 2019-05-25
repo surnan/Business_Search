@@ -28,6 +28,7 @@ class SettingsController: UIViewController {
     
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         let intRadius = Int(sender.value)
+        radius = intRadius
         sliderValueLabel.text = "\(intRadius)"
     }
     
@@ -75,9 +76,22 @@ class SettingsController: UIViewController {
         return label
     }()
     
+    
+    let informationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Search Radius"
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = .clear
+        view.isOpaque = false
         let stackView: UIStackView = {
             let stack = UIStackView()
             stack.axis = .vertical
@@ -95,14 +109,19 @@ class SettingsController: UIViewController {
         }()
         
         
+        
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
         [sliderValueLabel, dismissButton].forEach{stackView.addArrangedSubview($0)}
-        [stackView, sliderStack].forEach{view.addSubview($0)}
+        [informationLabel, stackView, sliderStack].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
-            sliderStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
-            sliderStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            informationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            informationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            
+            sliderStack.topAnchor.constraint(equalTo: informationLabel.bottomAnchor, constant: 20),
             sliderStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            sliderStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
+            
             stackView.topAnchor.constraint(equalTo: sliderStack.bottomAnchor, constant: 30),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ])

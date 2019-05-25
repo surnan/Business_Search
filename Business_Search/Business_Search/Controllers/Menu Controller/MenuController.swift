@@ -125,11 +125,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
         previousCoordinates = nil
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         [nearMeSearchButton, searchByMapButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}
         [verticalStackView].forEach{view.addSubview($0)}
+        
         NSLayoutConstraint.activate([
             verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
             verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -140,10 +142,34 @@ class MenuController: UIViewController, CLLocationManagerDelegate {
     
     func setupNavigationMenu(){
         navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "❁", style: .done, target: self, action: #selector(handleBack))]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Undo", style: .done, target: self, action: #selector(handleRight))
     }
     
+    
+    @objc func handleRight(){
+        print("Right Pressed")
+        blurredEffectView2.removeFromSuperview()
+        
+    }
+    
+    lazy var blurredEffectView2: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = view.bounds
+        return blurredEffectView
+    }()
+    
+    let newVC = SettingsController()
+    
     @objc func handleBack(){
-        present(SettingsController(), animated: true, completion: nil)
+        view.addSubview(blurredEffectView2)
+        newVC.modalPresentationStyle = .overCurrentContext
+        
+        present(newVC, animated: true, completion:nil)
+        
+//        present(newVC, animated: true, completion: {
+//            self.blurredEffectView2.removeFromSuperview()
+//        })
     }
     
     func determineMyCurrentLocation() {
