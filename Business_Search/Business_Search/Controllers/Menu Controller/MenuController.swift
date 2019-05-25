@@ -158,6 +158,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     func undoBlur() {
         blurredEffectView2.removeFromSuperview()
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     
@@ -172,8 +173,15 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     let newVC = SettingsController()
     
     @objc func handleBack(){
+        
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurredEffectView2)
-        newVC.modalPresentationStyle = .overCurrentContext
+        
+        //newVC.modalPresentationStyle = .overCurrentContext
+        newVC.modalPresentationStyle = .overFullScreen
+        
+        
         newVC.delegate = self
         present(newVC, animated: true, completion:nil)
     }
