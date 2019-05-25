@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsController: UIViewController {
     
+    var delegate: MenuControllerDelegate?
+    
     lazy var distanceSlider: UISlider = {
         var slider = UISlider()
         slider.minimumTrackTintColor = .blue
@@ -116,7 +118,7 @@ class SettingsController: UIViewController {
         
         NSLayoutConstraint.activate([
             informationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            informationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            informationLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
             
             sliderStack.topAnchor.constraint(equalTo: informationLabel.bottomAnchor, constant: 20),
             sliderStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -130,6 +132,8 @@ class SettingsController: UIViewController {
     
     //MARK:- Handlers
     @objc func handleDismissButton(){
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.delegate?.undoBlur()
+        })
     }
 }
