@@ -40,7 +40,6 @@ class MapController: UIViewController, MKMapViewDelegate {
         stackView.alignment = .center
         stackView.spacing = 10
         view.addSubview(stackView)
-        
         NSLayoutConstraint.activate([
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)])
@@ -86,11 +85,9 @@ class MapController: UIViewController, MKMapViewDelegate {
             let tempAnnotation = BusinessPointAnnotation(business: business)
             tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             tempAnnotation.title = business.name ?? ""
-            
             if let price = business.price {
                 tempAnnotation.subtitle = "Price: \(price)"
             }
-            
             tempAnnotation.business = business
             annotations.append(tempAnnotation)
         }
