@@ -151,7 +151,7 @@ class BusinessController: UIViewController {
         let attributedString = NSAttributedString(string: "     MAP IT     ", attributes: white25textAttributes)
         button.setAttributedTitle(attributedString, for: .normal)
         button.backgroundColor = UIColor.red
-        button.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handlemapItButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -172,7 +172,7 @@ class BusinessController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton, mapItButton].forEach{stackView.addArrangedSubview($0)}
+        [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton, mapItButton ].forEach{stackView.addArrangedSubview($0)}
         [nameLabel, stackView].forEach{view.addSubview($0)}
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
