@@ -57,8 +57,8 @@ class MapController: UIViewController, MKMapViewDelegate {
     func setupCompass() {
         view.addSubview(compass)
         NSLayoutConstraint.activate([
-            compass.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            compass.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15)
+            compass.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            compass.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ])
     }
     
@@ -86,7 +86,11 @@ class MapController: UIViewController, MKMapViewDelegate {
             let tempAnnotation = BusinessPointAnnotation(business: business)
             tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             tempAnnotation.title = business.name ?? ""
-            tempAnnotation.subtitle = business.displayAddress
+            
+            if let price = business.price {
+                tempAnnotation.subtitle = "Price: \(price)"
+            }
+            
             tempAnnotation.business = business
             annotations.append(tempAnnotation)
         }
@@ -95,9 +99,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     
     //MARK:- MarkAnnotation
     //SHOWS annotation on map
-    
     var currentBusinessAnnotation: Business?
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let selectedAnnotation = view.annotation as? BusinessPointAnnotation
         currentBusinessAnnotation = selectedAnnotation?.business
@@ -111,10 +113,11 @@ class MapController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let view = mapView.dequeueReusableAnnotationView(withIdentifier: "abc", for: annotation)
+        let view = mapView.dequeueReusableAnnotationView(withIdentifier: "abc", for: annotation)    //id = mapView.register(CLUSTER_CLASS)
         if let markerAnnotationView = view as? MKMarkerAnnotationView {
             markerAnnotationView.animatesWhenAdded = true
             markerAnnotationView.canShowCallout = true
+
             let rightButton = UIButton(type: .detailDisclosure)
             markerAnnotationView.rightCalloutAccessoryView = rightButton
             return markerAnnotationView
@@ -122,6 +125,30 @@ class MapController: UIViewController, MKMapViewDelegate {
             return view
         }
     }
+    
+    //MARK: Test Button
+    var myButtonImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "map-here2"), highlightedImage: #imageLiteral(resourceName: "map-here"))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMyButton)))
+        return imageView
+    }()
+    
+    
+    var myButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Click Me", for: .normal)
+        button.addTarget(self, action: #selector(handleMyButton), for: .touchDown)
+        return button
+    }()
+    
+    
+    @objc func handleMyButton(){
+        let newVC = BusinessController()
+        newVC.business = currentBusinessAnnotation
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+    
 }
 
 class BusinessPointAnnotation: MKPointAnnotation {
