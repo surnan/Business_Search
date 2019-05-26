@@ -119,17 +119,40 @@ class BusinessController: UIViewController {
         return button
     }()
     
+    lazy var visitYelpPageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Visit Yelp Page", for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleVisitYelpPageButton(_ sender: UIButton){
+        guard var _stringToURL = business.url else {
+            UIApplication.shared.open(URL(string: "https://www.yelp.com")!)     //MediaURL = empty, load Yelp
+            return
+        }
+        let backupURL = URL(string: "https://www.yelp.com")!  //URL is invalid, convert string to google search query
+        if _stringToURL._isValidURL {
+            _stringToURL = _stringToURL._prependHTTPifNeeded()
+            let url = URL(string: _stringToURL) ?? backupURL
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.open(backupURL)
+        }
+    }
+    
     var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 3
+        stack.spacing = 5
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        [addressLabel, phoneNumberButton, priceLabel, ratingLabel].forEach{stackView.addArrangedSubview($0)}
+        [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton].forEach{stackView.addArrangedSubview($0)}
         [nameLabel, stackView].forEach{view.addSubview($0)}
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
@@ -153,5 +176,22 @@ class BusinessController: UIViewController {
     
     @objc func pauseFunc(){
         print("")
+    }
+}
+
+
+extension String {
+    var _isValidURL: Bool {
+        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let range = NSRange(startIndex..., in: self)    //startIndex = position of first character in non-empty String
+        return detector.firstMatch(in: self, range: range)?.range == range
+    }
+    
+    func _prependHTTPifNeeded() -> String{
+        if prefix(4) != "http" {
+            return "http://" + self
+        } else {
+            return self
+        }
     }
 }
