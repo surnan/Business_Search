@@ -96,16 +96,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        if tableViewArrayType == TableIndex.category.rawValue {
-        //            guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
-        //            listBusinesses(category: currentCategory)
-        //        }
-        //
-        //        if tableViewArrayType == TableIndex.business.rawValue {
-        //            guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
-        //            showBusinessInfo(currentBusiness: currentBusiness)
-        //        }
-        
+        searchController.dismiss(animated: true, completion: nil)
         switch tableViewArrayType {
         case TableIndex.category.rawValue:
             guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
@@ -143,6 +134,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         newVC.businesses = businessArray
         newVC.categoryName = category
         navigationController?.pushViewController(newVC, animated: true)
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let firstVisibleIndexPath = self.tableView.indexPathsForVisibleRows?[0] else {return}
+        if firstVisibleIndexPath.row != 0 {
+            searchController.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

@@ -15,8 +15,6 @@ class MapController: UIViewController, MKMapViewDelegate {
     var businesses = [Business]()   //injected
     var annotations = [MKPointAnnotation]()
     var mapView = MKMapView()
-    var scaleView: MKScaleView!
-
     
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
        let button = MKUserTrackingButton(mapView: mapView)
@@ -28,7 +26,7 @@ class MapController: UIViewController, MKMapViewDelegate {
         return button
     }()
     
-    lazy var scaleView2: MKScaleView = {
+    lazy var scaleView: MKScaleView = {
        let view = MKScaleView(mapView: mapView)
         view.legendAlignment = .trailing
         view.scaleVisibility = .visible  // By default, `MKScaleView` uses adaptive visibility
@@ -36,7 +34,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     }()
     
     private func setupStackView() {
-        let stackView = UIStackView(arrangedSubviews: [scaleView2, moveToUserLocationButton])
+        let stackView = UIStackView(arrangedSubviews: [scaleView, moveToUserLocationButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -76,20 +74,9 @@ class MapController: UIViewController, MKMapViewDelegate {
         mapView.register(BusinessAnnotation.self, forAnnotationViewWithReuseIdentifier: "abc")
         convertLocationsToAnnotations()
         mapView.addAnnotations(annotations)  //There's a singular & plural for 'addAnnotation'.  OMG
-        zoomMapaFitAnnotations()
+        mapView.showAnnotations(annotations, animated: true)
         [mapView].forEach{view.addSubview($0)}
         mapView.fillSafeSuperView()
-    }
-    
-    
-    func zoomMapaFitAnnotations() {
-        var zoomRect = MKMapRect.null
-        for annotation in mapView.annotations {
-            let annotationPoint = MKMapPoint(annotation.coordinate)
-            let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0, height: 0)
-            zoomRect = zoomRect.union(pointRect)
-        }
-        mapView.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), animated: true)
     }
     
     private func convertLocationsToAnnotations(){
@@ -102,7 +89,6 @@ class MapController: UIViewController, MKMapViewDelegate {
             annotations.append(tempAnnotation)
         }
     }
-    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return BusinessAnnotation(annotation: annotation, reuseIdentifier: "abc")
@@ -124,11 +110,9 @@ class BusinessAnnotation: MKMarkerAnnotationView {
         super.prepareForDisplay()
         displayPriority = .defaultLow
         markerTintColor = UIColor.blue
-
         if let cluster = annotation as? MKClusterAnnotation {
             let total = cluster.memberAnnotations.count
             image = drawCustomBusinessAnnotationCircle(count: total)
-            
         }
     }
     
