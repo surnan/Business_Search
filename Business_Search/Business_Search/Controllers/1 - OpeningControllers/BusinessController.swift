@@ -121,7 +121,9 @@ class BusinessController: UIViewController {
     
     lazy var visitYelpPageButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Visit Yelp Page", for: .normal)
+        button.layer.cornerRadius = 12
+        let attributedString = NSAttributedString(string: "Visit Yelp Page", attributes: white25textAttributes)
+        button.setAttributedTitle(attributedString, for: .normal)
         button.backgroundColor = UIColor.blue
         button.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
         return button
@@ -142,6 +144,24 @@ class BusinessController: UIViewController {
         }
     }
     
+    
+    lazy var mapItButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        let attributedString = NSAttributedString(string: "     MAP IT     ", attributes: white25textAttributes)
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.backgroundColor = UIColor.red
+        button.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    @objc func handlemapItButton(_ sender: UIButton){
+        print("Map It")
+    }
+    
+    
+    
     var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -152,7 +172,7 @@ class BusinessController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton].forEach{stackView.addArrangedSubview($0)}
+        [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton, mapItButton].forEach{stackView.addArrangedSubview($0)}
         [nameLabel, stackView].forEach{view.addSubview($0)}
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
