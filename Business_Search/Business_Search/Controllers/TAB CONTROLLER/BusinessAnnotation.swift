@@ -13,7 +13,7 @@ class BusinessAnnotation: MKMarkerAnnotationView {
     
     var title = "Bridge Title"
     var subtitle = "Bridge SubTitle"
-    
+    var business: Business!
     
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
