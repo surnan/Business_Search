@@ -28,6 +28,7 @@ class MyTabController: UITabBarController {
     //MARK:- Local Var
     let firstController = GroupsController()
     let secondController = MapController()
+//    let secondController = MapController2()
     
 
     

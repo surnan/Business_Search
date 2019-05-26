@@ -40,6 +40,7 @@
 		84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE31022642B27008C9B01 /* YelpClient.swift */; };
 		84CC285D2297774800A82BBE /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC285C2297774800A82BBE /* SettingsController.swift */; };
 		84CC285F2297B0F400A82BBE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC285E2297B0F400A82BBE /* SettingsView.swift */; };
+		84D331CE229AB32C00F84ACB /* MapController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D331CD229AB32C00F84ACB /* MapController2.swift */; };
 		84D3DB9E2266DF5200E46B2E /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */; };
 		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
 		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
@@ -88,6 +89,7 @@
 		84BDE31022642B27008C9B01 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		84CC285C2297774800A82BBE /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		84CC285E2297B0F400A82BBE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		84D331CD229AB32C00F84ACB /* MapController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController2.swift; sourceTree = "<group>"; };
 		84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
 		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				84DC40DA2269F590003003C4 /* MyTabController+Handle.swift */,
 				843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */,
 				848761CC227E856C000CECC7 /* 2 - MapController.swift */,
+				84D331CD229AB32C00F84ACB /* MapController2.swift */,
 				8424A073229A1D0100F8FAF3 /* BusinessAnnotation.swift */,
 			);
 			path = "TAB CONTROLLER";
@@ -355,6 +358,7 @@
 				848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */,
+				84D331CE229AB32C00F84ACB /* MapController2.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,

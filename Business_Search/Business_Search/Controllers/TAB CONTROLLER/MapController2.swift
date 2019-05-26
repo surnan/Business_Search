@@ -10,14 +10,14 @@ import UIKit
 import MapKit
 
 
-class MapController: UIViewController, MKMapViewDelegate {
+class MapController2: UIViewController, MKMapViewDelegate {
     
     var businesses = [Business]()   //injected
     var annotations = [MKPointAnnotation]()
     var mapView = MKMapView()
     
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
-       let button = MKUserTrackingButton(mapView: mapView)
+        let button = MKUserTrackingButton(mapView: mapView)
         button.layer.backgroundColor = UIColor.clear.cgColor
         button.layer.borderColor = UIColor.clear.cgColor
         button.layer.borderWidth = 1
@@ -27,7 +27,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     }()
     
     lazy var scaleView: MKScaleView = {
-       let view = MKScaleView(mapView: mapView)
+        let view = MKScaleView(mapView: mapView)
         view.legendAlignment = .trailing
         view.scaleVisibility = .visible  // By default, `MKScaleView` uses adaptive visibility
         return view
@@ -83,80 +83,34 @@ class MapController: UIViewController, MKMapViewDelegate {
         for business in businesses {
             let latitude = CLLocationDegrees(business.latitude)
             let longitude = CLLocationDegrees(business.longitude)
-            let tempAnnotation = BusinessPointAnnotation(business: business)
+            let tempAnnotation = MKPointAnnotation()
             tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             tempAnnotation.title = business.name ?? ""
-            tempAnnotation.business = business
+            tempAnnotation.subtitle = business.price == nil ? "Rating: \(business.rating)" : "Rating: \(business.rating)     Price: \(business.price!)"
             annotations.append(tempAnnotation)
         }
     }
     
     
     //MARK:- MarkAnnotation
-    //SHOWS annotation on map
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let customAnnotation = annotation as? BusinessPointAnnotation {
-            print("customAnnotation.business.name = \(customAnnotation.business.name ?? "")")
-        }
- 
+        //reuse Identifier sets it to BusinessAnnotation through registration
         let view = mapView.dequeueReusableAnnotationView(withIdentifier: "abc", for: annotation)
         if let markerAnnotationView = view as? MKMarkerAnnotationView {
             markerAnnotationView.animatesWhenAdded = true
             markerAnnotationView.canShowCallout = true
             let rightButton = UIButton(type: .detailDisclosure)
+            //rightButton.addTarget(self, action: #selector(printHello(business:)), for: .touchUpInside)
             markerAnnotationView.rightCalloutAccessoryView = rightButton
-            return markerAnnotationView
-        } else {
-            return view
         }
-    }
-
-    var currentBusinessAnnotation: Business?
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let selectedAnnotation = view.annotation as? BusinessPointAnnotation
-        currentBusinessAnnotation = selectedAnnotation?.business
+        return view
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    @objc func printHello(business: Business){
+        print("HELLO WORLD")
         let newVC = BusinessController()
-        newVC.business = currentBusinessAnnotation
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-
-}
-
-class BusinessPointAnnotation: MKPointAnnotation {
-    var business: Business!
-    init(business: Business) {
-        self.business = business
-    }
-}
-
-class BusinessMKAnnotationView: MKAnnotationView {
-    let selectedLabel:UILabel = UILabel.init(frame:CGRect(x: 0, y: 0, width: 140, height: 38))
-    override func setSelected(_ selected: Bool, animated: Bool)
-    {
-        super.setSelected(false, animated: animated)
-        if(selected)
-        {
-            // Do customization, for example:
-            selectedLabel.text = "Hello World!!"
-            selectedLabel.textAlignment = .center
-            selectedLabel.font = UIFont.init(name: "HelveticaBold", size: 15)
-            selectedLabel.backgroundColor = UIColor.lightGray
-            selectedLabel.layer.borderColor = UIColor.darkGray.cgColor
-            selectedLabel.layer.borderWidth = 2
-            selectedLabel.layer.cornerRadius = 5
-            selectedLabel.layer.masksToBounds = true
-            selectedLabel.center.x = 0.5 * self.frame.size.width;
-            selectedLabel.center.y = -0.5 * selectedLabel.frame.height;
-            self.addSubview(selectedLabel)
-        }
-        else
-        {
-            selectedLabel.removeFromSuperview()
-        }
+        newVC.business = business
+        present(newVC, animated: true, completion: nil)
     }
 }
 
