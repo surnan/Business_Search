@@ -86,45 +86,32 @@ class MapController: UIViewController, MKMapViewDelegate {
             let tempAnnotation = MKPointAnnotation()
             tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             tempAnnotation.title = business.name ?? ""
+            tempAnnotation.subtitle = business.price == nil ? "Rating: \(business.rating)" : "Rating: \(business.rating)     Price: \(business.price!)"
             annotations.append(tempAnnotation)
         }
     }
     
+    
+    //MARK:- MarkAnnotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        return BusinessAnnotation(annotation: annotation, reuseIdentifier: "abc")
+        //reuse Identifier sets it to BusinessAnnotation through registration
+        let view = mapView.dequeueReusableAnnotationView(withIdentifier: "abc", for: annotation)
+        if let markerAnnotationView = view as? MKMarkerAnnotationView {
+            markerAnnotationView.animatesWhenAdded = true
+            markerAnnotationView.canShowCallout = true
+            let rightButton = UIButton(type: .detailDisclosure)
+            //rightButton.addTarget(self, action: #selector(printHello(business:)), for: .touchUpInside)
+            markerAnnotationView.rightCalloutAccessoryView = rightButton
+        }
+        return view
+    }
+    
+    @objc func printHello(business: Business){
+        print("HELLO WORLD")
+        let newVC = BusinessController()
+        newVC.business = business
+        present(newVC, animated: true, completion: nil)
     }
 }
 
-class BusinessAnnotation: MKMarkerAnnotationView {
-    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        clusteringIdentifier = "BusinessClusterID"
-        collisionMode = .circle
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func prepareForDisplay() {
-        super.prepareForDisplay()
-        displayPriority = .defaultLow
-        markerTintColor = UIColor.blue
-        if let cluster = annotation as? MKClusterAnnotation {
-            let total = cluster.memberAnnotations.count
-            image = drawCustomBusinessAnnotationCircle(count: total)
-        }
-    }
-    
-    private func drawCustomBusinessAnnotationCircle(count: Int) -> UIImage {
-        return drawCircle(color: UIColor.orange)
-    }
-    
-    private func drawCircle(color: UIColor?) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 40, height: 40))
-        return renderer.image { _ in
-            color?.setFill()
-            UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 40, height: 40)).fill()
-        }
-    }
-}
+

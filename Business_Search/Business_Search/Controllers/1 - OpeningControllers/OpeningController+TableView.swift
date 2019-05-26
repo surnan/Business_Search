@@ -143,5 +143,11 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             searchController.dismiss(animated: true, completion: nil)
         }
     }
+    
+    
+    
+    
+    
+    
 }
 
