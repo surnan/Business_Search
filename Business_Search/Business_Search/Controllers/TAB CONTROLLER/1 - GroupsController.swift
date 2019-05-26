@@ -40,4 +40,10 @@ class GroupsController: UITableViewController {
         view.backgroundColor = UIColor.white
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let newVC = BusinessController()
+            newVC.business = businesses[indexPath.row]
+            navigationController?.pushViewController(newVC, animated: true)
+    }
 }
