@@ -86,6 +86,7 @@ class MapController: UIViewController, MKMapViewDelegate {
             let tempAnnotation = BusinessPointAnnotation(business: business)
             tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             tempAnnotation.title = business.name ?? ""
+            tempAnnotation.subtitle = business.displayAddress
             tempAnnotation.business = business
             annotations.append(tempAnnotation)
         }
@@ -94,11 +95,22 @@ class MapController: UIViewController, MKMapViewDelegate {
     
     //MARK:- MarkAnnotation
     //SHOWS annotation on map
+    
+    var currentBusinessAnnotation: Business?
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let selectedAnnotation = view.annotation as? BusinessPointAnnotation
+        currentBusinessAnnotation = selectedAnnotation?.business
+    }
+    
+    //TAP Accessory
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let newVC = BusinessController()
+        newVC.business = currentBusinessAnnotation
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let customAnnotation = annotation as? BusinessPointAnnotation {
-            print("customAnnotation.business.name = \(customAnnotation.business.name ?? "")")
-        }
- 
         let view = mapView.dequeueReusableAnnotationView(withIdentifier: "abc", for: annotation)
         if let markerAnnotationView = view as? MKMarkerAnnotationView {
             markerAnnotationView.animatesWhenAdded = true
@@ -110,53 +122,12 @@ class MapController: UIViewController, MKMapViewDelegate {
             return view
         }
     }
-
-    var currentBusinessAnnotation: Business?
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let selectedAnnotation = view.annotation as? BusinessPointAnnotation
-        currentBusinessAnnotation = selectedAnnotation?.business
-    }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let newVC = BusinessController()
-        newVC.business = currentBusinessAnnotation
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-
 }
 
 class BusinessPointAnnotation: MKPointAnnotation {
     var business: Business!
     init(business: Business) {
         self.business = business
-    }
-}
-
-class BusinessMKAnnotationView: MKAnnotationView {
-    let selectedLabel:UILabel = UILabel.init(frame:CGRect(x: 0, y: 0, width: 140, height: 38))
-    override func setSelected(_ selected: Bool, animated: Bool)
-    {
-        super.setSelected(false, animated: animated)
-        if(selected)
-        {
-            // Do customization, for example:
-            selectedLabel.text = "Hello World!!"
-            selectedLabel.textAlignment = .center
-            selectedLabel.font = UIFont.init(name: "HelveticaBold", size: 15)
-            selectedLabel.backgroundColor = UIColor.lightGray
-            selectedLabel.layer.borderColor = UIColor.darkGray.cgColor
-            selectedLabel.layer.borderWidth = 2
-            selectedLabel.layer.cornerRadius = 5
-            selectedLabel.layer.masksToBounds = true
-            selectedLabel.center.x = 0.5 * self.frame.size.width;
-            selectedLabel.center.y = -0.5 * selectedLabel.frame.height;
-            self.addSubview(selectedLabel)
-        }
-        else
-        {
-            selectedLabel.removeFromSuperview()
-        }
     }
 }
 
