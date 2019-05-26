@@ -91,7 +91,6 @@ class MapController2: UIViewController, MKMapViewDelegate {
         }
     }
     
-    
     //MARK:- MarkAnnotation
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         //reuse Identifier sets it to BusinessAnnotation through registration
@@ -100,17 +99,9 @@ class MapController2: UIViewController, MKMapViewDelegate {
             markerAnnotationView.animatesWhenAdded = true
             markerAnnotationView.canShowCallout = true
             let rightButton = UIButton(type: .detailDisclosure)
-            //rightButton.addTarget(self, action: #selector(printHello(business:)), for: .touchUpInside)
             markerAnnotationView.rightCalloutAccessoryView = rightButton
         }
         return view
-    }
-    
-    @objc func printHello(business: Business){
-        print("HELLO WORLD")
-        let newVC = BusinessController()
-        newVC.business = business
-        present(newVC, animated: true, completion: nil)
     }
 }
 
