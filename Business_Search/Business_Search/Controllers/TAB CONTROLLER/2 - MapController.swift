@@ -27,12 +27,7 @@ class MapController: UIViewController, MKMapViewDelegate {
         return button
     }()
     
-    lazy var scaleView: MKScaleView = {
-       let view = MKScaleView(mapView: mapView)
-        view.legendAlignment = .trailing
-        view.scaleVisibility = .visible  // By default, `MKScaleView` uses adaptive visibility
-        return view
-    }()
+
     
     private func setupStackView() {
         let stackView = UIStackView(arrangedSubviews: [scaleView, moveToUserLocationButton])
@@ -53,6 +48,12 @@ class MapController: UIViewController, MKMapViewDelegate {
         return compass
     }()
     
+    lazy var scaleView: MKScaleView = {
+        let view = MKScaleView(mapView: mapView)
+        view.legendAlignment = .trailing
+        view.scaleVisibility = .visible  // By default, `MKScaleView` uses adaptive visibility
+        return view
+    }()
     
     func setupCompass() {
         view.addSubview(compass)
