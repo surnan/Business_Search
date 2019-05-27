@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 
 
+
 class MapController: UIViewController, MKMapViewDelegate {
     
     var businesses = [Business]()   //injected
@@ -114,7 +115,6 @@ class MapController: UIViewController, MKMapViewDelegate {
         if let markerAnnotationView = view as? MKMarkerAnnotationView {
             markerAnnotationView.animatesWhenAdded = true
             markerAnnotationView.canShowCallout = true
-
             let rightButton = UIButton(type: .detailDisclosure)
             markerAnnotationView.rightCalloutAccessoryView = rightButton
             return markerAnnotationView
