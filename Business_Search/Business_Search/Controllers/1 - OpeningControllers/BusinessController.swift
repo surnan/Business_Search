@@ -157,7 +157,9 @@ class BusinessController: UIViewController {
     
     
     @objc func handlemapItButton(_ sender: UIButton){
-        print("Map It")
+        let newVC = GoToMapController()
+        newVC.business = business
+        navigationController?.pushViewController(newVC, animated: true)
     }
     
     
