@@ -17,19 +17,8 @@ class MapController: UIViewController, MKMapViewDelegate {
     var annotations = [MKPointAnnotation]()
     var mapView = MKMapView()
     
-    lazy var moveToUserLocationButton: MKUserTrackingButton = {
-        let button = MKUserTrackingButton(mapView: mapView)
-        button.layer.backgroundColor = UIColor.clear.cgColor
-        button.layer.borderColor = UIColor.clear.cgColor
-        button.layer.borderWidth = 3
-        button.layer.cornerRadius = 5
-        button.isHidden = false      //Compass is already manually added to Right Bar Button
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     private func setupStackView() {
-        let stackView = UIStackView(arrangedSubviews: [scaleView, moveToUserLocationButton])
+        let stackView = UIStackView(arrangedSubviews: [scaleView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -59,11 +48,12 @@ class MapController: UIViewController, MKMapViewDelegate {
         convertLocationsToAnnotations()
         mapView.addAnnotations(annotations)  //There's a singular & plural for 'addAnnotation'.  OMG
         mapView.showAnnotations(annotations, animated: true)
-        [mapView, moveToUserLocationButton].forEach{view.addSubview($0)}
+        [mapView, scaleView].forEach{view.addSubview($0)}
         mapView.fillSafeSuperView()
-        
-        navigationItem.rightBarButtonItem =  UIBarButtonItem(customView: moveToUserLocationButton)
-        
+        NSLayoutConstraint.activate([
+            scaleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            scaleView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            ])
     }
     
     private func convertLocationsToAnnotations(){
