@@ -63,8 +63,22 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
         
         
         mapView.fillSafeSuperView()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: compass)
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass), UIBarButtonItem(title: "Table",
+                                                                                                    style: .done,
+                                                                                                    target: self,
+                                                                                                    action: #selector(hendleNextTable))]
     }
+    
+    
+    var _steps = [MKRoute.Step]()
+    
+    
+    @objc func hendleNextTable(){
+        let newVC = GoToMapTableController()
+        newVC.steps = _steps
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+    
     
     func addDestination(){
         let destinationAnnotation = MKPointAnnotation()
@@ -126,8 +140,8 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
             guard let response = response else { return }   //TODO: Show response not availabe in an alert
             for route in response.routes {  //an array of routes (below 'AlternateRoutes = true').
                 let steps = route.steps //Direction each phase (turn right, go straight 5 miles, etc)
+                self._steps = steps     //Pushing to New View Controller
                 self.mapView.addOverlay(route.polyline)
-                
                 //Fit whole map-route onto screen
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
             }
