@@ -15,9 +15,7 @@ protocol MenuControllerDelegate{
 }
 
 class MenuController: UIViewController, CLLocationManagerDelegate, MenuControllerDelegate {
-
     
-
     var dataController: DataController!     //MARK: Injected
     var locationManager: CLLocationManager!
     var userLocation: CLLocation!           //CLLocation value provided via Apple GPS
@@ -36,6 +34,14 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         button.layer.cornerRadius = 10
         button.tag = 0
         button.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
+        
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 12
+        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        button.layer.masksToBounds = false
+        
         return button
     }()
     
@@ -46,6 +52,14 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         button.layer.cornerRadius = 10
         button.tag = 1
         button.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
+        
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 12
+        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        button.layer.masksToBounds = false
+        
         return button
     }()
     
@@ -56,6 +70,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         button.layer.cornerRadius = 10
         button.tag = 2
         button.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
+        
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowRadius = 12
+        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+        button.layer.masksToBounds = false
+        
         return button
     }()
     
@@ -75,7 +96,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         determineMyCurrentLocation()
         controllerIndex = sender.tag
         activityView.startAnimating()
-//        handleButtons2(sender)
     }
     
     
@@ -133,7 +153,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .lightBlue
         [nearMeSearchButton, searchByMapButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}
         [verticalStackView].forEach{view.addSubview($0)}
         
@@ -146,15 +166,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     }
     
     func setupNavigationMenu(){
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "❁", style: .done, target: self, action: #selector(handleBack))]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Undo", style: .done, target: self, action: #selector(handleRight))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleBack))
+        
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
+        imageView.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = imageView
     }
-    
-    
-    @objc func handleRight(){
-        print("Right Pressed")
-        blurredEffectView2.removeFromSuperview()
-    }
+
     
     func undoBlur() {
         blurredEffectView2.removeFromSuperview()

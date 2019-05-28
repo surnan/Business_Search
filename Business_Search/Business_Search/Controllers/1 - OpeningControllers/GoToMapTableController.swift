@@ -12,6 +12,7 @@ import CoreLocation
 
 
 class GoToMapTableController: UITableViewController {
+
     var steps = [MKRoute.Step]() {
         didSet {
             steps.removeFirst()
@@ -20,7 +21,6 @@ class GoToMapTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,17 +30,15 @@ class GoToMapTableController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let step = steps[indexPath.row]
         let cell = UITableViewCell()
-        cell.textLabel?.text = "\(indexPath.row + 1): \(step.instructions) .. \(step.distance.toMiles())"
+        cell.textLabel?.text = "\(indexPath.row + 1): \(step.distance.toMiles()) .. \(step.instructions)"
         return cell
     }
 }
 
 extension CLLocationDistance {
     func toMiles() -> String {
-        
         let feet = self * 3.2808
         let miles = (self) * 0.0006213712
-        print("feet = \(feet) ... miles = \(miles)")
         
         if feet < 125 {
             let answer = String(Int(feet)) + " feet"

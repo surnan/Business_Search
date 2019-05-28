@@ -13,7 +13,8 @@ import CoreLocation
 class GoToMapController: UIViewController, CLLocationManagerDelegate {
     
     var business: Business!     //Injected
-
+    var _steps = [MKRoute.Step]()
+    
     lazy var scaleView: MKScaleView = {
         let scaleView = MKScaleView(mapView: mapView)
         scaleView.legendAlignment = .trailing
@@ -61,7 +62,6 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
             scaleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5)
             ])
         
-        
         mapView.fillSafeSuperView()
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass), UIBarButtonItem(title: "Table",
                                                                                                     style: .done,
@@ -69,16 +69,11 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
                                                                                                     action: #selector(hendleNextTable))]
     }
     
-    
-    var _steps = [MKRoute.Step]()
-    
-    
     @objc func hendleNextTable(){
         let newVC = GoToMapTableController()
         newVC.steps = _steps
         navigationController?.pushViewController(newVC, animated: true)
     }
-    
     
     func addDestination(){
         let destinationAnnotation = MKPointAnnotation()
@@ -97,10 +92,6 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
             mapView.setRegion(region, animated: true)
         }
     }
-
-    
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
     
     lazy var directionSegmentControl: UISegmentedControl = {
         let items = ["Walking", "Driving", "Mass-Transit"]
@@ -113,13 +104,14 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
     }()
 
     @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
+        //transport = MKDirectionsTransportType.automobile
         switch sender.selectedSegmentIndex {
         case 0:
-            getDirections()
+            transport = MKDirectionsTransportType.walking
         case 1:
-            getDirections()
+            transport = MKDirectionsTransportType.automobile
         case 2:
-            getDirections()
+            transport = MKDirectionsTransportType.transit
         default:
             print("Illegal index selected in Segment Controller")
         }
@@ -148,18 +140,17 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+
+    var transport = MKDirectionsTransportType.automobile
+    
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D)-> MKDirections.Request {
         let destinationCoordinate       = getCenterLocation(for: mapView).coordinate
         let startingLocation            = MKPlacemark(coordinate: coordinate)
         let destination                 = MKPlacemark(coordinate: destinationCoordinate)
-        
         let request                     = MKDirections.Request()
         request.source                  = MKMapItem(placemark: startingLocation)
         request.destination             = MKMapItem(placemark: destination)
-        
-        //request.transportType           = .automobile   //Twe're hard-coding it.
-        request.transportType           = .walking   //Twe're hard-coding it.
-        //request.transportType           = .transit   //Twe're hard-coding it.
+        request.transportType           = transport                         //From Segment Controller
         request.requestsAlternateRoutes = true
         return request
     }
@@ -178,8 +169,6 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
 }
-
-
 
 
 extension GoToMapController: MKMapViewDelegate {
