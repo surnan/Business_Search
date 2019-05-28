@@ -15,6 +15,18 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
     var business: Business!     //Injected
     var _steps = [MKRoute.Step]()
     
+    
+    lazy var moveToUserLocationButton: MKUserTrackingButton = {
+        let button = MKUserTrackingButton(mapView: mapView)
+        button.layer.backgroundColor = UIColor.clear.cgColor
+        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.borderWidth = 3
+        button.layer.cornerRadius = 5
+        button.isHidden = false      //Compass is already manually added to Right Bar Button
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     lazy var scaleView: MKScaleView = {
         let scaleView = MKScaleView(mapView: mapView)
         scaleView.legendAlignment = .trailing
@@ -25,6 +37,7 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
     
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        mapView.showsCompass = false
         mapView.showsUserLocation = true
         mapView.delegate = self
         return mapView
@@ -53,20 +66,21 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         mapView.showsUserLocation = true
         addDestination()
-        [mapView, directionSegmentControl, scaleView].forEach{view.addSubview($0)}
+        [mapView, directionSegmentControl, scaleView, moveToUserLocationButton].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
             directionSegmentControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             directionSegmentControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scaleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            scaleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5)
+            scaleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            moveToUserLocationButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            moveToUserLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             ])
         
         mapView.fillSafeSuperView()
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass), UIBarButtonItem(title: "Table",
-                                                                                                    style: .done,
-                                                                                                    target: self,
-                                                                                                    action: #selector(hendleNextTable))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
+                                              UIBarButtonItem(customView: moveToUserLocationButton),
+                                              UIBarButtonItem(title: "Table", style: .done, target: self, action: #selector(hendleNextTable))]
     }
     
     @objc func hendleNextTable(){

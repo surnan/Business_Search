@@ -96,7 +96,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchController.dismiss(animated: true, completion: nil)
         switch tableViewArrayType {
         case TableIndex.category.rawValue:
             guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
