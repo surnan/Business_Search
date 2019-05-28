@@ -219,7 +219,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     //MARK:- UI
     lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
+        let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
         searchController.obscuresBackgroundDuringPresentation = false
         
@@ -228,7 +228,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         //searchController.searchBar.barStyle = .black
         searchController.searchBar.tintColor = UIColor.white
         searchController.searchBar.barTintColor = UIColor.white
-        searchController.searchBar.backgroundImage = #imageLiteral(resourceName: "SearchControllerBackground")
         searchController.searchBar.placeholder = "Enter search term ..."
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
@@ -241,31 +240,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 backgroundview.clipsToBounds = true
             }
         }
-        
-        
-        
         return searchController
     }()
 }
-
-
-
-//po String(data: data, format: .utf8)
-
-/*
- if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
- 
- // Set text colour of text field
- textfield.textColor = UIColor.blue
- 
- if let backgroundview = textfield.subviews.first {
- 
- // Get background view and change background color
- backgroundview.backgroundColor = UIColor.white
- 
- // Set rounded corner
- backgroundview.layer.cornerRadius = 10
- backgroundview.clipsToBounds = true
- }
- }
- */

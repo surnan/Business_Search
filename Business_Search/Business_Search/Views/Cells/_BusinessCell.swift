@@ -51,6 +51,8 @@ class _BusinessCell: UITableViewCell {
         yelpImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85).isActive = true
         myLabel.leadingAnchor.constraint(equalTo: yelpImageView.trailingAnchor, constant: 1).isActive = true
         myLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        myLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
