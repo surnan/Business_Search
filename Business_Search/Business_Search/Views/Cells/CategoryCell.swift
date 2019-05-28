@@ -56,8 +56,6 @@ class CategoryCell: UITableViewCell {
         return label
     }()
     
-    //myLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         [accessoryLabel, myLabel, countLabel].forEach{addSubview($0)}
@@ -71,7 +69,7 @@ class CategoryCell: UITableViewCell {
             
             myLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             myLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            myLabel.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: 5)
+            myLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6)
         ])
     }
     
