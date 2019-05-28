@@ -58,6 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
 
+        UITabBar.appearance().barTintColor = UIColor.lightRed
+        UITabBar.appearance().tintColor = UIColor.white
+        
+        
         window = UIWindow()
         window?.makeKeyAndVisible()
         
