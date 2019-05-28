@@ -22,6 +22,7 @@ extension OpeningController {
         super.viewDidLoad()
         setupUI()
         readOrCreateLocation()
+        setupNavigationMenu()
     }
     
     func setupUI(){
@@ -29,7 +30,7 @@ extension OpeningController {
         nothingFoundView.center = view.center                               //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSuperview()
-        setupNavigationMenu()
+        //setupNavigationMenu()
         definesPresentationContext = true
     }
     
@@ -67,16 +68,22 @@ extension OpeningController {
     
     //MARK:- Navigation Menu
     func setupNavigationMenu(){
-        let logo = UIImage(imageLiteralResourceName: "Inline-Logo")
-        let imageView = UIImageView(image: logo)
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
+        //troubleshootFromNavigationMenu()
         navigationItem.searchController = searchController
+
+    }
+
+    
+    func troubleshootFromNavigationMenu(){
         navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "←", style: .done, target: self, action: #selector(handleBack)),
                                              UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)),
                                              UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
+    
     
     @objc func handleBack(){
         navigationController?.popViewController(animated: true)

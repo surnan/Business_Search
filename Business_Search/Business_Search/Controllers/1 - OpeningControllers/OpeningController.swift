@@ -222,10 +222,28 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         let searchController = UISearchController(searchResultsController: nil) //Going to use same View to display results
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
         searchController.obscuresBackgroundDuringPresentation = false
+        
+        
+        
+        //searchController.searchBar.barStyle = .black
+        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.barTintColor = UIColor.white
+        searchController.searchBar.backgroundImage = #imageLiteral(resourceName: "SearchControllerBackground")
         searchController.searchBar.placeholder = "Enter search term ..."
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
-        searchController.searchBar.barStyle = .black
+        
+        //Setting background for search controller
+        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            if let backgroundview = textfield.subviews.first {
+                backgroundview.backgroundColor = UIColor.white
+                backgroundview.layer.cornerRadius = 10
+                backgroundview.clipsToBounds = true
+            }
+        }
+        
+        
+        
         return searchController
     }()
 }
@@ -234,3 +252,20 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
 
 //po String(data: data, format: .utf8)
 
+/*
+ if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+ 
+ // Set text colour of text field
+ textfield.textColor = UIColor.blue
+ 
+ if let backgroundview = textfield.subviews.first {
+ 
+ // Get background view and change background color
+ backgroundview.backgroundColor = UIColor.white
+ 
+ // Set rounded corner
+ backgroundview.layer.cornerRadius = 10
+ backgroundview.clipsToBounds = true
+ }
+ }
+ */
