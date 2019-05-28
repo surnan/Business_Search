@@ -47,7 +47,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     var searchByMapButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .orange
         button.setTitle("Search By Map", for: .normal)
         button.layer.cornerRadius = 10
         button.tag = 1
