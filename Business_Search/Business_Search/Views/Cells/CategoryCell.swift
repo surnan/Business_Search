@@ -30,6 +30,7 @@ class CategoryCell: UITableViewCell {
         let label = UILabel()
         label.text = ""
         label.textColor = UIColor.black
+        label.numberOfLines = -1
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -55,18 +56,22 @@ class CategoryCell: UITableViewCell {
         return label
     }()
     
+    //myLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         [accessoryLabel, myLabel, countLabel].forEach{addSubview($0)}
         
         NSLayoutConstraint.activate([
-            countLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            myLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             accessoryLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            myLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             accessoryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            countLabel.trailingAnchor.constraint(equalTo: accessoryLabel.leadingAnchor, constant: -10)
+            
+            countLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            countLabel.trailingAnchor.constraint(equalTo: accessoryLabel.leadingAnchor, constant: -10),
+            
+            myLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            myLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            myLabel.trailingAnchor.constraint(equalTo: countLabel.leadingAnchor, constant: 5)
         ])
     }
     

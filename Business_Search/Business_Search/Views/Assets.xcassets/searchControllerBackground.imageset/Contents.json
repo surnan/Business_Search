@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "SearchControllerBackground.png",
+      "filename" : "searchControllerBackground.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "searchControllerBackground-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "searchControllerBackground-2.png",
       "scale" : "3x"
     }
   ],

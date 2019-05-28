@@ -19,6 +19,7 @@ class BusinessCell: UITableViewCell {
     let myLabel: UILabel = {
         let label = UILabel()
         label.text = ""
+        label.numberOfLines = 2
         label.textColor = UIColor.black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -28,6 +29,7 @@ class BusinessCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         [myLabel].forEach{addSubview($0)}
         myLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        myLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
         myLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
