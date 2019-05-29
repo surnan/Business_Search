@@ -132,15 +132,5 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         newVC.categoryName = category
         navigationController?.pushViewController(newVC, animated: true)
     }
-    
-    //guard  let temp = self.tableView.indexPathsForVisibleRows ,let firstVisibleIndexPath = self.tableView.indexPathsForVisibleRows?[0] else {return}
-    
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        guard let  firstVisibleIndexPath = self.tableView.indexPathsForVisibleRows?[0] else {return}
-//        if firstVisibleIndexPath.row != 0 {
-//            searchController.dismiss(animated: true, completion: nil)
-//        }
-//    }
 }
 

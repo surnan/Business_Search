@@ -34,8 +34,6 @@ extension OpeningController {
         }
     }
     
-
-    
     func handleGetNearbyBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
@@ -85,31 +83,6 @@ extension OpeningController {
         }
         downloadYelpBusinesses(latitiude: latitude, longitude: longitude)
     }
-
-    
-//    func downloadYelpBusinesses(latitiude: Double, longitude: Double){
-//        if urlsQueue.isEmpty {return}
-//        let semaphore = DispatchSemaphore(value: 2)
-//        let dispatchGroup = DispatchGroup()
-//
-//        print("urlsQueue.count = \(urlsQueue.count)")
-//        for (index, element) in urlsQueue.enumerated(){
-//            dispatchGroup.enter()
-//            semaphore.wait()
-//            _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
-//                defer {
-//                    semaphore.signal()
-//                    dispatchGroup.leave()
-//                }
-//                self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
-//            })
-//        }
-//        dispatchGroup.notify(queue: .main) {[weak self] in
-//            self?.runDownloadAgain()
-//        }
-//    }
-    
-    
     
     func downloadYelpBusinesses(latitiude: Double, longitude: Double){
         if urlsQueue.isEmpty {return}
@@ -132,10 +105,6 @@ extension OpeningController {
         }
     }
     
-    
-    
-
-    
     func runDownloadAgain(){
         reloadFetchControllers()
         print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
@@ -147,27 +116,3 @@ extension OpeningController {
         timer.fire()
     }
 }
-
-
-/*
- func downloadYelpBusinesses(){
- if urlsQueue.isEmpty {return}
- let semaphore = DispatchSemaphore(value: 4)
- let dispatchGroup = DispatchGroup()
- 
- for (index, element) in urlsQueue.enumerated(){
- dispatchGroup.enter()
- semaphore.wait()
- _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
- defer {
- semaphore.signal()
- dispatchGroup.leave()
- }
- self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
- })
- }
- dispatchGroup.notify(queue: .main) {[weak self] in
- self?.runDownloadAgain()
- }
- }
- */

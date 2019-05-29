@@ -10,7 +10,7 @@ import UIKit
 
 let limit = 50
 var offset = 50
-var radius = 1000
+var radius = 350
 var recordCountAtLocation = 0
 var categoryMatch = 0
 let yelpMaxPullCount = 1000
