@@ -8,36 +8,19 @@
 
 import UIKit
 
-var limit = 50
+let limit = 50
 var offset = 50
-var radius = 300
+var radius = 1000
 var recordCountAtLocation = 0
 var categoryMatch = 0
+let yelpMaxPullCount = 1000
 
 var locale = "en_US"
 
-//PAIR - DONE
-//Download - TOP
 
-//var latitude: Double!
-//var longitude: Double!
-
-
-//var latitude = 40.705199; var longitude = -74.007086    //100 Wall Street 10005
-//var latitude = 40.706324; var longitude = -74.007808  //70 Pine Street 10005
-
-//PAIR
-//var latitude = 37.786882; var longitude = -122.399972 //140 Montgomery St, San Francisco, CA 94105
-//var latitude = 37.786650; var longitude = -122.399520 //149 New Montgomery St, San Francisco, CA 94105
-
-//PAIR - DONE
-//var latitude = 40.76013750; var longitude = -73.91786550  //31-47 Steinway Street
-//var latitude = 40.759153; var longitude = -73.919044     //31-90 Steinway St, Astoria, NY 11103
-
-
-let colorArray: [UIColor] = [.paleGreen, .grey196, .solidOrange, .lemonChiffon,
+let colorArray: [UIColor] = [.lemonChiffon, .paleGreen, .white, .grey196, .solidOrange,
                              .ghostWhite, .greyOrange, .darkOrange, .white, .lightRed,
-                             .grey227, .plum, .dodgerBlue4, .tan, .teal, .skyBlue4]
+                             .grey227, .plum, .white, .dodgerBlue4, .grey196, .tan, .paleGreen, .teal, .skyBlue4]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

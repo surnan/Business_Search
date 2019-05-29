@@ -71,7 +71,7 @@ extension OpeningController {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
-        //troubleshootFromNavigationMenu()
+        troubleshootFromNavigationMenu()
         navigationItem.searchController = searchController
 
     }

@@ -10,17 +10,17 @@ import UIKit
 
 
 
-extension MyTabController {
-    
-    func handlegetNearbyBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
-        switch result {
-        case .failure(let error):
-            print("-->Error: \(error)")
-        case .success(let data):
-            print("--->handleGetNearbyBusiness below:")
-            data.businesses.forEach{
-                print($0.name ?? "", $0.display_phone ?? "")
-            }
-        }
-    }
-}
+//extension MyTabController {
+//    
+//    func handlegetNearbyBusinesses(result: Result<YelpBusinessResponse, NetworkError>){
+//        switch result {
+//        case .failure(let error):
+//            print("-->Error: \(error)")
+//        case .success(let data):
+//            print("--->handleGetNearbyBusiness below:")
+//            data.businesses.forEach{
+//                print($0.name ?? "", $0.display_phone ?? "")
+//            }
+//        }
+//    }
+//}

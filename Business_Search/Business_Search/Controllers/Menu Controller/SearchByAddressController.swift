@@ -13,10 +13,22 @@ import MapKit
 let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
-class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
+class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate {
     var dataController: DataController!                 //Injected from MenuController()
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
+    
+    lazy var myTapGesture: UITapGestureRecognizer = {
+        var gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        gesture.delegate = self
+        return gesture
+    }()
+    
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer){
+        print("tap happened")
+    }
+    
     
     let geoCoder = CLGeocoder()
 
@@ -120,13 +132,16 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
         
         [stackView, locationImageView, mapView].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            locationImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            locationImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             locationImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 50),
+            stackView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 10),
+            
             locationTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
             findLocationButton.widthAnchor.constraint(equalTo: locationTextField.widthAnchor),
-            mapView.topAnchor.constraint(equalTo: findLocationButton.bottomAnchor, constant: 15),
+            
+            mapView.topAnchor.constraint(equalTo: findLocationButton.bottomAnchor, constant: 10),
             mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -136,6 +151,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .skyBlue4
+        
         setupNavigationManu()
         setupUI()
         locationTextField.delegate = self

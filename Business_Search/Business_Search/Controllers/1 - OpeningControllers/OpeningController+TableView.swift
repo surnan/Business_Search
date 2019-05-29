@@ -108,8 +108,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    
-    
     func showBusinessInfo(currentBusiness: Business){
         let newVC = BusinessController()
         newVC.business = currentBusiness
@@ -135,12 +133,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         navigationController?.pushViewController(newVC, animated: true)
     }
     
+    //guard  let temp = self.tableView.indexPathsForVisibleRows ,let firstVisibleIndexPath = self.tableView.indexPathsForVisibleRows?[0] else {return}
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let firstVisibleIndexPath = self.tableView.indexPathsForVisibleRows?[0] else {return}
-        if firstVisibleIndexPath.row != 0 {
-            searchController.dismiss(animated: true, completion: nil)
-        }
-    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        guard let  firstVisibleIndexPath = self.tableView.indexPathsForVisibleRows?[0] else {return}
+//        if firstVisibleIndexPath.row != 0 {
+//            searchController.dismiss(animated: true, completion: nil)
+//        }
+//    }
 }
 
