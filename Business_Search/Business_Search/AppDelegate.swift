@@ -17,10 +17,11 @@ let yelpMaxPullCount = 1000
 
 var locale = "en_US"
 
-
-let colorArray: [UIColor] = [.lemonChiffon, .paleGreen, .white, .grey196, .solidOrange,
-                             .ghostWhite, .greyOrange, .darkOrange, .white, .lightRed,
-                             .grey227, .plum, .white, .dodgerBlue4, .grey196, .tan, .paleGreen, .teal, .skyBlue4]
+//.grey196
+let colorArray: [UIColor] = [ .lemonChiffon, .paleGreen, .white, .solidOrange,
+                             .grey227, .darkOrange, .greyOrange, .skyBlue4,
+                             .lightGray, .plum, .white, .tan, 
+                             .ghostWhite, .teal, .steelBlue, .snowHalf, .steelBlue4]
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

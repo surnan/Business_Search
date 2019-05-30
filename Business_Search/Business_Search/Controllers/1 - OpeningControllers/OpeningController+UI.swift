@@ -80,15 +80,9 @@ extension OpeningController {
 
     
     func troubleshootFromNavigationMenu(){
-        navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "←", style: .done, target: self, action: #selector(handleBack)),
-                                             UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
     }
     
-    
-    @objc func handleBack(){
-        navigationController?.popViewController(animated: true)
-    }
-
     
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){

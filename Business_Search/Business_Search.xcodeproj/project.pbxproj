@@ -15,7 +15,6 @@
 		842AD7D9228538B900590B1A /* BusinessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D8228538B900590B1A /* BusinessController.swift */; };
 		8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */; };
 		8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */; };
-		8435B1D8227A54B600E95B4E /* OpeningController+Fetched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */; };
 		843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */; };
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
 		844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Categories+Extension.swift */; };
@@ -61,7 +60,6 @@
 		842AD7D8228538B900590B1A /* BusinessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "OpeningController+Search.swift"; path = "Business_Search/Controllers/1 - OpeningControllers/OpeningController+Search.swift"; sourceTree = SOURCE_ROOT; };
 		8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "OpeningController+TableView.swift"; path = "Business_Search/Controllers/1 - OpeningControllers/OpeningController+TableView.swift"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+Fetched.swift"; sourceTree = "<group>"; };
 		843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "1 - GroupsController.swift"; sourceTree = "<group>"; };
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844F64B52277B3E0003E6A93 /* Categories+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categories+Extension.swift"; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 			children = (
 				846509B9227A0C06008ABA9F /* OpeningController.swift */,
 				842AD7D42284D74D00590B1A /* OpeningController+UI.swift */,
-				8435B1D7227A54B600E95B4E /* OpeningController+Fetched.swift */,
 				8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */,
 				8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */,
 				842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */,
@@ -378,7 +375,6 @@
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessController.swift in Sources */,
 				843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */,
-				8435B1D8227A54B600E95B4E /* OpeningController+Fetched.swift in Sources */,
 				842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,

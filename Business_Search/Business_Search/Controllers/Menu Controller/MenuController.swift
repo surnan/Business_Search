@@ -166,7 +166,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     }
     
     func setupNavigationMenu(){
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleBack))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
@@ -189,7 +189,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     let newVC = SettingsController()
     
-    @objc func handleBack(){
+    @objc func handleSettings(){
         
         
         navigationController?.setNavigationBarHidden(true, animated: true)
