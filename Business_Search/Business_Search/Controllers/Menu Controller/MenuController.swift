@@ -200,6 +200,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         
         
         newVC.delegate = self
+        newVC.dataController = dataController
         present(newVC, animated: true, completion:nil)
     }
     

@@ -29,7 +29,9 @@ extension OpeningController {
         [tableView].forEach{view.addSubview($0)}
         nothingFoundView.center = view.center                               //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
-        tableView.fillSuperview()
+        tableView.fillSafeSuperView()
+        view.backgroundColor = .lightRed
+        //tableView.fillSuperview()
         //setupNavigationMenu()
         definesPresentationContext = true
     }
@@ -79,42 +81,19 @@ extension OpeningController {
     
     func troubleshootFromNavigationMenu(){
         navigationItem.leftBarButtonItems = [UIBarButtonItem(title: "←", style: .done, target: self, action: #selector(handleBack)),
-                                             UIBarButtonItem(title: "▶️", style: .done, target: self, action: #selector(handleDownloadBusinesses)),
                                              UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete All", style: .done, target: self, action: #selector(handleDeleteAll))
     }
     
     
     @objc func handleBack(){
         navigationController?.popViewController(animated: true)
     }
-    
-    @objc func handleDownloadBusinesses(){
-        deleteAll()
-        reloadFetchControllers()
-        _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, completion: handleGetNearbyBusinesses(inputData:result:))
-    }
-    
-    @objc func handleDeleteAll() {deleteAll() }
-    
-    func deleteAll(){
-        let context: NSManagedObjectContext!  = dataController.backGroundContext
-        context.perform {
-            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-            do {
-                _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
-                self.reloadFetchControllers()
-            } catch {
-                print("Error deleting All \(error)")
-            }
-        }
-    }
+
     
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
+        print("Radius = \(radius)")
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-        tableView.reloadData()
     }
 }

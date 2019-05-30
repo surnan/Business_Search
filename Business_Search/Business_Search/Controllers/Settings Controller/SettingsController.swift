@@ -7,8 +7,34 @@
 //
 
 import UIKit
+import CoreData
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
+    
+    var dataController: DataController!
+    
+    var fetchLocationController: NSFetchedResultsController<Location>? {
+        didSet {
+            if fetchLocationController == nil {
+                fetchLocationController = {
+                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
+                    fetchRequest.sortDescriptors = [ sortDescriptor]
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }()
+            }
+        }
+    }
     
     var delegate: MenuControllerDelegate?
     
@@ -21,22 +47,10 @@ class SettingsController: UIViewController {
         slider.value = Float(radius)
         slider.thumbTintColor = .purple
         slider.isContinuous = true
-        slider.addTarget(self, action: #selector(handleSliderTouchUpInside(_:forEvent:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
-    
-    
-    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
-        let intRadius = Int(sender.value)
-        radius = intRadius
-        sliderValueLabel.text = "\(intRadius)"
-    }
-    
-    @objc func handleSliderTouchUpInside(_ sender: UISlider, forEvent event: UIEvent){
-        print("Final Value = \(sender.value)")
-    }
     
     var sliderLeftLabel: UILabel = {
         let label = UILabel()
@@ -52,18 +66,42 @@ class SettingsController: UIViewController {
         return label
     }()
     
-    
-    lazy var dismissButton: UIButton = {
+    lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(handleDismissButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         button.backgroundColor = UIColor.white
-        button.setTitle("     DISMISS     ", for: .normal)
+        button.setTitle("     SAVE     ", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
+        button.backgroundColor = UIColor.white
+        button.setTitle("     CANCEL     ", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var deleteAllButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(handleDeleteAllButton), for: .touchUpInside)
+        button.backgroundColor = UIColor.red
+        button.setTitle("     DELETE ALL     ", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     lazy var sliderValueLabel: UILabel = {
         let label = UILabel()
@@ -87,8 +125,25 @@ class SettingsController: UIViewController {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-        
     }()
+    
+    let deleteAllLabel: UILabel = {
+        let label = UILabel()
+        label.text = "All saved business data deleted"
+        label.textColor = UIColor.red
+        //label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        distanceSlider.value = Float(radius)
+        sliderValueLabel.text = String(radius)
+        deleteAllLabel.isHidden = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +168,7 @@ class SettingsController: UIViewController {
         
         
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
-        [sliderValueLabel, dismissButton].forEach{stackView.addArrangedSubview($0)}
+        [sliderValueLabel, saveButton, cancelButton, deleteAllButton, deleteAllLabel].forEach{stackView.addArrangedSubview($0)}
         [informationLabel, stackView, sliderStack].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
@@ -130,9 +185,42 @@ class SettingsController: UIViewController {
     }
     
     
+    var newRadiusValue: Int!
+    
     //MARK:- Handlers
-    @objc func handleDismissButton(){
+    @objc func handleDeleteAllButton(_ sender: UIButton){
+        let context: NSManagedObjectContext!  = dataController.backGroundContext
+        context.perform {
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+            do {
+                _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+                DispatchQueue.main.async {
+                    self.deleteAllLabel.isHidden = false
+                }
+            } catch {
+                print("Error deleting All \(error)")
+            }
+        }
+    }
+    
+    
+    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
+        let intRadius = Int(sender.value)
+        newRadiusValue = intRadius
+        sliderValueLabel.text = "\(intRadius)"
+        print("Radius ---> \(radius)")
+    }
+    
+    @objc func handlecancelButton(){
         dismiss(animated: true, completion: {
+            self.delegate?.undoBlur()
+        })
+    }
+    
+    @objc func handleSaveButton(){
+        dismiss(animated: true, completion: {
+            radius = self.newRadiusValue
             self.delegate?.undoBlur()
         })
     }
