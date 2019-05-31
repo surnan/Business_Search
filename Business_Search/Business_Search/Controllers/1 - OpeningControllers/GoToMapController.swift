@@ -18,16 +18,16 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
     lazy var googleMapView: GMSMapView = {
         let view = GMSMapView()
         view.delegate = self
+        view.isMyLocationEnabled = true
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .yellow
-        let camera = GMSCameraPosition.camera(withLatitude: business.latitude, longitude: business.longitude, zoom: 17.0)
+        let camera = GMSCameraPosition.camera(withLatitude: business.latitude, longitude: business.longitude, zoom: 16.0)
         googleMapView.camera = camera
         showMarker(position: googleMapView.camera.target)
-        
         view.addSubview(googleMapView)
         googleMapView.fillSafeSuperView()
     }

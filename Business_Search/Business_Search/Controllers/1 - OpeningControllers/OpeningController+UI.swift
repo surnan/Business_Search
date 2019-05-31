@@ -11,6 +11,10 @@ import CoreData
 import MapKit
 
 
+//var currentLatitude: Double = 0.0
+//var currentLongitude: Double = 0.0
+
+
 extension OpeningController {
     
     //MARK:- ViewDidLoad()
