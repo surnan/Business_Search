@@ -6,7 +6,9 @@
 //  Copyright © 2019 admin. All rights reserved.
 //
 
+
 import UIKit
+import GoogleMaps
 
 let limit = 50
 var offset = 50
@@ -30,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
+        
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         print(urls[urls.count-1] as URL)    //prints app directory path
         dataController.load()

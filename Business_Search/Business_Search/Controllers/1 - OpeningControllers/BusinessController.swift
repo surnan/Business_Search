@@ -201,7 +201,6 @@ class BusinessController: UIViewController {
     }
 }
 
-
 extension String {
     var _isValidURL: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
