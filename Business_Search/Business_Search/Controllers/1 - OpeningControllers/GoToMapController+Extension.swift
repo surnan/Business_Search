@@ -21,10 +21,16 @@ extension GoToMapController {
             do {
                 let jsonData = try decoder.decode(GoogleMapResponse.self, from: data)
                 print("json data: \n \(jsonData)")
-                print("")
             } catch {
                 print("Error catching jsonData: \n\(error)")
-            } 
+            }
+            
+            
+            
+            
+
+            
+            
         }
         task.resume()
     }

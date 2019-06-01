@@ -79,6 +79,7 @@ class BusinessController: UIViewController {
     
     var nameLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = -1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -177,6 +178,7 @@ class BusinessController: UIViewController {
         [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton, mapItButton ].forEach{stackView.addArrangedSubview($0)}
         [nameLabel, stackView].forEach{view.addSubview($0)}
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
         nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15).isActive = true

@@ -70,8 +70,13 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
         addDestination()
         [mapView, directionSegmentControl, scaleView].forEach{view.addSubview($0)}
         
+        
+        
+        
         NSLayoutConstraint.activate([
-            directionSegmentControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //directionSegmentControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            directionSegmentControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            directionSegmentControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             directionSegmentControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scaleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             scaleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),

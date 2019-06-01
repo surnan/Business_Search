@@ -28,7 +28,6 @@
 		848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */; };
 		848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */; };
 		84A5AFD522A18B00009B96AD /* GoToMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFD422A18B00009B96AD /* GoToMapController.swift */; };
-		84A5AFD822A1EF51009B96AD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFD722A1EF50009B96AD /* SwiftyJSON.swift */; };
 		84A5AFDA22A1FFF4009B96AD /* GoToMapController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFD922A1FFF4009B96AD /* GoToMapController+Extension.swift */; };
 		84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */; };
 		84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* MyTabController.swift */; };
@@ -42,7 +41,6 @@
 		84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE30E2263E652008C9B01 /* UNSYNC.swift */; };
 		84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE31022642B27008C9B01 /* YelpClient.swift */; };
 		84CC285D2297774800A82BBE /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CC285C2297774800A82BBE /* SettingsController.swift */; };
-		84D331D0229B4B7D00F84ACB /* GoToMapController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D331CF229B4B7D00F84ACB /* GoToMapController3.swift */; };
 		84D3DB9E2266DF5200E46B2E /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */; };
 		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
 		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
@@ -78,7 +76,6 @@
 		848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateYelpURLDuringLooping.swift; sourceTree = "<group>"; };
 		84A5AFD422A18B00009B96AD /* GoToMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToMapController.swift; sourceTree = "<group>"; };
-		84A5AFD722A1EF50009B96AD /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		84A5AFD922A1FFF4009B96AD /* GoToMapController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoToMapController+Extension.swift"; sourceTree = "<group>"; };
 		84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapResponse.swift; sourceTree = "<group>"; };
 		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
@@ -94,7 +91,6 @@
 		84BDE30E2263E652008C9B01 /* UNSYNC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNSYNC.swift; sourceTree = "<group>"; };
 		84BDE31022642B27008C9B01 /* YelpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
 		84CC285C2297774800A82BBE /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		84D331CF229B4B7D00F84ACB /* GoToMapController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToMapController3.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
 		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
@@ -164,7 +160,6 @@
 				8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */,
 				842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */,
 				842AD7D8228538B900590B1A /* BusinessController.swift */,
-				84D331CF229B4B7D00F84ACB /* GoToMapController3.swift */,
 				84A5AFD422A18B00009B96AD /* GoToMapController.swift */,
 				84A5AFD922A1FFF4009B96AD /* GoToMapController+Extension.swift */,
 				84EBA521229CAAFA00531AF5 /* GoToMapTableController.swift */,
@@ -180,14 +175,6 @@
 				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
 			);
 			path = "Menu Controller";
-			sourceTree = "<group>";
-		};
-		84A5AFD622A1EF38009B96AD /* Swifty JSON */ = {
-			isa = PBXGroup;
-			children = (
-				84A5AFD722A1EF50009B96AD /* SwiftyJSON.swift */,
-			);
-			path = "Swifty JSON";
 			sourceTree = "<group>";
 		};
 		84A5AFDB22A21E50009B96AD /* Google */ = {
@@ -233,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				84A5AFDB22A21E50009B96AD /* Google */,
-				84A5AFD622A1EF38009B96AD /* Swifty JSON */,
 				84DC40E6226B7B89003003C4 /* Core Data */,
 				8414475D2266C49900A38AAB /* Yelp API */,
 			);
@@ -453,7 +439,6 @@
 				84EBA522229CAAFA00531AF5 /* GoToMapTableController.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
-				84D331D0229B4B7D00F84ACB /* GoToMapController3.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
@@ -480,7 +465,6 @@
 				84CC285D2297774800A82BBE /* SettingsController.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
-				84A5AFD822A1EF51009B96AD /* SwiftyJSON.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
 				848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */,
