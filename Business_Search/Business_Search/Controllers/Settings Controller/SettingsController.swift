@@ -230,3 +230,18 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
     }
 }
+
+extension UIViewController {
+    func showOKAlertController(title: String, message: String){
+        let myAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        myAlertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(myAlertController, animated: true)
+    }
+    
+    func showOKCancelAlertController(title: String, message: String, okFunction: ((UIAlertAction) -> Void)?) {
+        let myAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        myAlertController.addAction(UIAlertAction(title: "OK", style: .default, handler: okFunction))
+        myAlertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        present(myAlertController, animated: true)
+    }
+}
