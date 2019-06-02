@@ -109,7 +109,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func showBusinessInfo(currentBusiness: Business){
-        let newVC = BusinessController()
+        let newVC = ShowBusinessDetailsController()
         newVC.business = currentBusiness
         navigationController?.pushViewController(newVC, animated: true)
     }

@@ -11,7 +11,7 @@ import CoreData
 import MapKit
 
 
-class BusinessController: UIViewController {
+class ShowBusinessDetailsController: UIViewController {
     
     var business: Business! {
         didSet {
@@ -21,7 +21,6 @@ class BusinessController: UIViewController {
                     .font: UIFont.boldSystemFont(ofSize: 28),
                 ]
                 nameLabel.attributedText = NSAttributedString(string: name, attributes: attributes)
-                nameLabel.textAlignment = .center
             }
             
             if let address = business.displayAddress {
@@ -31,7 +30,6 @@ class BusinessController: UIViewController {
                     .font: UIFont(name: "Georgia", size: 25) as Any,
                 ]
                 addressLabel.attributedText = NSAttributedString(string: replaced, attributes: attributes)
-                addressLabel.textAlignment = .center
             }
             
             
@@ -43,7 +41,6 @@ class BusinessController: UIViewController {
                     // NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
                 ]
                 phoneNumberLabel.attributedText = NSAttributedString(string: phoneText, attributes: attributes)
-                phoneNumberLabel.textAlignment = .center
             }
             
             if let phoneNumber = business.displayPhone {
@@ -80,23 +77,27 @@ class BusinessController: UIViewController {
     var nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = -1
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var addressLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 2
+        label.numberOfLines = -1
+        label.textAlignment = .center
         return label
     }()
     
     var ratingLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         return label
     }()
     
     var priceLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         return label
     }()
     
@@ -158,7 +159,7 @@ class BusinessController: UIViewController {
     
     
     @objc func handlemapItButton(_ sender: UIButton){
-        let newVC = GoToMapController()
+        let newVC = ShowBusinessMapController()
         newVC.business = business
         navigationController?.pushViewController(newVC, animated: true)
     }

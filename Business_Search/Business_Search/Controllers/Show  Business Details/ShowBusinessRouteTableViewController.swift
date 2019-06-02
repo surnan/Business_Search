@@ -11,13 +11,15 @@ import MapKit
 import CoreLocation
 
 
-class GoToMapTableController: UITableViewController {
+class ShowBusinessRouteTableViewController: UITableViewController {
 
     var steps = [MKRoute.Step]() {
         didSet {
             steps.removeFirst()
         }
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,11 +10,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class GoToMapController: UIViewController, CLLocationManagerDelegate {
+class ShowBusinessMapController: UIViewController, CLLocationManagerDelegate {
     
     var business: Business!     //Injected
     var _steps = [MKRoute.Step]()
     
+    var tableViewArrays = [[String]]()  //Forwarding 2D Array for Transit Routes
     
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
         let button = MKUserTrackingButton(mapView: mapView)
@@ -82,14 +83,15 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
             scaleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             ])
         
-        mapView.fillSafeSuperView()
+        let safe = view.safeAreaLayoutGuide
+        mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: directionSegmentControl.topAnchor)
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: moveToUserLocationButton),
                                               UIBarButtonItem(customView: compass),
                                               UIBarButtonItem(title: "Table", style: .done, target: self, action: #selector(hendleNextTable))]
     }
     
     @objc func hendleNextTable(){
-        let newVC = GoToMapTableController()
+        let newVC = ShowBusinessRouteTableViewController()
         newVC.steps = _steps
         navigationController?.pushViewController(newVC, animated: true)
     }
@@ -204,7 +206,7 @@ class GoToMapController: UIViewController, CLLocationManagerDelegate {
 }
 
 
-extension GoToMapController: MKMapViewDelegate {
+extension ShowBusinessMapController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.blue

@@ -42,7 +42,7 @@ class GroupsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let newVC = BusinessController()
+            let newVC = ShowBusinessDetailsController()
             newVC.business = businesses[indexPath.row]
             navigationController?.pushViewController(newVC, animated: true)
     }

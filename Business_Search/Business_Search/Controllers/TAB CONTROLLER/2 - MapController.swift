@@ -82,7 +82,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     
     //TAP Accessory
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let newVC = BusinessController()
+        let newVC = ShowBusinessDetailsController()
         newVC.business = currentBusinessAnnotation
         navigationController?.pushViewController(newVC, animated: true)
     }
@@ -118,7 +118,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     
     
     @objc func handleMyButton(){
-        let newVC = BusinessController()
+        let newVC = ShowBusinessDetailsController()
         newVC.business = currentBusinessAnnotation
         navigationController?.pushViewController(newVC, animated: true)
     }
