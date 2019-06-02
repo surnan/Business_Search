@@ -153,6 +153,13 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let bootupRadius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int
+        print("bootupRadius --> \(bootupRadius)")
+        
+        radius =  bootupRadius ?? 400
+        
+        
         view.backgroundColor = .lightBlue
         [nearMeSearchButton, searchByMapButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}
         [verticalStackView].forEach{view.addSubview($0)}

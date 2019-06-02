@@ -222,6 +222,11 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         dismiss(animated: true, completion: {
             radius = self.newRadiusValue
             self.delegate?.undoBlur()
+            self.saveDefaults()
         })
+    }
+    
+    func saveDefaults(){
+        UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
     }
 }
