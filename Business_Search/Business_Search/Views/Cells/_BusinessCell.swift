@@ -14,9 +14,7 @@ let attributes2: [NSAttributedString.Key: Any] = [ .font : UIFont.italicSystemFo
 class _BusinessCell: UITableViewCell {
     var currentBusiness: Business? {
         didSet {
-            
             guard let business = currentBusiness else { return }
-            
             if let displayAddresses = business.displayAddress,
                 let addresse = displayAddresses.split(separator: "?").first,
                 let name = business.name {
@@ -26,10 +24,7 @@ class _BusinessCell: UITableViewCell {
                 stringOne.append(stringTwo)
                 myLabel.attributedText = stringOne
             }
-            
-            
             yelpImageView.image = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
-            
         }
     }
     
@@ -41,15 +36,6 @@ class _BusinessCell: UITableViewCell {
         return imageView
     }()
     
-    let favoritesButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "UnFavorite"), for: .normal)
-        button.setImage(#imageLiteral(resourceName: "Favorite"), for: .selected)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    
     let myLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = -1
@@ -59,9 +45,7 @@ class _BusinessCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
         [yelpImageView, myLabel].forEach{addSubview($0)}
-
         yelpImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         yelpImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         yelpImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85).isActive = true

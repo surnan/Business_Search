@@ -15,25 +15,30 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
 
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
             print(indexPath)
         }
         action.image = #imageLiteral(resourceName: "Favorite")
         action.backgroundColor = .lightBlue
-        
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
-        
     }
     
-    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
-            print(indexPath)
+        if tableViewArrayType == TableIndex.category.rawValue {return nil}
+        let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
+            guard let self = self else {return}
+            let currentBusiness = self.fetchBusinessController?.object(at: indexPath)
+            currentBusiness?.isFavoriteChange(context: self.dataController.viewContext)
+            DispatchQueue.main.async {
+                //tableView.reloadData()    //This works with proper animation
+                tableView.deselectRow(at: indexPath, animated: true)
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
         }
         action.image = #imageLiteral(resourceName: "UnFavorite")
         action.backgroundColor = .lightSteelBlue1
-        
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
