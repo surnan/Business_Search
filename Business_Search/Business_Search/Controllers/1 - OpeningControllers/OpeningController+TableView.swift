@@ -12,6 +12,34 @@ import CoreData
 extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
+
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
+            print(indexPath)
+        }
+        action.image = #imageLiteral(resourceName: "Favorite")
+        action.backgroundColor = .lightBlue
+        
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
+            print(indexPath)
+        }
+        action.image = #imageLiteral(resourceName: "UnFavorite")
+        action.backgroundColor = .lightSteelBlue1
+        
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:

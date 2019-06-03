@@ -28,11 +28,20 @@ class _BusinessCell: UITableViewCell {
     
     let yelpImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "question_mark")
+        imageView.image = #imageLiteral(resourceName: "UnFavorite")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
+    let favoritesButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "UnFavorite"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "Favorite"), for: .selected)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     let myLabel: UILabel = {
         let label = UILabel()
