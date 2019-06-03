@@ -37,6 +37,14 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     var delegate: MenuControllerDelegate?
+    var maximumSliderValue: Int? {
+        didSet {
+            if let max = maximumSliderValue {
+                distanceSlider.maximumValue = Float(max)
+                sliderRightLabel.text = "\(max)"
+            }
+        }
+    }
     
     lazy var distanceSlider: UISlider = {
         var slider = UISlider()
@@ -189,7 +197,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var newRadiusValue: Int!
     
     //MARK:- Handlers
-    @objc func handleDeleteAllButton(_ sender: UIButton){
+    @objc func handleDeleteAllButton(){
         let context: NSManagedObjectContext!  = dataController.backGroundContext
         context.perform {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
@@ -220,12 +228,14 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc func handleSaveButton(){
+        handleDeleteAllButton()
+        if let newRadius = newRadiusValue {
+            radius = newRadius
+            saveDefaults()
+        }
+        
         dismiss(animated: true, completion: {
             self.delegate?.undoBlur()
-            if let newRadius = self.newRadiusValue {
-                radius = newRadius
-                self.saveDefaults()
-            }
         })
     }
     

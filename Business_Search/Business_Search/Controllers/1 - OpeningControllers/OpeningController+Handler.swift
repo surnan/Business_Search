@@ -39,6 +39,7 @@ extension OpeningController {
         newVC.modalPresentationStyle = .overFullScreen
         newVC.delegate = self
         newVC.dataController = dataController
+        newVC.maximumSliderValue = radius
         present(newVC, animated: true, completion:nil)
     }
     
