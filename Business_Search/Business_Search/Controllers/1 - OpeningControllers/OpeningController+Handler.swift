@@ -45,6 +45,7 @@ extension OpeningController {
     
     func checkLocationCount(data: YelpBusinessResponse){
         if recordCountAtLocation > yelpMaxPullCount {
+            navigationController?.setNavigationBarHidden(true, animated: true)
             let myAlertController = UIAlertController(title: "Not All Businesses Downloaded",
                                                       message: "More than \(yelpMaxPullCount) businesses found.  Reducing search radius can bring more accurate results", preferredStyle: .alert)
             myAlertController.addAction(UIAlertAction(title: "Change Radius", style: .default, handler: { _ in

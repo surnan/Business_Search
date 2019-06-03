@@ -27,6 +27,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     func undoBlur() {
         blurredEffectView2.removeFromSuperview()
         navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     var latitude: Double!                                       //MARK: Injected
