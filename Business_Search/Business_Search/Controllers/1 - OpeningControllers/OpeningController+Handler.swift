@@ -25,14 +25,22 @@ extension OpeningController {
             do {
                 try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
-                queueForSavingBusinesses(data)
-                self.buildURLsQueueForDownloadingBusinesses(total: data.total)
-                reloadFetchControllers()
+                self.checkLocationCount(data: data)
             } catch {
                 print("Error saving func addLocation() --\n\(error)")
             }
         }
     }
+    
+    
+    func checkLocationCount(data: YelpBusinessResponse){
+        queueForSavingBusinesses(data)
+        buildURLsQueueForDownloadingBusinesses(total: data.total)
+        reloadFetchControllers()
+    }
+    
+    
+    
     
     func handleGetNearbyBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {

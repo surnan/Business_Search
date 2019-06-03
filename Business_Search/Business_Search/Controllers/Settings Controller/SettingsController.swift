@@ -140,6 +140,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //newRadiusValue = Int(radius)
         distanceSlider.value = Float(radius)
         sliderValueLabel.text = String(radius)
         deleteAllLabel.isHidden = true
@@ -220,9 +221,11 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @objc func handleSaveButton(){
         dismiss(animated: true, completion: {
-            radius = self.newRadiusValue
             self.delegate?.undoBlur()
-            self.saveDefaults()
+            if let newRadius = self.newRadiusValue {
+                radius = newRadius
+                self.saveDefaults()
+            }
         })
     }
     
