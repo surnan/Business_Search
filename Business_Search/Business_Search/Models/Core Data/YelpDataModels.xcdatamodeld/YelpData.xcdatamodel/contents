@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Business" representedClassName="Business" syncable="YES" codeGenerationType="class">
-        <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alias" attributeType="String" syncable="YES"/>
         <attribute name="displayAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayPhone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDelivery" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isPickup" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="reviewCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="business" inverseEntity="Category" syncable="YES"/>
-        <relationship name="parentLocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="businesses" inverseEntity="Location" syncable="YES"/>
+        <relationship name="parentLocation" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="businesses" inverseEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="business" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="categories" inverseEntity="Business" syncable="YES"/>
+        <relationship name="business" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="categories" inverseEntity="Business" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -30,7 +33,7 @@
         <relationship name="businesses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Business" inverseName="parentLocation" inverseEntity="Business" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Business" positionX="-493.05859375" positionY="-30.921875" width="128" height="268"/>
+        <element name="Business" positionX="-493.05859375" positionY="-30.921875" width="128" height="315"/>
         <element name="Category" positionX="-209.7578125" positionY="294.0234375" width="128" height="90"/>
         <element name="Location" positionX="-689.16015625" positionY="-178.06640625" width="128" height="30"/>
     </elements>

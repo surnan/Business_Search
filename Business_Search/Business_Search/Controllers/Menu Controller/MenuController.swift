@@ -155,10 +155,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         super.viewDidLoad()
         
         let bootupRadius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int
-        print("bootupRadius --> \(bootupRadius)")
-        
         radius =  bootupRadius ?? 400
-        
         
         view.backgroundColor = .lightBlue
         [nearMeSearchButton, searchByMapButton, searchByAddressButton].forEach{verticalStackView.addArrangedSubview($0)}

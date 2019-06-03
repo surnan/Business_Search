@@ -37,6 +37,18 @@ extension Location {
                     currentCategory.business = currentBusiness
                 })
         
+                item.transactions.forEach({ (currentString) in
+                    
+                    if currentString.lowercased().contains("delivery") {
+                        currentBusiness.isDelivery = true
+                    }
+
+                    if currentString.lowercased().contains("pickup") {
+                        currentBusiness.isPickup = true
+                    }
+                    
+                })
+                
                 do {
                     try context.save()
                 } catch {

@@ -47,6 +47,8 @@ struct YelpBusinessResponse: Codable {
         var phone: String?
         var display_phone: String?
         var distance: Double?
+        
+        var transactions: [String]
     }
     
     var businesses: [BusinessesStruct]
