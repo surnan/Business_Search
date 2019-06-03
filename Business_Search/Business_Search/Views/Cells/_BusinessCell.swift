@@ -14,15 +14,22 @@ let attributes2: [NSAttributedString.Key: Any] = [ .font : UIFont.italicSystemFo
 class _BusinessCell: UITableViewCell {
     var currentBusiness: Business? {
         didSet {
-            if let displayAddresses = currentBusiness?.displayAddress,
+            
+            guard let business = currentBusiness else { return }
+            
+            if let displayAddresses = business.displayAddress,
                 let addresse = displayAddresses.split(separator: "?").first,
-                let name = currentBusiness?.name {
+                let name = business.name {
                 let nameNewLine = "\(name)\n"
                 let stringOne = NSMutableAttributedString(string: nameNewLine, attributes: attributes1)
                 let stringTwo = NSMutableAttributedString(string: String(addresse), attributes: attributes2)
                 stringOne.append(stringTwo)
                 myLabel.attributedText = stringOne
             }
+            
+            
+            yelpImageView.image = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
+            
         }
     }
     
