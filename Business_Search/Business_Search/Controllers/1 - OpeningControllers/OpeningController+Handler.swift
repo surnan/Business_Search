@@ -21,7 +21,7 @@ extension OpeningController {
             newLocation.longitude = data.region.center.longitude
             newLocation.totalBusinesses = Int32(data.total)
             newLocation.radius = Int32(radius)  //AppDelegate
-            recordCountAtLocation = data.total
+            recordCountAtLocation = data.total  //Number of businesses @ this location with current radius
             do {
                 try backgroundContext.save()    //1
                 self.currentLocationID = newLocation.objectID
@@ -32,11 +32,35 @@ extension OpeningController {
         }
     }
     
+    @objc func handleSettings(){
+        let newVC = SettingsController()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        view.addSubview(blurredEffectView2)
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.delegate = self
+        newVC.dataController = dataController
+        present(newVC, animated: true, completion:nil)
+    }
+    
     
     func checkLocationCount(data: YelpBusinessResponse){
-        queueForSavingBusinesses(data)
-        buildURLsQueueForDownloadingBusinesses(total: data.total)
-        reloadFetchControllers()
+        if recordCountAtLocation > yelpMaxPullCount {
+            let myAlertController = UIAlertController(title: "Not All Businesses Downloaded",
+                                                      message: "More than \(yelpMaxPullCount) businesses found.  Reducing search radius can bring more accurate results", preferredStyle: .alert)
+            myAlertController.addAction(UIAlertAction(title: "Change Radius", style: .default, handler: { _ in
+                self.handleSettings()
+            }))
+            myAlertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
+                self.queueForSavingBusinesses(data)
+                self.buildURLsQueueForDownloadingBusinesses(total: data.total)
+                self.reloadFetchControllers()
+            }))
+            present(myAlertController, animated: true)
+        } else {
+            queueForSavingBusinesses(data)
+            buildURLsQueueForDownloadingBusinesses(total: data.total)
+            reloadFetchControllers()
+        }
     }
     
     

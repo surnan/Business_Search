@@ -15,7 +15,20 @@ let businessCellID = "businessCellID"
 let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
-class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
+class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
+    
+    lazy var blurredEffectView2: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = view.bounds
+        return blurredEffectView
+    }()
+    
+    func undoBlur() {
+        blurredEffectView2.removeFromSuperview()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     var latitude: Double!                                       //MARK: Injected
     var longitude: Double!                                      //MARK: Injected
     var moc: NSManagedObjectContext!                            //Parent-Context
