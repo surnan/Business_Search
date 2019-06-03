@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ShowBusinessMapController: UIViewController, CLLocationManagerDelegate {
+class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDelegate {
     
     var business: Business!     //Injected
     var _steps = [MKRoute.Step]()
@@ -206,7 +206,7 @@ class ShowBusinessMapController: UIViewController, CLLocationManagerDelegate {
 }
 
 
-extension ShowBusinessMapController: MKMapViewDelegate {
+extension ShowMultipleBusinessMapController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.blue

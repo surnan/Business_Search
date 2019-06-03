@@ -11,10 +11,25 @@ import CoreData
 import MapKit
 
 
-class ShowBusinessDetailsController: UIViewController {
+class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate {
+    
+    lazy var mapView: MKMapView = {
+        var map = MKMapView()
+        map.delegate = self
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
+        map.mapType = .standard
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
+    
     
     var business: Business! {
         didSet {
+            firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: business.latitude, longitude: business.longitude)
+            isTakeoutLabel.isHidden = business.isPickup ? false : true
+            isDeliveryLabel.isHidden = business.isPickup ? false : true
+            
             if let name = business.name {
                 let attributes: [NSAttributedString.Key: Any] = [
                     .foregroundColor : UIColor.black,
@@ -49,23 +64,15 @@ class ShowBusinessDetailsController: UIViewController {
                     .foregroundColor : UIColor.blue,
                     .font: UIFont(name: "Georgia", size: 25) as Any,
                 ]
-                
                 let myNormalAttributedTitle = NSAttributedString(string: phoneText,
                                                                  attributes: attributes)
                 phoneNumberButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
             }
-            
-            
-            
+
             if let price = business.price {
-                let text = "Price: \(price)"
-                priceLabel.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
-                priceLabel.textAlignment = .center
+                priceLabel.text = "Price: \(price)"
             }
-            
-            let ratingText = "Rating: \(business.rating)"
-            ratingLabel.attributedText = NSAttributedString(string: ratingText, attributes: black25textAttributes)
-            ratingLabel.textAlignment = .center
+            ratingLabel.text = "\nRating: \(business.rating)"
         }
     }
     
@@ -89,17 +96,7 @@ class ShowBusinessDetailsController: UIViewController {
         return label
     }()
     
-    var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var priceLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        return label
-    }()
+
     
     var websiteButton: UIButton = {
         let button = UIButton()
@@ -150,7 +147,7 @@ class ShowBusinessDetailsController: UIViewController {
     lazy var mapItButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 12
-        let attributedString = NSAttributedString(string: "     MAP IT     ", attributes: white25textAttributes)
+        let attributedString = NSAttributedString(string: "         MAP IT         ", attributes: white25textAttributes)
         button.setAttributedTitle(attributedString, for: .normal)
         button.backgroundColor = UIColor.red
         button.addTarget(self, action: #selector(handlemapItButton(_:)), for: .touchUpInside)
@@ -159,12 +156,16 @@ class ShowBusinessDetailsController: UIViewController {
     
     
     @objc func handlemapItButton(_ sender: UIButton){
-        let newVC = ShowBusinessMapController()
+        let newVC = ShowMultipleBusinessMapController()
         newVC.business = business
         navigationController?.pushViewController(newVC, animated: true)
     }
     
-    
+    var firstAnnotation: MKPointAnnotation = {
+        let annotation = MKPointAnnotation()
+        return annotation
+    }()
+
     
     var stackView: UIStackView = {
         let stack = UIStackView()
@@ -174,15 +175,91 @@ class ShowBusinessDetailsController: UIViewController {
         return stack
     }()
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        } else {
+            pinView!.annotation = annotation
+        }
+        return pinView
+    }
+    
+    var ratingLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .darkGray
+        label.numberOfLines = -1
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var priceLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var isDeliveryLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "Delivery Available"
+        label.textAlignment = .center
+        return label
+    }()
+
+    var isTakeoutLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "Take Out Available\n"
+        label.textAlignment = .center
+        label.numberOfLines = -1
+        return label
+    }()
+    
+    var stackViewBtm: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     override func viewDidLoad() {
         view.backgroundColor = UIColor.white
-        [addressLabel, phoneNumberButton, priceLabel, ratingLabel, visitYelpPageButton, mapItButton ].forEach{stackView.addArrangedSubview($0)}
-        [nameLabel, stackView].forEach{view.addSubview($0)}
+        let safe = view.safeAreaLayoutGuide
+        
+        mapView.addAnnotation(firstAnnotation)
+
+        let viewRegion = MKCoordinateRegion(center: firstAnnotation.coordinate, latitudinalMeters: 400, longitudinalMeters: 400)
+        mapView.setRegion(viewRegion, animated: false)
+        
+        [addressLabel, phoneNumberButton, ratingLabel, priceLabel, isDeliveryLabel, isTakeoutLabel].forEach{stackView.addArrangedSubview($0)}
+        
+        [visitYelpPageButton, mapItButton].forEach{stackViewBtm.addArrangedSubview($0)}
+        
+        [mapView, nameLabel, stackView, stackViewBtm].forEach{view.addSubview($0)}
+        mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25).isActive = true
+        mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
+                       padding: .init(top: 3, left: 3, bottom: 0, right: 3))
+        
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 10).isActive = true
+
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15).isActive = true
+        
+        stackViewBtm.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
+        stackViewBtm.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stackViewBtm.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66).isActive = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "pause", style: .done, target: self, action: #selector(pauseFunc))
     }
     
