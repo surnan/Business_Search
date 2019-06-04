@@ -9,11 +9,92 @@
 import UIKit
 import CoreData
 
+class CustomButton: UIButton {
+    override open var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isSelected ? UIColor.white : UIColor.clear
+        }
+    }
+}
+
 
 
 class FilterController: UIViewController {
+    @objc func handleDollarButtons(_ sender: CustomButton){
+        print(".isSelected = \(sender.isSelected)")
+        sender.isSelected = !sender.isSelected
+    }
+    
     var delegate: MenuControllerDelegate?
     
+    lazy var dollarOneButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("$", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .selected)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 10
+        button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
+        return button
+    }()
+    
+    lazy var dollarTwoButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("$$", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .selected)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
+        return button
+    }()
+    
+    lazy var dollarThreeButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("$$$", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .selected)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
+        return button
+    }()
+    
+    lazy var dollarFourButton: CustomButton = {
+        let button = CustomButton()
+        button.setTitle("$$$$", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .selected)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 10
+        button.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
+        return button
+    }()
+    
+    lazy var defaultButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(handleDefaultButton), for: .touchUpInside)
+        button.backgroundColor = UIColor.white
+        button.setTitle("   Reset to Defaults     ", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc func handleDefaultButton(){
+        print("Default Settings Restored")
+    }
+    
+    
+
+    
+
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
@@ -98,19 +179,24 @@ class FilterController: UIViewController {
         return s
     }()
     
-    var priceSegmentControl: UISegmentedControl = {
-        let items = ["$","$$","$$$","$$$$",]
-        var segmentControl = UISegmentedControl(items: items)
-        segmentControl.backgroundColor = .white
-        segmentControl.tintColor = .black
-        segmentControl.layer.cornerRadius = 10
-        return segmentControl
-    }()
+    
+    
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        
+        let dollarStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.distribution = .fillEqually
+            stack.spacing = 1
+            return stack
+        }()
+        
+        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
         
         let deliveryStack: UIStackView = {
             let stack = UIStackView()
@@ -137,7 +223,7 @@ class FilterController: UIViewController {
             return stack
         }()
         
-        [priceLabel, priceSegmentControl, deliveryStack, takeOutStack, saveButton, cancelButton].forEach{myStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, deliveryStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
         
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
@@ -146,3 +232,4 @@ class FilterController: UIViewController {
             ])
     }
 }
+
