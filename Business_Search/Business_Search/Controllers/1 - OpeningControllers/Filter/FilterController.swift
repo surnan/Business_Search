@@ -17,11 +17,9 @@ class CustomButton: UIButton {
     }
 }
 
-
-
 class FilterController: UIViewController {
     @objc func handleDollarButtons(_ sender: CustomButton){
-        print(".isSelected = \(sender.isSelected)")
+        //print(".isSelected = \(sender.isSelected)")
         sender.isSelected = !sender.isSelected
     }
     
@@ -90,14 +88,10 @@ class FilterController: UIViewController {
     @objc func handleDefaultButton(){
         print("Default Settings Restored")
     }
-    
-    
-
-    
 
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         button.backgroundColor = UIColor.white
         button.setTitle("     SAVE     ", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -107,13 +101,7 @@ class FilterController: UIViewController {
         return button
     }()
     
-    @objc func handleSaveButton(){
-        dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
-        })
-    }
-    
-    
+
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -179,15 +167,59 @@ class FilterController: UIViewController {
         return s
     }()
     
+//    let bootupRadius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int
+//    radius =  bootupRadius ?? 400
+//    func saveDefaults(){
+//        UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
+//    }
     
     
+    @objc func handleSaveButton(){
+        let one = dollarOneButton.isSelected ? "$ " : ""
+        let two = dollarTwoButton.isSelected ? "$$ " : ""
+        let three = dollarThreeButton.isSelected ? "$$$ " : ""
+        let four = dollarFourButton.isSelected ? "$$$$ " : ""
+        let allButtons = one + two + three + four
+        
+        
+        UserDefaults.standard.set(dollarOneButton.isSelected, forKey: AppConstants.dollarOne.rawValue)
+        UserDefaults.standard.set(dollarTwoButton.isSelected, forKey: AppConstants.dollarTwo.rawValue)
+        UserDefaults.standard.set(dollarThreeButton.isSelected, forKey: AppConstants.dollarThree.rawValue)
+        UserDefaults.standard.set(dollarFourButton.isSelected, forKey: AppConstants.dollarFour.rawValue)
+        
+        UserDefaults.standard.set(deliverySwitch.isOn, forKey: AppConstants.deliveryMandatory.rawValue)
+        UserDefaults.standard.set(takeOutSwitch.isOn, forKey: AppConstants.takeoutMandatory.rawValue)
+        
+        
+        
+        print("allButtons = \(allButtons)")
+        dismiss(animated: true, completion: {
+            self.delegate?.undoBlur()
+        })
+    }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        dollarOneButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
+        dollarTwoButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
+        dollarThreeButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
+        dollarFourButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
+
+        deliverySwitch.isOn = UserDefaults.standard.object(forKey: AppConstants.deliveryMandatory.rawValue) as? Bool ?? false
+        takeOutSwitch.isOn = UserDefaults.standard.object(forKey: AppConstants.takeoutMandatory.rawValue) as? Bool ?? false
+
+        
+        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
+        
+        
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
-        
         let dollarStack: UIStackView = {
             let stack = UIStackView()
             stack.axis = .horizontal
@@ -197,7 +229,6 @@ class FilterController: UIViewController {
         }()
         
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
-        
         let deliveryStack: UIStackView = {
             let stack = UIStackView()
             stack.spacing = 20
@@ -205,7 +236,6 @@ class FilterController: UIViewController {
             [deliveryLabel, deliverySwitch].forEach{stack.addArrangedSubview($0)}
             return stack
         }()
-        
 
         let takeOutStack: UIStackView = {
             let stack = UIStackView()
@@ -224,7 +254,6 @@ class FilterController: UIViewController {
         }()
         
         [priceLabel, dollarStack, deliveryStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
-        
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -232,4 +261,6 @@ class FilterController: UIViewController {
             ])
     }
 }
+
+
 

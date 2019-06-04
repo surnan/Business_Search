@@ -19,7 +19,7 @@ var categoryMatch = 0
 var yelpMaxPullCount = 1000
 
 enum AppConstants:String {
-    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount
+    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, deliveryMandatory, takeoutMandatory
 }
 
 
@@ -63,7 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let startingVC = MenuController()
         startingVC.dataController = dataController
         window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
-        //window?.rootViewController = SettingsController()
         return true
     }
 
