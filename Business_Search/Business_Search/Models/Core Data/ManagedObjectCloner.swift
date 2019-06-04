@@ -35,8 +35,6 @@ class ManagedObjectCloner: NSObject {
                 relatedObj = e.nextObject() as? NSManagedObject
             }
         }
-        
         return cloned
     }
-    
 }

@@ -194,15 +194,9 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     let newVC = SettingsController()
     
     @objc func handleSettings(){
-        
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurredEffectView2)
-        
-        //newVC.modalPresentationStyle = .overCurrentContext
         newVC.modalPresentationStyle = .overFullScreen
-        
-        
         newVC.delegate = self
         newVC.dataController = dataController
         present(newVC, animated: true, completion:nil)

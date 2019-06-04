@@ -43,7 +43,6 @@ extension OpeningController {
         present(newVC, animated: true, completion:nil)
     }
     
-    
     func checkLocationCount(data: YelpBusinessResponse){
         if recordCountAtLocation > yelpMaxPullCount {
             navigationController?.setNavigationBarHidden(true, animated: true)

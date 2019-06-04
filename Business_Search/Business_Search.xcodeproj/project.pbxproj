@@ -33,6 +33,8 @@
 		84A5AFFE22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFFD22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift */; };
 		84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B01D22A58F7D009B96AD /* Business+Extension.swift */; };
 		84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */; };
+		84A5B02422A5DD43009B96AD /* OpeningController+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02322A5DD43009B96AD /* OpeningController+Filter.swift */; };
+		84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02622A5DFDF009B96AD /* FilterController.swift */; };
 		84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* MyTabController.swift */; };
 		84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE2EF2263D007008C9B01 /* AppDelegate.swift */; };
 		84BDE2F72263D009008C9B01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84BDE2F62263D009008C9B01 /* Assets.xcassets */; };
@@ -84,6 +86,8 @@
 		84A5AFFD22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBusinessTransitTableViewController.swift; sourceTree = "<group>"; };
 		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };
+		84A5B02322A5DD43009B96AD /* OpeningController+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+Filter.swift"; sourceTree = "<group>"; };
+		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
 		84BDE2EC2263D007008C9B01 /* Business_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Business_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84BDE2EF2263D007008C9B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 		843C66F6227D2569003A64D1 /* 1 - OpeningControllers */ = {
 			isa = PBXGroup;
 			children = (
+				84A5B02522A5DFC4009B96AD /* Filter */,
 				846509B9227A0C06008ABA9F /* OpeningController.swift */,
 				842AD7D42284D74D00590B1A /* OpeningController+UI.swift */,
 				8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */,
@@ -197,6 +202,15 @@
 				84A5AFFD22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift */,
 			);
 			path = "Show  Business Details";
+			sourceTree = "<group>";
+		};
+		84A5B02522A5DFC4009B96AD /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				84A5B02322A5DD43009B96AD /* OpeningController+Filter.swift */,
+				84A5B02622A5DFDF009B96AD /* FilterController.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		84BDE2E32263D006008C9B01 = {
@@ -454,6 +468,7 @@
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				84EBA522229CAAFA00531AF5 /* ShowBusinessRouteTableViewController.swift in Sources */,
+				84A5B02422A5DD43009B96AD /* OpeningController+Filter.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
@@ -489,6 +504,7 @@
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
 				848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
+				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
 				848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,

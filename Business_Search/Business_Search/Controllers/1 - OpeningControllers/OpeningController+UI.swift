@@ -35,8 +35,6 @@ extension OpeningController {
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSafeSuperView()
         view.backgroundColor = .lightRed
-        //tableView.fillSuperview()
-        //setupNavigationMenu()
         definesPresentationContext = true
     }
     
@@ -84,8 +82,12 @@ extension OpeningController {
 
     
     func troubleshootFromNavigationMenu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint)),
+                                              UIBarButtonItem(image: #imageLiteral(resourceName: "filter2"), style: .plain, target: self, action: #selector(handleFilter))]
     }
+    
+
+    
     
     
     //MARK:- BreakPoint
