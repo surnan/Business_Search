@@ -88,8 +88,6 @@ class FilterController: UIViewController {
         return button
     }()
     
-    
-    
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
@@ -101,8 +99,6 @@ class FilterController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -241,13 +237,16 @@ class FilterController: UIViewController {
         
         self.dismiss(animated: true, completion: {
             self.delegate?.undoBlur()
+            FilterPredicate.shared.load()
             showMyResultsInNSUserDefaults()
         })
     }
     
     @objc func handleDefaultButton(){
+        //FilterPredicate.shared.reset()
+        //FilterPredicate.shared.load()
         //showMyResultsInNSUserDefaults()
-        print("")
+        print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
     }
 }
 
@@ -268,13 +267,20 @@ func showMyResultsInNSUserDefaults(){
     answers.forEach{print($0)}
     print("\n***\ncount --> \(items.count)")
     
-    
-    
 }
 
 
 class FilterPredicate {
     static let shared = FilterPredicate()
+    
+    func reset(){
+        UserDefaults.standard.set(true, forKey: AppConstants.dollarOne.rawValue)
+        UserDefaults.standard.set(true, forKey: AppConstants.dollarTwo.rawValue)
+        UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
+        UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
+        UserDefaults.standard.set(false, forKey: AppConstants.deliveryMandatory.rawValue)
+        UserDefaults.standard.set(false, forKey: AppConstants.takeoutMandatory.rawValue)
+    }
     
     func load(){
         dollarOne = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
