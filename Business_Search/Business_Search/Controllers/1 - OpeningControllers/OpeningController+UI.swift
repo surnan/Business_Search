@@ -25,6 +25,7 @@ extension OpeningController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("ViewWillAppear: FilterPredicate.shared.isFilterOn --> \(FilterPredicate.shared.isFilterOn)")
         animateResultsAreFilteredLabel()
     }
     

@@ -112,12 +112,6 @@ class FilterController: UIViewController {
         return button
     }()
     
-    @objc func handlecancelButton(){
-        dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
-        })
-    }
-    
     var priceLabel: UILabel = {
         var label = UILabel()
         label.text = "Price Filter Options"
@@ -168,9 +162,9 @@ class FilterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("**")
-        showMyResultsInNSUserDefaults()
-        print("**")
+//        print("**")
+//        showMyResultsInNSUserDefaults()
+//        print("**")
         
         let shared = FilterPredicate.shared
         dollarOneButton.isSelected = shared.getOne
@@ -236,9 +230,10 @@ class FilterController: UIViewController {
                                     takeout: takeOutSwitch.isOn)
         
         self.dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
             FilterPredicate.shared.load()
-            showMyResultsInNSUserDefaults()
+            self.delegate?.undoBlur()
+            //showMyResultsInNSUserDefaults()
+            print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
         })
     }
     
@@ -247,6 +242,13 @@ class FilterController: UIViewController {
         //FilterPredicate.shared.load()
         //showMyResultsInNSUserDefaults()
         print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
+    }
+    
+    @objc func handlecancelButton(){
+        dismiss(animated: true, completion: {
+            self.delegate?.undoBlur()
+            print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
+        })
     }
 }
 

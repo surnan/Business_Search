@@ -18,10 +18,13 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
     
     func animateResultsAreFilteredLabel(){
-        resultsAreFilteredLabel.alpha = 1
-        UIView.animate(withDuration: 0.75, delay: 1.0, options: [], animations: {
+        
+        if !FilterPredicate.shared.isFilterOn {return}
+        
+            resultsAreFilteredLabel.alpha = 1
+            UIView.animate(withDuration: 0.75, delay: 1.0, options: [], animations: {
                 self.resultsAreFilteredLabel.alpha = 0
-        })
+            })
     }
     
     var resultsAreFilteredLabel: UILabel = {

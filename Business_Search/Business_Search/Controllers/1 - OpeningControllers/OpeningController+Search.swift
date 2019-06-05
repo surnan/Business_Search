@@ -59,6 +59,7 @@ extension OpeningController: UISearchResultsUpdating {
         searchGroupIndex = selectedScope
         tableView.reloadData()
         ShowNothingLabelIfNoResults(group: tableViewArrayType)
+        print("SelectedSearchScope: FilterPredicate.shared.isFilterOn --> \(FilterPredicate.shared.isFilterOn)")
         animateResultsAreFilteredLabel()
     }
 }

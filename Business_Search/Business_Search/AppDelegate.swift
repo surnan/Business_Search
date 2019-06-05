@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
         
         FilterPredicate.shared.load()
-        showMyResultsInNSUserDefaults()
+        //showMyResultsInNSUserDefaults()
         
         
         //Print path to Documents folder to help browse for CoreData
