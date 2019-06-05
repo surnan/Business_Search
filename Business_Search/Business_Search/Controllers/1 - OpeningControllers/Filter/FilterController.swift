@@ -324,7 +324,7 @@ class FilterPredicate {
         return !getOne || !getTwo || !getThree || !getFour || getTakeout || getDelivery
     }
     
-    func returnPredicate()->[NSPredicate]{
+    func returnPredicate()->[NSCompoundPredicate]{
         var priceOrPredicates = [NSPredicate]()
         var switchAndPredicates = [NSPredicate]()
         

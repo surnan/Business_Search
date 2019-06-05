@@ -87,7 +87,7 @@
 		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };
 		84A5B02322A5DD43009B96AD /* OpeningController+Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+Filter.swift"; sourceTree = "<group>"; };
-		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
+		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
 		84BDE2EC2263D007008C9B01 /* Business_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Business_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84BDE2EF2263D007008C9B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
