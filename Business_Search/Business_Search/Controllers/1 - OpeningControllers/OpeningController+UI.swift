@@ -22,6 +22,12 @@ extension OpeningController {
         return .lightContent       //Status bar sometimes turns black when typing into search bar
     }                              //Setting color scheme here just to play it safe
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateResultsAreFilteredLabel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -30,11 +36,14 @@ extension OpeningController {
     }
     
     func setupUI(){
-        [tableView].forEach{view.addSubview($0)}
+        let safe = view.safeAreaLayoutGuide
+        
+        [tableView, resultsAreFilteredLabel].forEach{view.addSubview($0)}
         nothingFoundView.center = view.center                               //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSafeSuperView()
         view.backgroundColor = .lightRed
+        resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
         definesPresentationContext = true
     }
     

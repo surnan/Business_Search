@@ -17,6 +17,23 @@ let categoryCellID = "categoryCellID"
 
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
     
+    func animateResultsAreFilteredLabel(){
+        resultsAreFilteredLabel.alpha = 1
+        UIView.animate(withDuration: 0.75, delay: 1.0, options: [], animations: {
+                self.resultsAreFilteredLabel.alpha = 0
+        })
+    }
+    
+    var resultsAreFilteredLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .black
+        label.textColor = .white
+        label.textAlignment = .center
+        label.text = "Partial results due to filter options..."
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var blurredEffectView2: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
@@ -29,6 +46,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         navigationController?.setNavigationBarHidden(false, animated: true)
         doesLocationEntityExist = false
         readOrCreateLocation()
+        animateResultsAreFilteredLabel()
     }
     
     var latitude: Double!                                       //MARK: Injected

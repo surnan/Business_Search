@@ -59,5 +59,6 @@ extension OpeningController: UISearchResultsUpdating {
         searchGroupIndex = selectedScope
         tableView.reloadData()
         ShowNothingLabelIfNoResults(group: tableViewArrayType)
+        animateResultsAreFilteredLabel()
     }
 }
