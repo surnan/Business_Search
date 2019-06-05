@@ -130,11 +130,19 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     
                     var predicate: [NSPredicate] = [predicateBusinessLatitude, predicateBusinessLongitude]
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
-                    fetchRequest.predicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+                    let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
+                    fetchRequest.predicate = openingControllerPredicate
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
