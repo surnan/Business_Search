@@ -140,7 +140,7 @@ class FilterController: UIViewController {
         s.addTarget(self, action: #selector(handleSwitch(_:)), for: .valueChanged)
         return s
     }()
-
+    
     lazy var deliverySwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
@@ -162,9 +162,9 @@ class FilterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        print("**")
-//        showMyResultsInNSUserDefaults()
-//        print("**")
+        //        print("**")
+        //        showMyResultsInNSUserDefaults()
+        //        print("**")
         
         let shared = FilterPredicate.shared
         dollarOneButton.isSelected = shared.getOne
@@ -266,7 +266,7 @@ func showMyResultsInNSUserDefaults(){
             answers.append(item)
         }
     }
-
+    
     let items = Array(UserDefaults.standard.dictionaryRepresentation())
     print("answers:\n")
     answers.forEach{print($0)}
@@ -305,7 +305,7 @@ class FilterPredicate {
         UserDefaults.standard.set(takeout, forKey: AppConstants.takeoutMandatory.rawValue)
     }
     
-
+    
     private var dollarOne: Bool?
     private var dollarTwo: Bool?
     private var dollarThree: Bool?
@@ -360,3 +360,39 @@ class FilterPredicate {
     }
 }
 
+/*
+ func returnPredicate()->[NSPredicate]{
+ var priceOrPredicates = [NSPredicate]()
+ var switchAndPredicates = [NSPredicate]()
+ 
+ // OR predicates
+ if !(getOne && getTwo && getThree && getFour) {
+ if getOne {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$"]))}
+ if getTwo {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$"]))}
+ if getThree {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$"]))}
+ if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$$"]))}
+ }
+ 
+ //AND predicates
+ if getDelivery {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
+ if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+ 
+ let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
+ let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
+ 
+ var returnPredicate = [NSCompoundPredicate]()
+ if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+ if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
+ 
+ 
+ if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
+ print("Return nil")
+ return []
+ } else {
+ print("priceOrPredicates = \(priceOrPredicates)")
+ print("switchAndPredicates = \(switchAndPredicates)")
+ print("returnPredicate = \(returnPredicate)")
+ return returnPredicate
+ }
+ }
+ */
