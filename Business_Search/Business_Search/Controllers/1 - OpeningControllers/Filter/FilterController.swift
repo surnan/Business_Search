@@ -23,7 +23,7 @@ class FilterController: UIViewController {
     }
     
     @objc func handleSwitch(_ sender: UISwitch){
-        print("sender.isOn --> \(sender.isOn)")
+//        print("sender.isOn --> \(sender.isOn)")
     }
     
     var delegate: MenuControllerDelegate?
@@ -240,13 +240,13 @@ class FilterController: UIViewController {
         //FilterPredicate.shared.reset()
         //FilterPredicate.shared.load()
         //showMyResultsInNSUserDefaults()
-        print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
+//        print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
     }
     
     @objc func handlecancelButton(){
         dismiss(animated: true, completion: {
             self.delegate?.undoBlur()
-            print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
+//            print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
         })
     }
     
@@ -349,12 +349,12 @@ class FilterPredicate {
         
         
         if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
-            print("Return nil")
+//            print("Return nil")
             return []
         } else {
-            print("priceOrPredicates = \(priceOrPredicates)")
-            print("switchAndPredicates = \(switchAndPredicates)")
-            print("returnPredicate = \(returnPredicate)")
+//            print("priceOrPredicates = \(priceOrPredicates)")
+//            print("switchAndPredicates = \(switchAndPredicates)")
+//            print("returnPredicate = \(returnPredicate)")
             return returnPredicate
         }
     }

@@ -102,9 +102,9 @@ extension OpeningController {
     
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
-        print("Radius = \(radius)")
+//        print("Radius = \(radius)")
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-        print("START -> dest -> lat = \(latitude ?? -999) ... lon = \(longitude ?? -999)")
+//        print("START -> dest -> lat = \(latitude ?? -999) ... lon = \(longitude ?? -999)")
     }
 }
