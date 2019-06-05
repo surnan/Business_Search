@@ -19,8 +19,11 @@ class CustomButton: UIButton {
 
 class FilterController: UIViewController {
     @objc func handleDollarButtons(_ sender: CustomButton){
-        //print(".isSelected = \(sender.isSelected)")
         sender.isSelected = !sender.isSelected
+    }
+    
+    @objc func handleSwitch(_ sender: UISwitch){
+        print("sender.isOn --> \(sender.isOn)")
     }
     
     var delegate: MenuControllerDelegate?
@@ -85,10 +88,8 @@ class FilterController: UIViewController {
         return button
     }()
     
-    @objc func handleDefaultButton(){
-        print("Default Settings Restored")
-    }
-
+    
+    
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
@@ -101,7 +102,7 @@ class FilterController: UIViewController {
         return button
     }()
     
-
+    
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -133,7 +134,7 @@ class FilterController: UIViewController {
     
     var takeOutLabel: UILabel = {
         var label = UILabel()
-        label.text = "Takeout Mandatory: "
+        label.text = "Takeout Available: "
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
@@ -141,79 +142,48 @@ class FilterController: UIViewController {
         return label
     }()
     
-    var takeOutSwitch: UISwitch = {
+    lazy var takeOutSwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
         s.onImage = #imageLiteral(resourceName: "filter")
         s.offImage = #imageLiteral(resourceName: "settings")
+        s.addTarget(self, action: #selector(handleSwitch(_:)), for: .valueChanged)
+        return s
+    }()
+
+    lazy var deliverySwitch: UISwitch = {
+        let s = UISwitch()
+        s.onTintColor = .green
+        s.onImage = #imageLiteral(resourceName: "filter2")
+        s.offImage = #imageLiteral(resourceName: "settings")
+        s.addTarget(self, action: #selector(handleSwitch(_:)), for: .valueChanged)
         return s
     }()
     
     var deliveryLabel: UILabel = {
         var label = UILabel()
-        label.text = "Delivery Mandatory: "
+        label.text = "Delivery Available: "
         label.textAlignment = .center
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    var deliverySwitch: UISwitch = {
-        let s = UISwitch()
-        s.onTintColor = .green
-        s.onImage = #imageLiteral(resourceName: "filter2")
-        s.offImage = #imageLiteral(resourceName: "settings")
-        return s
-    }()
-    
-//    let bootupRadius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int
-//    radius =  bootupRadius ?? 400
-//    func saveDefaults(){
-//        UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
-//    }
-    
-    
-    @objc func handleSaveButton(){
-        let one = dollarOneButton.isSelected ? "$ " : ""
-        let two = dollarTwoButton.isSelected ? "$$ " : ""
-        let three = dollarThreeButton.isSelected ? "$$$ " : ""
-        let four = dollarFourButton.isSelected ? "$$$$ " : ""
-        let allButtons = one + two + three + four
-        
-        
-        UserDefaults.standard.set(dollarOneButton.isSelected, forKey: AppConstants.dollarOne.rawValue)
-        UserDefaults.standard.set(dollarTwoButton.isSelected, forKey: AppConstants.dollarTwo.rawValue)
-        UserDefaults.standard.set(dollarThreeButton.isSelected, forKey: AppConstants.dollarThree.rawValue)
-        UserDefaults.standard.set(dollarFourButton.isSelected, forKey: AppConstants.dollarFour.rawValue)
-        
-        UserDefaults.standard.set(deliverySwitch.isOn, forKey: AppConstants.deliveryMandatory.rawValue)
-        UserDefaults.standard.set(takeOutSwitch.isOn, forKey: AppConstants.takeoutMandatory.rawValue)
-        
-        
-        
-        print("allButtons = \(allButtons)")
-        dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
-        })
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        dollarOneButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
-        dollarTwoButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
-        dollarThreeButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
-        dollarFourButton.isSelected = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
-
-        deliverySwitch.isOn = UserDefaults.standard.object(forKey: AppConstants.deliveryMandatory.rawValue) as? Bool ?? false
-        takeOutSwitch.isOn = UserDefaults.standard.object(forKey: AppConstants.takeoutMandatory.rawValue) as? Bool ?? false
-
+        print("**")
+        showMyResultsInNSUserDefaults()
+        print("**")
         
+        let shared = FilterPredicate.shared
+        dollarOneButton.isSelected = shared.getOne
+        dollarTwoButton.isSelected = shared.getTwo
+        dollarThreeButton.isSelected = shared.getThree
+        dollarFourButton.isSelected = shared.getFour
+        deliverySwitch.isOn = shared.getDelivery
+        takeOutSwitch.isOn = shared.getTakeout
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
-        
-        
     }
     
     
@@ -236,7 +206,7 @@ class FilterController: UIViewController {
             [deliveryLabel, deliverySwitch].forEach{stack.addArrangedSubview($0)}
             return stack
         }()
-
+        
         let takeOutStack: UIStackView = {
             let stack = UIStackView()
             stack.spacing = 20
@@ -260,7 +230,87 @@ class FilterController: UIViewController {
             myStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             ])
     }
+    
+    @objc func handleSaveButton(){
+        FilterPredicate.shared.save(dollarOne: dollarOneButton.isSelected,
+                                    dollarTwo: dollarTwoButton.isSelected,
+                                    dollarThree: dollarThreeButton.isSelected,
+                                    dollarFour: dollarFourButton.isSelected,
+                                    delivery: deliverySwitch.isOn,
+                                    takeout: takeOutSwitch.isOn)
+        
+        self.dismiss(animated: true, completion: {
+            self.delegate?.undoBlur()
+            showMyResultsInNSUserDefaults()
+        })
+    }
+    
+    @objc func handleDefaultButton(){
+        //showMyResultsInNSUserDefaults()
+        print("")
+    }
 }
 
 
+func showMyResultsInNSUserDefaults(){
+    let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "deliveryMandatory", "takeoutMandatory"]
+    
+    var answers = [(key: String, value: Any)]()
+    
+    for item in Array(UserDefaults.standard.dictionaryRepresentation()) {
+        if myIndex.contains(item.key) {
+            answers.append(item)
+        }
+    }
+
+    let items = Array(UserDefaults.standard.dictionaryRepresentation())
+    print("answers:\n")
+    answers.forEach{print($0)}
+    print("\n***\ncount --> \(items.count)")
+    
+    
+    
+}
+
+
+class FilterPredicate {
+    static let shared = FilterPredicate()
+    
+    func load(){
+        dollarOne = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
+        dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
+        dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
+        dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
+        delivery = UserDefaults.standard.object(forKey: AppConstants.deliveryMandatory.rawValue) as? Bool ?? false
+        takeout = UserDefaults.standard.object(forKey: AppConstants.takeoutMandatory.rawValue) as? Bool ?? false
+    }
+    
+    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, delivery: Bool, takeout: Bool){
+        UserDefaults.standard.set(dollarOne, forKey: AppConstants.dollarOne.rawValue)
+        UserDefaults.standard.set(dollarTwo, forKey: AppConstants.dollarTwo.rawValue)
+        UserDefaults.standard.set(dollarThree, forKey: AppConstants.dollarThree.rawValue)
+        UserDefaults.standard.set(dollarFour, forKey: AppConstants.dollarFour.rawValue)
+        UserDefaults.standard.set(delivery, forKey: AppConstants.deliveryMandatory.rawValue)
+        UserDefaults.standard.set(takeout, forKey: AppConstants.takeoutMandatory.rawValue)
+    }
+    
+
+    private var dollarOne: Bool?
+    private var dollarTwo: Bool?
+    private var dollarThree: Bool?
+    private var dollarFour: Bool?
+    private var delivery: Bool?
+    private var takeout: Bool?
+    
+    var getOne: Bool {return dollarOne ?? false}
+    var getTwo: Bool {return dollarTwo ?? false}
+    var getThree: Bool {return dollarThree ?? false}
+    var getFour: Bool {return dollarFour ?? false}
+    var getDelivery: Bool {return delivery ?? false}
+    var getTakeout: Bool {return takeout ?? false}
+    
+    var isFilterOn: Bool {
+        return !getOne || !getTwo || !getThree || !getFour || getTakeout || getDelivery
+    }
+}
 

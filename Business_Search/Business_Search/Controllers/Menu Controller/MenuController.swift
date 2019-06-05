@@ -154,6 +154,8 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         let bootupRadius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int
         radius =  bootupRadius ?? 400
         

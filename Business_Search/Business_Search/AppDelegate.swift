@@ -39,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
         radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
         
+        FilterPredicate.shared.load()
+        showMyResultsInNSUserDefaults()
+        
         
         //Print path to Documents folder to help browse for CoreData
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
