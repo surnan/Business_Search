@@ -232,8 +232,7 @@ class FilterController: UIViewController {
         self.dismiss(animated: true, completion: {
             FilterPredicate.shared.load()
             self.delegate?.undoBlur()
-            //showMyResultsInNSUserDefaults()
-            print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
+            _ = FilterPredicate.shared.returnPredicate()
         })
     }
     
@@ -249,6 +248,10 @@ class FilterController: UIViewController {
             self.delegate?.undoBlur()
             print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
         })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
 }
 
@@ -319,6 +322,41 @@ class FilterPredicate {
     
     var isFilterOn: Bool {
         return !getOne || !getTwo || !getThree || !getFour || getTakeout || getDelivery
+    }
+    
+    func returnPredicate()->[NSPredicate]{
+        var priceOrPredicates = [NSPredicate]()
+        var switchAndPredicates = [NSPredicate]()
+        
+        // OR predicates
+        if !(getOne && getTwo && getThree && getFour) {
+            if getOne {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$"]))}
+            if getTwo {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$"]))}
+            if getThree {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$"]))}
+            if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$$"]))}
+        }
+        
+        //AND predicates
+        if getDelivery {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
+        if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+        
+        let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
+        let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
+        
+        var returnPredicate = [NSCompoundPredicate]()
+        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
+        
+        
+        if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
+            print("Return nil")
+            return []
+        } else {
+            print("priceOrPredicates = \(priceOrPredicates)")
+            print("switchAndPredicates = \(switchAndPredicates)")
+            print("returnPredicate = \(returnPredicate)")
+            return returnPredicate
+        }
     }
 }
 
