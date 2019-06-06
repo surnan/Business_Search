@@ -31,11 +31,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             guard let self = self else {return}
             let currentBusiness = self.fetchBusinessController?.object(at: indexPath)
             currentBusiness?.isFavoriteChange(context: self.dataController.viewContext)
-            DispatchQueue.main.async {
-                //tableView.reloadData()    //This works with proper animation
-                tableView.deselectRow(at: indexPath, animated: true)
-                tableView.reloadRows(at: [indexPath], with: .none)
-            }
+            myBool(true)    //Dismiss the leading swipe action
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         action.image = #imageLiteral(resourceName: "UnFavorite")
         action.backgroundColor = .lightSteelBlue1
