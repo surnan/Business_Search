@@ -132,12 +132,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                    var filterControllerPredicate = FilterPredicate.shared.returnPredicate()
+                    var filterControllerPredicate = FilterPredicate.shared.returnBusinessPredicate()
                     filterControllerPredicate.append(openingControllerPredicate)
+                    
+                    fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                     
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
-                    fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
+                    
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
@@ -204,7 +206,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 if let _predicate = fetchCategoryArrayNamesPredicate {predicate.append(_predicate)}
                 let openingControllerPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                fetchRequest.predicate = openingControllerPredicate
+                var filterControllerPredicate = FilterPredicate.shared.returnCategoryPredicate()
+                filterControllerPredicate.append(openingControllerPredicate)
+                fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                 
                 let controller = NSFetchedResultsController(
                     fetchRequest: fetchRequest,
