@@ -29,16 +29,59 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         if tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
             guard let self = self else {return}
-            let currentBusiness = self.fetchBusinessController?.object(at: indexPath)
-            currentBusiness?.isFavoriteChange(context: self.dataController.viewContext)
+            guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
+            currentBusiness.isFavoriteChange(context: self.dataController.viewContext)
             myBool(true)    //Dismiss the leading swipe action
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
         }
         action.image = #imageLiteral(resourceName: "UnFavorite")
         action.backgroundColor = .lightSteelBlue1
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
+    
+    
+    func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
+        let newFavorite = FavoriteBusiness(context: context)
+        newFavorite.alias = business.alias
+        newFavorite.displayAddress = business.displayAddress
+        newFavorite.displayPhone = business.displayPhone
+        newFavorite.distance = business.distance
+        newFavorite.id = business.id
+        newFavorite.imageURL = business.imageURL
+        newFavorite.isDelivery = business.isDelivery
+        newFavorite.isFavorite = business.isFavorite
+        newFavorite.isPickup = business.isPickup
+        newFavorite.latitude = business.latitude
+        newFavorite.longitude = business.longitude
+        newFavorite.name = business.name
+        newFavorite.price = business.price
+        newFavorite.rating = business.rating
+        newFavorite.reviewCount = business.reviewCount
+        newFavorite.url = business.url
+        
+        let allCat = business.categories?.allObjects as! [Category]
+        allCat.forEach({ (currentCategory) in
+            let newFavoriteCategory = FavoriteCategory(context: context)
+            newFavoriteCategory.title = currentCategory.title
+            newFavoriteCategory.alias = currentCategory.alias
+            newFavoriteCategory.favoriteBusiness = newFavorite
+        })
+        
+        do {
+            try context.save()
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     
     

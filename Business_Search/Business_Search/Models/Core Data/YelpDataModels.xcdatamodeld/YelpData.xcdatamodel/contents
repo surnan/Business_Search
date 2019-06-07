@@ -25,7 +25,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="business" maxCount="1" deletionRule="Nullify" destinationEntity="Business" inverseName="categories" inverseEntity="Business" syncable="YES"/>
     </entity>
-    <entity name="Favorite" representedClassName="Favorite" syncable="YES" codeGenerationType="class">
+    <entity name="FavoriteBusiness" representedClassName="FavoriteBusiness" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayPhone" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,12 +42,18 @@
         <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="reviewCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="favoriteCategory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FavoriteCategory" inverseName="favoriteBusiness" inverseEntity="FavoriteCategory" syncable="YES"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Info" inverseName="toFavorite" inverseEntity="Info" syncable="YES"/>
+    </entity>
+    <entity name="FavoriteCategory" representedClassName="FavoriteCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="favoriteBusiness" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FavoriteBusiness" inverseName="favoriteCategory" inverseEntity="FavoriteBusiness" syncable="YES"/>
     </entity>
     <entity name="Info" representedClassName="Info" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="toFavorite" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Favorite" inverseName="notes" inverseEntity="Favorite" syncable="YES"/>
+        <relationship name="toFavorite" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FavoriteBusiness" inverseName="notes" inverseEntity="FavoriteBusiness" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -59,8 +65,9 @@
     <elements>
         <element name="Business" positionX="-493.05859375" positionY="-30.921875" width="128" height="315"/>
         <element name="Category" positionX="-134.8203125" positionY="263.58203125" width="128" height="90"/>
-        <element name="Favorite" positionX="-755.44921875" positionY="-258.44921875" width="128" height="300"/>
+        <element name="FavoriteBusiness" positionX="-755.44921875" positionY="-258.44921875" width="128" height="30"/>
         <element name="Location" positionX="-791.875" positionY="314.2578125" width="128" height="30"/>
         <element name="Info" positionX="-594" positionY="-117" width="128" height="90"/>
+        <element name="FavoriteCategory" positionX="-585" positionY="-108" width="128" height="90"/>
     </elements>
 </model>
