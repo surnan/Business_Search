@@ -19,6 +19,7 @@
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
 		844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Categories+Extension.swift */; };
 		846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846509B9227A0C06008ABA9F /* OpeningController.swift */; };
+		846ADABA22AA27ED0015F060 /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846ADAB922AA27ED0015F060 /* FavoritesController.swift */; };
 		848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* 2 - MapController.swift */; };
 		848761D0227F176F000CECC7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -72,6 +73,7 @@
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844F64B52277B3E0003E6A93 /* Categories+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categories+Extension.swift"; sourceTree = "<group>"; };
 		846509B9227A0C06008ABA9F /* OpeningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		846ADAB922AA27ED0015F060 /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* 2 - MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2 - MapController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -174,9 +176,18 @@
 			path = "1 - OpeningControllers";
 			sourceTree = "<group>";
 		};
+		846ADAB822AA27D70015F060 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				846ADAB922AA27ED0015F060 /* FavoritesController.swift */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
 		848761D1227F1779000CECC7 /* Menu Controller */ = {
 			isa = PBXGroup;
 			children = (
+				846ADAB822AA27D70015F060 /* Favorites */,
 				848761CF227F176F000CECC7 /* MenuController.swift */,
 				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
 				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
@@ -473,6 +484,7 @@
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
+				846ADABA22AA27ED0015F060 /* FavoritesController.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
 				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
