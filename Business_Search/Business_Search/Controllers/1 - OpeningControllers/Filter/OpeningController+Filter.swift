@@ -13,15 +13,10 @@ extension OpeningController {
     @objc func handleFilter(){
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurredEffectView2)
-        
         let newVC = FilterController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.delegate = self
-        
         present(newVC, animated: true)
-        
-        
-        
     }
 }
 

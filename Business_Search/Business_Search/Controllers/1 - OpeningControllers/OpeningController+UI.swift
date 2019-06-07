@@ -10,14 +10,7 @@ import UIKit
 import CoreData
 import MapKit
 
-
-//var currentLatitude: Double = 0.0
-//var currentLongitude: Double = 0.0
-
-
 extension OpeningController {
-    
-    //MARK:- ViewDidLoad()
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent       //Status bar sometimes turns black when typing into search bar
     }                              //Setting color scheme here just to play it safe
@@ -25,7 +18,6 @@ extension OpeningController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("ViewWillAppear: FilterPredicate.shared.isFilterOn --> \(FilterPredicate.shared.isFilterOn)")
         animateResultsAreFilteredLabel()
     }
     
@@ -37,14 +29,11 @@ extension OpeningController {
     }
     
     func setupUI(){
-        let safe = view.safeAreaLayoutGuide
-        
-        [tableView, resultsAreFilteredLabel].forEach{view.addSubview($0)}
+        [tableView].forEach{view.addSubview($0)}
         nothingFoundView.center = view.center                               //UILabel When tableView is empty
         view.insertSubview(nothingFoundView, aboveSubview: tableView)
         tableView.fillSafeSuperView()
         view.backgroundColor = .lightRed
-        resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
         definesPresentationContext = true
     }
     
@@ -87,7 +76,6 @@ extension OpeningController {
         self.navigationItem.titleView = imageView
         troubleshootFromNavigationMenu()
         navigationItem.searchController = searchController
-
     }
 
     
@@ -96,15 +84,11 @@ extension OpeningController {
                                               UIBarButtonItem(image: #imageLiteral(resourceName: "filter2"), style: .plain, target: self, action: #selector(handleFilter))]
     }
     
-
-    
-    
-    
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
-//        print("Radius = \(radius)")
+        //print("Radius = \(radius)")
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
         print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
-//        print("START -> dest -> lat = \(latitude ?? -999) ... lon = \(longitude ?? -999)")
+        //print("START -> dest -> lat = \(latitude ?? -999) ... lon = \(longitude ?? -999)")
     }
 }

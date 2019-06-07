@@ -18,24 +18,32 @@ let categoryCellID = "categoryCellID"
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
     
     func animateResultsAreFilteredLabel(){
-        
+        print("A - Filter On = \(FilterPredicate.shared.isFilterOn)")
         if !FilterPredicate.shared.isFilterOn {return}
+        print("B - Filter executed")
         
-            resultsAreFilteredLabel.alpha = 1
-            UIView.animate(withDuration: 0.75, delay: 1.0, options: [], animations: {
-                self.resultsAreFilteredLabel.alpha = 0
-            })
+        let resultsAreFilteredLabel: UILabel = {
+            let label = UILabel()
+            label.backgroundColor = .black
+            label.textColor = .white
+            label.textAlignment = .center
+            label.text = "Partial results due to filter options..."
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        view.addSubview(resultsAreFilteredLabel)
+        let safe = view.safeAreaLayoutGuide
+        resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
+        resultsAreFilteredLabel.alpha = 1
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            resultsAreFilteredLabel.alpha = 0
+        }) { (_) in
+            resultsAreFilteredLabel.removeFromSuperview()
+        }
     }
     
-    var resultsAreFilteredLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .black
-        label.textColor = .white
-        label.textAlignment = .center
-        label.text = "Partial results due to filter options..."
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     lazy var blurredEffectView2: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
@@ -282,52 +290,3 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         return searchController
     }()
 }
-
-
-
-
-/*
- var fetchCategoryNames: [String]? {
- didSet {
- if fetchCategoryNames == nil {
- //By default, returns .ManagedObjectResultType = Actual Objects
- // .dictionaryResultType used for 'returnsDistinctResults'
- let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "Category")
- fetchRequest.resultType = .dictionaryResultType
- fetchRequest.propertiesToFetch = ["title"]
- fetchRequest.returnsDistinctResults = true
- let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
- fetchRequest.sortDescriptors = sortDescriptor
- 
- if let fetchCategoryArrayNamesPredicate = fetchCategoryArrayNamesPredicate {
- fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fetchCategoryArrayNamesPredicate,
- predicateCategoryLatitude,
- predicateCategoryLongitude])
- } else {
- fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateCategoryLatitude,
- predicateCategoryLongitude])
- }
- 
- let controller = NSFetchedResultsController(
- fetchRequest: fetchRequest,
- managedObjectContext: dataController.viewContext,
- sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
- cacheName: nil              // and nil = dont cache
- )
- 
- do {
- try controller.performFetch()
- let temp = controller.fetchedObjects
- var answer = [String]()
- temp?.forEach({ (element) in
- let tempString = element.value(forKey: "title") as! String
- answer.append(tempString)
- })
- fetchCategoryNames = answer
- } catch {
- print("Fail to PerformFetch inside categoryFinalArray:")
- }
- }
- }
- }
-*/
