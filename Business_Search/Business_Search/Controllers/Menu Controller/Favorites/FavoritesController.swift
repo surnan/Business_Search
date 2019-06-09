@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 
 
+let favoriteBusinessCellID = "favoriteBusinessCellID"
+
 class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         //        if searchBarIsEmpty() {
@@ -32,6 +34,7 @@ class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate,
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
+        tableView.register(FavoriteBusinessCell.self, forCellReuseIdentifier: favoriteBusinessCellID)
         return tableView
     }()
     
@@ -119,9 +122,15 @@ class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate,
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = fetchFavoritesController?.object(at: indexPath).name
-        return cell
+        
+        let cell2 = tableView.dequeueReusableCell(withIdentifier: favoriteBusinessCellID, for: indexPath) as! FavoriteBusinessCell
+        cell2.favoriteBusiness = fetchFavoritesController?.object(at: indexPath)
+        return cell2
+        
+        
+//        let cell = UITableViewCell()
+//        cell.textLabel?.text = fetchFavoritesController?.object(at: indexPath).name
+//        return cell
     }
     
     func setupNavigationMenu(){
