@@ -10,10 +10,54 @@ import UIKit
 import CoreData
 
 
-class FavoritesController: UITableViewController, NSFetchedResultsControllerDelegate {
+class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //        if searchBarIsEmpty() {
+        //            reloadResetFetchControllers()
+        //            return
+        //        }
+        //        fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        //        fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        //        reloadFetchControllers()
+    }
     
     var dataController: DataController!                        //MARK: Injected
     var businessID: String?
+    
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
+        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
+        return tableView
+    }()
+    
+    //MARK:- UI
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        //searchController.searchBar.barStyle = .black
+        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.barTintColor = UIColor.white
+        searchController.searchBar.placeholder = "Enter search term ..."
+        searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        
+        //Setting background for search controller
+        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            if let backgroundview = textfield.subviews.first {
+                backgroundview.backgroundColor = UIColor.white
+                backgroundview.layer.cornerRadius = 10
+                backgroundview.clipsToBounds = true
+            }
+        }
+        return searchController
+    }()
     
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
@@ -69,12 +113,12 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
     }   //-1
     
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchFavoritesController?.fetchedObjects?.count ?? 0
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = fetchFavoritesController?.object(at: indexPath).name
         return cell
@@ -88,11 +132,11 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
     }
     
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("Row selected @ \(indexPath)")
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let rowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, indexPath) in
             let currentBusiness = self.fetchFavoritesController?.object(at: indexPath)
             self.deleteFavorite(currentFavorite: currentBusiness!, indexPath: indexPath)
@@ -127,6 +171,8 @@ class FavoritesController: UITableViewController, NSFetchedResultsControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        [tableView].forEach{view.addSubview($0)}
+        tableView.fillSafeSuperView()
         fetchFavoritesController = nil
         setupNavigationMenu()
     }
