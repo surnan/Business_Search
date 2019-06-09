@@ -148,15 +148,12 @@ class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate,
     func deleteFavorite(currentFavorite: FavoriteBusiness, indexPath: IndexPath){
         businessID = currentFavorite.id!
         print("Id passed in is: \(businessID ?? "")")
-        
         dataController.viewContext.delete(currentFavorite)
         fetchBusinessController = nil
-        
         guard let businessToChange = fetchBusinessController?.fetchedObjects?.first else {
             print("No business found")
             return
         }
-        
         do {
             businessToChange.isFavorite = false
             try dataController.viewContext.save()
