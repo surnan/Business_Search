@@ -122,15 +122,10 @@ class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate,
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell2 = tableView.dequeueReusableCell(withIdentifier: favoriteBusinessCellID, for: indexPath) as! FavoriteBusinessCell
+        cell2.backgroundColor = colorArray[indexPath.row % colorArray.count]
         cell2.favoriteBusiness = fetchFavoritesController?.object(at: indexPath)
         return cell2
-        
-        
-//        let cell = UITableViewCell()
-//        cell.textLabel?.text = fetchFavoritesController?.object(at: indexPath).name
-//        return cell
     }
     
     func setupNavigationMenu(){
