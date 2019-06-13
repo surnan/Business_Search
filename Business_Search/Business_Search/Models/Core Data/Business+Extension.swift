@@ -30,13 +30,15 @@ extension Business {
         }
     }
     
-    func isFavoriteChange(context: NSManagedObjectContext){
+    func isFavoriteChange(context: NSManagedObjectContext)->Bool{
         self.isFavorite = !self.isFavorite
         do {
             try context.save()
+            return self.isFavorite
         } catch {
             print("Short Error: \(error.localizedDescription)")
             print("Error saving Business.isFavorite = !Business.isFavorite\n\(error)")
+            return false
         }
     }
     

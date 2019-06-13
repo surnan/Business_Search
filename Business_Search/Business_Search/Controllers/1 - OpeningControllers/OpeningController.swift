@@ -191,6 +191,51 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
+    var fetchFavoritesPredicate : NSPredicate? {
+        didSet {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
+            fetchFavoritesController?.fetchRequest.predicate = fetchFavoritesPredicate
+        }
+    }
+    
+    //lazy var predicateFavorite = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
+    
+    var predicateFavorite: NSPredicate?{
+        didSet{
+            fetchFavoritesController?.fetchRequest.predicate = predicateFavorite
+        }
+    }
+    
+    var fetchFavoritesController: NSFetchedResultsController<FavoriteBusiness>? { //+1
+        didSet {    //+2
+            if fetchFavoritesController == nil { //+3
+                fetchFavoritesController = {   //+4
+                    
+                    let fetchRequest: NSFetchRequest<FavoriteBusiness> = FavoriteBusiness.fetchRequest()
+                    
+                    fetchRequest.predicate = predicateFavorite
+                    
+                    let sortDescriptor = NSSortDescriptor(keyPath: \FavoriteBusiness.name, ascending: true)
+                    fetchRequest.sortDescriptors = [sortDescriptor]
+                    
+                    
+                    
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    aFetchedResultsController.delegate = self
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }() //-4
+            }   //-3
+        }   //-2
+    }   //-1
+    
     //latitude and longitude MUST when this Controller is created
     lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
     lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude!])

@@ -25,22 +25,33 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableViewArrayType == TableIndex.category.rawValue {return nil}
+        
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
             guard let self = self else {return}
             guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
-            currentBusiness.isFavoriteChange(context: self.dataController.viewContext)
+            let isFavorite = currentBusiness.isFavoriteChange(context: self.dataController.viewContext)
             myBool(true)    //Dismiss the leading swipe action
             tableView.reloadRows(at: [indexPath], with: .automatic)
-            self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
+            if isFavorite {
+                self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
+            } else {
+                self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
+                self.fetchFavoritesController = nil
+                print("currentBusiness.id --> \(currentBusiness.id!)")
+                self.fetchFavoritesController?.fetchedObjects?.forEach{
+                    self.dataController.viewContext.delete($0)
+                    try! self.dataController.viewContext.save()
+                }
+                print("")
+            }
         }
-        
         guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return nil}
         action.image = currentBusiness.isFavorite ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
         action.backgroundColor =  currentBusiness.isFavorite ? .lightSteelBlue1 : .orange
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
-    
+
     
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
         let newFavorite = FavoriteBusiness(context: context)
