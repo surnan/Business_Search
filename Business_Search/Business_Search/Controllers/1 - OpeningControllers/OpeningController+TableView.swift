@@ -12,8 +12,6 @@ import CoreData
 extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
-
-
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
@@ -35,8 +33,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
         }
-        action.image = #imageLiteral(resourceName: "UnFavorite")
-        action.backgroundColor = .lightSteelBlue1
+        
+        guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return nil}
+        action.image = currentBusiness.isFavorite ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
+        action.backgroundColor =  currentBusiness.isFavorite ? .lightSteelBlue1 : .orange
         let configuration = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
