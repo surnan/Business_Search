@@ -194,7 +194,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var fetchFavoritesPredicate : NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
-            fetchFavoritesController?.fetchRequest.predicate = fetchFavoritesPredicate
+            fetchFavoriteBusinessController?.fetchRequest.predicate = fetchFavoritesPredicate
         }
     }
     
@@ -202,19 +202,17 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var predicateFavorite: NSPredicate?{
         didSet{
-            fetchFavoritesController?.fetchRequest.predicate = predicateFavorite
+            fetchFavoriteBusinessController?.fetchRequest.predicate = predicateFavorite
         }
     }
     
-    var fetchFavoritesController: NSFetchedResultsController<FavoriteBusiness>? { //+1
+    var fetchFavoriteBusinessController: NSFetchedResultsController<FavoriteBusiness>? { //+1
         didSet {    //+2
-            if fetchFavoritesController == nil { //+3
-                fetchFavoritesController = {   //+4
+            if fetchFavoriteBusinessController == nil { //+3
+                fetchFavoriteBusinessController = {   //+4
                     
                     let fetchRequest: NSFetchRequest<FavoriteBusiness> = FavoriteBusiness.fetchRequest()
-                    
                     fetchRequest.predicate = predicateFavorite
-                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \FavoriteBusiness.name, ascending: true)
                     fetchRequest.sortDescriptors = [sortDescriptor]
                     

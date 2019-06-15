@@ -36,9 +36,9 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
                 self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
             } else {
                 self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
-                self.fetchFavoritesController = nil
+                self.fetchFavoriteBusinessController = nil
                 print("currentBusiness.id --> \(currentBusiness.id!)")
-                self.fetchFavoritesController?.fetchedObjects?.forEach{
+                self.fetchFavoriteBusinessController?.fetchedObjects?.forEach{
                     self.dataController.viewContext.delete($0)
                     try! self.dataController.viewContext.save()
                 }
