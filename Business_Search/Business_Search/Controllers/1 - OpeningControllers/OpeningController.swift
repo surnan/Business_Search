@@ -15,6 +15,10 @@ let businessCellID = "businessCellID"
 let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
+enum TableIndex:Int {
+    case business = 0, category
+}
+
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
     
     func animateResultsAreFilteredLabel(){
@@ -78,9 +82,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
     var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
     
-    enum TableIndex:Int {
-        case business = 0, category
-    }
+
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

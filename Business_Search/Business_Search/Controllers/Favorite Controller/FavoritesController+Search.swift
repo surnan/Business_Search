@@ -38,6 +38,7 @@ extension FavoritesController{
         fetchBusinessController = nil
         fetchFavoriteBusinessController = nil
         fetchFavoriteCategoriesController = nil
+        fetchCategoryNames = nil
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -48,6 +49,7 @@ extension FavoritesController{
         fetchBusinessController = nil
         fetchFavoriteBusinessController = nil
         fetchFavoriteCategoriesController = nil
+        fetchCategoryNames = nil
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

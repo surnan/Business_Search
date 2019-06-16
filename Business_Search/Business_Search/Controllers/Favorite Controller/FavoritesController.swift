@@ -107,6 +107,42 @@ class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate,
     }   //-1
     
 
+    var fetchCategoryNames: [String]? {
+        didSet {
+            if fetchCategoryNames == nil {
+                //By default, returns .ManagedObjectResultType = Actual Objects
+                // .dictionaryResultType used for 'returnsDistinctResults'
+                let fetchRequest = NSFetchRequest<NSDictionary>(entityName: "FavoriteCategory")
+                fetchRequest.resultType = .dictionaryResultType
+                fetchRequest.propertiesToFetch = ["title"]
+                fetchRequest.returnsDistinctResults = true
+                let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
+                fetchRequest.sortDescriptors = sortDescriptor
+
+                fetchRequest.predicate = fetchFavoriteCategoriesPredicate
+                
+                let controller = NSFetchedResultsController(
+                    fetchRequest: fetchRequest,
+                    managedObjectContext: dataController.viewContext,
+                    sectionNameKeyPath: nil,    // just for demonstration: nil = dont split into section
+                    cacheName: nil              // and nil = dont cache
+                )
+                
+                do {
+                    try controller.performFetch()
+                    let temp = controller.fetchedObjects
+                    var answer = [String]()
+                    temp?.forEach({ (element) in
+                        let tempString = element.value(forKey: "title") as! String
+                        answer.append(tempString)
+                    })
+                    fetchCategoryNames = answer
+                } catch {
+                    print("Fail to PerformFetch inside categoryFinalArray:")
+                }
+            }
+        }
+    }
     
     var fetchFavoriteBusinessController: NSFetchedResultsController<FavoriteBusiness>? { //+1
         didSet {    //+2
