@@ -13,13 +13,6 @@ class MyTabController: UITabBarController {
     //MARK:- Injection Start
     var category: String!
     
-    var favoriteBusinesses = [FavoriteBusiness]() {
-        didSet {
-            firstController.favoriteBusinesses = favoriteBusinesses
-            secondController.favoriteBusinesses = favoriteBusinesses
-        }
-    }
-    
     var businesses = [Business]()   {
         didSet {
             firstController.businesses = businesses //Populate TableView

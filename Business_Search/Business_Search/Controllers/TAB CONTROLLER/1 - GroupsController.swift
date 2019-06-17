@@ -12,9 +12,7 @@ import CoreData
 
 class GroupsController: UITableViewController {
     var businesses = [Business]()   //injected
-    var favoriteBusinesses = [FavoriteBusiness]() //injected
-    
-    var categoryName: String! //injected
+    var categoryName: String!       //injected
 
     
     override func viewDidAppear(_ animated: Bool) {

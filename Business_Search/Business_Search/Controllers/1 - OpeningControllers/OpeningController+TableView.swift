@@ -36,13 +36,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
                 self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
                 
             } else {
-                self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
-                self.fetchFavoriteBusinessController = nil
+                //TODO: delete favorite
+                //self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
+                //self.fetchFavoriteBusinessController = nil
                 print("currentBusiness.id --> \(currentBusiness.id!)")
-                self.fetchFavoriteBusinessController?.fetchedObjects?.forEach{
-                    self.dataController.viewContext.delete($0)
-                    try! self.dataController.viewContext.save()
-                }
+//                self.fetchFavoriteBusinessController?.fetchedObjects?.forEach{
+//                    self.dataController.viewContext.delete($0)
+//                    try! self.dataController.viewContext.save()
+//                }
                 print("")
             }
         }
@@ -57,7 +58,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
         let newFavorite2 = Favorites(context: context)
         newFavorite2.id = business.id
-        
         do {
             try context.save()
         } catch {

@@ -80,31 +80,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
         return button
     }()
     
-    
-//    lazy var showFavoritesButton: UIButton = {
-//        let button = UIButton()
-//        button.backgroundColor = UIColor.green
-//        button.setTitle("           Favorites           ", for: .normal)
-//        button.layer.cornerRadius = 10
-//        button.tag = 2
-//        button.addTarget(self, action: #selector(handleShowFavorites), for: .touchDown)
-//        button.layer.shadowColor = UIColor.black.cgColor
-//        button.layer.shadowOpacity = 0.5
-//        button.layer.shadowRadius = 12
-//        button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-//        button.layer.masksToBounds = false
-//
-//        return button
-//    }()
-    
-    
-//    @objc func handleShowFavorites(){
-//        let newVC = FavoritesController()
-//        newVC.dataController = dataController
-//        navigationController?.pushViewController(newVC, animated: true)
-//    }
-
-    
     var verticalStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical

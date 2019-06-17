@@ -14,7 +14,6 @@ import MapKit
 class MapController: UIViewController, MKMapViewDelegate {
     
     var businesses = [Business]()                   //injected
-    var favoriteBusinesses = [FavoriteBusiness]()   //injected
     var annotations = [MKPointAnnotation]()
     var mapView = MKMapView()
     
@@ -68,22 +67,6 @@ class MapController: UIViewController, MKMapViewDelegate {
                 tempAnnotation.subtitle = "Price: \(price)"
             }
             tempAnnotation.business = business
-            annotations.append(tempAnnotation)
-        }
-        
-        for business in favoriteBusinesses {
-            let latitude = CLLocationDegrees(business.latitude)
-            let longitude = CLLocationDegrees(business.longitude)
-            
-            //let tempAnnotation = BusinessPointAnnotation(business: business)
-            let tempAnnotation = FavoriteBusinessPointAnnotation(favoriteBusiness: business)
-            
-            tempAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            tempAnnotation.title = business.name ?? ""
-            if let price = business.price {
-                tempAnnotation.subtitle = "Price: \(price)"
-            }
-            tempAnnotation.favoriteBusiness = business
             annotations.append(tempAnnotation)
         }
     }
@@ -149,10 +132,4 @@ class BusinessPointAnnotation: MKPointAnnotation {
     }
 }
 
-class FavoriteBusinessPointAnnotation: MKPointAnnotation {
-    var favoriteBusiness: FavoriteBusiness!
-    init(favoriteBusiness: FavoriteBusiness) {
-        self.favoriteBusiness = favoriteBusiness
-    }
-}
 

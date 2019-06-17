@@ -193,33 +193,16 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    var fetchFavoritesPredicate : NSPredicate? {
-        didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
-            fetchFavoriteBusinessController?.fetchRequest.predicate = fetchFavoritesPredicate
-        }
-    }
+    var predicateFavorite: NSPredicate?
     
-    //lazy var predicateFavorite = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
-    
-    var predicateFavorite: NSPredicate?{
+    var fetchFavoritesController: NSFetchedResultsController<Favorites>?{
         didSet{
-            fetchFavoriteBusinessController?.fetchRequest.predicate = predicateFavorite
-        }
-    }
-    
-    var fetchFavoriteBusinessController: NSFetchedResultsController<FavoriteBusiness>? { //+1
-        didSet {    //+2
-            if fetchFavoriteBusinessController == nil { //+3
-                fetchFavoriteBusinessController = {   //+4
-                    
-                    let fetchRequest: NSFetchRequest<FavoriteBusiness> = FavoriteBusiness.fetchRequest()
+            if fetchFavoritesController == nil {
+                fetchFavoritesController = {
+                    let fetchRequest: NSFetchRequest<Favorites> = Favorites.fetchRequest()
                     fetchRequest.predicate = predicateFavorite
-                    let sortDescriptor = NSSortDescriptor(keyPath: \FavoriteBusiness.name, ascending: true)
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Favorites.id, ascending: true)
                     fetchRequest.sortDescriptors = [sortDescriptor]
-                    
-                    
-                    
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
@@ -231,10 +214,11 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                         fatalError("Unresolved error \(error)")
                     }
                     return aFetchedResultsController
-                }() //-4
-            }   //-3
-        }   //-2
-    }   //-1
+                }()
+            }
+        }
+    }
+    
     
     //latitude and longitude MUST when this Controller is created
     lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
@@ -314,8 +298,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
         searchController.obscuresBackgroundDuringPresentation = false
-        
-        
         
         //searchController.searchBar.barStyle = .black
         searchController.searchBar.tintColor = UIColor.white

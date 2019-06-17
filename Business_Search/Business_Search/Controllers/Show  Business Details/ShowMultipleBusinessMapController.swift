@@ -75,7 +75,6 @@ class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDele
         
         
         NSLayoutConstraint.activate([
-            //directionSegmentControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             directionSegmentControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             directionSegmentControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             directionSegmentControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
