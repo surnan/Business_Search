@@ -34,6 +34,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             if isFavorite {
                 self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
+                
             } else {
                 self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
                 self.fetchFavoriteBusinessController = nil
@@ -54,31 +55,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
 
     
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
-        let newFavorite = FavoriteBusiness(context: context)
-        newFavorite.alias = business.alias
-        newFavorite.displayAddress = business.displayAddress
-        newFavorite.displayPhone = business.displayPhone
-        newFavorite.distance = business.distance
-        newFavorite.id = business.id
-        newFavorite.imageURL = business.imageURL
-        newFavorite.isDelivery = business.isDelivery
-        newFavorite.isFavorite = business.isFavorite
-        newFavorite.isPickup = business.isPickup
-        newFavorite.latitude = business.latitude
-        newFavorite.longitude = business.longitude
-        newFavorite.name = business.name
-        newFavorite.price = business.price
-        newFavorite.rating = business.rating
-        newFavorite.reviewCount = business.reviewCount
-        newFavorite.url = business.url
-        
-        let allCat = business.categories?.allObjects as! [Category]
-        allCat.forEach({ (currentCategory) in
-            let newFavoriteCategory = FavoriteCategory(context: context)
-            newFavoriteCategory.title = currentCategory.title
-            newFavoriteCategory.alias = currentCategory.alias
-            newFavoriteCategory.favoriteBusiness = newFavorite
-        })
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
         
         do {
             try context.save()
@@ -87,14 +65,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             print("\n\nError saving newly created favorite - full error: \n\(error)")
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableViewArrayType {
