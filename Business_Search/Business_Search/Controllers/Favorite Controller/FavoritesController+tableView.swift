@@ -14,7 +14,7 @@ import CoreData
 extension FavoritesController{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch searchGroupIndex {
+        switch tableViewArrayType {
         case TableIndex.business.rawValue:
             let cell2 = tableView.dequeueReusableCell(withIdentifier: favoriteBusinessCellID, for: indexPath) as! FavoriteBusinessCell
             cell2.backgroundColor = colorArray[indexPath.row % colorArray.count]
@@ -44,12 +44,40 @@ extension FavoritesController{
             print("Error: FavoriteController.cellForRowAt: \nInvalid value for searchGroupIndex.")
             return UITableViewCell()
         }
-        print("Error: Skip switch FavoriteController.cellForRowAt:")
-        return UITableViewCell()
+    }
+    
+    func showBusinessInfo(currentBusiness: Business){
+        let newVC = ShowBusinessDetailsController()
+        newVC.business = currentBusiness
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+    
+    func listBusinesses(category: String){
+        //Not shown in this tableView.  It's to create array to push into next VC's tableView
+        
+        fetchFavoriteBusinessPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
+        fetchFavoriteCategoriesController = nil
+        
+        var businessArray = [FavoriteBusiness]()    //Pushed into next ViewController
+        fetchFavoriteCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.favoriteBusiness!)}
+        
+        let newVC = MyTabController()
+        newVC.favoriteBusinesses = businessArray
+        newVC.categoryName = category
+        navigationController?.pushViewController(newVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Row selected @ \(indexPath)")
+        switch tableViewArrayType {
+        case TableIndex.category.rawValue:
+            guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
+            listBusinesses(category: currentCategory)
+        case TableIndex.business.rawValue:
+            guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
+            showBusinessInfo(currentBusiness: currentBusiness)
+        default:
+            print("Illegal Value inside tableViewArrayType")
+        }
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -61,13 +89,6 @@ extension FavoritesController{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return fetchFavoriteBusinessController?.fetchedObjects?.count ?? 0
-        if searchGroupIndex == TableIndex.business.rawValue {
-          return fetchFavoriteBusinessController?.fetchedObjects?.count ?? 0
-        }
-        
-        return fetchCategoryNames?.count ?? 0
-        
-        
+        return searchGroupIndex == 0 ? fetchFavoriteBusinessController?.fetchedObjects?.count ?? 0 : fetchCategoryNames?.count ?? 0
     }
 }

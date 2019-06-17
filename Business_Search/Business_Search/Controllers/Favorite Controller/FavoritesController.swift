@@ -18,6 +18,7 @@ class FavoritesController: UIViewController, NSFetchedResultsControllerDelegate,
     var dataController: DataController!                        //MARK: Injected
     var businessID: String?
     var searchGroupIndex = 0
+    var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

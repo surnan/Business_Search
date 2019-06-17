@@ -12,6 +12,14 @@ class MyTabController: UITabBarController {
     
     //MARK:- Injection Start
     var category: String!
+    
+    var favoriteBusinesses = [FavoriteBusiness]() {
+        didSet {
+            firstController.favoriteBusinesses = favoriteBusinesses
+            secondController.favoriteBusinesses = favoriteBusinesses
+        }
+    }
+    
     var businesses = [Business]()   {
         didSet {
             firstController.businesses = businesses //Populate TableView
@@ -32,15 +40,11 @@ class MyTabController: UITabBarController {
         view.backgroundColor = UIColor.clear
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleLeftBarButton))
         navigationItem.title = categoryName
-        
         firstController.tabBarItem =  UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "menu100B.png"), selectedImage: #imageLiteral(resourceName: "menu100B.png"))
         secondController.tabBarItem = UITabBarItem(title: "MAP", image: #imageLiteral(resourceName: "map100") , selectedImage: #imageLiteral(resourceName: "map100"))
-        
         let tabBarList = [firstController, secondController]
         viewControllers = tabBarList
-        
         tabBar.isTranslucent = false
-        
     }
     
     @objc func handleRight(){
