@@ -34,8 +34,8 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             if isFavorite {
                 self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
-                
             } else {
+                self.deleteFavorite(business: currentBusiness)
                 //TODO: delete favorite
                 //self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
                 //self.fetchFavoriteBusinessController = nil
@@ -54,6 +54,28 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         return configuration
     }
 
+    
+    func deleteFavorite(business: Business){
+        //lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
+        predicateFavorite = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
+        fetchFavoritesController = nil
+        
+        fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+            dataController.viewContext.delete(item)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error)
+                print(error.localizedDescription)
+            }
+        })
+    }
+    
+    
+    
+    
+    
+    
     
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
         let newFavorite2 = Favorites(context: context)
