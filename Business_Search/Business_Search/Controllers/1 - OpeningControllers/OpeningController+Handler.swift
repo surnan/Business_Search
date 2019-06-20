@@ -155,28 +155,23 @@ extension OpeningController {
     
     func searchFavorites(){
         resetAllFetchControllers()
-        
-        //let allFavorites = fetchFavoritesController?.fetchedObjects ?? []
-        //for (_ , item) in fetchBusinessController?.fetchedObjects?.enumerated() ?? [].enumerated() {}
-        
-        let currentFavorite = "pXx19tcFyVSnPU5moTnvzg"
-        
-        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [currentFavorite])
-        fetchBusinessController = nil
-        
-        let results = fetchBusinessController?.fetchedObjects ?? []
-        
-        if results.isEmpty {
-            return
-        } else {
-            results.first?.isFavorite = true
-            do {
-            try dataController.viewContext.save()
-            resetAllFetchControllers()
-            } catch {
-                print("Error saving favorite after finding match - \(error)")
+        let allFavorites = fetchFavoritesController?.fetchedObjects ?? []
+        for ( _ , item) in allFavorites.enumerated() {
+            guard let ID = item.id else {return}
+            fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [ID])
+            fetchBusinessController = nil
+            let results = fetchBusinessController?.fetchedObjects ?? []
+            if results.isEmpty {
+                return
+            } else {
+                results.first?.isFavorite = true
+                do {
+                    try dataController.viewContext.save()
+                    resetAllFetchControllers()
+                } catch {
+                    print("Error saving favorite after finding match - \(error)")
+                }
             }
         }
     }
 }
-
