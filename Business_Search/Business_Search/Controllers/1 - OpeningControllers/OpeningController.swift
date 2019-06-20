@@ -148,9 +148,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                     
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
-                    let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: true)
+                    let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
                     
-                    fetchRequest.sortDescriptors = [sortDescriptor]
+                    fetchRequest.sortDescriptors = [sortDescriptor2, sortDescriptor]
                     
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
