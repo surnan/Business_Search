@@ -26,6 +26,7 @@ extension OpeningController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
+        //searchFavorites()
     }
     
     func setupUI(){

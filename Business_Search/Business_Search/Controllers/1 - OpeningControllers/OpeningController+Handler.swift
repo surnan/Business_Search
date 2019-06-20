@@ -137,6 +137,7 @@ extension OpeningController {
             self.runDownloadAgain()
             if self.urlsQueue.isEmpty {
                 //Last download was executed but no guarantee data for it was saved
+                self.searchFavorites()
                 print("!!Completed all the downloads when record count > 50!!")
             }
         }
@@ -144,11 +145,38 @@ extension OpeningController {
     
     func runDownloadAgain(){
         reloadFetchControllers()
-//        print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
+        //        print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
         print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
         }
         timer.fire()
     }
+    
+    func searchFavorites(){
+        resetAllFetchControllers()
+        
+        //let allFavorites = fetchFavoritesController?.fetchedObjects ?? []
+        //for (_ , item) in fetchBusinessController?.fetchedObjects?.enumerated() ?? [].enumerated() {}
+        
+        let currentFavorite = "pXx19tcFyVSnPU5moTnvzg"
+        
+        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [currentFavorite])
+        fetchBusinessController = nil
+        
+        let results = fetchBusinessController?.fetchedObjects ?? []
+        
+        if results.isEmpty {
+            return
+        } else {
+            results.first?.isFavorite = true
+            do {
+            try dataController.viewContext.save()
+            resetAllFetchControllers()
+            } catch {
+                print("Error saving favorite after finding match - \(error)")
+            }
+        }
+    }
 }
+

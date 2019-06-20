@@ -148,7 +148,9 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                     
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
-                    fetchRequest.sortDescriptors = [ sortDescriptor]
+                    let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: true)
+                    
+                    fetchRequest.sortDescriptors = [sortDescriptor]
                     
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
@@ -193,14 +195,14 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    var predicateFavorite: NSPredicate?
+    var fetchFavoritePredicate: NSPredicate?
     
     var fetchFavoritesController: NSFetchedResultsController<Favorites>?{
         didSet{
             if fetchFavoritesController == nil {
                 fetchFavoritesController = {
                     let fetchRequest: NSFetchRequest<Favorites> = Favorites.fetchRequest()
-                    fetchRequest.predicate = predicateFavorite
+                    fetchRequest.predicate = fetchFavoritePredicate
                     let sortDescriptor = NSSortDescriptor(keyPath: \Favorites.id, ascending: true)
                     fetchRequest.sortDescriptors = [sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,

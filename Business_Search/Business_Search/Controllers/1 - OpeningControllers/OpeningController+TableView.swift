@@ -57,7 +57,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func deleteFavorite(business: Business){
         //lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
-        predicateFavorite = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
+        fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
         fetchFavoritesController = nil
         
         fetchFavoritesController?.fetchedObjects?.forEach({ (item) in

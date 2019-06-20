@@ -10,11 +10,13 @@ import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
     
-    func reloadResetFetchControllers() {
+    func resetAllFetchControllers() {
         fetchBusinessPredicate = nil
         fetchCategoryArrayNamesPredicate = nil
         fetchBusinessController = nil
         fetchCategoryNames = nil
+        fetchFavoritePredicate = nil
+        fetchFavoritesController = nil
         tableView.reloadData()
     }
     
@@ -27,13 +29,13 @@ extension OpeningController: UISearchResultsUpdating {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        reloadResetFetchControllers()
+        resetAllFetchControllers()
     }
 
     //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty() {
-            reloadResetFetchControllers()
+            resetAllFetchControllers()
             return
         }
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
