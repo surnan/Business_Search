@@ -22,7 +22,7 @@ enum TableIndex:Int {
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
     
     func animateResultsAreFilteredLabel(){
-        print("A - Filter On = \(FilterPredicate.shared.isFilterOn)")
+        //print("A - Filter On = \(FilterPredicate.shared.isFilterOn)")
         if !FilterPredicate.shared.isFilterOn {return}
         print("B - Filter executed")
         

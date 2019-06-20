@@ -82,6 +82,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         newFavorite2.id = business.id
         do {
             try context.save()
+            print("createFavorite -- SAVE()")
         } catch {
             print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
             print("\n\nError saving newly created favorite - full error: \n\(error)")

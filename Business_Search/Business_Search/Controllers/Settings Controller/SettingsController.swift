@@ -206,6 +206,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
                 _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
                 DispatchQueue.main.async {
                     self.deleteAllLabel.isHidden = false
+                    self.handlecancelButton()
                 }
             } catch {
                 print("Error deleting All \(error)")

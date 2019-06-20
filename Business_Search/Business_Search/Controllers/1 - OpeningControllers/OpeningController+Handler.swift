@@ -23,7 +23,7 @@ extension OpeningController {
             newLocation.radius = Int32(radius)  //AppDelegate
             recordCountAtLocation = data.total  //Number of businesses @ this location with current radius
             do {
-                try backgroundContext.save()    //1
+                try backgroundContext.save()    //Saves only Location-entity.  @ this stage business/categories = zero
                 self.currentLocationID = newLocation.objectID
                 self.checkLocationCount(data: data)
             } catch {
@@ -110,7 +110,6 @@ extension OpeningController {
     func buildURLsQueueForDownloadingBusinesses(total: Int){
     //let yelpMaxPullCount = 1000
         let loopMax = min(recordCountAtLocation, yelpMaxPullCount)  //Yelp is limited to 1000 records on pull
-        
         for index in stride(from: limit, to: loopMax, by: limit){
             urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: index))
         }
@@ -134,15 +133,19 @@ extension OpeningController {
             })
         }
         dispatchGroup.notify(queue: .main) {[weak self] in
-            self?.runDownloadAgain()
+            guard let self = self else {return}
+            self.runDownloadAgain()
+            if self.urlsQueue.isEmpty {
+                //Last download was executed but no guarantee data for it was saved
+                print("!!Completed all the downloads when record count > 50!!")
+            }
         }
     }
     
     func runDownloadAgain(){
         reloadFetchControllers()
-        print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
-        print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
+//        print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
+        print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
         }

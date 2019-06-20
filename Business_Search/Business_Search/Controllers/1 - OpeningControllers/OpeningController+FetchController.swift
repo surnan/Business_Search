@@ -19,11 +19,11 @@ extension OpeningController {
                     newIndexPath: IndexPath?) {
         //Object insert/update/remove/move changed
         if controller != fetchBusinessController {
-            print("Returned")
+            //print("Returned")
             return
         }
         
-        print("success")
+        //print("success")
         
         switch type {
         case .insert:
@@ -38,12 +38,14 @@ extension OpeningController {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //tableView.beginUpdates()
-        print("")
+        //print("")
+        return
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         //tableView.beginUpdates()
-        print("")
+        //print("")
+        return
     }
 }
 

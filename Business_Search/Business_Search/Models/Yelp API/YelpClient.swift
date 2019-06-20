@@ -89,7 +89,7 @@ class YelpClient{
     
     class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{
         let url = Endpoints.autocomplete(text, latitude, longitude).url
-        print("url = \(url)")
+        //print("url = \(url)")
         let task = taskForYelpGetRequest(url: url, decoder: YelpAutoCompleteResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
@@ -123,7 +123,7 @@ class YelpClient{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         
-        print("\nurl = \(url)")
+        //print("\nurl = \(url)")
         
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
