@@ -25,7 +25,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableViewArrayType == TableIndex.category.rawValue {return nil}
-        
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
             guard let self = self else {return}
             guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
@@ -34,16 +33,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             tableView.reloadRows(at: [indexPath], with: .automatic)
             if isFavorite {
                 self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
+                self.fetchBusinessController = nil
+                self.tableView.reloadData()
             } else {
                 self.deleteFavorite(business: currentBusiness)
+                self.fetchBusinessController = nil
+                self.tableView.reloadData()
                 //TODO: delete favorite
-                //self.predicateFavorite = NSPredicate(format: "id == %@", argumentArray: [currentBusiness.id!])
-                //self.fetchFavoriteBusinessController = nil
                 print("currentBusiness.id --> \(currentBusiness.id!)")
-//                self.fetchFavoriteBusinessController?.fetchedObjects?.forEach{
-//                    self.dataController.viewContext.delete($0)
-//                    try! self.dataController.viewContext.save()
-//                }
                 print("")
             }
         }
@@ -70,12 +67,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             }
         })
     }
-    
-    
-    
-    
-    
-    
     
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
         let newFavorite2 = Favorites(context: context)
