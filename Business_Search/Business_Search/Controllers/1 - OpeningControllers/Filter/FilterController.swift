@@ -27,6 +27,7 @@ class FilterController: UIViewController {
     }
     
     var delegate: MenuControllerDelegate?
+
     
     lazy var dollarOneButton: CustomButton = {
         let button = CustomButton()
@@ -237,10 +238,11 @@ class FilterController: UIViewController {
     }
     
     @objc func handleDefaultButton(){
-        //FilterPredicate.shared.reset()
-        //FilterPredicate.shared.load()
-        //showMyResultsInNSUserDefaults()
-        //print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
+        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
+            $0.isSelected = true
+            $0.backgroundColor = .white
+        }        
+        [takeOutSwitch, deliverySwitch].forEach{$0.isOn = false}
     }
     
     @objc func handlecancelButton(){
