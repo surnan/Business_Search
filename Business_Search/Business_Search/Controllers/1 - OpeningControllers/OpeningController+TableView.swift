@@ -115,16 +115,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             let currentCategoryName = fetchCategoryNames?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-//            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [myPredicate,
-//                                                                                         predicateCategoryLatitude,
-//                                                                                         predicateCategoryLongitude])
             let filterControllerPredicate = FilterPredicate.shared.returnCategoryPredicate()        //FilterController() & Singleton
             var tempPredicate = [myPredicate, predicateCategoryLatitude, predicateCategoryLongitude]
             filterControllerPredicate.forEach{tempPredicate.append($0)}
             _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: tempPredicate)
-            
-            
-            
             
             cell.name = currentCategoryName
             do {
@@ -202,9 +196,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             return $0.parentLocation?.latitude == latitude &&
                 $0.parentLocation?.longitude == longitude
         }
-
         let newVC = MyTabController()
-        newVC.businesses = businessArray
+        
+        newVC.businesses = FilterPredicate.shared.returnFilteredBusinessArray(businessArray: businessArray)
+        
         newVC.categoryName = category
         navigationController?.pushViewController(newVC, animated: true)
     }

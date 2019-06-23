@@ -354,6 +354,25 @@ class FilterPredicate {
         }
     }
     
+    func returnFilteredBusinessArray(businessArray: [Business])->[Business]{
+        var answer = [Business]()
+        
+        businessArray.forEach { (first) in
+            switch first.price {
+            case "$" where getOne:
+                answer.append(first)
+            case "$$" where getTwo:
+                answer.append(first)
+            case "$$$" where getThree:
+                answer.append(first)
+            case "$$$$" where getFour:
+                answer.append(first)
+            default:
+                print("")
+            }
+        }
+        return answer
+    }
     
     func returnCategoryPredicate()->[NSCompoundPredicate]{
         var priceOrPredicates = [NSPredicate]()

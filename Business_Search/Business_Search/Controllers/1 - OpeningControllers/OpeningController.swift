@@ -142,7 +142,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                    var filterControllerPredicate = FilterPredicate.shared.returnBusinessPredicate()
+                    var filterControllerPredicate = FilterPredicate.shared.returnBusinessPredicate()    //FilterController() & Singleton
                     filterControllerPredicate.append(openingControllerPredicate)
                     
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
@@ -228,7 +228,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude!])
     lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude!])
     
-    var fetchCategoryNames: [String]? {
+    var fetchCategoryNames: [String]? { //Populate Search Group listings
         didSet {
             if fetchCategoryNames == nil {
                 //By default, returns .ManagedObjectResultType = Actual Objects
