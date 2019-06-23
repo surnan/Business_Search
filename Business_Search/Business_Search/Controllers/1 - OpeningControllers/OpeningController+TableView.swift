@@ -115,9 +115,17 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
             let currentCategoryName = fetchCategoryNames?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [myPredicate,
-                                                                                         predicateCategoryLatitude,
-                                                                                         predicateCategoryLongitude])
+//            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [myPredicate,
+//                                                                                         predicateCategoryLatitude,
+//                                                                                         predicateCategoryLongitude])
+            let filterControllerPredicate = FilterPredicate.shared.returnCategoryPredicate()        //FilterController() & Singleton
+            var tempPredicate = [myPredicate, predicateCategoryLatitude, predicateCategoryLongitude]
+            filterControllerPredicate.forEach{tempPredicate.append($0)}
+            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: tempPredicate)
+            
+            
+            
+            
             cell.name = currentCategoryName
             do {
                 let count = try dataController.viewContext.count(for: _fetchRequest)
