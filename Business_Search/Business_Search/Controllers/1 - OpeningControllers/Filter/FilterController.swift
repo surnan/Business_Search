@@ -439,7 +439,7 @@ class UserAppliedFilter {
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
         
         var returnPredicate = [NSCompoundPredicate]()
-//////        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
 //////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
         
         
@@ -495,7 +495,7 @@ class UserAppliedFilter {
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
         
         var returnPredicate = [NSCompoundPredicate]()
-//////        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
 //////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
         
         
