@@ -216,7 +216,7 @@ class FilterController: UIViewController {
         return s
     }()
     
-    lazy var deliverySwitch: UISwitch = {
+    lazy var noPriceListedSwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
         s.onImage = #imageLiteral(resourceName: "filter2")
@@ -225,7 +225,7 @@ class FilterController: UIViewController {
         return s
     }()
     
-    var deliveryLabel: UILabel = {
+    var noPriceListedLabel: UILabel = {
         var label = UILabel()
         label.text = "Delivery Available: "
         label.textAlignment = .center
@@ -246,7 +246,7 @@ class FilterController: UIViewController {
         dollarTwoButton.isSelected = shared.getTwo
         dollarThreeButton.isSelected = shared.getThree
         dollarFourButton.isSelected = shared.getFour
-        deliverySwitch.isOn = shared.getDelivery
+        noPriceListedSwitch.isOn = shared.getDelivery
         takeOutSwitch.isOn = shared.getTakeout
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
     }
@@ -276,11 +276,11 @@ class FilterController: UIViewController {
 
         
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
-        let deliveryStack: UIStackView = {
+        let isPriceListedStack: UIStackView = {
             let stack = UIStackView()
             stack.spacing = 20
             stack.axis = .horizontal
-            [deliveryLabel, deliverySwitch].forEach{stack.addArrangedSubview($0)}
+            [noPriceListedLabel, noPriceListedSwitch].forEach{stack.addArrangedSubview($0)}
             return stack
         }()
         
@@ -300,7 +300,7 @@ class FilterController: UIViewController {
             return stack
         }()
         
-        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, deliveryStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, isPriceListedStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -313,7 +313,7 @@ class FilterController: UIViewController {
                                     dollarTwo: dollarTwoButton.isSelected,
                                     dollarThree: dollarThreeButton.isSelected,
                                     dollarFour: dollarFourButton.isSelected,
-                                    delivery: deliverySwitch.isOn,
+                                    delivery: noPriceListedSwitch.isOn,
                                     takeout: takeOutSwitch.isOn,
                                     minimumRating: sliderValueLabel.text ?? "0.0")
         
@@ -329,7 +329,7 @@ class FilterController: UIViewController {
             $0.isSelected = true
             $0.backgroundColor = .white
         }        
-        [takeOutSwitch, deliverySwitch].forEach{$0.isOn = false}
+        [takeOutSwitch, noPriceListedSwitch].forEach{$0.isOn = false}
     }
     
     @objc func handlecancelButton(){
@@ -346,7 +346,7 @@ class FilterController: UIViewController {
 
 
 func showMyResultsInNSUserDefaults(){
-    let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "deliveryMandatory", "takeoutMandatory"]
+    let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "isPriceListed", "takeoutMandatory"]
     
     var answers = [(key: String, value: Any)]()
     
