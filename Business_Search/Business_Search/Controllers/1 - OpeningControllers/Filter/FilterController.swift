@@ -316,7 +316,7 @@ class FilterController: UIViewController {
         self.dismiss(animated: true, completion: {
             UserAppliedFilter.shared.load()
             self.delegate?.undoBlur()
-            _ = UserAppliedFilter.shared.returnBusinessPredicate()
+            _ = UserAppliedFilter.shared.getBusinessPredicate()
         })
     }
     
@@ -396,6 +396,8 @@ class UserAppliedFilter {
     private var dollarFour: Bool?
     private var delivery: Bool?
     private var takeout: Bool?
+    private var minimumRating: String?
+
     
     var getOne: Bool {return dollarOne ?? false}
     var getTwo: Bool {return dollarTwo ?? false}
@@ -403,12 +405,14 @@ class UserAppliedFilter {
     var getFour: Bool {return dollarFour ?? false}
     var getDelivery: Bool {return delivery ?? false}
     var getTakeout: Bool {return takeout ?? false}
+    var getMinimumRating: String {return minimumRating ?? "0.0"}
+
     
     var isFilterOn: Bool {
         return !getOne || !getTwo || !getThree || !getFour || getTakeout || getDelivery
     }
     
-    func returnBusinessPredicate()->[NSCompoundPredicate]{
+    func getBusinessPredicate()->[NSCompoundPredicate]{
         var priceOrPredicates = [NSPredicate]()
         var switchAndPredicates = [NSPredicate]()
         
@@ -439,7 +443,7 @@ class UserAppliedFilter {
         }
     }
     
-    func returnFilteredBusinessArray(businessArray: [Business])->[Business]{
+    func getFilteredBusinessArray(businessArray: [Business])->[Business]{
         var answer = [Business]()
         
         businessArray.forEach { (first) in
@@ -459,7 +463,7 @@ class UserAppliedFilter {
         return answer
     }
     
-    func returnCategoryPredicate()->[NSCompoundPredicate]{
+    func getCategoryPredicate()->[NSCompoundPredicate]{
         var priceOrPredicates = [NSPredicate]()
         var switchAndPredicates = [NSPredicate]()
         

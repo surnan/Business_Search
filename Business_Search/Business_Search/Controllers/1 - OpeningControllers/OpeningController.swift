@@ -142,7 +142,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                    var filterControllerPredicate = UserAppliedFilter.shared.returnBusinessPredicate()    //FilterController() & Singleton
+                    var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()    //FilterController() & Singleton
                     filterControllerPredicate.append(openingControllerPredicate)
                     
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
@@ -245,7 +245,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 if let _predicate = fetchCategoryArrayNamesPredicate {predicate.append(_predicate)}
                 let openingControllerPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                var filterControllerPredicate = UserAppliedFilter.shared.returnCategoryPredicate()
+                var filterControllerPredicate = UserAppliedFilter.shared.getCategoryPredicate()
                 filterControllerPredicate.append(openingControllerPredicate)
                 fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                 
