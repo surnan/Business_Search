@@ -82,7 +82,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
     var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
     
-
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

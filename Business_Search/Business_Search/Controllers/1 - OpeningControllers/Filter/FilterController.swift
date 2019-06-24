@@ -227,7 +227,7 @@ class FilterController: UIViewController {
     
     var noPriceListedLabel: UILabel = {
         var label = UILabel()
-        label.text = "Delivery Available: "
+        label.text = "Include if No Price Listed: "
         label.textAlignment = .center
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -439,8 +439,8 @@ class UserAppliedFilter {
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
         
         var returnPredicate = [NSCompoundPredicate]()
-        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
-        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
+//////        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+//////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
         
         
         if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
@@ -495,8 +495,8 @@ class UserAppliedFilter {
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
         
         var returnPredicate = [NSCompoundPredicate]()
-        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
-        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
+//////        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+//////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
         
         
         if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
