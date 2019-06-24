@@ -453,6 +453,10 @@ class UserAppliedFilter {
     func getFilteredBusinessArray(businessArray: [Business])->[Business]{
         var answer = [Business]()
         
+        if getOne && getTwo && getThree && getFour && !getTakeout && !getDelivery{
+            return businessArray
+        }
+        
         businessArray.forEach { (first) in
             switch first.price {
             case "$" where getOne: answer.append(first)
