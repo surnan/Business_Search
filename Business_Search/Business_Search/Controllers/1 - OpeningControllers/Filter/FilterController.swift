@@ -197,9 +197,9 @@ class FilterController: UIViewController {
         return label
     }()
     
-    var takeOutLabel: UILabel = {
+    var ratingLabel: UILabel = {
         var label = UILabel()
-        label.text = "Takeout Available: "
+        label.text = "Include if No Rating Listed: "
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
@@ -207,7 +207,7 @@ class FilterController: UIViewController {
         return label
     }()
     
-    lazy var takeOutSwitch: UISwitch = {
+    lazy var noRatingSwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
         s.onImage = #imageLiteral(resourceName: "filter")
@@ -216,7 +216,7 @@ class FilterController: UIViewController {
         return s
     }()
     
-    lazy var noPriceListedSwitch: UISwitch = {
+    lazy var noPriceSwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
         s.onImage = #imageLiteral(resourceName: "filter2")
@@ -225,7 +225,7 @@ class FilterController: UIViewController {
         return s
     }()
     
-    var noPriceListedLabel: UILabel = {
+    var noPriceLabel: UILabel = {
         var label = UILabel()
         label.text = "Include if No Price Listed: "
         label.textAlignment = .center
@@ -246,8 +246,8 @@ class FilterController: UIViewController {
         dollarTwoButton.isSelected = shared.getTwo
         dollarThreeButton.isSelected = shared.getThree
         dollarFourButton.isSelected = shared.getFour
-        noPriceListedSwitch.isOn = shared.getNoPrice
-        takeOutSwitch.isOn = shared.getTakeout
+        noPriceSwitch.isOn = shared.getNoPrice
+        noRatingSwitch.isOn = shared.getNoRating
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
     }
     
@@ -280,15 +280,15 @@ class FilterController: UIViewController {
             let stack = UIStackView()
             stack.spacing = 20
             stack.axis = .horizontal
-            [noPriceListedLabel, noPriceListedSwitch].forEach{stack.addArrangedSubview($0)}
+            [noPriceLabel, noPriceSwitch].forEach{stack.addArrangedSubview($0)}
             return stack
         }()
         
-        let takeOutStack: UIStackView = {
+        let isRatingStack: UIStackView = {
             let stack = UIStackView()
             stack.spacing = 20
             stack.axis = .horizontal
-            [takeOutLabel, takeOutSwitch].forEach{stack.addArrangedSubview($0)}
+            [ratingLabel, noRatingSwitch].forEach{stack.addArrangedSubview($0)}
             return stack
         }()
         
@@ -300,7 +300,7 @@ class FilterController: UIViewController {
             return stack
         }()
         
-        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, isPriceListedStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, isPriceListedStack, isRatingStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -313,8 +313,8 @@ class FilterController: UIViewController {
                                     dollarTwo: dollarTwoButton.isSelected,
                                     dollarThree: dollarThreeButton.isSelected,
                                     dollarFour: dollarFourButton.isSelected,
-                                    noPrices: noPriceListedSwitch.isOn,
-                                    takeout: takeOutSwitch.isOn,
+                                    noPrices: noPriceSwitch.isOn,
+                                    noRating: noRatingSwitch.isOn,
                                     minimumRating: sliderValueLabel.text ?? "0.0")
         
         self.dismiss(animated: true, completion: {
@@ -329,7 +329,7 @@ class FilterController: UIViewController {
             $0.isSelected = true
             $0.backgroundColor = .white
         }        
-        [takeOutSwitch, noPriceListedSwitch].forEach{$0.isOn = true}
+        [noRatingSwitch, noPriceSwitch].forEach{$0.isOn = true}
     }
     
     @objc func handlecancelButton(){
@@ -346,7 +346,7 @@ class FilterController: UIViewController {
 
 
 func showMyResultsInNSUserDefaults(){
-    let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "isPriceListed", "takeoutMandatory"]
+    let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "isPriceListed", "isRatingListed"]
     
     var answers = [(key: String, value: Any)]()
     
@@ -371,16 +371,16 @@ class UserAppliedFilter {
     private var dollarTwo: Bool?
     private var dollarThree: Bool?
     private var dollarFour: Bool?
-    private var isPrice: Bool?
-    private var takeout: Bool?
+    private var priceExists: Bool?
+    private var ratingExists: Bool?
     private var minimumRating: String?
     
     var getOne: Bool {return dollarOne ?? false}
     var getTwo: Bool {return dollarTwo ?? false}
     var getThree: Bool {return dollarThree ?? false}
     var getFour: Bool {return dollarFour ?? false}
-    var getNoPrice: Bool {return isPrice ?? false}
-    var getTakeout: Bool {return takeout ?? false}
+    var getNoPrice: Bool {return priceExists ?? false}
+    var getNoRating: Bool {return ratingExists ?? false}
     var getMinimumRating: String {return minimumRating ?? "0.0"}
     
     func reset(){
@@ -398,24 +398,24 @@ class UserAppliedFilter {
         dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
         dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
         dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
-        isPrice = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
-        takeout = UserDefaults.standard.object(forKey: AppConstants.isRatingListed.rawValue) as? Bool ?? false
+        priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
+        ratingExists = UserDefaults.standard.object(forKey: AppConstants.isRatingListed.rawValue) as? Bool ?? false
         minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
     }
     
     
-    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, noPrices: Bool, takeout: Bool, minimumRating: String){
+    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, noPrices: Bool, noRating: Bool, minimumRating: String){
         UserDefaults.standard.set(dollarOne, forKey: AppConstants.dollarOne.rawValue)
         UserDefaults.standard.set(dollarTwo, forKey: AppConstants.dollarTwo.rawValue)
         UserDefaults.standard.set(dollarThree, forKey: AppConstants.dollarThree.rawValue)
         UserDefaults.standard.set(dollarFour, forKey: AppConstants.dollarFour.rawValue)
         UserDefaults.standard.set(noPrices, forKey: AppConstants.isPriceListed.rawValue)
-        UserDefaults.standard.set(takeout, forKey: AppConstants.isRatingListed.rawValue)
+        UserDefaults.standard.set(noRating, forKey: AppConstants.isRatingListed.rawValue)
         UserDefaults.standard.set(minimumRating, forKey: AppConstants.minimumRating.rawValue)
     }
     
     var isFilterOn: Bool {
-        return !getOne || !getTwo || !getThree || !getFour || !getTakeout || !getNoPrice
+        return !getOne || !getTwo || !getThree || !getFour || !getNoRating || !getNoPrice
     }
     
     func getBusinessPredicate()->[NSCompoundPredicate]{
@@ -433,7 +433,7 @@ class UserAppliedFilter {
         
         //AND predicates
         if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
-        if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+        if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
         
         let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
@@ -453,7 +453,7 @@ class UserAppliedFilter {
     func getFilteredBusinessArray(businessArray: [Business])->[Business]{
         var answer = [Business]()
         
-        if getOne && getTwo && getThree && getFour && !getTakeout && !getNoPrice{
+        if getOne && getTwo && getThree && getFour && !getNoRating && !getNoPrice{
             return businessArray
         }
         
@@ -493,7 +493,7 @@ class UserAppliedFilter {
         //AND predicates
         if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@",
                                                                argumentArray: [#keyPath(Category.business.isDelivery), true]))}
-        if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@",
+        if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@",
                                                               argumentArray: [#keyPath(Category.business.isPickup), true]))}
         
         let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
