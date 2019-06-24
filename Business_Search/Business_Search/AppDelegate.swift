@@ -19,7 +19,7 @@ var categoryMatch = 0
 var yelpMaxPullCount = 1000
 
 enum AppConstants:String {
-    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, deliveryMandatory, takeoutMandatory
+    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, deliveryMandatory, takeoutMandatory, isPriceListed, isRatingListed, minimumRating
 }
 
 

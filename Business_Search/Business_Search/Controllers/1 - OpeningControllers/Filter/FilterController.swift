@@ -50,11 +50,14 @@ class FilterController: UIViewController {
         label.backgroundColor = .blue
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .white
-        label.text = "temp"
-        //        let intRadius = Int(radius)
-        //        label.text = "\(intRadius)"
+        //label.text = "temp"
         
-        //label.text = UserAppliedFilter.shared.getMinimumRating
+        let intRadius = Int(radius)
+        label.text = "\(intRadius)"
+        
+        label.text = UserAppliedFilter.shared.getMinimumRating
+        
+        print("UserAppliedFilter.shared.getMinimumRating = \(UserAppliedFilter.shared.getMinimumRating)")
         
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
@@ -72,7 +75,7 @@ class FilterController: UIViewController {
         //UserAppliedFilter.shared.getMinimumRating
         //slider.value = Float(radius)
         
-        //slider.value = Float(UserAppliedFilter.shared.getMinimumRating) ?? 0.0
+        slider.value = Float(UserAppliedFilter.shared.getMinimumRating) ?? 0.0
         
         slider.thumbTintColor = .white
         slider.isContinuous = true
@@ -234,9 +237,9 @@ class FilterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //        print("**")
-        //        showMyResultsInNSUserDefaults()
-        //        print("**")
+                print("**")
+                showMyResultsInNSUserDefaults()
+                print("**")
         
         let shared = UserAppliedFilter.shared
         dollarOneButton.isSelected = shared.getOne
@@ -311,7 +314,8 @@ class FilterController: UIViewController {
                                     dollarThree: dollarThreeButton.isSelected,
                                     dollarFour: dollarFourButton.isSelected,
                                     delivery: deliverySwitch.isOn,
-                                    takeout: takeOutSwitch.isOn)
+                                    takeout: takeOutSwitch.isOn,
+                                    minimumRating: sliderValueLabel.text ?? "0.0")
         
         self.dismiss(animated: true, completion: {
             UserAppliedFilter.shared.load()
@@ -368,8 +372,9 @@ class UserAppliedFilter {
         UserDefaults.standard.set(true, forKey: AppConstants.dollarTwo.rawValue)
         UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
         UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
-        UserDefaults.standard.set(false, forKey: AppConstants.deliveryMandatory.rawValue)
-        UserDefaults.standard.set(false, forKey: AppConstants.takeoutMandatory.rawValue)
+        UserDefaults.standard.set(false, forKey: AppConstants.isPriceListed.rawValue)
+        UserDefaults.standard.set(false, forKey: AppConstants.isRatingListed.rawValue)
+        UserDefaults.standard.set("0.0", forKey: AppConstants.minimumRating.rawValue)
     }
     
     func load(){
@@ -377,17 +382,20 @@ class UserAppliedFilter {
         dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
         dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
         dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
-        delivery = UserDefaults.standard.object(forKey: AppConstants.deliveryMandatory.rawValue) as? Bool ?? false
-        takeout = UserDefaults.standard.object(forKey: AppConstants.takeoutMandatory.rawValue) as? Bool ?? false
+        delivery = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
+        takeout = UserDefaults.standard.object(forKey: AppConstants.isRatingListed.rawValue) as? Bool ?? false
+        minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
     }
     
-    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, delivery: Bool, takeout: Bool){
+    
+    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, delivery: Bool, takeout: Bool, minimumRating: String){
         UserDefaults.standard.set(dollarOne, forKey: AppConstants.dollarOne.rawValue)
         UserDefaults.standard.set(dollarTwo, forKey: AppConstants.dollarTwo.rawValue)
         UserDefaults.standard.set(dollarThree, forKey: AppConstants.dollarThree.rawValue)
         UserDefaults.standard.set(dollarFour, forKey: AppConstants.dollarFour.rawValue)
-        UserDefaults.standard.set(delivery, forKey: AppConstants.deliveryMandatory.rawValue)
-        UserDefaults.standard.set(takeout, forKey: AppConstants.takeoutMandatory.rawValue)
+        UserDefaults.standard.set(delivery, forKey: AppConstants.isPriceListed.rawValue)
+        UserDefaults.standard.set(takeout, forKey: AppConstants.isRatingListed.rawValue)
+        UserDefaults.standard.set(minimumRating, forKey: AppConstants.minimumRating.rawValue)
     }
     
     private var dollarOne: Bool?
@@ -397,7 +405,6 @@ class UserAppliedFilter {
     private var delivery: Bool?
     private var takeout: Bool?
     private var minimumRating: String?
-
     
     var getOne: Bool {return dollarOne ?? false}
     var getTwo: Bool {return dollarTwo ?? false}
@@ -448,16 +455,11 @@ class UserAppliedFilter {
         
         businessArray.forEach { (first) in
             switch first.price {
-            case "$" where getOne:
-                answer.append(first)
-            case "$$" where getTwo:
-                answer.append(first)
-            case "$$$" where getThree:
-                answer.append(first)
-            case "$$$$" where getFour:
-                answer.append(first)
-            default:
-                print("")
+            case "$" where getOne: answer.append(first)
+            case "$$" where getTwo: answer.append(first)
+            case "$$$" where getThree: answer.append(first)
+            case "$$$$" where getFour: answer.append(first)
+            default: print("")
             }
         }
         return answer
@@ -469,15 +471,21 @@ class UserAppliedFilter {
         
         // OR predicates
         if !(getOne && getTwo && getThree && getFour) {
-            if getOne {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.price),"$"]))}
-            if getTwo {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.price),"$$"]))}
-            if getThree {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.price),"$$$"]))}
-            if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
+            if getOne {priceOrPredicates.append(NSPredicate(format: "%K == %@",
+                                                            argumentArray: [#keyPath(Category.business.price),"$"]))}
+            if getTwo {priceOrPredicates.append(NSPredicate(format: "%K == %@",
+                                                            argumentArray: [#keyPath(Category.business.price),"$$"]))}
+            if getThree {priceOrPredicates.append(NSPredicate(format: "%K == %@",
+                                                              argumentArray: [#keyPath(Category.business.price),"$$$"]))}
+            if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@",
+                                                             argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
         }
         
         //AND predicates
-        if getDelivery {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.isDelivery), true]))}
-        if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.isPickup), true]))}
+        if getDelivery {switchAndPredicates.append(NSPredicate(format: "%K == %@",
+                                                               argumentArray: [#keyPath(Category.business.isDelivery), true]))}
+        if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@",
+                                                              argumentArray: [#keyPath(Category.business.isPickup), true]))}
         
         let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
