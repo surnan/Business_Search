@@ -237,9 +237,9 @@ class FilterController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                print("**")
-                showMyResultsInNSUserDefaults()
-                print("**")
+//                print("**")
+//                showMyResultsInNSUserDefaults()
+//                print("**")
         
         let shared = UserAppliedFilter.shared
         dollarOneButton.isSelected = shared.getOne
