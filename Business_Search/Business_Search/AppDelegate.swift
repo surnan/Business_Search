@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
         radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
         
-        FilterPredicate.shared.load()
+        UserAppliedFilter.shared.load()
         //showMyResultsInNSUserDefaults()
         
         

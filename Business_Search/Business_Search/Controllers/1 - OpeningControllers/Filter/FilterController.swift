@@ -18,6 +18,77 @@ class CustomButton: UIButton {
 }
 
 class FilterController: UIViewController {
+    
+    var sliderLabel: UILabel = {
+        var label = UILabel()
+        label.text = "Minimum Yelp Rating"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var sliderLeftLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var sliderRightLabel: UILabel = {
+        let label = UILabel()
+        label.text = "5"
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var sliderValueLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .blue
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textColor = .white
+        label.text = "temp"
+        //        let intRadius = Int(radius)
+        //        label.text = "\(intRadius)"
+        
+        //label.text = UserAppliedFilter.shared.getMinimumRating
+        
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var distanceSlider: UISlider = {
+        var slider = UISlider()
+        slider.minimumTrackTintColor = .gray
+        slider.maximumTrackTintColor = .black
+        slider.minimumValue = 0.0
+        slider.maximumValue = 5.0
+        
+        //UserAppliedFilter.shared.getMinimumRating
+        //slider.value = Float(radius)
+        
+        //slider.value = Float(UserAppliedFilter.shared.getMinimumRating) ?? 0.0
+        
+        slider.thumbTintColor = .white
+        slider.isContinuous = true
+        slider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
+    }()
+    
+    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
+        let temp = sender.value.rounded(digits: 1)
+        print("Radius ---> \(temp)")
+        sliderValueLabel.text = "\(temp)"
+    }
+    
+
+    
     @objc func handleDollarButtons(_ sender: CustomButton){
         sender.isSelected = !sender.isSelected
     }
@@ -167,7 +238,7 @@ class FilterController: UIViewController {
         //        showMyResultsInNSUserDefaults()
         //        print("**")
         
-        let shared = FilterPredicate.shared
+        let shared = UserAppliedFilter.shared
         dollarOneButton.isSelected = shared.getOne
         dollarTwoButton.isSelected = shared.getTwo
         dollarThreeButton.isSelected = shared.getThree
@@ -188,6 +259,18 @@ class FilterController: UIViewController {
             stack.spacing = 1
             return stack
         }()
+        
+        let sliderStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.spacing = 10
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            return stack
+        }()
+        
+        [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
+        
+
         
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
         let deliveryStack: UIStackView = {
@@ -214,7 +297,7 @@ class FilterController: UIViewController {
             return stack
         }()
         
-        [priceLabel, dollarStack, deliveryStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, deliveryStack, takeOutStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -223,7 +306,7 @@ class FilterController: UIViewController {
     }
     
     @objc func handleSaveButton(){
-        FilterPredicate.shared.save(dollarOne: dollarOneButton.isSelected,
+        UserAppliedFilter.shared.save(dollarOne: dollarOneButton.isSelected,
                                     dollarTwo: dollarTwoButton.isSelected,
                                     dollarThree: dollarThreeButton.isSelected,
                                     dollarFour: dollarFourButton.isSelected,
@@ -231,9 +314,9 @@ class FilterController: UIViewController {
                                     takeout: takeOutSwitch.isOn)
         
         self.dismiss(animated: true, completion: {
-            FilterPredicate.shared.load()
+            UserAppliedFilter.shared.load()
             self.delegate?.undoBlur()
-            _ = FilterPredicate.shared.returnBusinessPredicate()
+            _ = UserAppliedFilter.shared.returnBusinessPredicate()
         })
     }
     
@@ -277,8 +360,8 @@ func showMyResultsInNSUserDefaults(){
 }
 
 
-class FilterPredicate {
-    static let shared = FilterPredicate()
+class UserAppliedFilter {
+    static let shared = UserAppliedFilter()
     
     func reset(){
         UserDefaults.standard.set(true, forKey: AppConstants.dollarOne.rawValue)
@@ -408,3 +491,16 @@ class FilterPredicate {
     }
 }
 
+extension Double {
+    func rounded(digits: Int) -> Double {
+        let multiplier = pow(10.0, Double(digits))
+        return (self * multiplier).rounded() / multiplier
+    }
+}
+
+extension Float {
+    func rounded(digits: Int) -> Float {
+        let multiplier = pow(10.0, Float(digits))
+        return (self * multiplier).rounded() / multiplier
+    }
+}

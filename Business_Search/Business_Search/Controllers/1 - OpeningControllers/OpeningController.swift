@@ -23,7 +23,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     func animateResultsAreFilteredLabel(){
         //print("A - Filter On = \(FilterPredicate.shared.isFilterOn)")
-        if !FilterPredicate.shared.isFilterOn {return}
+        if !UserAppliedFilter.shared.isFilterOn {return}
         print("B - Filter executed")
         
         let resultsAreFilteredLabel: UILabel = {
@@ -142,7 +142,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                    var filterControllerPredicate = FilterPredicate.shared.returnBusinessPredicate()    //FilterController() & Singleton
+                    var filterControllerPredicate = UserAppliedFilter.shared.returnBusinessPredicate()    //FilterController() & Singleton
                     filterControllerPredicate.append(openingControllerPredicate)
                     
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
@@ -245,7 +245,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                 if let _predicate = fetchCategoryArrayNamesPredicate {predicate.append(_predicate)}
                 let openingControllerPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                 
-                var filterControllerPredicate = FilterPredicate.shared.returnCategoryPredicate()
+                var filterControllerPredicate = UserAppliedFilter.shared.returnCategoryPredicate()
                 filterControllerPredicate.append(openingControllerPredicate)
                 fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                 
