@@ -13,6 +13,28 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var dataController: DataController!
     
+    
+    let myTextViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ??  "All outgoing messages include:"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var myTextView: UITextView = {
+       let textView = UITextView()
+        textView.backgroundColor = .white
+        textView.text = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
+        textView.layer.cornerRadius = 10
+        textView.font = UIFont.boldSystemFont(ofSize: 12)
+        return textView
+    }()
+    
+    
+    
     var fetchLocationController: NSFetchedResultsController<Location>? {
         didSet {
             if fetchLocationController == nil {
@@ -177,7 +199,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         
         
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
-        [sliderValueLabel, saveButton, cancelButton, deleteAllButton, deleteAllLabel].forEach{stackView.addArrangedSubview($0)}
+        [myTextViewLabel, myTextView, sliderValueLabel, saveButton, cancelButton, deleteAllButton, deleteAllLabel].forEach{stackView.addArrangedSubview($0)}
         [informationLabel, stackView, sliderStack].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
@@ -190,6 +212,8 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             
             stackView.topAnchor.constraint(equalTo: sliderStack.bottomAnchor, constant: 30),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            myTextView.heightAnchor.constraint(equalToConstant: 50)
             ])
     }
     
@@ -229,11 +253,12 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc func handleSaveButton(){
-        handleDeleteAllButton()
         if let newRadius = newRadiusValue {
             radius = newRadius
             saveDefaults()
         }
+        
+        UserDefaults.standard.set(myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
         
         dismiss(animated: true, completion: {
             self.delegate?.undoBlur()

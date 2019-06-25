@@ -20,7 +20,7 @@ var yelpMaxPullCount = 1000
 
 
 enum AppConstants:String {
-    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, isPriceListed, isRatingListed, minimumRating
+    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, isPriceListed, isRatingListed, minimumRating, greetingMessage
 }
 
 //.grey196

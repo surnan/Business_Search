@@ -48,9 +48,9 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     
     func test(){
+        let items: [Any] = ["\nhttps://www.yelp.com \n"]
         
-        //let items: [Any] = [#imageLiteral(resourceName: "unfavorite_yellow") as? Any]
-        let items: [Any] = ["2 - This is the yelp page for what I'm looking at: \nhttps://www.yelp.com \nhttps://www.yahoo.com"]
+        
         
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
