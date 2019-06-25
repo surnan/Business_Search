@@ -11,46 +11,66 @@ import CoreData
 
 extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-    
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        if tableViewArrayType == TableIndex.category.rawValue {return nil}
-//        let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
-//            print(indexPath)
-//        }
-//        action.image = #imageLiteral(resourceName: "Favorite")
-//        action.backgroundColor = .lightBlue
-//        let configuration = UISwipeActionsConfiguration(actions: [action])
-//        return configuration
-//    }
+
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let actionOne = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
-            print("Selected Action")
-            self.test()
+        let actionBusiness = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
+            guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
+            self.pickRandomBusiness(business: currentBusiness)
         }
-        actionOne.backgroundColor = .darkBlue
+        actionBusiness.backgroundColor = .darkBlue
     
-        
-        let actionTwo = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
-            print("Selected Action")
-            self.test()
+    
+        let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") { (action, indexPath) in
+            guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
+            self.pickRandomBusiness(business: currentBusiness)
         }
-        
-        actionOne.backgroundColor = .red
-        actionTwo.backgroundColor = .blue
-        
+    
+        actionBusiness.backgroundColor = .red
+        actionCategory.backgroundColor = .blue
+    
         if tableViewArrayType == TableIndex.category.rawValue {
-            return [actionTwo]
+            return [actionCategory]
         } else {
-            return [actionOne]
+            return [actionBusiness]
         }
+    }
+
+    func pickRandomBusiness(business: Business){
+        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
+        
+        guard let temp = business.url else {return}
+        let items: [Any] = ["\(prependText) \(temp)"]
+        
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+        present(activityVC, animated: true)
     }
     
     
-    func test(){
-        
+    func test(businesses: [Business]){
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
-        
+        let items: [Any] = ["\(prependText) www.yelp.com"]
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+        present(activityVC, animated: true)
+    }
+    
+
+    
+    
+    func test(){
+        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
         let items: [Any] = ["\(prependText) www.yelp.com"]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
