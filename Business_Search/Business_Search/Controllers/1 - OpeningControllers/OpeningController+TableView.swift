@@ -16,14 +16,15 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let actionBusiness = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
             guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
-            self.pickRandomBusiness(business: currentBusiness)
+            self.shareBusiness(business: currentBusiness)
         }
         actionBusiness.backgroundColor = .darkBlue
     
     
         let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") { (action, indexPath) in
-            guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
-            self.pickRandomBusiness(business: currentBusiness)
+            guard let currentCategory = self.fetchCategoryNames?[indexPath.row] else {return}
+            let items = self.getBusinessesFromCategoryName(category: currentCategory)
+            print("")
         }
     
         actionBusiness.backgroundColor = .red
@@ -36,7 +37,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func pickRandomBusiness(business: Business){
+    func shareBusiness(business: Business){
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
         
         guard let temp = business.url else {return}
@@ -52,8 +53,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         present(activityVC, animated: true)
     }
     
-    
-    func test(businesses: [Business]){
+    func pickRandomBusiness(businesses: [Business]){
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
         let items: [Any] = ["\(prependText) www.yelp.com"]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -65,24 +65,6 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         }
         present(activityVC, animated: true)
     }
-    
-
-    
-    
-    func test(){
-        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
-        let items: [Any] = ["\(prependText) www.yelp.com"]
-        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            if !completed {
-                return
-            }
-            self.dismiss(animated: true, completion: nil)
-        }
-        present(activityVC, animated: true)
-    }
-    
-    
     
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -247,23 +229,34 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    func listBusinesses(category: String){
-        //Not shown in this tableView.  It's to create array to push into next VC's tableView
-        selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
-        fetchCategoriesController = nil
+    func getBusinessesFromCategoryName(category: String)-> [Business]{
+        //This array is not NOT shown in this tableView.
         
+        //'BARS' includes hits from other groups with "bar"
+        //selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
+        
+        //'MATCHES' is confused when string contains parenthesis.  Such as "American (New)"
+        //selectedCategoryPredicate = NSPredicate(format: "title MATCHES[cd] %@", argumentArray: [category])
+        
+        selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
+        fetchCategoriesController = nil
         var businessArray = [Business]()    //Pushed into next ViewController
         fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
         businessArray = businessArray.filter{
             return $0.parentLocation?.latitude == latitude &&
                 $0.parentLocation?.longitude == longitude
         }
+        let businesses = UserAppliedFilter.shared.getFilteredBusinessArray(businessArray: businessArray)
+        return businesses
+    }
+    
+    func listBusinesses(category: String){
         let newVC = MyTabController()
-        
-        newVC.businesses = UserAppliedFilter.shared.getFilteredBusinessArray(businessArray: businessArray)
-        
+        let items = getBusinessesFromCategoryName(category: category)
+        newVC.businesses = items
         newVC.categoryName = category
         navigationController?.pushViewController(newVC, animated: true)
     }
 }
+
 
