@@ -374,7 +374,7 @@ class UserAppliedFilter {
     }
     
     var isFilterOn: Bool {
-        return !getOne || !getTwo || !getThree || !getFour || !getNoPrice
+        return !getOne || !getTwo || !getThree || !getFour || !getNoPrice || !(getMinimumRatingFloat == 1.0)
     }
     
     func getBusinessPredicate()->[NSCompoundPredicate]{
@@ -432,7 +432,6 @@ class UserAppliedFilter {
         var pricePredicates_OR_Compound = [NSPredicate]()
         var radiusOrPredicates_OR_Compound = [NSPredicate]()
         var returnCompoundPredicate = [NSCompoundPredicate]()
-
         
         // OR predicates
         if !(getOne && getTwo && getThree && getFour && getNoPrice) {
@@ -458,29 +457,7 @@ class UserAppliedFilter {
             let andPredicateForRating = NSCompoundPredicate(andPredicateWithSubpredicates: radiusOrPredicates_OR_Compound)
             returnCompoundPredicate.append(andPredicateForRating)
         }
-        
         return returnCompoundPredicate
-//
-//
-//
-//
-//        //AND predicates
-//        if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@",
-//                                                               argumentArray: [#keyPath(Category.business.isDelivery), true]))}
-//
-//        let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)
-//        let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
-//
-//        var returnPredicate = [NSCompoundPredicate]()
-//        if !pricePredicates_OR_Compound.isEmpty {returnPredicate.append(orPredicate)}
-////////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
-//
-//
-//        if pricePredicates_OR_Compound.isEmpty && switchAndPredicates.isEmpty {
-//            return []
-//        } else {
-//            return returnPredicate
-//        }
     }
 }
 
@@ -497,69 +474,3 @@ extension Float {
         return (self * multiplier).rounded() / multiplier
     }
 }
-
-
-
-/*
-func getCategoryPredicate()->[NSCompoundPredicate]{
-    var pricePredicates_OR_Compound = [NSPredicate]()
-    var radiusOrPredicates_OR_Compound = [NSPredicate]()
-    var switchAndPredicates = [NSPredicate]()
- 
-    // OR predicates
-    if !(getOne && getTwo && getThree && getFour && getNoPrice) {
-        if getOne {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                  argumentArray: [#keyPath(Category.business.price),"$"]))}
-        if getTwo {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                  argumentArray: [#keyPath(Category.business.price),"$$"]))}
-        if getThree {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                    argumentArray: [#keyPath(Category.business.price),"$$$"]))}
-        if getFour {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                   argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
-        if getNoPrice {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                      argumentArray: [#keyPath(Category.business.price), nil!]))}
-    }
- 
-    //AND predicates
-    if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@",
-                                                          argumentArray: [#keyPath(Category.business.isDelivery), true]))}
- 
-    let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)
-    let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
- 
-    var returnPredicate = [NSCompoundPredicate]()
-    if !pricePredicates_OR_Compound.isEmpty {returnPredicate.append(orPredicate)}
-    //////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
- 
- 
-    if pricePredicates_OR_Compound.isEmpty && switchAndPredicates.isEmpty {
-        return []
-    } else {
-        return returnPredicate
-    }
-}
-*/
-
-
-/*
-func getFilteredBusinessArray(businessArray: [Business])->[Business]{
-    var answer = [Business]()
-    if getOne && getTwo && getThree && getFour && !getNoPrice{
-        return businessArray
-    }
-    
-    businessArray.forEach { (first) in
-        switch first.price {
-        case "$" where getOne: answer.append(first)
-        case "$$" where getTwo: answer.append(first)
-        case "$$$" where getThree: answer.append(first)
-        case "$$$$" where getFour: answer.append(first)
-        default:
-            if getNoPrice {
-                answer.append(first)
-            }
-        }
-    }
-    return answer
-}
-*/
