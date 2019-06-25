@@ -31,7 +31,7 @@ class FilterController: UIViewController {
     
     var sliderLeftLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
+        label.text = "1"
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -50,15 +50,8 @@ class FilterController: UIViewController {
         label.backgroundColor = .blue
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = .white
-        //label.text = "temp"
-        
         let intRadius = Int(radius)
-        label.text = "\(intRadius)"
-        
         label.text = UserAppliedFilter.shared.getMinimumRatingString
-        
-        print("UserAppliedFilter.shared.getMinimumRating = \(UserAppliedFilter.shared.getMinimumRatingString)")
-        
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
         label.textAlignment = .center
@@ -69,14 +62,9 @@ class FilterController: UIViewController {
         var slider = UISlider()
         slider.minimumTrackTintColor = .gray
         slider.maximumTrackTintColor = .black
-        slider.minimumValue = 0.0
+        slider.minimumValue = 1.0
         slider.maximumValue = 5.0
-        
-        //UserAppliedFilter.shared.getMinimumRating
-        //slider.value = Float(radius)
-        
-        slider.value = Float(UserAppliedFilter.shared.getMinimumRatingString) ?? 0.0
-        
+        slider.value = Float(UserAppliedFilter.shared.getMinimumRatingString) ?? 1.0
         slider.thumbTintColor = .white
         slider.isContinuous = true
         slider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
@@ -86,11 +74,8 @@ class FilterController: UIViewController {
     
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         let temp = sender.value.rounded(digits: 1)
-        print("Radius ---> \(temp)")
         sliderValueLabel.text = "\(temp)"
     }
-    
-
     
     @objc func handleDollarButtons(_ sender: CustomButton){
         sender.isSelected = !sender.isSelected
@@ -197,25 +182,6 @@ class FilterController: UIViewController {
         return label
     }()
     
-    var ratingLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Include if No Rating Listed: "
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var noRatingSwitch: UISwitch = {
-        let s = UISwitch()
-        s.onTintColor = .green
-        s.onImage = #imageLiteral(resourceName: "filter")
-        s.offImage = #imageLiteral(resourceName: "settings")
-        s.addTarget(self, action: #selector(handleSwitch(_:)), for: .valueChanged)
-        return s
-    }()
-    
     lazy var noPriceSwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
@@ -247,7 +213,6 @@ class FilterController: UIViewController {
         dollarThreeButton.isSelected = shared.getThree
         dollarFourButton.isSelected = shared.getFour
         noPriceSwitch.isOn = shared.getNoPrice
-        noRatingSwitch.isOn = shared.getNoRating
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
     }
     
@@ -272,23 +237,13 @@ class FilterController: UIViewController {
         }()
         
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
-        
-
-        
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
+        
         let isPriceListedStack: UIStackView = {
             let stack = UIStackView()
             stack.spacing = 20
             stack.axis = .horizontal
             [noPriceLabel, noPriceSwitch].forEach{stack.addArrangedSubview($0)}
-            return stack
-        }()
-        
-        let isRatingStack: UIStackView = {
-            let stack = UIStackView()
-            stack.spacing = 20
-            stack.axis = .horizontal
-            [ratingLabel, noRatingSwitch].forEach{stack.addArrangedSubview($0)}
             return stack
         }()
         
@@ -300,7 +255,7 @@ class FilterController: UIViewController {
             return stack
         }()
         
-        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, isPriceListedStack, isRatingStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -314,7 +269,6 @@ class FilterController: UIViewController {
                                     dollarThree: dollarThreeButton.isSelected,
                                     dollarFour: dollarFourButton.isSelected,
                                     noPrices: noPriceSwitch.isOn,
-                                    noRating: noRatingSwitch.isOn,
                                     minimumRating: sliderValueLabel.text ?? "0.0")
         
         self.dismiss(animated: true, completion: {
@@ -329,13 +283,12 @@ class FilterController: UIViewController {
             $0.isSelected = true
             $0.backgroundColor = .white
         }        
-        [noRatingSwitch, noPriceSwitch].forEach{$0.isOn = true}
+        [noPriceSwitch].forEach{$0.isOn = true}
     }
     
     @objc func handlecancelButton(){
         dismiss(animated: true, completion: {
             self.delegate?.undoBlur()
-            //print("isFilterOn = \(FilterPredicate.shared.isFilterOn)")
         })
     }
     
@@ -380,7 +333,6 @@ class UserAppliedFilter {
     var getThree: Bool {return dollarThree ?? false}
     var getFour: Bool {return dollarFour ?? false}
     var getNoPrice: Bool {return priceExists ?? false}
-    var getNoRating: Bool {return ratingExists ?? false}
     var getMinimumRatingString: String {return minimumRating ?? "0.0"}
     
     var getMinimumRatingFloat: Float {
@@ -397,8 +349,7 @@ class UserAppliedFilter {
         UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
         UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
         UserDefaults.standard.set(true, forKey: AppConstants.isPriceListed.rawValue)
-        UserDefaults.standard.set(true, forKey: AppConstants.isRatingListed.rawValue)
-        UserDefaults.standard.set("0.0", forKey: AppConstants.minimumRating.rawValue)
+        UserDefaults.standard.set("1.0", forKey: AppConstants.minimumRating.rawValue)
     }
     
     func load(){
@@ -407,23 +358,21 @@ class UserAppliedFilter {
         dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
         dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
         priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
-        ratingExists = UserDefaults.standard.object(forKey: AppConstants.isRatingListed.rawValue) as? Bool ?? false
         minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
     }
     
     
-    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, noPrices: Bool, noRating: Bool, minimumRating: String){
+    func save(dollarOne: Bool, dollarTwo: Bool, dollarThree: Bool, dollarFour: Bool, noPrices: Bool, minimumRating: String){
         UserDefaults.standard.set(dollarOne, forKey: AppConstants.dollarOne.rawValue)
         UserDefaults.standard.set(dollarTwo, forKey: AppConstants.dollarTwo.rawValue)
         UserDefaults.standard.set(dollarThree, forKey: AppConstants.dollarThree.rawValue)
         UserDefaults.standard.set(dollarFour, forKey: AppConstants.dollarFour.rawValue)
         UserDefaults.standard.set(noPrices, forKey: AppConstants.isPriceListed.rawValue)
-        UserDefaults.standard.set(noRating, forKey: AppConstants.isRatingListed.rawValue)
         UserDefaults.standard.set(minimumRating, forKey: AppConstants.minimumRating.rawValue)
     }
     
     var isFilterOn: Bool {
-        return !getOne || !getTwo || !getThree || !getFour || !getNoRating || !getNoPrice
+        return !getOne || !getTwo || !getThree || !getFour || !getNoPrice
     }
     
     func getBusinessPredicate()->[NSCompoundPredicate]{
@@ -443,48 +392,37 @@ class UserAppliedFilter {
         
         // orPredicateForRadius - BUILD-UP
         radiusOrPredicates_OR_Compound.append(NSPredicate(format: "%K <= %@", argumentArray: [#keyPath(Business.rating), getMinimumRatingFloat]))
-        if getNoRating {radiusOrPredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.rating), 0]))}
-        let orPredicateForRadius = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)     //or-Compound
-        
+        let orPredicateForRadius = NSCompoundPredicate(andPredicateWithSubpredicates: radiusOrPredicates_OR_Compound)     //or-Compound
         
         if !pricePredicates_OR_Compound.isEmpty {
             returnCompoundPredicate.append(orPredicateForPrices)
         }
-        
-//        if !radiusOrPredicates_OR_Compound.isEmpty {
-//            returnCompoundPredicate.append(orPredicateForRadius)
-//        }
-        
         return returnCompoundPredicate
         
         
-        
-        
-        
-        
         /*
-        //AND predicates
-        //var switchAndPredicates = [NSPredicate]()
-        //if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
-        //if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
-        //let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
-        
-        if !pricePredicates_OR_Compound.isEmpty {returnPredicate.append(orPredicateForPrices)}
-//////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
-        
-        
-        if pricePredicates_OR_Compound.isEmpty && switchAndPredicates.isEmpty {
-            return []
-        } else {
-            return returnPredicate
-        }
-        */
+         //AND predicates
+         //var switchAndPredicates = [NSPredicate]()
+         //if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
+         //if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+         //let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
+         
+         if !pricePredicates_OR_Compound.isEmpty {returnPredicate.append(orPredicateForPrices)}
+         //////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
+         
+         
+         if pricePredicates_OR_Compound.isEmpty && switchAndPredicates.isEmpty {
+         return []
+         } else {
+         return returnPredicate
+         }
+         */
+
     }
     
     func getFilteredBusinessArray(businessArray: [Business])->[Business]{
         var answer = [Business]()
-        
-        if getOne && getTwo && getThree && getFour && !getNoRating && !getNoPrice{
+        if getOne && getTwo && getThree && getFour && !getNoPrice{
             return businessArray
         }
         
@@ -524,8 +462,6 @@ class UserAppliedFilter {
         //AND predicates
         if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@",
                                                                argumentArray: [#keyPath(Category.business.isDelivery), true]))}
-        if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@",
-                                                              argumentArray: [#keyPath(Category.business.isPickup), true]))}
         
         let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
         let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
