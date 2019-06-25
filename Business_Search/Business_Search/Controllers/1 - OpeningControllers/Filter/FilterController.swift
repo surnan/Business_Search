@@ -138,7 +138,7 @@ class FilterController: UIViewController {
     
     lazy var defaultButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(handleDefaultButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
         button.backgroundColor = UIColor.white
         button.setTitle("   Reset to Defaults     ", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -278,12 +278,14 @@ class FilterController: UIViewController {
         })
     }
     
-    @objc func handleDefaultButton(){
+    @objc func handleResetToDefaultsButton(){
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
             $0.isSelected = true
             $0.backgroundColor = .white
         }        
         [noPriceSwitch].forEach{$0.isOn = true}
+        distanceSlider.value = 1.0
+        sliderValueLabel.text = "1.0"
     }
     
     @objc func handlecancelButton(){
@@ -386,38 +388,58 @@ class UserAppliedFilter {
             if getTwo {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$"]))}
             if getThree {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$"]))}
             if getFour {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$$"]))}
-            if getNoPrice {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price), nil!]))}
+            if getNoPrice {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price), nil]))}
         }
-        let orPredicateForPrices = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)     //or-Compound
-        
-        // orPredicateForRadius - BUILD-UP
-        radiusOrPredicates_OR_Compound.append(NSPredicate(format: "%K <= %@", argumentArray: [#keyPath(Business.rating), getMinimumRatingFloat]))
-        let orPredicateForRadius = NSCompoundPredicate(andPredicateWithSubpredicates: radiusOrPredicates_OR_Compound)     //or-Compound
         
         if !pricePredicates_OR_Compound.isEmpty {
+            let orPredicateForPrices = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)   //OR
             returnCompoundPredicate.append(orPredicateForPrices)
         }
+        
+        if getMinimumRatingFloat > 1.0 {
+            radiusOrPredicates_OR_Compound.append(NSPredicate(format: "%K >= %@", argumentArray: [#keyPath(Business.rating), getMinimumRatingFloat]))
+            let andPredicateForRating = NSCompoundPredicate(andPredicateWithSubpredicates: radiusOrPredicates_OR_Compound)
+            returnCompoundPredicate.append(andPredicateForRating)
+        }
+        
         return returnCompoundPredicate
+    }
+    
+    func _getBusinessPredicate()->[NSCompoundPredicate]{
+        var priceOrPredicates = [NSPredicate]()
+        var switchAndPredicates = [NSPredicate]()
+        
+        let getDelivery = true; let getTakeout = true
+        
+        // OR predicates
+        if !(getOne && getTwo && getThree && getFour) {
+            if getOne {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$"]))}
+            if getTwo {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$"]))}
+            if getThree {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$"]))}
+            if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$$"]))}
+        }
+        
+        //AND predicates
+        switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))
+        switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))
+        
+        if getDelivery {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
+        if getTakeout {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+        
+        let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
+        let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
         
         
-        /*
-         //AND predicates
-         //var switchAndPredicates = [NSPredicate]()
-         //if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
-         //if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
-         //let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
-         
-         if !pricePredicates_OR_Compound.isEmpty {returnPredicate.append(orPredicateForPrices)}
-         //////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
-         
-         
-         if pricePredicates_OR_Compound.isEmpty && switchAndPredicates.isEmpty {
-         return []
-         } else {
-         return returnPredicate
-         }
-         */
-
+        var returnPredicate = [NSCompoundPredicate]()
+        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
+        
+        
+        if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
+            return []
+        } else {
+            return returnPredicate
+        }
     }
     
     func getFilteredBusinessArray(businessArray: [Business])->[Business]{
@@ -456,7 +478,7 @@ class UserAppliedFilter {
             if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@",
                                                              argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
             if getNoPrice {priceOrPredicates.append(NSPredicate(format: "%K == %@",
-                                                             argumentArray: [#keyPath(Category.business.price), nil!]))}
+                                                             argumentArray: [#keyPath(Category.business.price), 0]))}
         }
         
         //AND predicates
