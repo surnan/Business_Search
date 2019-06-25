@@ -16,7 +16,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
     let myTextViewLabel: UILabel = {
         let label = UILabel()
-        label.text = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ??  "All outgoing messages include:"
+        label.text = "All outgoing messages include:"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .center
         label.backgroundColor = .clear

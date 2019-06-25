@@ -48,10 +48,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     
     func test(){
-        let items: [Any] = ["\nhttps://www.yelp.com \n"]
         
+        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
         
-        
+        let items: [Any] = ["\(prependText) www.yelp.com"]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if !completed {
