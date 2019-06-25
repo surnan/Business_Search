@@ -105,10 +105,12 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     
     
     func setupNavigationManu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight)),
-                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight))]
+        //        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight)),
+        //                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }
     
+
     @objc func handlePause() {
         print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")
     }

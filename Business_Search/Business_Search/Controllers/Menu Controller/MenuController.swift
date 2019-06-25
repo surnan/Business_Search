@@ -169,7 +169,7 @@ class MenuController: UIViewController, CLLocationManagerDelegate, MenuControlle
     }
     
     func setupNavigationMenu(){
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView

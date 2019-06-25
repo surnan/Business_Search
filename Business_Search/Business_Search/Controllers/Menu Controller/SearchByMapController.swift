@@ -64,9 +64,16 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             pinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
             ])
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
-                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext))]
+        
+        
+//        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
+//                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }
+    
+    
+    
     
     //MARK:- Map Delegate Function
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
