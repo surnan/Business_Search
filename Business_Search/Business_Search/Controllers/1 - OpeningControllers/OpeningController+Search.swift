@@ -57,11 +57,9 @@ extension OpeningController: UISearchResultsUpdating {
     
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print("selectedScope --> \(selectedScope)  ... selectedScope = \(searchController.searchBar.text!)")
         searchGroupIndex = selectedScope
         tableView.reloadData()
         ShowNothingLabelIfNoResults(group: tableViewArrayType)
-        print("SelectedSearchScope: FilterPredicate.shared.isFilterOn --> \(UserAppliedFilter.shared.isFilterOn)")
         animateResultsAreFilteredLabel()
     }
 }

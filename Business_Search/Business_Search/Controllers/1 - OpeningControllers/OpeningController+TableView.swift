@@ -12,16 +12,58 @@ import CoreData
 extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if tableViewArrayType == TableIndex.category.rawValue {return nil}
-        let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
-            print(indexPath)
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        if tableViewArrayType == TableIndex.category.rawValue {return nil}
+//        let action = UIContextualAction(style: .normal, title: "Favorite") { (action, view, myBool) in
+//            print(indexPath)
+//        }
+//        action.image = #imageLiteral(resourceName: "Favorite")
+//        action.backgroundColor = .lightBlue
+//        let configuration = UISwipeActionsConfiguration(actions: [action])
+//        return configuration
+//    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let actionOne = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
+            print("Selected Action")
+            self.test()
         }
-        action.image = #imageLiteral(resourceName: "Favorite")
-        action.backgroundColor = .lightBlue
-        let configuration = UISwipeActionsConfiguration(actions: [action])
-        return configuration
+        actionOne.backgroundColor = .darkBlue
+    
+        
+        let actionTwo = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
+            print("Selected Action")
+            self.test()
+        }
+        
+        actionOne.backgroundColor = .red
+        actionTwo.backgroundColor = .blue
+        
+        if tableViewArrayType == TableIndex.category.rawValue {
+            return [actionTwo]
+        } else {
+            return [actionOne]
+        }
     }
+    
+    
+    func test(){
+        
+        //let items: [Any] = [#imageLiteral(resourceName: "unfavorite_yellow") as? Any]
+        let items: [Any] = ["2 - This is the yelp page for what I'm looking at: \nhttps://www.yelp.com \nhttps://www.yahoo.com"]
+        
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+        present(activityVC, animated: true)
+    }
+    
+    
+    
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableViewArrayType == TableIndex.category.rawValue {return nil}
