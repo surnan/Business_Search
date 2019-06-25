@@ -55,9 +55,9 @@ class FilterController: UIViewController {
         let intRadius = Int(radius)
         label.text = "\(intRadius)"
         
-        label.text = UserAppliedFilter.shared.getMinimumRating
+        label.text = UserAppliedFilter.shared.getMinimumRatingString
         
-        print("UserAppliedFilter.shared.getMinimumRating = \(UserAppliedFilter.shared.getMinimumRating)")
+        print("UserAppliedFilter.shared.getMinimumRating = \(UserAppliedFilter.shared.getMinimumRatingString)")
         
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
@@ -75,7 +75,7 @@ class FilterController: UIViewController {
         //UserAppliedFilter.shared.getMinimumRating
         //slider.value = Float(radius)
         
-        slider.value = Float(UserAppliedFilter.shared.getMinimumRating) ?? 0.0
+        slider.value = Float(UserAppliedFilter.shared.getMinimumRatingString) ?? 0.0
         
         slider.thumbTintColor = .white
         slider.isContinuous = true
@@ -381,7 +381,15 @@ class UserAppliedFilter {
     var getFour: Bool {return dollarFour ?? false}
     var getNoPrice: Bool {return priceExists ?? false}
     var getNoRating: Bool {return ratingExists ?? false}
-    var getMinimumRating: String {return minimumRating ?? "0.0"}
+    var getMinimumRatingString: String {return minimumRating ?? "0.0"}
+    
+    var getMinimumRatingFloat: Float {
+        if let _rating = minimumRating, let temp = Float(_rating){
+            return temp
+        }
+        return 0.0
+    }
+    
     
     func reset(){
         UserDefaults.standard.set(true, forKey: AppConstants.dollarOne.rawValue)
@@ -419,35 +427,58 @@ class UserAppliedFilter {
     }
     
     func getBusinessPredicate()->[NSCompoundPredicate]{
-        var priceOrPredicates = [NSPredicate]()
-        var switchAndPredicates = [NSPredicate]()
+        var pricePredicates_OR_Compound = [NSPredicate]()
+        var radiusOrPredicates_OR_Compound = [NSPredicate]()
+        var returnCompoundPredicate = [NSCompoundPredicate]()
         
-        // OR predicates
+        // orPredicateForPrices - BUILD-UP
         if !(getOne && getTwo && getThree && getFour && getNoPrice) {
-            if getOne {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$"]))}
-            if getTwo {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$"]))}
-            if getThree {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$"]))}
-            if getFour {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$$"]))}
-            if getNoPrice {priceOrPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price), nil!]))}
+            if getOne {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$"]))}
+            if getTwo {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$"]))}
+            if getThree {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$"]))}
+            if getFour {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price),"$$$$"]))}
+            if getNoPrice {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.price), nil!]))}
+        }
+        let orPredicateForPrices = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)     //or-Compound
+        
+        // orPredicateForRadius - BUILD-UP
+        radiusOrPredicates_OR_Compound.append(NSPredicate(format: "%K <= %@", argumentArray: [#keyPath(Business.rating), getMinimumRatingFloat]))
+        if getNoRating {radiusOrPredicates_OR_Compound.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.rating), 0]))}
+        let orPredicateForRadius = NSCompoundPredicate(orPredicateWithSubpredicates: pricePredicates_OR_Compound)     //or-Compound
+        
+        
+        if !pricePredicates_OR_Compound.isEmpty {
+            returnCompoundPredicate.append(orPredicateForPrices)
         }
         
+//        if !radiusOrPredicates_OR_Compound.isEmpty {
+//            returnCompoundPredicate.append(orPredicateForRadius)
+//        }
+        
+        return returnCompoundPredicate
+        
+        
+        
+        
+        
+        
+        /*
         //AND predicates
-        if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
-        if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+        //var switchAndPredicates = [NSPredicate]()
+        //if getNoPrice {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isDelivery), true]))}
+        //if getNoRating {switchAndPredicates.append(NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.isPickup), true]))}
+        //let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
         
-        let orPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: priceOrPredicates)
-        let andPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: switchAndPredicates)
-        
-        var returnPredicate = [NSCompoundPredicate]()
-        if !priceOrPredicates.isEmpty {returnPredicate.append(orPredicate)}
+        if !pricePredicates_OR_Compound.isEmpty {returnPredicate.append(orPredicateForPrices)}
 //////        if !switchAndPredicates.isEmpty {returnPredicate.append(andPredicate)}
         
         
-        if priceOrPredicates.isEmpty && switchAndPredicates.isEmpty {
+        if pricePredicates_OR_Compound.isEmpty && switchAndPredicates.isEmpty {
             return []
         } else {
             return returnPredicate
         }
+        */
     }
     
     func getFilteredBusinessArray(businessArray: [Business])->[Business]{
