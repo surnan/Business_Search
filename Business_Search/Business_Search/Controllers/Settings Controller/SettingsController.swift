@@ -11,29 +11,8 @@ import CoreData
 
 class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
-    var dataController: DataController!
-    
-    
-    let myTextViewLabel: UILabel = {
-        let label = UILabel()
-        label.text = "All outgoing messages include:"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        label.backgroundColor = .clear
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var myTextView: UITextView = {
-       let textView = UITextView()
-        textView.backgroundColor = .white
-        textView.text = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
-        textView.layer.cornerRadius = 10
-        textView.font = UIFont.boldSystemFont(ofSize: 12)
-        return textView
-    }()
-    
-    
+    var dataController: DataController!     //injected
+    var newRadiusValue: Int!
     
     var fetchLocationController: NSFetchedResultsController<Location>? {
         didSet {
@@ -68,6 +47,22 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
+
+    let searchRadiusLabel: UILabel = {
+        let label = UILabel()
+        let memeTextAttributes:[NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
+            NSAttributedString.Key.strokeWidth: -2.6
+        ]
+        label.attributedText = NSAttributedString(string: "Meters to Search for Businesses", attributes: memeTextAttributes)
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var distanceSlider: UISlider = {
         var slider = UISlider()
         slider.minimumTrackTintColor = .blue
@@ -94,6 +89,43 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         label.text = "1000"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    lazy var sliderValueLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .blue
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textColor = .white
+        let intRadius = Int(radius)
+        label.text = "\(intRadius)"
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        label.textAlignment = .center
+        return label
+    }()
+
+    let myTextViewLabel: UILabel = {
+        let label = UILabel()
+        let memeTextAttributes:[NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
+            NSAttributedString.Key.strokeWidth: -2.6
+        ]
+        label.attributedText = NSAttributedString(string: "All outgoing messages include:", attributes: memeTextAttributes)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 5
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var myTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .white
+        textView.text = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "Hi.  This is the Yelp page for a business that I am looking at: "
+        textView.layer.cornerRadius = 5
+        textView.font = UIFont.boldSystemFont(ofSize: 12)
+        return textView
     }()
     
     lazy var saveButton: UIButton = {
@@ -124,37 +156,12 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleDeleteAllButton), for: .touchUpInside)
         button.backgroundColor = UIColor.red
-        button.setTitle("     DELETE ALL     ", for: .normal)
+        button.setTitle(" DELETE ALL ", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
-    }()
-    
-    
-    lazy var sliderValueLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .blue
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = .white
-        let intRadius = Int(radius)
-        label.text = "\(intRadius)"
-        label.layer.cornerRadius = 10
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        return label
-    }()
-    
-    
-    let informationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Search Radius"
-        label.font = UIFont.boldSystemFont(ofSize: 30)
-        label.textAlignment = .center
-        label.backgroundColor = .clear
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
     
     let deleteAllLabel: UILabel = {
@@ -168,9 +175,29 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         return label
     }()
     
+    let directionsDefaultLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Default travel mode when retrieving directions:"
+        return label
+    }()
+    
+    let directionSegmentControl: UISegmentedControl = {
+        let items = ["Walking", "Driving", "Mass-Transit"]
+        let segment = UISegmentedControl(items: items)
+        segment.backgroundColor = .white
+        segment.addTarget(self, action: #selector(handleDirectionSegmentControl(_:)), for: .valueChanged)
+        segment.layer.cornerRadius = 10
+        segment.translatesAutoresizingMaskIntoConstraints = false
+        return segment
+    }()
+    
+    @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
+        print("")
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //newRadiusValue = Int(radius)
         distanceSlider.value = Float(radius)
         sliderValueLabel.text = String(radius)
         deleteAllLabel.isHidden = true
@@ -180,15 +207,8 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         super.viewDidLoad()
         view.backgroundColor = .clear
         view.isOpaque = false
-        let stackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.spacing = 50
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            return stack
-        }()
-        
-        let sliderStack: UIStackView = {
+
+        let horizontalSliderStack: UIStackView = {
             let stack = UIStackView()
             stack.axis = .horizontal
             stack.spacing = 10
@@ -196,29 +216,52 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             return stack
         }()
         
+        let verticalSliderStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.spacing = 20
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            return stack
+        }()
         
+        let textViewStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.spacing = 20
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            return stack
+        }()
         
-        [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
-        [myTextViewLabel, myTextView, sliderValueLabel, saveButton, cancelButton, deleteAllButton, deleteAllLabel].forEach{stackView.addArrangedSubview($0)}
-        [informationLabel, stackView, sliderStack].forEach{view.addSubview($0)}
+        let saveCancelDeleteStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.spacing = 20
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            return stack
+        }()
+        
+        [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{horizontalSliderStack.addArrangedSubview($0)}
+        [searchRadiusLabel, horizontalSliderStack, sliderValueLabel].forEach{verticalSliderStack.addArrangedSubview($0)}
+        [myTextViewLabel, myTextView].forEach{textViewStack.addArrangedSubview($0)}
+        [saveButton, cancelButton, deleteAllButton, deleteAllLabel].forEach{saveCancelDeleteStack.addArrangedSubview($0)}
+        [verticalSliderStack, textViewStack, saveCancelDeleteStack].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
-            informationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            informationLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+            horizontalSliderStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
+            myTextView.heightAnchor.constraint(equalToConstant: 50),
+            verticalSliderStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            verticalSliderStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            sliderStack.topAnchor.constraint(equalTo: informationLabel.bottomAnchor, constant: 20),
-            sliderStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            sliderStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
+            textViewStack.topAnchor.constraint(equalTo: verticalSliderStack.bottomAnchor, constant: 70),
+            textViewStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            stackView.topAnchor.constraint(equalTo: sliderStack.bottomAnchor, constant: 30),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            myTextView.heightAnchor.constraint(equalToConstant: 50)
+            saveCancelDeleteStack.topAnchor.constraint(equalTo: textViewStack.bottomAnchor, constant: 70),
+            saveCancelDeleteStack.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             ])
     }
     
     
-    var newRadiusValue: Int!
+    
     
     //MARK:- Handlers
     @objc func handleDeleteAllButton(){
@@ -257,12 +300,8 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             radius = newRadius
             saveDefaults()
         }
-        
         UserDefaults.standard.set(myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
-        
-        dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
-        })
+        dismiss(animated: true, completion: {self.delegate?.undoBlur()})
     }
     
     func saveDefaults(){
