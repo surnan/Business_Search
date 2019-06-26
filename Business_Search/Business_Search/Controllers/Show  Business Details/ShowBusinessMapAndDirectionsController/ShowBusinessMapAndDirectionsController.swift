@@ -12,7 +12,7 @@ import CoreLocation
 
 class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManagerDelegate {
     
-    var business: Business!             //Injected
+    var currentBusiness: Business!             //Injected
     var _steps = [MKRoute.Step]()
     var tableViewArrays = [[String]]()  //Forwarding 2D Array for Transit Routes
     
@@ -72,11 +72,23 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
     let regionInMeters: Double = 1000.0
     var previousLocation: CLLocation?
     
+    //MARK:- Functions Below
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("dest -> lat = \(business.latitude) ... lon = \(business.longitude)")
+        print("dest -> lat = \(currentBusiness.latitude) ... lon = \(currentBusiness.longitude)")
         mapView.showsUserLocation = true
         addDestination()
+        setupUI()
+    }
+    
+    func addDestination(){
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.coordinate = CLLocationCoordinate2D(latitude: currentBusiness.latitude, longitude: currentBusiness.longitude)
+        mapView.addAnnotation(destinationAnnotation)
+        mapView.showAnnotations([destinationAnnotation], animated: true)
+    }
+    
+    func setupUI(){
         [mapView, directionSegmentControl, scaleView].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
             directionSegmentControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -95,13 +107,6 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
                                                               style: .done,
                                                               target: self,
                                                               action: #selector(handleNextTable))]
-    }
-    
-    func addDestination(){
-        let destinationAnnotation = MKPointAnnotation()
-        destinationAnnotation.coordinate = CLLocationCoordinate2D(latitude: business.latitude, longitude: business.longitude)
-        mapView.addAnnotation(destinationAnnotation)
-        mapView.showAnnotations([destinationAnnotation], animated: true)
     }
 }
 

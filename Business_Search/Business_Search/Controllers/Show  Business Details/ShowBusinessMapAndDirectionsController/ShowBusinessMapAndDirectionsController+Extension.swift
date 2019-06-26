@@ -42,7 +42,12 @@ extension ShowBusinessMapAndDirectionsController {
     }
     
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D)-> MKDirections.Request {
-        let destinationCoordinate       = getCenterLocation(for: mapView).coordinate
+        
+        //let destinationCoordinate       = getCenterLocation(for: mapView).coordinate
+        
+        let temp = CLLocationCoordinate2D(latitude: currentBusiness.latitude, longitude: currentBusiness.longitude)
+        let destinationCoordinate       = temp
+        
         let startingLocation            = MKPlacemark(coordinate: coordinate)
         let destination                 = MKPlacemark(coordinate: destinationCoordinate)
         let request                     = MKDirections.Request()
