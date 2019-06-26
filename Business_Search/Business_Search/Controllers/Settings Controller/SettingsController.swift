@@ -132,7 +132,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         button.backgroundColor = UIColor.white
-        button.setTitle("     SAVE     ", for: .normal)
+        button.setTitle("SAVE", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -144,7 +144,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let button = UIButton()
         button.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
         button.backgroundColor = UIColor.white
-        button.setTitle("     CANCEL     ", for: .normal)
+        button.setTitle("CANCEL", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -156,7 +156,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let button = UIButton()
         button.addTarget(self, action: #selector(handleDeleteAllButton), for: .touchUpInside)
         button.backgroundColor = UIColor.red
-        button.setTitle(" DELETE ALL ", for: .normal)
+        button.setTitle("DELETE ALL", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -168,7 +168,6 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let label = UILabel()
         label.text = "All saved business data deleted"
         label.textColor = UIColor.red
-        //label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textAlignment = .center
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -180,20 +179,6 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         label.text = "Default travel mode when retrieving directions:"
         return label
     }()
-    
-    let directionSegmentControl: UISegmentedControl = {
-        let items = ["Walking", "Driving", "Mass-Transit"]
-        let segment = UISegmentedControl(items: items)
-        segment.backgroundColor = .white
-        segment.addTarget(self, action: #selector(handleDirectionSegmentControl(_:)), for: .valueChanged)
-        segment.layer.cornerRadius = 10
-        segment.translatesAutoresizingMaskIntoConstraints = false
-        return segment
-    }()
-    
-    @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
-        print("")
-    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -249,7 +234,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         NSLayoutConstraint.activate([
             horizontalSliderStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
             myTextView.heightAnchor.constraint(equalToConstant: 50),
-            verticalSliderStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            verticalSliderStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             verticalSliderStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             textViewStack.topAnchor.constraint(equalTo: verticalSliderStack.bottomAnchor, constant: 70),
