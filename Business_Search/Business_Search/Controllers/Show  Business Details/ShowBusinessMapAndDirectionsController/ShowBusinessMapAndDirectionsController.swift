@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDelegate {
+class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManagerDelegate {
     
     var business: Business!     //Injected
     var _steps = [MKRoute.Step]()
@@ -71,9 +71,6 @@ class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDele
         addDestination()
         [mapView, directionSegmentControl, scaleView].forEach{view.addSubview($0)}
         
-        
-        
-        
         NSLayoutConstraint.activate([
             directionSegmentControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             directionSegmentControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -84,9 +81,11 @@ class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDele
         
         let safe = view.safeAreaLayoutGuide
         mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: directionSegmentControl.topAnchor)
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: moveToUserLocationButton),
-                                              UIBarButtonItem(customView: compass),
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
                                               UIBarButtonItem(title: "Table", style: .done, target: self, action: #selector(hendleNextTable))]
+//        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: moveToUserLocationButton),
+//                                              UIBarButtonItem(customView: compass),
+//                                              UIBarButtonItem(title: "Table", style: .done, target: self, action: #selector(hendleNextTable))]
     }
     
     @objc func hendleNextTable(){
@@ -140,12 +139,6 @@ class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDele
     }
     
     //MARK:- connecting destination & source
-    
-    
-
-    
-    
-    
     func getDirections(){
         guard let location = locationManager.location?.coordinate else {
             //TODO: Inform user we don't have their current location
@@ -166,15 +159,7 @@ class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDele
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     var transport = MKDirectionsTransportType.automobile
     
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D)-> MKDirections.Request {
@@ -205,7 +190,7 @@ class ShowMultipleBusinessMapController: UIViewController, CLLocationManagerDele
 }
 
 
-extension ShowMultipleBusinessMapController: MKMapViewDelegate {
+extension ShowBusinessMapAndDirectionsController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.blue
