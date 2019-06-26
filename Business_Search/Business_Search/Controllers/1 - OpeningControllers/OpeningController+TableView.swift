@@ -24,7 +24,13 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") { (action, indexPath) in
             guard let currentCategory = self.fetchCategoryNames?[indexPath.row] else {return}
             let items = self.getBusinessesFromCategoryName(category: currentCategory)
-            print("")
+            let modder = items.count - 1
+            let randomNumber = Int.random(in: 0...modder)
+            print(items[randomNumber].name ?? "")
+            
+            
+            self.showBusinessInfo(currentBusiness: items[randomNumber])
+            
         }
     
         actionBusiness.backgroundColor = .red
