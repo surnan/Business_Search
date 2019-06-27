@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-extension ShowBusinessMapAndDirectionsController: UITableViewDataSource, UITableViewDelegate {
+extension MapItController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

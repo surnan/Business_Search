@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class ShowBusinessTransitTableViewController: UITableViewController {
+class ShowTransitRouteController: UITableViewController {
 
     var transitSteps = [[String]]()
     

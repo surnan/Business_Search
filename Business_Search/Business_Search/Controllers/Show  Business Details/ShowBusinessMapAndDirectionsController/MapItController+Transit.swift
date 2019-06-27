@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ShowBusinessMapAndDirectionsController {
+extension MapItController {
     
     func getTransitDirections(){
         
@@ -65,7 +65,7 @@ extension ShowBusinessMapAndDirectionsController {
             }
         }
         DispatchQueue.main.async {
-            let newVC = ShowBusinessTransitTableViewController()
+            let newVC = ShowTransitRouteController()
             newVC.transitSteps = self.tableViewArrays
             self.navigationController?.pushViewController(newVC, animated: true)
         }

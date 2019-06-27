@@ -11,24 +11,24 @@ import MapKit
 import CoreLocation
 
 
-class ShowBusinessRouteTableViewController: UITableViewController {
+class WalkDriveRoutesController: UITableViewController {
 
     var steps = [MKRoute.Step]() {
         didSet {
             steps.removeFirst()
         }
     }
-    
-    
-    
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return steps.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let step = steps[indexPath.row]
         let cell = UITableViewCell()
@@ -41,7 +41,7 @@ extension CLLocationDistance {
     func toMiles() -> String {
         let feet = self * 3.2808
         let miles = (self) * 0.0006213712
-        
+
         if feet < 125 {
             let answer = String(Int(feet)) + " feet"
             return answer

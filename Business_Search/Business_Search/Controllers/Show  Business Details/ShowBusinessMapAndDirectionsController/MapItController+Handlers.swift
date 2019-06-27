@@ -10,10 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
-extension ShowBusinessMapAndDirectionsController {
-    @objc func handleNextTable(){
+extension MapItController {
+    @objc func pushWalkDriveRoutesController(){
         routeTableView.reloadData()
-        let newVC = ShowBusinessRouteTableViewController()
+        let newVC = WalkDriveRoutesController()
         newVC.steps = _steps
         navigationController?.pushViewController(newVC, animated: true)
     }

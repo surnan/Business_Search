@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import GoogleMaps
 
-class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManagerDelegate {
+class MapItController: UIViewController, CLLocationManagerDelegate {
     var currentBusiness: Business!              //Injected
     var _steps = [MKRoute.Step]()               //Array for Walking & Driving Routes - From Apple
     var tableViewArrays = [[String]]()          //2D Array for Transit Routes - From Google
@@ -132,8 +132,8 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
             
             ])
         
-        mapView.isHidden = true
-//        googleMap.isHidden = true
+//        mapView.isHidden = true
+        googleMap.isHidden = true
         
         mapView.anchor(top: safe.topAnchor,
                        leading: safe.leadingAnchor,
@@ -152,14 +152,14 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
                                               UIBarButtonItem(title: "Table",
                                                               style: .done,
                                                               target: self,
-                                                              action: #selector(handleNextTable))]
+                                                              action: #selector(pushWalkDriveRoutesController))]
     }
     
     var currentLocation: CLLocation?
 }
 
 
-extension ShowBusinessMapAndDirectionsController: MKMapViewDelegate {
+extension MapItController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.blue

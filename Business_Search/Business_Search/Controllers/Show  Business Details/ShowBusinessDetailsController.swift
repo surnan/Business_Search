@@ -156,7 +156,7 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate {
     
     
     @objc func handlemapItButton(_ sender: UIButton){
-        let newVC = ShowBusinessMapAndDirectionsController()
+        let newVC = MapItController()
         newVC.currentBusiness = business
         navigationController?.pushViewController(newVC, animated: true)
     }

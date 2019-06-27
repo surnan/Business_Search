@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-extension ShowBusinessMapAndDirectionsController {
+extension MapItController {
     //Move map center to current GPS coordinate
     func centerViewOnUserLocation(){
         if let location = locationManager.location?.coordinate {
