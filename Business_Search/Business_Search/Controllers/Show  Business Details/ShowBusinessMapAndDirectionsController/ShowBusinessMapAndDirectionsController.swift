@@ -89,19 +89,22 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
     }
     
     func setupUI(){
+        let safe = view.safeAreaLayoutGuide
+        
         [mapView, directionSegmentControl, scaleView].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            directionSegmentControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            directionSegmentControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            directionSegmentControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            scaleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            scaleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            directionSegmentControl.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            directionSegmentControl.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+            directionSegmentControl.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+            scaleView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 5),
+            scaleView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 5),
+            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5)
             ])
-        let safe = view.safeAreaLayoutGuide
+        
         mapView.anchor(top: safe.topAnchor,
                        leading: safe.leadingAnchor,
-                       trailing: safe.trailingAnchor,
-                       bottom: directionSegmentControl.topAnchor)
+                       trailing: safe.trailingAnchor)
+        
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
                                               UIBarButtonItem(title: "Table",
                                                               style: .done,
