@@ -96,6 +96,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         let location = locationManager.location
         guard let coord = location?.coordinate else {return}
         googleMap.camera = GMSCameraPosition(latitude: coord.latitude, longitude: coord.longitude, zoom: 17.0)
+        googleMap.isMyLocationEnabled = true
         
         let  marker = GMSMarker(position: CLLocationCoordinate2D(latitude: currentBusiness.latitude,
                                                                      longitude: currentBusiness.longitude))
