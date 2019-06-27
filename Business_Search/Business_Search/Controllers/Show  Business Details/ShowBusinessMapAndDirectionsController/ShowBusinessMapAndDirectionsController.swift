@@ -40,6 +40,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         let mapView = MKMapView()
         mapView.showsCompass = false
         mapView.showsUserLocation = true
+        mapView.showsPointsOfInterest = true
         mapView.delegate = self
         return mapView
     }()
@@ -131,7 +132,8 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
             
             ])
         
-        mapView.isHidden = true
+        //mapView.isHidden = true
+        googleMap.isHidden = true
         
         mapView.anchor(top: safe.topAnchor,
                        leading: safe.leadingAnchor,
