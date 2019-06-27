@@ -11,7 +11,6 @@ import Foundation
 extension ShowBusinessMapAndDirectionsController {
     
     func getTransitDirections(){
-//        let mapURL = URL(string: "https://maps.googleapis.com/maps/api/directions/json?&mode=transit&routes=transit&origin=40.7590+-73.9845&destination=40.7110241158536+-74.0124703624216&key=AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")!
         
         guard let currentLocation = locationManager.location?.coordinate else {
             print("Unable to get current Location")

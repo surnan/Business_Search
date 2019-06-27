@@ -13,8 +13,8 @@ import GoogleMaps
 
 class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManagerDelegate {
     var currentBusiness: Business!              //Injected
-    var _steps = [MKRoute.Step]()
-    var tableViewArrays = [[String]]()          //Forwarding 2D Array for Transit Routes
+    var _steps = [MKRoute.Step]()               //Array for Walking & Driving Routes - From Apple
+    var tableViewArrays = [[String]]()          //2D Array for Transit Routes - From Google
     
     
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
