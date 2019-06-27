@@ -120,8 +120,8 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         
         [mapView, directionSegmentControl, scaleView, routeTableView, googleMap].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.8),
-            googleMap.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.8),
+            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5),
+            googleMap.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5),
             scaleView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 5),
             scaleView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 5),
             
@@ -132,8 +132,8 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
             
             ])
         
-        //mapView.isHidden = true
-        googleMap.isHidden = true
+        mapView.isHidden = true
+//        googleMap.isHidden = true
         
         mapView.anchor(top: safe.topAnchor,
                        leading: safe.leadingAnchor,
@@ -154,6 +154,8 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
                                                               target: self,
                                                               action: #selector(handleNextTable))]
     }
+    
+    var currentLocation: CLLocation?
 }
 
 
@@ -165,13 +167,18 @@ extension ShowBusinessMapAndDirectionsController: MKMapViewDelegate {
         return renderer
     }
     
+    
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
+        currentLocation = location
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
         self.googleMap.animate(to: camera)
+        
+        /*
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
-        
+        */
     }
 }
 

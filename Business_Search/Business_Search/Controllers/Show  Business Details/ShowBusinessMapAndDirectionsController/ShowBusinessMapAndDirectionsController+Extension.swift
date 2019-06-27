@@ -53,9 +53,8 @@ extension ShowBusinessMapAndDirectionsController {
         let request                     = MKDirections.Request()
         request.source                  = MKMapItem(placemark: startingLocation)
         request.destination             = MKMapItem(placemark: destination)
-        request.transportType           = transport         //Injected from directionSegmentControl
-        request.requestsAlternateRoutes = false             //Don't want to show alternate routes without
-                                                            //giving user opportunity to change routes to update Routes.
+        request.transportType           = transport         //directionSegmentControl
+        request.requestsAlternateRoutes = false             //Don't want to show alternate routes without to avoid updating Route Table
         return request
     }
     

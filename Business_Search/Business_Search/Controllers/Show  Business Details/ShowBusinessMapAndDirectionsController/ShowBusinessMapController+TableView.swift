@@ -12,14 +12,6 @@ import CoreLocation
 
 extension ShowBusinessMapAndDirectionsController: UITableViewDataSource, UITableViewDelegate {
     
-    @objc func handleNextTable(){
-        routeTableView.reloadData()
-//        print("")
-//        let newVC = ShowBusinessRouteTableViewController()
-//        newVC.steps = _steps
-//        navigationController?.pushViewController(newVC, animated: true)
-    }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _steps.count

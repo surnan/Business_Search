@@ -11,8 +11,27 @@ import Foundation
 extension ShowBusinessMapAndDirectionsController {
     
     func getTransitDirections(){
-        let mapURL = URL(string: "https://maps.googleapis.com/maps/api/directions/json?&mode=transit&routes=transit&origin=40.7590+-73.9845&destination=40.7110241158536+-74.0124703624216&key=AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")!
-        let task = URLSession.shared.dataTask(with: mapURL) { (data, resp, error) in
+//        let mapURL = URL(string: "https://maps.googleapis.com/maps/api/directions/json?&mode=transit&routes=transit&origin=40.7590+-73.9845&destination=40.7110241158536+-74.0124703624216&key=AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")!
+        
+        guard let currentLocation = locationManager.location?.coordinate else {
+            print("Unable to get current Location")
+            return
+        }
+
+        let mapString = "https://maps.googleapis.com/maps/api/directions/json?&mode=transit&routes=transit&origin="
+            + "\(currentLocation.latitude)+"
+            + "\(currentLocation.longitude)"
+            + "&destination="
+            + "\(currentBusiness.latitude)+"
+            + "\(currentBusiness.longitude)"
+            + "&key=AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w"
+        
+        let mapURL2 = URL(string: mapString)!
+
+        print("mapURL2 = \(mapURL2)")
+        
+        
+        let task = URLSession.shared.dataTask(with: mapURL2) { (data, resp, error) in
             guard let data = data else {return}
             let decoder = JSONDecoder()
             do {
