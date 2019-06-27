@@ -11,12 +11,12 @@ import MapKit
 import CoreLocation
 
 extension ShowBusinessMapAndDirectionsController {
-    @objc func handleNextTable(){
-        print("")
-        let newVC = ShowBusinessRouteTableViewController()
-        newVC.steps = _steps
-        navigationController?.pushViewController(newVC, animated: true)
-    }
+//    @objc func handleNextTable(){
+//        print("")
+//        let newVC = ShowBusinessRouteTableViewController()
+//        newVC.steps = _steps
+//        navigationController?.pushViewController(newVC, animated: true)
+//    }
     
     @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
         //transport = MKDirectionsTransportType.automobile

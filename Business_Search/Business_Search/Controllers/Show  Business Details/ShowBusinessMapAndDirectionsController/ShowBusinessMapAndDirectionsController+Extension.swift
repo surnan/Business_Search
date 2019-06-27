@@ -36,7 +36,10 @@ extension ShowBusinessMapAndDirectionsController {
                 let steps = route.steps                     //Direction each phase (turn right, go straight 5 miles, etc)
                 self._steps = steps                         //Pushing to New View Controller
                 self.mapView.addOverlay(route.polyline)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)//Fit whole map-route onto screen
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                DispatchQueue.main.async {
+                    self.routeTableView.reloadData()
+                }
             }
         }
     }

@@ -15,6 +15,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
     var _steps = [MKRoute.Step]()
     var tableViewArrays = [[String]]()          //Forwarding 2D Array for Transit Routes
     
+    
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
         let button = MKUserTrackingButton(mapView: mapView)
         button.layer.backgroundColor = UIColor.clear.cgColor

@@ -11,18 +11,26 @@ import MapKit
 import CoreLocation
 
 extension ShowBusinessMapAndDirectionsController: UITableViewDataSource, UITableViewDelegate {
+    
+    @objc func handleNextTable(){
+        routeTableView.reloadData()
+//        print("")
+//        let newVC = ShowBusinessRouteTableViewController()
+//        newVC.steps = _steps
+//        navigationController?.pushViewController(newVC, animated: true)
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return _steps.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let step = _steps[indexPath.row]
         let cell = UITableViewCell()
         cell.backgroundColor = .black
-        cell.textLabel?.textColor = UIColor.white
-        cell.textLabel?.text = "asdf"
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.text = "\(indexPath.row + 1): \(step.distance.toMiles()) .. \(step.instructions)"
         return cell
     }
-    
-
-
 }
