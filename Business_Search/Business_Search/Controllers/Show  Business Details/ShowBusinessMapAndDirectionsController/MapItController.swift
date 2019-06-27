@@ -74,11 +74,20 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
     var directionsArray: [MKDirections] = []
     let regionInMeters: Double = 1000.0
     var previousLocation: CLLocation?
-    
+
     //MARK:- Google Map
-    var googleMap = GMSMapView()
-    
-    var showGoogleMaps = false
+    var googleMap: GMSMapView = {
+        let map = GMSMapView()
+        map.isMyLocationEnabled = true
+        return map
+    }()
+
+    var showGoogleMaps: Bool = true {
+        didSet {
+            mapView.isHidden = showGoogleMaps
+            googleMap.isHidden = !showGoogleMaps
+        }
+    }
     
     //MARK:- Functions Below
     override func viewDidLoad() {
@@ -98,8 +107,8 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
         //GoogleMap Stuff
         let location = locationManager.location
         guard let coord = location?.coordinate else {return}
-        googleMap.camera = GMSCameraPosition(latitude: coord.latitude, longitude: coord.longitude, zoom: 17.0)
-        googleMap.isMyLocationEnabled = true
+        //googleMap.camera = GMSCameraPosition(latitude: coord.latitude, longitude: coord.longitude, zoom: 10.0)
+        googleMap.camera = GMSCameraPosition(latitude: currentBusiness.latitude, longitude: currentBusiness.longitude, zoom: 10.0)
         let  marker = GMSMarker(position: CLLocationCoordinate2D(latitude: currentBusiness.latitude, longitude: currentBusiness.longitude))
         marker.title = currentBusiness.name
         marker.snippet = "Info window text"
@@ -116,7 +125,6 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
     }()
     
     @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
-        //transport = MKDirectionsTransportType.automobile
         showGoogleMaps = false
         
         switch sender.selectedSegmentIndex {
@@ -128,19 +136,11 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setupUI(){
-        if showGoogleMaps {
-            mapView.isHidden = true
-            googleMap.isHidden = false
-        } else {
-            mapView.isHidden = false
-            googleMap.isHidden = true
-        }
-        
         let safe = view.safeAreaLayoutGuide
         [mapView, directionSegmentControl, scaleView, routeTableView, googleMap].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5),
-            googleMap.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5),
+            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.8),
+            googleMap.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.8),
             scaleView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 5),
             scaleView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 5),
             directionSegmentControl.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
@@ -164,15 +164,15 @@ extension MapItController: MKMapViewDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        currentLocation = location
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        self.googleMap.animate(to: camera)
+        //        let location = locations.last
+        //        currentLocation = location
+        //        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        //        self.googleMap.animate(to: camera)
         
         /*
-        //Finally stop updating location otherwise it will come again and again in this delegate
-        self.locationManager.stopUpdatingLocation()
-        */
+         //Finally stop updating location otherwise it will come again and again in this delegate
+         self.locationManager.stopUpdatingLocation()
+         */
     }
 }
 

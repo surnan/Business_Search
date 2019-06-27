@@ -9,9 +9,10 @@
 import UIKit
 import CoreData
 import MapKit
+import CoreLocation
 
 
-class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate {
+class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     lazy var mapView: MKMapView = {
         var map = MKMapView()
@@ -128,20 +129,7 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate {
         return button
     }()
     
-    @objc func handleVisitYelpPageButton(_ sender: UIButton){
-        guard var _stringToURL = business.url else {
-            UIApplication.shared.open(URL(string: "https://www.yelp.com")!)     //MediaURL = empty, load Yelp
-            return
-        }
-        let backupURL = URL(string: "https://www.yelp.com")!  //URL is invalid, convert string to google search query
-        if _stringToURL._isValidURL {
-            _stringToURL = _stringToURL._prependHTTPifNeeded()
-            let url = URL(string: _stringToURL) ?? backupURL
-            UIApplication.shared.open(url)
-        } else {
-            UIApplication.shared.open(backupURL)
-        }
-    }
+
     
     
     lazy var mapItButton: UIButton = {
@@ -154,11 +142,63 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate {
         return button
     }()
     
+    lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        return locationManager
+    }()
+    
+    var currentLocation: CLLocation?
+    
+    
+    @objc func handleVisitYelpPageButton(_ sender: UIButton){
+        guard var _stringToURL = business.url else {
+            UIApplication.shared.open(URL(string: "https://www.yelp.com")!)     //MediaURL = empty, load Yelp
+            return
+        }
+        let backupURL = URL(string: "https://www.yelp.com")!                    //URL is invalid, convert string to google search query
+        if _stringToURL._isValidURL {
+            _stringToURL = _stringToURL._prependHTTPifNeeded()
+            let url = URL(string: _stringToURL) ?? backupURL
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.open(backupURL)
+        }
+    }
+    
     
     @objc func handlemapItButton(_ sender: UIButton){
-        let newVC = MapItController()
-        newVC.currentBusiness = business
-        navigationController?.pushViewController(newVC, animated: true)
+        guard let currentLocation = locationManager.location?.coordinate else {print("Unable to get current Location"); return}
+        let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)))
+        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: business.latitude, longitude: business.longitude)))
+        source.name = "Source"
+        destination.name = "Destination"
+        MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    override func viewDidLoad() {
+        locationManager.startUpdatingLocation()
+        view.backgroundColor = UIColor.white
+        let safe = view.safeAreaLayoutGuide
+        mapView.addAnnotation(firstAnnotation)
+        let viewRegion = MKCoordinateRegion(center: firstAnnotation.coordinate, latitudinalMeters: 400, longitudinalMeters: 400)
+        mapView.setRegion(viewRegion, animated: false)
+        [addressLabel, phoneNumberButton, ratingLabel, priceLabel, isDeliveryLabel, isTakeoutLabel].forEach{stackView.addArrangedSubview($0)}
+        [visitYelpPageButton, mapItButton].forEach{stackViewBtm.addArrangedSubview($0)}
+        [mapView, nameLabel, stackView, stackViewBtm].forEach{view.addSubview($0)}
+        mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25).isActive = true
+        mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
+                       padding: .init(top: 3, left: 3, bottom: 0, right: 3))
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 10).isActive = true
+        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15).isActive = true
+        stackViewBtm.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
+        stackViewBtm.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stackViewBtm.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66).isActive = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "pause", style: .done, target: self, action: #selector(pauseFunc))
     }
     
     var firstAnnotation: MKPointAnnotation = {
@@ -232,36 +272,7 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate {
         return stack
     }()
     
-    override func viewDidLoad() {
-        view.backgroundColor = UIColor.white
-        let safe = view.safeAreaLayoutGuide
-        
-        mapView.addAnnotation(firstAnnotation)
 
-        let viewRegion = MKCoordinateRegion(center: firstAnnotation.coordinate, latitudinalMeters: 400, longitudinalMeters: 400)
-        mapView.setRegion(viewRegion, animated: false)
-        
-        [addressLabel, phoneNumberButton, ratingLabel, priceLabel, isDeliveryLabel, isTakeoutLabel].forEach{stackView.addArrangedSubview($0)}
-        
-        [visitYelpPageButton, mapItButton].forEach{stackViewBtm.addArrangedSubview($0)}
-        
-        [mapView, nameLabel, stackView, stackViewBtm].forEach{view.addSubview($0)}
-        mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25).isActive = true
-        mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
-                       padding: .init(top: 3, left: 3, bottom: 0, right: 3))
-        
-        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 10).isActive = true
-
-        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15).isActive = true
-        
-        stackViewBtm.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
-        stackViewBtm.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackViewBtm.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66).isActive = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "pause", style: .done, target: self, action: #selector(pauseFunc))
-    }
     
     
     @objc func phoneTapped(sender: UIButton){
