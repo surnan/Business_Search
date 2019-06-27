@@ -11,10 +11,9 @@ import MapKit
 import CoreLocation
 
 class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManagerDelegate {
-    
-    var currentBusiness: Business!             //Injected
+    var currentBusiness: Business!              //Injected
     var _steps = [MKRoute.Step]()
-    var tableViewArrays = [[String]]()  //Forwarding 2D Array for Transit Routes
+    var tableViewArrays = [[String]]()          //Forwarding 2D Array for Transit Routes
     
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
         let button = MKUserTrackingButton(mapView: mapView)
@@ -22,7 +21,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 3
         button.layer.cornerRadius = 5
-        button.isHidden = false      //Compass is already manually added to Right Bar Button
+        button.isHidden = false                 //Compass is already manually added to Right Bar Button
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -39,7 +38,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         let mapView = MKMapView()
         mapView.showsCompass = false
         mapView.showsUserLocation = true
-        mapView.delegate = self  //--> rename 'GoToMapController2' to 'GoToMapController'
+        mapView.delegate = self
         return mapView
     }()
     
@@ -121,7 +120,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
                               leading: safe.leadingAnchor,
                               trailing: safe.trailingAnchor,
                               bottom: safe.bottomAnchor)
-        
+
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
                                               UIBarButtonItem(title: "Table",
                                                               style: .done,
