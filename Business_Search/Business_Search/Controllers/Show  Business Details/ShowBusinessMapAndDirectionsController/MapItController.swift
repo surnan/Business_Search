@@ -150,11 +150,7 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
         mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
         googleMap.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
         routeTableView.anchor(top: directionSegmentControl.bottomAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
-                                              UIBarButtonItem(title: "Table",
-                                                              style: .done,
-                                                              target: self,
-                                                              action: #selector(pushWalkDriveRoutesController))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass)]
     }
 }
 
