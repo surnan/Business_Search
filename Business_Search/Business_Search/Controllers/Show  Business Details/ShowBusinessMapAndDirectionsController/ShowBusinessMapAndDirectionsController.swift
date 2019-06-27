@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import GoogleMaps
 
 class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManagerDelegate {
     var currentBusiness: Business!              //Injected
@@ -43,6 +44,7 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         return mapView
     }()
     
+    
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -72,6 +74,9 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
     let regionInMeters: Double = 1000.0
     var previousLocation: CLLocation?
     
+    //MARK:- Google Map
+    var googleMap = GMSMapView()
+    
     //MARK:- Functions Below
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +91,17 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         destinationAnnotation.coordinate = CLLocationCoordinate2D(latitude: currentBusiness.latitude, longitude: currentBusiness.longitude)
         mapView.addAnnotation(destinationAnnotation)
         mapView.showAnnotations([destinationAnnotation], animated: true)
+        
+        //GOOGLE
+        let location = locationManager.location
+        guard let coord = location?.coordinate else {return}
+        googleMap.camera = GMSCameraPosition(latitude: coord.latitude, longitude: coord.longitude, zoom: 17.0)
+        
+        let  marker = GMSMarker(position: CLLocationCoordinate2D(latitude: currentBusiness.latitude,
+                                                                     longitude: currentBusiness.longitude))
+        marker.title = currentBusiness.name
+        marker.snippet = "Info window text"
+        marker.map = googleMap
     }
     
     lazy var routeTableView: UITableView = {
@@ -100,9 +116,10 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
     func setupUI(){
         let safe = view.safeAreaLayoutGuide
         
-        [mapView, directionSegmentControl, scaleView, routeTableView].forEach{view.addSubview($0)}
+        [mapView, directionSegmentControl, scaleView, routeTableView, googleMap].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.4),
+            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.8),
+            googleMap.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.8),
             scaleView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 5),
             scaleView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 5),
             
@@ -113,7 +130,13 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
             
             ])
         
+        mapView.isHidden = true
+        
         mapView.anchor(top: safe.topAnchor,
+                       leading: safe.leadingAnchor,
+                       trailing: safe.trailingAnchor)
+        
+        googleMap.anchor(top: safe.topAnchor,
                        leading: safe.leadingAnchor,
                        trailing: safe.trailingAnchor)
         
@@ -137,6 +160,15 @@ extension ShowBusinessMapAndDirectionsController: MKMapViewDelegate {
         renderer.strokeColor = UIColor.blue
         renderer.lineWidth = 2.0
         return renderer
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        self.googleMap.animate(to: camera)
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+        
     }
 }
 
