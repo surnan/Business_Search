@@ -158,8 +158,8 @@
 		84365CAB22C564520014E577 /* Opening Controller */ = {
 			isa = PBXGroup;
 			children = (
-				84A5B02322A5DD43009B96AD /* OpeningController+Filter.swift */,
 				846509B9227A0C06008ABA9F /* OpeningController.swift */,
+				84A5B02322A5DD43009B96AD /* OpeningController+Filter.swift */,
 				84D416A622BB076A001F0234 /* OpeningController+FetchController.swift */,
 				842AD7D42284D74D00590B1A /* OpeningController+UI.swift */,
 				8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */,
@@ -185,6 +185,17 @@
 				84BDE3052263D3CD008C9B01 /* UIColor+Extension.swift */,
 				84BDE3042263D3CD008C9B01 /* UIView+Extensions.swift */,
 				84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84365CAE22C565BC0014E577 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84DC40EC226BFCC3003003C4 /* Location+Extension.swift */,
+				84A5B01D22A58F7D009B96AD /* Business+Extension.swift */,
+				84FBC8C92277204B00833562 /* Category+Extension.swift */,
+				844F64B52277B3E0003E6A93 /* Categories+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,12 +338,9 @@
 		84DC40E6226B7B89003003C4 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				84365CAE22C565BC0014E577 /* Extensions */,
 				84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */,
 				84DC40EA226BCB2C003003C4 /* DataController.swift */,
-				84DC40EC226BFCC3003003C4 /* Location+Extension.swift */,
-				84A5B01D22A58F7D009B96AD /* Business+Extension.swift */,
-				84FBC8C92277204B00833562 /* Category+Extension.swift */,
-				844F64B52277B3E0003E6A93 /* Categories+Extension.swift */,
 				84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */,
 			);
 			path = "Core Data";
