@@ -44,7 +44,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     
     func setupMap(){
         mapView.delegate = self
-        mapView.register(BusinessAnnotation.self, forAnnotationViewWithReuseIdentifier: "abc")
+        mapView.register(BusinessAnnotationView.self, forAnnotationViewWithReuseIdentifier: "abc")
         convertLocationsToAnnotations()
         mapView.addAnnotations(annotations)  //There's a singular & plural for 'addAnnotation'.  OMG
         mapView.showAnnotations(annotations, animated: true)

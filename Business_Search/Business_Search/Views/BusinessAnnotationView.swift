@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class BusinessAnnotation: MKMarkerAnnotationView {
+class BusinessAnnotationView: MKMarkerAnnotationView {
     
     var title = "Bridge Title"
     var subtitle = "Bridge SubTitle"

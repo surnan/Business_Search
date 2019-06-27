@@ -9,15 +9,19 @@
 /* Begin PBXBuildFile section */
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
-		8424A074229A1D0100F8FAF3 /* BusinessAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotation.swift */; };
+		8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */; };
 		842AD7D52284D74D00590B1A /* OpeningController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D42284D74D00590B1A /* OpeningController+UI.swift */; };
 		842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */; };
 		842AD7D9228538B900590B1A /* ShowBusinessDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D8228538B900590B1A /* ShowBusinessDetailsController.swift */; };
 		8435B1D4227A4EED00E95B4E /* OpeningController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */; };
 		8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */; };
+		84365CB122C567A80014E577 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB022C567A80014E577 /* Double+Extension.swift */; };
+		84365CB322C567B50014E577 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB222C567B50014E577 /* Float+Extension.swift */; };
+		84365CB522C5687E0014E577 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB422C5687E0014E577 /* String+Extension.swift */; };
+		84365CB822C569520014E577 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB722C569520014E577 /* File.swift */; };
 		843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */; };
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
-		844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Categories+Extension.swift */; };
+		844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Array+Extension.swift */; };
 		846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846509B9227A0C06008ABA9F /* OpeningController.swift */; };
 		848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* 2 - MapController.swift */; };
 		848761D0227F176F000CECC7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MenuController.swift */; };
@@ -59,15 +63,19 @@
 /* Begin PBXFileReference section */
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		8424A073229A1D0100F8FAF3 /* BusinessAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotation.swift; sourceTree = "<group>"; };
+		8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotationView.swift; sourceTree = "<group>"; };
 		842AD7D42284D74D00590B1A /* OpeningController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+UI.swift"; sourceTree = "<group>"; };
 		842AD7D62284D80B00590B1A /* OpeningController+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+Handler.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		842AD7D8228538B900590B1A /* ShowBusinessDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBusinessDetailsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8435B1D2227A4EEC00E95B4E /* OpeningController+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "OpeningController+Search.swift"; path = "Business_Search/Controllers/Opening Controller/OpeningController+Search.swift"; sourceTree = SOURCE_ROOT; };
 		8435B1D3227A4EED00E95B4E /* OpeningController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "OpeningController+TableView.swift"; path = "Business_Search/Controllers/Opening Controller/OpeningController+TableView.swift"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		84365CB022C567A80014E577 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		84365CB222C567B50014E577 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
+		84365CB422C5687E0014E577 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		84365CB722C569520014E577 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "1 - GroupsController.swift"; sourceTree = "<group>"; };
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		844F64B52277B3E0003E6A93 /* Categories+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Categories+Extension.swift"; sourceTree = "<group>"; };
+		844F64B52277B3E0003E6A93 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		846509B9227A0C06008ABA9F /* OpeningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CC227E856C000CECC7 /* 2 - MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2 - MapController.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -150,7 +158,6 @@
 				84B3CF8B2268A9030012A75C /* MyTabController.swift */,
 				843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */,
 				848761CC227E856C000CECC7 /* 2 - MapController.swift */,
-				8424A073229A1D0100F8FAF3 /* BusinessAnnotation.swift */,
 			);
 			path = "TAB CONTROLLER";
 			sourceTree = "<group>";
@@ -180,9 +187,9 @@
 		84365CAD22C565060014E577 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */,
 				848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */,
 				84BDE3052263D3CD008C9B01 /* UIColor+Extension.swift */,
+				848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */,
 				84BDE3042263D3CD008C9B01 /* UIView+Extensions.swift */,
 				84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */,
 			);
@@ -192,25 +199,35 @@
 		84365CAE22C565BC0014E577 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				84DC40EC226BFCC3003003C4 /* Location+Extension.swift */,
 				84A5B01D22A58F7D009B96AD /* Business+Extension.swift */,
 				84FBC8C92277204B00833562 /* Category+Extension.swift */,
-				844F64B52277B3E0003E6A93 /* Categories+Extension.swift */,
+				84DC40EC226BFCC3003003C4 /* Location+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		846ADAB822AA27D70015F060 /* Favorites */ = {
+		84365CAF22C566500014E577 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				844F64B52277B3E0003E6A93 /* Array+Extension.swift */,
+				84365CB022C567A80014E577 /* Double+Extension.swift */,
+				84365CB222C567B50014E577 /* Float+Extension.swift */,
+				84365CB422C5687E0014E577 /* String+Extension.swift */,
 			);
-			path = Favorites;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84365CB622C569200014E577 /* UserAppliedFilter - Singleton */ = {
+			isa = PBXGroup;
+			children = (
+				84365CB722C569520014E577 /* File.swift */,
+			);
+			path = "UserAppliedFilter - Singleton";
 			sourceTree = "<group>";
 		};
 		848761D1227F1779000CECC7 /* Menu Controller */ = {
 			isa = PBXGroup;
 			children = (
-				846ADAB822AA27D70015F060 /* Favorites */,
 				848761CF227F176F000CECC7 /* MenuController.swift */,
 				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
 				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
@@ -268,6 +285,8 @@
 		84BDE3012263D367008C9B01 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84365CB622C569200014E577 /* UserAppliedFilter - Singleton */,
+				84365CAF22C566500014E577 /* Extensions */,
 				84A5AFDB22A21E50009B96AD /* Google */,
 				84DC40E6226B7B89003003C4 /* Core Data */,
 				8414475D2266C49900A38AAB /* Yelp API */,
@@ -280,8 +299,9 @@
 			children = (
 				84D3DB9F22675B0B00E46B2E /* Cells */,
 				84365CAD22C565060014E577 /* Extensions */,
-				848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */,
+				8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */,
 				84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */,
+				848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */,
 				84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */,
 				84BDE2F62263D009008C9B01 /* Assets.xcassets */,
 			);
@@ -339,9 +359,9 @@
 			isa = PBXGroup;
 			children = (
 				84365CAE22C565BC0014E577 /* Extensions */,
-				84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */,
 				84DC40EA226BCB2C003003C4 /* DataController.swift */,
 				84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */,
+				84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -483,12 +503,13 @@
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				84A5B02422A5DD43009B96AD /* OpeningController+Filter.swift in Sources */,
+				84365CB322C567B50014E577 /* Float+Extension.swift in Sources */,
 				84D416A722BB076A001F0234 /* OpeningController+FetchController.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
-				844F64B62277B3E0003E6A93 /* Categories+Extension.swift in Sources */,
+				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
 				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
 				84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */,
@@ -500,7 +521,7 @@
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				848761CD227E856C000CECC7 /* 2 - MapController.swift in Sources */,
 				842AD7D52284D74D00590B1A /* OpeningController+UI.swift in Sources */,
-				8424A074229A1D0100F8FAF3 /* BusinessAnnotation.swift in Sources */,
+				8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */,
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				842AD7D9228538B900590B1A /* ShowBusinessDetailsController.swift in Sources */,
@@ -513,8 +534,11 @@
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
+				84365CB822C569520014E577 /* File.swift in Sources */,
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
 				848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */,
+				84365CB522C5687E0014E577 /* String+Extension.swift in Sources */,
+				84365CB122C567A80014E577 /* Double+Extension.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
 				848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */,
