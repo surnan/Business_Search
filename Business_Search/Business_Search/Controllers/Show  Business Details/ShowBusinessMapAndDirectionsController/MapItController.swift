@@ -16,7 +16,6 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
     var _steps = [MKRoute.Step]()               //Array for Walking & Driving Routes - From Apple
     var tableViewArrays = [[String]]()          //2D Array for Transit Routes - From Google
     
-    
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
         let button = MKUserTrackingButton(mapView: mapView)
         button.layer.backgroundColor = UIColor.clear.cgColor
@@ -45,13 +44,14 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
         return mapView
     }()
     
-    
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         return locationManager
     }()
+    
+    var currentLocation: CLLocation?
     
     lazy var compass: MKCompassButton = {
         let compass = MKCompassButton(mapView: mapView)
@@ -93,14 +93,12 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
         mapView.addAnnotation(destinationAnnotation)
         mapView.showAnnotations([destinationAnnotation], animated: true)
         
-        //GOOGLE
+        //GoogleMap Stuff
         let location = locationManager.location
         guard let coord = location?.coordinate else {return}
         googleMap.camera = GMSCameraPosition(latitude: coord.latitude, longitude: coord.longitude, zoom: 17.0)
         googleMap.isMyLocationEnabled = true
-        
-        let  marker = GMSMarker(position: CLLocationCoordinate2D(latitude: currentBusiness.latitude,
-                                                                     longitude: currentBusiness.longitude))
+        let  marker = GMSMarker(position: CLLocationCoordinate2D(latitude: currentBusiness.latitude, longitude: currentBusiness.longitude))
         marker.title = currentBusiness.name
         marker.snippet = "Info window text"
         marker.map = googleMap
@@ -115,47 +113,40 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
         return myTable
     }()
     
+    @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
+        //transport = MKDirectionsTransportType.automobile
+        switch sender.selectedSegmentIndex {
+        case 0:     transport = MKDirectionsTransportType.walking; getDirections()
+        case 1:     transport = MKDirectionsTransportType.automobile; getDirections()
+        case 2:     getTransitDirections()  //transport = MKDirectionsTransportType.transit
+        default:    print("Illegal index selected in Segment Controller")
+        }
+    }
+    
     func setupUI(){
-        let safe = view.safeAreaLayoutGuide
+        //        mapView.isHidden = true
+        googleMap.isHidden = true
         
+        let safe = view.safeAreaLayoutGuide
         [mapView, directionSegmentControl, scaleView, routeTableView, googleMap].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
             mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5),
             googleMap.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5),
             scaleView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 5),
             scaleView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 5),
-            
             directionSegmentControl.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
             directionSegmentControl.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
             directionSegmentControl.topAnchor.constraint(equalTo: mapView.bottomAnchor),
-            
-            
             ])
-        
-//        mapView.isHidden = true
-        googleMap.isHidden = true
-        
-        mapView.anchor(top: safe.topAnchor,
-                       leading: safe.leadingAnchor,
-                       trailing: safe.trailingAnchor)
-        
-        googleMap.anchor(top: safe.topAnchor,
-                       leading: safe.leadingAnchor,
-                       trailing: safe.trailingAnchor)
-        
-        routeTableView.anchor(top: directionSegmentControl.bottomAnchor,
-                              leading: safe.leadingAnchor,
-                              trailing: safe.trailingAnchor,
-                              bottom: safe.bottomAnchor)
-
+        mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
+        googleMap.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
+        routeTableView.anchor(top: directionSegmentControl.bottomAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor)
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
                                               UIBarButtonItem(title: "Table",
                                                               style: .done,
                                                               target: self,
                                                               action: #selector(pushWalkDriveRoutesController))]
     }
-    
-    var currentLocation: CLLocation?
 }
 
 
@@ -166,8 +157,6 @@ extension MapItController: MKMapViewDelegate {
         renderer.lineWidth = 2.0
         return renderer
     }
-    
-    
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last

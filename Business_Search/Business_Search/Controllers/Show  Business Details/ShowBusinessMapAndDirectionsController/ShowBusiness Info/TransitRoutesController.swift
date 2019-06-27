@@ -8,15 +8,8 @@
 
 import UIKit
 
-
-
-class ShowTransitRouteController: UITableViewController {
-
-    var transitSteps = [[String]]()
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return transitSteps.count
-    }
+class TransitRoutesController: UITableViewController {
+    var transitSteps = [[String]]() //injected
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return transitSteps[section].count - 1
@@ -29,10 +22,13 @@ class ShowTransitRouteController: UITableViewController {
         return cell
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return transitSteps.count
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return transitSteps[section].first
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

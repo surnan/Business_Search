@@ -65,7 +65,7 @@ extension MapItController {
             }
         }
         DispatchQueue.main.async {
-            let newVC = ShowTransitRouteController()
+            let newVC = TransitRoutesController()
             newVC.transitSteps = self.tableViewArrays
             self.navigationController?.pushViewController(newVC, animated: true)
         }

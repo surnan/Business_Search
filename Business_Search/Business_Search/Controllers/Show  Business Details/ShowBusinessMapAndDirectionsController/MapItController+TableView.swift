@@ -11,8 +11,6 @@ import MapKit
 import CoreLocation
 
 extension MapItController: UITableViewDataSource, UITableViewDelegate {
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _steps.count
     }
