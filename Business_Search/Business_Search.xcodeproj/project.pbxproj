@@ -30,7 +30,7 @@
 		848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */; };
 		848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */; };
 		84A5AFD522A18B00009B96AD /* ShowBusinessMapAndDirectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFD422A18B00009B96AD /* ShowBusinessMapAndDirectionsController.swift */; };
-		84A5AFDA22A1FFF4009B96AD /* ShowBusinessMapController+Extension+Transit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFD922A1FFF4009B96AD /* ShowBusinessMapController+Extension+Transit.swift */; };
+		84A5AFDA22A1FFF4009B96AD /* ShowBusinessMapController+Transit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFD922A1FFF4009B96AD /* ShowBusinessMapController+Transit.swift */; };
 		84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */; };
 		84A5AFFE22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFFD22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift */; };
 		84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B01D22A58F7D009B96AD /* Business+Extension.swift */; };
@@ -51,6 +51,7 @@
 		84D3DB9E2266DF5200E46B2E /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */; };
 		84D416A522B6E176001F0234 /* Non Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D416A422B6E176001F0234 /* Non Extensions.swift */; };
 		84D416A722BB076A001F0234 /* OpeningController+FetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D416A622BB076A001F0234 /* OpeningController+FetchController.swift */; };
+		84D8916A22C441D600EEDAD2 /* ShowBusinessMapController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8916922C441D500EEDAD2 /* ShowBusinessMapController+TableView.swift */; };
 		84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */; };
 		84DC40D222697319003003C4 /* Error Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40D122697319003003C4 /* Error Enums.swift */; };
 		84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40DC2269F7C0003003C4 /* YelpBusinessResponse.swift */; };
@@ -87,7 +88,7 @@
 		848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateYelpURLDuringLooping.swift; sourceTree = "<group>"; };
 		84A5AFD422A18B00009B96AD /* ShowBusinessMapAndDirectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBusinessMapAndDirectionsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		84A5AFD922A1FFF4009B96AD /* ShowBusinessMapController+Extension+Transit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowBusinessMapController+Extension+Transit.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		84A5AFD922A1FFF4009B96AD /* ShowBusinessMapController+Transit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowBusinessMapController+Transit.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapResponse.swift; sourceTree = "<group>"; };
 		84A5AFFD22A37EAF009B96AD /* ShowBusinessTransitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBusinessTransitTableViewController.swift; sourceTree = "<group>"; };
 		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 		84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		84D416A422B6E176001F0234 /* Non Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Non Extensions.swift"; sourceTree = "<group>"; };
 		84D416A622BB076A001F0234 /* OpeningController+FetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningController+FetchController.swift"; sourceTree = "<group>"; };
+		84D8916922C441D500EEDAD2 /* ShowBusinessMapController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowBusinessMapController+TableView.swift"; sourceTree = "<group>"; };
 		84DC40CF22693AA8003003C4 /* YelpAPIErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAPIErrorResponse.swift; sourceTree = "<group>"; };
 		84DC40D122697319003003C4 /* Error Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Enums.swift"; sourceTree = "<group>"; };
 		84DC40DC2269F7C0003003C4 /* YelpBusinessResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBusinessResponse.swift; sourceTree = "<group>"; };
@@ -164,7 +166,8 @@
 				84A5AFD422A18B00009B96AD /* ShowBusinessMapAndDirectionsController.swift */,
 				842ABFE122C3F3C200FB9D92 /* ShowBusinessMapAndDirectionsController+Handlers.swift */,
 				842ABFDF22C3F27600FB9D92 /* ShowBusinessMapAndDirectionsController+Extension.swift */,
-				84A5AFD922A1FFF4009B96AD /* ShowBusinessMapController+Extension+Transit.swift */,
+				84A5AFD922A1FFF4009B96AD /* ShowBusinessMapController+Transit.swift */,
+				84D8916922C441D500EEDAD2 /* ShowBusinessMapController+TableView.swift */,
 				842ABFDE22C3F12C00FB9D92 /* ShowBusiness Info */,
 			);
 			path = ShowBusinessMapAndDirectionsController;
@@ -531,7 +534,7 @@
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				842AD7D9228538B900590B1A /* ShowBusinessDetailsController.swift in Sources */,
-				84A5AFDA22A1FFF4009B96AD /* ShowBusinessMapController+Extension+Transit.swift in Sources */,
+				84A5AFDA22A1FFF4009B96AD /* ShowBusinessMapController+Transit.swift in Sources */,
 				843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */,
 				84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */,
 				842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */,
@@ -547,6 +550,7 @@
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
 				848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */,
+				84D8916A22C441D600EEDAD2 /* ShowBusinessMapController+TableView.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
 				846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */,
 			);

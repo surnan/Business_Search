@@ -88,22 +88,39 @@ class ShowBusinessMapAndDirectionsController: UIViewController, CLLocationManage
         mapView.showAnnotations([destinationAnnotation], animated: true)
     }
     
+    lazy var routeTableView: UITableView = {
+        let myTable = UITableView()
+        myTable.delegate = self
+        myTable.dataSource = self
+        myTable.backgroundColor = .black
+        myTable.separatorColor = UIColor.clear
+        return myTable
+    }()
+    
     func setupUI(){
         let safe = view.safeAreaLayoutGuide
         
-        [mapView, directionSegmentControl, scaleView].forEach{view.addSubview($0)}
+        [mapView, directionSegmentControl, scaleView, routeTableView].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            directionSegmentControl.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
-            directionSegmentControl.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
-            directionSegmentControl.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.4),
             scaleView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 5),
             scaleView.leadingAnchor.constraint(equalTo: safe.leadingAnchor, constant: 5),
-            mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.5)
+            
+            directionSegmentControl.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            directionSegmentControl.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+            directionSegmentControl.topAnchor.constraint(equalTo: mapView.bottomAnchor),
+            
+            
             ])
         
         mapView.anchor(top: safe.topAnchor,
                        leading: safe.leadingAnchor,
                        trailing: safe.trailingAnchor)
+        
+        routeTableView.anchor(top: directionSegmentControl.bottomAnchor,
+                              leading: safe.leadingAnchor,
+                              trailing: safe.trailingAnchor,
+                              bottom: safe.bottomAnchor)
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: compass),
                                               UIBarButtonItem(title: "Table",
