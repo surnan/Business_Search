@@ -13,9 +13,9 @@ import CoreLocation
 extension MapItController {
     @objc func pushWalkDriveRoutesController(){
         routeTableView.reloadData()
-        let newVC = WalkDriveRoutesController()
-        newVC.steps = _steps
-        navigationController?.pushViewController(newVC, animated: true)
+//        let newVC = WalkDriveRoutesController()
+//        newVC.steps = _steps
+//        navigationController?.pushViewController(newVC, animated: true)
     }
     
 //    @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){

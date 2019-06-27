@@ -46,28 +46,26 @@ extension MapItController {
     
     
     func buildTransitMap(json: GoogleMapResponse){ //+1
-        tableViewArrays = [[String]]()
+        transitSteps = [[String]]()
         guard let allSteps = json.routes.first?.legs.first?.steps else {return}
         for (index, currentStep) in allSteps.enumerated() {
             let htmlInstruction = "\(currentStep.html_instructions ?? "no html instructions found")"
             //print("html instructions = \(htmlInstruction)")
-            tableViewArrays.append([htmlInstruction])
+            transitSteps.append([htmlInstruction])
             if let moreSteps = currentStep.steps {
                 for innerStep in moreSteps {
                     let innerStep = "\(innerStep.html_instructions ?? "No Inner Step found")"
                     //print("Inner Step: \(innerStep)")
-                    tableViewArrays[index].append(innerStep)
+                    transitSteps[index].append(innerStep)
                 }
             }
             if let moreTransit = currentStep.transit_details {
                 let moreTransit = "\(moreTransit.arrival_stop.name) with '\(moreTransit.line.short_name)'"
-                tableViewArrays[index].append(moreTransit)
+                transitSteps[index].append(moreTransit)
             }
         }
         DispatchQueue.main.async {
-            let newVC = TransitRoutesController()
-            newVC.transitSteps = self.tableViewArrays
-            self.navigationController?.pushViewController(newVC, animated: true)
+            self.routeTableView.reloadData()
         }
     } //-1
 }

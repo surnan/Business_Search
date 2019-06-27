@@ -14,7 +14,7 @@ import GoogleMaps
 class MapItController: UIViewController, CLLocationManagerDelegate {
     var currentBusiness: Business!              //Injected
     var _steps = [MKRoute.Step]()               //Array for Walking & Driving Routes - From Apple
-    var tableViewArrays = [[String]]()          //2D Array for Transit Routes - From Google
+    var transitSteps = [[String]]()          //2D Array for Transit Routes - From Google
     
     lazy var moveToUserLocationButton: MKUserTrackingButton = {
         let button = MKUserTrackingButton(mapView: mapView)
@@ -78,6 +78,8 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
     //MARK:- Google Map
     var googleMap = GMSMapView()
     
+    var showGoogleMaps = false
+    
     //MARK:- Functions Below
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,17 +117,24 @@ class MapItController: UIViewController, CLLocationManagerDelegate {
     
     @objc func handleDirectionSegmentControl(_ sender: UISegmentedControl){
         //transport = MKDirectionsTransportType.automobile
+        showGoogleMaps = false
+        
         switch sender.selectedSegmentIndex {
-        case 0:     transport = MKDirectionsTransportType.walking; getDirections()
-        case 1:     transport = MKDirectionsTransportType.automobile; getDirections()
-        case 2:     getTransitDirections()  //transport = MKDirectionsTransportType.transit
+        case 0:     showGoogleMaps = false; transport = MKDirectionsTransportType.walking; getDirections();
+        case 1:     showGoogleMaps = false; transport = MKDirectionsTransportType.automobile; getDirections()
+        case 2:     showGoogleMaps = true; getTransitDirections()  //MKDirectionsTransportType.transit buggy Apple Maps
         default:    print("Illegal index selected in Segment Controller")
         }
     }
     
     func setupUI(){
-        //        mapView.isHidden = true
-        googleMap.isHidden = true
+        if showGoogleMaps {
+            mapView.isHidden = true
+            googleMap.isHidden = false
+        } else {
+            mapView.isHidden = false
+            googleMap.isHidden = true
+        }
         
         let safe = view.safeAreaLayoutGuide
         [mapView, directionSegmentControl, scaleView, routeTableView, googleMap].forEach{view.addSubview($0)}
@@ -171,5 +180,18 @@ extension MapItController: MKMapViewDelegate {
     }
 }
 
+extension CLLocationDistance {
+    func toMiles() -> String {
+        let feet = self * 3.2808
+        let miles = (self) * 0.0006213712
 
-
+        if feet < 125 {
+            let answer = String(Int(feet)) + " feet"
+            return answer
+        } else {
+            let answer = (miles*100).rounded()/100
+            let answerString = String(answer)
+            return "\(answerString) miles"
+        }
+    }
+}
