@@ -51,50 +51,37 @@ class FilterController: UIViewController {
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .clear
+        addHandlers()
+        let dollarStack = MYStack(spacing: 1, axis: .horizontal, distribution: .fillEqually)
+        let sliderStack = MYStack(spacing: 10, axis: .horizontal)
+        let isPriceListedStack = MYStack(spacing: 20, axis: .horizontal)
+        let _myStack = MYStack(spacing: 20, axis: .vertical)
+
+        [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
+        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
+        [noPriceLabel, noPriceSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel,
+         isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{_myStack.addArrangedSubview($0)}
+        
+        view.addSubview(_myStack)
+        _myStack.centerToSuperView()
+        _myStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+    }
+    
+    //MARK:- Handlers
     func addHandlers(){
         defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
         distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .clear
-        addHandlers()
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
             $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
         }
-        
-        let dollarStack = MYStack(spacing: 1, axis: .horizontal, distribution: .fillEqually)
-        let sliderStack = MYStack(spacing: 10, axis: .horizontal)
-        let isPriceListedStack = MYStack(spacing: 20)
-        
-        [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
-        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
-        [noPriceLabel, noPriceSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
-        
-        let myStack: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.spacing = 20
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            return stack
-        }()
-        
-        
-        let myStack2 = MYStack(spacing: 20, axis: .vertical)
-        
-        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel,
-         isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
-        view.addSubview(myStack)
-        NSLayoutConstraint.activate([
-            myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            ])
     }
     
-    //MARK:- Handlers
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         let temp = sender.value.rounded(digits: 1)
         sliderValueLabel.text = "\(temp)"
@@ -102,7 +89,6 @@ class FilterController: UIViewController {
     
     @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismiss(animated: true, completion: {self.delegate?.undoBlur()})}
-    
     
     @objc func handleSaveButton(){
         UserAppliedFilter.shared.save(dollarOne: dollarOneButton.isSelected,

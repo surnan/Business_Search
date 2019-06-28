@@ -99,6 +99,7 @@ class MYStack: UIStackView {
         super.init(frame: .zero)
         self.spacing = spacing
         self.distribution = distribution
+        self.axis = axis
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
