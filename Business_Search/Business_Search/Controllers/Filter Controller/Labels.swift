@@ -28,3 +28,22 @@ class MyLabel: UILabel {
     }
 }
 
+
+
+class SegmentButton: CustomButton {
+    init(title: String, isCorner: Bool = false, corners: CACornerMask = .init()){
+        super.init(frame: .zero)
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(.white, for: .normal)
+        self.setTitleColor(.black, for: .selected)
+        self.layer.borderColor = UIColor.white.cgColor
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = 10
+        self.layer.maskedCorners = corners
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+

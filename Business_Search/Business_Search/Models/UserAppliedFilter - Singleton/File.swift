@@ -134,7 +134,7 @@ class UserAppliedFilter {
             if getFour {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
                                                                        argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
             if getNoPrice {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                          argumentArray: [#keyPath(Category.business.price), nil!]))}
+                                                                          argumentArray: [#keyPath(Category.business.price), nil]))}
         }
         
         if !pricePredicates_OR_Compound.isEmpty {

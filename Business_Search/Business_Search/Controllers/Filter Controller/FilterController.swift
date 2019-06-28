@@ -9,102 +9,23 @@
 import UIKit
 import CoreData
 
-class CustomButton: UIButton {
-    override open var isHighlighted: Bool {
-        didSet {
-            backgroundColor = isSelected ? UIColor.white : UIColor.clear
-        }
-    }
-}
-
 class FilterController: UIViewController {
+    //  LABELS
     var sliderLabel = MyLabel(text: "Minimum Yelp Rating", size: 20)
     var sliderLeftLabel = MyLabel(text: "1")
     var sliderRightLabel = MyLabel(text: "5")
     var priceLabel = MyLabel(text: "Price Filter Options",  size: 20)
     var noPriceLabel = MyLabel(text: "Include if No Price Listed: ", size: 18)
     
-    let temp = UserAppliedFilter.shared.getMinimumRatingString
-    lazy var sliderValueLabel = MyLabel(text: temp, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
-
+    //  BUTTONS
+    lazy var dollarOneButton = SegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+    lazy var dollarTwoButton = SegmentButton(title: "$$")
+    lazy var dollarThreeButton = SegmentButton(title: "$$$")
+    lazy var dollarFourButton = SegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    let minimumRatingText = UserAppliedFilter.shared.getMinimumRatingString
+    lazy var sliderValueLabel = MyLabel(text: minimumRatingText, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
     
-    lazy var distanceSlider: UISlider = {
-        var slider = UISlider()
-        slider.minimumTrackTintColor = .gray
-        slider.maximumTrackTintColor = .black
-        slider.minimumValue = 1.0
-        slider.maximumValue = 5.0
-        slider.value = Float(UserAppliedFilter.shared.getMinimumRatingString) ?? 1.0
-        slider.thumbTintColor = .white
-        slider.isContinuous = true
-        slider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        return slider
-    }()
     
-    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
-        let temp = sender.value.rounded(digits: 1)
-        sliderValueLabel.text = "\(temp)"
-    }
-    
-    @objc func handleDollarButtons(_ sender: CustomButton){
-        sender.isSelected = !sender.isSelected
-    }
-    
-    @objc func handleSwitch(_ sender: UISwitch){
-        //print("sender.isOn --> \(sender.isOn)")
-    }
-    
-    var delegate: MenuControllerDelegate?
-
-    
-    lazy var dollarOneButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("$", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.black, for: .selected)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
-        button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
-        return button
-    }()
-    
-    lazy var dollarTwoButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("$$", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.black, for: .selected)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
-        return button
-    }()
-    
-    lazy var dollarThreeButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("$$$", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.black, for: .selected)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
-        return button
-    }()
-    
-    lazy var dollarFourButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("$$$$", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.black, for: .selected)
-        button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
-        button.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-        button.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
-        return button
-    }()
     
     lazy var defaultButton: UIButton = {
         let button = UIButton()
@@ -142,16 +63,50 @@ class FilterController: UIViewController {
         return button
     }()
     
-
+    
     
     lazy var noPriceSwitch: UISwitch = {
         let s = UISwitch()
         s.onTintColor = .green
         s.onImage = #imageLiteral(resourceName: "filter2")
         s.offImage = #imageLiteral(resourceName: "settings")
-        s.addTarget(self, action: #selector(handleSwitch(_:)), for: .valueChanged)
         return s
     }()
+    
+    
+    
+    lazy var distanceSlider: UISlider = {
+        var slider = UISlider()
+        slider.minimumTrackTintColor = .gray
+        slider.maximumTrackTintColor = .black
+        slider.minimumValue = 1.0
+        slider.maximumValue = 5.0
+        slider.value = Float(UserAppliedFilter.shared.getMinimumRatingString) ?? 1.0
+        slider.thumbTintColor = .white
+        slider.isContinuous = true
+        slider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        return slider
+    }()
+    
+    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
+        let temp = sender.value.rounded(digits: 1)
+        sliderValueLabel.text = "\(temp)"
+    }
+    
+    @objc func handleDollarButtons(_ sender: CustomButton){
+        sender.isSelected = !sender.isSelected
+    }
+
+    
+    var delegate: MenuControllerDelegate?
+
+    
+    
+
+    
+    
+
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -171,6 +126,11 @@ class FilterController: UIViewController {
     
     
     override func viewDidLoad() {
+        
+        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
+            $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
+        }
+        
         super.viewDidLoad()
         view.backgroundColor = .clear
         let dollarStack: UIStackView = {
