@@ -18,45 +18,15 @@ class CustomButton: UIButton {
 }
 
 class FilterController: UIViewController {
+    var sliderLabel = MyLabel(text: "Minimum Yelp Rating", size: 20)
+    var sliderLeftLabel = MyLabel(text: "1")
+    var sliderRightLabel = MyLabel(text: "5")
+    var priceLabel = MyLabel(text: "Price Filter Options",  size: 20)
+    var noPriceLabel = MyLabel(text: "Include if No Price Listed: ", size: 18)
     
-    var sliderLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Minimum Yelp Rating"
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var sliderLeftLabel: UILabel = {
-        let label = UILabel()
-        label.text = "1"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var sliderRightLabel: UILabel = {
-        let label = UILabel()
-        label.text = "5"
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var sliderValueLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .blue
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = .white
-        let intRadius = Int(radius)
-        label.text = UserAppliedFilter.shared.getMinimumRatingString
-        label.layer.cornerRadius = 10
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        return label
-    }()
+    let temp = UserAppliedFilter.shared.getMinimumRatingString
+    lazy var sliderValueLabel = MyLabel(text: temp, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
+
     
     lazy var distanceSlider: UISlider = {
         var slider = UISlider()
@@ -172,15 +142,7 @@ class FilterController: UIViewController {
         return button
     }()
     
-    var priceLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Price Filter Options"
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+
     
     lazy var noPriceSwitch: UISwitch = {
         let s = UISwitch()
@@ -191,15 +153,6 @@ class FilterController: UIViewController {
         return s
     }()
     
-    var noPriceLabel: UILabel = {
-        var label = UILabel()
-        label.text = "Include if No Price Listed: "
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -255,7 +208,8 @@ class FilterController: UIViewController {
             return stack
         }()
         
-        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel, isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
+        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel,
+         isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
         view.addSubview(myStack)
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
