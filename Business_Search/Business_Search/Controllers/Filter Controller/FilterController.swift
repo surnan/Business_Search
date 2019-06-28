@@ -10,112 +10,39 @@ import UIKit
 import CoreData
 
 class FilterController: UIViewController {
-    //  LABELS
+    let minimumRatingText = UserAppliedFilter.shared.getMinimumRatingString
+    let sliderValue = UserAppliedFilter.shared.getMinimumRatingFloat
+
+    var delegate: MenuControllerDelegate?
+    
+    //  MYLabel
     var sliderLabel = MyLabel(text: "Minimum Yelp Rating", size: 20)
     var sliderLeftLabel = MyLabel(text: "1")
     var sliderRightLabel = MyLabel(text: "5")
     var priceLabel = MyLabel(text: "Price Filter Options",  size: 20)
     var noPriceLabel = MyLabel(text: "Include if No Price Listed: ", size: 18)
     
-    //  BUTTONS
+    //  SegmentButton
     lazy var dollarOneButton = SegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
     lazy var dollarTwoButton = SegmentButton(title: "$$")
     lazy var dollarThreeButton = SegmentButton(title: "$$$")
     lazy var dollarFourButton = SegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-    let minimumRatingText = UserAppliedFilter.shared.getMinimumRatingString
+    
+    //  MYButton
     lazy var sliderValueLabel = MyLabel(text: minimumRatingText, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
-    
-    
-    
-    lazy var defaultButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
-        button.backgroundColor = UIColor.white
-        button.setTitle("   Reset to Defaults     ", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    lazy var saveButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
-        button.backgroundColor = UIColor.white
-        button.setTitle("     SAVE     ", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    lazy var cancelButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
-        button.backgroundColor = UIColor.white
-        button.setTitle("     CANCEL     ", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    
-    
-    lazy var noPriceSwitch: UISwitch = {
-        let s = UISwitch()
-        s.onTintColor = .green
-        s.onImage = #imageLiteral(resourceName: "filter2")
-        s.offImage = #imageLiteral(resourceName: "settings")
-        return s
-    }()
-    
-    
-    
-    lazy var distanceSlider: UISlider = {
-        var slider = UISlider()
-        slider.minimumTrackTintColor = .gray
-        slider.maximumTrackTintColor = .black
-        slider.minimumValue = 1.0
-        slider.maximumValue = 5.0
-        slider.value = Float(UserAppliedFilter.shared.getMinimumRatingString) ?? 1.0
-        slider.thumbTintColor = .white
-        slider.isContinuous = true
-        slider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        return slider
-    }()
-    
-    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
-        let temp = sender.value.rounded(digits: 1)
-        sliderValueLabel.text = "\(temp)"
-    }
-    
-    @objc func handleDollarButtons(_ sender: CustomButton){
-        sender.isSelected = !sender.isSelected
-    }
+    lazy var defaultButton = MYButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
+    lazy var saveButton = MYButton(title: "SAVE", titleColor: .black, backgroundColor: .white, isCorner: true)
+    lazy var cancelButton = MYButton(title: "CANCEL", titleColor: .black, backgroundColor: .white, isCorner: true)
 
-    
-    var delegate: MenuControllerDelegate?
+    //  MYSwitch & MYSlider
+    lazy var noPriceSwitch = MYSwitch(onTintColor: .green)
+    lazy var distanceSlider = MYSlider(min: 1.0, max: 5.0, value: sliderValue,
+                                       minColor: .gray, maxColor: .black, thumbColor: .white)
 
-    
-    
-
-    
-    
-
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//                print("**")
-//                showMyResultsInNSUserDefaults()
-//                print("**")
-        
         let shared = UserAppliedFilter.shared
+        //shared.showMyResultsInNSUserDefaults(); print("***")
         dollarOneButton.isSelected = shared.getOne
         dollarTwoButton.isSelected = shared.getTwo
         dollarThreeButton.isSelected = shared.getThree
@@ -124,41 +51,28 @@ class FilterController: UIViewController {
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
     }
     
+    func addHandlers(){
+        defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
+        distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+    }
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
+        view.backgroundColor = .clear
+        addHandlers()
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
             $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
         }
         
-        super.viewDidLoad()
-        view.backgroundColor = .clear
-        let dollarStack: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .horizontal
-            stack.distribution = .fillEqually
-            stack.spacing = 1
-            return stack
-        }()
-        
-        let sliderStack: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .horizontal
-            stack.spacing = 10
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            return stack
-        }()
+        let dollarStack = MYStack(spacing: 1, axis: .horizontal, distribution: .fillEqually)
+        let sliderStack = MYStack(spacing: 10, axis: .horizontal)
+        let isPriceListedStack = MYStack(spacing: 20)
         
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
         [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
-        
-        let isPriceListedStack: UIStackView = {
-            let stack = UIStackView()
-            stack.spacing = 20
-            stack.axis = .horizontal
-            [noPriceLabel, noPriceSwitch].forEach{stack.addArrangedSubview($0)}
-            return stack
-        }()
+        [noPriceLabel, noPriceSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
         
         let myStack: UIStackView = {
             let stack = UIStackView()
@@ -167,6 +81,9 @@ class FilterController: UIViewController {
             stack.translatesAutoresizingMaskIntoConstraints = false
             return stack
         }()
+        
+        
+        let myStack2 = MYStack(spacing: 20, axis: .vertical)
         
         [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel,
          isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{myStack.addArrangedSubview($0)}
@@ -177,14 +94,23 @@ class FilterController: UIViewController {
             ])
     }
     
+    //MARK:- Handlers
+    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
+        let temp = sender.value.rounded(digits: 1)
+        sliderValueLabel.text = "\(temp)"
+    }
+    
+    @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
+    @objc func handleCancelButton(){dismiss(animated: true, completion: {self.delegate?.undoBlur()})}
+    
+    
     @objc func handleSaveButton(){
         UserAppliedFilter.shared.save(dollarOne: dollarOneButton.isSelected,
-                                    dollarTwo: dollarTwoButton.isSelected,
-                                    dollarThree: dollarThreeButton.isSelected,
-                                    dollarFour: dollarFourButton.isSelected,
-                                    noPrices: noPriceSwitch.isOn,
-                                    minimumRating: sliderValueLabel.text ?? "0.0")
-        
+                                      dollarTwo: dollarTwoButton.isSelected,
+                                      dollarThree: dollarThreeButton.isSelected,
+                                      dollarFour: dollarFourButton.isSelected,
+                                      noPrices: noPriceSwitch.isOn,
+                                      minimumRating: sliderValueLabel.text ?? "0.0")
         self.dismiss(animated: true, completion: {
             UserAppliedFilter.shared.load()
             self.delegate?.undoBlur()
@@ -193,40 +119,15 @@ class FilterController: UIViewController {
     }
     
     @objc func handleResetToDefaultsButton(){
-        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
-            $0.isSelected = true
-            $0.backgroundColor = .white
-        }        
+        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.isSelected = true; $0.backgroundColor = .white}
         [noPriceSwitch].forEach{$0.isOn = true}
         distanceSlider.value = 1.0
         sliderValueLabel.text = "1.0"
     }
-    
-    @objc func handlecancelButton(){
-        dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
-        })
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
 }
 
 
-func showMyResultsInNSUserDefaults(){
-    let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "isPriceListed", "isRatingListed"]
-    var answers = [(key: String, value: Any)]()
-    for item in Array(UserDefaults.standard.dictionaryRepresentation()) {
-        if myIndex.contains(item.key) {
-            answers.append(item)
-        }
-    }
-    let items = Array(UserDefaults.standard.dictionaryRepresentation())
-    print("answers:\n")
-    answers.forEach{print($0)}
-    print("\n***\ncount --> \(items.count)")
-}
+
 
 
 

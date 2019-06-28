@@ -149,4 +149,18 @@ class UserAppliedFilter {
         }
         return returnCompoundPredicate
     }
+    
+    func showMyResultsInNSUserDefaults(){
+        let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "isPriceListed", "isRatingListed"]
+        var answers = [(key: String, value: Any)]()
+        for item in Array(UserDefaults.standard.dictionaryRepresentation()) {
+            if myIndex.contains(item.key) {
+                answers.append(item)
+            }
+        }
+        let items = Array(UserDefaults.standard.dictionaryRepresentation())
+        print("answers:\n")
+        answers.forEach{print($0)}
+        print("\n***\ncount --> \(items.count)")
+    }
 }

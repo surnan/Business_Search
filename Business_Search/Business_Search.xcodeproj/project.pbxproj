@@ -18,8 +18,8 @@
 		84365CB122C567A80014E577 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB022C567A80014E577 /* Double+Extension.swift */; };
 		84365CB322C567B50014E577 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB222C567B50014E577 /* Float+Extension.swift */; };
 		84365CB522C5687E0014E577 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB422C5687E0014E577 /* String+Extension.swift */; };
-		84365CB822C569520014E577 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB722C569520014E577 /* File.swift */; };
-		84365CBA22C62AA40014E577 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* Labels.swift */; };
+		84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB722C569520014E577 /* UserAppliedFilter.swift */; };
+		84365CBA22C62AA40014E577 /* Refactored UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* Refactored UI.swift */; };
 		84365CBC22C64A860014E577 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBB22C64A860014E577 /* CustomButton.swift */; };
 		843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */; };
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
@@ -74,8 +74,8 @@
 		84365CB022C567A80014E577 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		84365CB222C567B50014E577 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		84365CB422C5687E0014E577 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		84365CB722C569520014E577 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		84365CB922C62AA40014E577 /* Labels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		84365CB722C569520014E577 /* UserAppliedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAppliedFilter.swift; sourceTree = "<group>"; };
+		84365CB922C62AA40014E577 /* Refactored UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Refactored UI.swift"; sourceTree = "<group>"; };
 		84365CBB22C64A860014E577 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "1 - GroupsController.swift"; sourceTree = "<group>"; };
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -184,7 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				84A5B02622A5DFDF009B96AD /* FilterController.swift */,
-				84365CB922C62AA40014E577 /* Labels.swift */,
+				84365CB922C62AA40014E577 /* Refactored UI.swift */,
 			);
 			path = "Filter Controller";
 			sourceTree = "<group>";
@@ -226,7 +226,7 @@
 		84365CB622C569200014E577 /* UserAppliedFilter - Singleton */ = {
 			isa = PBXGroup;
 			children = (
-				84365CB722C569520014E577 /* File.swift */,
+				84365CB722C569520014E577 /* UserAppliedFilter.swift */,
 			);
 			path = "UserAppliedFilter - Singleton";
 			sourceTree = "<group>";
@@ -514,7 +514,7 @@
 				84D416A722BB076A001F0234 /* OpeningController+FetchController.swift in Sources */,
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
-				84365CBA22C62AA40014E577 /* Labels.swift in Sources */,
+				84365CBA22C62AA40014E577 /* Refactored UI.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
@@ -542,7 +542,7 @@
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
-				84365CB822C569520014E577 /* File.swift in Sources */,
+				84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */,
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
 				848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */,
 				84365CB522C5687E0014E577 /* String+Extension.swift in Sources */,
