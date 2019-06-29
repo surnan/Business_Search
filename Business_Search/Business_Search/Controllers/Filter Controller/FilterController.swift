@@ -21,23 +21,22 @@ class FilterController: UIViewController {
     var sliderRightLabel = MyLabel(text: "5")
     var priceLabel = MyLabel(text: "Price Filter Options",  size: 20)
     var noPriceLabel = MyLabel(text: "Include if No Price Listed: ", size: 18)
-    
+
     //  SegmentButton
-    lazy var dollarOneButton = SegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
-    lazy var dollarTwoButton = SegmentButton(title: "$$")
-    lazy var dollarThreeButton = SegmentButton(title: "$$$")
-    lazy var dollarFourButton = SegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    var dollarOneButton = SegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+    var dollarTwoButton = SegmentButton(title: "$$")
+    var dollarThreeButton = SegmentButton(title: "$$$")
+    var dollarFourButton = SegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
     
     //  MYButton
     lazy var sliderValueLabel = MyLabel(text: minimumRatingText, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
-    lazy var defaultButton = MYButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
-    lazy var saveButton = MYButton(title: "SAVE", titleColor: .black, backgroundColor: .white, isCorner: true)
-    lazy var cancelButton = MYButton(title: "CANCEL", titleColor: .black, backgroundColor: .white, isCorner: true)
+    var defaultButton = MYButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
+    var saveButton = MYButton(title: "SAVE", titleColor: .black, backgroundColor: .white, isCorner: true)
+    var cancelButton = MYButton(title: "CANCEL", titleColor: .black, backgroundColor: .white, isCorner: true)
 
     //  MYSwitch & MYSlider
-    lazy var noPriceSwitch = MYSwitch(onTintColor: .green)
-    lazy var distanceSlider = MYSlider(min: 1.0, max: 5.0, value: sliderValue,
-                                       minColor: .gray, maxColor: .black, thumbColor: .white)
+    var noPriceSwitch = MYSwitch(onTintColor: .green)
+    lazy var distanceSlider = MYSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray, maxColor: .black, thumbColor: .white)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
