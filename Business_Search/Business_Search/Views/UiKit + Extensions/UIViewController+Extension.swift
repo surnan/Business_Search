@@ -8,7 +8,22 @@
 
 import UIKit
 
-extension UIViewController {    
+let blurringScreenDark: UIVisualEffectView = {
+    let blurEffect = UIBlurEffect(style: .dark)
+    let blur = UIVisualEffectView(effect: blurEffect)
+    return blur
+}()
+
+extension UIViewController {
+    func addDarkScreenBlur(){
+        view.addSubview(blurringScreenDark)
+        blurringScreenDark.fillSuperview()
+    }
+    
+    func removeDarkScreenBlur(){
+        blurringScreenDark.removeFromSuperview()
+    }
+    
     func showAlertController(title: String, message: String, okFunction: ((UIAlertAction) -> Void)? = nil) {
         let myAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         myAlertController.addAction(UIAlertAction(title: "OK", style: .default, handler: okFunction))

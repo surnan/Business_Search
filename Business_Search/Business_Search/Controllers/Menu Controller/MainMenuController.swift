@@ -7,59 +7,33 @@
 //
 
 import UIKit
-import CoreData
 import CoreLocation
 
 protocol UnBlurDelegate{
     func undoBlur()
 }
 
-
-class MenuController: UIViewController, CLLocationManagerDelegate, UnBlurDelegate {
-    var dataController:     DataController!     //MARK: Injected
+class MenuController: UIViewController, UnBlurDelegate {
+    var dataController:     DataController!         //MARK: Injected
     var locationManager:    CLLocationManager!
-    var userLocation:       CLLocation!           //CLLocation value provided via Apple GPS
-    var previousCoordinates: CLLocation?
+    var userLocation:       CLLocation!             //Provided via Apple GPS
+    var previousCoordinate: CLLocation?
     
     let activityView    = GenericActivityIndicatorView()
     var model           = MainMenuModel()
     var controllerIndex = 0
-    let newVC           = SettingsController()
-    
-    lazy var blurredEffectView2: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = view.bounds
-        return blurredEffectView
-    }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = .lightBlue
-        setupNavigationMenu()
-        let verticalStackView = model.getMenuButtonStack()
-        view.addSubview(verticalStackView)
-        NSLayoutConstraint.activate([
-            verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
-            verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-            ])
+        setupUI()
     }
 
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        activityView.center = view.center
-//        [activityView].forEach{view.addSubview($0)}
-//        previousCoordinates = nil
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addHandlers()
         activityView.center = view.center
-        [activityView].forEach{view.addSubview($0)}
-        previousCoordinates = nil
+        view.addSubview(activityView)
     }
     
     func setupNavigationMenu(){
@@ -67,11 +41,6 @@ class MenuController: UIViewController, CLLocationManagerDelegate, UnBlurDelegat
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
-    }
-    
-    func undoBlur() {
-        blurredEffectView2.removeFromSuperview()
-        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func pushNextController(){
@@ -98,9 +67,26 @@ class MenuController: UIViewController, CLLocationManagerDelegate, UnBlurDelegat
         }
     }
     
+    func setupUI(){
+        setupNavigationMenu()
+        let verticalStackView = model.getMenuButtonStack()
+        view.addSubview(verticalStackView)
+        NSLayoutConstraint.activate([
+            verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
+            verticalStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
+            ])
+    }
+    
+    func undoBlur() {
+        removeDarkScreenBlur()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     @objc func handleSettings(){
         navigationController?.setNavigationBarHidden(true, animated: true)
-        view.addSubview(blurredEffectView2)
+        addDarkScreenBlur()
+        let newVC           = SettingsController()
         newVC.modalPresentationStyle = .overFullScreen
         newVC.delegate = self
         newVC.dataController = dataController
@@ -108,37 +94,15 @@ class MenuController: UIViewController, CLLocationManagerDelegate, UnBlurDelegat
     }
     
     func addHandlers(){
-        [model.nearMeSearchButton, model.searchByMapButton,
-         model.searchByAddressButton].forEach{$0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)}
+        [model.nearMeSearchButton, model.searchByMapButton, model.searchByAddressButton]
+            .forEach{$0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)}
     }
-    
     
     @objc func handleButtons(_ sender: UIButton){
         determineMyCurrentLocation()
         controllerIndex = sender.tag
         activityView.startAnimating()
     }
-    
-    //Location Manager
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last
-        locationManager.stopUpdatingLocation()
-        if previousCoordinates == nil {
-            previousCoordinates = userLocation
-            pushNextController()
-        } else if let previous = previousCoordinates, userLocation.distance(from: previous) > 10 {
-            userLocation = previous
-            pushNextController()
-        }
-    }
-    
-    func determineMyCurrentLocation() {
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-        }
-    }
 }
+
+
