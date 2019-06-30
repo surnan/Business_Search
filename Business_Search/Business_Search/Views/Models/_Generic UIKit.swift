@@ -10,12 +10,12 @@ import UIKit
 
 class GenericLabel: UILabel {
     init(text: String, size: CGFloat = 12, backgroundColor: UIColor = UIColor.clear,
-         textColor: UIColor = UIColor.white, corner: Bool = false) {
+         textColor: UIColor = UIColor.white, alignment: NSTextAlignment = .center, corner: Bool = false) {
         super.init(frame: .zero)
         self.text = text
         self.font = UIFont.boldSystemFont(ofSize: size)
         self.textColor = .white
-        self.textAlignment = .center
+        self.textAlignment = alignment
         self.backgroundColor = backgroundColor
         self.textColor = textColor
         if corner {
@@ -28,6 +28,23 @@ class GenericLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
+class GenericAttributedTextLabel: UILabel {
+    init(text: String, attributes: [NSAttributedString.Key:Any], alignment: NSTextAlignment = .center, background: UIColor = .clear) {
+        super.init(frame: .zero)
+        self.attributedText = NSAttributedString(string: text, attributes: attributes)
+        self.textAlignment = alignment
+        self.backgroundColor = background
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 
 class GenericSegmentButton: CustomButton {
     init(title: String, isCorner: Bool = false, corners: CACornerMask = .init()){
@@ -48,8 +65,8 @@ class GenericSegmentButton: CustomButton {
 }
 
 class GenericButton: UIButton {
-    init(title: String, titleColor: UIColor = .black, backgroundColor: UIColor, borderWidth: CGFloat = 0,
-         isCorner: Bool = false, corners: CACornerMask = .init()){
+    init(title: String, titleColor: UIColor = .black, backgroundColor: UIColor = .white, borderWidth: CGFloat = 0,
+         isCorner: Bool = false){
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
@@ -89,6 +106,25 @@ class GenericSlider: UISlider {
         self.isContinuous = true
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class genericTextView: UITextView {
+    init(text: String, size: CGFloat, textColor: UIColor = .black, background: UIColor = .white, corner: Bool) {
+        super.init(frame: .zero, textContainer: nil)
+        self.text = text
+        self.textColor = textColor
+        self.font = UIFont.boldSystemFont(ofSize: size)
+        self.backgroundColor = background
+        
+        if corner {
+            self.layer.cornerRadius = 5
+            self.clipsToBounds = true
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

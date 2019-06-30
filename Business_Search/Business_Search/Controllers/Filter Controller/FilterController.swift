@@ -13,18 +13,18 @@ class FilterController: UIViewController {
     var delegate: MenuControllerDelegate?   //Unblur
     
     let shared                  = UserAppliedFilter.shared
-    var filterModel             = FilterModel()
-    lazy var allDollarButtons   = [filterModel.dollarOneButton, filterModel.dollarTwoButton,
-                                 filterModel.dollarThreeButton,filterModel.dollarFourButton]
+    let model             = FilterModel()
+    lazy var allDollarButtons   = [model.dollarOneButton, model.dollarTwoButton,
+                                 model.dollarThreeButton,model.dollarFourButton]
     
     //MARK:- Override Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        filterModel.dollarOneButton.isSelected      = shared.getOne
-        filterModel.dollarTwoButton.isSelected      = shared.getTwo
-        filterModel.dollarThreeButton.isSelected    = shared.getThree
-        filterModel.dollarFourButton.isSelected     = shared.getFour
-        filterModel.noPriceSwitch.isOn              = shared.getNoPrice
+        model.dollarOneButton.isSelected      = shared.getOne
+        model.dollarTwoButton.isSelected      = shared.getTwo
+        model.dollarThreeButton.isSelected    = shared.getThree
+        model.dollarFourButton.isSelected     = shared.getFour
+        model.noPriceSwitch.isOn              = shared.getNoPrice
         allDollarButtons.forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
         setupUI()
         //shared.showMyResultsInNSUserDefaults(); print("***")
@@ -38,7 +38,7 @@ class FilterController: UIViewController {
     
     //MARK:- Functions
     func setupUI(){
-        let fullStackView = filterModel.getFullStack()
+        let fullStackView = model.getFullStack()
         view.addSubview(fullStackView)
         fullStackView.centerToSuperView()
         fullStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
@@ -47,10 +47,10 @@ class FilterController: UIViewController {
     
     //MARK: Handlers
     func addHandlers(){
-        filterModel.defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
-        filterModel.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
-        filterModel.cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
-        filterModel.distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+        model.defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
+        model.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        model.cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
+        model.distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
         allDollarButtons.forEach{
             $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
         }
@@ -58,19 +58,19 @@ class FilterController: UIViewController {
     
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         let temp = sender.value.rounded(digits: 1)
-        filterModel.sliderValueLabel.text = "\(temp)"
+        model.sliderValueLabel.text = "\(temp)"
     }
     
     @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismiss(animated: true, completion: {self.delegate?.undoBlur()})}
     
     @objc func handleSaveButton(){
-        UserAppliedFilter.shared.save(dollarOne: filterModel.dollarOneButton.isSelected,
-                                      dollarTwo: filterModel.dollarTwoButton.isSelected,
-                                      dollarThree: filterModel.dollarThreeButton.isSelected,
-                                      dollarFour: filterModel.dollarFourButton.isSelected,
-                                      noPrices: filterModel.noPriceSwitch.isOn,
-                                      minimumRating: filterModel.sliderValueLabel.text ?? "0.0")
+        UserAppliedFilter.shared.save(dollarOne: model.dollarOneButton.isSelected,
+                                      dollarTwo: model.dollarTwoButton.isSelected,
+                                      dollarThree: model.dollarThreeButton.isSelected,
+                                      dollarFour: model.dollarFourButton.isSelected,
+                                      noPrices: model.noPriceSwitch.isOn,
+                                      minimumRating: model.sliderValueLabel.text ?? "0.0")
         self.dismiss(animated: true, completion: {
             UserAppliedFilter.shared.load()
             self.delegate?.undoBlur()
@@ -79,9 +79,9 @@ class FilterController: UIViewController {
     }
     
     @objc func handleResetToDefaultsButton(){
-        [filterModel.noPriceSwitch].forEach{$0.isOn = true}
-        filterModel.distanceSlider.value = 1.0
-        filterModel.sliderValueLabel.text = "1.0"
+        [model.noPriceSwitch].forEach{$0.isOn = true}
+        model.distanceSlider.value = 1.0
+        model.sliderValueLabel.text = "1.0"
         allDollarButtons.forEach{
             $0.isSelected = true
             $0.backgroundColor = .white

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class FilterModel{
     let minimumRatingText = UserAppliedFilter.shared.getMinimumRatingString
@@ -27,8 +26,8 @@ class FilterModel{
     var dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
 
     var defaultButton       = GenericButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
-    var saveButton          = GenericButton(title: "SAVE", titleColor: .black, backgroundColor: .white, isCorner: true)
-    var cancelButton        = GenericButton(title: "CANCEL", titleColor: .black, backgroundColor: .white, isCorner: true)
+    var saveButton          = GenericButton(title: "SAVE", isCorner: true)
+    var cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
     
     var noPriceSwitch       = GenericSwitch(onTintColor: .green)
     

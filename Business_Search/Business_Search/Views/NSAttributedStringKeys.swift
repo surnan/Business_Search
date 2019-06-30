@@ -33,3 +33,9 @@ let orange_25 : [NSAttributedString.Key: Any] = [
     NSAttributedString.Key.font: UIFont(name: "Georgia", size: 25) as Any
 ]
 
+let whiteHelvetica_20_blackStroke : [NSAttributedString.Key: Any] = [
+    NSAttributedString.Key.foregroundColor : UIColor.white,
+    NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 20)!,
+    NSAttributedString.Key.strokeWidth: -2.6,
+    NSAttributedString.Key.strokeColor: UIColor.black
+]

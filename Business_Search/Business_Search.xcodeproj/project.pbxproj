@@ -22,6 +22,8 @@
 		84365CBA22C62AA40014E577 /* _Generic UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* _Generic UIKit.swift */; };
 		84365CBC22C64A860014E577 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBB22C64A860014E577 /* CustomButton.swift */; };
 		84365CC022C7F2460014E577 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBF22C7F2460014E577 /* FilterModel.swift */; };
+		84365CC522C8658B0014E577 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CC422C8658B0014E577 /* SettingsModel.swift */; };
+		84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CC622C8897A0014E577 /* LocationNSFetchController.swift */; };
 		843C66F9227D25D7003A64D1 /* 1 - GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */; };
 		843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* _BusinessCell.swift */; };
 		844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Array+Extension.swift */; };
@@ -79,6 +81,8 @@
 		84365CB922C62AA40014E577 /* _Generic UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "_Generic UIKit.swift"; sourceTree = "<group>"; };
 		84365CBB22C64A860014E577 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84365CBF22C7F2460014E577 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		84365CC422C8658B0014E577 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		84365CC622C8897A0014E577 /* LocationNSFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNSFetchController.swift; sourceTree = "<group>"; };
 		843C66F8227D25D7003A64D1 /* 1 - GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "1 - GroupsController.swift"; sourceTree = "<group>"; };
 		843C66FA227DC97A003A64D1 /* _BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844F64B52277B3E0003E6A93 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -350,6 +354,8 @@
 			isa = PBXGroup;
 			children = (
 				84CC285C2297774800A82BBE /* SettingsController.swift */,
+				84365CC422C8658B0014E577 /* SettingsModel.swift */,
+				84365CC622C8897A0014E577 /* LocationNSFetchController.swift */,
 			);
 			path = "Settings Controller";
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 				8435B1D5227A4EED00E95B4E /* OpeningController+TableView.swift in Sources */,
 				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
 				84365CBA22C62AA40014E577 /* _Generic UIKit.swift in Sources */,
+				84365CC522C8658B0014E577 /* SettingsModel.swift in Sources */,
 				84DC40D222697319003003C4 /* Error Enums.swift in Sources */,
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
@@ -568,6 +575,7 @@
 				84365CB522C5687E0014E577 /* String+Extension.swift in Sources */,
 				84365CB122C567A80014E577 /* Double+Extension.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
+				84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */,
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
 				848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */,
