@@ -239,8 +239,8 @@
 		84365CC222C83B0A0014E577 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				84365CB922C62AA40014E577 /* _Generic UIKit.swift */,
-				84365CBF22C7F2460014E577 /* FilterModel.swift */,
+				84365CC922C897870014E577 /* Core Data */,
+				84365CC822C897790014E577 /* UIKit */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,6 +250,24 @@
 			children = (
 			);
 			path = "MY GENERICS";
+			sourceTree = "<group>";
+		};
+		84365CC822C897790014E577 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				84365CB922C62AA40014E577 /* _Generic UIKit.swift */,
+				84365CBF22C7F2460014E577 /* FilterModel.swift */,
+				84365CC422C8658B0014E577 /* SettingsModel.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		84365CC922C897870014E577 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				84365CC622C8897A0014E577 /* LocationNSFetchController.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 		848761D1227F1779000CECC7 /* Menu Controller */ = {
@@ -340,10 +358,10 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				84CC285B2297772700A82BBE /* Settings Controller */,
 				84365CAC22C564710014E577 /* Filter Controller */,
 				84365CAB22C564520014E577 /* Opening Controller */,
 				84A5AFDE22A368E2009B96AD /* Show  Business Details */,
-				84CC285B2297772700A82BBE /* Settings Controller */,
 				848761D1227F1779000CECC7 /* Menu Controller */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 			);
@@ -354,8 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				84CC285C2297774800A82BBE /* SettingsController.swift */,
-				84365CC422C8658B0014E577 /* SettingsModel.swift */,
-				84365CC622C8897A0014E577 /* LocationNSFetchController.swift */,
 			);
 			path = "Settings Controller";
 			sourceTree = "<group>";
