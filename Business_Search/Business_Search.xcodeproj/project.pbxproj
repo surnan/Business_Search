@@ -270,12 +270,20 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		84365CCA22C89A0E0014E577 /* Sub Menu Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
+				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
+			);
+			path = "Sub Menu Controllers";
+			sourceTree = "<group>";
+		};
 		848761D1227F1779000CECC7 /* Menu Controller */ = {
 			isa = PBXGroup;
 			children = (
+				84365CCA22C89A0E0014E577 /* Sub Menu Controllers */,
 				848761CF227F176F000CECC7 /* MenuController.swift */,
-				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
-				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
 			);
 			path = "Menu Controller";
 			sourceTree = "<group>";
