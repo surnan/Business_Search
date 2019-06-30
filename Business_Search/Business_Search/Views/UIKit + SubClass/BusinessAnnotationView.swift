@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class BusinessAnnotationView: MKMarkerAnnotationView {
-    
+    //mapView.register(BusinessAnnotationView.self, forAnnotationViewWithReuseIdentifier: mapViewReuseID)
     var title = "Bridge Title"
     var subtitle = "Bridge SubTitle"
     var business: Business!
@@ -18,7 +18,7 @@ class BusinessAnnotationView: MKMarkerAnnotationView {
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        clusteringIdentifier = "BusinessClusterID"
+        clusteringIdentifier = "BusinessAnnotationView"
         collisionMode = .circle
     }
     

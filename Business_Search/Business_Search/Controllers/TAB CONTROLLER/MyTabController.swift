@@ -9,43 +9,28 @@
 import UIKit
 
 class MyTabController: UITabBarController {
-    
-    //MARK:- Injection Start
+    //MARK:- Injections START
     var category: String!
-    
+    var categoryName: String!  {didSet {navigationItem.title = categoryName}}
     var businesses = [Business]()   {
         didSet {
-            firstController.businesses = businesses //Populate TableView
-            secondController.businesses = businesses    //populate array to build map
+            firstController.businesses = businesses     //Populate GroupsController.tableView
+            secondController.businesses = businesses    //populate MapsController.mapView
         }
     }
+    //MARK:- Injections END
     
-    var categoryName: String!  {
-        didSet {
-            navigationItem.title = categoryName
-        }
-    }
-
     let firstController = GroupsController()
     let secondController = MapController()
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.clear
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleLeftBarButton))
         navigationItem.title = categoryName
         firstController.tabBarItem =  UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "menu100B.png"), selectedImage: #imageLiteral(resourceName: "menu100B.png"))
         secondController.tabBarItem = UITabBarItem(title: "MAP", image: #imageLiteral(resourceName: "map100") , selectedImage: #imageLiteral(resourceName: "map100"))
         let tabBarList = [firstController, secondController]
         viewControllers = tabBarList
         tabBar.isTranslucent = false
-    }
-    
-    @objc func handleRight(){
-        print("")
-    }
-    
-    @objc func handleLeftBarButton(){
-        navigationController?.popViewController(animated: true)
     }
 }
 

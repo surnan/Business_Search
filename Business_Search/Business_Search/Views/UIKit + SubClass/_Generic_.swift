@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class GenericLabel: UILabel {
     init(text: String, size: CGFloat = 12, backgroundColor: UIColor = UIColor.clear,
@@ -151,6 +152,20 @@ class GenericActivityIndicatorView: UIActivityIndicatorView{
     }
     
     required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class GenericScaleView: MKScaleView {
+    init(mapView: MKMapView, visibility: MKFeatureVisibility = .visible) {
+        super.init(frame: .zero)
+        self.mapView = mapView
+        self.scaleVisibility = visibility
+        //self.legendAlignment = .trailing
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
