@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyLabel: UILabel {
+class GenericLabel: UILabel {
     init(text: String, size: CGFloat = 12, backgroundColor: UIColor = UIColor.clear,
          textColor: UIColor = UIColor.white, corner: Bool = false) {
         super.init(frame: .zero)
@@ -29,7 +29,7 @@ class MyLabel: UILabel {
     }
 }
 
-class SegmentButton: CustomButton {
+class GenericSegmentButton: CustomButton {
     init(title: String, isCorner: Bool = false, corners: CACornerMask = .init()){
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
@@ -47,7 +47,7 @@ class SegmentButton: CustomButton {
     }
 }
 
-class MYButton: UIButton {
+class GenericButton: UIButton {
     init(title: String, titleColor: UIColor = .black, backgroundColor: UIColor, borderWidth: CGFloat = 0,
          isCorner: Bool = false, corners: CACornerMask = .init()){
         super.init(frame: .zero)
@@ -66,7 +66,7 @@ class MYButton: UIButton {
     }
 }
 
-class MYSwitch: UISwitch {
+class GenericSwitch: UISwitch {
     init(onTintColor: UIColor) {
         super.init(frame: .zero)
         self.onTintColor = onTintColor
@@ -77,7 +77,7 @@ class MYSwitch: UISwitch {
     }
 }
 
-class MYSlider: UISlider {
+class GenericSlider: UISlider {
     init(min: Float, max: Float, value: Float, minColor: UIColor, maxColor: UIColor, thumbColor: UIColor){
         super.init(frame: .zero)
         self.minimumValue = min
@@ -94,7 +94,7 @@ class MYSlider: UISlider {
     }
 }
 
-class MYStack: UIStackView {
+class GenericStack: UIStackView {
     init(spacing: CGFloat = 0, axis: NSLayoutConstraint.Axis = .vertical, distribution: UIStackView.Distribution = .fill){
         super.init(frame: .zero)
         self.spacing = spacing

@@ -10,92 +10,67 @@ import UIKit
 import CoreData
 
 class FilterController: UIViewController {
-    let minimumRatingText = UserAppliedFilter.shared.getMinimumRatingString
-    let sliderValue = UserAppliedFilter.shared.getMinimumRatingFloat
-
-    var delegate: MenuControllerDelegate?
+    var delegate: MenuControllerDelegate?   //Unblur
     
-    //  MYLabel
-    var sliderLabel = MyLabel(text: "Minimum Yelp Rating", size: 20)
-    var sliderLeftLabel = MyLabel(text: "1")
-    var sliderRightLabel = MyLabel(text: "5")
-    var priceLabel = MyLabel(text: "Price Filter Options",  size: 20)
-    var noPriceLabel = MyLabel(text: "Include if No Price Listed: ", size: 18)
-
-    //  SegmentButton
-    var dollarOneButton = SegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
-    var dollarTwoButton = SegmentButton(title: "$$")
-    var dollarThreeButton = SegmentButton(title: "$$$")
-    var dollarFourButton = SegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    let shared                  = UserAppliedFilter.shared
+    var filterModel             = FilterModel()
+    lazy var allDollarButtons   = [filterModel.dollarOneButton, filterModel.dollarTwoButton,
+                                 filterModel.dollarThreeButton,filterModel.dollarFourButton]
     
-    //  MYButton
-    lazy var sliderValueLabel = MyLabel(text: minimumRatingText, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
-    var defaultButton = MYButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
-    var saveButton = MYButton(title: "SAVE", titleColor: .black, backgroundColor: .white, isCorner: true)
-    var cancelButton = MYButton(title: "CANCEL", titleColor: .black, backgroundColor: .white, isCorner: true)
-
-    //  MYSwitch & MYSlider
-    var noPriceSwitch = MYSwitch(onTintColor: .green)
-    lazy var distanceSlider = MYSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray, maxColor: .black, thumbColor: .white)
-
+    //MARK:- Override Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let shared = UserAppliedFilter.shared
+        filterModel.dollarOneButton.isSelected      = shared.getOne
+        filterModel.dollarTwoButton.isSelected      = shared.getTwo
+        filterModel.dollarThreeButton.isSelected    = shared.getThree
+        filterModel.dollarFourButton.isSelected     = shared.getFour
+        filterModel.noPriceSwitch.isOn              = shared.getNoPrice
+        allDollarButtons.forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
+        setupUI()
         //shared.showMyResultsInNSUserDefaults(); print("***")
-        dollarOneButton.isSelected = shared.getOne
-        dollarTwoButton.isSelected = shared.getTwo
-        dollarThreeButton.isSelected = shared.getThree
-        dollarFourButton.isSelected = shared.getFour
-        noPriceSwitch.isOn = shared.getNoPrice
-        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
         addHandlers()
-        let dollarStack = MYStack(spacing: 1, axis: .horizontal, distribution: .fillEqually)
-        let sliderStack = MYStack(spacing: 10, axis: .horizontal)
-        let isPriceListedStack = MYStack(spacing: 20, axis: .horizontal)
-        let _myStack = MYStack(spacing: 20, axis: .vertical)
-
-        [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
-        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{dollarStack.addArrangedSubview($0)}
-        [noPriceLabel, noPriceSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
-        [priceLabel, dollarStack, sliderLabel, sliderStack, sliderValueLabel,
-         isPriceListedStack, saveButton, cancelButton, defaultButton].forEach{_myStack.addArrangedSubview($0)}
-        
-        view.addSubview(_myStack)
-        _myStack.centerToSuperView()
-        _myStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
     }
     
-    //MARK:- Handlers
+    //MARK:- Functions
+    func setupUI(){
+        let fullStackView = filterModel.getFullStack()
+        view.addSubview(fullStackView)
+        fullStackView.centerToSuperView()
+        fullStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+    }
+
+    
+    //MARK: Handlers
     func addHandlers(){
-        defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
-        saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
-        distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
-        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{
+        filterModel.defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
+        filterModel.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        filterModel.cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
+        filterModel.distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+        allDollarButtons.forEach{
             $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
         }
     }
     
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         let temp = sender.value.rounded(digits: 1)
-        sliderValueLabel.text = "\(temp)"
+        filterModel.sliderValueLabel.text = "\(temp)"
     }
     
     @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismiss(animated: true, completion: {self.delegate?.undoBlur()})}
     
     @objc func handleSaveButton(){
-        UserAppliedFilter.shared.save(dollarOne: dollarOneButton.isSelected,
-                                      dollarTwo: dollarTwoButton.isSelected,
-                                      dollarThree: dollarThreeButton.isSelected,
-                                      dollarFour: dollarFourButton.isSelected,
-                                      noPrices: noPriceSwitch.isOn,
-                                      minimumRating: sliderValueLabel.text ?? "0.0")
+        UserAppliedFilter.shared.save(dollarOne: filterModel.dollarOneButton.isSelected,
+                                      dollarTwo: filterModel.dollarTwoButton.isSelected,
+                                      dollarThree: filterModel.dollarThreeButton.isSelected,
+                                      dollarFour: filterModel.dollarFourButton.isSelected,
+                                      noPrices: filterModel.noPriceSwitch.isOn,
+                                      minimumRating: filterModel.sliderValueLabel.text ?? "0.0")
         self.dismiss(animated: true, completion: {
             UserAppliedFilter.shared.load()
             self.delegate?.undoBlur()
@@ -104,19 +79,12 @@ class FilterController: UIViewController {
     }
     
     @objc func handleResetToDefaultsButton(){
-        [dollarOneButton, dollarTwoButton, dollarThreeButton, dollarFourButton].forEach{$0.isSelected = true; $0.backgroundColor = .white}
-        [noPriceSwitch].forEach{$0.isOn = true}
-        distanceSlider.value = 1.0
-        sliderValueLabel.text = "1.0"
+        [filterModel.noPriceSwitch].forEach{$0.isOn = true}
+        filterModel.distanceSlider.value = 1.0
+        filterModel.sliderValueLabel.text = "1.0"
+        allDollarButtons.forEach{
+            $0.isSelected = true
+            $0.backgroundColor = .white
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
