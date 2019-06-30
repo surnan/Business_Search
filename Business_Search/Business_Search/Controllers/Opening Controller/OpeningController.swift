@@ -19,7 +19,7 @@ enum TableIndex:Int {
     case business = 0, category
 }
 
-class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, MenuControllerDelegate {
+class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate {
     
     func animateResultsAreFilteredLabel(){
         if !UserAppliedFilter.shared.isFilterOn {return}

@@ -66,12 +66,11 @@ class GenericSegmentButton: CustomButton {
 
 class GenericButton: UIButton {
     init(title: String, titleColor: UIColor = .black, backgroundColor: UIColor = .white, borderWidth: CGFloat = 0,
-         isCorner: Bool = false){
+         isCorner: Bool = false, tag: Int = 0){
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
         self.backgroundColor = backgroundColor
-        self.layer.borderWidth = 1
         self.translatesAutoresizingMaskIntoConstraints = false
         if isCorner {
             self.layer.cornerRadius = 10
@@ -137,6 +136,18 @@ class GenericStack: UIStackView {
         self.distribution = distribution
         self.axis = axis
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class GenericActivityIndicatorView: UIActivityIndicatorView{
+    init(hidesWhenStopped: Bool = true, style: UIActivityIndicatorView.Style = .gray){
+        super.init(frame: .zero)
+        self.hidesWhenStopped = hidesWhenStopped
+        self.style = style
     }
     
     required init(coder: NSCoder) {
