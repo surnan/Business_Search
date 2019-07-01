@@ -12,7 +12,10 @@ import MapKit
 import CoreLocation
 
 
-class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    //var model = BusinessDetailsModel()
+    
+    var currentLocation: CLLocation?
     
     lazy var mapView: MKMapView = {
         var map = MKMapView()
@@ -24,12 +27,111 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLoca
         return map
     }()
     
+
+    var ratingLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .darkGray
+        label.numberOfLines = -1
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var priceLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var nameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = -1
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var addressLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = -1
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var phoneNumberLabel: UILabel = {
+        let label = UILabel()
+        let text = ""
+        label.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    var websiteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Load Website from Yelp", for: .normal)
+        return button
+    }()
+    
+    var phoneNumberButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(phoneTapped(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var visitYelpPageButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        let attributedString = NSAttributedString(string: "Visit Yelp Page", attributes: white25textAttributes)
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    lazy var mapItButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        let attributedString = NSAttributedString(string: "         MAP IT         ", attributes: white25textAttributes)
+        button.setAttributedTitle(attributedString, for: .normal)
+        button.backgroundColor = UIColor.red
+        button.addTarget(self, action: #selector(handlemapItButton(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    var stackViewBtm: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    var stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 5
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        return locationManager
+    }()
+    
+    var firstAnnotation: MKPointAnnotation = {
+        let annotation = MKPointAnnotation()
+        return annotation
+    }()
     
     var business: Business! {
         didSet {
             firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: business.latitude, longitude: business.longitude)
-            isTakeoutLabel.isHidden = business.isPickup ? false : true
-            isDeliveryLabel.isHidden = business.isPickup ? false : true
             
             if let name = business.name {
                 let attributes: [NSAttributedString.Key: Any] = [
@@ -82,74 +184,6 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLoca
     }
     
     
-    var nameLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = -1
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var addressLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = -1
-        label.textAlignment = .center
-        return label
-    }()
-    
-
-    
-    var websiteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Load Website from Yelp", for: .normal)
-        return button
-    }()
-    
-    var phoneNumberLabel: UILabel = {
-        let label = UILabel()
-        let text = ""
-        label.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var phoneNumberButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(phoneTapped(sender:)), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var visitYelpPageButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 12
-        let attributedString = NSAttributedString(string: "Visit Yelp Page", attributes: white25textAttributes)
-        button.setAttributedTitle(attributedString, for: .normal)
-        button.backgroundColor = UIColor.blue
-        button.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
-        return button
-    }()
-    
-
-    
-    
-    lazy var mapItButton: UIButton = {
-        let button = UIButton()
-        button.layer.cornerRadius = 12
-        let attributedString = NSAttributedString(string: "         MAP IT         ", attributes: white25textAttributes)
-        button.setAttributedTitle(attributedString, for: .normal)
-        button.backgroundColor = UIColor.red
-        button.addTarget(self, action: #selector(handlemapItButton(_:)), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        return locationManager
-    }()
-    
-    var currentLocation: CLLocation?
     
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
@@ -184,7 +218,7 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLoca
         mapView.addAnnotation(firstAnnotation)
         let viewRegion = MKCoordinateRegion(center: firstAnnotation.coordinate, latitudinalMeters: 400, longitudinalMeters: 400)
         mapView.setRegion(viewRegion, animated: false)
-        [addressLabel, phoneNumberButton, ratingLabel, priceLabel, isDeliveryLabel, isTakeoutLabel].forEach{stackView.addArrangedSubview($0)}
+        [addressLabel, phoneNumberButton, ratingLabel, priceLabel].forEach{stackView.addArrangedSubview($0)}
         [visitYelpPageButton, mapItButton].forEach{stackViewBtm.addArrangedSubview($0)}
         [mapView, nameLabel, stackView, stackViewBtm].forEach{view.addSubview($0)}
         mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25).isActive = true
@@ -201,19 +235,7 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLoca
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "pause", style: .done, target: self, action: #selector(pauseFunc))
     }
     
-    var firstAnnotation: MKPointAnnotation = {
-        let annotation = MKPointAnnotation()
-        return annotation
-    }()
 
-    
-    var stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
@@ -225,55 +247,6 @@ class ShowBusinessDetailsController: UIViewController, MKMapViewDelegate, CLLoca
         }
         return pinView
     }
-    
-    var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .darkGray
-        label.numberOfLines = -1
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var priceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var isDeliveryLabel: UILabel = {
-        let label = UILabel()
-        label.isHidden = true
-        label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "Delivery Available"
-        label.textAlignment = .center
-        return label
-    }()
-
-    var isTakeoutLabel: UILabel = {
-        let label = UILabel()
-        label.isHidden = true
-        label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "Take Out Available\n"
-        label.textAlignment = .center
-        label.numberOfLines = -1
-        return label
-    }()
-    
-    var stackViewBtm: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 5
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-
-    
     
     @objc func phoneTapped(sender: UIButton){
         print("phone tapped")

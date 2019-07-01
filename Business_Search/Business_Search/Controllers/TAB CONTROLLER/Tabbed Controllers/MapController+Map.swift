@@ -20,7 +20,7 @@ extension MapController {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         //Second tap = calloutAccessoryTapped
         //Only triggers if "viewFor annotation:" enables accessoryView
-        let newVC = ShowBusinessDetailsController()
+        let newVC = BusinessDetailsController()
         newVC.business = currentBusinessAnnotation
         navigationController?.pushViewController(newVC, animated: true)
     }

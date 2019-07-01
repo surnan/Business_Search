@@ -15,10 +15,11 @@ class GenericLabel: UILabel {
         super.init(frame: .zero)
         self.text = text
         self.font = UIFont.boldSystemFont(ofSize: size)
-        self.textColor = .white
+        self.textColor = textColor
         self.textAlignment = alignment
         self.backgroundColor = backgroundColor
         self.textColor = textColor
+        self.numberOfLines = -1
         if corner {
             self.layer.cornerRadius = 10
             self.clipsToBounds = true
