@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 
 class BusinessAnnotationView: MKMarkerAnnotationView {
-    //mapView.register(BusinessAnnotationView.self, forAnnotationViewWithReuseIdentifier: mapViewReuseID)
     var title = "Bridge Title"
     var subtitle = "Bridge SubTitle"
     var business: Business!
