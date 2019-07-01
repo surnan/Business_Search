@@ -13,7 +13,7 @@ import CoreLocation
 
 
 class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    //var model = BusinessDetailsModel()
+    var model = BusinessDetailsModel()
     
     var currentLocation: CLLocation?
     
@@ -28,45 +28,45 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     }()
     
 
-    var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .darkGray
-        label.numberOfLines = -1
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var priceLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var nameLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = -1
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    var addressLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = -1
-        label.textAlignment = .center
-        return label
-    }()
-    
-    var phoneNumberLabel: UILabel = {
-        let label = UILabel()
-        let text = ""
-        label.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
-        label.textAlignment = .center
-        return label
-    }()
+//    var ratingLabel: UILabel = {
+//        let label = UILabel()
+//        label.textColor = .darkGray
+//        label.numberOfLines = -1
+//        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.textAlignment = .center
+//        return label
+//    }()
+//
+//    var priceLabel: UILabel = {
+//        let label = UILabel()
+//        label.textColor = .darkGray
+//        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.textAlignment = .center
+//        return label
+//    }()
+//
+//    var nameLabel: UILabel = {
+//        let label = UILabel()
+//        label.numberOfLines = -1
+//        label.textAlignment = .center
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
+//
+//    var addressLabel: UILabel = {
+//        let label = UILabel()
+//        label.numberOfLines = -1
+//        label.textAlignment = .center
+//        return label
+//    }()
+//
+//    var phoneNumberLabel: UILabel = {
+//        let label = UILabel()
+//        let text = ""
+//        label.attributedText = NSAttributedString(string: text, attributes: black25textAttributes)
+//        label.textAlignment = .center
+//        return label
+//    }()
     
     var websiteButton: UIButton = {
         let button = UIButton()
@@ -138,7 +138,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
                     .foregroundColor : UIColor.black,
                     .font: UIFont.boldSystemFont(ofSize: 28),
                 ]
-                nameLabel.attributedText = NSAttributedString(string: name, attributes: attributes)
+                model.nameLabel.attributedText = NSAttributedString(string: name, attributes: attributes)
             }
             
             if let address = business.displayAddress {
@@ -147,7 +147,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
                     .foregroundColor : UIColor.black,
                     .font: UIFont(name: "Georgia", size: 25) as Any,
                 ]
-                addressLabel.attributedText = NSAttributedString(string: replaced, attributes: attributes)
+                model.addressLabel.attributedText = NSAttributedString(string: replaced, attributes: attributes)
             }
             
             
@@ -158,7 +158,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
                     .font: UIFont(name: "Arial", size: 25) as Any,
                     // NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
                 ]
-                phoneNumberLabel.attributedText = NSAttributedString(string: phoneText, attributes: attributes)
+                model.phoneNumberLabel.attributedText = NSAttributedString(string: phoneText, attributes: attributes)
             }
             
             if let phoneNumber = business.displayPhone {
@@ -173,9 +173,9 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
             }
 
             if let price = business.price {
-                priceLabel.text = "Price: \(price)"
+                model.priceLabel.text = "Price: \(price)"
             }
-            ratingLabel.text = "\nRating: \(business.rating)"
+            model.ratingLabel.text = "\nRating: \(business.rating)"
         }
     }
     
@@ -218,17 +218,17 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
         mapView.addAnnotation(firstAnnotation)
         let viewRegion = MKCoordinateRegion(center: firstAnnotation.coordinate, latitudinalMeters: 400, longitudinalMeters: 400)
         mapView.setRegion(viewRegion, animated: false)
-        [addressLabel, phoneNumberButton, ratingLabel, priceLabel].forEach{stackView.addArrangedSubview($0)}
+        [model.addressLabel, model.phoneNumberButton, model.ratingLabel, model.priceLabel].forEach{stackView.addArrangedSubview($0)}
         [visitYelpPageButton, mapItButton].forEach{stackViewBtm.addArrangedSubview($0)}
-        [mapView, nameLabel, stackView, stackViewBtm].forEach{view.addSubview($0)}
+        [mapView, model.nameLabel, stackView, stackViewBtm].forEach{view.addSubview($0)}
         mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25).isActive = true
         mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
                        padding: .init(top: 3, left: 3, bottom: 0, right: 3))
-        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 10).isActive = true
+        model.nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        model.nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80).isActive = true
+        model.nameLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 10).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 15).isActive = true
+        stackView.topAnchor.constraint(equalTo: model.nameLabel.bottomAnchor, constant: 15).isActive = true
         stackViewBtm.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
         stackViewBtm.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackViewBtm.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66).isActive = true
