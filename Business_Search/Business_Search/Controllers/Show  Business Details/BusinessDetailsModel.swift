@@ -17,6 +17,15 @@ class BusinessDetailsModel {
         return annotation
     }()
     
+    var mapView: MKMapView = {
+        var map = MKMapView()
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
+        map.mapType = .standard
+        map.translatesAutoresizingMaskIntoConstraints = false
+        return map
+    }()
+    
     var business: Business! {
         didSet {
             firstAnnotation.coordinate = CLLocationCoordinate2D(latitude: business.latitude, longitude: business.longitude)
@@ -78,7 +87,4 @@ class BusinessDetailsModel {
     var phoneNumberButton   = GenericButton(title: "...", titleColor: .blue, backgroundColor: .white, isCorner: true)
     var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
     var mapItButton         = GenericButton(title: " MAP IT ", titleColor: .white, backgroundColor: .red, isCorner: true)
-    var websiteButton       = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue,
-                                            isCorner: true)
-    
 }
