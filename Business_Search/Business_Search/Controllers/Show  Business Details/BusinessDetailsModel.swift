@@ -7,24 +7,36 @@
 //
 
 import UIKit
-import CoreData
 import MapKit
-import CoreLocation
 
 class BusinessDetailsModel {
-    var firstAnnotation: MKPointAnnotation = {
-        let annotation = MKPointAnnotation()
-        return annotation
-    }()
     
-    var mapView: MKMapView = {
-        var map = MKMapView()
-        map.isZoomEnabled = false
-        map.isScrollEnabled = false
-        map.mapType = .standard
-        map.translatesAutoresizingMaskIntoConstraints = false
-        return map
-    }()
+    func getFullStack()->UIStackView {
+        let buttonStack = GenericStack(spacing: 5)
+        [addressLabel, phoneNumberButton, ratingLabel, priceLabel].forEach{buttonStack.addArrangedSubview($0)}
+        return buttonStack
+    }
+    
+    
+    func getButtonStack()-> UIStackView {
+        let buttonStack = GenericStack(spacing: 5)
+        [visitYelpPageButton, mapItButton].forEach{buttonStack.addArrangedSubview($0)}
+        return buttonStack
+    }
+    
+    
+    var firstAnnotation     = MKPointAnnotation()
+    var mapView             = GenericMapView(isZoom: false, isScroll: false)
+    
+    var ratingLabel         = GenericLabel(text: "", size: 16, textColor: .black)
+    var priceLabel          = GenericLabel(text: "", size: 16, textColor: .black)
+    var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
+    var addressLabel        = GenericLabel(text: "", size: 16, textColor: .black)
+    var phoneNumberLabel    = GenericLabel(text: "", size: 16, textColor: .black)
+    
+    var phoneNumberButton   = GenericButton(title: "...", titleColor: .blue, backgroundColor: .white, isCorner: true)
+    var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
+    var mapItButton         = GenericButton(title: " MAP IT ", titleColor: .white, backgroundColor: .red, isCorner: true)
     
     var business: Business! {
         didSet {
@@ -69,22 +81,8 @@ class BusinessDetailsModel {
                 phoneNumberButton.setAttributedTitle(myNormalAttributedTitle, for: .normal)
             }
             
-            if let price = business.price {
-                priceLabel.text = "Price: \(price)"
-            }
+            if let price = business.price {priceLabel.text = "Price: \(price)"}
             ratingLabel.text = "\nRating: \(business.rating)"
         }
     }
-    
-    
-    var ratingLabel         = GenericLabel(text: "", size: 16, textColor: .black)
-    var priceLabel          = GenericLabel(text: "", size: 16, textColor: .black)
-    var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
-    var addressLabel        = GenericLabel(text: "", size: 16, textColor: .black)
-    var phoneNumberLabel    = GenericLabel(text: "", size: 16, textColor: .black)
-    
-    //black on white
-    var phoneNumberButton   = GenericButton(title: "...", titleColor: .blue, backgroundColor: .white, isCorner: true)
-    var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
-    var mapItButton         = GenericButton(title: " MAP IT ", titleColor: .white, backgroundColor: .red, isCorner: true)
 }

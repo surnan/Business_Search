@@ -170,3 +170,23 @@ class GenericScaleView: MKScaleView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class GenericMapView: MKMapView {
+    init(isZoom: Bool = true, mapType: MKMapType = .standard, isScroll: Bool = true) {
+        super.init(frame: .zero)
+        self.isZoomEnabled = isZoom
+        self.mapType = mapType
+        self.isScrollEnabled = isScroll
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class GenericCLLocationManager: CLLocationManager {
+    init(desiredAccuracy: CLLocationAccuracy) {
+        super.init()
+        self.desiredAccuracy = desiredAccuracy
+    }
+}
