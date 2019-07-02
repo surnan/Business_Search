@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-extension OpeningController: UITableViewDataSource, UITableViewDelegate {
+extension OpeningController: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
 
     
@@ -130,59 +130,9 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch model.tableViewArrayType {
-        case TableIndex.business.rawValue:
-            let state = model.fetchBusinessController?.fetchedObjects?.count ?? 0
-            ShowNothingLabelIfNoResults(group: model.tableViewArrayType)
-            return state
-        case TableIndex.category.rawValue:
-            let state = model.fetchCategoryNames?.count ?? 0
-            ShowNothingLabelIfNoResults(group: model.tableViewArrayType)
-            return state
-        default:
-            print("numberOfRowsInSection --> WHOOOOOPS!!")
-        }
-        return TableIndex.business.rawValue
-    }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch model.tableViewArrayType {
-        case TableIndex.business.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
-            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-            cell.currentBusiness = model.fetchBusinessController?.object(at: indexPath)
-            return cell
-        case TableIndex.category.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-            let currentCategoryName = model.fetchCategoryNames?[indexPath.row]
-            let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-            let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-            let filterControllerPredicate = UserAppliedFilter.shared.getCategoryPredicate()        //FilterController() & Singleton
-            var tempPredicate = [myPredicate, model.predicateCategoryLatitude, model.predicateCategoryLongitude]
-            filterControllerPredicate.forEach{tempPredicate.append($0)}
-            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: tempPredicate)
-            
-            cell.name = currentCategoryName
-            do {
-                let count = try dataController.viewContext.count(for: _fetchRequest)
-                cell.count = count
-            } catch {
-                cell.count = 0
-                print("Failed to get Count inside cellForRowAt: \n\(error)")
-            }
-            return cell
-        default:
-            print("Something Bad HAPPENED inside cellForRowAt:")
-            return UITableViewCell()
-        }
     }
     
     private func showNothingFoundView(){

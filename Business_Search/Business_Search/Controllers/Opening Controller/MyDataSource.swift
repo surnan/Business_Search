@@ -288,6 +288,4 @@ class MyDataSource: NSObject, UITableViewDataSource {
         }
         return TableIndex.business.rawValue
     }
-    
-    
 }

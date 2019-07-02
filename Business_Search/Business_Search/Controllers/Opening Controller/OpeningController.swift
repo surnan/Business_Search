@@ -88,7 +88,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = model
         tableView.tableFooterView = UIView()
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
