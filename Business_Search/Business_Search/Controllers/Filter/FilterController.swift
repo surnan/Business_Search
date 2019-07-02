@@ -13,7 +13,7 @@ class FilterController: UIViewController {
     var delegate: UnBlurDelegate?   //Unblur
     
     let shared                  = UserAppliedFilter.shared
-    let model             = FilterModel()
+    let model                   = FilterModel()
     lazy var allDollarButtons   = [model.dollarOneButton, model.dollarTwoButton,
                                  model.dollarThreeButton,model.dollarFourButton]
     

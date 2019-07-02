@@ -15,14 +15,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let actionBusiness = UITableViewRowAction(style: .normal, title: "SHARE") { (action, indexPath) in
-            guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
+            guard let currentBusiness = self.model.fetchBusinessController?.object(at: indexPath) else {return}
             self.shareBusiness(business: currentBusiness)
         }
         actionBusiness.backgroundColor = .darkBlue
     
     
         let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") { (action, indexPath) in
-            guard let currentCategory = self.fetchCategoryNames?[indexPath.row] else {return}
+            guard let currentCategory = self.model.fetchCategoryNames?[indexPath.row] else {return}
             let items = self.getBusinessesFromCategoryName(category: currentCategory)
             let modder = items.count - 1
             let randomNumber = Int.random(in: 0...modder)
@@ -77,24 +77,24 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         if tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
             guard let self = self else {return}
-            guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return}
+            guard let currentBusiness = self.model.fetchBusinessController?.object(at: indexPath) else {return}
             let isFavorite = currentBusiness.isFavoriteChange(context: self.dataController.viewContext)
             myBool(true)    //Dismiss the leading swipe action
             tableView.reloadRows(at: [indexPath], with: .automatic)
             if isFavorite {
                 self.createFavoriteEntity(business: currentBusiness, context: self.dataController.backGroundContext)
-                self.fetchBusinessController = nil
+                self.model.fetchBusinessController = nil
                 self.tableView.reloadData()
             } else {
-                self.deleteFavorite(business: currentBusiness)
-                self.fetchBusinessController = nil
+                //self.model.deleteFavorite(business: currentBusiness)
+                self.model.fetchBusinessController = nil
                 self.tableView.reloadData()
                 //TODO: delete favorite
                 print("currentBusiness.id --> \(currentBusiness.id!)")
                 print("")
             }
         }
-        guard let currentBusiness = self.fetchBusinessController?.object(at: indexPath) else {return nil}
+        guard let currentBusiness = self.model.fetchBusinessController?.object(at: indexPath) else {return nil}
         action.image = currentBusiness.isFavorite ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
         action.backgroundColor =  currentBusiness.isFavorite ? .lightSteelBlue1 : .orange
         let configuration = UISwipeActionsConfiguration(actions: [action])
@@ -104,10 +104,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     func deleteFavorite(business: Business){
         //lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
-        fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
-        fetchFavoritesController = nil
+        model.fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
+        model.fetchFavoritesController = nil
         
-        fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+        model.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
             dataController.viewContext.delete(item)
             do {
                 try dataController.viewContext.save()
@@ -133,11 +133,11 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
-            let state = fetchBusinessController?.fetchedObjects?.count ?? 0
+            let state = model.fetchBusinessController?.fetchedObjects?.count ?? 0
             ShowNothingLabelIfNoResults(group: tableViewArrayType)
             return state
         case TableIndex.category.rawValue:
-            let state = fetchCategoryNames?.count ?? 0
+            let state = model.fetchCategoryNames?.count ?? 0
             ShowNothingLabelIfNoResults(group: tableViewArrayType)
             return state
         default:
@@ -157,16 +157,16 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-            cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
+            cell.currentBusiness = model.fetchBusinessController?.object(at: indexPath)
             return cell
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-            let currentCategoryName = fetchCategoryNames?[indexPath.row]
+            let currentCategoryName = model.fetchCategoryNames?[indexPath.row]
             let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
             let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
             let filterControllerPredicate = UserAppliedFilter.shared.getCategoryPredicate()        //FilterController() & Singleton
-            var tempPredicate = [myPredicate, predicateCategoryLatitude, predicateCategoryLongitude]
+            var tempPredicate = [myPredicate, model.predicateCategoryLatitude, model.predicateCategoryLongitude]
             filterControllerPredicate.forEach{tempPredicate.append($0)}
             _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: tempPredicate)
             
@@ -199,13 +199,13 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func ShowNothingLabelIfNoResults(group: Int){
         switch group {
         case TableIndex.business.rawValue:
-            if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+            if model.fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
                 showNothingFoundView()
             } else {
                 hideNothingFoundView()
             }
         case TableIndex.category.rawValue:
-            if fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+            if model.fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
                 showNothingFoundView()
             } else {
                 hideNothingFoundView()
@@ -218,10 +218,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableViewArrayType {
         case TableIndex.category.rawValue:
-            guard let currentCategory = fetchCategoryNames?[indexPath.row] else {return}
+            guard let currentCategory = model.fetchCategoryNames?[indexPath.row] else {return}
             listBusinesses(category: currentCategory)
         case TableIndex.business.rawValue:
-            guard let currentBusiness = fetchBusinessController?.object(at: indexPath) else {return}
+            guard let currentBusiness = model.fetchBusinessController?.object(at: indexPath) else {return}
             showBusinessInfo(currentBusiness: currentBusiness)
         default:
             print("Illegal Value inside tableViewArrayType")
@@ -244,10 +244,10 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         //'MATCHES' is confused when string contains parenthesis.  Such as "American (New)"
         //selectedCategoryPredicate = NSPredicate(format: "title MATCHES[cd] %@", argumentArray: [category])
         
-        selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
-        fetchCategoriesController = nil
+        model.selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
+        model.fetchCategoriesController = nil
         var businessArray = [Business]()    //Pushed into next ViewController
-        fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
+        model.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
         businessArray = businessArray.filter{
             return $0.parentLocation?.latitude == latitude &&
                 $0.parentLocation?.longitude == longitude

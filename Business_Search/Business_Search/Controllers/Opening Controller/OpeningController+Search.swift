@@ -11,18 +11,18 @@ import UIKit
 extension OpeningController: UISearchResultsUpdating {
     
     func resetAllFetchControllers() {
-        fetchBusinessPredicate = nil
-        fetchCategoryArrayNamesPredicate = nil
-        fetchBusinessController = nil
-        fetchCategoryNames = nil
-        fetchFavoritePredicate = nil
-        fetchFavoritesController = nil
+        model.fetchBusinessPredicate = nil
+        model.fetchCategoryArrayNamesPredicate = nil
+        model.fetchBusinessController = nil
+        model.fetchCategoryNames = nil
+        model.fetchFavoritePredicate = nil
+        model.fetchFavoritesController = nil
         tableView.reloadData()
     }
     
     func reloadFetchControllers() {
-        fetchBusinessController = nil
-        fetchCategoryNames = nil
+        model.fetchBusinessController = nil
+        model.fetchCategoryNames = nil
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -38,8 +38,8 @@ extension OpeningController: UISearchResultsUpdating {
             resetAllFetchControllers()
             return
         }
-        fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        model.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        model.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         reloadFetchControllers()
     }
     

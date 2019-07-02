@@ -19,6 +19,7 @@ extension OpeningController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animateResultsAreFilteredLabel()
+        
     }
     
     override func viewDidLoad() {
@@ -26,6 +27,8 @@ extension OpeningController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
+        
+        tableView.dataSource = model
     }
     
     func setupUI(){
@@ -38,8 +41,8 @@ extension OpeningController {
     }
     
     func readOrCreateLocation(){  //Check if location exists or download
-        fetchLocationController = nil                                       //Only time Locations should be loaded
-        let locationArray = fetchLocationController?.fetchedObjects
+        model.fetchLocationController = nil                                       //Only time Locations should be loaded
+        let locationArray = model.fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
             _ = YelpClient.getBusinesses(latitude: latitude,
@@ -87,8 +90,8 @@ extension OpeningController {
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
         //print("Radius = \(radius)")
-        print("fetchBusiness.FetchedObject.count - ", fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", fetchCategoryNames?.count ?? -999)
+        print("fetchBusiness.FetchedObject.count - ", model.fetchBusinessController?.fetchedObjects?.count ?? -999)
+        print("fetchCategoryArray.count - ", model.fetchCategoryNames?.count ?? -999)
         tableView.reloadData()
     }
 }

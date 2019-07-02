@@ -1,8 +1,8 @@
 //
-//  AnotherTest.swift
+//  OpeningControllerTableSource.swift
 //  Business_Search
 //
-//  Created by admin on 5/1/19.
+//  Created by admin on 7/1/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
@@ -11,112 +11,32 @@ import CoreData
 import MapKit
 
 
-let businessCellID = "businessCellID"
-let _businessCellID = "_businessCellID"
-let categoryCellID = "categoryCellID"
-
-enum TableIndex:Int {
-    case business = 0, category
+protocol OpeningControllerProtocol {
+    func getFetchBusinessController()
+    func getFetchCategoryNames()
 }
 
-class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate {
-    
-    
+
+class MyDataSource: NSObject, UITableViewDataSource {
+    var dataController: DataController!
     var latitude: Double!                                       //MARK: Injected
     var longitude: Double!                                      //MARK: Injected
-    var moc: NSManagedObjectContext!                            //Parent-Context
-    var privateMoc: NSManagedObjectContext!                     //Child-Context for CoreData Concurrency
-    var dataController: DataController!{                        //MARK: Injected
-        didSet {
-            moc = dataController.viewContext
-            privateMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-            privateMoc.parent = moc
-        }
+
+    
+    init(dataController: DataController, latitude: Double, longitude: Double) {
+        super.init()
+        self.dataController = dataController
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
-    var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
-    var doesLocationEntityExist = false                         //set true after we create location or find location
-    var urlsQueue = [CreateYelpURLDuringLoopingStruct]()        //enumeration loop for semaphores
+
+    
     var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
     var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
     
-    func animateResultsAreFilteredLabel(){
-        if !UserAppliedFilter.shared.isFilterOn {return}
-        print("B - Filter executed")
-        
-        let resultsAreFilteredLabel: UILabel = {
-            let label = UILabel()
-            label.backgroundColor = .black
-            label.textColor = .white
-            label.textAlignment = .center
-            label.text = "Partial results due to filter options..."
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        view.addSubview(resultsAreFilteredLabel)
-        let safe = view.safeAreaLayoutGuide
-        resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
-        resultsAreFilteredLabel.alpha = 1
-        
-        UIView.animate(withDuration: 1.5, animations: {
-            resultsAreFilteredLabel.alpha = 0
-        }) { (_) in
-            resultsAreFilteredLabel.removeFromSuperview()
-        }
-    }
-    
-    
-    lazy var blurredEffectView2: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = view.bounds
-        return blurredEffectView
-    }()
-    
-    func undoBlur() {
-        blurredEffectView2.removeFromSuperview()
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        doesLocationEntityExist = false
-        readOrCreateLocation()
-        animateResultsAreFilteredLabel()
-    }
-    
-    
-    
-    
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
-        tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
-        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
-        return tableView
-    }()
-    
-    let nothingFoundView: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 350, height: 350))
-        label.backgroundColor = .clear
-        label.alpha = 0
-        label.text = "That's all Folks"
-        label.textAlignment = .center
-        label.isUserInteractionEnabled = false
-        let textAttributes:[NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.strokeColor: UIColor.lightGray,
-            NSAttributedString.Key.foregroundColor: UIColor.green,
-            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
-            NSAttributedString.Key.strokeWidth: -1.0
-        ]
-        label.attributedText = NSAttributedString(string: "No matches found", attributes: textAttributes)
-        return label
-    }()
-    
-    
-    
     //MARK:- Predicates
-    /*
+    
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
         didSet {
@@ -135,6 +55,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
     var predicateTest = false
     
+    //aFetchedResultsController.delegate = self
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
             if fetchBusinessController == nil { //+3
@@ -144,7 +65,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                     var predicate: [NSPredicate] = [predicateBusinessLatitude, predicateBusinessLongitude]
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-                
+                    
                     var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()    //FilterController() & Singleton
                     filterControllerPredicate.append(openingControllerPredicate)
                     
@@ -159,7 +80,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    aFetchedResultsController.delegate = self
+                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -171,7 +92,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }   //-2
     }   //-1
     
-    
+    //aFetchedResultsController.delegate = self
     var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
         didSet {    //+2
             if fetchCategoriesController == nil { //+3
@@ -186,7 +107,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    aFetchedResultsController.delegate = self
+                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -200,6 +121,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     
     var fetchFavoritePredicate: NSPredicate?
     
+    //aFetchedResultsController.delegate = self
     var fetchFavoritesController: NSFetchedResultsController<Favorites>?{
         didSet{
             if fetchFavoritesController == nil {
@@ -212,7 +134,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    aFetchedResultsController.delegate = self
+                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -223,8 +145,6 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             }
         }
     }
-    
-    
     
     
     //latitude and longitude MUST when this Controller is created
@@ -277,6 +197,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }
     }
     
+    //aFetchedResultsController.delegate = self
     var fetchLocationController: NSFetchedResultsController<Location>? {
         didSet {
             if fetchLocationController == nil {
@@ -288,7 +209,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    aFetchedResultsController.delegate = self
+                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -299,35 +220,74 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
             }
         }
     }
-    */
     
-    //MARK:- UI
-    lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
-        searchController.obscuresBackgroundDuringPresentation = false
-        
-        //searchController.searchBar.barStyle = .black
-        searchController.searchBar.tintColor = UIColor.white
-        searchController.searchBar.barTintColor = UIColor.white
-        searchController.searchBar.placeholder = "Enter search term ..."
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
-        
-        //Setting background for search controller
-        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            if let backgroundview = textfield.subviews.first {
-                backgroundview.backgroundColor = UIColor.white
-                backgroundview.layer.cornerRadius = 10
-                backgroundview.clipsToBounds = true
+    func ShowNothingLabelIfNoResults(group: Int){
+//        switch group {
+//        case TableIndex.business.rawValue:
+//            if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+//                showNothingFoundView()
+//            } else {
+//                hideNothingFoundView()
+//            }
+//        case TableIndex.category.rawValue:
+//            if fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+//                showNothingFoundView()
+//            } else {
+//                hideNothingFoundView()
+//            }
+//        default:
+//            print("ShowNothingLabelIfNoResults --> is very unhappy")
+//        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableViewArrayType {
+        case TableIndex.business.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
+            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+            cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
+            return cell
+        case TableIndex.category.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+            let currentCategoryName = fetchCategoryNames?[indexPath.row]
+            let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+            let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
+            let filterControllerPredicate = UserAppliedFilter.shared.getCategoryPredicate()        //FilterController() & Singleton
+            var tempPredicate = [myPredicate, predicateCategoryLatitude, predicateCategoryLongitude]
+            filterControllerPredicate.forEach{tempPredicate.append($0)}
+            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: tempPredicate)
+            
+            cell.name = currentCategoryName
+            do {
+                let count = try dataController.viewContext.count(for: _fetchRequest)
+                cell.count = count
+            } catch {
+                cell.count = 0
+                print("Failed to get Count inside cellForRowAt: \n\(error)")
             }
+            return cell
+        default:
+            print("Something Bad HAPPENED inside cellForRowAt:")
+            return UITableViewCell()
         }
-        return searchController
-    }()
+    }
     
-    //MARK:-  Outsourcing Data Source
-    lazy var model = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude)
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableViewArrayType {
+        case TableIndex.business.rawValue:
+            let state = fetchBusinessController?.fetchedObjects?.count ?? 0
+            ShowNothingLabelIfNoResults(group: tableViewArrayType)
+            return state
+        case TableIndex.category.rawValue:
+            let state = fetchCategoryNames?.count ?? 0
+            ShowNothingLabelIfNoResults(group: tableViewArrayType)
+            return state
+        default:
+            print("numberOfRowsInSection --> WHOOOOOPS!!")
+        }
+        return TableIndex.business.rawValue
+    }
     
     
 }
