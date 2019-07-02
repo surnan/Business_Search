@@ -36,7 +36,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
         actionBusiness.backgroundColor = .red
         actionCategory.backgroundColor = .blue
     
-        if tableViewArrayType == TableIndex.category.rawValue {
+        if model.tableViewArrayType == TableIndex.category.rawValue {
             return [actionCategory]
         } else {
             return [actionBusiness]
@@ -74,7 +74,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if tableViewArrayType == TableIndex.category.rawValue {return nil}
+        if model.tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
             guard let self = self else {return}
             guard let currentBusiness = self.model.fetchBusinessController?.object(at: indexPath) else {return}
@@ -131,14 +131,14 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableViewArrayType {
+        switch model.tableViewArrayType {
         case TableIndex.business.rawValue:
             let state = model.fetchBusinessController?.fetchedObjects?.count ?? 0
-            ShowNothingLabelIfNoResults(group: tableViewArrayType)
+            ShowNothingLabelIfNoResults(group: model.tableViewArrayType)
             return state
         case TableIndex.category.rawValue:
             let state = model.fetchCategoryNames?.count ?? 0
-            ShowNothingLabelIfNoResults(group: tableViewArrayType)
+            ShowNothingLabelIfNoResults(group: model.tableViewArrayType)
             return state
         default:
             print("numberOfRowsInSection --> WHOOOOOPS!!")
@@ -153,7 +153,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableViewArrayType {
+        switch model.tableViewArrayType {
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
             cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
@@ -216,7 +216,7 @@ extension OpeningController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch tableViewArrayType {
+        switch model.tableViewArrayType {
         case TableIndex.category.rawValue:
             guard let currentCategory = model.fetchCategoryNames?[indexPath.row] else {return}
             listBusinesses(category: currentCategory)

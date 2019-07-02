@@ -37,8 +37,8 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
     var doesLocationEntityExist = false                         //set true after we create location or find location
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]()        //enumeration loop for semaphores
-    var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
-    var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
+//    var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
+//    var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
     
     func animateResultsAreFilteredLabel(){
         if !UserAppliedFilter.shared.isFilterOn {return}
