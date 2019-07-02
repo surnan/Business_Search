@@ -396,12 +396,12 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				848761D1227F1779000CECC7 /* Menu Controller */,
 				84365CAC22C564710014E577 /* Filter */,
 				84CC285B2297772700A82BBE /* Settings */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
 				84365CAB22C564520014E577 /* Opening Controller */,
-				848761D1227F1779000CECC7 /* Menu Controller */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
