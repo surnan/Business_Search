@@ -14,18 +14,18 @@ protocol UnBlurDelegate{
 }
 
 class MenuController: UIViewController, UnBlurDelegate {
-    var dataController:     DataController!         //MARK: Injected
-    var locationManager:    CLLocationManager!
-    var userLocation:       CLLocation!             //Provided via Apple GPS
-    var previousCoordinate: CLLocation?
-    
-    let activityView    = GenericActivityIndicatorView()
-    var model           = MainMenuModel()
-    var controllerIndex = 0
+    var dataController      : DataController!         //MARK: Injected
+    var locationManager     : CLLocationManager!
+    var userLocation        : CLLocation!             //Provided via Apple GPS
+    var previousCoordinate  : CLLocation?
+    let activityView        = GenericActivityIndicatorView()
+    var model               = MainMenuModel()
+    var controllerIndex     = 0
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = .lightBlue
+        view.backgroundColor    = .lightBlue
+        previousCoordinate      = nil
         setupUI()
     }
 
@@ -47,10 +47,10 @@ class MenuController: UIViewController, UnBlurDelegate {
         activityView.stopAnimating()
         switch controllerIndex {
         case 0:
-            let newVC = OpeningController()
-            newVC.dataController = dataController
-            newVC.latitude = userLocation.coordinate.latitude
-            newVC.longitude = userLocation.coordinate.longitude
+            let newVC               = OpeningController()
+            newVC.dataController    = dataController
+            newVC.latitude          = userLocation.coordinate.latitude
+            newVC.longitude         = userLocation.coordinate.longitude
             navigationController?.pushViewController(newVC, animated: true)
         case 1:
             let newVC = SearchByMapController()
@@ -86,10 +86,10 @@ class MenuController: UIViewController, UnBlurDelegate {
     @objc func handleSettings(){
         navigationController?.setNavigationBarHidden(true, animated: true)
         addDarkScreenBlur()
-        let newVC           = SettingsController()
+        let newVC               = SettingsController()
+        newVC.delegate          = self
+        newVC.dataController    = dataController
         newVC.modalPresentationStyle = .overFullScreen
-        newVC.delegate = self
-        newVC.dataController = dataController
         present(newVC, animated: true, completion:nil)
     }
     

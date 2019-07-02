@@ -15,11 +15,11 @@ extension MenuController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         if previousCoordinate == nil {
             previousCoordinate = userLocation
-            pushNextController()
-        } else if let previous = previousCoordinate, userLocation.distance(from: previous) > 10 {
+        } else if let previous = previousCoordinate, userLocation.distance(from: previous) < 10 {
+            //Prevents app from uploading a new Location entity too close to an existing one saved in CoreData
             userLocation = previous
-            pushNextController()
         }
+        pushNextController()
     }
     
     func determineMyCurrentLocation() {
