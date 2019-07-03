@@ -33,24 +33,32 @@ class MyDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
-            guard let self = self,
-                let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
+            guard let self = self else {return}
             
+            //guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
+            let currentBusiness = self.dd.getBusiness(at: indexPath)
             
-//            let isFavorite = currentBusiness.isFavoriteChange(context: (self.delegate.getDataController.viewContext))
-            let isFavorite = self.dd.isBusinessFavorite(at: indexPath)
+            let isFavorite = currentBusiness.isFavoriteChange(context: (self.delegate.getDataController.viewContext))
+            let isFavorite2 = self.dd.isBusinessFavorite(at: indexPath)
             
             
             myBool(true)    //Dismiss the leading swipe action
             //tableView.reloadRows(at: [indexPath], with: .automatic)
             
-            if isFavorite {
-//                if isFavorite2 {print("###")}
+            if isFavorite2 {
+                if isFavorite {
+                    print("###")
+                    print("isFavorite = \(isFavorite)  && isFavorite2 = \(isFavorite2)")
+                }
+                
                 self.delegate.createFavoriteEntity(business: currentBusiness, context: (self.delegate.getDataController.backGroundContext)!)  ///!
                 self.dd.resetBusinessController()
                 self.delegate.reloadData()
             } else {
-//                if !isFavorite2 {print("####")}
+                if !isFavorite {
+                    print("===")
+                    print("isFavorite = \(isFavorite)  && isFavorite2 = \(isFavorite2)")
+                }
                 self.delegate.deleteFavorite(business: currentBusiness)
                 self.dd.resetBusinessController()
                 self.delegate.reloadData()
