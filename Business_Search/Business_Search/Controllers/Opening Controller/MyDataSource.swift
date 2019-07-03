@@ -11,13 +11,17 @@ import CoreData
 import MapKit
 
 
-protocol OpeningControllerProtocol {
-    func getFetchBusinessController()
-    func getFetchCategoryNames()
+protocol DataDelegate {
+    func getBusiness()
 }
 
 
-class MyDataSource: NSObject, UITableViewDataSource {
+class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
+    
+    func getBusiness() {
+        print("")
+    }
+    
     var dataController: DataController!
     var latitude: Double!                                       //MARK: Injected
     var longitude: Double!                                      //MARK: Injected

@@ -27,7 +27,7 @@ extension OpeningController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
-        tableDelegate.delegate = self
+        //tableDelegate.delegate = self
         //tableDelegate.getModel = model
     }
     

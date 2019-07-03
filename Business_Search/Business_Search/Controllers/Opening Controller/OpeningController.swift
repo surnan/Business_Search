@@ -22,6 +22,12 @@ enum TableIndex:Int {
 class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate, OpenControllerDelegate {
     
     
+    //MARK:-  Outsourcing Data Source
+    lazy var model = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude)
+    lazy var tableDelegate = MyDelegate(delegate: self, dd: model)
+    
+    
+    
     var getDataController: DataController {return dataController}
     var getLatitude: Double {return latitude}
     var getLongitude: Double  {return longitude}
@@ -47,8 +53,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     var currentLocationID: NSManagedObjectID?                   //Used to connect newly downloaded Business to Location
     var doesLocationEntityExist = false                         //set true after we create location or find location
     var urlsQueue = [CreateYelpURLDuringLoopingStruct]()        //enumeration loop for semaphores
-//    var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
-//    var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
+
     
     func animateResultsAreFilteredLabel(){
         if !UserAppliedFilter.shared.isFilterOn {return}
@@ -93,7 +98,7 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }
     
     
-    let tableDelegate = MyDelegate()
+    
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -335,10 +340,5 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
         }
         return searchController
     }()
-    
-    //MARK:-  Outsourcing Data Source
-    lazy var model = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude)
-    
-    
-    
+   
 }
