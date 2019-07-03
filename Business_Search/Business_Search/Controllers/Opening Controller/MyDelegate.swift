@@ -22,12 +22,53 @@ protocol OpenControllerDelegate {
     func shareBusiness(business: Business)
     func getBusinessesFromCategoryName(category: String)-> [Business]
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext)
+    func deleteFavorite(business: Business)
     func reloadData()
 }
 
 class MyDelegate: NSObject, UITableViewDelegate {
     var delegate: OpenControllerDelegate!
     var dd: DataDelegate!
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
+        let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
+            guard let self = self,
+                let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
+            
+            
+//            let isFavorite = currentBusiness.isFavoriteChange(context: (self.delegate.getDataController.viewContext))
+            let isFavorite = self.dd.isBusinessFavorite(at: indexPath)
+            
+            
+            myBool(true)    //Dismiss the leading swipe action
+            //tableView.reloadRows(at: [indexPath], with: .automatic)
+            
+            if isFavorite {
+//                if isFavorite2 {print("###")}
+                self.delegate.createFavoriteEntity(business: currentBusiness, context: (self.delegate.getDataController.backGroundContext)!)  ///!
+                self.dd.resetBusinessController()
+                self.delegate.reloadData()
+            } else {
+//                if !isFavorite2 {print("####")}
+                self.delegate.deleteFavorite(business: currentBusiness)
+                self.dd.resetBusinessController()
+                self.delegate.reloadData()
+                //TODO: delete favorite
+                print("currentBusiness.id --> \(currentBusiness.id!)")
+                print("")
+            }
+            
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return nil}
+        action.image = currentBusiness.isFavorite ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
+        action.backgroundColor =  currentBusiness.isFavorite ? .lightSteelBlue1 : .orange
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+    
+    
     
     init(delegate: OpenControllerDelegate, dd: DataDelegate) {
         self.delegate = delegate
@@ -77,33 +118,5 @@ class MyDelegate: NSObject, UITableViewDelegate {
         } else {
             return [actionBusiness]
         }
-    }
-    
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
-        let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
-            guard let self = self else {return}
-            guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
-            let isFavorite = currentBusiness.isFavoriteChange(context: (self.delegate.getDataController.viewContext))
-            myBool(true)    //Dismiss the leading swipe action
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-            if isFavorite {
-                self.delegate.createFavoriteEntity(business: currentBusiness, context: (self.delegate.getDataController.backGroundContext)!)  ///!
-                self.delegate.getModel.fetchBusinessController = nil
-                self.delegate.reloadData()
-            } else {
-                //self.model.deleteFavorite(business: currentBusiness)
-                self.delegate.getModel.fetchBusinessController = nil
-                self.delegate.reloadData()
-                //TODO: delete favorite
-                print("currentBusiness.id --> \(currentBusiness.id!)")
-                print("")
-            }
-        }
-        guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return nil}
-        action.image = currentBusiness.isFavorite ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
-        action.backgroundColor =  currentBusiness.isFavorite ? .lightSteelBlue1 : .orange
-        let configuration = UISwipeActionsConfiguration(actions: [action])
-        return configuration
     }
 }
