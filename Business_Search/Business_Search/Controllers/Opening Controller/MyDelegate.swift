@@ -23,6 +23,7 @@ protocol OpenControllerDelegate {
     func getBusinessesFromCategoryName(category: String)-> [Business]
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext)
     func deleteFavorite(business: Business)
+    func updateBusinessFavoriteFlag(business: Business)->Bool
     func reloadData()
 }
 
@@ -33,40 +34,25 @@ class MyDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
-            guard let self = self else {return}
+            guard let self = self, let dd = self.dd, let delegate = self.delegate else {return}
             
-            //guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
-            let currentBusiness = self.dd.getBusiness(at: indexPath)
-            
-            let isFavorite = currentBusiness.isFavoriteChange(context: (self.delegate.getDataController.viewContext))
-            let isFavorite2 = self.dd.isBusinessFavorite(at: indexPath)
-            
+            let currentBusiness = dd.getBusiness(at: indexPath)
+            let isFavorite = delegate.updateBusinessFavoriteFlag(business: currentBusiness)
             
             myBool(true)    //Dismiss the leading swipe action
-            //tableView.reloadRows(at: [indexPath], with: .automatic)
-            
-            if isFavorite2 {
-                if isFavorite {
-                    print("###")
-                    print("isFavorite = \(isFavorite)  && isFavorite2 = \(isFavorite2)")
-                }
-                
-                self.delegate.createFavoriteEntity(business: currentBusiness, context: (self.delegate.getDataController.backGroundContext)!)  ///!
-                self.dd.resetBusinessController()
-                self.delegate.reloadData()
+
+            if isFavorite {
+                delegate.createFavoriteEntity(business: currentBusiness, context: (delegate.getDataController.backGroundContext)!)  ///!
+                dd.resetBusinessController()
+                delegate.reloadData()
             } else {
-                if !isFavorite {
-                    print("===")
-                    print("isFavorite = \(isFavorite)  && isFavorite2 = \(isFavorite2)")
-                }
-                self.delegate.deleteFavorite(business: currentBusiness)
-                self.dd.resetBusinessController()
-                self.delegate.reloadData()
+                delegate.deleteFavorite(business: currentBusiness)
+                dd.resetBusinessController()
+                delegate.reloadData()
                 //TODO: delete favorite
                 print("currentBusiness.id --> \(currentBusiness.id!)")
                 print("")
             }
-            
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return nil}

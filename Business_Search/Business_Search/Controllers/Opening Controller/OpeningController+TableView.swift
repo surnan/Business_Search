@@ -103,6 +103,11 @@ extension OpeningController: UITableViewDelegate {
         return businesses
     }
     
+    func updateBusinessFavoriteFlag(business: Business)->Bool{
+        return business.isFavoriteChange(context: dataController.viewContext)
+    }
+    
+    
     func listBusinesses(category: String){
         let newVC = MyTabController()
         let items = getBusinessesFromCategoryName(category: category)

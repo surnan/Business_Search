@@ -12,18 +12,19 @@ import MapKit
 
 
 protocol DataDelegate {
-    func getBusiness(at: IndexPath)
-//    func isFavorite(business: Business)->Bool
+    func getBusiness(at indexPath: IndexPath)->Business
     func isBusinessFavorite(at indexPath: IndexPath) -> Bool
     func resetBusinessController()
 }
 
 
 class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
-//    func isFavorite(business: Business) -> Bool {
-//        return false
-//    }
+    func getBusiness(at indexPath: IndexPath) -> Business {
+        let currentBusiness = fetchBusinessController!.object(at: indexPath)
+        return currentBusiness
+    }
     
+
     func isBusinessFavorite(at indexPath: IndexPath) -> Bool {
         //Tableaction != nil because it's tableView action
         let currentBusiness = fetchBusinessController!.object(at: indexPath)
