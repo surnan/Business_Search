@@ -19,7 +19,17 @@ enum TableIndex:Int {
     case business = 0, category
 }
 
-class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate {
+class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate, OpenControllerDelegate {
+    
+    
+    var getDataController: DataController {return dataController}
+    var getLatitude: Double {return latitude}
+    var getLongitude: Double  {return longitude}
+    var getModel: MyDataSource {return model}
+    func currentSelected(_ indexPath: IndexPath) {print(indexPath)}
+    
+    func reloadData(){tableView.reloadData()}
+    
     
     
     var latitude: Double!                                       //MARK: Injected
@@ -83,11 +93,12 @@ class OpeningController: UIViewController, NSFetchedResultsControllerDelegate, U
     }
     
     
-    
+    let tableDelegate = MyDelegate()
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.delegate = self
+        //tableView.delegate = self
+        tableView.delegate = tableDelegate
         tableView.dataSource = model
         tableView.tableFooterView = UIView()
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)

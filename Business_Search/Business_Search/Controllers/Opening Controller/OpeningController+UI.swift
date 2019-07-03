@@ -27,8 +27,8 @@ extension OpeningController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
-        
-        tableView.dataSource = model
+        tableDelegate.delegate = self
+        //tableDelegate.getModel = model
     }
     
     func setupUI(){
