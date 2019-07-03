@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 
 extension OpeningController: UITableViewDelegate {
+    
+    //Tableview Row Actions
     func shareBusiness(business: Business){
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
         guard let temp = business.url else {return}
@@ -38,32 +40,8 @@ extension OpeningController: UITableViewDelegate {
     }
 
 
-    func deleteFavorite(business: Business){
-        //lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
-        model.fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
-        model.fetchFavoritesController = nil
-        model.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
-            dataController.viewContext.delete(item)
-            do {
-                try dataController.viewContext.save()
-            } catch {
-                print(error)
-                print(error.localizedDescription)
-            }
-        })
-    }
-    
-    func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
-        let newFavorite2 = Favorites(context: context)
-        newFavorite2.id = business.id
-        do {
-            try context.save()
-            print("createFavorite -- SAVE()")
-        } catch {
-            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
-            print("\n\nError saving newly created favorite - full error: \n\(error)")
-        }
-    }
+
+    //Nothing Found Label
     
     private func showNothingFoundView(){
         UIView.animate(withDuration: 1.0) {[unowned self] in
@@ -95,6 +73,7 @@ extension OpeningController: UITableViewDelegate {
         }
     }
 
+    //NavigationController().push()
     
     func showBusinessInfo(currentBusiness: Business){
         let newVC = BusinessDetailsController()
@@ -130,6 +109,34 @@ extension OpeningController: UITableViewDelegate {
         newVC.businesses = items
         newVC.categoryName = category
         navigationController?.pushViewController(newVC, animated: true)
+    }
+    
+    //Manipulates another Core Data Entity
+    func deleteFavorite(business: Business){
+        //lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
+        model.fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
+        model.fetchFavoritesController = nil
+        model.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+            dataController.viewContext.delete(item)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error)
+                print(error.localizedDescription)
+            }
+        })
+    }
+    
+    func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
+        do {
+            try context.save()
+            print("createFavorite -- SAVE()")
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
     }
 }
 
