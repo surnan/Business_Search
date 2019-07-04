@@ -11,18 +11,13 @@ import UIKit
 extension OpeningController: UISearchResultsUpdating {
     
     func resetAllFetchControllers() {
-        model.fetchBusinessPredicate = nil
-        model.fetchCategoryArrayNamesPredicate = nil
-        model.fetchBusinessController = nil
-        model.fetchCategoryNames = nil
-        model.fetchFavoritePredicate = nil
-        model.fetchFavoritesController = nil
+        tableDataSource.resetAllControllerAndPredicates()
         tableView.reloadData()
     }
     
     func reloadFetchControllers() {
-        model.fetchBusinessController = nil
-        model.fetchCategoryNames = nil
+        tableDataSource.reloadBusinessController()
+        tableDataSource.reloadCategoryNames()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -38,8 +33,8 @@ extension OpeningController: UISearchResultsUpdating {
             resetAllFetchControllers()
             return
         }
-        model.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        model.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        tableDataSource.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        tableDataSource.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
         reloadFetchControllers()
     }
     
@@ -57,9 +52,9 @@ extension OpeningController: UISearchResultsUpdating {
     
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        model.searchGroupIndex = selectedScope
+        tableDataSource.searchGroupIndex = selectedScope
         tableView.reloadData()
-        ShowNothingLabelIfNoResults(group: model.tableViewArrayType)
+        ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
         animateResultsAreFilteredLabel()
     }
 }

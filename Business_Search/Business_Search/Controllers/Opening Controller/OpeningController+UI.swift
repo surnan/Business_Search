@@ -27,22 +27,21 @@ extension OpeningController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
-        //tableDelegate.delegate = self
-        //tableDelegate.getModel = model
     }
     
     func setupUI(){
-        [tableView].forEach{view.addSubview($0)}
-        nothingFoundView.center = view.center                               //UILabel When tableView is empty
-        view.insertSubview(nothingFoundView, aboveSubview: tableView)
-        tableView.fillSafeSuperView()
         view.backgroundColor = .lightRed
         definesPresentationContext = true
+        
+        [tableView, model.nothingFoundView].forEach{view.addSubview($0)}
+        tableView.fillSafeSuperView()
+        model.nothingFoundView.centerToSuperView()                             //UILabel When tableView is empty
+
     }
     
     func readOrCreateLocation(){  //Check if location exists or download
-        model.fetchLocationController = nil                                       //Only time Locations should be loaded
-        let locationArray = model.fetchLocationController?.fetchedObjects
+        tableDataSource.fetchLocationController = nil                                       //Only time Locations should be loaded
+        let locationArray = tableDataSource.fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
             _ = YelpClient.getBusinesses(latitude: latitude,
@@ -90,8 +89,8 @@ extension OpeningController {
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
         //print("Radius = \(radius)")
-        print("fetchBusiness.FetchedObject.count - ", model.fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", model.fetchCategoryNames?.count ?? -999)
+        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999)
+        print("fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
         tableView.reloadData()
     }
 }

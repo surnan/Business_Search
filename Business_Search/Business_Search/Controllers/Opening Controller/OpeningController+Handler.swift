@@ -146,7 +146,7 @@ extension OpeningController {
     func runDownloadAgain(){
         reloadFetchControllers()
         //        print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
-        print("fetchBusiness.FetchedObject.count - ", model.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", model.fetchCategoryNames?.count ?? -999)
+        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
         }
@@ -155,12 +155,12 @@ extension OpeningController {
     
     func searchFavorites(){
         resetAllFetchControllers()
-        let allFavorites = model.fetchFavoritesController?.fetchedObjects ?? []
+        let allFavorites = tableDataSource.fetchFavoritesController?.fetchedObjects ?? []
         for ( _ , item) in allFavorites.enumerated() {
             guard let ID = item.id else {return}
-            model.fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [ID])
-            model.fetchBusinessController = nil
-            let results = model.fetchBusinessController?.fetchedObjects ?? []
+            tableDataSource.fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [ID])
+            tableDataSource.fetchBusinessController = nil
+            let results = tableDataSource.fetchBusinessController?.fetchedObjects ?? []
             if results.isEmpty {
                 return
             } else {

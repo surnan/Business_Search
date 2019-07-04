@@ -9,7 +9,16 @@
 import UIKit
 
 class OpeningModel {
-    let nothingFoundView = GenericAttributedTextLabel(text: "No matches found", attributes: greenHelvetica_30_greyStroke)
+    
+    
+    
+    let nothingFoundView: GenericAttributedTextLabel = {
+        let myView = GenericAttributedTextLabel(text: "No matches found", attributes: greenHelvetica_30_greyStroke)
+        myView.alpha = 0
+        myView.isUserInteractionEnabled = false
+        return myView
+    }()
+    
     
     func hideNothingFoundView(){
         nothingFoundView.alpha = 0

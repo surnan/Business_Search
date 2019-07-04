@@ -15,10 +15,32 @@ protocol DataDelegate {
     func getBusiness(at indexPath: IndexPath)->Business
     func getCategoryName(at index: Int)->String
     func resetBusinessController()
+    func resetAllControllerAndPredicates()
+    func reloadBusinessController()
+    func reloadCategoryNames()
 }
 
 
 class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
+    func reloadCategoryNames() {
+        fetchCategoryNames = nil
+    }
+    
+
+    func reloadBusinessController(){
+        fetchBusinessController = nil
+    }
+
+    
+    func resetAllControllerAndPredicates() {
+        fetchBusinessPredicate = nil
+        fetchCategoryArrayNamesPredicate = nil
+        fetchBusinessController = nil
+        fetchCategoryNames = nil
+        fetchFavoritePredicate = nil
+        fetchFavoritesController = nil
+    }
+    
     var dataController: DataController!
     var latitude: Double!
     var longitude: Double!
@@ -225,6 +247,13 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         //            print("ShowNothingLabelIfNoResults --> is very unhappy")
         //        }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
 }
