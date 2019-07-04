@@ -74,13 +74,11 @@ extension OpeningController: UITableViewDelegate {
     }
 
     //NavigationController().push()
-    
     func showBusinessInfo(currentBusiness: Business){
         let newVC = BusinessDetailsController()
         newVC.business = currentBusiness
         navigationController?.pushViewController(newVC, animated: true)
     }
-    
     
     func getBusinessesFromCategoryName(category: String)-> [Business]{
         //This array is not NOT shown in this tableView.
@@ -103,9 +101,7 @@ extension OpeningController: UITableViewDelegate {
         return businesses
     }
     
-    func updateBusinessFavoriteFlag(business: Business)->Bool{
-        return business.isFavoriteChange(context: dataController.viewContext)
-    }
+    func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
     
     
     func listBusinesses(category: String){
@@ -131,6 +127,21 @@ extension OpeningController: UITableViewDelegate {
             }
         })
     }
+    
+    func createFavorite(business: Business){
+        let context = dataController.viewContext
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
+        do {
+            try context.save()
+            print("createFavorite -- SAVE()")
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
+    }
+    
+    
     
     func createFavoriteEntity(business: Business, context: NSManagedObjectContext){
         let newFavorite2 = Favorites(context: context)

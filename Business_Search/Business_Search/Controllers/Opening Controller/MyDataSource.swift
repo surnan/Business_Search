@@ -13,41 +13,16 @@ import MapKit
 
 protocol DataDelegate {
     func getBusiness(at indexPath: IndexPath)->Business
-    func isBusinessFavorite(at indexPath: IndexPath) -> Bool
+    func getCategoryName(at index: Int)->String
     func resetBusinessController()
 }
 
 
 class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
-    func getBusiness(at indexPath: IndexPath) -> Business {
-        let currentBusiness = fetchBusinessController!.object(at: indexPath)
-        return currentBusiness
-    }
-    
-
-    func isBusinessFavorite(at indexPath: IndexPath) -> Bool {
-        //Tableaction != nil because it's tableView action
-        let currentBusiness = fetchBusinessController!.object(at: indexPath)
-        return currentBusiness.isFavorite
-    }
-    
-    func resetBusinessController() {
-        fetchBusinessController = nil
-    }
-    
-    func getBusiness(at: IndexPath) {
-        print("")
-    }
-    
-    
-    func getBusiness() {
-        print("")
-    }
-    
     var dataController: DataController!
-    var latitude: Double!                                       //MARK: Injected
-    var longitude: Double!                                      //MARK: Injected
-
+    var latitude: Double!
+    var longitude: Double!
+    
     
     init(dataController: DataController, latitude: Double, longitude: Double) {
         super.init()
@@ -56,27 +31,25 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         self.longitude = longitude
     }
     
-
-    
-    var searchGroupIndex = 0                                    //Only accessed directly in 'func selectedScopeButtonIndexDidChange'
-    var tableViewArrayType: Int { return searchGroupIndex }     //Enables functions to know which SearchGroup is selected
+    var searchGroupIndex = 0                                    //'func selectedScopeButtonIndexDidChange'
+    var tableViewArrayType: Int { return searchGroupIndex }     //protect searchGroupIndex
     
     //MARK:- Predicates
-    
     lazy var fetchPredicateInput: String? = nil
     var selectedCategoryPredicate: NSPredicate? {
         didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
             fetchCategoriesController?.fetchRequest.predicate = fetchBusinessPredicate
         }
     }
     
     var fetchBusinessPredicate : NSPredicate? {
         didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case we use NSFetchResults Cache
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
             fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
         }
     }
+    var fetchFavoritePredicate: NSPredicate?
     
     lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
     var predicateTest = false
@@ -91,22 +64,18 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
                     var predicate: [NSPredicate] = [predicateBusinessLatitude, predicateBusinessLongitude]
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
-                    
-                    var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()    //FilterController() & Singleton
+                    var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()
                     filterControllerPredicate.append(openingControllerPredicate)
                     
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                     
                     let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
                     let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
-                    
                     fetchRequest.sortDescriptors = [sortDescriptor2, sortDescriptor]
-                    
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -118,7 +87,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         }   //-2
     }   //-1
     
-    //aFetchedResultsController.delegate = self
     var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
         didSet {    //+2
             if fetchCategoriesController == nil { //+3
@@ -133,7 +101,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -145,9 +112,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         }   //-2
     }   //-1
     
-    var fetchFavoritePredicate: NSPredicate?
-    
-    //aFetchedResultsController.delegate = self
     var fetchFavoritesController: NSFetchedResultsController<Favorites>?{
         didSet{
             if fetchFavoritesController == nil {
@@ -160,7 +124,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -190,7 +153,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
                 fetchRequest.returnsDistinctResults = true
                 let sortDescriptor = [NSSortDescriptor(key: "title", ascending: true)]
                 fetchRequest.sortDescriptors = sortDescriptor
-                
                 
                 var predicate: [NSPredicate] = [predicateCategoryLatitude, predicateCategoryLongitude]
                 if let _predicate = fetchCategoryArrayNamesPredicate {predicate.append(_predicate)}
@@ -223,7 +185,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         }
     }
     
-    //aFetchedResultsController.delegate = self
     var fetchLocationController: NSFetchedResultsController<Location>? {
         didSet {
             if fetchLocationController == nil {
@@ -235,7 +196,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
-                    //aFetchedResultsController.delegate = self
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
@@ -248,24 +208,28 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
     }
     
     func ShowNothingLabelIfNoResults(group: Int){
-//        switch group {
-//        case TableIndex.business.rawValue:
-//            if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-//                showNothingFoundView()
-//            } else {
-//                hideNothingFoundView()
-//            }
-//        case TableIndex.category.rawValue:
-//            if fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-//                showNothingFoundView()
-//            } else {
-//                hideNothingFoundView()
-//            }
-//        default:
-//            print("ShowNothingLabelIfNoResults --> is very unhappy")
-//        }
+        //        switch group {
+        //        case TableIndex.business.rawValue:
+        //            if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+        //                showNothingFoundView()
+        //            } else {
+        //                hideNothingFoundView()
+        //            }
+        //        case TableIndex.category.rawValue:
+        //            if fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
+        //                showNothingFoundView()
+        //            } else {
+        //                hideNothingFoundView()
+        //            }
+        //        default:
+        //            print("ShowNothingLabelIfNoResults --> is very unhappy")
+        //        }
     }
     
+    
+}
+
+extension MyDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
@@ -313,5 +277,29 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
             print("numberOfRowsInSection --> WHOOOOOPS!!")
         }
         return TableIndex.business.rawValue
+    }
+}
+
+extension MyDataSource {
+    func getCategoryName(at index: Int) -> String {
+        let categoryName = fetchCategoryNames![index]
+        return categoryName
+    }
+    
+    func getBusiness(at indexPath: IndexPath) -> Business {
+        // != nil.  Otherwise, tableView would be empty and can't have indexPath
+        let currentBusiness = fetchBusinessController!.object(at: indexPath)
+        return currentBusiness
+    }
+    
+    
+    func isBusinessFavorite(at indexPath: IndexPath) -> Bool {
+        // != nil.  Otherwise, tableView would be empty and can't have indexPath
+        let currentBusiness = fetchBusinessController!.object(at: indexPath)
+        return currentBusiness.isFavorite
+    }
+    
+    func resetBusinessController() {
+        fetchBusinessController = nil
     }
 }

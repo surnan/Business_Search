@@ -107,7 +107,7 @@
 		848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateYelpURLDuringLooping.swift; sourceTree = "<group>"; };
-		849A934722CD032300DE6658 /* MyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDelegate.swift; sourceTree = "<group>"; };
+		849A934722CD032300DE6658 /* MyDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapResponse.swift; sourceTree = "<group>"; };
 		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };

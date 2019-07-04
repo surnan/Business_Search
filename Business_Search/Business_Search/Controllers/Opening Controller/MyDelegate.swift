@@ -11,65 +11,46 @@ import CoreData
 import MapKit
 
 protocol OpenControllerDelegate {
-    //func currentSelected() won't give the auto-completes
-    func currentSelected(_ indexPath: IndexPath)
     var getModel: MyDataSource {get}
-    var getLatitude: Double {get}
-    var getLongitude: Double {get}
-    var getDataController: DataController {get}
     func listBusinesses(category: String)
     func showBusinessInfo(currentBusiness: Business)
     func shareBusiness(business: Business)
     func getBusinessesFromCategoryName(category: String)-> [Business]
-    func createFavoriteEntity(business: Business, context: NSManagedObjectContext)
     func deleteFavorite(business: Business)
-    func updateBusinessFavoriteFlag(business: Business)->Bool
+    func updateBusinessIsFavorite(business: Business)->Bool
     func reloadData()
+    func createFavorite(business: Business)
 }
 
 class MyDelegate: NSObject, UITableViewDelegate {
     var delegate: OpenControllerDelegate!
-    var dd: DataDelegate!
+    var dd      : DataDelegate!
+    
+    init(delegate: OpenControllerDelegate, dd: DataDelegate) {
+        self.delegate   = delegate
+        self.dd         = dd
+    }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
+        let currentBusiness = dd.getBusiness(at: indexPath)
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
-            guard let self = self, let dd = self.dd, let delegate = self.delegate else {return}
-            
-            let currentBusiness = dd.getBusiness(at: indexPath)
-            let isFavorite = delegate.updateBusinessFavoriteFlag(business: currentBusiness)
-            
-            myBool(true)    //Dismiss the leading swipe action
-
-            if isFavorite {
-                delegate.createFavoriteEntity(business: currentBusiness, context: (delegate.getDataController.backGroundContext)!)  ///!
-                dd.resetBusinessController()
-                delegate.reloadData()
-            } else {
-                delegate.deleteFavorite(business: currentBusiness)
-                dd.resetBusinessController()
-                delegate.reloadData()
-                //TODO: delete favorite
-                print("currentBusiness.id --> \(currentBusiness.id!)")
-                print("")
-            }
+            guard let self  = self, let dd = self.dd, let delegate = self.delegate else {return}
+            let isFavorite  = delegate.updateBusinessIsFavorite(business: currentBusiness)
+            isFavorite ? delegate.createFavorite(business: currentBusiness)
+                :delegate.deleteFavorite(business: currentBusiness)
+            dd.resetBusinessController()
+            delegate.reloadData()
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            myBool(true)                                //Dismiss the leading swipe from UI
         }
-        guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return nil}
-        action.image = currentBusiness.isFavorite ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
-        action.backgroundColor =  currentBusiness.isFavorite ? .lightSteelBlue1 : .orange
-        let configuration = UISwipeActionsConfiguration(actions: [action])
+        action.image            = currentBusiness.isFavorite    ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
+        action.backgroundColor  =  currentBusiness.isFavorite   ? .lightSteelBlue1 : .orange
+        let configuration       = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }
     
-    
-    
-    init(delegate: OpenControllerDelegate, dd: DataDelegate) {
-        self.delegate = delegate
-        self.dd = dd
-    }
-    
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
@@ -94,23 +75,15 @@ class MyDelegate: NSObject, UITableViewDelegate {
         }
         actionBusiness.backgroundColor = .darkBlue
         let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") { (action, indexPath) in
-            guard let currentCategory = self.delegate.getModel.fetchCategoryNames?[indexPath.row] else {return}
-            
-            //guard let items = self.delegate.getBusinessesFromCategoryName(category: currentCategory) else {return}
-            let items = self.delegate.getBusinessesFromCategoryName(category: currentCategory)
-            
-            
-            let modder = items.count - 1
-            let randomNumber = Int.random(in: 0...modder)
-            print(items[randomNumber].name ?? "")
+            let currentCategory = self.dd.getCategoryName(at: indexPath.row)
+            let items           = self.delegate.getBusinessesFromCategoryName(category: currentCategory)
+            let modder          = items.count - 1
+            let randomNumber    = Int.random(in: 0...modder)
             self.delegate.showBusinessInfo(currentBusiness: items[randomNumber])
         }
         actionBusiness.backgroundColor = .red
         actionCategory.backgroundColor = .blue
-        if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {
-            return [actionCategory]
-        } else {
-            return [actionBusiness]
-        }
+        return delegate.getModel.tableViewArrayType == TableIndex.category.rawValue ? [actionCategory]
+            : [actionBusiness]
     }
 }
