@@ -39,3 +39,11 @@ let whiteHelvetica_20_blackStroke : [NSAttributedString.Key: Any] = [
     NSAttributedString.Key.strokeWidth: -2.6,
     NSAttributedString.Key.strokeColor: UIColor.black
 ]
+
+let greenHelvetica_30_greyStroke : [NSAttributedString.Key: Any] = [
+    NSAttributedString.Key.strokeColor: UIColor.lightGray,
+    NSAttributedString.Key.foregroundColor: UIColor.green,
+    NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
+    NSAttributedString.Key.strokeWidth: -1.0
+]
+
