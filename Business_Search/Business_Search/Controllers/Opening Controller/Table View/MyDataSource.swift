@@ -16,12 +16,17 @@ protocol DataDelegate {
     func getCategoryName(at index: Int)->String
     func resetBusinessController()
     func resetAllControllerAndPredicates()
-    func reloadBusinessController()
     func reloadCategoryNames()
+    func reloadBusinessController()
+    func reloadCategoryController()
 }
 
 
 class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
+    func reloadCategoryController(){
+        fetchCategoriesController = nil
+    }
+    
     func reloadCategoryNames() {
         fetchCategoryNames = nil
     }

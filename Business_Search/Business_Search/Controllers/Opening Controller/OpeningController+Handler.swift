@@ -11,6 +11,36 @@ import CoreData
 import MapKit
 
 extension OpeningController {
+    //MARK:- BreakPoint
+    @objc func JumpToBreakPoint(total: Int){
+        //print("Radius = \(radius)")
+        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999)
+        print("fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
+        model.tableView.reloadData()
+    }
+    
+    @objc func handleSettings(){
+        let newVC = SettingsController()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        view.addSubview(model.blurredEffectView)
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.delegate = self
+        newVC.dataController = dataController
+        newVC.maximumSliderValue = radius
+        present(newVC, animated: true, completion:nil)
+    }
+    
+    @objc func handleFilter(){
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        view.addSubview(model.blurredEffectView)
+        model.blurredEffectView.fillSuperview()
+        let newVC = FilterController()
+        newVC.modalPresentationStyle = .overFullScreen
+        newVC.delegate = self
+        present(newVC, animated: true)
+    }
+    
+    
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
@@ -30,17 +60,6 @@ extension OpeningController {
                 print("Error saving func addLocation() --\n\(error)")
             }
         }
-    }
-    
-    @objc func handleSettings(){
-        let newVC = SettingsController()
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        view.addSubview(blurredEffectView2)
-        newVC.modalPresentationStyle = .overFullScreen
-        newVC.delegate = self
-        newVC.dataController = dataController
-        newVC.maximumSliderValue = radius
-        present(newVC, animated: true, completion:nil)
     }
     
     func checkLocationCount(data: YelpBusinessResponse){
@@ -63,9 +82,6 @@ extension OpeningController {
             reloadFetchControllers()
         }
     }
-    
-    
-    
     
     func handleGetNearbyBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
@@ -104,8 +120,6 @@ extension OpeningController {
             }
         }
     }
-
-    
     
     func buildURLsQueueForDownloadingBusinesses(total: Int){
     //let yelpMaxPullCount = 1000
@@ -120,15 +134,11 @@ extension OpeningController {
         if urlsQueue.isEmpty {return}
         let semaphore = DispatchSemaphore(value: 4)
         let dispatchGroup = DispatchGroup()
-        
-        print("urlsQueue.count = \(urlsQueue.count)")
         for (index, element) in urlsQueue.enumerated(){
             if index > 3 {break}
             dispatchGroup.enter()
             _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
-                defer {
-                    dispatchGroup.leave()
-                }
+                defer {dispatchGroup.leave()}
                 self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
             })
         }
@@ -145,7 +155,6 @@ extension OpeningController {
     
     func runDownloadAgain(){
         reloadFetchControllers()
-        //        print("\nTimer fired!\nurlsQueue ------> \(self.urlsQueue)")
         print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)

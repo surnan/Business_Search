@@ -20,7 +20,6 @@ enum TableIndex:Int {
 }
 
 class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate, OpenControllerDelegate {
-    
     lazy var tableDataSource    = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude)
     lazy var tableDelegate      = MyDelegate(delegate: self, dd: tableDataSource)
     let model                   = OpeningModel()
@@ -29,13 +28,11 @@ class OpeningController: UIViewController, UISearchControllerDelegate, UISearchB
     var getLatitude                 : Double {return latitude}
     var getLongitude                : Double  {return longitude}
     var getModel                    : MyDataSource {return tableDataSource}
-    func currentSelected(_ indexPath: IndexPath) {print(indexPath)}
     
-    
-    var latitude        : Double!                                       //MARK: Injected
-    var longitude       : Double!                                      //MARK: Injected
-    var moc             : NSManagedObjectContext!                            //Parent-Context
-    var privateMoc      : NSManagedObjectContext!                     //Child-Context for CoreData Concurrency
+    var latitude        : Double!                                 //MARK: Injected
+    var longitude       : Double!                                 //MARK: Injected
+    var moc             : NSManagedObjectContext!                 //Parent-Context
+    var privateMoc      : NSManagedObjectContext!                 //Child-Context for CoreData Concurrency
     var dataController  : DataController!{                        //MARK: Injected
         didSet {
             moc                 = dataController.viewContext
@@ -48,16 +45,6 @@ class OpeningController: UIViewController, UISearchControllerDelegate, UISearchB
     var doesLocationEntityExist = false                                     //set true after we create location or find location
     var urlsQueue               = [CreateYelpURLDuringLoopingStruct]()      //enumeration loop for semaphores
     
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = tableDelegate
-        tableView.dataSource = tableDataSource
-        tableView.tableFooterView = UIView()
-        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
-        tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
-        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
-        return tableView
-    }()
 
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -79,46 +66,4 @@ class OpeningController: UIViewController, UISearchControllerDelegate, UISearchB
         }
         return searchController
     }()
-    
-    //MOVE OUT
-    func animateResultsAreFilteredLabel(){
-        if !UserAppliedFilter.shared.isFilterOn {return}
-        print("B - Filter executed")
-        
-        let resultsAreFilteredLabel: UILabel = {
-            let label = UILabel()
-            label.backgroundColor = .black
-            label.textColor = .white
-            label.textAlignment = .center
-            label.text = "Partial results due to filter options..."
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
-        view.addSubview(resultsAreFilteredLabel)
-        let safe = view.safeAreaLayoutGuide
-        resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
-        resultsAreFilteredLabel.alpha = 1
-        
-        UIView.animate(withDuration: 1.5, animations: {
-            resultsAreFilteredLabel.alpha = 0
-        }) { (_) in
-            resultsAreFilteredLabel.removeFromSuperview()
-        }
-    }
-    
-    lazy var blurredEffectView2: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = view.bounds
-        return blurredEffectView
-    }()
-    
-    func undoBlur() {
-        blurredEffectView2.removeFromSuperview()
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        doesLocationEntityExist = false
-        readOrCreateLocation()
-        animateResultsAreFilteredLabel()
-    }
 }

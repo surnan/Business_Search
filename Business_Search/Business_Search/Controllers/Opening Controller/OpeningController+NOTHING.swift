@@ -9,33 +9,43 @@
 import UIKit
 import CoreData
 
+//NOTHING LABEL
 
 extension OpeningController{
-
-    private func showNothingFoundView(){
-        UIView.animate(withDuration: 1.0) {[unowned self] in
-            self.model.nothingFoundView.alpha = 1
+    func undoBlur() {
+        model.blurredEffectView.removeFromSuperview()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        doesLocationEntityExist = false
+        readOrCreateLocation()
+        animateResultsAreFilteredLabel()
+    }
+    
+    func animateResultsAreFilteredLabel(){
+        if !UserAppliedFilter.shared.isFilterOn {return}
+        view.addSubview(model.resultsAreFilteredLabel)
+        let safe = view.safeAreaLayoutGuide
+        model.resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
+        model.resultsAreFilteredLabel.alpha = 1
+        UIView.animate(withDuration: 1.5, animations: {
+            self.model.resultsAreFilteredLabel.alpha = 0
+        }) { (_) in
+            self.model.resultsAreFilteredLabel.removeFromSuperview()
         }
     }
-    
-    private func hideNothingFoundView(){
-        model.nothingFoundView.alpha = 0
-    }
-    
     
     func ShowNothingLabelIfNoResults(group: Int){
         switch group {
         case TableIndex.business.rawValue:
             if tableDataSource.fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-                showNothingFoundView()
+                model.showNothingFoundView()
             } else {
-                hideNothingFoundView()
+                model.hideNothingFoundView()
             }
         case TableIndex.category.rawValue:
             if tableDataSource.fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-                showNothingFoundView()
+                model.showNothingFoundView()
             } else {
-                hideNothingFoundView()
+                model.hideNothingFoundView()
             }
         default:
             print("ShowNothingLabelIfNoResults --> is very unhappy")

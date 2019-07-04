@@ -13,13 +13,11 @@ import MapKit
 extension OpeningController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent       //Status bar sometimes turns black when typing into search bar
-    }                              //Setting color scheme here just to play it safe
-    
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animateResultsAreFilteredLabel()
-        
     }
     
     override func viewDidLoad() {
@@ -27,20 +25,20 @@ extension OpeningController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
+        model.tableView.delegate      = tableDelegate
+        model.tableView.dataSource    = tableDataSource
     }
     
     func setupUI(){
         view.backgroundColor = .lightRed
         definesPresentationContext = true
-        
-        [tableView, model.nothingFoundView].forEach{view.addSubview($0)}
-        tableView.fillSafeSuperView()
-        model.nothingFoundView.centerToSuperView()                             //UILabel When tableView is empty
-
+        [model.tableView, model.nothingFoundView].forEach{view.addSubview($0)}
+        model.tableView.fillSafeSuperView()
+        model.nothingFoundView.centerToSuperView()                                      //UILabel When tableView is empty
     }
     
     func readOrCreateLocation(){  //Check if location exists or download
-        tableDataSource.fetchLocationController = nil                                       //Only time Locations should be loaded
+        tableDataSource.fetchLocationController = nil                                    //Only time Locations should be loaded
         let locationArray = tableDataSource.fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
@@ -53,12 +51,11 @@ extension OpeningController {
         var index = 0
         let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
         
-        //While Loop so the return can break out of the function with 'return'
+        //While "return" can break out of the function
         while index < _locationArray.count {
             let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
             let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-            
             if miles < 1.0 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
                 reloadFetchControllers()
@@ -79,18 +76,9 @@ extension OpeningController {
         troubleshootFromNavigationMenu()
         navigationItem.searchController = searchController
     }
-
     
     func troubleshootFromNavigationMenu(){
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint)),
                                               UIBarButtonItem(image: #imageLiteral(resourceName: "filter2"), style: .plain, target: self, action: #selector(handleFilter))]
-    }
-    
-    //MARK:- BreakPoint
-    @objc func JumpToBreakPoint(total: Int){
-        //print("Radius = \(radius)")
-        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
-        tableView.reloadData()
     }
 }

@@ -9,26 +9,21 @@
 import UIKit
 
 extension OpeningController: UISearchResultsUpdating {
-    
     func resetAllFetchControllers() {
         tableDataSource.resetAllControllerAndPredicates()
-        tableView.reloadData()
+        model.tableView.reloadData()
     }
     
     func reloadFetchControllers() {
         tableDataSource.reloadBusinessController()
         tableDataSource.reloadCategoryNames()
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            self.model.tableView.reloadData()
         }
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resetAllFetchControllers()
-    }
-
-    //Text typed into Search Bar
     func updateSearchResults(for searchController: UISearchController) {
+        //Text typed into Search Bar
         if searchBarIsEmpty() {
             resetAllFetchControllers()
             return
@@ -38,11 +33,9 @@ extension OpeningController: UISearchResultsUpdating {
         reloadFetchControllers()
     }
     
-    // MARK: - Private instance methods
-    func searchBarIsEmpty() -> Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
+
+    func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {resetAllFetchControllers()}
     
     //When user clicks in searchField, Active = TRUE & If nothing is typed, return all items
     func isFiltering() -> Bool {
@@ -53,7 +46,7 @@ extension OpeningController: UISearchResultsUpdating {
     //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         tableDataSource.searchGroupIndex = selectedScope
-        tableView.reloadData()
+        model.tableView.reloadData()
         ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
         animateResultsAreFilteredLabel()
     }

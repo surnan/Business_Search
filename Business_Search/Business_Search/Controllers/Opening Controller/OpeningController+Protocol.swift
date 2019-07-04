@@ -10,9 +10,9 @@ import UIKit
 import CoreData
 import MapKit
 
+//These functions are called by TableView Delegate
 
 extension OpeningController {
-    
     func listBusinesses(category: String){
         let newVC = MyTabController()
         let items = getBusinessesFromCategoryName(category: category)
@@ -28,7 +28,8 @@ extension OpeningController {
     }
     
     func shareBusiness(business: Business){
-        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
+        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
+            ?? "Please check this link. \n"
         guard let temp = business.url else {return}
         let items: [Any] = ["\(prependText) \(temp)"]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
@@ -41,17 +42,9 @@ extension OpeningController {
         present(activityVC, animated: true)
     }
     
-    func getBusinessesFromCategoryName(category: String)-> [Business]{
-        //This array is not NOT shown in this tableView.
-        
-        //'BARS' includes hits from other groups with "bar"
-        //selectedCategoryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [category])
-        
-        //'MATCHES' is confused when string contains parenthesis.  Such as "American (New)"
-        //selectedCategoryPredicate = NSPredicate(format: "title MATCHES[cd] %@", argumentArray: [category])
-        
+    func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
         tableDataSource.selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
-        tableDataSource.fetchCategoriesController = nil
+        tableDataSource.reloadCategoryController()
         var businessArray = [Business]()    //Pushed into next ViewController
         tableDataSource.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
         businessArray = businessArray.filter{
@@ -63,7 +56,6 @@ extension OpeningController {
     }
     
     func deleteFavorite(business: Business){
-        //lazy var predicateBusinessLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
         tableDataSource.fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
         tableDataSource.fetchFavoritesController = nil
         tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
@@ -77,23 +69,9 @@ extension OpeningController {
         })
     }
     
-    func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
-    
-    func createFavorite(business: Business){
-        let context = dataController.viewContext
-        let newFavorite2 = Favorites(context: context)
-        newFavorite2.id = business.id
-        do {
-            try context.save()
-            print("createFavorite -- SAVE()")
-        } catch {
-            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
-            print("\n\nError saving newly created favorite - full error: \n\(error)")
-        }
-    }
-    
     func pickRandomBusiness(businesses: [Business]){
-        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String ?? "3 - This is the yelp page for what I'm looking at: "
+        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
+            ?? "3 - This is the yelp page for what I'm looking at: "
         let items: [Any] = ["\(prependText) www.yelp.com"]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
         activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
@@ -105,7 +83,18 @@ extension OpeningController {
         present(activityVC, animated: true)
     }
     
-    func reloadData(){
-        tableView.reloadData()
+    func createFavorite(business: Business){
+        let context = dataController.viewContext
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
+        do {
+            try context.save()
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
     }
+    
+    func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
+    func reloadData(){model.tableView.reloadData()}
 }

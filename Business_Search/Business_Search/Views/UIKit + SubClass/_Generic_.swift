@@ -40,7 +40,6 @@ class GenericAttributedTextLabel: UILabel {
         self.backgroundColor = background
         self.translatesAutoresizingMaskIntoConstraints = false
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
