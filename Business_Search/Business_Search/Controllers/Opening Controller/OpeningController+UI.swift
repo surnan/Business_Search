@@ -39,6 +39,9 @@ extension OpeningController {
     
     func readOrCreateLocation(){  //Check if location exists or download
         tableDataSource.fetchLocationController = nil                                    //Only time Locations should be loaded
+        var index = 0
+        let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
+        
         let locationArray = tableDataSource.fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
@@ -47,10 +50,6 @@ extension OpeningController {
                                          completion: handleGetNearbyBusinesses(inputData:result:))
             return
         }
-        
-        var index = 0
-        let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
-        
         //While "return" can break out of the function
         while index < _locationArray.count {
             let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)

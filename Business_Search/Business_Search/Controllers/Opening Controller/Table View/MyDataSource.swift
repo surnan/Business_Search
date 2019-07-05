@@ -19,10 +19,57 @@ protocol DataDelegate {
     func reloadCategoryNames()
     func reloadBusinessController()
     func reloadCategoryController()
+    
+    func updateCategoryPredicate(category: String)
+    func updateFavoritesPredicate(business: Business)
+    
+    
+    
+    func updateBusinessPredicate(searchString: String)
+    func updateCategoryArrayNamesPredicate(searchString: String)
+    
+    func updateBusinessPredicate(id: String)
+    
+    
+    
 }
 
 
 class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
+
+    func updateBusinessPredicate(id: String){
+        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
+        fetchBusinessController = nil
+    }
+    
+    
+    func updateBusinessPredicate(searchString: String){
+        fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
+        fetchCategoryNames = nil
+    }
+    
+    func updateCategoryArrayNamesPredicate(searchString: String){
+        fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
+        fetchBusinessController = nil
+    }
+    
+    
+    
+    
+    func updateFavoritesPredicate(business: Business){
+        guard let id = business.id else {return}
+        fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
+        fetchFavoritesController = nil
+    }
+    
+    
+    func updateCategoryPredicate(category: String){
+        selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
+        fetchCategoriesController = nil
+    }
+    
+    
+    
     func reloadCategoryController(){
         fetchCategoriesController = nil
     }

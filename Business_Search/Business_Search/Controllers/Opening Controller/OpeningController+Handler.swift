@@ -166,9 +166,8 @@ extension OpeningController {
         resetAllFetchControllers()
         let allFavorites = tableDataSource.fetchFavoritesController?.fetchedObjects ?? []
         for ( _ , item) in allFavorites.enumerated() {
-            guard let ID = item.id else {return}
-            tableDataSource.fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [ID])
-            tableDataSource.fetchBusinessController = nil
+            guard let id = item.id else {return}
+            tableDataSource.updateBusinessPredicate(id: id)
             let results = tableDataSource.fetchBusinessController?.fetchedObjects ?? []
             if results.isEmpty {
                 return

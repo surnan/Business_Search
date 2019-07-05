@@ -28,26 +28,27 @@ extension OpeningController: UISearchResultsUpdating {
             resetAllFetchControllers()
             return
         }
-        tableDataSource.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
-        tableDataSource.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchController.searchBar.text!])
+        guard let searchString = searchController.searchBar.text else {return}
+        tableDataSource.updateBusinessPredicate(searchString: searchString)
+        tableDataSource.updateCategoryArrayNamesPredicate(searchString: searchString)
         reloadFetchControllers()
+        model.tableView.reloadData()
     }
     
-
-    func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {resetAllFetchControllers()}
-    
-    //When user clicks in searchField, Active = TRUE & If nothing is typed, return all items
-    func isFiltering() -> Bool {
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
-    }
-    
-    //This is called when user switches scopes
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        //This is called when user switches scopes
         tableDataSource.searchGroupIndex = selectedScope
         model.tableView.reloadData()
         ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
         animateResultsAreFilteredLabel()
     }
+
+    func isFiltering() -> Bool {
+        //When user clicks in searchField, Active = TRUE & If nothing is typed, return all items
+        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+    }
+    
+    func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {resetAllFetchControllers()}
 }

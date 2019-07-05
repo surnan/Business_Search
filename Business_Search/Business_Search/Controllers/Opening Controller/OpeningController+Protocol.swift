@@ -43,8 +43,8 @@ extension OpeningController {
     }
     
     func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
-        tableDataSource.selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
-        tableDataSource.reloadCategoryController()
+        tableDataSource.updateCategoryPredicate(category: category)
+ 
         var businessArray = [Business]()    //Pushed into next ViewController
         tableDataSource.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
         businessArray = businessArray.filter{
@@ -56,8 +56,7 @@ extension OpeningController {
     }
     
     func deleteFavorite(business: Business){
-        tableDataSource.fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), business.id!])
-        tableDataSource.fetchFavoritesController = nil
+        tableDataSource.updateFavoritesPredicate(business: business)
         tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
             dataController.viewContext.delete(item)
             do {
