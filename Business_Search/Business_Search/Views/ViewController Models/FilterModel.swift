@@ -47,7 +47,9 @@ class FilterModel{
     }
     
     func getSliderStack()->UIStackView{
-        let sliderStack = GenericStack(spacing: 10, axis: .horizontal)
+        sliderLeftLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        sliderRightLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        let sliderStack = GenericStack(spacing: 2, axis: .horizontal)
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
         return sliderStack
     }
@@ -67,7 +69,6 @@ class FilterModel{
     
     func getFullStack()->UIStackView{
         let fullStack = GenericStack(spacing: 20, axis: .vertical)
-        //[priceLabel, getDollarStack(), sliderLabel, getSliderStack(), sliderValueLabel,
         [priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(),
          getPriceStack(), saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         return fullStack
