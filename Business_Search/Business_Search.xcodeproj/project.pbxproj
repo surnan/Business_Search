@@ -39,14 +39,13 @@
 		845A1D8122D029C10066C17C /* OpenControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8022D029C10066C17C /* OpenControllerProtocol.swift */; };
 		845A1D8322D02A210066C17C /* OpeningTableDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8222D02A210066C17C /* OpeningTableDataSourceProtocol.swift */; };
 		845A1D8522D02BE20066C17C /* UnBlurViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */; };
-		845A1D8A22D02E740066C17C /* GLOBAL VAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8922D02E740066C17C /* GLOBAL VAR.swift */; };
+		845A1D8D22D0314D0066C17C /* Global Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8C22D0314D0066C17C /* Global Variables.swift */; };
 		846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846509B9227A0C06008ABA9F /* OpeningController.swift */; };
 		8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
 		848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */; };
-		848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */; };
 		848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */; };
 		848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */; };
 		848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */; };
@@ -111,14 +110,13 @@
 		845A1D8022D029C10066C17C /* OpenControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenControllerProtocol.swift; sourceTree = "<group>"; };
 		845A1D8222D02A210066C17C /* OpeningTableDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTableDataSourceProtocol.swift; sourceTree = "<group>"; };
 		845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnBlurViewProtocol.swift; sourceTree = "<group>"; };
-		845A1D8922D02E740066C17C /* GLOBAL VAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GLOBAL VAR.swift"; sourceTree = "<group>"; };
+		845A1D8C22D0314D0066C17C /* Global Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Variables.swift"; sourceTree = "<group>"; };
 		846509B9227A0C06008ABA9F /* OpeningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTableDataSource.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringKeys.swift; sourceTree = "<group>"; };
 		848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		848761DA227F8E7B000CECC7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateYelpURLDuringLooping.swift; sourceTree = "<group>"; };
@@ -288,14 +286,6 @@
 			path = "UIKit + SubClass";
 			sourceTree = "<group>";
 		};
-		84365CCF22C8E3BE0014E577 /* Global UIKit VAR */ = {
-			isa = PBXGroup;
-			children = (
-				848761D6227F8E09000CECC7 /* NSAttributedStringKeys.swift */,
-			);
-			path = "Global UIKit VAR";
-			sourceTree = "<group>";
-		};
 		84365CD822C93D450014E577 /* Tabbed Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,7 +376,6 @@
 		84BDE2E32263D006008C9B01 = {
 			isa = PBXGroup;
 			children = (
-				845A1D8922D02E740066C17C /* GLOBAL VAR.swift */,
 				84BDE30E2263E652008C9B01 /* UNSYNC.swift */,
 				84BDE2EE2263D007008C9B01 /* Business_Search */,
 				84BDE2ED2263D007008C9B01 /* Products */,
@@ -410,6 +399,7 @@
 				84BDE3032263D373008C9B01 /* Controllers */,
 				84BDE3022263D36E008C9B01 /* Views */,
 				84BDE2EF2263D007008C9B01 /* AppDelegate.swift */,
+				845A1D8C22D0314D0066C17C /* Global Variables.swift */,
 				84BDE2FB2263D009008C9B01 /* Info.plist */,
 			);
 			path = Business_Search;
@@ -424,7 +414,6 @@
 				845A1D8622D02CC40066C17C /* Extensions */,
 				845A1D7F22D029A60066C17C /* Protocols */,
 				845A1D8722D02D680066C17C /* Singleton */,
-				845A1D8822D02DB00066C17C /* ViewController Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -432,9 +421,9 @@
 		84BDE3022263D36E008C9B01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84365CCF22C8E3BE0014E577 /* Global UIKit VAR */,
 				84D3DB9F22675B0B00E46B2E /* TableView Cells */,
 				84365CCE22C8E30E0014E577 /* UIKit + SubClass */,
+				845A1D8822D02DB00066C17C /* ViewController Models */,
 				84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */,
 				84BDE2F62263D009008C9B01 /* Assets.xcassets */,
 			);
@@ -473,9 +462,9 @@
 		84D3DB9F22675B0B00E46B2E /* TableView Cells */ = {
 			isa = PBXGroup;
 			children = (
+				843C66FA227DC97A003A64D1 /* _BusinessCell.swift */,
 				84D3DB9D2266DF5200E46B2E /* BusinessCell.swift */,
 				8417FCBC227B8A6D005BC240 /* CategoryCell.swift */,
-				843C66FA227DC97A003A64D1 /* _BusinessCell.swift */,
 			);
 			path = "TableView Cells";
 			sourceTree = "<group>";
@@ -674,7 +663,6 @@
 				84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */,
 				842AD7D72284D80B00590B1A /* OpeningController+Handler.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
-				845A1D8A22D02E740066C17C /* GLOBAL VAR.swift in Sources */,
 				8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84CC285D2297774800A82BBE /* SettingsController.swift in Sources */,
@@ -683,6 +671,7 @@
 				84365CC022C7F2460014E577 /* FilterModel.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				843F033B22CE94B7002798C1 /* OpeningTableDataSource+Protocol.swift in Sources */,
+				845A1D8D22D0314D0066C17C /* Global Variables.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
 				84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */,
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
@@ -693,7 +682,6 @@
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
 				84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */,
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
-				848761D7227F8E09000CECC7 /* NSAttributedStringKeys.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
 				846509BA227A0C06008ABA9F /* OpeningController.swift in Sources */,

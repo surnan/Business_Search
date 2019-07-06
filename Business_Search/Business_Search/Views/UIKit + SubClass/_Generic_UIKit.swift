@@ -45,8 +45,6 @@ class GenericAttributedTextLabel: UILabel {
     }
 }
 
-
-
 class GenericSegmentButton: CustomButton {
     init(title: String, isCorner: Bool = false, corners: CACornerMask = .init()){
         super.init(frame: .zero)

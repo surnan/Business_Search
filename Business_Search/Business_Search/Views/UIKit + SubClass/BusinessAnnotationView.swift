@@ -14,7 +14,6 @@ class BusinessAnnotationView: MKMarkerAnnotationView {
     var subtitle = "Bridge SubTitle"
     var business: Business!
     
-    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         clusteringIdentifier = "BusinessAnnotationView"

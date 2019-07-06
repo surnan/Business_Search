@@ -10,7 +10,6 @@ import UIKit
 
 
 class SettingsModel {
-    
     init(maximumSliderValue: Int? = nil){
         //radius is declared in AppDelegate
         distanceSlider.value = Float(radius)
