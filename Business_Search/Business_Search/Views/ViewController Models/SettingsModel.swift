@@ -27,7 +27,6 @@ class SettingsModel {
     //MARK:- VAR
     let sliderLeftLabel     = GenericLabel(text: "0", size: 15, textColor: .white)
     let sliderRightLabel    = GenericLabel(text: "1000", size: 15, textColor: .white)
-    
     let deleteAllLabel      = GenericLabel(text: "All saved business data deleted", size: 12,
                                            backgroundColor: .clear, textColor: .red)
     let myTextViewLabel     = GenericAttributedTextLabel(text: "All outgoing messages include:",
@@ -36,7 +35,7 @@ class SettingsModel {
                                                          attributes: whiteHelvetica_20_blackStroke)
     let saveButton          = GenericButton(title: "SAVE", isCorner: true)
     let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
-    let defaultsButton     = GenericButton(title: "Reset to Defaults", isCorner: true)
+    let defaultsButton      = GenericButton(title: "Reset to Defaults", isCorner: true)
     
     
     //MARK: Lazy VAR
@@ -47,10 +46,8 @@ class SettingsModel {
     lazy var myTextView         = genericTextView(text: textViewText, size: 12, corner: true)
     
     func getDistanceSliderStack()-> UIStackView {
-
         sliderLeftLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         sliderRightLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        
         let stack = GenericStack(spacing: 2, axis: .horizontal)
         stack.distribution = .fillProportionally
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{stack.addArrangedSubview($0)}
@@ -58,10 +55,18 @@ class SettingsModel {
     }
     
     func getSearchStack()-> UIStackView {
-        let stack = GenericStack(spacing: 20, axis: .vertical)
-        stack.distribution = .fill
-        [searchRadiusLabel, getDistanceSliderStack(), sliderValueLabel].forEach{stack.addArrangedSubview($0)}
+        let stack = GenericStack(spacing: 20, axis: .vertical, distribution: .fill)
+        //[searchRadiusLabel, getDistanceSliderStack(), sliderValueLabel].forEach{stack.addArrangedSubview($0)}
+        [searchRadiusLabel, getDistanceSliderStack(), getSliderValueLabelStack()].forEach{stack.addArrangedSubview($0)}
         stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }
+    
+    func getSliderValueLabelStack()->UIStackView{
+        let stack = GenericStack(spacing: 0, axis: .horizontal, distribution: .fillEqually)
+        let fillerLabel = GenericLabel(text: " ")
+        let fillerLabel2 = GenericLabel(text: " ")
+        [fillerLabel, sliderValueLabel, fillerLabel2].forEach{stack.addArrangedSubview($0)}
         return stack
     }
     
