@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import CoreData
+
 
 //NOTHING LABEL
-
 extension OpeningController{
     func undoBlur() {
         model.blurredEffectView.removeFromSuperview()

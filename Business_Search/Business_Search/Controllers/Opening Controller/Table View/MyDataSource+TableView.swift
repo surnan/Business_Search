@@ -47,15 +47,20 @@ extension MyDataSource {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
             let state = fetchBusinessController?.fetchedObjects?.count ?? 0
-            ShowNothingLabelIfNoResults(group: tableViewArrayType)
+            ShowNothingLabelIfNoResults(state: state)
             return state
         case TableIndex.category.rawValue:
             let state = fetchCategoryNames?.count ?? 0
-            ShowNothingLabelIfNoResults(group: tableViewArrayType)
+            ShowNothingLabelIfNoResults(state: state)
             return state
         default:
             print("numberOfRowsInSection --> WHOOOOOPS!!")
         }
         return TableIndex.business.rawValue
+    }
+    
+    //func ShowNothingLabelIfNoResults(group: Int){
+    func ShowNothingLabelIfNoResults(state: Int){
+        state == 0 ? model.showNothingFoundView() : model.hideNothingFoundView()
     }
 }

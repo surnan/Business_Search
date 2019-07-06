@@ -11,7 +11,7 @@ import CoreData
 import MapKit
 
 
-protocol DataDelegate {
+protocol MyDataSourceDelegate {
     func getBusiness(at indexPath: IndexPath)->Business
     func getCategoryName(at index: Int)->String
     func resetBusinessController()
@@ -19,29 +19,18 @@ protocol DataDelegate {
     func reloadCategoryNames()
     func reloadBusinessController()
     func reloadCategoryController()
-    
     func updateCategoryPredicate(category: String)
     func updateFavoritesPredicate(business: Business)
-    
-    
-    
     func updateBusinessPredicate(searchString: String)
     func updateCategoryArrayNamesPredicate(searchString: String)
-    
     func updateBusinessPredicate(id: String)
-    
-    
-    
 }
 
-
-class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
-
+extension MyDataSource {
     func updateBusinessPredicate(id: String){
         fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
         fetchBusinessController = nil
     }
-    
     
     func updateBusinessPredicate(searchString: String){
         fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
@@ -53,22 +42,16 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         fetchBusinessController = nil
     }
     
-    
-    
-    
     func updateFavoritesPredicate(business: Business){
         guard let id = business.id else {return}
         fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
         fetchFavoritesController = nil
     }
     
-    
     func updateCategoryPredicate(category: String){
         selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
         fetchCategoriesController = nil
     }
-    
-    
     
     func reloadCategoryController(){
         fetchCategoriesController = nil
@@ -78,11 +61,10 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         fetchCategoryNames = nil
     }
     
-
+    
     func reloadBusinessController(){
         fetchBusinessController = nil
     }
-
     
     func resetAllControllerAndPredicates() {
         fetchBusinessPredicate = nil
@@ -93,16 +75,21 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
         fetchFavoritesController = nil
     }
     
+}
+
+class MyDataSource: NSObject, UITableViewDataSource, MyDataSourceDelegate {
     var dataController: DataController!
     var latitude: Double!
     var longitude: Double!
     
+    var model: OpeningModel!
     
-    init(dataController: DataController, latitude: Double, longitude: Double) {
+    init(dataController: DataController, latitude: Double, longitude: Double, model: OpeningModel) {
         super.init()
         self.dataController = dataController
         self.latitude = latitude
         self.longitude = longitude
+        self.model = model
     }
     
     var searchGroupIndex = 0                                    //'func selectedScopeButtonIndexDidChange'
@@ -280,34 +267,6 @@ class MyDataSource: NSObject, UITableViewDataSource, DataDelegate {
             }
         }
     }
-    
-    func ShowNothingLabelIfNoResults(group: Int){
-        //        switch group {
-        //        case TableIndex.business.rawValue:
-        //            if fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-        //                showNothingFoundView()
-        //            } else {
-        //                hideNothingFoundView()
-        //            }
-        //        case TableIndex.category.rawValue:
-        //            if fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-        //                showNothingFoundView()
-        //            } else {
-        //                hideNothingFoundView()
-        //            }
-        //        default:
-        //            print("ShowNothingLabelIfNoResults --> is very unhappy")
-        //        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 

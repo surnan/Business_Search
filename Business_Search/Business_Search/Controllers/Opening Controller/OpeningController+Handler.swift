@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import CoreData
-import MapKit
 
 extension OpeningController {
     //MARK:- BreakPoint

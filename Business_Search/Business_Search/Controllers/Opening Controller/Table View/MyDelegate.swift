@@ -24,9 +24,9 @@ protocol OpenControllerDelegate {
 
 class MyDelegate: NSObject, UITableViewDelegate {
     var delegate: OpenControllerDelegate!
-    var dd      : DataDelegate!
+    var dd      : MyDataSourceDelegate!
     
-    init(delegate: OpenControllerDelegate, dd: DataDelegate) {
+    init(delegate: OpenControllerDelegate, dd: MyDataSourceDelegate) {
         self.delegate   = delegate
         self.dd         = dd
     }

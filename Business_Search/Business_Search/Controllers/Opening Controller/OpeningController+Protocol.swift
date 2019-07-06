@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import CoreData
-import MapKit
+
 
 //These functions are called by TableView Delegate
-
 extension OpeningController {
     func listBusinesses(category: String){
         let newVC = MyTabController()

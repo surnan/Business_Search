@@ -8,8 +8,6 @@
 
 import UIKit
 import CoreData
-import MapKit
-
 
 let businessCellID = "businessCellID"
 let _businessCellID = "_businessCellID"
@@ -20,7 +18,7 @@ enum TableIndex:Int {
 }
 
 class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate, OpenControllerDelegate {
-    lazy var tableDataSource    = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude)
+    lazy var tableDataSource    = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude, model: model)
     lazy var tableDelegate      = MyDelegate(delegate: self, dd: tableDataSource)
     let model                   = OpeningModel()
     
