@@ -27,6 +27,7 @@ class SettingsModel {
     //MARK:- VAR
     let sliderLeftLabel     = GenericLabel(text: "0", size: 15, textColor: .white)
     let sliderRightLabel    = GenericLabel(text: "1000", size: 15, textColor: .white)
+    
     let deleteAllLabel      = GenericLabel(text: "All saved business data deleted", size: 12,
                                            backgroundColor: .clear, textColor: .red)
     let myTextViewLabel     = GenericAttributedTextLabel(text: "All outgoing messages include:",
@@ -46,14 +47,21 @@ class SettingsModel {
     lazy var myTextView         = genericTextView(text: textViewText, size: 12, corner: true)
     
     func getDistanceSliderStack()-> UIStackView {
-        let stack = GenericStack(spacing: 10, axis: .horizontal)
+
+        sliderLeftLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        sliderRightLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        let stack = GenericStack(spacing: 2, axis: .horizontal)
+        stack.distribution = .fillProportionally
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{stack.addArrangedSubview($0)}
         return stack
     }
     
     func getSearchStack()-> UIStackView {
         let stack = GenericStack(spacing: 20, axis: .vertical)
+        stack.distribution = .fill
         [searchRadiusLabel, getDistanceSliderStack(), sliderValueLabel].forEach{stack.addArrangedSubview($0)}
+        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }
     

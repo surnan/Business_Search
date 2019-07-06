@@ -41,10 +41,10 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let verticalSearchStack     = model.getSearchStack()
         [distanceSliderStack, verticalSearchStack, textViewStack, saveCancelDeleteStack].forEach{view.addSubview($0)}
         NSLayoutConstraint.activate([
-            distanceSliderStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
             model.myTextView.heightAnchor.constraint(equalToConstant: 50),
             verticalSearchStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             verticalSearchStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            verticalSearchStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             textViewStack.topAnchor.constraint(equalTo: verticalSearchStack.bottomAnchor, constant: 70),
             textViewStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveCancelDeleteStack.topAnchor.constraint(equalTo: textViewStack.bottomAnchor, constant: 70),
