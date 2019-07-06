@@ -9,11 +9,7 @@
 import UIKit
 import CoreLocation
 
-protocol UnBlurDelegate{
-    func undoBlur()
-}
-
-class MenuController: UIViewController, UnBlurDelegate {
+class MenuController: UIViewController, UnBlurViewProtocol {
     var dataController      : DataController!         //MARK: Injected
     var locationManager     : CLLocationManager!
     var userLocation        : CLLocation!             //Provided via Apple GPS

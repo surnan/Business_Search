@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-extension MyDataSource {
+extension OpeningTableDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
@@ -59,7 +59,6 @@ extension MyDataSource {
         return TableIndex.business.rawValue
     }
     
-    //func ShowNothingLabelIfNoResults(group: Int){
     func ShowNothingLabelIfNoResults(state: Int){
         state == 0 ? model.showNothingFoundView() : model.hideNothingFoundView()
     }

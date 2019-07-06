@@ -10,7 +10,7 @@ import UIKit
 
 
 //These functions are called by TableView Delegate
-extension OpeningController {
+extension OpeningController: OpenControllerProtocol{
     func listBusinesses(category: String){
         let newVC = MyTabController()
         let items = getBusinessesFromCategoryName(category: category)

@@ -13,7 +13,7 @@ import CoreData
 class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     //var radius: AppDelegate
     var dataController      : DataController!           //injected
-    var delegate            : UnBlurDelegate?   //Unblur
+    var delegate            : UnBlurViewProtocol?   //Unblur
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
     

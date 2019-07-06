@@ -10,32 +10,20 @@ import UIKit
 import CoreData
 import MapKit
 
-protocol OpenControllerDelegate {
-    var getModel: MyDataSource {get}
-    func listBusinesses(category: String)
-    func showBusinessInfo(currentBusiness: Business)
-    func shareBusiness(business: Business)
-    func getBusinessesFromCategoryName(category: String)-> [Business]
-    func deleteFavorite(business: Business)
-    func updateBusinessIsFavorite(business: Business)->Bool
-    func reloadData()
-    func createFavorite(business: Business)
-}
-
-class MyDelegate: NSObject, UITableViewDelegate {
-    var delegate: OpenControllerDelegate!
-    var dd      : MyDataSourceDelegate!
+class OpeningTableDelegate: NSObject, UITableViewDelegate {
+    var delegate: OpenControllerProtocol!
+    var dataDelegate      : OpeningTableDataSourceProtocol!
     
-    init(delegate: OpenControllerDelegate, dd: MyDataSourceDelegate) {
+    init(delegate: OpenControllerProtocol, dd: OpeningTableDataSourceProtocol) {
         self.delegate   = delegate
-        self.dd         = dd
+        self.dataDelegate         = dd
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
-        let currentBusiness = dd.getBusiness(at: indexPath)
+        let currentBusiness = dataDelegate.getBusiness(at: indexPath)
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
-            guard let self  = self, let dd = self.dd, let delegate = self.delegate else {return}
+            guard let self  = self, let dd = self.dataDelegate, let delegate = self.delegate else {return}
             let isFavorite  = delegate.updateBusinessIsFavorite(business: currentBusiness)
             isFavorite ? delegate.createFavorite(business: currentBusiness)
                 :delegate.deleteFavorite(business: currentBusiness)
@@ -75,7 +63,7 @@ class MyDelegate: NSObject, UITableViewDelegate {
         }
         actionBusiness.backgroundColor = .darkBlue
         let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") { (action, indexPath) in
-            let currentCategory = self.dd.getCategoryName(at: indexPath.row)
+            let currentCategory = self.dataDelegate.getCategoryName(at: indexPath.row)
             let items           = self.delegate.getBusinessesFromCategoryName(category: currentCategory)
             let modder          = items.count - 1
             let randomNumber    = Int.random(in: 0...modder)

@@ -9,23 +9,16 @@
 import UIKit
 import CoreData
 
-let businessCellID = "businessCellID"
-let _businessCellID = "_businessCellID"
-let categoryCellID = "categoryCellID"
 
-enum TableIndex:Int {
-    case business = 0, category
-}
-
-class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurDelegate, OpenControllerDelegate {
-    lazy var tableDataSource    = MyDataSource(dataController: dataController, latitude: latitude, longitude: longitude, model: model)
-    lazy var tableDelegate      = MyDelegate(delegate: self, dd: tableDataSource)
+class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurViewProtocol {
+    lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController, latitude: latitude, longitude: longitude, model: model)
+    lazy var tableDelegate      = OpeningTableDelegate(delegate: self, dd: tableDataSource)
     let model                   = OpeningModel()
     
     var getDataController           : DataController {return dataController}
     var getLatitude                 : Double {return latitude}
     var getLongitude                : Double  {return longitude}
-    var getModel                    : MyDataSource {return tableDataSource}
+    var getModel                    : OpeningTableDataSource {return tableDataSource}
     
     var latitude        : Double!                                 //MARK: Injected
     var longitude       : Double!                                 //MARK: Injected

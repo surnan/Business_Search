@@ -40,7 +40,6 @@ extension OpeningController {
         tableDataSource.fetchLocationController = nil                                    //Only time Locations should be loaded
         var index = 0
         let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
-        
         let locationArray = tableDataSource.fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
