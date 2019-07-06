@@ -37,6 +37,15 @@ class FilterModel{
     lazy var distanceSlider     = GenericSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray,
                                        maxColor: .black, thumbColor: .white)
     
+    
+    func getSliderValueLabelStack()->UIStackView{
+        let stack = GenericStack(spacing: 0, axis: .horizontal, distribution: .fillEqually)
+        let fillerLabel = GenericLabel(text: " ")
+        let fillerLabel2 = GenericLabel(text: " ")
+        [fillerLabel, sliderValueLabel, fillerLabel2].forEach{stack.addArrangedSubview($0)}
+        return stack
+    }
+    
     func getSliderStack()->UIStackView{
         let sliderStack = GenericStack(spacing: 10, axis: .horizontal)
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{sliderStack.addArrangedSubview($0)}
@@ -55,9 +64,11 @@ class FilterModel{
         return isPriceListedStack
     }
     
+    
     func getFullStack()->UIStackView{
         let fullStack = GenericStack(spacing: 20, axis: .vertical)
-        [priceLabel, getDollarStack(), sliderLabel, getSliderStack(), sliderValueLabel,
+        //[priceLabel, getDollarStack(), sliderLabel, getSliderStack(), sliderValueLabel,
+        [priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(),
          getPriceStack(), saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         return fullStack
     }

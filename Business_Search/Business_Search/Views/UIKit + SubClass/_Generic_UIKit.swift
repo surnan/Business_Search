@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class GenericLabel: UILabel {
-    init(text: String, size: CGFloat = 12, backgroundColor: UIColor = UIColor.clear,
+    init(text: String, size: CGFloat = 15, backgroundColor: UIColor = UIColor.clear,
          textColor: UIColor = UIColor.white, alignment: NSTextAlignment = .center, corner: Bool = false) {
         super.init(frame: .zero)
         self.text = text
