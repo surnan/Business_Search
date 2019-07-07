@@ -11,7 +11,10 @@ import CoreData
 
 
 class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurViewProtocol {
-    lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController, latitude: latitude, longitude: longitude, model: model)
+    lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController,
+                                                         latitude: latitude,
+                                                         longitude: longitude,
+                                                         model: model)
     lazy var tableDelegate      = OpeningTableDelegate(delegate: self, dd: tableDataSource)
     let model                   = OpeningModel()
     
@@ -32,8 +35,8 @@ class OpeningController: UIViewController, UISearchControllerDelegate, UISearchB
         }
     }
     
-    var currentLocationID: NSManagedObjectID?                               //Used to connect newly downloaded Business to Location
-    var doesLocationEntityExist = false                                     //set true after we create location or find location
+    var currentLocationID: NSManagedObjectID?                               //Connects downloaded Business to Location
+    var doesLocationEntityExist = false                                     //true after create/find location
     var urlsQueue               = [CreateYelpURLDuringLoopingStruct]()      //enumeration loop for semaphores
     
 

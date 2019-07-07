@@ -11,7 +11,7 @@ import MapKit
 
 class GenericLabel: UILabel {
     init(text: String, size: CGFloat = 15, backgroundColor: UIColor = UIColor.clear,
-         textColor: UIColor = UIColor.white, alignment: NSTextAlignment = .center, corner: Bool = false) {
+         textColor: UIColor = UIColor.white, alignment: NSTextAlignment = .center, corner: Bool = false, numberOfLines: Int = 1) {
         super.init(frame: .zero)
         self.text = text
         self.font = UIFont.boldSystemFont(ofSize: size)
@@ -19,7 +19,7 @@ class GenericLabel: UILabel {
         self.textAlignment = alignment
         self.backgroundColor = backgroundColor
         self.textColor = textColor
-        self.numberOfLines = -1
+        self.numberOfLines = numberOfLines  //'-1' can create formatting problems in Horizontal Stacks.
         if corner {
             self.layer.cornerRadius = 10
             self.clipsToBounds = true

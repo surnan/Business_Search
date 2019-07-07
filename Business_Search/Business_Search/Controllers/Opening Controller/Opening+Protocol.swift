@@ -53,19 +53,6 @@ extension OpeningController: OpenControllerProtocol{
         return businesses
     }
     
-    func deleteFavorite(business: Business){
-        tableDataSource.updateFavoritesPredicate(business: business)
-        tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
-            dataController.viewContext.delete(item)
-            do {
-                try dataController.viewContext.save()
-            } catch {
-                print(error)
-                print(error.localizedDescription)
-            }
-        })
-    }
-    
     func pickRandomBusiness(businesses: [Business]){
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
             ?? "3 - This is the yelp page for what I'm looking at: "
@@ -78,6 +65,19 @@ extension OpeningController: OpenControllerProtocol{
             self.dismiss(animated: true, completion: nil)
         }
         present(activityVC, animated: true)
+    }
+    
+    func deleteFavorite(business: Business){
+        tableDataSource.updateFavoritesPredicate(business: business)
+        tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+            dataController.viewContext.delete(item)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error)
+                print(error.localizedDescription)
+            }
+        })
     }
     
     func createFavorite(business: Business){

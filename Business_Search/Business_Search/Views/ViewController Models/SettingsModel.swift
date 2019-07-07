@@ -46,9 +46,7 @@ class SettingsModel {
     lazy var myTextView         = genericTextView(text: textViewText, size: 12, corner: true)
     
     func getDistanceSliderStack()-> UIStackView {
-        sliderLeftLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        sliderRightLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        let stack = GenericStack(spacing: 2, axis: .horizontal)
+        let stack = GenericStack(spacing: 10, axis: .horizontal)
         [sliderLeftLabel, distanceSlider, sliderRightLabel].forEach{stack.addArrangedSubview($0)}
         return stack
     }

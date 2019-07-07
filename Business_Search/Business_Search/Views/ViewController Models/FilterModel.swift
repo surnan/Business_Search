@@ -18,7 +18,8 @@ class FilterModel{
     var sliderLeftLabel     = GenericLabel(text: "1")
     var sliderRightLabel    = GenericLabel(text: "5")
     var priceLabel          = GenericLabel(text: "Price Filter Options",  size: 20)
-    var noPriceLabel        = GenericLabel(text: "Include if No Price Listed: ", size: 18)
+    var noPriceLabel        = GenericLabel(text: "Include if No Price Listed:", size: 18)
+    var favoriteAtTopLabel  = GenericLabel(text: "Move favorites to top:", size: 18)
     
     var dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
     var dollarTwoButton     =  GenericSegmentButton(title: "$$")
@@ -30,6 +31,7 @@ class FilterModel{
     var cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
     
     var noPriceSwitch       = GenericSwitch(onTintColor: .green)
+    var favoriteAtTopSwitch = GenericSwitch(onTintColor: .green)
     
     //MARK: Lazy VAR
     lazy var sliderValueLabel   = GenericLabel(text: minimumRatingText, size: 24, backgroundColor: .blue,
@@ -37,6 +39,17 @@ class FilterModel{
     lazy var distanceSlider     = GenericSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray,
                                        maxColor: .black, thumbColor: .white)
     
+    func getFavoritesAtTopStack()->UIStackView{
+        let isPriceListedStack =  GenericStack(spacing: 2, axis: .horizontal)
+        [favoriteAtTopLabel, favoriteAtTopSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
+        return isPriceListedStack
+    }
+    
+    func getNoPriceStack()->UIStackView{
+        let isPriceListedStack =  GenericStack(spacing: 2, axis: .horizontal)
+        [noPriceLabel, noPriceSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
+        return isPriceListedStack
+    }
     
     func getSliderValueLabelStack()->UIStackView{
         let stack = GenericStack(spacing: 0, axis: .horizontal, distribution: .fillEqually)
@@ -60,17 +73,43 @@ class FilterModel{
         return dollarStack
     }
     
-    func getPriceStack()->UIStackView{
-        let isPriceListedStack =  GenericStack(spacing: 20, axis: .horizontal)
-        [noPriceLabel, noPriceSwitch].forEach{isPriceListedStack.addArrangedSubview($0)}
-        return isPriceListedStack
-    }
-    
-    
     func getFullStack()->UIStackView{
         let fullStack = GenericStack(spacing: 20, axis: .vertical)
-        [priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(),
-         getPriceStack(), saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
+        [priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(), getFavoritesAtTopStack(),
+         getNoPriceStack(), saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         return fullStack
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
