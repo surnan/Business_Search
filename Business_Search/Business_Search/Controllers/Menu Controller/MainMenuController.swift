@@ -18,6 +18,9 @@ class MenuController: UIViewController, UnBlurViewProtocol {
     var model               = MainMenuModel()
     var controllerIndex     = 0
 
+    
+    var coordinator: MainCoordinator?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .lightBlue
@@ -49,15 +52,9 @@ class MenuController: UIViewController, UnBlurViewProtocol {
             newVC.longitude         = userLocation.coordinate.longitude
             navigationController?.pushViewController(newVC, animated: true)
         case 1:
-            let newVC = SearchByMapController(location: userLocation, dataController: dataController)
-//            newVC.dataController = dataController
-//            newVC.possibleInsertLocationCoordinate = userLocation
-            navigationController?.pushViewController(newVC, animated: true)
+            coordinator?.pushSearchByMap(location: userLocation, dataController: dataController)
         case 2:
-            let newVC = SearchByAddressController(location: userLocation, dataController: dataController)
-//            newVC.dataController = dataController
-//            newVC.possibleInsertLocationCoordinate = userLocation
-            navigationController?.pushViewController(newVC, animated: true)
+            coordinator?.pushSearchByAddress(location: userLocation, dataController: dataController)
         default:
             break
         }

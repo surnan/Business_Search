@@ -18,6 +18,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
+    var coordinator: MainCoordinator?
     
     init(location: CLLocation, dataController: DataController){
         super.init(nibName: nil, bundle: nil)

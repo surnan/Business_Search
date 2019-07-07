@@ -16,11 +16,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
-    
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//        <#code#>
-//    }
-
+    var coordinator: MainCoordinator?
     
     init(location: CLLocation, dataController: DataController){
         super.init(nibName: nil, bundle: nil)
