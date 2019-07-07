@@ -49,14 +49,14 @@ class MenuController: UIViewController, UnBlurViewProtocol {
             newVC.longitude         = userLocation.coordinate.longitude
             navigationController?.pushViewController(newVC, animated: true)
         case 1:
-            let newVC = SearchByMapController()
-            newVC.dataController = dataController
-            newVC.possibleInsertLocationCoordinate = userLocation
+            let newVC = SearchByMapController(location: userLocation, dataController: dataController)
+//            newVC.dataController = dataController
+//            newVC.possibleInsertLocationCoordinate = userLocation
             navigationController?.pushViewController(newVC, animated: true)
         case 2:
-            let newVC = SearchByAddressController()
-            newVC.dataController = dataController
-            newVC.possibleInsertLocationCoordinate = userLocation
+            let newVC = SearchByAddressController(location: userLocation, dataController: dataController)
+//            newVC.dataController = dataController
+//            newVC.possibleInsertLocationCoordinate = userLocation
             navigationController?.pushViewController(newVC, animated: true)
         default:
             break

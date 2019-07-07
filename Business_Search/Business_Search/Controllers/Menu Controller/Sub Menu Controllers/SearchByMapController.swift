@@ -16,6 +16,24 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
+    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        <#code#>
+//    }
+
+    
+    init(location: CLLocation, dataController: DataController){
+        super.init(nibName: nil, bundle: nil)
+        self.dataController = dataController
+        self.possibleInsertLocationCoordinate = location
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
     let pinImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin2"))
         imageView.isUserInteractionEnabled = false

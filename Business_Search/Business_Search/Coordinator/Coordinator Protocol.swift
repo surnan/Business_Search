@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
 protocol Coordinator {
     var childCoordinators: [Coordinator] {get set}
@@ -30,6 +32,20 @@ class MainCoordinator: Coordinator {
         vc.dataController = dataController
         navigationController.pushViewController(vc, animated: false)
     }
+    
+    func pushSearchByAddress(location: CLLocation, dataController: DataController){
+        let vc = SearchByAddressController(location: location, dataController: dataController)
+        vc.dataController = dataController
+        navigationController.pushViewController(vc, animated: false)
+    }
+    
+    
+    func pushSearchByMap(location: CLLocation, dataController: DataController){
+        let vc = SearchByMapController(location: location, dataController: dataController)
+        vc.dataController = dataController
+        navigationController.pushViewController(vc, animated: false)
+    }
+    
 }
 
 
