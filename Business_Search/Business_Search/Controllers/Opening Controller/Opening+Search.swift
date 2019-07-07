@@ -11,7 +11,9 @@ import UIKit
 extension OpeningController: UISearchResultsUpdating {
     func resetAllFetchControllers() {
         tableDataSource.resetAllControllerAndPredicates()
-        model.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.model.tableView.reloadData()
+        }
     }
     
     func reloadFetchControllers() {

@@ -53,7 +53,7 @@ extension OpeningController {
             let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
             let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
-            if miles < 1.0 {
+            if miles < 0.5 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
                 reloadFetchControllers()
                 return                           //Exit the function

@@ -128,6 +128,15 @@ extension OpeningController {
         downloadYelpBusinesses(latitiude: latitude, longitude: longitude)
     }
     
+    func runDownloadAgain(){
+        reloadFetchControllers()
+        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
+            self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
+        }
+        timer.fire()
+    }
+    
     func downloadYelpBusinesses(latitiude: Double, longitude: Double){
         if urlsQueue.isEmpty {return}
         let semaphore = DispatchSemaphore(value: 4)
@@ -151,16 +160,26 @@ extension OpeningController {
         }
     }
     
-    func runDownloadAgain(){
-        reloadFetchControllers()
-        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
-        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
-            self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
-        }
-        timer.fire()
-    }
+
     
     func searchFavorites(){
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        
+        let block1 = BlockOperation {
+            self.searchFavoritesIterations()
+        }
+        
+        let block2 = BlockOperation  {
+            self.resetAllFetchControllers()
+        }
+        
+        block2.addDependency(block1)
+        queue.addOperations([block1, block2], waitUntilFinished: false)
+
+    }
+    
+    func searchFavoritesIterations(){
         resetAllFetchControllers()
         let allFavorites = tableDataSource.fetchFavoritesController?.fetchedObjects ?? []
         for ( _ , item) in allFavorites.enumerated() {
