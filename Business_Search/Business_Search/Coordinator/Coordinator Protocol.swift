@@ -26,7 +26,6 @@ class MainCoordinator: Coordinator {
         self.dataController = dataController
     }
     
-    
     func start(){
         let vc = MenuController()
         vc.dataController = dataController
@@ -46,6 +45,13 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
     
+    func pushOpeningController(coord: CLLocationCoordinate2D, dataController: DataController){
+        let newVC               = OpeningController()
+        newVC.dataController    = dataController
+        newVC.latitude          = coord.latitude
+        newVC.longitude         = coord.longitude
+        navigationController.pushViewController(newVC, animated: true)
+    }
     
     func presentSettingsController(currentSelf: UIViewController, dataController: DataController){
         navigationController.setNavigationBarHidden(true, animated: true)

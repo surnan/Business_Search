@@ -111,11 +111,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     }
     
     @objc func handleRight(){
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        newVC.latitude = locationToForward.coordinate.latitude
-        newVC.longitude = locationToForward.coordinate.longitude
-        navigationController?.pushViewController(newVC, animated: true)
+        coordinator?.pushOpeningController(coord: locationToForward.coordinate, dataController: dataController)
     }
     
     

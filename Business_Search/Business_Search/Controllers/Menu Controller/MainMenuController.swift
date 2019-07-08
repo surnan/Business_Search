@@ -46,11 +46,7 @@ class MenuController: UIViewController, UnBlurViewProtocol {
         activityView.stopAnimating()
         switch controllerIndex {
         case 0:
-            let newVC               = OpeningController()
-            newVC.dataController    = dataController
-            newVC.latitude          = userLocation.coordinate.latitude
-            newVC.longitude         = userLocation.coordinate.longitude
-            navigationController?.pushViewController(newVC, animated: true)
+            coordinator?.pushOpeningController(coord: userLocation.coordinate, dataController: dataController)
         case 1:
             coordinator?.pushSearchByMap(location: userLocation, dataController: dataController)
         case 2:

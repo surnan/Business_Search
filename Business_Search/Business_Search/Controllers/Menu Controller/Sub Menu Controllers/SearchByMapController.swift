@@ -49,7 +49,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
                                                 latitudinalMeters: 500,
                                                 longitudinalMeters: 500)
         }
-        
         mapView.delegate = self
         return mapView
     }()
@@ -64,11 +63,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
     
     @objc func handleNext(){
-        let newVC = OpeningController()
-        newVC.dataController = dataController
-        newVC.latitude = locationToForward.coordinate.latitude
-        newVC.longitude = locationToForward.coordinate.longitude
-        navigationController?.pushViewController(newVC, animated: true)
+        coordinator?.pushOpeningController(coord: locationToForward.coordinate, dataController: dataController)
     }
 
     func setupUI(){
@@ -78,10 +73,9 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             pinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
             ])
+    
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext))]
-        
-        
 //        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
 //                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }
