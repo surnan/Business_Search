@@ -40,34 +40,28 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
     
-    
     func pushSearchByMap(location: CLLocation, dataController: DataController){
         let vc = SearchByMapController(location: location, dataController: dataController)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
     
-}
-
-
-/*
-class MainCoordinator: Coordinator {
-    var children = [Coordinator]()
-    func start(){
-        let vc = ViewController()
-        vc.coordinator = self
-        nav.push(vc, animated: false)
+    
+    func presentSettingsController(currentSelf: UIViewController, dataController: DataController){
+        navigationController.setNavigationBarHidden(true, animated: true)
+        currentSelf.view.addSubview(blurringScreenDark)
+        blurringScreenDark.fillSuperview()
+        let newVC               = SettingsController()
+        newVC.delegate          = currentSelf as? UnBlurViewProtocol
+        newVC.dataController    = dataController
+        newVC.coordinator       = self
+        newVC.modalPresentationStyle = .overFullScreen
+        currentSelf.present(newVC, animated: true, completion:nil)
+    }
+    
+    func dismissSettingsController(currentSelf: UIViewController, delegate: UnBlurViewProtocol?){
+        currentSelf.dismiss(animated: true) {
+            delegate?.undoBlur()
+        }
     }
 }
-
-//Inside VC
-func userTapped(widget: Int){
-    let vc = NextViewController()
-    vc.widgetToBuy = widget
-    present(vc, animated: true)
-}
- CONVERTS TO
- func userTapped(widget: Int){
-    coordinator?.buy(widget)
- }
-*/

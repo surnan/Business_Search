@@ -76,14 +76,9 @@ class MenuController: UIViewController, UnBlurViewProtocol {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    
     @objc func handleSettings(){
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        addDarkScreenBlur()
-        let newVC               = SettingsController()
-        newVC.delegate          = self
-        newVC.dataController    = dataController
-        newVC.modalPresentationStyle = .overFullScreen
-        present(newVC, animated: true, completion:nil)
+        coordinator?.presentSettingsController(currentSelf: self, dataController: dataController)
     }
     
     func addHandlers(){

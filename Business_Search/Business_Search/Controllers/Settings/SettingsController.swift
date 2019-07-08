@@ -11,14 +11,14 @@ import CoreData
 
 
 class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
-    //var radius: AppDelegate
     var dataController      : DataController!           //injected
     var delegate            : UnBlurViewProtocol?   //Unblur
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
+    var coordinator         : MainCoordinator?
     
-    lazy var fetchLocation = LocationNSFetchController(dataController: dataController)
-    lazy var model = SettingsModel(maximumSliderValue: maximumSliderValue)
+    lazy var fetchLocation  = LocationNSFetchController(dataController: dataController)
+    lazy var model          = SettingsModel(maximumSliderValue: maximumSliderValue)
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,9 +71,8 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc func handlecancelButton(){
-        dismiss(animated: true, completion: {
-            self.delegate?.undoBlur()
-    })}
+        coordinator?.dismissSettingsController(currentSelf: self, delegate: delegate)
+    }
     
     @objc func handleSaveButton(){
         if let newRadius = newRadiusValue {
@@ -82,6 +81,6 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
             UserDefaults.standard.set(model.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
         }
-        dismiss(animated: true, completion: {self.delegate?.undoBlur()})
+        coordinator?.dismissSettingsController(currentSelf: self, delegate: delegate)
     }
 }
