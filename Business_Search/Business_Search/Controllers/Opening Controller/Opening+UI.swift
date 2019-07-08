@@ -55,6 +55,7 @@ extension OpeningController {
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
             if miles < 0.5 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
+                tableDataSource.updateCoordinates(latitude: latitude, longitude: longitude)
                 reloadFetchControllers()
                 return                           //Exit the function
             }

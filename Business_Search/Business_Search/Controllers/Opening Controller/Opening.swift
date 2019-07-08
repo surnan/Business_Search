@@ -15,7 +15,7 @@ class OpeningController: UIViewController, UISearchControllerDelegate, UISearchB
                                                          latitude: latitude,
                                                          longitude: longitude,
                                                          model: model)
-    lazy var tableDelegate      = OpeningTableDelegate(delegate: self, dd: tableDataSource)
+    lazy var tableDelegate      = OpeningTableDelegate(delegate: self, dataSourceDelegate: tableDataSource)
     let model                   = OpeningModel()
     
     var getDataController           : DataController {return dataController}

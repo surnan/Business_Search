@@ -9,6 +9,12 @@
 import UIKit
 
 extension OpeningTableDataSource: OpeningTableDataSourceProtocol  {
+    func updateCoordinates(latitude: Double, longitude: Double){
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    
     func getCategoryName(at index: Int) -> String {
         let categoryName = fetchCategoryNames![index]
         return categoryName

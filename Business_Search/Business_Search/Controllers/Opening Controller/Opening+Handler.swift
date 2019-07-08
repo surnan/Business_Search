@@ -11,9 +11,10 @@ import UIKit
 extension OpeningController {
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
-        //print("Radius = \(radius)")
-        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999)
-        print("fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
+        print("fetchBusiness.FetchedObject.count - \(tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999) ... fetchCategoryArray.count - \(tableDataSource.fetchCategoryNames?.count ?? -999)")
+        print("latitude = \(latitude) .... longitude = \(longitude)")
+        print("BusinessPredicate = \(tableDataSource.fetchBusinessPredicate)\n")
+        resetAllFetchControllers()
         model.tableView.reloadData()
     }
     

@@ -21,4 +21,5 @@ protocol OpeningTableDataSourceProtocol {
     func updateBusinessPredicate(searchString: String)
     func updateCategoryArrayNamesPredicate(searchString: String)
     func updateBusinessPredicate(id: String)
+    func updateCoordinates(latitude: Double, longitude: Double)
 }

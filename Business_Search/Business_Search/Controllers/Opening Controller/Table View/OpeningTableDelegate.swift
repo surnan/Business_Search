@@ -14,9 +14,9 @@ class OpeningTableDelegate: NSObject, UITableViewDelegate {
     var delegate: OpenControllerProtocol!
     var dataDelegate      : OpeningTableDataSourceProtocol!
     
-    init(delegate: OpenControllerProtocol, dd: OpeningTableDataSourceProtocol) {
+    init(delegate: OpenControllerProtocol, dataSourceDelegate: OpeningTableDataSourceProtocol) {
         self.delegate   = delegate
-        self.dataDelegate         = dd
+        self.dataDelegate         = dataSourceDelegate
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
