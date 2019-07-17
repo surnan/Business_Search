@@ -18,9 +18,6 @@ class MenuController: UIViewController, UnBlurViewProtocol {
     var model               = MainMenuModel()
     var controllerIndex     = 0
 
-    
-    var coordinator: MainCoordinator?
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .lightBlue
@@ -46,11 +43,22 @@ class MenuController: UIViewController, UnBlurViewProtocol {
         activityView.stopAnimating()
         switch controllerIndex {
         case 0:
-            coordinator?.pushOpeningController(coord: userLocation.coordinate, dataController: dataController)
+            let coord = userLocation.coordinate
+            let vc = OpeningController()
+            vc.dataController = dataController
+            vc.latitude = coord.latitude
+            vc.longitude = coord.longitude
+            navigationController?.pushViewController(vc, animated: true)
         case 1:
-            coordinator?.pushSearchByMap(location: userLocation, dataController: dataController)
+            let vc = SearchByMapController()
+            vc.dataController = dataController
+            vc.possibleInsertLocationCoordinate = userLocation
+            navigationController?.pushViewController(vc, animated: true)
         case 2:
-            coordinator?.pushSearchByAddress(location: userLocation, dataController: dataController)
+            let vc = SearchByAddressController()
+            vc.dataController = dataController
+            vc.possibleInsertLocationCoordinate = userLocation
+            navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }
@@ -74,7 +82,14 @@ class MenuController: UIViewController, UnBlurViewProtocol {
     
     
     @objc func handleSettings(){
-        coordinator?.presentSettingsController(currentSelf: self, dataController: dataController)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        view.addSubview(blurringScreenDark)
+        addDarkScreenBlur()
+        let newVC               = SettingsController()
+        newVC.delegate          = self
+        newVC.dataController    = dataController
+        newVC.modalPresentationStyle = .overFullScreen
+        present(newVC, animated: true, completion: nil)
     }
     
     func addHandlers(){

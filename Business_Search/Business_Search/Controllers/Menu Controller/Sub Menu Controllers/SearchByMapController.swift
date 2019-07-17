@@ -16,20 +16,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
-    var coordinator: MainCoordinator?
-    
-    init(location: CLLocation, dataController: DataController){
-        super.init(nibName: nil, bundle: nil)
-        self.dataController = dataController
-        self.possibleInsertLocationCoordinate = location
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    
     let pinImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin2"))
         imageView.isUserInteractionEnabled = false
@@ -63,7 +49,12 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
     
     @objc func handleNext(){
-        coordinator?.pushOpeningController(coord: locationToForward.coordinate, dataController: dataController)
+        let coord = locationToForward.coordinate
+        let vc = OpeningController()
+        vc.dataController = dataController
+        vc.latitude = coord.latitude
+        vc.longitude = coord.longitude
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func setupUI(){
@@ -79,8 +70,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
 //        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
 //                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }
-    
-    
     
     
     //MARK:- Map Delegate Function

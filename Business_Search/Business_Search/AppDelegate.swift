@@ -14,9 +14,8 @@ import GoogleMaps
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var coordinator: MainCoordinator?
+
     var dataController = DataController(modelName: "YelpDataModels")
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
@@ -24,12 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
         UserAppliedFilter.shared.load()
         
-        
         //Print path to Documents folder to help browse for CoreData
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         print(urls[urls.count-1] as URL)    //prints app directory path
         dataController.load()
-        
         
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .white
@@ -41,10 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor.lightRed
         UITabBar.appearance().tintColor = UIColor.white
         
-        
-        let navController = CustomNavigationController()
-        coordinator = MainCoordinator(navigationController: navController, dataController: dataController)
-        coordinator?.start()
+        let vc = MenuController()
+        vc.dataController = dataController
+        let navController = CustomNavigationController(rootViewController: vc)
         window = UIWindow(frame: UIScreen.main.bounds) //window = UIWindow()
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
@@ -75,41 +71,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
     }
 }
-
-
-
-
-/*
- func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
- GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
- 
- radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
- 
- UserAppliedFilter.shared.load()
- 
- //Print path to Documents folder to help browse for CoreData
- let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
- print(urls[urls.count-1] as URL)    //prints app directory path
- dataController.load()
- 
- //UIAppearance Proxy
- UINavigationBar.appearance().isTranslucent = false
- UINavigationBar.appearance().tintColor = .white
- UINavigationBar.appearance().barTintColor = UIColor.lightRed
- UINavigationBar.appearance().prefersLargeTitles = false
- UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
- UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
- 
- UITabBar.appearance().barTintColor = UIColor.lightRed
- UITabBar.appearance().tintColor = UIColor.white
- 
- 
- window = UIWindow()
- window?.makeKeyAndVisible()
- 
- let startingVC = MenuController()
- startingVC.dataController = dataController
- window?.rootViewController = CustomNavigationController(rootViewController: startingVC)
- return true
- }
- */

@@ -15,7 +15,6 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var delegate            : UnBlurViewProtocol?   //Unblur
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
-    var coordinator         : MainCoordinator?
     
     lazy var fetchLocation  = LocationNSFetchController(dataController: dataController)
     lazy var model          = SettingsModel(maximumSliderValue: maximumSliderValue)
@@ -71,7 +70,9 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc func handlecancelButton(){
-        coordinator?.dismissSettingsController(currentSelf: self, delegate: delegate)
+        dismiss(animated: true) {
+            self.delegate?.undoBlur()
+        }
     }
     
     @objc func handleSaveButton(){
@@ -81,6 +82,8 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
             UserDefaults.standard.set(model.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
         }
-        coordinator?.dismissSettingsController(currentSelf: self, delegate: delegate)
+        dismiss(animated: true) {
+            self.delegate?.undoBlur()
+        }
     }
 }

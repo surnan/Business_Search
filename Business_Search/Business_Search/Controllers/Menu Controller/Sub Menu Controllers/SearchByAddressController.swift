@@ -18,21 +18,6 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
-    var coordinator: MainCoordinator?
-    
-    init(location: CLLocation, dataController: DataController){
-        super.init(nibName: nil, bundle: nil)
-        self.dataController = dataController
-        self.possibleInsertLocationCoordinate = location
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    
-    
     lazy var myTapGesture: UITapGestureRecognizer = {
         var gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         gesture.delegate = self
@@ -111,7 +96,12 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     }
     
     @objc func handleRight(){
-        coordinator?.pushOpeningController(coord: locationToForward.coordinate, dataController: dataController)
+        let coord = locationToForward.coordinate
+        let vc = OpeningController()
+        vc.dataController = dataController
+        vc.latitude = coord.latitude
+        vc.longitude = coord.longitude
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
