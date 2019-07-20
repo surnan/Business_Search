@@ -1,11 +1,11 @@
 import UIKit
 
-public protocol Presentable {
+protocol Presentable {
     func toPresentable() -> UIViewController
 }
 
 extension UIViewController: Presentable {
-    public func toPresentable() -> UIViewController {
+    func toPresentable() -> UIViewController {
         return self
     }
 }
