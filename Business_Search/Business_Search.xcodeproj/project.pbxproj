@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8401126022E29F2600ECE0D5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401125F22E29F2600ECE0D5 /* Router.swift */; };
+		8401126222E29F3400ECE0D5 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126122E29F3400ECE0D5 /* Presentable.swift */; };
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
 		8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */; };
@@ -78,6 +80,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8401125F22E29F2600ECE0D5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8401126122E29F3400ECE0D5 /* Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotationView.swift; sourceTree = "<group>"; };
@@ -164,6 +168,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8401125E22E29F1400ECE0D5 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				8401126122E29F3400ECE0D5 /* Presentable.swift */,
+				8401125F22E29F2600ECE0D5 /* Router.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		8414475D2266C49900A38AAB /* API - Yelp */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +408,7 @@
 		84BDE2EE2263D007008C9B01 /* Business_Search */ = {
 			isa = PBXGroup;
 			children = (
+				8401125E22E29F1400ECE0D5 /* Coordinators */,
 				84BDE3012263D367008C9B01 /* Models */,
 				84BDE3032263D373008C9B01 /* Controllers */,
 				84BDE3022263D36E008C9B01 /* Views */,
@@ -642,6 +656,7 @@
 				84365CCC22C8A5090014E577 /* MainMenuModel.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
 				844D358222C9C2AC00D7E594 /* BusinessDetailsModel.swift in Sources */,
+				8401126022E29F2600ECE0D5 /* Router.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
 				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
 				84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */,
@@ -651,6 +666,7 @@
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
+				8401126222E29F3400ECE0D5 /* Presentable.swift in Sources */,
 				848761CD227E856C000CECC7 /* MapController.swift in Sources */,
 				842AD7D52284D74D00590B1A /* Opening+UI.swift in Sources */,
 				8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */,
