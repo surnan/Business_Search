@@ -15,11 +15,24 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    var dataController = DataController(modelName: "YelpDataModels")
+    var dataController                  = DataController(modelName: "YelpDataModels")
+    //lazy var appNavigationController    = CustomNavigationController(rootViewController: MenuController())
+//    lazy var appNavigationController    = CustomNavigationController()
+//    lazy var appRouter                  = Router(navigationController: self.appNavigationController)
+//    lazy var appCoordinator             = AppCoordinator(router: self.appRouter, dataController: self.dataController)
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
+        let firstVC                    = MenuController()
+        let appNavigationController    = CustomNavigationController(rootViewController: firstVC)
+        let appRouter                  = Router(navigationController: appNavigationController)
+        let appCoordinator             = AppCoordinator(router: appRouter, dataController: dataController)
         
+        
+        
+        
+        
+        GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
         radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
         UserAppliedFilter.shared.load()
         
@@ -38,12 +51,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor.lightRed
         UITabBar.appearance().tintColor = UIColor.white
         
-        let vc = MenuController()
-        vc.dataController = dataController
-        let navController = CustomNavigationController(rootViewController: vc)
-        window = UIWindow(frame: UIScreen.main.bounds) //window = UIWindow()
-        window?.rootViewController = navController
+//        let vc = MenuController()
+//        vc.dataController = dataController
+//        let navController = CustomNavigationController(rootViewController: vc)
+//        window = UIWindow(frame: UIScreen.main.bounds) //window = UIWindow()
+//        window?.rootViewController = navController
+//        window?.makeKeyAndVisible()
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = appCoordinator.toPresentable()
+        window?.backgroundColor = .white
         window?.makeKeyAndVisible()
+        appCoordinator.start()
         return true
     }
     

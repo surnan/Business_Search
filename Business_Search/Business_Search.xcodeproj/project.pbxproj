@@ -10,6 +10,7 @@
 		8401126022E29F2600ECE0D5 /* _Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401125F22E29F2600ECE0D5 /* _Router.swift */; };
 		8401126222E29F3400ECE0D5 /* _Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126122E29F3400ECE0D5 /* _Presentable.swift */; };
 		8401126522E29FE800ECE0D5 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126422E29FE800ECE0D5 /* Coordinators.swift */; };
+		8401126722E2B0A400ECE0D5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126622E2B0A400ECE0D5 /* AppCoordinator.swift */; };
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
 		8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */; };
@@ -84,6 +85,7 @@
 		8401125F22E29F2600ECE0D5 /* _Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Router.swift; sourceTree = "<group>"; };
 		8401126122E29F3400ECE0D5 /* _Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Presentable.swift; sourceTree = "<group>"; };
 		8401126422E29FE800ECE0D5 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
+		8401126622E2B0A400ECE0D5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotationView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				8401126122E29F3400ECE0D5 /* _Presentable.swift */,
 				8401125F22E29F2600ECE0D5 /* _Router.swift */,
 				8401126422E29FE800ECE0D5 /* Coordinators.swift */,
+				8401126622E2B0A400ECE0D5 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				8435B1D4227A4EED00E95B4E /* Opening+Search.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */,
+				8401126722E2B0A400ECE0D5 /* AppCoordinator.swift in Sources */,
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				845A1D8122D029C10066C17C /* OpenControllerProtocol.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
