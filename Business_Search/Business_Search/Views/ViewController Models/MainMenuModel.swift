@@ -26,6 +26,13 @@ class MainMenuModel {
     var nearMeSearchButton = MainMenuControllerButton(title: "Search Near Me", backgroundColor: .blue, tag: 0)
     var searchByMapButton = MainMenuControllerButton(title: "Search By Map", backgroundColor: .red, tag: 1)
     var searchByAddressButton = MainMenuControllerButton(title: "     Search By Address     ", backgroundColor: .green, tag: 2)
+    
+    var titleImage: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     func getMenuButtonStack()-> UIStackView{
         let stack = GenericStack(spacing: 20, distribution: .fillEqually)
         [nearMeSearchButton, searchByMapButton, searchByAddressButton].forEach{stack.addArrangedSubview($0)}

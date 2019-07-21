@@ -17,13 +17,15 @@ class MenuController: UIViewController, UnBlurViewProtocol{
     let activityView        = GenericActivityIndicatorView()
     var model               = MainMenuModel()
     var controllerIndex     = 0
-    var coordinator         : (OpeningType & SearchByMapType & SearchByAddressType)?
+    var coordinator         : (OpeningType & SearchByMapType & SearchByAddressType & SettingsType)?
+    var coordinateFound     = false //Prevent 'func pushNextController' - twice
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .lightBlue
         previousCoordinate      = nil
         setupUI()
+        coordinateFound = false //tested in 'ViewDidAppear'
     }
 
     override func viewDidLoad() {
@@ -35,23 +37,12 @@ class MenuController: UIViewController, UnBlurViewProtocol{
     
     func setupNavigationMenu(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
-        imageView.contentMode = .scaleAspectFit
-        self.navigationItem.titleView = imageView
+        self.navigationItem.titleView = model.titleImage
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        coordinateFound = false
-    }
-    
-    
-    var coordinateFound = false
     
     func pushNextController(){
         guard let coordinator = coordinator else {print("coordinator is NIL");return}
         activityView.stopAnimating()
-        print("coordinateFound == \(coordinateFound)")
         if coordinateFound {return} //Navigation Delegate will sometimes send multiple locations and rapid fire this function
         coordinateFound = true
         switch controllerIndex {
@@ -84,23 +75,11 @@ class MenuController: UIViewController, UnBlurViewProtocol{
         activityView.startAnimating()
     }
     
-    func _handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
-        let newVC = SettingsController()
-        newVC.delegate = viewController
-        newVC.dataController = dataController
-        newVC.modalPresentationStyle = .overFullScreen
-        present(newVC, animated: true, completion: nil)
-    }
-    
     @objc func handleSettings(){
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurringScreenDark)
         addDarkScreenBlur()
-        let newVC               = SettingsController()
-        newVC.delegate          = self
-        newVC.dataController    = dataController
-        newVC.modalPresentationStyle = .overFullScreen
-        present(newVC, animated: true, completion: nil)
+        coordinator?.handleSettings(dataController: dataController, delegate: self)
     }
     
     func addHandlers(){

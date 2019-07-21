@@ -13,9 +13,10 @@ import MapKit
 protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
 protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
+protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol)}
 
 
-class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType {
+class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
     let dataController  : DataController
     let window          : UIWindow
     let firstController : MenuController
@@ -37,6 +38,11 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
     func handleOpenController(dataController: DataController, location: CLLocation){
         let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
+        coordinator.start(parent: self)
+    }
+    
+    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol) {
+        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }
     

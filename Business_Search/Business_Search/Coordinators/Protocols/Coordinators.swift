@@ -50,11 +50,3 @@ class Coordinator: PresentableCoordinator, CoordinatorType  {
         
     }
 }
-
-
-
-
-
-
-
-

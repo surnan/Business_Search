@@ -16,9 +16,10 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
     
+    var coordinator         : Coordinator?
+    
     lazy var fetchLocation  = LocationNSFetchController(dataController: dataController)
     lazy var model          = SettingsModel(maximumSliderValue: maximumSliderValue)
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

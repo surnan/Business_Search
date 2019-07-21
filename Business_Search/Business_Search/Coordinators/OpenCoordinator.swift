@@ -19,9 +19,6 @@ class OpenCoordinator: Coordinator {
         super.init(router: router)
     }
     
-    override func start(){
-    }
-    
     func start(parent: Coordinator){
         let coordinate = location.coordinate
         let vc = OpeningController()
@@ -33,5 +30,25 @@ class OpenCoordinator: Coordinator {
             parent?.removeChild(self)
             print("-2 popped -2")
         }
+    }
+}
+
+class SettingsCoordinator: Coordinator {
+    let unblurProtocol: UnBlurViewProtocol
+    let dataController: DataController
+    
+    init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType) {
+        self.unblurProtocol = unblurProtocol
+        self.dataController = dataController
+        super.init(router: router)
+    }
+    
+    func start(parent: Coordinator){
+        let vc = SettingsController()
+        vc.dataController           = dataController
+        vc.delegate                 = unblurProtocol
+        vc.coordinator              = self
+        vc.modalPresentationStyle   = .overFullScreen
+        router.present(vc, animated: true)
     }
 }
