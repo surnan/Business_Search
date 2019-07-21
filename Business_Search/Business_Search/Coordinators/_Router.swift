@@ -13,7 +13,11 @@ protocol RouterType: class, Presentable {
 
 
 final class Router: NSObject, RouterType, UINavigationControllerDelegate {
-    private var completions: [UIViewController : () -> Void]
+    private var completions: [UIViewController : () -> Void] {
+        didSet {
+            print("Completions.count ==> \(completions.count)")
+        }
+    }
     let navigationController: UINavigationController
     
     init(navigationController: UINavigationController = UINavigationController()) {
@@ -90,6 +94,11 @@ extension Router {
 			!navigationController.viewControllers.contains(poppedViewController) else {
 			return
 		}
+        print("A")
+        print("")
+        print("B")
 		runCompletion(for: poppedViewController)
+        print("")
+        print("C")
 	}
 }
