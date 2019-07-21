@@ -36,15 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor.lightRed
         UITabBar.appearance().tintColor = UIColor.white
         
-        //let firstVC                    = MenuController()
-        //let appNavigationController    = CustomNavigationController(rootViewController: firstVC)
-        //let appRouter                  = Router(navigationController: appNavigationController)
-        //let appCoordinator             = AppCoordinator(router: appRouter, dataController: dataController)
-        //window = UIWindow(frame: UIScreen.main.bounds)
-        //window?.rootViewController = appCoordinator.toPresentable()
-        //window?.backgroundColor = .white
-        //window?.makeKeyAndVisible()
-        //appCoordinator.start()
+        window = UIWindow()
+        let appCoordinator = AppCoordinator(window: window, dataController: dataController)
+        appCoordinator.start()
         return true
     }
     

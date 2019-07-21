@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class MenuController: UIViewController, UnBlurViewProtocol {
+class MenuController: UIViewController, UnBlurViewProtocol{
     var dataController      : DataController!         //MARK: Injected
     var locationManager     : CLLocationManager!
     var userLocation        : CLLocation!             //Provided via Apple GPS
@@ -17,6 +17,7 @@ class MenuController: UIViewController, UnBlurViewProtocol {
     let activityView        = GenericActivityIndicatorView()
     var model               = MainMenuModel()
     var controllerIndex     = 0
+    var coordinator         : (SettingsType & OpeningType & SearchByMapType & SearchByAddressType)?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,27 +41,13 @@ class MenuController: UIViewController, UnBlurViewProtocol {
     }
     
     func pushNextController(){
+        guard let coordinator = coordinator else {print("coordinator is NIL");return}
         activityView.stopAnimating()
         switch controllerIndex {
-        case 0:
-            let coord = userLocation.coordinate
-            let vc = OpeningController()
-            vc.dataController = dataController
-            vc.latitude = coord.latitude
-            vc.longitude = coord.longitude
-            navigationController?.pushViewController(vc, animated: true)
-        case 1:
-            let vc = SearchByMapController()
-            vc.dataController = dataController
-            vc.possibleInsertLocationCoordinate = userLocation
-            navigationController?.pushViewController(vc, animated: true)
-        case 2:
-            let vc = SearchByAddressController()
-            vc.dataController = dataController
-            vc.possibleInsertLocationCoordinate = userLocation
-            navigationController?.pushViewController(vc, animated: true)
-        default:
-            break
+        case 0: coordinator.handleOpenController(dataController: dataController, location: userLocation)
+        case 1: coordinator.handleSearchByMap(dataController: dataController, location: userLocation)
+        case 2: coordinator.handleSearchByAddress(dataController: dataController, location: userLocation)
+        default:    break
         }
     }
     
@@ -80,6 +67,11 @@ class MenuController: UIViewController, UnBlurViewProtocol {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    @objc func handleButtons(_ sender: UIButton){
+        determineMyCurrentLocation()
+        controllerIndex = sender.tag
+        activityView.startAnimating()
+    }
     
     @objc func handleSettings(){
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -96,12 +88,7 @@ class MenuController: UIViewController, UnBlurViewProtocol {
         [model.nearMeSearchButton, model.searchByMapButton, model.searchByAddressButton]
             .forEach{$0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)}
     }
-    
-    @objc func handleButtons(_ sender: UIButton){
-        determineMyCurrentLocation()
-        controllerIndex = sender.tag
-        activityView.startAnimating()
-    }
 }
+
 
 
