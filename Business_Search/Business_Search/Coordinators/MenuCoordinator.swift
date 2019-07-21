@@ -9,13 +9,13 @@
 import Foundation
 import MapKit
 
-protocol SettingsType {func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController)}
+//protocol SettingsType {func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController)}
 protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
 protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
 
 
-class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
+class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType {
     let dataController  : DataController
     let window          : UIWindow
     let firstController : MenuController

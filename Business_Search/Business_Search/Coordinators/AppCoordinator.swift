@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class AppCoordinator: Coordinator, SettingsType, OpeningType, SearchByAddressType, SearchByMapType {
+class AppCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType {
     let window          : UIWindow
     let dataController  : DataController
     let firstVC         : MenuController

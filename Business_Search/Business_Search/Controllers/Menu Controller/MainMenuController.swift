@@ -17,7 +17,7 @@ class MenuController: UIViewController, UnBlurViewProtocol{
     let activityView        = GenericActivityIndicatorView()
     var model               = MainMenuModel()
     var controllerIndex     = 0
-    var coordinator         : (SettingsType & OpeningType & SearchByMapType & SearchByAddressType)?
+    var coordinator         : (OpeningType & SearchByMapType & SearchByAddressType)?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
