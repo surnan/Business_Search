@@ -42,16 +42,12 @@ class Coordinator: PresentableCoordinator, CoordinatorType  {
 }
 
 
-
-//protocol SettingsType {func handleSettings()}
 protocol SettingsType {func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController)}
 protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
 protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
 
 class AppCoordinator: Coordinator, SettingsType, OpeningType, SearchByAddressType, SearchByMapType {
-    
-    
     let window          : UIWindow
     let dataController  : DataController
     let firstVC         : MenuController
@@ -78,11 +74,10 @@ class AppCoordinator: Coordinator, SettingsType, OpeningType, SearchByAddressTyp
     func handleSearchByAddress(dataController: DataController, location: CLLocation){}
 }
 
-class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {    
-    var dataController  : DataController
+class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
+    let dataController  : DataController
     let window          : UIWindow
     let firstController : MenuController
-
     
     init(router: RouterType, dataController: DataController, window: UIWindow, vc: MenuController) {
         self.dataController = dataController
@@ -98,6 +93,49 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
     }
     
     func handleOpenController(dataController: DataController, location: CLLocation){
+        let newCoordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+        newCoordinator.start()
+    }
+    
+    func handleSearchByMap(dataController: DataController, location: CLLocation){
+        let newCoordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
+        newCoordinator.start()
+    }
+    
+    func handleSearchByAddress(dataController: DataController, location: CLLocation){
+        let newCoordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
+        newCoordinator.start()
+    }
+    
+    func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
+        let newCoordinator = SettingsCoordinator(unblurProtocol: viewController, dataController: dataController, router: router)
+        newCoordinator.start()
+    }
+}
+
+class SettingsCoordinator: Coordinator {
+    let unblurProtocol: UnBlurViewProtocol
+    let dataController: DataController
+    
+    init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType) {
+        self.unblurProtocol = unblurProtocol
+        self.dataController = dataController
+        super.init(router: router)
+    }
+    
+}
+
+class OpenCoordinator: Coordinator {
+    let dataController: DataController
+    let location : CLLocation
+    
+    init(dataController: DataController, router: RouterType, location: CLLocation){
+        self.dataController = dataController
+        self.location = location
+        super.init(router: router)
+    }
+    
+    override func start(){
         let coordinate = location.coordinate
         let vc = OpeningController()
         vc.dataController = dataController
@@ -105,25 +143,40 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         vc.longitude = coordinate.longitude
         router.push(vc, animated: true, completion: nil)
     }
+}
+
+class SearchByAddressCoordinator: Coordinator {
+    let dataController: DataController
+    let location : CLLocation
     
-    func handleSearchByMap(dataController: DataController, location: CLLocation){
-        let vc = SearchByMapController()
-        vc.dataController = dataController
-        vc.possibleInsertLocationCoordinate = location
-        router.push(vc, animated: true, completion: nil)
+    init(dataController: DataController, router: RouterType, location: CLLocation){
+        self.dataController = dataController
+        self.location = location
+        super.init(router: router)
     }
     
-    func handleSearchByAddress(dataController: DataController, location: CLLocation){
+    override func start(){
         let vc = SearchByAddressController()
+        vc.possibleInsertLocationCoordinate = location
         vc.dataController = dataController
         router.push(vc, animated: true, completion: nil)
     }
+}
+
+class SearchByMapCoordinator: Coordinator {
+    let dataController: DataController
+    let location : CLLocation
     
-    func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
-        let newVC = SettingsController()
-        newVC.delegate = viewController
-        newVC.dataController = dataController
-        newVC.modalPresentationStyle = .overFullScreen
-        router.present(newVC, animated: true)
+    init(dataController: DataController, router: RouterType, location: CLLocation){
+        self.dataController = dataController
+        self.location = location
+        super.init(router: router)
+    }
+    
+    override func start(){
+        let vc = SearchByMapController()
+        vc.possibleInsertLocationCoordinate = location
+        vc.dataController = dataController
+        router.push(vc, animated: true, completion: nil)
     }
 }
