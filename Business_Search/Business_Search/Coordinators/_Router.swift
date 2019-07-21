@@ -13,6 +13,7 @@ protocol RouterType: class, Presentable {
 
 
 final class Router: NSObject, RouterType, UINavigationControllerDelegate {
+    //because it's dictionary, only one velue per key.
     private var completions: [UIViewController : () -> Void] {
         didSet {
             print("Completions.count ==> \(completions.count)")
@@ -54,11 +55,13 @@ extension Router {
     //  PUSH/POP
 	func push(_ module: Presentable, animated: Bool = true, completion: (() -> Void)? = nil) {
 		let controller = module.toPresentable()
-		guard controller is UINavigationController == false else {return}   //Avoid pushing UINavigationController
+        //print("controller -> \(controller)\ncompletion -> \(completion)\ncompletions.count -> \(completions.count)")
+        guard controller is UINavigationController == false else {return}   //Avoid pushing UINavigationController
 		if let completion = completion {
 			completions[controller] = completion
+            print("Appended to completions")
 		}
-		navigationController.pushViewController(controller, animated: animated)
+        navigationController.pushViewController(controller, animated: animated)
 	}
 	
 	func popModule(animated: Bool = true)  {
@@ -94,11 +97,6 @@ extension Router {
 			!navigationController.viewControllers.contains(poppedViewController) else {
 			return
 		}
-        print("A")
-        print("")
-        print("B")
 		runCompletion(for: poppedViewController)
-        print("")
-        print("C")
 	}
 }

@@ -40,9 +40,20 @@ class MenuController: UIViewController, UnBlurViewProtocol{
         self.navigationItem.titleView = imageView
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        coordinateFound = false
+    }
+    
+    
+    var coordinateFound = false
+    
     func pushNextController(){
         guard let coordinator = coordinator else {print("coordinator is NIL");return}
         activityView.stopAnimating()
+        print("coordinateFound == \(coordinateFound)")
+        if coordinateFound {return} //Navigation Delegate will sometimes send multiple locations and rapid fire this function
+        coordinateFound = true
         switch controllerIndex {
         case 0: coordinator.handleOpenController(dataController: dataController, location: userLocation)
         case 1: coordinator.handleSearchByMap(dataController: dataController, location: userLocation)

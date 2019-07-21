@@ -32,12 +32,22 @@ class Coordinator: PresentableCoordinator, CoordinatorType  {
         self.router = router
         super.init()
     }
-    func addChild(_ coordinator: Coordinator) {childCoordinators.append(coordinator)}
+    
+    func addChild(_ coordinator: Coordinator) {
+        print("ChildCoordinators before append = \(childCoordinators.count)")
+        childCoordinators.append(coordinator)
+        print("ChildCoordinators after append = \(childCoordinators.count)")
+    }
+    
     override func toPresentable() -> UIViewController {return router.toPresentable()}
+    
     func removeChild(_ coordinator: Coordinator?) {
+        print("ChildCoordinators before removeChild = \(childCoordinators.count)")
         if let coordinator = coordinator, let index = childCoordinators.firstIndex(of: coordinator) {
             childCoordinators.remove(at: index)
+            print("ChildCoordinators after removeChild = \(childCoordinators.count)")
         }
+        
     }
 }
 
@@ -92,24 +102,46 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         window.makeKeyAndVisible()
     }
     
+    //var childCoordinators: [Coordinator] = []
     func handleOpenController(dataController: DataController, location: CLLocation){
-        let newCoordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
-        newCoordinator.start()
+        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+        addChild(coordinator)
+        coordinator.start(parent: self)
+//        print("Pushing now")
+//        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+//            self?.removeChild(coordinator)
+//            print("Popped")
+//        }
     }
     
     func handleSearchByMap(dataController: DataController, location: CLLocation){
-        let newCoordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
-        newCoordinator.start()
+        let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
+        addChild(coordinator)
+        coordinator.start()
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+            print("Popped")
+        }
     }
     
     func handleSearchByAddress(dataController: DataController, location: CLLocation){
-        let newCoordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
-        newCoordinator.start()
+        let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
+        addChild(coordinator)
+        coordinator.start()
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+            print("Popped")
+        }
     }
     
     func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
-        let newCoordinator = SettingsCoordinator(unblurProtocol: viewController, dataController: dataController, router: router)
-        newCoordinator.start()
+        let coordinator = SettingsCoordinator(unblurProtocol: viewController, dataController: dataController, router: router)
+        addChild(coordinator)
+        coordinator.start()
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+            print("Popped")
+        }
     }
 }
 
@@ -136,13 +168,23 @@ class OpenCoordinator: Coordinator {
     }
     
     override func start(){
+    }
+    
+    func start(parent: Coordinator){
         let coordinate = location.coordinate
         let vc = OpeningController()
         vc.dataController = dataController
         vc.latitude = coordinate.latitude
         vc.longitude = coordinate.longitude
-        router.push(vc, animated: true, completion: nil)
+        vc.coordinator = self
+        
+        router.push(vc, animated: true) {[weak self, weak parent] in
+            parent?.removeChild(self)
+            print("-2 popped -2")
+        }
+        
     }
+    
 }
 
 class SearchByAddressCoordinator: Coordinator {
