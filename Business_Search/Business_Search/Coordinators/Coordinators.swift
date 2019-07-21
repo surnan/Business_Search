@@ -43,12 +43,15 @@ class Coordinator: PresentableCoordinator, CoordinatorType  {
 
 
 
-protocol SettingsType {func handleSettings()}
+//protocol SettingsType {func handleSettings()}
+protocol SettingsType {func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController)}
 protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
 protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
 
 class AppCoordinator: Coordinator, SettingsType, OpeningType, SearchByAddressType, SearchByMapType {
+    
+    
     let window          : UIWindow
     let dataController  : DataController
     let firstVC         : MenuController
@@ -69,13 +72,13 @@ class AppCoordinator: Coordinator, SettingsType, OpeningType, SearchByAddressTyp
         coordinator.start()
     }
     
-    func handleSettings(){}
+    func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController) {}
     func handleOpenController(dataController: DataController, location: CLLocation){}
     func handleSearchByMap(dataController: DataController, location: CLLocation){}
     func handleSearchByAddress(dataController: DataController, location: CLLocation){}
 }
 
-class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
+class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {    
     var dataController  : DataController
     let window          : UIWindow
     let firstController : MenuController
@@ -116,5 +119,11 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         router.push(vc, animated: true, completion: nil)
     }
     
-    func handleSettings(){}
+    func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
+        let newVC = SettingsController()
+        newVC.delegate = viewController
+        newVC.dataController = dataController
+        newVC.modalPresentationStyle = .overFullScreen
+        router.present(newVC, animated: true)
+    }
 }

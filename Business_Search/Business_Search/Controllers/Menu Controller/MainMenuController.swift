@@ -73,6 +73,14 @@ class MenuController: UIViewController, UnBlurViewProtocol{
         activityView.startAnimating()
     }
     
+    func _handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
+        let newVC = SettingsController()
+        newVC.delegate = viewController
+        newVC.dataController = dataController
+        newVC.modalPresentationStyle = .overFullScreen
+        present(newVC, animated: true, completion: nil)
+    }
+    
     @objc func handleSettings(){
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurringScreenDark)
