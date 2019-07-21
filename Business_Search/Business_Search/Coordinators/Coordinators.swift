@@ -107,11 +107,6 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
-//        print("Pushing now")
-//        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
-//            self?.removeChild(coordinator)
-//            print("Popped")
-//        }
     }
     
     func handleSearchByMap(dataController: DataController, location: CLLocation){

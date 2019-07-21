@@ -14,11 +14,7 @@ protocol RouterType: class, Presentable {
 
 final class Router: NSObject, RouterType, UINavigationControllerDelegate {
     //because it's dictionary, only one velue per key.
-    private var completions: [UIViewController : () -> Void] {
-        didSet {
-            print("Completions.count ==> \(completions.count)")
-        }
-    }
+    private var completions: [UIViewController : () -> Void]
     let navigationController: UINavigationController
     
     init(navigationController: UINavigationController = UINavigationController()) {
@@ -29,17 +25,9 @@ final class Router: NSObject, RouterType, UINavigationControllerDelegate {
     }
     
     //  Computed
-	var rootViewController: UIViewController? {
-        return navigationController.viewControllers.first
-    }
-    
-	var hasRootController: Bool {
-        return rootViewController != nil
-    }
-    
-    func toPresentable() -> UIViewController {
-        return navigationController
-    }
+	var rootViewController: UIViewController? {return navigationController.viewControllers.first}
+	var hasRootController: Bool {return rootViewController != nil}
+    func toPresentable() -> UIViewController {return navigationController}
 }
 
 extension Router {
@@ -55,7 +43,7 @@ extension Router {
     //  PUSH/POP
 	func push(_ module: Presentable, animated: Bool = true, completion: (() -> Void)? = nil) {
 		let controller = module.toPresentable()
-        //print("controller -> \(controller)\ncompletion -> \(completion)\ncompletions.count -> \(completions.count)")
+        print("controller -> \(controller) ............ completions.count -> \(completions.count)")
         guard controller is UINavigationController == false else {return}   //Avoid pushing UINavigationController
 		if let completion = completion {
 			completions[controller] = completion
