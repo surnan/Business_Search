@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8401126022E29F2600ECE0D5 /* _Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401125F22E29F2600ECE0D5 /* _Router.swift */; };
-		8401126222E29F3400ECE0D5 /* _Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126122E29F3400ECE0D5 /* _Presentable.swift */; };
+		8401126022E29F2600ECE0D5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401125F22E29F2600ECE0D5 /* Router.swift */; };
+		8401126222E29F3400ECE0D5 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126122E29F3400ECE0D5 /* Presentable.swift */; };
 		8401126522E29FE800ECE0D5 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401126422E29FE800ECE0D5 /* Coordinators.swift */; };
 		8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127722E51C2300ECE0D5 /* AppCoordinator.swift */; };
-		8401127A22E51C5C00ECE0D5 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127922E51C5C00ECE0D5 /* MenuCoordinator.swift */; };
+		8401127A22E51C5C00ECE0D5 /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */; };
 		8401127C22E51C9C00ECE0D5 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */; };
 		8401127E22E51CE300ECE0D5 /* OpenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */; };
 		8401128022E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */; };
@@ -87,11 +87,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8401125F22E29F2600ECE0D5 /* _Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Router.swift; sourceTree = "<group>"; };
-		8401126122E29F3400ECE0D5 /* _Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Presentable.swift; sourceTree = "<group>"; };
+		8401125F22E29F2600ECE0D5 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		8401126122E29F3400ECE0D5 /* Presentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		8401126422E29FE800ECE0D5 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
 		8401127722E51C2300ECE0D5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		8401127922E51C5C00ECE0D5 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
 		8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCoordinator.swift; sourceTree = "<group>"; };
 		8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressCoordinator.swift; sourceTree = "<group>"; };
@@ -182,44 +182,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8401125E22E29F1400ECE0D5 /* Coordinators */ = {
+		8401125E22E29F1400ECE0D5 /* Base_Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				8401128322E51D7F00ECE0D5 /* Protocols */,
+				8408F0DD22E60A1500DB55B6 /* _Protocols */,
 				8401127722E51C2300ECE0D5 /* AppCoordinator.swift */,
-				8401127922E51C5C00ECE0D5 /* MenuCoordinator.swift */,
-				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
+			);
+			path = Base_Coordinator;
+			sourceTree = "<group>";
+		};
+		8401128422E5667F00ECE0D5 /* SearchByAddress */ = {
+			isa = PBXGroup;
+			children = (
+				8408F0E222E60C3E00DB55B6 /* Coordinators */,
+				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
+			);
+			path = SearchByAddress;
+			sourceTree = "<group>";
+		};
+		8401128522E566A300ECE0D5 /* SearchByMap */ = {
+			isa = PBXGroup;
+			children = (
+				8408F0E322E60C4B00DB55B6 /* Coordinators */,
+				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
+			);
+			path = SearchByMap;
+			sourceTree = "<group>";
+		};
+		8408F0DD22E60A1500DB55B6 /* _Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8401126422E29FE800ECE0D5 /* Coordinators.swift */,
+				8401126122E29F3400ECE0D5 /* Presentable.swift */,
+				8401125F22E29F2600ECE0D5 /* Router.swift */,
+			);
+			path = _Protocols;
+			sourceTree = "<group>";
+		};
+		8408F0DE22E60A4300DB55B6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				845A1D8022D029C10066C17C /* OpenControllerProtocol.swift */,
+				845A1D8222D02A210066C17C /* OpeningTableDataSourceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8408F0DF22E60A9100DB55B6 /* _Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */,
+			);
+			path = _Protocols;
+			sourceTree = "<group>";
+		};
+		8408F0E022E60BEB00DB55B6 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8408F0E122E60C0600DB55B6 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
 				8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		8408F0E222E60C3E00DB55B6 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		8408F0E322E60C4B00DB55B6 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
 				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		8401128322E51D7F00ECE0D5 /* Protocols */ = {
+		8408F0E422E60C5900DB55B6 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				8401126122E29F3400ECE0D5 /* _Presentable.swift */,
-				8401125F22E29F2600ECE0D5 /* _Router.swift */,
-				8401126422E29FE800ECE0D5 /* Coordinators.swift */,
+				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
 			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		8401128422E5667F00ECE0D5 /* SearchByAddressController */ = {
-			isa = PBXGroup;
-			children = (
-				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
-			);
-			path = SearchByAddressController;
-			sourceTree = "<group>";
-		};
-		8401128522E566A300ECE0D5 /* SearchByMapController */ = {
-			isa = PBXGroup;
-			children = (
-				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
-			);
-			path = SearchByMapController;
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		8414475D2266C49900A38AAB /* API - Yelp */ = {
@@ -247,15 +301,17 @@
 		8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */ = {
 			isa = PBXGroup;
 			children = (
-				84B3CF8B2268A9030012A75C /* MyTabController.swift */,
 				84365CD822C93D450014E577 /* Tabbed Controllers */,
+				84B3CF8B2268A9030012A75C /* MyTabController.swift */,
 			);
 			path = "TAB CONTROLLER";
 			sourceTree = "<group>";
 		};
-		84365CAB22C564520014E577 /* Opening Controller */ = {
+		84365CAB22C564520014E577 /* Opening */ = {
 			isa = PBXGroup;
 			children = (
+				8408F0E122E60C0600DB55B6 /* Coordinators */,
+				8408F0DE22E60A4300DB55B6 /* Protocols */,
 				843F033722CE93FF002798C1 /* Table View */,
 				846509B9227A0C06008ABA9F /* Opening.swift */,
 				843F033C22CE98ED002798C1 /* Opening+TableView+Delegate.swift */,
@@ -264,7 +320,7 @@
 				8435B1D2227A4EEC00E95B4E /* Opening+Search.swift */,
 				842AD7D62284D80B00590B1A /* Opening+Handler.swift */,
 			);
-			path = "Opening Controller";
+			path = Opening;
 			sourceTree = "<group>";
 		};
 		84365CAC22C564710014E577 /* Filter */ = {
@@ -316,13 +372,6 @@
 			path = "UserAppliedFilter - Singleton";
 			sourceTree = "<group>";
 		};
-		84365CCA22C89A0E0014E577 /* Sub Menu Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Sub Menu Controllers";
-			sourceTree = "<group>";
-		};
 		84365CCD22C8E1B50014E577 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,9 +415,6 @@
 		845A1D7F22D029A60066C17C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				845A1D8022D029C10066C17C /* OpenControllerProtocol.swift */,
-				845A1D8222D02A210066C17C /* OpeningTableDataSourceProtocol.swift */,
-				845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -402,14 +448,14 @@
 			path = "ViewController Models";
 			sourceTree = "<group>";
 		};
-		848761D1227F1779000CECC7 /* Menu Controller */ = {
+		848761D1227F1779000CECC7 /* MainMenu */ = {
 			isa = PBXGroup;
 			children = (
-				84365CCA22C89A0E0014E577 /* Sub Menu Controllers */,
+				8408F0E022E60BEB00DB55B6 /* Coordinator */,
 				848761CF227F176F000CECC7 /* MainMenuController.swift */,
 				84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */,
 			);
-			path = "Menu Controller";
+			path = MainMenu;
 			sourceTree = "<group>";
 		};
 		84A5AFDB22A21E50009B96AD /* API - Google */ = {
@@ -451,7 +497,7 @@
 		84BDE2EE2263D007008C9B01 /* Business_Search */ = {
 			isa = PBXGroup;
 			children = (
-				8401125E22E29F1400ECE0D5 /* Coordinators */,
+				8401125E22E29F1400ECE0D5 /* Base_Coordinator */,
 				84BDE3012263D367008C9B01 /* Models */,
 				84BDE3032263D373008C9B01 /* Controllers */,
 				84BDE3022263D36E008C9B01 /* Views */,
@@ -478,6 +524,7 @@
 		84BDE3022263D36E008C9B01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8408F0DF22E60A9100DB55B6 /* _Protocols */,
 				84D3DB9F22675B0B00E46B2E /* TableView Cells */,
 				84365CCE22C8E30E0014E577 /* UIKit + SubClass */,
 				845A1D8822D02DB00066C17C /* ViewController Models */,
@@ -490,12 +537,12 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8401128522E566A300ECE0D5 /* SearchByMapController */,
-				8401128422E5667F00ECE0D5 /* SearchByAddressController */,
 				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
 				84365CAC22C564710014E577 /* Filter */,
-				848761D1227F1779000CECC7 /* Menu Controller */,
-				84365CAB22C564520014E577 /* Opening Controller */,
+				848761D1227F1779000CECC7 /* MainMenu */,
+				84365CAB22C564520014E577 /* Opening */,
+				8401128422E5667F00ECE0D5 /* SearchByAddress */,
+				8401128522E566A300ECE0D5 /* SearchByMap */,
 				84CC285B2297772700A82BBE /* Settings */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 			);
@@ -505,6 +552,7 @@
 		84CC285B2297772700A82BBE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				8408F0E422E60C5900DB55B6 /* Coordinators */,
 				84CC285C2297774800A82BBE /* SettingsController.swift */,
 			);
 			path = Settings;
@@ -704,7 +752,7 @@
 				84365CCC22C8A5090014E577 /* MainMenuModel.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
 				844D358222C9C2AC00D7E594 /* BusinessDetailsModel.swift in Sources */,
-				8401126022E29F2600ECE0D5 /* _Router.swift in Sources */,
+				8401126022E29F2600ECE0D5 /* Router.swift in Sources */,
 				8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
 				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
@@ -716,7 +764,7 @@
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
-				8401126222E29F3400ECE0D5 /* _Presentable.swift in Sources */,
+				8401126222E29F3400ECE0D5 /* Presentable.swift in Sources */,
 				848761CD227E856C000CECC7 /* MapController.swift in Sources */,
 				842AD7D52284D74D00590B1A /* Opening+UI.swift in Sources */,
 				8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */,
@@ -729,7 +777,7 @@
 				84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */,
 				842AD7D72284D80B00590B1A /* Opening+Handler.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
-				8401127A22E51C5C00ECE0D5 /* MenuCoordinator.swift in Sources */,
+				8401127A22E51C5C00ECE0D5 /* MainMenuCoordinator.swift in Sources */,
 				8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
 				84CC285D2297774800A82BBE /* SettingsController.swift in Sources */,
