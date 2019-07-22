@@ -49,11 +49,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
     func handleSearchByMap(dataController: DataController, location: CLLocation){
         let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
-        coordinator.start()
-        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
-            self?.removeChild(coordinator)
-            print("Popped")
-        }
+        coordinator.start(parent: self)
     }
     
     func handleSearchByAddress(dataController: DataController, location: CLLocation){

@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+
 class SearchByMapCoordinator: Coordinator {
     let dataController: DataController
     let location : CLLocation
@@ -19,10 +20,14 @@ class SearchByMapCoordinator: Coordinator {
         super.init(router: router)
     }
     
-    override func start(){
+   func start(parent: Coordinator){
         let vc = SearchByMapController()
         vc.possibleInsertLocationCoordinate = location
         vc.dataController = dataController
-        router.push(vc, animated: true, completion: nil)
+        router.push(vc, animated: true){[weak self, weak parent] in
+            parent?.removeChild(self)
+            print("-2 popped -2")
+        }
     }
 }
+

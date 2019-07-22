@@ -206,6 +206,22 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		8401128422E5667F00ECE0D5 /* SearchByAddressController */ = {
+			isa = PBXGroup;
+			children = (
+				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
+			);
+			path = SearchByAddressController;
+			sourceTree = "<group>";
+		};
+		8401128522E566A300ECE0D5 /* SearchByMapController */ = {
+			isa = PBXGroup;
+			children = (
+				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
+			);
+			path = SearchByMapController;
+			sourceTree = "<group>";
+		};
 		8414475D2266C49900A38AAB /* API - Yelp */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,8 +319,6 @@
 		84365CCA22C89A0E0014E577 /* Sub Menu Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
-				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
 			);
 			path = "Sub Menu Controllers";
 			sourceTree = "<group>";
@@ -476,6 +490,8 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8401128522E566A300ECE0D5 /* SearchByMapController */,
+				8401128422E5667F00ECE0D5 /* SearchByAddressController */,
 				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
 				84365CAC22C564710014E577 /* Filter */,
 				848761D1227F1779000CECC7 /* Menu Controller */,
