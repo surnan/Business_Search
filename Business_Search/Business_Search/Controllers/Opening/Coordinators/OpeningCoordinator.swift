@@ -37,4 +37,30 @@ class OpeningCoordinator: Coordinator {
         addChild(coordinator)
         coordinator.start(parent: self)
     }
+    
+    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol) {
+        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
+        coordinator.start(parent: self)
+    }
+    
+//    @objc func handleSettings(){
+//        let newVC = SettingsController()
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        view.addSubview(model.blurredEffectView)
+//        newVC.modalPresentationStyle = .overFullScreen
+//        newVC.delegate = self
+//        newVC.dataController = dataController
+//        newVC.maximumSliderValue = radius
+//        present(newVC, animated: true, completion:nil)
+//    }
+//
+//    @objc func handleFilter(){
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        view.addSubview(model.blurredEffectView)
+//        model.blurredEffectView.fillSuperview()
+//        let newVC = FilterController()
+//        newVC.modalPresentationStyle = .overFullScreen
+//        newVC.delegate = self
+//        present(newVC, animated: true)
+//    }
 }

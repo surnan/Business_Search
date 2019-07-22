@@ -1,31 +1,19 @@
 //
-//  SettingsCoordinator.swift
+//  FilterCoordinator.swift
 //  Business_Search
 //
-//  Created by admin on 7/21/19.
+//  Created by admin on 7/22/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
-import Foundation
-import MapKit
+import UIKit
 
 
-
-class SettingsCoordinator: Coordinator {
+class FilterCoordinator: Coordinator {
     let unblurProtocol: UnBlurViewProtocol
-    let dataController: DataController
-    var maximumSliderValue: Int?
     
-    init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType) {
+    init(unblurProtocol: UnBlurViewProtocol, router: RouterType) {
         self.unblurProtocol = unblurProtocol
-        self.dataController = dataController
-        super.init(router: router)
-    }
-    
-    init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType, maximumSliderValue: Int? = nil) {
-        self.unblurProtocol = unblurProtocol
-        self.dataController = dataController
-        self.maximumSliderValue = maximumSliderValue
         super.init(router: router)
     }
     
@@ -36,16 +24,17 @@ class SettingsCoordinator: Coordinator {
     }
     
     func start(parent: Coordinator){
-        let vc = SettingsController()
-        vc.dataController           = dataController
+        let vc = FilterController()
         vc.delegate                 = unblurProtocol
         vc.coordinator              = self
         vc.modalPresentationStyle   = .overFullScreen
+        
         vc.dismissController = {[weak self] in
             self?.router.dismissModule(animated: true, completion: {
                 self?.unblurProtocol.undoBlur()
             })
         }
+        
         router.present(vc, animated: true)
     }
 }

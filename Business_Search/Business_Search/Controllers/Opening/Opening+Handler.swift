@@ -29,6 +29,14 @@ extension OpeningController {
         present(newVC, animated: true, completion:nil)
     }
     
+    @objc func handleSettings2(){
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        view.addSubview(blurringScreenDark)
+        addDarkScreenBlur()
+        coordinator?.handleSettings(dataController: dataController, delegate: self)
+    }
+
+    
     @objc func handleFilter(){
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(model.blurredEffectView)

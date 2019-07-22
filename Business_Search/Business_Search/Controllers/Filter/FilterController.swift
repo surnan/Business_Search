@@ -13,7 +13,9 @@ class FilterController: UIViewController {
     var delegate: UnBlurViewProtocol?   //Unblur
     
     let shared                  = UserAppliedFilter.shared
+    var coordinator             : FilterCoordinator?
     let model                   = FilterModel()
+    var dismissController   : (()->Void)?
     lazy var allDollarButtons   = [model.dollarOneButton, model.dollarTwoButton,
                                  model.dollarThreeButton,model.dollarFourButton]
     

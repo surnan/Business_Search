@@ -12,7 +12,7 @@ import MapKit
 protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
 protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
-protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol)}
+protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
 protocol BarButtonToOpeningType {func handleNext(dataController: DataController, location: CLLocation)}
 protocol BusinessDetailsType{func showBusinessInfo(currentBusiness: Business)}
 protocol OpenAppleMapType{func handleMapItButton(currentLocation: CLLocationCoordinate2D)}

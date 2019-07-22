@@ -79,7 +79,7 @@ class MenuController: UIViewController, UnBlurViewProtocol{
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurringScreenDark)
         addDarkScreenBlur()
-        coordinator?.handleSettings(dataController: dataController, delegate: self)
+        coordinator?.handleSettings(dataController: dataController, delegate: self, max: nil)
     }
     
     func addHandlers(){

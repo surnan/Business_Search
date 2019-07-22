@@ -10,8 +10,8 @@ import Foundation
 import MapKit
 
 class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
-    let dataController  : DataController
     let window          : UIWindow
+    let dataController  : DataController
     let firstController : MenuController
     
     init(router: RouterType, dataController: DataController, window: UIWindow, vc: MenuController) {
@@ -23,41 +23,38 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
     
     override func start(){
         firstController.coordinator = self
-        window.rootViewController       = router.toPresentable()
+        window.rootViewController   = router.toPresentable()
         window.makeKeyAndVisible()
     }
     
-    //var childCoordinators: [Coordinator] = []
     func handleOpenController(dataController: DataController, location: CLLocation){
         let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
     }
-    
-    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol) {
-        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
-        coordinator.start(parent: self)
-    }
-    
     func handleSearchByMap(dataController: DataController, location: CLLocation){
         let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
     }
     
     func handleSearchByAddress(dataController: DataController, location: CLLocation){
         let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
-    }
-    
-    func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){
-        let coordinator = SettingsCoordinator(unblurProtocol: viewController, dataController: dataController, router: router)
-        addChild(coordinator)
-        coordinator.start()
         router.push(coordinator, animated: true) {[weak self, weak coordinator] in
             self?.removeChild(coordinator)
-            print("Popped")
         }
+    }
+
+    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
+        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
+        coordinator.start(parent: self)
     }
 }
