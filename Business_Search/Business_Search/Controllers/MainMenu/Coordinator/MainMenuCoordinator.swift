@@ -9,16 +9,6 @@
 import Foundation
 import MapKit
 
-
-protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
-protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
-protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
-protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol)}
-
-//protocol BarButtonToOpeningType {func handleNext(location: CLLocation, dataController: DataController)}
-protocol BarButtonToOpeningType {func handleNext(dataController: DataController, location: CLLocation)}
-
-
 class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
     let dataController  : DataController
     let window          : UIWindow
@@ -39,7 +29,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
     
     //var childCoordinators: [Coordinator] = []
     func handleOpenController(dataController: DataController, location: CLLocation){
-        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+        let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
     }

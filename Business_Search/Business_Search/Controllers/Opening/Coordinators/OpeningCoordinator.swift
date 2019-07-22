@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class OpenCoordinator: Coordinator {
+class OpeningCoordinator: Coordinator {
     let dataController: DataController
     let location : CLLocation
     
@@ -30,5 +30,11 @@ class OpenCoordinator: Coordinator {
             parent?.removeChild(self)
             print("-2 popped -2")
         }
+    }
+    
+    func handleBusinessDetails(business: Business){
+        let coordinator = BusinessDetailsCoordinator(router: router, business: business)
+        addChild(coordinator)
+        coordinator.start(parent: self)
     }
 }

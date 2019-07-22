@@ -32,7 +32,7 @@ class SearchByMapCoordinator: Coordinator, BarButtonToOpeningType {
     }
     
     func handleNext(dataController: DataController, location: CLLocation){
-        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+        let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
     }

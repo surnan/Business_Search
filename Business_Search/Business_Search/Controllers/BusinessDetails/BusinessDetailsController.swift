@@ -11,30 +11,31 @@ import CoreData
 import MapKit
 import CoreLocation
 
-
 class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    let regionMeters    = 400.0
-    var model           = BusinessDetailsModel()
-    var locationManager = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
-    
-    var business        : Business! {didSet { model.business = business }}
-    var currentLocation : CLLocation?
+    let regionMetersForMap      = 400.0
+    var currentLocation         : CLLocation?
+    var locationManager         = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
+    var model                   = BusinessDetailsModel()
+    var business                : Business! {didSet { model.business = business }}
+    var coordinator             : (OpenInSafariType & OpenAppleMapType)?
     
     //MARK:- Functions START
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = UIColor.white
         setupUI()
+        setupMapView()
     }
     
     override func viewDidLoad() {
         addHandlers()
-        setupMapView()
         setupLocationManager()
     }
     
     func setupMapView(){
-        let viewRegion = MKCoordinateRegion(center: model.firstAnnotation.coordinate, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
+        let viewRegion = MKCoordinateRegion(center: model.firstAnnotation.coordinate,
+                                            latitudinalMeters: regionMetersForMap,
+                                            longitudinalMeters: regionMetersForMap)
         model.mapView.setRegion(viewRegion, animated: false)
         model.mapView.addAnnotation(model.firstAnnotation)
         model.mapView.delegate = self
@@ -62,21 +63,15 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
         if let urlStringExists = business.url, urlStringExists._isValidURL {
-            let verifiedURLStringFormatted = urlStringExists._prependHTTPifNeeded()
-            if let url = URL(string: verifiedURLStringFormatted) {
-                UIApplication.shared.open(url)
-                return
-            }
+            coordinator?.handleOpenBrowser(urlString: urlStringExists)
+        } else {
+            coordinator?.handleOpenBrowser(urlString: "https://www.yelp.com")
         }
-        UIApplication.shared.open(URL(string: "https://www.yelp.com")!)
     }
     
     @objc func handleMapItButton(_ sender: UIButton){
         guard let currentLocation = locationManager.location?.coordinate else {print("Unable to get current Location"); return}
-        let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: currentLocation.latitude, longitude: currentLocation.longitude)))
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: business.latitude, longitude: business.longitude)))
-        source.name = "Your Location"; destination.name = "Destination"
-        MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+        coordinator?.handleMapItButton(currentLocation: currentLocation)
     }
 }
 

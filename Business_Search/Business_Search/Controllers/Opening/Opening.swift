@@ -12,7 +12,7 @@ import CoreData
 
 class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurViewProtocol {
     
-    var coordinator: OpenCoordinator!
+    var coordinator: OpeningCoordinator!
     
     lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController,
                                                          latitude: latitude,

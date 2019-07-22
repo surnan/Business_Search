@@ -10,18 +10,16 @@ import UIKit
 
 
 //These functions are called by TableView Delegate
-extension OpeningController: OpeningControllerProtocol{
+extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
+    func showBusinessInfo(currentBusiness: Business){coordinator.handleBusinessDetails(business: currentBusiness)}
+    func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
+    func reloadData(){model.tableView.reloadData()}
+    
     func listBusinesses(category: String){
         let newVC = MyTabController()
         let items = getBusinessesFromCategoryName(category: category)
         newVC.businesses = items
         newVC.categoryName = category
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-    
-    func showBusinessInfo(currentBusiness: Business){
-        let newVC = BusinessDetailsController()
-        newVC.business = currentBusiness
         navigationController?.pushViewController(newVC, animated: true)
     }
     
@@ -42,7 +40,6 @@ extension OpeningController: OpeningControllerProtocol{
     
     func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
         tableDataSource.updateCategoryPredicate(category: category)
- 
         var businessArray = [Business]()    //Pushed into next ViewController
         tableDataSource.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
         businessArray = businessArray.filter{
@@ -67,6 +64,7 @@ extension OpeningController: OpeningControllerProtocol{
         present(activityVC, animated: true)
     }
     
+    //
     func deleteFavorite(business: Business){
         tableDataSource.updateFavoritesPredicate(business: business)
         tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
@@ -91,7 +89,4 @@ extension OpeningController: OpeningControllerProtocol{
             print("\n\nError saving newly created favorite - full error: \n\(error)")
         }
     }
-    
-    func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
-    func reloadData(){model.tableView.reloadData()}
 }
