@@ -11,20 +11,20 @@ import CoreData
 
 
 class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
-    var dataController      : DataController!           //injected
+    var dataController      : DataController!       //injected
     var delegate            : UnBlurViewProtocol?   //Unblur
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
-    
     var coordinator         : Coordinator?
+    var dismissController   : (()->Void)?
     
     lazy var fetchLocation  = LocationNSFetchController(dataController: dataController)
     lazy var model          = SettingsModel(maximumSliderValue: maximumSliderValue)
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = .clear
-        view.isOpaque = false
+        view.backgroundColor    = .clear
+        view.isOpaque           = false
         setupUI()
     }
     
@@ -40,6 +40,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         let distanceSliderStack     = model.getDistanceSliderStack()
         let verticalSearchStack     = model.getSearchStack()
         [distanceSliderStack, verticalSearchStack, textViewStack, saveCancelDeleteStack].forEach{view.addSubview($0)}
+        
         NSLayoutConstraint.activate([
             model.myTextView.heightAnchor.constraint(equalToConstant: 50),
             verticalSearchStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
@@ -71,9 +72,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc func handlecancelButton(){
-        dismiss(animated: true) {
-            self.delegate?.undoBlur()
-        }
+        dismissController?()
     }
     
     @objc func handleSaveButton(){
@@ -83,8 +82,6 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
             UserDefaults.standard.set(model.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
         }
-        dismiss(animated: true) {
-            self.delegate?.undoBlur()
-        }
+        dismissController?()
     }
 }
