@@ -11,10 +11,10 @@ import CoreData
 import MapKit
 
 class OpeningTableDelegate: NSObject, UITableViewDelegate {
-    var delegate: OpenControllerProtocol!
+    var delegate: OpeningControllerProtocol!
     var dataDelegate      : OpeningTableDataSourceProtocol!
     
-    init(delegate: OpenControllerProtocol, dataSourceDelegate: OpeningTableDataSourceProtocol) {
+    init(delegate: OpeningControllerProtocol, dataSourceDelegate: OpeningTableDataSourceProtocol) {
         self.delegate   = delegate
         self.dataDelegate         = dataSourceDelegate
     }

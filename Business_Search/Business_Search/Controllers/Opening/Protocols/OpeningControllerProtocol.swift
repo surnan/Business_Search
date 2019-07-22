@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol OpenControllerProtocol {
+protocol OpeningControllerProtocol {
     var getModel: OpeningTableDataSource {get}
     func listBusinesses(category: String)
     func showBusinessInfo(currentBusiness: Business)
