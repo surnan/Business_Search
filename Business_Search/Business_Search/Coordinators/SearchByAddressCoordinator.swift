@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class SearchByAddressCoordinator: Coordinator {
+class SearchByAddressCoordinator: Coordinator, BarButtonToOpeningType {
     let dataController: DataController
     let location : CLLocation
     
@@ -19,10 +19,20 @@ class SearchByAddressCoordinator: Coordinator {
         super.init(router: router)
     }
     
-    override func start(){
+    func start(parent: Coordinator){
         let vc = SearchByAddressController()
         vc.possibleInsertLocationCoordinate = location
         vc.dataController = dataController
-        router.push(vc, animated: true, completion: nil)
+        vc.coordinator = self
+        router.push(vc, animated: true) {[weak self, weak parent] in
+            parent?.removeChild(self)
+            print("-2 popped -2")
+        }
+    }
+    
+    func handleNext(dataController: DataController, location: CLLocation){
+        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+        addChild(coordinator)
+        coordinator.start(parent: self)
     }
 }

@@ -9,11 +9,14 @@
 import Foundation
 import MapKit
 
-//protocol SettingsType {func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController)}
+
 protocol OpeningType {func handleOpenController(dataController: DataController, location: CLLocation)}
 protocol SearchByMapType {func handleSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
 protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol)}
+
+//protocol BarButtonToOpeningType {func handleNext(location: CLLocation, dataController: DataController)}
+protocol BarButtonToOpeningType {func handleNext(dataController: DataController, location: CLLocation)}
 
 
 class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
@@ -55,11 +58,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
     func handleSearchByAddress(dataController: DataController, location: CLLocation){
         let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
-        coordinator.start()
-        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
-            self?.removeChild(coordinator)
-            print("Popped")
-        }
+        coordinator.start(parent: self)
     }
     
     func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController){

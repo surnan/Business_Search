@@ -9,9 +9,6 @@
 import Foundation
 import MapKit
 
-protocol BarButtonToOpeningType {
-    func handleNext(location: CLLocation, dataController: DataController, router: RouterType)
-}
 
 class SearchByMapCoordinator: Coordinator, BarButtonToOpeningType {
     let dataController: DataController
@@ -27,13 +24,14 @@ class SearchByMapCoordinator: Coordinator, BarButtonToOpeningType {
         let vc = SearchByMapController()
         vc.possibleInsertLocationCoordinate = location
         vc.dataController = dataController
+        vc.coordinator  = self
         router.push(vc, animated: true){[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
         }
     }
     
-    func handleNext(location: CLLocation, dataController: DataController, router: RouterType){
+    func handleNext(dataController: DataController, location: CLLocation){
         let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)

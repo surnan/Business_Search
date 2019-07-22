@@ -18,6 +18,8 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
+    var coordinator: BarButtonToOpeningType?
+    
     lazy var myTapGesture: UITapGestureRecognizer = {
         var gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         gesture.delegate = self
@@ -95,18 +97,19 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
         }
     }
     
-    @objc func handleRight(){
-        let coord = locationToForward.coordinate
-        let vc = OpeningController()
-        vc.dataController = dataController
-        vc.latitude = coord.latitude
-        vc.longitude = coord.longitude
-        navigationController?.pushViewController(vc, animated: true)
+    @objc func handleNext(){
+        coordinator?.handleNext(dataController: dataController, location: locationToForward)
+//        let coord = locationToForward.coordinate
+//        let vc = OpeningController()
+//        vc.dataController = dataController
+//        vc.latitude = coord.latitude
+//        vc.longitude = coord.longitude
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     
     func setupNavigationManu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext))]
         //        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight)),
         //                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }
@@ -154,7 +157,6 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .skyBlue4
-        
         setupNavigationManu()
         setupUI()
         locationTextField.delegate = self

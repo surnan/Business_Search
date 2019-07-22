@@ -52,12 +52,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
     
     @objc func handleNext(){
-        let coord = locationToForward.coordinate
-        let vc = OpeningController()
-        vc.dataController = dataController
-        vc.latitude = coord.latitude
-        vc.longitude = coord.longitude
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator?.handleNext(dataController: dataController, location: locationToForward)
     }
 
     func setupUI(){
