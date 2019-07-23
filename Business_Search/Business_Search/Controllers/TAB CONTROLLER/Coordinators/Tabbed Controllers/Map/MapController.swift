@@ -20,8 +20,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     var currentBusinessAnnotation: Business?        //tapped Annotation
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"
-    
-    var coordinator: Coordinator?
+    var coordinator             : Coordinator?
     
 
     lazy var scaleView          = GenericScaleView(mapView: mapView)
@@ -36,10 +35,10 @@ class MapController: UIViewController, MKMapViewDelegate {
     //MARK:- Functions START
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true   //hides the searchController bar
         setupMap()      //ViewWillAppear: annotations stack on top each when popping back
     }
-    
-    
+        
     func setupMap(){
         let allAnnotations = convertLocationsToAnnotations()
         mapView.addAnnotations(allAnnotations)

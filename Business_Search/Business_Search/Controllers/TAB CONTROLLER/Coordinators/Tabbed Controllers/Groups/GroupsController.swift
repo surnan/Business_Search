@@ -16,7 +16,6 @@ class GroupsController: UITableViewController {
     
     var coordinator: Coordinator?
 
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
@@ -39,6 +38,7 @@ class GroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true   //hides the searchController bar
         view.backgroundColor = UIColor.white
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
     }
