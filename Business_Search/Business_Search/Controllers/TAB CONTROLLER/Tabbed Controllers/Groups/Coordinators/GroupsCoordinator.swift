@@ -12,7 +12,6 @@ class GroupsCoordinator: Coordinator {
     let businesses      : [Business]
     let categoryName    : String
     
-    
     init(businesses: [Business], categoryName: String, router: RouterType) {
         self.businesses     = businesses
         self.categoryName   = categoryName

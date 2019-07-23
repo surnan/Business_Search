@@ -22,6 +22,7 @@
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
 		841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */; };
 		841CDF8C22E746A600FEB1D0 /* GroupsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8B22E746A600FEB1D0 /* GroupsCoordinator.swift */; };
+		841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8E22E7535200FEB1D0 /* MapCoordinate.swift */; };
 		8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */; };
 		842AD7D52284D74D00590B1A /* Opening+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D42284D74D00590B1A /* Opening+UI.swift */; };
 		842AD7D72284D80B00590B1A /* Opening+Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D62284D80B00590B1A /* Opening+Handler.swift */; };
@@ -110,6 +111,7 @@
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabCoordinator.swift; sourceTree = "<group>"; };
 		841CDF8B22E746A600FEB1D0 /* GroupsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsCoordinator.swift; sourceTree = "<group>"; };
+		841CDF8E22E7535200FEB1D0 /* MapCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinate.swift; sourceTree = "<group>"; };
 		8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotationView.swift; sourceTree = "<group>"; };
 		842AD7D42284D74D00590B1A /* Opening+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Opening+UI.swift"; sourceTree = "<group>"; };
 		842AD7D62284D80B00590B1A /* Opening+Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Opening+Handler.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -327,7 +329,7 @@
 		841CDF8822E73C7C00FEB1D0 /* Groups */ = {
 			isa = PBXGroup;
 			children = (
-				841CDF8A22E745E600FEB1D0 /* GroupsCoordinator */,
+				841CDF8A22E745E600FEB1D0 /* Coordinators */,
 				843C66F8227D25D7003A64D1 /* GroupsController.swift */,
 			);
 			path = Groups;
@@ -336,18 +338,27 @@
 		841CDF8922E73C8C00FEB1D0 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				841CDF8D22E7532700FEB1D0 /* Coordinators */,
 				848761CC227E856C000CECC7 /* MapController.swift */,
 				84365CD922C93D860014E577 /* MapController+Map.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
 		};
-		841CDF8A22E745E600FEB1D0 /* GroupsCoordinator */ = {
+		841CDF8A22E745E600FEB1D0 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
 				841CDF8B22E746A600FEB1D0 /* GroupsCoordinator.swift */,
 			);
-			path = GroupsCoordinator;
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		841CDF8D22E7532700FEB1D0 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				841CDF8E22E7535200FEB1D0 /* MapCoordinate.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */ = {
@@ -816,6 +827,7 @@
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */,
 				845A1D8122D029C10066C17C /* OpeningControllerProtocol.swift in Sources */,
+				841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				849A934822CD032300DE6658 /* OpeningTableDelegate.swift in Sources */,
 				84365CB322C567B50014E577 /* Float+Extension.swift in Sources */,
