@@ -20,7 +20,8 @@ class MapController: UIViewController, MKMapViewDelegate {
     var currentBusinessAnnotation: Business?        //tapped Annotation
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"
-    var coordinator             : Coordinator?
+ 
+    var coordinator: BusinessDetailsType?
     
 
     lazy var scaleView          = GenericScaleView(mapView: mapView)
@@ -41,7 +42,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     }
     
     func setupNavigationBar(){
-        //navigationController?.isNavigationBarHidden = true   //hides the searchController bar
+        navigationController?.isNavigationBarHidden = false   //hides the searchController bar
         
         navigationItem.title = "categoryName2"
         navigationController?.title = "categoryName"

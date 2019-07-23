@@ -57,9 +57,7 @@ class MyTabCoordinator: Coordinator, UITabBarControllerDelegate {
     }
     
     func start(parent: Coordinator) {
-        router.push(tabBarController, animated: true){[weak self, weak parent] in
-            parent?.removeChild(self)
-            print("-2 popped -2")}
+        router.present(tabBarController, animated: true)
     }
 }
 
