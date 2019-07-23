@@ -19,6 +19,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         self.window         = window
         firstController     = vc
         super.init(router: router)
+        router.setRootModule(vc, hideBar: false)
     }
     
     override func start(){

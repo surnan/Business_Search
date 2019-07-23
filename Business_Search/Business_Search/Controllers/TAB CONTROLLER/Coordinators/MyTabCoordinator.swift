@@ -6,5 +6,11 @@
 //  Copyright © 2019 admin. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+
+var tabs = [UIViewController: Coordinator]()
+
+
+
 
