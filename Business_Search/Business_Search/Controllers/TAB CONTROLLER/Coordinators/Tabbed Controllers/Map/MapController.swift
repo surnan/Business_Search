@@ -17,11 +17,12 @@ class BusinessPointAnnotation: MKPointAnnotation {
 }
 
 class MapController: UIViewController, MKMapViewDelegate {
-    var coordinator: Coordinator?
-    
     var currentBusinessAnnotation: Business?        //tapped Annotation
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"
+    
+    var coordinator: Coordinator?
+    
 
     lazy var scaleView          = GenericScaleView(mapView: mapView)
     lazy var mapView: MKMapView = {
