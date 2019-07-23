@@ -14,25 +14,11 @@ let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
 class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate {
-    var dataController: DataController!                 //Injected from MenuController()
+    let geoCoder = CLGeocoder()
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
-    
+    var dataController: DataController!                 //Injected from MenuController()
     var coordinator: BarButtonToOpeningType?
-    
-    lazy var myTapGesture: UITapGestureRecognizer = {
-        var gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        gesture.delegate = self
-        return gesture
-    }()
-    
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer){
-        print("tap happened")
-    }
-    
-    
-    let geoCoder = CLGeocoder()
 
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))
@@ -113,6 +99,12 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
         print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")
     }
     
+    
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     
     
     override func viewDidLoad() {

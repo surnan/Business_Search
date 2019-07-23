@@ -30,6 +30,14 @@ class FilterCoordinator: Coordinator {
             })
         }
         
+        vc.saveDismissController = {[weak self] in
+            self?.router.dismissModule(animated: true){
+                UserAppliedFilter.shared.load()
+                self?.unblurProtocol.undoBlur()
+                _ = UserAppliedFilter.shared.getBusinessPredicate()
+            }
+        }
+        
         router.present(vc, animated: true)
     }
 }

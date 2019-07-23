@@ -16,6 +16,7 @@ class FilterController: UIViewController {
     var coordinator             : FilterCoordinator?
     let model                   = FilterModel()
     var dismissController       : (()->Void)?
+    var saveDismissController   : (()->Void)?
     lazy var allDollarButtons   = [model.dollarOneButton, model.dollarTwoButton,
                                  model.dollarThreeButton,model.dollarFourButton]
     
@@ -72,7 +73,7 @@ class FilterController: UIViewController {
                                       dollarFour: model.dollarFourButton.isSelected,
                                       noPrices: model.noPriceSwitch.isOn,
                                       minimumRating: model.sliderValueLabel.text ?? "0.0")
-        dismissController?()
+        saveDismissController?()
     }
     
     @objc func handleResetToDefaultsButton(){

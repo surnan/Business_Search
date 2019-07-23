@@ -61,8 +61,6 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     }
     
     @objc func handleSettings(){
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        view.addSubview(blurringScreenDark)
         addDarkScreenBlur()
         coordinator?.handleSettings(dataController: dataController, delegate: self, max: nil)
     }

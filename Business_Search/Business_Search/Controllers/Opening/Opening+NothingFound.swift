@@ -12,8 +12,9 @@ import UIKit
 //NOTHING LABEL
 extension OpeningController{
     func undoBlur() {
-        model.blurredEffectView.removeFromSuperview()
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        removeDarkScreenBlur()
+        navigationController?.setNavigationBarHidden(false, animated: true)        
+        
         doesLocationEntityExist = false
         readOrCreateLocation()
         animateResultsAreFilteredLabel()

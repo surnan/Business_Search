@@ -55,6 +55,7 @@
 		84684CA722E6449800999599 /* SearchByAddressController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA622E6449800999599 /* SearchByAddressController+UI.swift */; };
 		84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA922E6466A00999599 /* FilterCoordinator.swift */; };
 		84684CAC22E69B7600999599 /* MainMenuController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CAB22E69B7600999599 /* MainMenuController+UI.swift */; };
+		84684CAE22E6A4A400999599 /* SearchByAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */; };
 		8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
@@ -140,6 +141,7 @@
 		84684CA622E6449800999599 /* SearchByAddressController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByAddressController+UI.swift"; sourceTree = "<group>"; };
 		84684CA922E6466A00999599 /* FilterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCoordinator.swift; sourceTree = "<group>"; };
 		84684CAB22E69B7600999599 /* MainMenuController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+UI.swift"; sourceTree = "<group>"; };
+		84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressModel.swift; sourceTree = "<group>"; };
 		8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTableDataSource.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -439,7 +441,7 @@
 			path = Singleton;
 			sourceTree = "<group>";
 		};
-		845A1D8822D02DB00066C17C /* ViewController_Models */ = {
+		845A1D8822D02DB00066C17C /* View_Models */ = {
 			isa = PBXGroup;
 			children = (
 				844D358122C9C2AC00D7E594 /* BusinessDetailsModel.swift */,
@@ -447,8 +449,9 @@
 				84365CCB22C8A5090014E577 /* MainMenuModel.swift */,
 				843F032722CE64FC002798C1 /* OpeningModel.swift */,
 				84365CC422C8658B0014E577 /* SettingsModel.swift */,
+				84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */,
 			);
-			path = ViewController_Models;
+			path = View_Models;
 			sourceTree = "<group>";
 		};
 		84684C9F22E60FCB00999599 /* TableView */ = {
@@ -566,7 +569,7 @@
 				8408F0DF22E60A9100DB55B6 /* _Protocols */,
 				84D3DB9F22675B0B00E46B2E /* TableView_Cells */,
 				84365CCE22C8E30E0014E577 /* UIKit + SubClass */,
-				845A1D8822D02DB00066C17C /* ViewController_Models */,
+				845A1D8822D02DB00066C17C /* View_Models */,
 				84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */,
 				84BDE2F62263D009008C9B01 /* Assets.xcassets */,
 			);
@@ -827,6 +830,7 @@
 				84684CA522E61D2400999599 /* _Types.swift in Sources */,
 				84365CD322C8EB5B0014E577 /* MainMenuController+CLLocation.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
+				84684CAE22E6A4A400999599 /* SearchByAddressModel.swift in Sources */,
 				84365CC022C7F2460014E577 /* FilterModel.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				843F033B22CE94B7002798C1 /* OpeningTableDataSource+Protocol.swift in Sources */,
