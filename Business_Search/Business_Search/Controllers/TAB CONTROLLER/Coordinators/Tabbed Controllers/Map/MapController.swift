@@ -37,8 +37,17 @@ class MapController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true   //hides the searchController bar
         setupMap()      //ViewWillAppear: annotations stack on top each when popping back
+        setupNavigationBar()
     }
+    
+    func setupNavigationBar(){
+        //navigationController?.isNavigationBarHidden = true   //hides the searchController bar
         
+        navigationItem.title = "categoryName2"
+        navigationController?.title = "categoryName"
+    }
+    
+    
     func setupMap(){
         let allAnnotations = convertLocationsToAnnotations()
         mapView.addAnnotations(allAnnotations)

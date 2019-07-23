@@ -13,8 +13,7 @@ import CoreData
 class GroupsController: UITableViewController {
     var businesses = [Business]()   //injected
     var categoryName: String!       //injected
-    
-    var coordinator: Coordinator?
+    var coordinator: BusinessDetailsType?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -38,14 +37,20 @@ class GroupsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true   //hides the searchController bar
         view.backgroundColor = UIColor.white
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
+        tableView.separatorColor = UIColor.clear
+        setupNavigationBar()
+    }
+    
+    func setupNavigationBar(){
+        //navigationController?.isNavigationBarHidden = true   //hides the searchController bar
+        navigationItem.title = "categoryName2"
+        navigationController?.title = categoryName
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let newVC = BusinessDetailsController()
-            newVC.business = businesses[indexPath.row]
-            navigationController?.pushViewController(newVC, animated: true)
+        let currentBusiness = businesses[indexPath.row]
+        coordinator?.handleBusinessDetails(currentBusiness: currentBusiness)
     }
 }

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class GroupsCoordinator: Coordinator {
+class GroupsCoordinator: Coordinator, BusinessDetailsType {
     let businesses      : [Business]
     let categoryName    : String
-    
     
     lazy var myGroupsController: GroupsController  = {
         let controller = GroupsController()
@@ -26,6 +25,13 @@ class GroupsCoordinator: Coordinator {
         self.categoryName   = categoryName
         super.init(router: router)
         router.setRootModule(myGroupsController, hideBar: false)
+        myGroupsController.coordinator = self
+    }
+    
+    func handleBusinessDetails(currentBusiness: Business){
+        let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
+        addChild(coordinator)
+        coordinator.start(parent: self)
     }
 }
 
