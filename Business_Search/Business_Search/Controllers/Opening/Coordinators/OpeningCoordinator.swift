@@ -47,4 +47,6 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
         let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
         coordinator.start(parent: self)
     }
+    
+    
 }
