@@ -19,4 +19,5 @@ protocol OpenAppleMapType{func handleMapItButton(currentLocation: CLLocationCoor
 protocol OpenInSafariType {func handleOpenBrowser(urlString: String)}
 protocol FilterType{func handleFilter(unblurProtocol: UnBlurViewProtocol)}
 protocol OpenPhoneType {func handlePhoneNumber(numberString: String)}
+protocol TabControllerType {func handleTabController(businesses: [Business], categoryName: String)}
 

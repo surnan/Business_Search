@@ -23,9 +23,9 @@ class GroupsCoordinator: Coordinator {
         let vc = GroupsController()
         vc.businesses   = businesses
         vc.categoryName = categoryName
-        router.push(router, animated: true){[weak self, weak parent] in
-            parent?.removeChild(self)
-            print("-2 popped -2")
-        }
+        vc.coordinator = self
+        router.push(vc, animated: true){[weak self, weak parent] in
+                    parent?.removeChild(self)
+                    print("-2 popped -2")}
     }
 }

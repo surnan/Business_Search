@@ -13,6 +13,8 @@ import CoreData
 class GroupsController: UITableViewController {
     var businesses = [Business]()   //injected
     var categoryName: String!       //injected
+    
+    var coordinator: Coordinator?
 
     
     override func viewDidAppear(_ animated: Bool) {

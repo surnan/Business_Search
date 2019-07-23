@@ -73,11 +73,13 @@ extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
     
     //MARK: - Row Action when Search Group = "Categories"
     func listBusinesses(category: String){
-        let newVC = MyTabController()
         let items = getBusinessesFromCategoryName(category: category)
-        newVC.businesses = items
-        newVC.categoryName = category
-        navigationController?.pushViewController(newVC, animated: true)
+        coordinator?.handleTabController(businesses: items, categoryName: category)
+        
+//        let newVC = MyTabController()
+//        newVC.businesses = items
+//        newVC.categoryName = category
+//        navigationController?.pushViewController(newVC, animated: true)
     }
     
     func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.

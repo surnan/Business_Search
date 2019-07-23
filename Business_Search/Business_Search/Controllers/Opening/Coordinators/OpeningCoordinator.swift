@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType {
+class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
     let dataController: DataController
     let location : CLLocation
     
@@ -48,5 +48,8 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
         coordinator.start(parent: self)
     }
     
-    
+    func handleTabController(businesses: [Business], categoryName: String){
+        let coordinator = GroupsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        coordinator.start(parent: self)
+    }
 }

@@ -14,7 +14,7 @@ class OpeningController: UIViewController, UISearchControllerDelegate, UISearchB
     
     
     //var coordinator: OpeningCoordinator!
-    var coordinator: (SettingsType & BusinessDetailsType & FilterType)?
+    var coordinator: (SettingsType & BusinessDetailsType & FilterType & TabControllerType)?
     
     lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController,
                                                          latitude: latitude,
