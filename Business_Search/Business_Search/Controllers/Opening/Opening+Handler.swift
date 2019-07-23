@@ -19,23 +19,11 @@ extension OpeningController {
     }
     
     @objc func handleSettings(){
-        let newVC = SettingsController()
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(model.blurredEffectView)
-        newVC.modalPresentationStyle = .overFullScreen
-        newVC.delegate = self
-        newVC.dataController = dataController
-        newVC.maximumSliderValue = radius
-        present(newVC, animated: true, completion:nil)
+        model.blurredEffectView.fillSuperview()
+        coordinator.handleSettings(dataController: dataController, delegate: self, max: radius)
     }
-    
-    @objc func handleSettings2(){
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        view.addSubview(blurringScreenDark)
-        addDarkScreenBlur()
-        coordinator?.handleSettings(dataController: dataController, delegate: self)
-    }
-
     
     @objc func handleFilter(){
         navigationController?.setNavigationBarHidden(true, animated: true)

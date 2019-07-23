@@ -43,6 +43,11 @@ class OpeningCoordinator: Coordinator {
         coordinator.start(parent: self)
     }
     
+    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
+        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router, maximumSliderValue: radius)
+        coordinator.start(parent: self)
+    }
+    
 //    @objc func handleSettings(){
 //        let newVC = SettingsController()
 //        navigationController?.setNavigationBarHidden(true, animated: true)
