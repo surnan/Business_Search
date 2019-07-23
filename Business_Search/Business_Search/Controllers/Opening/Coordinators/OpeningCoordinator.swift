@@ -50,8 +50,8 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
     
     func handleTabController(businesses: [Business], categoryName: String){
         //let coordinator = GroupsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
-        let coordinator = MapsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
-        
+        //let coordinator = MapsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = MyTabCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         coordinator.start(parent: self)
     }
 }

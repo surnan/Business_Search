@@ -24,13 +24,13 @@ class MyTabController: UITabBarController {
     let secondController = MapController()
     
     override func viewDidLoad() {
-        view.backgroundColor = UIColor.clear
-        navigationItem.title = categoryName
-        firstController.tabBarItem =  UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "menu100B.png"), selectedImage: #imageLiteral(resourceName: "menu100B.png"))
-        secondController.tabBarItem = UITabBarItem(title: "MAP", image: #imageLiteral(resourceName: "map100") , selectedImage: #imageLiteral(resourceName: "map100"))
-        let tabBarList = [firstController, secondController]
-        viewControllers = tabBarList
-        tabBar.isTranslucent = false
+//        view.backgroundColor = UIColor.clear
+//        navigationItem.title = categoryName
+//        firstController.tabBarItem =  UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "menu100B.png"), selectedImage: #imageLiteral(resourceName: "menu100B.png"))
+//        secondController.tabBarItem = UITabBarItem(title: "MAP", image: #imageLiteral(resourceName: "map100") , selectedImage: #imageLiteral(resourceName: "map100"))
+//        let tabBarList = [firstController, secondController]
+//        viewControllers = tabBarList
+//        tabBar.isTranslucent = false
     }
 }
 
