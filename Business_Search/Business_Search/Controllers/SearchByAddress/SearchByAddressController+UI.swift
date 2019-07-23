@@ -11,10 +11,6 @@ import UIKit
 
 extension SearchByAddressController{
     func setupUI(){
-        
-        
-        
-        
         let stackView: UIStackView = {
             let stack = UIStackView()
             stack.axis = .vertical
