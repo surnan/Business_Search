@@ -17,12 +17,11 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var locationManager         = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
     var model                   = BusinessDetailsModel()
     var business                : Business! {didSet { model.business = business }}
-    var coordinator             : (OpenInSafariType & OpenAppleMapType)?
+    var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
     
     //MARK:- Functions START
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor = UIColor.white
         setupUI()
         setupMapView()
     }
@@ -30,15 +29,6 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     override func viewDidLoad() {
         addHandlers()
         setupLocationManager()
-    }
-    
-    func setupMapView(){
-        let viewRegion = MKCoordinateRegion(center: model.firstAnnotation.coordinate,
-                                            latitudinalMeters: regionMetersForMap,
-                                            longitudinalMeters: regionMetersForMap)
-        model.mapView.setRegion(viewRegion, animated: false)
-        model.mapView.addAnnotation(model.firstAnnotation)
-        model.mapView.delegate = self
     }
     
     func setupLocationManager(){
@@ -55,10 +45,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     
     @objc func handlePhoneNumberButton(sender: UIButton){
         guard let numberString = sender.titleLabel?.text else {return}
-        let number = numberString.filter("0123456789".contains)
-        if let url = URL(string: "tel://\(number)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url)
-        }
+        coordinator?.handlePhoneNumber(numberString: numberString)
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){

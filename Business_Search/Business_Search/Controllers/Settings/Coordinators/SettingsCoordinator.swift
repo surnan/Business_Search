@@ -28,13 +28,7 @@ class SettingsCoordinator: Coordinator {
         self.maximumSliderValue = maximumSliderValue
         super.init(router: router)
     }
-    
-    func handleCancel(){
-        router.dismissModule(animated: true) {
-            self.unblurProtocol.undoBlur()
-        }
-    }
-    
+        
     func start(parent: Coordinator){
         let vc = SettingsController()
         vc.dataController           = dataController

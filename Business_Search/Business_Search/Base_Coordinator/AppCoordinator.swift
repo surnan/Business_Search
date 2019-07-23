@@ -12,13 +12,13 @@ import MapKit
 class AppCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType {
     let window          : UIWindow
     let dataController  : DataController
-    let firstVC         : MenuController
+    let firstVC         : MainMenuController
     
     init(window: UIWindow?, dataController: DataController) {
         guard let window = window else {fatalError("Window creation needed in AppDelegate")}
         self.window                     = window
         self.dataController             = dataController
-        self.firstVC                    = MenuController()
+        self.firstVC                    = MainMenuController()
         self.firstVC.dataController     = dataController
         let appNavigationController     = CustomNavigationController(rootViewController: firstVC)
         let appRouter                   = Router(navigationController: appNavigationController)

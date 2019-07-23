@@ -9,9 +9,9 @@
 import UIKit
 import MapKit
 
-class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapType {
+class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapType, OpenPhoneType {
     let business: Business
-    
+
     init(router: RouterType, business: Business) {
         self.business = business
         super.init(router: router)
@@ -24,6 +24,13 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
         router.push(newVC, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
+        }
+    }
+    
+    func handlePhoneNumber(numberString: String){
+        let number = numberString.filter("0123456789".contains)
+        if let url = URL(string: "tel://\(number)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
         }
     }
     
@@ -42,5 +49,3 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
         MKMapItem.openMaps(with: [source, destination], launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
     }
 }
-
-

@@ -11,7 +11,7 @@ import Foundation
 protocol OpeningControllerProtocol {
     var getModel: OpeningTableDataSource {get}
     func listBusinesses(category: String)
-    func showBusinessInfo(currentBusiness: Business)
+    func handleBusinessDetails(currentBusiness: Business)
     func shareBusiness(business: Business)
     func getBusinessesFromCategoryName(category: String)-> [Business]
     func deleteFavorite(business: Business)

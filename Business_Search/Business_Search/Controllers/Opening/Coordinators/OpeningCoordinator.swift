@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class OpeningCoordinator: Coordinator {
+class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType {
     let dataController: DataController
     let location : CLLocation
     
@@ -32,14 +32,9 @@ class OpeningCoordinator: Coordinator {
         }
     }
     
-    func handleBusinessDetails(business: Business){
-        let coordinator = BusinessDetailsCoordinator(router: router, business: business)
+    func handleBusinessDetails(currentBusiness: Business){
+        let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
-        coordinator.start(parent: self)
-    }
-    
-    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol) {
-        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }
     
@@ -47,25 +42,9 @@ class OpeningCoordinator: Coordinator {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router, maximumSliderValue: radius)
         coordinator.start(parent: self)
     }
-    
-//    @objc func handleSettings(){
-//        let newVC = SettingsController()
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        view.addSubview(model.blurredEffectView)
-//        newVC.modalPresentationStyle = .overFullScreen
-//        newVC.delegate = self
-//        newVC.dataController = dataController
-//        newVC.maximumSliderValue = radius
-//        present(newVC, animated: true, completion:nil)
-//    }
-//
-//    @objc func handleFilter(){
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        view.addSubview(model.blurredEffectView)
-//        model.blurredEffectView.fillSuperview()
-//        let newVC = FilterController()
-//        newVC.modalPresentationStyle = .overFullScreen
-//        newVC.delegate = self
-//        present(newVC, animated: true)
-//    }
+
+    func handleFilter(unblurProtocol: UnBlurViewProtocol){
+        let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
+        coordinator.start(parent: self)
+    }
 }

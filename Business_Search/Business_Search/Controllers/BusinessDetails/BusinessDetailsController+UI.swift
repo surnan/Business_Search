@@ -12,6 +12,16 @@ import MapKit
 import CoreLocation
 
 extension BusinessDetailsController {
+    
+    func setupMapView(){
+        let viewRegion = MKCoordinateRegion(center: model.firstAnnotation.coordinate,
+                                            latitudinalMeters: regionMetersForMap,
+                                            longitudinalMeters: regionMetersForMap)
+        model.mapView.setRegion(viewRegion, animated: false)
+        model.mapView.addAnnotation(model.firstAnnotation)
+        model.mapView.delegate = self
+    }
+    
     func setupUI(){
         let safe                = view.safeAreaLayoutGuide
         let buttonStack         = model.getButtonStack()
@@ -21,6 +31,7 @@ extension BusinessDetailsController {
         model.mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
                              padding: .init(top: 3, left: 3, bottom: 0, right: 3))
         
+        view.backgroundColor = UIColor.white
         NSLayoutConstraint.activate([
             model.mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25),
             model.nameLabel.topAnchor.constraint(equalTo: model.mapView.bottomAnchor, constant: 10),

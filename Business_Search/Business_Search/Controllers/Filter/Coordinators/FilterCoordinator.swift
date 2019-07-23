@@ -17,11 +17,6 @@ class FilterCoordinator: Coordinator {
         super.init(router: router)
     }
     
-    func handleCancel(){
-        router.dismissModule(animated: true) {
-            self.unblurProtocol.undoBlur()
-        }
-    }
     
     func start(parent: Coordinator){
         let vc = FilterController()

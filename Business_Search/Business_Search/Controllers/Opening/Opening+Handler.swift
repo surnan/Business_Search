@@ -12,27 +12,26 @@ extension OpeningController {
     //MARK:- BreakPoint
     @objc func JumpToBreakPoint(total: Int){
         print("fetchBusiness.FetchedObject.count - \(tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999) ... fetchCategoryArray.count - \(tableDataSource.fetchCategoryNames?.count ?? -999)")
-        print("latitude = \(latitude) .... longitude = \(longitude)")
-        print("BusinessPredicate = \(tableDataSource.fetchBusinessPredicate)\n")
+        print("latitude = \(latitude!) .... longitude = \(longitude!)")
+        print("BusinessPredicate = \(tableDataSource.fetchBusinessPredicate!)\n")
         resetAllFetchControllers()
         model.tableView.reloadData()
     }
     
     @objc func handleSettings(){
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        view.addSubview(model.blurredEffectView)
-        model.blurredEffectView.fillSuperview()
-        coordinator.handleSettings(dataController: dataController, delegate: self, max: radius)
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        view.addSubview(model.blurredEffectView)
+//        model.blurredEffectView.fillSuperview()
+        addDarkScreenBlur()
+        coordinator?.handleSettings(dataController: dataController, delegate: self, max: radius)
     }
     
     @objc func handleFilter(){
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        view.addSubview(model.blurredEffectView)
-        model.blurredEffectView.fillSuperview()
-        let newVC = FilterController()
-        newVC.modalPresentationStyle = .overFullScreen
-        newVC.delegate = self
-        present(newVC, animated: true)
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        view.addSubview(model.blurredEffectView)
+//        model.blurredEffectView.fillSuperview()
+        addDarkScreenBlur()
+        coordinator?.handleFilter(unblurProtocol: self)
     }
     
     

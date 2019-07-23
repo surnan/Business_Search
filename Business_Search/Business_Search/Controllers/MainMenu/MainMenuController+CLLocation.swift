@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-extension MenuController: CLLocationManagerDelegate {
+extension MainMenuController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations.last
         locationManager.stopUpdatingLocation()

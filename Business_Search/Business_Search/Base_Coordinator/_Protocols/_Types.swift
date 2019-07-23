@@ -14,6 +14,9 @@ protocol SearchByMapType {func handleSearchByMap(dataController: DataController,
 protocol SearchByAddressType {func handleSearchByAddress(dataController: DataController, location: CLLocation)}
 protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
 protocol BarButtonToOpeningType {func handleNext(dataController: DataController, location: CLLocation)}
-protocol BusinessDetailsType{func showBusinessInfo(currentBusiness: Business)}
+protocol BusinessDetailsType{func handleBusinessDetails(currentBusiness: Business)}
 protocol OpenAppleMapType{func handleMapItButton(currentLocation: CLLocationCoordinate2D)}
 protocol OpenInSafariType {func handleOpenBrowser(urlString: String)}
+protocol FilterType{func handleFilter(unblurProtocol: UnBlurViewProtocol)}
+protocol OpenPhoneType {func handlePhoneNumber(numberString: String)}
+

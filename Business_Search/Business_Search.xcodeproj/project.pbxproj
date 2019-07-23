@@ -54,6 +54,7 @@
 		84684CA522E61D2400999599 /* _Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA422E61D2400999599 /* _Types.swift */; };
 		84684CA722E6449800999599 /* SearchByAddressController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA622E6449800999599 /* SearchByAddressController+UI.swift */; };
 		84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA922E6466A00999599 /* FilterCoordinator.swift */; };
+		84684CAC22E69B7600999599 /* MainMenuController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CAB22E69B7600999599 /* MainMenuController+UI.swift */; };
 		8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
@@ -138,6 +139,7 @@
 		84684CA422E61D2400999599 /* _Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Types.swift; sourceTree = "<group>"; };
 		84684CA622E6449800999599 /* SearchByAddressController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByAddressController+UI.swift"; sourceTree = "<group>"; };
 		84684CA922E6466A00999599 /* FilterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCoordinator.swift; sourceTree = "<group>"; };
+		84684CAB22E69B7600999599 /* MainMenuController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+UI.swift"; sourceTree = "<group>"; };
 		8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTableDataSource.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -490,6 +492,7 @@
 			children = (
 				8408F0E022E60BEB00DB55B6 /* Coordinator */,
 				848761CF227F176F000CECC7 /* MainMenuController.swift */,
+				84684CAB22E69B7600999599 /* MainMenuController+UI.swift */,
 				84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */,
 			);
 			path = MainMenu;
@@ -790,6 +793,7 @@
 				84365CCC22C8A5090014E577 /* MainMenuModel.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
 				844D358222C9C2AC00D7E594 /* BusinessDetailsModel.swift in Sources */,
+				84684CAC22E69B7600999599 /* MainMenuController+UI.swift in Sources */,
 				8401126022E29F2600ECE0D5 /* Router.swift in Sources */,
 				8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,

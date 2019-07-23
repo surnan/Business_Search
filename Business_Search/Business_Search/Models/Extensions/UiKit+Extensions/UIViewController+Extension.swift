@@ -16,6 +16,7 @@ let blurringScreenDark: UIVisualEffectView = {
 
 extension UIViewController {
     func addDarkScreenBlur(){
+        navigationController?.setNavigationBarHidden(true, animated: true)
         view.addSubview(blurringScreenDark)
         blurringScreenDark.fillSuperview()
     }

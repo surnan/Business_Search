@@ -71,7 +71,7 @@ class OpeningTableDataSource: NSObject, UITableViewDataSource{
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
                     do {
-                        print("Performing Business Fetch with: \n   \(fetchRequest.predicate)")
+                        print("Performing Business Fetch with: \n   \(fetchRequest.predicate!)")
                         try aFetchedResultsController.performFetch()
                     } catch let error {
                         fatalError("Unresolved error \(error)")
