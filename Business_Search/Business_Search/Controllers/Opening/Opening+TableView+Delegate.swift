@@ -15,14 +15,7 @@ extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
     func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
     func reloadData(){model.tableView.reloadData()}
     
-    func listBusinesses(category: String){
-        let newVC = MyTabController()
-        let items = getBusinessesFromCategoryName(category: category)
-        newVC.businesses = items
-        newVC.categoryName = category
-        navigationController?.pushViewController(newVC, animated: true)
-    }
-    
+    //MARK:- ROW RIGHT-SIDE ACTIONS
     func shareBusiness(business: Business){
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
             ?? "Please check this link. \n"
@@ -36,18 +29,6 @@ extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
             self.dismiss(animated: true, completion: nil)
         }
         present(activityVC, animated: true)
-    }
-    
-    func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
-        tableDataSource.updateCategoryPredicate(category: category)
-        var businessArray = [Business]()    //Pushed into next ViewController
-        tableDataSource.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
-        businessArray = businessArray.filter{
-            return $0.parentLocation?.latitude == latitude &&
-                $0.parentLocation?.longitude == longitude
-        }
-        let businesses = UserAppliedFilter.shared.getFilteredBusinessArray(businessArray: businessArray)
-        return businesses
     }
     
     func pickRandomBusiness(businesses: [Business]){
@@ -64,7 +45,7 @@ extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
         present(activityVC, animated: true)
     }
     
-    //
+    //MARK:- Favorites
     func deleteFavorite(business: Business){
         tableDataSource.updateFavoritesPredicate(business: business)
         tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
@@ -88,5 +69,26 @@ extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
             print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
             print("\n\nError saving newly created favorite - full error: \n\(error)")
         }
+    }
+    
+    //MARK: - Row Action when Search Group = "Categories"
+    func listBusinesses(category: String){
+        let newVC = MyTabController()
+        let items = getBusinessesFromCategoryName(category: category)
+        newVC.businesses = items
+        newVC.categoryName = category
+        navigationController?.pushViewController(newVC, animated: true)
+    }
+    
+    func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
+        tableDataSource.updateCategoryPredicate(category: category)
+        var businessArray = [Business]()    //Pushed into next ViewController
+        tableDataSource.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
+        businessArray = businessArray.filter{
+            return $0.parentLocation?.latitude == latitude &&
+                $0.parentLocation?.longitude == longitude
+        }
+        let businesses = UserAppliedFilter.shared.getFilteredBusinessArray(businessArray: businessArray)
+        return businesses
     }
 }
