@@ -11,6 +11,14 @@ import CoreData
 import MapKit
 
 class OpeningTableDelegate: NSObject, UITableViewDelegate {
+    var reloadCellAt: IndexPath?
+    
+    func reloadCellIfNecessary(tableView: UITableView) {
+        guard let cellIndex = reloadCellAt else {return}
+        tableView.reloadRows(at: [cellIndex], with: .none)
+        reloadCellAt = nil
+    }
+    
     var delegate: OpeningControllerProtocol!
     var dataDelegate      : OpeningTableDataSourceProtocol!
     
@@ -44,6 +52,7 @@ class OpeningTableDelegate: NSObject, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        reloadCellAt = indexPath
         switch delegate.getModel.tableViewArrayType {
         case TableIndex.category.rawValue:
             guard let currentCategory = delegate.getModel.fetchCategoryNames?[indexPath.row] else {return}

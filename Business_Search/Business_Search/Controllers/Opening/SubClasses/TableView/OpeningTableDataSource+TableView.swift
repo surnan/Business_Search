@@ -14,7 +14,7 @@ extension OpeningTableDataSource {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
-            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+            cell.backColor = colorArray[indexPath.row % colorArray.count]
             cell.currentBusiness = fetchBusinessController?.object(at: indexPath)
             return cell
         case TableIndex.category.rawValue:

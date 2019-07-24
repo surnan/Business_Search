@@ -11,9 +11,6 @@ import CoreData
 
 
 class OpeningController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurViewProtocol {
-    
-    
-    //var coordinator: OpeningCoordinator!
     var coordinator: (SettingsType & BusinessDetailsType & FilterType & TabControllerType)?
     
     lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController,

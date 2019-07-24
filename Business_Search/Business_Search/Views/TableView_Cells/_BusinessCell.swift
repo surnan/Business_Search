@@ -28,6 +28,8 @@ class _BusinessCell: UITableViewCell {
         }
     }
     
+    var backColor: UIColor!
+    
     let yelpImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "UnFavorite")
@@ -59,19 +61,16 @@ class _BusinessCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-//        //Need to put the original colors back for when it's not highlighted
-//        super.setHighlighted(highlighted, animated: animated)
-//        let colorOne = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
-//        let colorTwo = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        let colorThree = #colorLiteral(red: 0.6152468447, green: 0.2204021755, blue: 0.7012629534, alpha: 1)
-//
-//        if isHighlighted {
-//            contentView.backgroundColor = colorOne
-//            myLabel.textColor = colorTwo
-//            myLabel.backgroundColor = colorThree
-//        }
-//    }
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if isHighlighted {
+            contentView.backgroundColor = .darkBlue
+            myLabel.textColor = .white
+        } else {
+            myLabel.textColor = .black
+            contentView.backgroundColor = backColor
+        }
+    }
     
 }
 

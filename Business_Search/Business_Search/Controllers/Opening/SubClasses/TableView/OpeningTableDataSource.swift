@@ -17,6 +17,8 @@ class OpeningTableDataSource: NSObject, UITableViewDataSource{
     
     var model: OpeningModel!
     
+    
+    
     init(dataController: DataController, latitude: Double, longitude: Double, model: OpeningModel) {
         super.init()
         self.dataController = dataController

@@ -9,6 +9,7 @@
 import UIKit
 
 extension OpeningTableDataSource: OpeningTableDataSourceProtocol  {
+    
     func updateCoordinates(latitude: Double, longitude: Double){
         self.latitude = latitude
         self.longitude = longitude

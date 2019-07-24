@@ -17,6 +17,7 @@ extension OpeningController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animateResultsAreFilteredLabel()
+        tableDelegate.reloadCellIfNecessary(tableView: model.tableView)
     }
     
     override func viewDidLoad() {
