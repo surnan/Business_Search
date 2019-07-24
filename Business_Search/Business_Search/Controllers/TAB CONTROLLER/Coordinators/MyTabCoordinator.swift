@@ -20,6 +20,7 @@ class MyTabCoordinator: Coordinator, UITabBarControllerDelegate {
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         let router = Router(navigationController: navigationController)
         let coordinator = GroupsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        coordinator.parent = self
         return coordinator
     }()
     
@@ -28,6 +29,7 @@ class MyTabCoordinator: Coordinator, UITabBarControllerDelegate {
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads , tag: 1)
         let router = Router(navigationController: navigationController)
         let coordinator = MapsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        coordinator.parent = self
         return coordinator
     }()
     
@@ -58,6 +60,10 @@ class MyTabCoordinator: Coordinator, UITabBarControllerDelegate {
     
     func start(parent: Coordinator) {
         router.present(tabBarController, animated: true)
+    }
+    
+    func dismissTabController(){
+        router.dismissModule(animated: true, completion: nil)
     }
 }
 

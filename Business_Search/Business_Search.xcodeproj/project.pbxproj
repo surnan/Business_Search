@@ -323,8 +323,8 @@
 		841CDF8522E6BFCA00FEB1D0 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				84365CD822C93D450014E577 /* Tabbed Controllers */,
 				841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */,
+				84365CD822C93D450014E577 /* Tabbed Controllers */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -461,8 +461,8 @@
 		84365CD822C93D450014E577 /* Tabbed Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				841CDF8922E73C8C00FEB1D0 /* Map */,
 				841CDF8822E73C7C00FEB1D0 /* Groups */,
+				841CDF8922E73C8C00FEB1D0 /* Map */,
 			);
 			path = "Tabbed Controllers";
 			sourceTree = "<group>";

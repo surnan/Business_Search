@@ -8,9 +8,10 @@
 
 import UIKit
 
-class MapsCoordinator: Coordinator, BusinessDetailsType {
+class MapsCoordinator: Coordinator, BusinessDetailsType, DismissControllerType {
     let businesses      : [Business]
     let categoryName    : String
+    var parent          : MyTabCoordinator?  //because it's in a tab controller
     
     
     lazy var myMapsController: MapController = {
@@ -32,5 +33,9 @@ class MapsCoordinator: Coordinator, BusinessDetailsType {
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
         coordinator.start(parent: self)
+    }
+    
+    func handleDismiss(){
+        parent?.dismissTabController()
     }
 }

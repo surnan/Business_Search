@@ -13,7 +13,7 @@ import CoreData
 class GroupsController: UITableViewController {
     var businesses = [Business]()   //injected
     var categoryName: String!       //injected
-    var coordinator: BusinessDetailsType?
+    var coordinator: (BusinessDetailsType & DismissControllerType)?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -44,10 +44,17 @@ class GroupsController: UITableViewController {
     }
     
     func setupNavigationBar(){
-        //navigationController?.isNavigationBarHidden = true   //hides the searchController bar
-        navigationItem.title = "categoryName2"
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.title = "categoryName1"
         navigationController?.title = categoryName
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self,
+                                                           action: #selector(handleDismiss))
     }
+    
+    @objc func handleDismiss(){
+        coordinator?.handleDismiss()
+    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentBusiness = businesses[indexPath.row]

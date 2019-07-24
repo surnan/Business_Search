@@ -8,9 +8,11 @@
 
 import UIKit
 
-class GroupsCoordinator: Coordinator, BusinessDetailsType {
+class GroupsCoordinator: Coordinator, BusinessDetailsType, DismissControllerType {
+    
     let businesses      : [Business]
     let categoryName    : String
+    var parent          : MyTabCoordinator?  //because it's in a tab controller
     
     lazy var myGroupsController: GroupsController  = {
         let controller = GroupsController()
@@ -32,6 +34,10 @@ class GroupsCoordinator: Coordinator, BusinessDetailsType {
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
         coordinator.start(parent: self)
+    }
+    
+    @objc func handleDismiss(){
+        parent?.dismissTabController()
     }
 }
 

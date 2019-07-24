@@ -21,7 +21,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"
  
-    var coordinator: BusinessDetailsType?
+    var coordinator: (BusinessDetailsType & DismissControllerType)?
     
 
     lazy var scaleView          = GenericScaleView(mapView: mapView)
@@ -42,10 +42,14 @@ class MapController: UIViewController, MKMapViewDelegate {
     }
     
     func setupNavigationBar(){
-        navigationController?.isNavigationBarHidden = false   //hides the searchController bar
-        
+        navigationController?.isNavigationBarHidden = false
         navigationItem.title = "categoryName2"
-        navigationController?.title = "categoryName"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss 2", style: .plain, target: self,
+                                                           action: #selector(handleDismiss))
+    }
+    
+    @objc func handleDismiss(){
+        coordinator?.handleDismiss()
     }
     
     
