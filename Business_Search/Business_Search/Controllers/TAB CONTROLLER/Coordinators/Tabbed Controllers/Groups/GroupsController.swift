@@ -26,9 +26,14 @@ class GroupsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
-        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-        cell.currentBusiness = businesses[indexPath.row]
+        let _model = MyBusinessViewModel(business: businesses[indexPath.row],colorIndex: indexPath)
+        cell.firstViewModel = _model
         return cell
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
+//        cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
+//        cell.currentBusiness = businesses[indexPath.row]
+//        return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

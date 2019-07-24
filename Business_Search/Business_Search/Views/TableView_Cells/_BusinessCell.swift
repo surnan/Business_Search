@@ -8,23 +8,15 @@
 
 import UIKit
 
-let attributes1: [NSAttributedString.Key: Any] = [ .font : UIFont.boldSystemFont(ofSize: 16), .strokeColor : UIColor.blue ]
-let attributes2: [NSAttributedString.Key: Any] = [ .font : UIFont.italicSystemFont(ofSize: 13) , .strokeColor : UIColor.darkGray ]
+
 
 class _BusinessCell: UITableViewCell {
-    var currentBusiness: Business? {
+    var firstViewModel: MyBusinessViewModel! {
         didSet {
-            guard let business = currentBusiness else { return }
-            if let displayAddresses = business.displayAddress,
-                let addresse = displayAddresses.split(separator: "?").first,
-                let name = business.name {
-                let nameNewLine = "\(name)\n"
-                let stringOne = NSMutableAttributedString(string: nameNewLine, attributes: attributes1)
-                let stringTwo = NSMutableAttributedString(string: String(addresse), attributes: attributes2)
-                stringOne.append(stringTwo)
-                myLabel.attributedText = stringOne
-            }
-            yelpImageView.image = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
+            myLabel.attributedText = firstViewModel.myLabelAttributedString
+            yelpImageView.image = firstViewModel.favoriteImage
+            backColor = firstViewModel.originalColor
+            accessoryType = firstViewModel.accessoryType
         }
     }
     
@@ -45,15 +37,23 @@ class _BusinessCell: UITableViewCell {
         return label
     }()
     
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         [yelpImageView, myLabel].forEach{addSubview($0)}
-        yelpImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        yelpImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        yelpImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.85).isActive = true
-        myLabel.leadingAnchor.constraint(equalTo: yelpImageView.trailingAnchor, constant: 1).isActive = true
-        myLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        myLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5).isActive = true
+
+        NSLayoutConstraint.activate([
+            yelpImageView.centerYAnchor.constraint  (equalTo: centerYAnchor),
+            yelpImageView.leadingAnchor.constraint  (equalTo: leadingAnchor),
+            yelpImageView.heightAnchor.constraint   (equalTo: heightAnchor, multiplier: 0.85),
+            
+            myLabel.leadingAnchor.constraint        (equalTo: yelpImageView.trailingAnchor, constant: 1),
+            myLabel.centerYAnchor.constraint        (equalTo: centerYAnchor),
+            myLabel.trailingAnchor.constraint       (equalTo: trailingAnchor, constant: -5)
+            ])
+        
+        
         
     }
     
@@ -64,11 +64,12 @@ class _BusinessCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         if isHighlighted {
-            contentView.backgroundColor = .darkBlue
+            //contentView.backgroundColor = .darkBlue
+            backgroundColor = .darkBlue
             myLabel.textColor = .white
         } else {
             myLabel.textColor = .black
-            contentView.backgroundColor = backColor
+            backgroundColor = backColor
         }
     }
     

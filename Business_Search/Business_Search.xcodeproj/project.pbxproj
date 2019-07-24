@@ -60,7 +60,7 @@
 		84684CAC22E69B7600999599 /* MainMenuController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CAB22E69B7600999599 /* MainMenuController+UI.swift */; };
 		84684CAE22E6A4A400999599 /* SearchByAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */; };
 		8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */; };
-		847AE23522E81D7600774371 /* MyBusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE23422E81D7600774371 /* MyBusinessCell.swift */; };
+		847AE23522E81D7600774371 /* MyBusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE23422E81D7600774371 /* MyBusinessViewModel.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -150,7 +150,7 @@
 		84684CAB22E69B7600999599 /* MainMenuController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+UI.swift"; sourceTree = "<group>"; };
 		84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressModel.swift; sourceTree = "<group>"; };
 		8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTableDataSource.swift; sourceTree = "<group>"; };
-		847AE23422E81D7600774371 /* MyBusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBusinessCell.swift; sourceTree = "<group>"; };
+		847AE23422E81D7600774371 /* MyBusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBusinessViewModel.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -535,8 +535,7 @@
 		847AE23322E81D1E00774371 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				847AE23622E892E000774371 /* Extensions */,
-				847AE23422E81D7600774371 /* MyBusinessCell.swift */,
+				847AE23422E81D7600774371 /* MyBusinessViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -626,6 +625,7 @@
 		84BDE3022263D36E008C9B01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				847AE23622E892E000774371 /* Extensions */,
 				8408F0DF22E60A9100DB55B6 /* _Protocols */,
 				84D3DB9F22675B0B00E46B2E /* TableView_Cells */,
 				84365CCE22C8E30E0014E577 /* UIKit + SubClass */,
@@ -838,7 +838,7 @@
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */,
 				845A1D8122D029C10066C17C /* OpeningControllerProtocol.swift in Sources */,
-				847AE23522E81D7600774371 /* MyBusinessCell.swift in Sources */,
+				847AE23522E81D7600774371 /* MyBusinessViewModel.swift in Sources */,
 				841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				849A934822CD032300DE6658 /* OpeningTableDelegate.swift in Sources */,
