@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class BusinessCell: UITableViewCell {
     var firstViewModel: MyBusinessViewModel! {
         didSet {
