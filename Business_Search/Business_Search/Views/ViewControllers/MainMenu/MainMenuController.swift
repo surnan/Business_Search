@@ -67,4 +67,8 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
         addDarkScreenBlur()
         coordinator?.loadSettings(dataController: dataController, delegate: self, max: nil)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent       //Status bar sometimes black on searchbar editing or presenting clear VC fullscreen
+    }
 }
