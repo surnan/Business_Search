@@ -12,7 +12,7 @@ extension SearchTableController {
     //MARK:- BreakPoint
     @objc func handleSettings(){
         addDarkScreenBlur()
-        coordinator?.loadSettings(dataController: dataController, delegate: self, max: radius)
+        coordinator?.loadSettings(delegate: self, max: radius)
     }
     
     @objc func handleFilter(){

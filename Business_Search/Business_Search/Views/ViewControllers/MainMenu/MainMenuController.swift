@@ -10,7 +10,6 @@ import UIKit
 import CoreLocation
 
 class MainMenuController: UIViewController, UnBlurViewProtocol{
-    var dataController          : DataController!   // Injection
     var locationManager         : CLLocationManager!
     var userLocation            : CLLocation!       //Provided via Apple GPS
     var previousCoordinate      : CLLocation?
@@ -45,9 +44,9 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
         if coordinateFound {return}
         coordinateFound = true
         switch controllerIndex {
-        case 0: coordinator.loadSearchTable(dataController: dataController, location: userLocation)
-        case 1: coordinator.loadSearchByMap(dataController: dataController, location: userLocation)
-        case 2: coordinator.loadSearchByAddress(dataController: dataController, location: userLocation)
+        case 0: coordinator.loadSearchTable(location: userLocation)
+        case 1: coordinator.loadSearchByMap(location: userLocation)
+        case 2: coordinator.loadSearchByAddress(location: userLocation)
         default:    break
         }
     }
@@ -65,7 +64,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     
     @objc func handleSettings(){
         addDarkScreenBlur()
-        coordinator?.loadSettings(dataController: dataController, delegate: self, max: nil)
+        coordinator?.loadSettings(delegate: self, max: nil)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

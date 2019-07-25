@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 
 class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
+    
     let dataController: DataController
     let location : CLLocation
     
@@ -38,7 +39,7 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
         coordinator.start(parent: self)
     }
     
-    func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
+    func loadSettings(delegate: UnBlurViewProtocol, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router, maximumSliderValue: radius)
         coordinator.start(parent: self)
     }

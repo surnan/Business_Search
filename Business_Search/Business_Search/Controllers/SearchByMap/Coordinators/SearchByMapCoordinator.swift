@@ -31,7 +31,7 @@ class SearchByMapCoordinator: Coordinator, SearchTableType {
         }
     }
     
-    func loadSearchTable(dataController: DataController, location: CLLocation){
+    func loadSearchTable(location: CLLocation){
         let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)

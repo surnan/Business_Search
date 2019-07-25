@@ -28,7 +28,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         window.makeKeyAndVisible()
     }
     
-    func loadSearchTable(dataController: DataController, location: CLLocation){
+    func loadSearchTable(location: CLLocation){
         let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -36,7 +36,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
             self?.removeChild(coordinator)
         }
     }
-    func loadSearchByMap(dataController: DataController, location: CLLocation){
+    func loadSearchByMap(location: CLLocation){
         let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -45,7 +45,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         }
     }
     
-    func loadSearchByAddress(dataController: DataController, location: CLLocation){
+    func loadSearchByAddress(location: CLLocation){
         let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -54,7 +54,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         }
     }
 
-    func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
+    func loadSettings(delegate: UnBlurViewProtocol, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }

@@ -84,7 +84,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     }
     
     @objc func pushSearchTable(){
-        coordinator?.loadSearchTable(dataController: dataController, location: locationToForward)
+        coordinator?.loadSearchTable(location: locationToForward)
     }
     
     

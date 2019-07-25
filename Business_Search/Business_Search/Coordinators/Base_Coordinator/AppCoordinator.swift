@@ -19,7 +19,6 @@ class AppCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchB
         self.window                     = window
         self.dataController             = dataController
         self.firstVC                    = MainMenuController()
-        self.firstVC.dataController     = dataController
         let appNavigationController     = CustomNavigationController(rootViewController: firstVC)
         let appRouter                   = Router(navigationController: appNavigationController)
         super.init(router: appRouter)
@@ -31,7 +30,7 @@ class AppCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchB
     }
     
     func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController) {}
-    func loadSearchTable(dataController: DataController, location: CLLocation){}
-    func loadSearchByMap(dataController: DataController, location: CLLocation){}
-    func loadSearchByAddress(dataController: DataController, location: CLLocation){}
+    func loadSearchTable(location: CLLocation){}
+    func loadSearchByMap(location: CLLocation){}
+    func loadSearchByAddress(location: CLLocation){}
 }
