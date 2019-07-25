@@ -10,25 +10,26 @@ import UIKit
 import CoreLocation
 
 class MainMenuController: UIViewController, UnBlurViewProtocol{
-    var dataController      : DataController!       //MARK: Injected
-    var locationManager     : CLLocationManager!
-    var userLocation        : CLLocation!           //Provided via Apple GPS
-    var previousCoordinate  : CLLocation?
-    var coordinateFound     : Bool!                 //Prevent 'func pushNextController' trigger twice
+    var dataController          : DataController!   // Injection
+    var locationManager         : CLLocationManager!
+    var userLocation            : CLLocation!       //Provided via Apple GPS
+    var previousCoordinate      : CLLocation?
+    var coordinateFound         : Bool!             //Prevent 'func pushNextController' trigger twice
                                                     //multiple hits serially from locationManager
-    let activityView        = GenericActivityIndicatorView()
-    var viewModel           = MainMenuViewModel()
-    var controllerIndex     = 0
-    var coordinator         : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType)?
-
+    
+    let activityView            = GenericActivityIndicatorView()
+    var controllerIndex         = 0
+    var coordinator             : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType)?
+    var nearMeSearchButton      = MainMenuControllerButton(title: "Search Near Me", background: .blue, tag: 0)
+    var searchByMapButton       = MainMenuControllerButton(title: "Search By Map", background: .red, tag: 1)
+    var searchByAddressButton   = MainMenuControllerButton(title: "     Search By Address     ", background: .green, tag: 2)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .lightBlue
         previousCoordinate      = nil
-        coordinateFound         = false //tested in 'ViewDidAppear'
+        coordinateFound         = false
         setupUI()
-        
     }
 
     override func viewDidLoad() {
@@ -37,7 +38,6 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
         activityView.center = view.center
         view.addSubview(activityView)
     }
-    
 
     func pushNextController(){
         guard let coordinator = coordinator else {print("coordinator is NIL");return}
@@ -53,7 +53,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     }
     
     func addHandlers(){
-        [viewModel.nearMeSearchButton, viewModel.searchByMapButton, viewModel.searchByAddressButton]
+        [nearMeSearchButton, searchByMapButton, searchByAddressButton]
             .forEach{$0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)}
     }
     

@@ -187,3 +187,4 @@ class GenericCLLocationManager: CLLocationManager {
         self.desiredAccuracy = desiredAccuracy
     }
 }
+
