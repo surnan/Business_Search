@@ -10,7 +10,7 @@ import UIKit
 
 
 //NOTHING LABEL
-extension OpeningController{
+extension SearchTableController{
     func undoBlur() {
         removeDarkScreenBlur()
         navigationController?.setNavigationBarHidden(false, animated: true)        

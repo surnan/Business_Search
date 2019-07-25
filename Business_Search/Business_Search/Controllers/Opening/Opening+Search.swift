@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension OpeningController: UISearchResultsUpdating {
+extension SearchTableController: UISearchResultsUpdating {
     func resetAllFetchControllers() {
         tableDataSource.resetAllControllerAndPredicates()
         DispatchQueue.main.async {

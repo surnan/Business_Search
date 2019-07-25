@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-extension OpeningController {
+extension SearchTableController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent       //Status bar sometimes turns black when typing into search bar
     }

@@ -21,7 +21,7 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
     
     func start(parent: Coordinator){
         let coordinate = location.coordinate
-        let vc = OpeningController()
+        let vc = SearchTableController()
         vc.dataController = dataController
         vc.latitude = coordinate.latitude
         vc.longitude = coordinate.longitude

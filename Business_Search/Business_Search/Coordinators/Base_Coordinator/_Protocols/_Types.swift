@@ -13,7 +13,7 @@ protocol OpeningType {func pushOpenController(dataController: DataController, lo
 protocol SearchByMapType {func pushSearchByMap(dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType {func pushSearchByAddress(dataController: DataController, location: CLLocation)}
 protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
-protocol BarButtonToOpeningType {func handleNext(dataController: DataController, location: CLLocation)}
+protocol SearchTableType {func handleNext(dataController: DataController, location: CLLocation)}
 protocol BusinessDetailsType{func handleBusinessDetails(currentBusiness: Business)}
 protocol OpenAppleMapType{func handleMapItButton(currentLocation: CLLocationCoordinate2D)}
 protocol OpenInSafariType {func handleOpenBrowser(urlString: String)}

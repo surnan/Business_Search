@@ -10,7 +10,7 @@ import UIKit
 
 
 //These functions are called by TableView Delegate
-extension OpeningController: OpeningControllerProtocol, BusinessDetailsType{
+extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
     func handleBusinessDetails(currentBusiness: Business){coordinator?.handleBusinessDetails(currentBusiness: currentBusiness)}
     func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
     func reloadData(){model.tableView.reloadData()}

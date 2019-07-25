@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 
-class SearchByMapCoordinator: Coordinator, BarButtonToOpeningType {
+class SearchByMapCoordinator: Coordinator, SearchTableType {
     let dataController: DataController
     let location : CLLocation
     

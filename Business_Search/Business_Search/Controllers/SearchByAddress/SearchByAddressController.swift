@@ -18,7 +18,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     var dataController: DataController!                 //Injected from MenuController()
-    var coordinator: BarButtonToOpeningType?
+    var coordinator: SearchTableType?
 
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))

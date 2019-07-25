@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class SearchByAddressCoordinator: Coordinator, BarButtonToOpeningType {
+class SearchByAddressCoordinator: Coordinator, SearchTableType {
     let dataController: DataController
     let location : CLLocation
     

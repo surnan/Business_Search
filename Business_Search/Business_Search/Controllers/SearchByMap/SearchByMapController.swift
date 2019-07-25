@@ -16,7 +16,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
     
-    var coordinator: BarButtonToOpeningType?
+    var coordinator: SearchTableType?
     
     
     let pinImageView: UIImageView = {
