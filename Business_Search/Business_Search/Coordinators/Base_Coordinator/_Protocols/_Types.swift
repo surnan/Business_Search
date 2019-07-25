@@ -13,8 +13,8 @@ import MapKit
 protocol SearchTableType    {func loadSearchTable       (dataController: DataController, location: CLLocation)}
 protocol SearchByMapType    {func loadSearchByMap       (dataController: DataController, location: CLLocation)}
 protocol SearchByAddressType{func loadSearchByAddress   (dataController: DataController, location: CLLocation)}
-protocol OpenInSafariType   {func handleOpenBrowser(urlString   : String)}
-protocol OpenPhoneType      {func handlePhoneNumber(numberString: String)}
+protocol OpenInSafariType   {func handleOpenBrowser(url: String)}
+protocol OpenPhoneType      {func handlePhoneNumber(number: String)}
 
 protocol SettingsType       {func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
 protocol BusinessDetailsType{func loadBusinessDetails(currentBusiness: Business)}

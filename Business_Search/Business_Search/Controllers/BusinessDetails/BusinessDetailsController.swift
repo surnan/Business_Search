@@ -45,14 +45,14 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     
     @objc func handlePhoneNumberButton(sender: UIButton){
         guard let numberString = sender.titleLabel?.text else {return}
-        coordinator?.handlePhoneNumber(numberString: numberString)
+        coordinator?.handlePhoneNumber(number: numberString)
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
         if let urlStringExists = business.url, urlStringExists._isValidURL {
-            coordinator?.handleOpenBrowser(urlString: urlStringExists)
+            coordinator?.handleOpenBrowser(url: urlStringExists)
         } else {
-            coordinator?.handleOpenBrowser(urlString: "https://www.yelp.com")
+            coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
         }
     }
     

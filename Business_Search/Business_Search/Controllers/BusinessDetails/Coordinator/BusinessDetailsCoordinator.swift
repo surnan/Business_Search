@@ -27,15 +27,15 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
         }
     }
     
-    func handlePhoneNumber(numberString: String){
-        let number = numberString.filter("0123456789".contains)
+    func handlePhoneNumber(number: String){
+        let number = number.filter("0123456789".contains)
         if let url = URL(string: "tel://\(number)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
     
-    func handleOpenBrowser(urlString: String){
-        let verifiedURLStringFormatted = urlString._prependHTTPifNeeded()
+    func handleOpenBrowser(url: String){
+        let verifiedURLStringFormatted = url._prependHTTPifNeeded()
         if let url = URL(string: verifiedURLStringFormatted) {
             UIApplication.shared.open(url)
             return
