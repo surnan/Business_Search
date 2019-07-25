@@ -25,7 +25,7 @@ class GroupsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         let _model = MyBusinessViewModel(business: businesses[indexPath.row],colorIndex: indexPath)
         cell.firstViewModel = _model
         return cell
@@ -43,7 +43,7 @@ class GroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.separatorColor = UIColor.clear
         setupNavigationBar()
     }

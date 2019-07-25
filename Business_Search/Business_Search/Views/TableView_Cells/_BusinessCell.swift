@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class _BusinessCell: UITableViewCell {
+class BusinessCell: UITableViewCell {
     var firstViewModel: MyBusinessViewModel! {
         didSet {
             myLabel.attributedText = firstViewModel.myLabelAttributedString

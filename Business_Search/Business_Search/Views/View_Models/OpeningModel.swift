@@ -29,7 +29,7 @@ class OpeningModel {
         tableView.tableFooterView = UIView()
         //tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
-        tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         return tableView
     }()
     

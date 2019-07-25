@@ -17,7 +17,6 @@ var categoryMatch = 0
 var yelpMaxPullCount = 1000
 
 let businessCellID = "businessCellID"
-let _businessCellID = "_businessCellID"
 let categoryCellID = "categoryCellID"
 
 enum TableIndex:Int { case business = 0, category }

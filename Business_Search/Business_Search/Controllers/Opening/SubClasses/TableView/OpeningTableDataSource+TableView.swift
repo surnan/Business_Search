@@ -13,7 +13,7 @@ extension OpeningTableDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableViewArrayType {
         case TableIndex.business.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: _businessCellID, for: indexPath) as! _BusinessCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
             guard let business = fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
             cell.firstViewModel = MyBusinessViewModel(business: business,colorIndex: indexPath)
             return cell
