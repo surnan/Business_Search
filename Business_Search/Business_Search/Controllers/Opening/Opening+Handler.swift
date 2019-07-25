@@ -23,7 +23,7 @@ extension SearchTableController {
 //        view.addSubview(model.blurredEffectView)
 //        model.blurredEffectView.fillSuperview()
         addDarkScreenBlur()
-        coordinator?.handleSettings(dataController: dataController, delegate: self, max: radius)
+        coordinator?.loadSettings(dataController: dataController, delegate: self, max: radius)
     }
     
     @objc func handleFilter(){

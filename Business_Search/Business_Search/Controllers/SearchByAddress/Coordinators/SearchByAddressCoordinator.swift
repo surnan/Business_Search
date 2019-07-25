@@ -30,7 +30,7 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
         }
     }
     
-    func pushSearchTable(dataController: DataController, location: CLLocation){
+    func loadSearchTable(dataController: DataController, location: CLLocation){
         let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)

@@ -52,7 +52,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
     
     @objc func pushSearchTable(){
-        coordinator?.pushSearchTable(dataController: dataController, location: locationToForward)
+        coordinator?.loadSearchTable(dataController: dataController, location: locationToForward)
     }
 
     func setupUI(){

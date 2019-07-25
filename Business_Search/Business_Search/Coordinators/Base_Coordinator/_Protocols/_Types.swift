@@ -9,11 +9,14 @@
 import Foundation
 import MapKit
 
-protocol OpeningType {func pushOpenController(dataController: DataController, location: CLLocation)}
-protocol SearchByMapType {func pushSearchByMap(dataController: DataController, location: CLLocation)}
-protocol SearchByAddressType {func pushSearchByAddress(dataController: DataController, location: CLLocation)}
-protocol SettingsType {func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
-protocol SearchTableType {func pushSearchTable(dataController: DataController, location: CLLocation)}
+
+protocol SearchTableType {func loadSearchTable(dataController: DataController, location: CLLocation)}
+protocol SearchByMapType {func loadSearchByMap(dataController: DataController, location: CLLocation)}
+protocol SearchByAddressType {func loadSearchByAddress(dataController: DataController, location: CLLocation)}
+protocol SettingsType {func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
+
+
+
 protocol BusinessDetailsType{func handleBusinessDetails(currentBusiness: Business)}
 protocol OpenAppleMapType{func handleMapItButton(currentLocation: CLLocationCoordinate2D)}
 protocol OpenInSafariType {func handleOpenBrowser(urlString: String)}

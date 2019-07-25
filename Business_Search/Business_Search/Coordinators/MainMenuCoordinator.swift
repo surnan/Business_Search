@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType, SettingsType {
+class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType {
     let window          : UIWindow
     let dataController  : DataController
     let firstController : MainMenuController
@@ -28,7 +28,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         window.makeKeyAndVisible()
     }
     
-    func pushOpenController(dataController: DataController, location: CLLocation){
+    func loadSearchTable(dataController: DataController, location: CLLocation){
         let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -36,7 +36,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
             self?.removeChild(coordinator)
         }
     }
-    func pushSearchByMap(dataController: DataController, location: CLLocation){
+    func loadSearchByMap(dataController: DataController, location: CLLocation){
         let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -45,7 +45,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         }
     }
     
-    func pushSearchByAddress(dataController: DataController, location: CLLocation){
+    func loadSearchByAddress(dataController: DataController, location: CLLocation){
         let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -54,7 +54,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         }
     }
 
-    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
+    func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }

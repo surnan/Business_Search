@@ -38,7 +38,7 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
         coordinator.start(parent: self)
     }
     
-    func handleSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
+    func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router, maximumSliderValue: radius)
         coordinator.start(parent: self)
     }

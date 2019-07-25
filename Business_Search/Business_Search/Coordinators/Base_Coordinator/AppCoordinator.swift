@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class AppCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMapType {
+class AppCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType {
     let window          : UIWindow
     let dataController  : DataController
     let firstVC         : MainMenuController
@@ -31,7 +31,7 @@ class AppCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMap
     }
     
     func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController) {}
-    func pushOpenController(dataController: DataController, location: CLLocation){}
-    func pushSearchByMap(dataController: DataController, location: CLLocation){}
-    func pushSearchByAddress(dataController: DataController, location: CLLocation){}
+    func loadSearchTable(dataController: DataController, location: CLLocation){}
+    func loadSearchByMap(dataController: DataController, location: CLLocation){}
+    func loadSearchByAddress(dataController: DataController, location: CLLocation){}
 }

@@ -19,7 +19,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     let activityView        = GenericActivityIndicatorView()
     var viewModel           = MainMenuViewModel()
     var controllerIndex     = 0
-    var coordinator         : (OpeningType & SearchByMapType & SearchByAddressType & SettingsType)?
+    var coordinator         : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType)?
 
 
     override func viewWillAppear(_ animated: Bool) {
@@ -45,9 +45,9 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
         if coordinateFound {return}
         coordinateFound = true
         switch controllerIndex {
-        case 0: coordinator.pushOpenController(dataController: dataController, location: userLocation)
-        case 1: coordinator.pushSearchByMap(dataController: dataController, location: userLocation)
-        case 2: coordinator.pushSearchByAddress(dataController: dataController, location: userLocation)
+        case 0: coordinator.loadSearchTable(dataController: dataController, location: userLocation)
+        case 1: coordinator.loadSearchByMap(dataController: dataController, location: userLocation)
+        case 2: coordinator.loadSearchByAddress(dataController: dataController, location: userLocation)
         default:    break
         }
     }
@@ -65,6 +65,6 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     
     @objc func handleSettings(){
         addDarkScreenBlur()
-        coordinator?.handleSettings(dataController: dataController, delegate: self, max: nil)
+        coordinator?.loadSettings(dataController: dataController, delegate: self, max: nil)
     }
 }
