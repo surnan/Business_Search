@@ -77,7 +77,13 @@ extension SearchTableController {
     }
     
     func troubleshootFromNavigationMenu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: " ⏸", style: .done, target: self, action: #selector(JumpToBreakPoint)),
-                                              UIBarButtonItem(image: #imageLiteral(resourceName: "filter2"), style: .plain, target: self, action: #selector(handleFilter))]
+        let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
+        let composeBarButton    = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(handleFilter))
+        navigationItem.rightBarButtonItems = [composeBarButton, searchBarButton]
     }
+    
+    @objc func handleShowSearch(){
+        searchController.isActive = true
+    }
+    
 }

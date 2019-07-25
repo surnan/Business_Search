@@ -10,26 +10,12 @@ import UIKit
 
 extension SearchTableController {
     //MARK:- BreakPoint
-    @objc func JumpToBreakPoint(total: Int){
-        print("fetchBusiness.FetchedObject.count - \(tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999) ... fetchCategoryArray.count - \(tableDataSource.fetchCategoryNames?.count ?? -999)")
-        print("latitude = \(latitude!) .... longitude = \(longitude!)")
-        print("BusinessPredicate = \(tableDataSource.fetchBusinessPredicate!)\n")
-        resetAllFetchControllers()
-        model.tableView.reloadData()
-    }
-    
     @objc func handleSettings(){
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        view.addSubview(model.blurredEffectView)
-//        model.blurredEffectView.fillSuperview()
         addDarkScreenBlur()
         coordinator?.loadSettings(dataController: dataController, delegate: self, max: radius)
     }
     
     @objc func handleFilter(){
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        view.addSubview(model.blurredEffectView)
-//        model.blurredEffectView.fillSuperview()
         addDarkScreenBlur()
         coordinator?.loadFilter(unblurProtocol: self)
     }
