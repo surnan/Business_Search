@@ -26,8 +26,7 @@ class GroupsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-        let _model = MyBusinessViewModel(business: businesses[indexPath.row],colorIndex: indexPath)
-        cell.firstViewModel = _model
+        cell.firstViewModel = MyBusinessViewModel(business: businesses[indexPath.row],colorIndex: indexPath)
         return cell
     }
     

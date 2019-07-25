@@ -28,7 +28,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         window.makeKeyAndVisible()
     }
     
-    func handleOpenController(dataController: DataController, location: CLLocation){
+    func pushOpenController(dataController: DataController, location: CLLocation){
         let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -36,7 +36,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
             self?.removeChild(coordinator)
         }
     }
-    func handleSearchByMap(dataController: DataController, location: CLLocation){
+    func pushSearchByMap(dataController: DataController, location: CLLocation){
         let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -45,7 +45,7 @@ class MenuCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMa
         }
     }
     
-    func handleSearchByAddress(dataController: DataController, location: CLLocation){
+    func pushSearchByAddress(dataController: DataController, location: CLLocation){
         let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)

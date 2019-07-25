@@ -22,7 +22,7 @@ class MainMenuControllerButton: GenericButton {
     }
 }
 
-class MainMenuModel {
+class MainMenuViewModel {
     var nearMeSearchButton = MainMenuControllerButton(title: "Search Near Me", backgroundColor: .blue, tag: 0)
     var searchByMapButton = MainMenuControllerButton(title: "Search By Map", backgroundColor: .red, tag: 1)
     var searchByAddressButton = MainMenuControllerButton(title: "     Search By Address     ", backgroundColor: .green, tag: 2)

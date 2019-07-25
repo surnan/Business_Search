@@ -12,12 +12,12 @@ import CoreLocation
 extension MainMenuController{
     func setupNavigationMenu(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
-        self.navigationItem.titleView = model.titleImage
+        self.navigationItem.titleView = viewModel.titleImage
     }
     
     func setupUI(){
         setupNavigationMenu()
-        let verticalStackView = model.getMenuButtonStack()
+        let verticalStackView = viewModel.getMenuButtonStack()
         view.addSubview(verticalStackView)
         NSLayoutConstraint.activate([
             verticalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),

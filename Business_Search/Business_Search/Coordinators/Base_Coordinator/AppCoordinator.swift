@@ -31,7 +31,7 @@ class AppCoordinator: Coordinator, OpeningType, SearchByAddressType, SearchByMap
     }
     
     func handlSettings(self viewController: UnBlurViewProtocol, dataController: DataController) {}
-    func handleOpenController(dataController: DataController, location: CLLocation){}
-    func handleSearchByMap(dataController: DataController, location: CLLocation){}
-    func handleSearchByAddress(dataController: DataController, location: CLLocation){}
+    func pushOpenController(dataController: DataController, location: CLLocation){}
+    func pushSearchByMap(dataController: DataController, location: CLLocation){}
+    func pushSearchByAddress(dataController: DataController, location: CLLocation){}
 }

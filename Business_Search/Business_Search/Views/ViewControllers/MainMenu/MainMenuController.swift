@@ -10,22 +10,25 @@ import UIKit
 import CoreLocation
 
 class MainMenuController: UIViewController, UnBlurViewProtocol{
-    var dataController      : DataController!         //MARK: Injected
+    var dataController      : DataController!       //MARK: Injected
     var locationManager     : CLLocationManager!
-    var userLocation        : CLLocation!             //Provided via Apple GPS
+    var userLocation        : CLLocation!           //Provided via Apple GPS
     var previousCoordinate  : CLLocation?
+    var coordinateFound     : Bool!                 //Prevent 'func pushNextController' trigger twice
+                                                    //multiple hits serially from locationManager
     let activityView        = GenericActivityIndicatorView()
-    var model               = MainMenuModel()
+    var viewModel           = MainMenuViewModel()
     var controllerIndex     = 0
     var coordinator         : (OpeningType & SearchByMapType & SearchByAddressType & SettingsType)?
-    var coordinateFound     = false //Prevent 'func pushNextController' - twice
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .lightBlue
         previousCoordinate      = nil
+        coordinateFound         = false //tested in 'ViewDidAppear'
         setupUI()
-        coordinateFound = false //tested in 'ViewDidAppear'
+        
     }
 
     override func viewDidLoad() {
@@ -39,18 +42,18 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     func pushNextController(){
         guard let coordinator = coordinator else {print("coordinator is NIL");return}
         activityView.stopAnimating()
-        if coordinateFound {return} //Navigation Delegate will sometimes send multiple locations and rapid fire this function
+        if coordinateFound {return}
         coordinateFound = true
         switch controllerIndex {
-        case 0: coordinator.handleOpenController(dataController: dataController, location: userLocation)
-        case 1: coordinator.handleSearchByMap(dataController: dataController, location: userLocation)
-        case 2: coordinator.handleSearchByAddress(dataController: dataController, location: userLocation)
+        case 0: coordinator.pushOpenController(dataController: dataController, location: userLocation)
+        case 1: coordinator.pushSearchByMap(dataController: dataController, location: userLocation)
+        case 2: coordinator.pushSearchByAddress(dataController: dataController, location: userLocation)
         default:    break
         }
     }
     
     func addHandlers(){
-        [model.nearMeSearchButton, model.searchByMapButton, model.searchByAddressButton]
+        [viewModel.nearMeSearchButton, viewModel.searchByMapButton, viewModel.searchByAddressButton]
             .forEach{$0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)}
     }
     
