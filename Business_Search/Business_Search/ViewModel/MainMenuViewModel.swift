@@ -15,7 +15,7 @@ class MainMenuControllerButton: GenericButton {
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 12
         self.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
-        self.tag = tag
+        self.tag                = tag
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -23,13 +23,13 @@ class MainMenuControllerButton: GenericButton {
 }
 
 class MainMenuViewModel {
-    var nearMeSearchButton = MainMenuControllerButton(title: "Search Near Me", backgroundColor: .blue, tag: 0)
-    var searchByMapButton = MainMenuControllerButton(title: "Search By Map", backgroundColor: .red, tag: 1)
-    var searchByAddressButton = MainMenuControllerButton(title: "     Search By Address     ", backgroundColor: .green, tag: 2)
+    var nearMeSearchButton      = MainMenuControllerButton(title: "Search Near Me", backgroundColor: .blue, tag: 0)
+    var searchByMapButton       = MainMenuControllerButton(title: "Search By Map", backgroundColor: .red, tag: 1)
+    var searchByAddressButton   = MainMenuControllerButton(title: "     Search By Address     ", backgroundColor: .green, tag: 2)
     
     var titleImage: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
-        imageView.contentMode = .scaleAspectFit
+        let imageView           = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
+        imageView.contentMode   = .scaleAspectFit
         return imageView
     }()
     
@@ -39,5 +39,3 @@ class MainMenuViewModel {
         return stack
     }
 }
-
-
