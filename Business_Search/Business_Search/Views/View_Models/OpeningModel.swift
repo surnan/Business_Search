@@ -27,7 +27,7 @@ class OpeningModel {
     var tableView: UITableView = {
         let tableView = UITableView()
         tableView.tableFooterView = UIView()
-        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        //tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         tableView.register(_BusinessCell.self, forCellReuseIdentifier: _businessCellID)
         return tableView

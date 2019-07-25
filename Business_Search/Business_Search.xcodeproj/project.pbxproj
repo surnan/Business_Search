@@ -61,6 +61,7 @@
 		84684CAE22E6A4A400999599 /* SearchByAddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */; };
 		8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */; };
 		847AE23522E81D7600774371 /* MyBusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE23422E81D7600774371 /* MyBusinessViewModel.swift */; };
+		847AE23A22E922DC00774371 /* MyCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE23922E922DC00774371 /* MyCategoryViewModel.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -151,6 +152,7 @@
 		84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressModel.swift; sourceTree = "<group>"; };
 		8474C43722CAFFCC0023BAD6 /* OpeningTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTableDataSource.swift; sourceTree = "<group>"; };
 		847AE23422E81D7600774371 /* MyBusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBusinessViewModel.swift; sourceTree = "<group>"; };
+		847AE23922E922DC00774371 /* MyCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewModel.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -536,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				847AE23422E81D7600774371 /* MyBusinessViewModel.swift */,
+				847AE23922E922DC00774371 /* MyCategoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 				843C66FB227DC97A003A64D1 /* _BusinessCell.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
 				846509BA227A0C06008ABA9F /* Opening.swift in Sources */,
+				847AE23A22E922DC00774371 /* MyCategoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

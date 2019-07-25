@@ -19,23 +19,8 @@ extension OpeningTableDataSource {
             return cell
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-            cell.backgroundColor = colorArray[indexPath.row % colorArray.count]
-            let currentCategoryName = fetchCategoryNames?[indexPath.row]
-            let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-            let myPredicate = NSPredicate(format: "%K == %@", #keyPath(Category.title), currentCategoryName!)
-            let filterControllerPredicate = UserAppliedFilter.shared.getCategoryPredicate()        //FilterController() & Singleton
-            var tempPredicate = [myPredicate, predicateCategoryLatitude, predicateCategoryLongitude]
-            filterControllerPredicate.forEach{tempPredicate.append($0)}
-            _fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: tempPredicate)
-            
-            cell.name = currentCategoryName
-            do {
-                let count = try dataController.viewContext.count(for: _fetchRequest)
-                cell.count = count
-            } catch {
-                cell.count = 0
-                print("Failed to get Count inside cellForRowAt: \n\(error)")
-            }
+            guard let currentCategoryName = fetchCategoryNames?[indexPath.row] else {return UITableViewCell()}
+            cell.firstViewModel = MyCategoryViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
             return cell
         default:
             print("Something Bad HAPPENED inside cellForRowAt:")

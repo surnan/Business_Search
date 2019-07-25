@@ -52,9 +52,6 @@ class _BusinessCell: UITableViewCell {
             myLabel.centerYAnchor.constraint        (equalTo: centerYAnchor),
             myLabel.trailingAnchor.constraint       (equalTo: trailingAnchor, constant: -5)
             ])
-        
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,6 +69,5 @@ class _BusinessCell: UITableViewCell {
             backgroundColor = backColor
         }
     }
-    
 }
 
