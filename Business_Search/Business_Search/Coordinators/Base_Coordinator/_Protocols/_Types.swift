@@ -10,18 +10,15 @@ import Foundation
 import MapKit
 
 
-protocol SearchTableType {func loadSearchTable(dataController: DataController, location: CLLocation)}
-protocol SearchByMapType {func loadSearchByMap(dataController: DataController, location: CLLocation)}
-protocol SearchByAddressType {func loadSearchByAddress(dataController: DataController, location: CLLocation)}
-protocol SettingsType {func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
+protocol SearchTableType    {func loadSearchTable       (dataController: DataController, location: CLLocation)}
+protocol SearchByMapType    {func loadSearchByMap       (dataController: DataController, location: CLLocation)}
+protocol SearchByAddressType{func loadSearchByAddress   (dataController: DataController, location: CLLocation)}
+protocol OpenInSafariType   {func handleOpenBrowser(urlString   : String)}
+protocol OpenPhoneType      {func handlePhoneNumber(numberString: String)}
 
-
-
-protocol BusinessDetailsType{func handleBusinessDetails(currentBusiness: Business)}
-protocol OpenAppleMapType{func handleMapItButton(currentLocation: CLLocationCoordinate2D)}
-protocol OpenInSafariType {func handleOpenBrowser(urlString: String)}
-protocol FilterType{func handleFilter(unblurProtocol: UnBlurViewProtocol)}
-protocol OpenPhoneType {func handlePhoneNumber(numberString: String)}
-protocol TabControllerType {func handleTabController(businesses: [Business], categoryName: String)}
-protocol DismissControllerType {func handleDismiss()}
-
+protocol SettingsType       {func loadSettings(dataController: DataController, delegate: UnBlurViewProtocol, max: Int?)}
+protocol BusinessDetailsType{func loadBusinessDetails(currentBusiness: Business)}
+protocol OpenAppleMapType   {func handleMapItButton(currentLocation: CLLocationCoordinate2D)}
+protocol FilterType         {func loadFilter(unblurProtocol: UnBlurViewProtocol)}
+protocol TabControllerType  {func loadTabController(businesses: [Business], categoryName: String)}
+protocol DismissType        {func handleDismiss()}

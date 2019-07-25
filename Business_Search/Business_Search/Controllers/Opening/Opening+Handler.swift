@@ -31,7 +31,7 @@ extension SearchTableController {
 //        view.addSubview(model.blurredEffectView)
 //        model.blurredEffectView.fillSuperview()
         addDarkScreenBlur()
-        coordinator?.handleFilter(unblurProtocol: self)
+        coordinator?.loadFilter(unblurProtocol: self)
     }
     
     

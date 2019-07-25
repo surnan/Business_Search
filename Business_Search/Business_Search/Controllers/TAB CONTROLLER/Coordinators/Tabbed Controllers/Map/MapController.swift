@@ -21,7 +21,7 @@ class MapController: UIViewController, MKMapViewDelegate {
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"
  
-    var coordinator: (BusinessDetailsType & DismissControllerType)?
+    var coordinator: (BusinessDetailsType & DismissType)?
     
 
     lazy var scaleView          = GenericScaleView(mapView: mapView)

@@ -22,7 +22,7 @@ extension MapController {
         //Only triggers if "viewFor annotation:" enables accessoryView
         
         guard let currentBusiness = currentBusinessAnnotation else {return}
-        coordinator?.handleBusinessDetails(currentBusiness: currentBusiness)
+        coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         
         
 //        let newVC = BusinessDetailsController()

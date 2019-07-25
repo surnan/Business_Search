@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapsCoordinator: Coordinator, BusinessDetailsType, DismissControllerType {
+class MapsCoordinator: Coordinator, BusinessDetailsType, DismissType {
     let businesses      : [Business]
     let categoryName    : String
     var parent          : MyTabCoordinator?  //because it's in a tab controller
@@ -29,7 +29,7 @@ class MapsCoordinator: Coordinator, BusinessDetailsType, DismissControllerType {
     }
     
     
-    func handleBusinessDetails(currentBusiness: Business){
+    func loadBusinessDetails(currentBusiness: Business){
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
         coordinator.start(parent: self)

@@ -13,7 +13,7 @@ import CoreData
 class GroupsController: UITableViewController {
     var businesses = [Business]()   //injected
     var categoryName: String!       //injected
-    var coordinator: (BusinessDetailsType & DismissControllerType)?
+    var coordinator: (BusinessDetailsType & DismissType)?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -57,6 +57,6 @@ class GroupsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentBusiness = businesses[indexPath.row]
-        coordinator?.handleBusinessDetails(currentBusiness: currentBusiness)
+        coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
     }
 }

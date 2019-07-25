@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupsCoordinator: Coordinator, BusinessDetailsType, DismissControllerType {
+class GroupsCoordinator: Coordinator, BusinessDetailsType, DismissType {
     
     let businesses      : [Business]
     let categoryName    : String
@@ -30,7 +30,7 @@ class GroupsCoordinator: Coordinator, BusinessDetailsType, DismissControllerType
         myGroupsController.coordinator = self
     }
     
-    func handleBusinessDetails(currentBusiness: Business){
+    func loadBusinessDetails(currentBusiness: Business){
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
         coordinator.start(parent: self)

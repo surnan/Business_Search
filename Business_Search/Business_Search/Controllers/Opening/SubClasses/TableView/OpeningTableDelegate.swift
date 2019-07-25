@@ -59,7 +59,7 @@ class OpeningTableDelegate: NSObject, UITableViewDelegate {
             delegate.listBusinesses(category: currentCategory)
         case TableIndex.business.rawValue:
             guard let currentBusiness = delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
-            delegate.handleBusinessDetails(currentBusiness: currentBusiness)
+            delegate.loadBusinessDetails(currentBusiness: currentBusiness)
         default:
             print("Illegal Value inside tableViewArrayType")
         }
@@ -76,7 +76,7 @@ class OpeningTableDelegate: NSObject, UITableViewDelegate {
             let items           = self.delegate.getBusinessesFromCategoryName(category: currentCategory)
             let modder          = items.count - 1
             let randomNumber    = Int.random(in: 0...modder)
-            self.delegate.handleBusinessDetails(currentBusiness: items[randomNumber])
+            self.delegate.loadBusinessDetails(currentBusiness: items[randomNumber])
         }
         actionBusiness.backgroundColor = .red
         actionCategory.backgroundColor = .blue

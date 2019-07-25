@@ -32,7 +32,7 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
         }
     }
     
-    func handleBusinessDetails(currentBusiness: Business){
+    func loadBusinessDetails(currentBusiness: Business){
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
         coordinator.start(parent: self)
@@ -43,12 +43,12 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
         coordinator.start(parent: self)
     }
 
-    func handleFilter(unblurProtocol: UnBlurViewProtocol){
+    func loadFilter(unblurProtocol: UnBlurViewProtocol){
         let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
         coordinator.start(parent: self)
     }
     
-    func handleTabController(businesses: [Business], categoryName: String){
+    func loadTabController(businesses: [Business], categoryName: String){
         //let coordinator = GroupsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         //let coordinator = MapsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         let coordinator = MyTabCoordinator(businesses: businesses, categoryName: categoryName, router: router)

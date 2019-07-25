@@ -11,7 +11,7 @@ import UIKit
 
 //These functions are called by TableView Delegate
 extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
-    func handleBusinessDetails(currentBusiness: Business){coordinator?.handleBusinessDetails(currentBusiness: currentBusiness)}
+    func loadBusinessDetails(currentBusiness: Business){coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)}
     func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
     func reloadData(){model.tableView.reloadData()}
     
@@ -74,7 +74,7 @@ extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
     //MARK: - Row Action when Search Group = "Categories"
     func listBusinesses(category: String){
         let items = getBusinessesFromCategoryName(category: category)
-        coordinator?.handleTabController(businesses: items, categoryName: category)
+        coordinator?.loadTabController(businesses: items, categoryName: category)
         
 //        let newVC = MyTabController()
 //        newVC.businesses = items
