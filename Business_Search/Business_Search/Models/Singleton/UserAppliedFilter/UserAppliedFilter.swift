@@ -125,16 +125,25 @@ class UserAppliedFilter {
         
         // OR predicates
         if !(getOne && getTwo && getThree && getFour && getNoPrice) {
-            if getOne {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                      argumentArray: [#keyPath(Category.business.price),"$"]))}
-            if getTwo {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                      argumentArray: [#keyPath(Category.business.price),"$$"]))}
-            if getThree {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                        argumentArray: [#keyPath(Category.business.price),"$$$"]))}
-            if getFour {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                       argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
-            if getNoPrice {pricePredicates_OR_Compound.append(NSPredicate(format: "%K == %@",
-                                                                          argumentArray: [#keyPath(Category.business.price), nil]))}
+            if getOne {pricePredicates_OR_Compound.append(
+                NSPredicate(format: "%K == %@",
+                            argumentArray: [#keyPath(Category.business.price),"$"]))}
+            
+            if getTwo {pricePredicates_OR_Compound.append(
+                NSPredicate(format: "%K == %@",
+                            argumentArray: [#keyPath(Category.business.price),"$$"]))}
+            
+            if getThree {pricePredicates_OR_Compound.append(
+                NSPredicate(format: "%K == %@",
+                            argumentArray: [#keyPath(Category.business.price),"$$$"]))}
+            
+            if getFour {pricePredicates_OR_Compound.append(
+                NSPredicate(format: "%K == %@",
+                            argumentArray: [#keyPath(Category.business.price),"$$$$"]))}
+            
+            if getNoPrice {pricePredicates_OR_Compound.append(
+                NSPredicate(format: "%K == %@",
+                            argumentArray: [#keyPath(Category.business.price), nil]))}
         }
         
         if !pricePredicates_OR_Compound.isEmpty {
