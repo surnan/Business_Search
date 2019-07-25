@@ -83,13 +83,13 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
         }
     }
     
-    @objc func handleNext(){
-        coordinator?.handleNext(dataController: dataController, location: locationToForward)
+    @objc func pushSearchTable(){
+        coordinator?.pushSearchTable(dataController: dataController, location: locationToForward)
     }
     
     
     func setupNavigationManu(){
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(pushSearchTable))]
         //        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRight)),
         //                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }

@@ -51,8 +51,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     @objc func handlePause() {print(" mapView.centerCoordinate = \(mapView.centerCoordinate)")}
     
-    @objc func handleNext(){
-        coordinator?.handleNext(dataController: dataController, location: locationToForward)
+    @objc func pushSearchTable(){
+        coordinator?.pushSearchTable(dataController: dataController, location: locationToForward)
     }
 
     func setupUI(){
@@ -64,7 +64,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             ])
     
         
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext))]
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(pushSearchTable))]
 //        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleNext)),
 //                                              UIBarButtonItem(title: "⏸", style: .done, target: self, action: #selector(handlePause))]
     }
