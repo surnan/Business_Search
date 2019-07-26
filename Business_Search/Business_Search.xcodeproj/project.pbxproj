@@ -626,10 +626,10 @@
 			isa = PBXGroup;
 			children = (
 				847AE24022E945A600774371 /* Coordinators */,
-				847AE23322E81D1E00774371 /* ViewModel */,
 				84BDE3012263D367008C9B01 /* Models */,
-				84BDE3032263D373008C9B01 /* Controllers */,
+				847AE23322E81D1E00774371 /* ViewModel */,
 				84BDE3022263D36E008C9B01 /* Views */,
+				84BDE3032263D373008C9B01 /* Controllers */,
 				84BDE2EF2263D007008C9B01 /* AppDelegate.swift */,
 				845A1D8C22D0314D0066C17C /* Global Variables.swift */,
 				84BDE2FB2263D009008C9B01 /* Info.plist */,
