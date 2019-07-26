@@ -9,7 +9,7 @@
 import UIKit
 
 class BusinessCell: UITableViewCell {
-    var firstViewModel: MyBusinessViewModel! {
+    var firstViewModel: BusinessCellViewModel! {
         didSet {
             myLabel.attributedText = firstViewModel.myLabelAttributedString
             yelpImageView.image = firstViewModel.favoriteImage

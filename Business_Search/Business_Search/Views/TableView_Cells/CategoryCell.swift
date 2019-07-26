@@ -10,7 +10,7 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
     
-    var firstViewModel: MyCategoryViewModel! {
+    var firstViewModel: CategoryCellViewModel! {
         didSet{
             myLabel.text = firstViewModel.name
             backColor = firstViewModel.originalColor

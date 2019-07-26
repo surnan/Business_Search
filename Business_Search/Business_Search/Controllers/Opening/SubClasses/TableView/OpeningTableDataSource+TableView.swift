@@ -15,12 +15,12 @@ extension OpeningTableDataSource {
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
             guard let business = fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
-            cell.firstViewModel = MyBusinessViewModel(business: business,colorIndex: indexPath)
+            cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
             return cell
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             guard let currentCategoryName = fetchCategoryNames?[indexPath.row] else {return UITableViewCell()}
-            cell.firstViewModel = MyCategoryViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
+            cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
             return cell
         default:
             print("Something Bad HAPPENED inside cellForRowAt:")

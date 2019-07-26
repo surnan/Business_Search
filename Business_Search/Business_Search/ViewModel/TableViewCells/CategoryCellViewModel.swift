@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-struct MyCategoryViewModel {
+struct CategoryCellViewModel {
     
     var name: String!
     var count: Int!

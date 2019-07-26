@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct MyBusinessViewModel {
+struct BusinessCellViewModel {
     private let topStringAttributes: [NSAttributedString.Key: Any]   = [
         .font:UIFont.boldSystemFont(ofSize: 16),
         .strokeColor:UIColor.blue
