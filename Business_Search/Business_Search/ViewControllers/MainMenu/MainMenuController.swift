@@ -20,7 +20,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
     lazy var stack              = mainView.getButtonStack()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent       //Status bar sometimes black
+        return .lightContent                        //Status bar sometimes black
     }
     
     override func viewWillAppear(_ animated: Bool) {
