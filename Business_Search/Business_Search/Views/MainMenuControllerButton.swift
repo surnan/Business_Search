@@ -21,3 +21,4 @@ class MainMenuControllerButton: GenericButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

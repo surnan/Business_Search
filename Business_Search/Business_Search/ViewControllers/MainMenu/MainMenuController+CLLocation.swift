@@ -18,7 +18,7 @@ extension MainMenuController: CLLocationManagerDelegate {
         } else if let previous  = previousCoordinate, userLocation.distance(from: previous) < 10 {
             userLocation        = previous  //Prevents creating new Location entity too close to one in CoreData
         }
-        pushNextController()
+        pushController()
     }
     
     func determineMyCurrentLocation() {
