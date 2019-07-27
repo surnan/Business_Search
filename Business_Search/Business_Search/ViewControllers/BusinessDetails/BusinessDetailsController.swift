@@ -22,6 +22,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     //var model                   = BusinessDetailsModel()
     //var business                : Business! {didSet { model.business = business }}
     var mainView: BusinessDetailsView!
+    var viewModel: BusinessDetailsViewModel!
     
     
     
@@ -55,11 +56,11 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
-//        if let urlStringExists = business.url, urlStringExists._isValidURL {
-//            coordinator?.handleOpenBrowser(url: urlStringExists)
-//        } else {
-//            coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
-//        }
+        if let urlStringExists = viewModel.business.url, urlStringExists._isValidURL {
+            coordinator?.handleOpenBrowser(url: urlStringExists)
+        } else {
+            coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
+        }
     }
     
     @objc func handleMapItButton(_ sender: UIButton){

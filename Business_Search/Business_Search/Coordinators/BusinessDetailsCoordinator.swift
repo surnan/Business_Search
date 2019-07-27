@@ -23,6 +23,7 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
         newView.viewModel = newViewModel
         let newVC = BusinessDetailsController()
         newVC.mainView = newView
+        newVC.viewModel = newViewModel
         
         //newVC.business = business
         newVC.coordinator = self

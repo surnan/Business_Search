@@ -9,7 +9,7 @@
 import UIKit
 
 struct BusinessDetailsViewModel {
-    private var business: Business
+    var business: Business
     var nameAttributedString        = NSAttributedString()
     var addressAttributedString     = NSAttributedString()
     var phoneNumberAttributedString = NSAttributedString()
