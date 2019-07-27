@@ -19,6 +19,7 @@ class BusinessDetailsView: UIView {
             nameLabel.attributedText        = viewModel?.nameAttributedString
             addressLabel.attributedText     = viewModel?.addressAttributedString
             phoneNumberLabel.attributedText = viewModel?.phoneNumberAttributedString
+            phoneNumberButton.setAttributedTitle(viewModel?.phoneNumberAttributedString, for: .normal)
             priceLabel.text                 = viewModel?.priceString
             ratingLabel.text                = viewModel?.ratingString
         }
