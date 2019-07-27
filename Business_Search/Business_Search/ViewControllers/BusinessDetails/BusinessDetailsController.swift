@@ -15,9 +15,15 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     let regionMetersForMap      = 400.0
     var currentLocation         : CLLocation?
     var locationManager         = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
-    var model                   = BusinessDetailsModel()
-    var business                : Business! {didSet { model.business = business }}
     var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
+    
+    
+    
+    //var model                   = BusinessDetailsModel()
+    //var business                : Business! {didSet { model.business = business }}
+    var mainView: BusinessDetailsView!
+    
+    
     
     //MARK:- Functions START
     override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +44,9 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     
     //MARK:- Handlers
     func addHandlers(){
-        model.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
-        model.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
-        model.mapItButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
+        mainView.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
+        mainView.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
+        mainView.mapItButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
     }
     
     @objc func handlePhoneNumberButton(sender: UIButton){
@@ -49,11 +55,11 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
-        if let urlStringExists = business.url, urlStringExists._isValidURL {
-            coordinator?.handleOpenBrowser(url: urlStringExists)
-        } else {
-            coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
-        }
+//        if let urlStringExists = business.url, urlStringExists._isValidURL {
+//            coordinator?.handleOpenBrowser(url: urlStringExists)
+//        } else {
+//            coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
+//        }
     }
     
     @objc func handleMapItButton(_ sender: UIButton){

@@ -18,8 +18,13 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
     }
     
     func start(parent: Coordinator){
+        let newViewModel = BusinessDetailsViewModel(business: business)
+        let newView = BusinessDetailsView()
+        newView.viewModel = newViewModellin
         let newVC = BusinessDetailsController()
-        newVC.business = business
+        newVC.mainView = newView
+        
+        //newVC.business = business
         newVC.coordinator = self
         router.push(newVC, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
