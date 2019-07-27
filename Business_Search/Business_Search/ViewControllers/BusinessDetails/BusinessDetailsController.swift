@@ -16,13 +16,8 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var currentLocation         : CLLocation?
     var locationManager         = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
     var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
-    
-    
-    
-    //var model                   = BusinessDetailsModel()
-    //var business                : Business! {didSet { model.business = business }}
-    var mainView: BusinessDetailsView!
-    var viewModel: BusinessDetailsViewModel!
+    var mainView                : BusinessDetailsView!
+    var viewModel               : BusinessDetailsViewModel!
     
     
     
@@ -56,7 +51,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
-        if let urlStringExists = viewModel.business.url, urlStringExists._isValidURL {
+        if let urlStringExists = viewModel.url, urlStringExists._isValidURL {
             coordinator?.handleOpenBrowser(url: urlStringExists)
         } else {
             coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
@@ -68,4 +63,3 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
         coordinator?.handleMapItButton(currentLocation: currentLocation)
     }
 }
-

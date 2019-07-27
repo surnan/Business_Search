@@ -9,13 +9,15 @@
 import UIKit
 
 struct BusinessDetailsViewModel {
-    var business: Business
+    private var business: Business
     var nameAttributedString        = NSAttributedString()
     var addressAttributedString     = NSAttributedString()
     var phoneNumberAttributedString = NSAttributedString()
     var priceString                 = ""
     var ratingString                = ""
-
+    var url                         : String?
+    
+    
     init(business: Business) {
         self.business = business
         
@@ -55,6 +57,8 @@ struct BusinessDetailsViewModel {
             phoneNumberAttributedString = NSAttributedString(string: phoneText,
                                                              attributes: attributes)
         }
+        
+        self.url = business.url ?? ""
         
         if let price = business.price {priceString = "Price: \(price)"}
         ratingString = "\nRating: \(business.rating)"
