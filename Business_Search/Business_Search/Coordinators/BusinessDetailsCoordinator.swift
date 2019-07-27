@@ -20,7 +20,7 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
     func start(parent: Coordinator){
         let newViewModel = BusinessDetailsViewModel(business: business)
         let newView = BusinessDetailsView()
-        newView.viewModel = newViewModellin
+        newView.viewModel = newViewModel
         let newVC = BusinessDetailsController()
         newVC.mainView = newView
         
