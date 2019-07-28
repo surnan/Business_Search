@@ -15,10 +15,33 @@ struct FilterViewModel {
     private var minimumRatingText: String!
     var getMinimumRatingText: String {return minimumRatingText}
 
+    private var dollarOneButtonSelected: Bool!
+    var getDollarOneButtonSelected: Bool {return dollarOneButtonSelected}
     
+    private var dollarTwoButtonSelected: Bool!
+    var getDollarTwoButtonSelected: Bool {return dollarTwoButtonSelected}
+    
+    private var dollarThreeButtonSelected: Bool!
+    var getDollarThreeButtonSelected: Bool {return dollarThreeButtonSelected}
+    
+    private var dollarFourButtonSelected: Bool!
+    var getDollarFourButtonSelected: Bool {return dollarFourButtonSelected}
+    
+    private var noPriceSwitchIsOn: Bool!
+    var getNoPriceSwitchIsOn: Bool {return noPriceSwitchIsOn}
+    
+
     init(){
-        let shared              = UserAppliedFilter.shared
+        let shared          = UserAppliedFilter.shared
         minimumRatingText   = shared.getMinimumRatingString
         sliderValue         = shared.getMinimumRatingFloat
+        
+        
+        
+        dollarOneButtonSelected    = shared.getOne
+        dollarTwoButtonSelected    = shared.getTwo
+        dollarThreeButtonSelected  = shared.getThree
+        dollarFourButtonSelected   = shared.getFour
+        noPriceSwitchIsOn          = shared.getNoPrice
     }
 }

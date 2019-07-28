@@ -11,8 +11,17 @@ import UIKit
 class FilterView {
     var viewModel: FilterViewModel?{
         didSet{
-            minimumRatingText = viewModel?.getMinimumRatingText
-            sliderValue     = viewModel?.getSliderValue
+            guard let viewModel = viewModel else {
+                print("SettingsView.ViewModel = NIL")
+                return
+            }
+            minimumRatingText = viewModel.getMinimumRatingText
+            sliderValue     = viewModel.getSliderValue
+            dollarOneButton.isSelected =  viewModel.getDollarOneButtonSelected
+            dollarTwoButton.isSelected =  viewModel.getDollarTwoButtonSelected
+            dollarThreeButton.isSelected =  viewModel.getDollarThreeButtonSelected
+            dollarFourButton.isSelected =  viewModel.getDollarFourButtonSelected
+            noPriceSwitch.isOn =   viewModel.getNoPriceSwitchIsOn
         }
     }
     
@@ -22,31 +31,22 @@ class FilterView {
     var priceLabel          = GenericLabel(text: "Price Filter Options",  size: 20)
     var noPriceLabel        = GenericLabel(text: "Include if No Price Listed:", size: 18)
     var favoriteAtTopLabel  = GenericLabel(text: "Move favorites to top:", size: 18)
-    
     var dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true,
                                                    corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
     var dollarTwoButton     =  GenericSegmentButton(title: "$$")
     var dollarThreeButton   = GenericSegmentButton(title: "$$$")
     var dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true,
                                                    corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-    
     var defaultButton       = GenericButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
     var saveButton          = GenericButton(title: "SAVE", isCorner: true)
     var cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
-    
     var noPriceSwitch       = GenericSwitch(onTintColor: .green)
     var favoriteAtTopSwitch = GenericSwitch(onTintColor: .green)
-    
     var minimumRatingText   : String!
     var sliderValue         : Float!
-
     
-    
-    //MARK: Lazy VAR
-    lazy var sliderValueLabel   = GenericLabel(text: minimumRatingText, size: 24, backgroundColor: .blue,
-                                               textColor: .white, corner: true)
-    lazy var distanceSlider     = GenericSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray, maxColor: .black,
-                                                thumbColor: .white)
+    lazy var sliderValueLabel   = GenericLabel(text: minimumRatingText, size: 24, backgroundColor: .blue, textColor: .white, corner: true)
+    lazy var distanceSlider     = GenericSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray, maxColor: .black, thumbColor: .white)
     
     func getFavoritesAtTopStack()->UIStackView{
         let isPriceListedStack =  GenericStack(spacing: 2, axis: .horizontal)
