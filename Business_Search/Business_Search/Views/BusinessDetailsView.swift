@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class BusinessDetailsView: UIView {
+class BusinessDetailsView {
     
     var mapView             = GenericMapView(isZoom: false, isScroll: false)
     var firstAnnotation     = MKPointAnnotation()

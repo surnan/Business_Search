@@ -20,11 +20,15 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
     }
     
     func start(parent: Coordinator){
-        let vc = SearchByAddressController()
-        vc.possibleInsertLocationCoordinate = location
-        vc.dataController = dataController
-        vc.coordinator = self
-        router.push(vc, animated: true) {[weak self, weak parent] in
+        let newViewModel = SearchByAddressViewModel()
+        let newView = SearchByAddressView()
+        newView.viewModel = newViewModel
+        let newController = SearchByAddressController()
+        newController.viewObject = newView
+        newController.viewModel = newViewModel
+        newController.possibleInsertLocationCoordinate = location
+        newController.coordinator = self
+        router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
         }

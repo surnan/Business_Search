@@ -14,10 +14,14 @@ let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
 
 class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate {
+    
+    var viewObject: SearchByAddressView!
+    var viewModel:  SearchByAddressModel!
+    
     let geoCoder = CLGeocoder()
     var possibleInsertLocationCoordinate: CLLocation!   //Injected from MenuController()
     var locationToForward = CLLocation()                //Pushing into newController()
-    var dataController: DataController!                 //Injected from MenuController()
+//    var dataController: DataController!                 //Injected from MenuController()
     var coordinator: SearchTableType?
 
     let locationImageView: UIImageView = {

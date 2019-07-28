@@ -64,6 +64,8 @@
 		847AE25D22EAB4E000774371 /* MainMenuController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE25C22EAB4E000774371 /* MainMenuController+Handlers.swift */; };
 		847AE26022EBE45500774371 /* BusinessDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */; };
 		847AE26222EBE50B00774371 /* BusinessDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE26122EBE50B00774371 /* BusinessDetailsView.swift */; };
+		847AE26922EDA37600774371 /* SearchByAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE26822EDA37600774371 /* SearchByAddressView.swift */; };
+		847AE26B22EDA66800774371 /* SearchByAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -156,6 +158,8 @@
 		847AE25C22EAB4E000774371 /* MainMenuController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+Handlers.swift"; sourceTree = "<group>"; };
 		847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsViewModel.swift; sourceTree = "<group>"; };
 		847AE26122EBE50B00774371 /* BusinessDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsView.swift; sourceTree = "<group>"; };
+		847AE26822EDA37600774371 /* SearchByAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressView.swift; sourceTree = "<group>"; };
+		847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressViewModel.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -217,16 +221,6 @@
 			path = Base_Coordinator;
 			sourceTree = "<group>";
 		};
-		8401128422E5667F00ECE0D5 /* SearchByAddress */ = {
-			isa = PBXGroup;
-			children = (
-				8408F0E222E60C3E00DB55B6 /* Coordinators */,
-				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
-				84684CA622E6449800999599 /* SearchByAddressController+UI.swift */,
-			);
-			path = SearchByAddress;
-			sourceTree = "<group>";
-		};
 		8401128522E566A300ECE0D5 /* SearchByMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,14 +251,6 @@
 			isa = PBXGroup;
 			children = (
 				8401127D22E51CE300ECE0D5 /* OpeningCoordinator.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		8408F0E222E60C3E00DB55B6 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -476,7 +462,6 @@
 				84365CBF22C7F2460014E577 /* FilterModel.swift */,
 				843F032722CE64FC002798C1 /* OpeningModel.swift */,
 				84365CC422C8658B0014E577 /* SettingsModel.swift */,
-				84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */,
 			);
 			path = View_Models;
 			sourceTree = "<group>";
@@ -579,12 +564,26 @@
 		847AE26622ED625100774371 /* _Break it down */ = {
 			isa = PBXGroup;
 			children = (
+				847AE26722EDA10900774371 /* ___ */,
+				84BDE3022263D36E008C9B01 /* _Views */,
 				847AE25922EAB44700774371 /* Extensions */,
 				845A1D8C22D0314D0066C17C /* Global Variables.swift */,
-				84BDE3022263D36E008C9B01 /* _Views */,
 				84BDE3032263D373008C9B01 /* Controllers */,
 			);
 			path = "_Break it down";
+			sourceTree = "<group>";
+		};
+		847AE26722EDA10900774371 /* ___ */ = {
+			isa = PBXGroup;
+			children = (
+				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
+				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
+				847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */,
+				848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */,
+				84684CA622E6449800999599 /* SearchByAddressController+UI.swift */,
+				84684CAD22E6A4A400999599 /* SearchByAddressModel.swift */,
+			);
+			path = "___";
 			sourceTree = "<group>";
 		};
 		848761D1227F1779000CECC7 /* MainMenu */ = {
@@ -676,7 +675,6 @@
 			children = (
 				84365CAC22C564710014E577 /* Filter */,
 				84365CAB22C564520014E577 /* Opening */,
-				8401128422E5667F00ECE0D5 /* SearchByAddress */,
 				8401128522E566A300ECE0D5 /* SearchByMap */,
 				84CC285B2297772700A82BBE /* Settings */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
@@ -856,6 +854,7 @@
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				843F032822CE64FD002798C1 /* OpeningModel.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
+				847AE26B22EDA66800774371 /* SearchByAddressViewModel.swift in Sources */,
 				84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */,
 				8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */,
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
@@ -897,6 +896,7 @@
 				842AD7D52284D74D00590B1A /* Opening+UI.swift in Sources */,
 				8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */,
 				844D358422CA7A1300D7E594 /* BusinessDetailsController+UI.swift in Sources */,
+				847AE26922EDA37600774371 /* SearchByAddressView.swift in Sources */,
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				845A1D8522D02BE20066C17C /* UnBlurViewProtocol.swift in Sources */,

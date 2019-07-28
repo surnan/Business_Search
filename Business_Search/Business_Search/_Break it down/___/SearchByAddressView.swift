@@ -1,15 +1,20 @@
 //
-//  SearchByAddressModel.swift
+//  SearchByAddressView.swift
 //  Business_Search
 //
-//  Created by admin on 7/22/19.
+//  Created by admin on 7/28/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
 import UIKit
 import MapKit
 
-class SearchByAddressModel{
+class SearchByAddressView {
+    var possibleInsertLocationCoordinate: CLLocation!
+    
+    var viewModel: SearchByAddressViewModel?
+    
+    
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))
         imageView.contentMode = .scaleAspectFit
@@ -58,10 +63,7 @@ class SearchByAddressModel{
     }()
     
     
-    var possibleInsertLocationCoordinate: CLLocation
-    init(possibleInsertLocationCoordinate: CLLocation) {
-        self.possibleInsertLocationCoordinate = possibleInsertLocationCoordinate
-    }
+
     
     
     func getStackView(){
@@ -69,10 +71,7 @@ class SearchByAddressModel{
             $0.heightAnchor.constraint(equalToConstant: customUIHeightSize).isActive = true
             stackView.addArrangedSubview($0)
         }
-
+        
     }
-    
-    
-    
 }
 

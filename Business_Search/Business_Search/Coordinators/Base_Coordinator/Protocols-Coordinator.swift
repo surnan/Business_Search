@@ -18,8 +18,8 @@ protocol SettingsType       {func loadSettings(delegate: UnBlurViewProtocol, max
 
 protocol BusinessDetailsType{func loadBusinessDetails(currentBusiness: Business)}
 protocol FilterType         {func loadFilter(unblurProtocol: UnBlurViewProtocol)}
-protocol OpenPhoneType      {func handlePhoneNumber(number: String)}
-protocol OpenInSafariType   {func handleOpenBrowser(url: String)}
-protocol OpenAppleMapType   {func handleMapItButton(currentLocation: CLLocationCoordinate2D)}
+protocol OpenPhoneType      {func loadPhoneCallScreen(number: String)}
+protocol OpenInSafariType   {func loadSafariBrowser(url: String)}
+protocol OpenAppleMapType   {func loadAppleMap(currentLocation: CLLocationCoordinate2D)}
 protocol TabControllerType  {func loadTabController(businesses: [Business], categoryName: String)}
 protocol DismissType        {func handleDismiss()}

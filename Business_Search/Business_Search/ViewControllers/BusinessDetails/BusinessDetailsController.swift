@@ -16,7 +16,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var currentLocation         : CLLocation?
     var locationManager         = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
     var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
-    var mainView                : BusinessDetailsView!
+    var viewObject              : BusinessDetailsView!
     var viewModel               : BusinessDetailsViewModel!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,26 +37,26 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     
     //MARK:- Handlers
     func addHandlers(){
-        mainView.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
-        mainView.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
-        mainView.mapItButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
+        viewObject.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
+        viewObject.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
+        viewObject.mapItButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
     }
     
     @objc func handlePhoneNumberButton(sender: UIButton){
         guard let numberString = sender.titleLabel?.text else {return}
-        coordinator?.handlePhoneNumber(number: numberString)
+        coordinator?.loadPhoneCallScreen(number: numberString)
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
         if let urlStringExists = viewModel.url, urlStringExists._isValidURL {
-            coordinator?.handleOpenBrowser(url: urlStringExists)
+            coordinator?.loadSafariBrowser(url: urlStringExists)
         } else {
-            coordinator?.handleOpenBrowser(url: "https://www.yelp.com")
+            coordinator?.loadSafariBrowser(url: "https://www.yelp.com")
         }
     }
     
     @objc func handleMapItButton(_ sender: UIButton){
         guard let currentLocation = locationManager.location?.coordinate else {print("Unable to get current Location"); return}
-        coordinator?.handleMapItButton(currentLocation: currentLocation)
+        coordinator?.loadAppleMap(currentLocation: currentLocation)
     }
 }
