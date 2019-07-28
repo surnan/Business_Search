@@ -19,9 +19,6 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var mainView                : BusinessDetailsView!
     var viewModel               : BusinessDetailsViewModel!
     
-    
-    
-    //MARK:- Functions START
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()

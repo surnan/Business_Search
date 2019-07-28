@@ -38,7 +38,7 @@ class BusinessDetailsView: UIView {
     var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
     var addressLabel        = GenericLabel(text: "", size: 16, textColor: .black)
     var phoneNumberLabel    = GenericLabel(text: "", size: 16, textColor: .black)
-    var phoneNumberButton   = GenericButton(title: "...", titleColor: .blue, backgroundColor: .white, isCorner: true)
+    var phoneNumberButton   = GenericButton(title: "", titleColor: .blue, backgroundColor: .white, isCorner: true)
     var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
     var mapItButton         = GenericButton(title: " MAP IT ", titleColor: .white, backgroundColor: .red, isCorner: true)
     
