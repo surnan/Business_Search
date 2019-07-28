@@ -477,7 +477,6 @@
 		845A1D8822D02DB00066C17C /* View_Models */ = {
 			isa = PBXGroup;
 			children = (
-				844D358122C9C2AC00D7E594 /* BusinessDetailsModel.swift */,
 				84365CBF22C7F2460014E577 /* FilterModel.swift */,
 				843F032722CE64FC002798C1 /* OpeningModel.swift */,
 				84365CC422C8658B0014E577 /* SettingsModel.swift */,
@@ -518,8 +517,6 @@
 			isa = PBXGroup;
 			children = (
 				847AE24122E9487300774371 /* TableViewCells */,
-				847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */,
-				847AE26122EBE50B00774371 /* BusinessDetailsView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -599,8 +596,11 @@
 		84A5AFDE22A368E2009B96AD /* BusinessDetails */ = {
 			isa = PBXGroup;
 			children = (
+				847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */,
+				847AE26122EBE50B00774371 /* BusinessDetailsView.swift */,
 				842AD7D8228538B900590B1A /* BusinessDetailsController.swift */,
 				844D358322CA7A1300D7E594 /* BusinessDetailsController+UI.swift */,
+				844D358122C9C2AC00D7E594 /* BusinessDetailsModel.swift */,
 			);
 			path = BusinessDetails;
 			sourceTree = "<group>";

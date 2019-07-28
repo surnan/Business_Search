@@ -16,12 +16,19 @@ class BusinessDetailsView: UIView {
     
     var viewModel: BusinessDetailsViewModel? {
         didSet {
-            nameLabel.attributedText        = viewModel?.nameAttributedString
-            addressLabel.attributedText     = viewModel?.addressAttributedString
-            phoneNumberLabel.attributedText = viewModel?.phoneNumberAttributedString
-            phoneNumberButton.setAttributedTitle(viewModel?.phoneNumberAttributedString, for: .normal)
-            priceLabel.text                 = viewModel?.priceString
-            ratingLabel.text                = viewModel?.ratingString
+            guard let viewModel = viewModel else {
+                print("BusinessDetailsView.viewModel = NIL")
+                return
+            }
+            nameLabel.attributedText                = viewModel.nameAttributedString
+            addressLabel.attributedText             = viewModel.addressAttributedString
+            phoneNumberLabel.attributedText         = viewModel.phoneNumberAttributedString
+            priceLabel.text                         = viewModel.priceString
+            ratingLabel.text                        = viewModel.ratingString
+            firstAnnotation.coordinate.latitude     = viewModel.latitude
+            firstAnnotation.coordinate.longitude    = viewModel.longitude
+            mapView.addAnnotation(firstAnnotation)
+            phoneNumberButton.setAttributedTitle(viewModel.phoneNumberAttributedString, for: .normal)
         }
     }
     

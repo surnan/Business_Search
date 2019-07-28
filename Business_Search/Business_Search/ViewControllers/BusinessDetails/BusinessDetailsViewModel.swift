@@ -16,10 +16,15 @@ struct BusinessDetailsViewModel {
     var priceString                 = ""
     var ratingString                = ""
     var url                         : String?
+    var latitude                    : Double
+    var longitude                   : Double
     
     
     init(business: Business) {
         self.business = business
+        
+        self.latitude = business.latitude
+        self.longitude = business.longitude
         
         if let name = business.name {
             let attributes: [NSAttributedString.Key: Any] = [
@@ -61,6 +66,6 @@ struct BusinessDetailsViewModel {
         self.url = business.url ?? ""
         
         if let price = business.price {priceString = "Price: \(price)"}
-        ratingString = "\nRating: \(business.rating)"
+        ratingString = "Rating: \(business.rating)"
     }
 }
