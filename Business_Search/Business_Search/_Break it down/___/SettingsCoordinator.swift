@@ -12,9 +12,10 @@ import MapKit
 
 
 class SettingsCoordinator: Coordinator {
+    private let dataController: DataController
+    private var maximumSliderValue: Int?
+    var getMaximumSliderValue: Int? {return maximumSliderValue}
     let unblurProtocol: UnBlurViewProtocol
-    let dataController: DataController
-    var maximumSliderValue: Int?
     
     init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType) {
         self.unblurProtocol = unblurProtocol

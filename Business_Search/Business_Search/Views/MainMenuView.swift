@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MainMenuView: UIView {
+class MainMenuView {
     var nearMeSearchButton      = MainMenuControllerButton(title: "Search Near Me", background: .blue, tag: 0)
     var searchByMapButton       = MainMenuControllerButton(title: "Search By Map", background: .red, tag: 1)
     var searchByAddressButton   = MainMenuControllerButton(title: "     Search By Address     ", background: .green, tag: 2)

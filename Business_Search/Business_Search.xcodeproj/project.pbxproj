@@ -72,6 +72,8 @@
 		847AE27822EDE1B100774371 /* SearchByMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27722EDE1B100774371 /* SearchByMapView.swift */; };
 		847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27A22EDE79600774371 /* SearchByMapController+UI.swift */; };
 		847AE27D22EDE7A300774371 /* SearchByMapController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */; };
+		847AE27F22EDEADB00774371 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27E22EDEADB00774371 /* SettingsViewModel.swift */; };
+		847AE28122EDEAF600774371 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28022EDEAF600774371 /* SettingsView.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -172,6 +174,8 @@
 		847AE27722EDE1B100774371 /* SearchByMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapView.swift; sourceTree = "<group>"; };
 		847AE27A22EDE79600774371 /* SearchByMapController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByMapController+UI.swift"; sourceTree = "<group>"; };
 		847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByMapController+Handlers.swift"; sourceTree = "<group>"; };
+		847AE27E22EDEADB00774371 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		847AE28022EDEAF600774371 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -254,14 +258,6 @@
 			isa = PBXGroup;
 			children = (
 				8401127D22E51CE300ECE0D5 /* OpeningCoordinator.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		8408F0E422E60C5900DB55B6 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -456,7 +452,6 @@
 			children = (
 				84365CBF22C7F2460014E577 /* FilterModel.swift */,
 				843F032722CE64FC002798C1 /* OpeningModel.swift */,
-				84365CC422C8658B0014E577 /* SettingsModel.swift */,
 			);
 			path = View_Models;
 			sourceTree = "<group>";
@@ -579,6 +574,11 @@
 		847AE26722EDA10900774371 /* ___ */ = {
 			isa = PBXGroup;
 			children = (
+				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
+				84365CC422C8658B0014E577 /* SettingsModel.swift */,
+				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
+				847AE28022EDEAF600774371 /* SettingsView.swift */,
+				84CC285C2297774800A82BBE /* SettingsController.swift */,
 			);
 			path = "___";
 			sourceTree = "<group>";
@@ -694,19 +694,9 @@
 			children = (
 				84365CAC22C564710014E577 /* Filter */,
 				84365CAB22C564520014E577 /* Opening */,
-				84CC285B2297772700A82BBE /* Settings */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		84CC285B2297772700A82BBE /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				8408F0E422E60C5900DB55B6 /* Coordinators */,
-				84CC285C2297774800A82BBE /* SettingsController.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		84CF692622755B0B00109C96 /* Yelp_Struct */ = {
@@ -873,6 +863,7 @@
 				843F032822CE64FD002798C1 /* OpeningModel.swift in Sources */,
 				847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
+				847AE27F22EDEADB00774371 /* SettingsViewModel.swift in Sources */,
 				847AE26B22EDA66800774371 /* SearchByAddressViewModel.swift in Sources */,
 				84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */,
 				8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */,
@@ -924,6 +915,7 @@
 				8408F0E622E60E0500DB55B6 /* Opening+Search.swift in Sources */,
 				841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */,
+				847AE28122EDEAF600774371 /* SettingsView.swift in Sources */,
 				843C66F9227D25D7003A64D1 /* GroupsController.swift in Sources */,
 				84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */,
 				842AD7D72284D80B00590B1A /* Opening+Handler.swift in Sources */,
