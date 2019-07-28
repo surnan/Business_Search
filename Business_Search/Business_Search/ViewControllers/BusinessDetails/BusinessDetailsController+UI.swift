@@ -31,15 +31,18 @@ extension BusinessDetailsController {
         [mainView.mapView, mainView.nameLabel, fullStackNoButtons, buttonStack].forEach{view.addSubview($0)}
         mainView.mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
                              padding: .init(top: 3, left: 3, bottom: 0, right: 3))
-        [mainView.nameLabel, fullStackNoButtons, buttonStack].forEach{$0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true}
+
+
+        [mainView.nameLabel].forEach{$0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true}
         
         NSLayoutConstraint.activate([
             mainView.mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25),
             mainView.nameLabel.topAnchor.constraint(equalTo: mainView.mapView.bottomAnchor, constant: 10),
             mainView.nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80),
-            fullStackNoButtons.topAnchor.constraint(equalTo: mainView.nameLabel.bottomAnchor, constant: 15),
-            buttonStack.topAnchor.constraint(equalTo: fullStackNoButtons.bottomAnchor, constant: 20),
-            buttonStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66),
             ])
+        
+        fullStackNoButtons.anchor(top: mainView.nameLabel.bottomAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), centerX: true)
+        buttonStack.anchor(top: fullStackNoButtons.bottomAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),
+                           centerX: true, x: view.widthAnchor, xMultiply: 0.66)
     }
 }

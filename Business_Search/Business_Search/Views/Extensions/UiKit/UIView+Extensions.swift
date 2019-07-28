@@ -11,15 +11,15 @@ import UIKit
 
 extension UIView {
     
-    func anchor(top: NSLayoutYAxisAnchor? = nil, topPadding: CGFloat? = CGFloat.zero,
-                leading: NSLayoutXAxisAnchor? = nil, leadingPadding: CGFloat? = CGFloat.zero,
-                trailing: NSLayoutXAxisAnchor? = nil, trailingPadding: CGFloat? = CGFloat.zero,
-                bottom: NSLayoutYAxisAnchor? = nil, bottomPadding: CGFloat? = CGFloat.zero,
+    func anchor(top: NSLayoutYAxisAnchor? = nil,
+                leading: NSLayoutXAxisAnchor? = nil,
+                trailing: NSLayoutXAxisAnchor? = nil,
+                bottom: NSLayoutYAxisAnchor? = nil,
                 padding: UIEdgeInsets = .zero,
                 size: CGSize = .zero,
                 centerX: Bool = false, centerY: Bool = false,
-                widthX: CGFloat = CGFloat.zero,
-                heightX: CGFloat = CGFloat.zero ){
+                x: NSLayoutDimension? = nil, xMultiply: CGFloat = CGFloat.zero,
+                y: NSLayoutDimension? = nil, yMultiply: CGFloat = CGFloat.zero ){
         
         translatesAutoresizingMaskIntoConstraints = false
         if let top = top {topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true}
@@ -28,10 +28,10 @@ extension UIView {
         if let trailing = trailing {trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true}
         if size.height != 0 {heightAnchor.constraint(equalToConstant: size.height).isActive = true}
         if size.width != 0 {widthAnchor.constraint(equalToConstant: size.width).isActive = true}
-        if centerX {centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true}
-        if centerY {centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true}
-        if widthX != CGFloat.zero {widthAnchor.constraint(equalTo: widthAnchor, multiplier: widthX)}
-        if heightX != CGFloat.zero {heightAnchor.constraint(equalTo: heightAnchor, multiplier: heightX)}
+        if let parent = superview, centerX {centerXAnchor.constraint(equalTo: parent.centerXAnchor).isActive = true}
+        if let parent = superview, centerY {centerYAnchor.constraint(equalTo: parent.centerYAnchor).isActive = true}
+        if let x = x, xMultiply != CGFloat.zero {widthAnchor.constraint(equalTo: x, multiplier: xMultiply).isActive = true}
+        if let y = y, yMultiply != CGFloat.zero {heightAnchor.constraint(equalTo: y, multiplier: yMultiply).isActive = true}
     }
     
     func anchorSize(to view: UIView){
