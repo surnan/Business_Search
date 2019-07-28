@@ -20,6 +20,8 @@ struct SettingsViewModel {
     var getRadiusMaxFloat   : Float {return maxRadius}
     
     init(maximumSliderValue : Int? = nil) {
+        textViewText = ""
+        
         self._radius = Float(radius)
         if let maximumSliderValue = maximumSliderValue {
             maxRadius = Float(maximumSliderValue)
