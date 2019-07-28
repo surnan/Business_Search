@@ -1,5 +1,5 @@
 //
-//  SearchByAddressViewModel.swift
+//  SearchByMapViewModel.swift
 //  Business_Search
 //
 //  Created by admin on 7/28/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SearchByAddressViewModel{
+struct SearchByMapViewModel{
     private var latitude: Double!
     var getLatitude: Double {return latitude}
     

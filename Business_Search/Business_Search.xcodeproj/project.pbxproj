@@ -68,6 +68,10 @@
 		847AE27022EDD03500774371 /* SearchByAddressController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE26F22EDD03400774371 /* SearchByAddressController+Handlers.swift */; };
 		847AE27222EDD39200774371 /* BusinessDetailsController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27122EDD39200774371 /* BusinessDetailsController+Handlers.swift */; };
 		847AE27422EDDF9300774371 /* MainMenuController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27322EDDF9300774371 /* MainMenuController+UI.swift */; };
+		847AE27622EDE14F00774371 /* SearchByMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */; };
+		847AE27822EDE1B100774371 /* SearchByMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27722EDE1B100774371 /* SearchByMapView.swift */; };
+		847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27A22EDE79600774371 /* SearchByMapController+UI.swift */; };
+		847AE27D22EDE7A300774371 /* SearchByMapController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -164,6 +168,10 @@
 		847AE26F22EDD03400774371 /* SearchByAddressController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByAddressController+Handlers.swift"; sourceTree = "<group>"; };
 		847AE27122EDD39200774371 /* BusinessDetailsController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessDetailsController+Handlers.swift"; sourceTree = "<group>"; };
 		847AE27322EDDF9300774371 /* MainMenuController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+UI.swift"; sourceTree = "<group>"; };
+		847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapViewModel.swift; sourceTree = "<group>"; };
+		847AE27722EDE1B100774371 /* SearchByMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapView.swift; sourceTree = "<group>"; };
+		847AE27A22EDE79600774371 /* SearchByMapController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByMapController+UI.swift"; sourceTree = "<group>"; };
+		847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByMapController+Handlers.swift"; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -225,15 +233,6 @@
 			path = Base_Coordinator;
 			sourceTree = "<group>";
 		};
-		8401128522E566A300ECE0D5 /* SearchByMap */ = {
-			isa = PBXGroup;
-			children = (
-				8408F0E322E60C4B00DB55B6 /* Coordinators */,
-				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
-			);
-			path = SearchByMap;
-			sourceTree = "<group>";
-		};
 		8408F0DE22E60A4300DB55B6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,14 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				8401127D22E51CE300ECE0D5 /* OpeningCoordinator.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		8408F0E322E60C4B00DB55B6 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -505,6 +496,7 @@
 				847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */,
 				847AE23922E922DC00774371 /* CategoryCellViewModel.swift */,
 				847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */,
+				847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -521,6 +513,7 @@
 		847AE23F22E9458400774371 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				847AE27922EDE76900774371 /* SearchByMap */,
 				847AE26C22EDCF8400774371 /* SearchByAddress */,
 				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
 				848761D1227F1779000CECC7 /* MainMenu */,
@@ -535,6 +528,7 @@
 				84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */,
 				8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */,
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
+				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -565,6 +559,7 @@
 				8417FCBC227B8A6D005BC240 /* CategoryCell.swift */,
 				847AE25522EAA6E800774371 /* MainMenuView.swift */,
 				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
+				847AE27722EDE1B100774371 /* SearchByMapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -596,6 +591,16 @@
 				847AE26D22EDCFA500774371 /* SearchByAddressController+UI.swift */,
 			);
 			path = SearchByAddress;
+			sourceTree = "<group>";
+		};
+		847AE27922EDE76900774371 /* SearchByMap */ = {
+			isa = PBXGroup;
+			children = (
+				848761D2227F221D000CECC7 /* SearchByMapController.swift */,
+				847AE27A22EDE79600774371 /* SearchByMapController+UI.swift */,
+				847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */,
+			);
+			path = SearchByMap;
 			sourceTree = "<group>";
 		};
 		848761D1227F1779000CECC7 /* MainMenu */ = {
@@ -689,7 +694,6 @@
 			children = (
 				84365CAC22C564710014E577 /* Filter */,
 				84365CAB22C564520014E577 /* Opening */,
-				8401128522E566A300ECE0D5 /* SearchByMap */,
 				84CC285B2297772700A82BBE /* Settings */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 			);
@@ -867,12 +871,14 @@
 				848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				843F032822CE64FD002798C1 /* OpeningModel.swift in Sources */,
+				847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				847AE26B22EDA66800774371 /* SearchByAddressViewModel.swift in Sources */,
 				84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */,
 				8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */,
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */,
+				847AE27622EDE14F00774371 /* SearchByMapViewModel.swift in Sources */,
 				845A1D8122D029C10066C17C /* OpeningControllerProtocol.swift in Sources */,
 				847AE23522E81D7600774371 /* BusinessCellViewModel.swift in Sources */,
 				841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */,
@@ -896,6 +902,7 @@
 				8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
 				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
+				847AE27D22EDE7A300774371 /* SearchByMapController+Handlers.swift in Sources */,
 				84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */,
 				847AE27422EDDF9300774371 /* MainMenuController+UI.swift in Sources */,
 				848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */,
@@ -949,6 +956,7 @@
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
 				847AE26022EBE45500774371 /* BusinessDetailsViewModel.swift in Sources */,
 				847AE27022EDD03500774371 /* SearchByAddressController+Handlers.swift in Sources */,
+				847AE27822EDE1B100774371 /* SearchByMapView.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
 				846509BA227A0C06008ABA9F /* Opening.swift in Sources */,
