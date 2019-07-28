@@ -21,6 +21,19 @@ extension MainMenuController: CLLocationManagerDelegate {
         pushController()
     }
     
+    private func pushController(){
+        guard let coordinator = coordinator else {print("coordinator is NIL");return}
+        mainView.activityView.stopAnimating()
+        if coordinateFound {return}
+        coordinateFound = true
+        switch controllerIndex {
+        case 0: coordinator.loadSearchTable(location: userLocation)
+        case 1: coordinator.loadSearchByMap(location: userLocation)
+        case 2: coordinator.loadSearchByAddress(location: userLocation)
+        default:    break
+        }
+    }
+    
     func determineMyCurrentLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate        = self

@@ -28,6 +28,11 @@ class BusinessDetailsView {
             firstAnnotation.coordinate.latitude     = viewModel.latitude
             firstAnnotation.coordinate.longitude    = viewModel.longitude
             mapView.addAnnotation(firstAnnotation)
+            mapView.region = MKCoordinateRegion(center: .init(latitude: viewModel.latitude,
+                                                              longitude: viewModel.longitude),
+                                                latitudinalMeters: 400.0,
+                                                longitudinalMeters: 400.0)
+            
             phoneNumberButton.setAttributedTitle(viewModel.phoneNumberAttributedString, for: .normal)
         }
     }

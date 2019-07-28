@@ -12,15 +12,6 @@ import MapKit
 import CoreLocation
 
 extension BusinessDetailsController {
-    func setupMapView(){
-        let viewRegion = MKCoordinateRegion(center: viewObject.firstAnnotation.coordinate,
-                                            latitudinalMeters: regionMetersForMap,
-                                            longitudinalMeters: regionMetersForMap)
-        viewObject.mapView.setRegion(viewRegion, animated: false)
-        viewObject.mapView.addAnnotation(viewObject.firstAnnotation)
-        viewObject.mapView.delegate = self
-    }
-    
     func setupUI(){
         view.backgroundColor = UIColor.white
         let safe        = view.safeAreaLayoutGuide

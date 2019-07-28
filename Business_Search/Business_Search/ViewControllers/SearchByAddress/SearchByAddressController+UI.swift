@@ -2,15 +2,17 @@
 //  SearchByAddressController+UI.swift
 //  Business_Search
 //
-//  Created by admin on 7/22/19.
+//  Created by admin on 7/28/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
 import UIKit
+import CoreLocation
+import MapKit
 
-
-extension SearchByAddressController{
+extension SearchByAddressController {
     func setupUI(){
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]
         let safe = view.safeAreaLayoutGuide
         let stackView = viewObject.getStackView()
         [stackView, locationImageView, mapView].forEach{view.addSubview($0)}

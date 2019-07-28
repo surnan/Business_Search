@@ -12,6 +12,9 @@ let limit = 50
 var offset = 50
 var radius = 350           // NSUserDefaults
 
+let cornerRadiusSize: CGFloat = 5.0
+let customUIHeightSize: CGFloat = 55
+
 var recordCountAtLocation = 0
 var categoryMatch = 0
 var yelpMaxPullCount = 1000

@@ -35,10 +35,6 @@ class SearchByAddressView {
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
-//        mapView.region = MKCoordinateRegion(center: possibleInsertLocationCoordinate.coordinate,
-//                                            latitudinalMeters: 500,
-//                                            longitudinalMeters: 500)
-        //mapView.delegate = self
         mapView.isScrollEnabled = false
         return mapView
     }()
@@ -56,7 +52,6 @@ class SearchByAddressView {
         button.setTitle("FIND LOCATION", for: .normal)
         button.setTitle("Searching...", for: .selected)
         button.setTitleColor(UIColor.white, for: .normal)
-        //button.addTarget(self, action: #selector(handleFindButton(_:)), for: .touchUpInside)
         button.layer.cornerRadius = cornerRadiusSize
         button.clipsToBounds = true
         return button

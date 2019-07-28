@@ -27,7 +27,6 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
         let newController = SearchByAddressController()
         newController.viewObject = newView
         newController.viewModel = newViewModel
-        newController.possibleInsertLocationCoordinate = location
         newController.coordinator = self
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

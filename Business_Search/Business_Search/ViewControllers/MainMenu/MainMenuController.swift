@@ -37,7 +37,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
         [mainView.activityView, stack].forEach{view.addSubview($0)}
     }
     
-    func setupUI(){
+    private func setupUI(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
         self.navigationItem.titleView = mainView.titleImage
         mainView.activityView.center = view.center
@@ -48,11 +48,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
             ])
     }
 
-    func addHandlers(){
-        [mainView.nearMeSearchButton, mainView.searchByMapButton, mainView.searchByAddressButton].forEach{
-                $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
-        }
-    }
+
     
     func undoBlur() {
         removeDarkScreenBlur()

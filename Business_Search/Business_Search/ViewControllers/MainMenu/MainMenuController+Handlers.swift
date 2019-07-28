@@ -9,18 +9,13 @@
 import UIKit
 
 extension MainMenuController {
-    func pushController(){
-        guard let coordinator = coordinator else {print("coordinator is NIL");return}
-        mainView.activityView.stopAnimating()
-        if coordinateFound {return}
-        coordinateFound = true
-        switch controllerIndex {
-        case 0: coordinator.loadSearchTable(location: userLocation)
-        case 1: coordinator.loadSearchByMap(location: userLocation)
-        case 2: coordinator.loadSearchByAddress(location: userLocation)
-        default:    break
+    func addHandlers(){
+        [mainView.nearMeSearchButton, mainView.searchByMapButton, mainView.searchByAddressButton].forEach{
+            $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
         }
     }
+    
+
     
     @objc func handleButtons(_ sender: UIButton){
         determineMyCurrentLocation()

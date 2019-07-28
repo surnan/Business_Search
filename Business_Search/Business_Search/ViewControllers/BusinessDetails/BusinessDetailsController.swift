@@ -18,14 +18,9 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
     var viewObject              : BusinessDetailsView!
     var viewModel               : BusinessDetailsViewModel!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupUI()
-        setupMapView()
-    }
-    
+
     override func viewDidLoad() {
+        setupUI()
         addHandlers()
         setupLocationManager()
     }
@@ -33,30 +28,5 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     func setupLocationManager(){
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
-    }
-    
-    //MARK:- Handlers
-    func addHandlers(){
-        viewObject.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
-        viewObject.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
-        viewObject.mapItButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
-    }
-    
-    @objc func handlePhoneNumberButton(sender: UIButton){
-        guard let numberString = sender.titleLabel?.text else {return}
-        coordinator?.loadPhoneCallScreen(number: numberString)
-    }
-    
-    @objc func handleVisitYelpPageButton(_ sender: UIButton){
-        if let urlStringExists = viewModel.url, urlStringExists._isValidURL {
-            coordinator?.loadSafariBrowser(url: urlStringExists)
-        } else {
-            coordinator?.loadSafariBrowser(url: "https://www.yelp.com")
-        }
-    }
-    
-    @objc func handleMapItButton(_ sender: UIButton){
-        guard let currentLocation = locationManager.location?.coordinate else {print("Unable to get current Location"); return}
-        coordinator?.loadAppleMap(currentLocation: currentLocation)
     }
 }
