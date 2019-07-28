@@ -20,7 +20,8 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
     }
     
     func start(parent: Coordinator){
-        let newViewModel = SearchByAddressViewModel()
+        let coor = location.coordinate
+        let newViewModel = SearchByAddressViewModel(latitude: coor.latitude, longitude: coor.longitude)
         let newView = SearchByAddressView()
         newView.viewModel = newViewModel
         let newController = SearchByAddressController()

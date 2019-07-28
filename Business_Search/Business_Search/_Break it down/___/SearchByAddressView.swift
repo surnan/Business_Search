@@ -12,7 +12,17 @@ import MapKit
 class SearchByAddressView {
     var possibleInsertLocationCoordinate: CLLocation!
     
-    var viewModel: SearchByAddressViewModel?
+    var viewModel: SearchByAddressViewModel?{
+        didSet{
+            guard let viewModel = viewModel else {
+                print("SearchByAddressView.viewModel = NIL")
+                return
+            }
+            mapView.region = MKCoordinateRegion(center: .init(latitude: viewModel.getLatitude, longitude: viewModel.getLongitude),
+                                                latitudinalMeters: 500,
+                                                longitudinalMeters: 500)
+        }
+    }
     
     
     let locationImageView: UIImageView = {
@@ -25,9 +35,9 @@ class SearchByAddressView {
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.region = MKCoordinateRegion(center: possibleInsertLocationCoordinate.coordinate,
-                                            latitudinalMeters: 500,
-                                            longitudinalMeters: 500)
+//        mapView.region = MKCoordinateRegion(center: possibleInsertLocationCoordinate.coordinate,
+//                                            latitudinalMeters: 500,
+//                                            longitudinalMeters: 500)
         //mapView.delegate = self
         mapView.isScrollEnabled = false
         return mapView
@@ -52,26 +62,23 @@ class SearchByAddressView {
         return button
     }()
     
-    let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.alignment = .center
-        stack.distribution = .fill
-        stack.spacing = 15
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
-    
-
-    
-    
-    func getStackView(){
+    func getStackView()-> UIStackView{
+        let stackView: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.alignment = .center
+            stack.distribution = .fill
+            stack.spacing = 15
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            return stack
+        }()
+        
         [locationTextField, findLocationButton].forEach{
             $0.heightAnchor.constraint(equalToConstant: customUIHeightSize).isActive = true
             stackView.addArrangedSubview($0)
         }
         
+        return stackView
     }
 }
 

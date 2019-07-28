@@ -11,37 +11,14 @@ import UIKit
 
 extension SearchByAddressController{
     func setupUI(){
-        let stackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.alignment = .center
-            stack.distribution = .fill
-            stack.spacing = 15
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            return stack
-        }()
-        
-        [locationTextField, findLocationButton].forEach{
-            $0.heightAnchor.constraint(equalToConstant: customUIHeightSize).isActive = true
-            stackView.addArrangedSubview($0)
-        }
-        
-        
+        let safe = view.safeAreaLayoutGuide
+        let stackView = viewObject.getStackView()
         [stackView, locationImageView, mapView].forEach{view.addSubview($0)}
-        NSLayoutConstraint.activate([
-            locationImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            locationImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 10),
-            
-            locationTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            findLocationButton.widthAnchor.constraint(equalTo: locationTextField.widthAnchor),
-            
-            mapView.topAnchor.constraint(equalTo: findLocationButton.bottomAnchor, constant: 10),
-            mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-            ])
+        locationImageView.anchor(top: safe.topAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0), centerX: true)
+        stackView.anchor(top: locationImageView.bottomAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0), centerX: true)
+        viewObject.locationTextField.anchor(x: view.widthAnchor, xMultiply: 0.7)
+        viewObject.findLocationButton.anchor(x: view.widthAnchor, xMultiply: 0.7)
+        mapView.anchor(top: stackView.bottomAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor, bottom: safe.bottomAnchor,
+                       padding: .init(top: 10, left: 0, bottom: 0, right: 0))
     }
 }
