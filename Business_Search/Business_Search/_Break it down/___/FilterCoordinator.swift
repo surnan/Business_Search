@@ -10,7 +10,7 @@ import UIKit
 
 
 class FilterCoordinator: Coordinator {
-    let unblurProtocol: UnBlurViewProtocol
+    private let unblurProtocol: UnBlurViewProtocol
     
     init(unblurProtocol: UnBlurViewProtocol, router: RouterType) {
         self.unblurProtocol = unblurProtocol
@@ -19,25 +19,30 @@ class FilterCoordinator: Coordinator {
     
     
     func start(parent: Coordinator){
-        let vc = FilterController()
-        vc.delegate                 = unblurProtocol
-        vc.coordinator              = self
-        vc.modalPresentationStyle   = .overFullScreen
+        let newViewModel    = FilterViewModel() //SettingsViewModel()
+        let newViewObject   = FilterView()      //SettingsView()
+        newViewObject.viewModel = newViewModel
         
-        vc.dismissController = {[weak self] in
+        let newController = FilterController()
+        newController.viewObject               = newViewObject
+        newController.viewModel                = newViewModel
+        newController.delegate                 = unblurProtocol
+        newController.coordinator              = self
+        newController.modalPresentationStyle   = .overFullScreen
+        
+        newController.dismissController = {[weak self] in
             self?.router.dismissModule(animated: true, completion: {
                 self?.unblurProtocol.undoBlur()
             })
         }
         
-        vc.saveDismissController = {[weak self] in
+        newController.saveDismissController = {[weak self] in
             self?.router.dismissModule(animated: true){
                 UserAppliedFilter.shared.load()
                 self?.unblurProtocol.undoBlur()
                 _ = UserAppliedFilter.shared.getBusinessPredicate()
             }
         }
-        
-        router.present(vc, animated: true)
+        router.present(newController, animated: true)
     }
 }

@@ -1,19 +1,21 @@
 //
-//  FilteredControllerUI.swift
+//  FilterView.swift
 //  Business_Search
 //
-//  Created by admin on 6/29/19.
+//  Created by admin on 7/28/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
 import UIKit
 
-class FilterModel{
-    let minimumRatingText = UserAppliedFilter.shared.getMinimumRatingString
-    let sliderValue = UserAppliedFilter.shared.getMinimumRatingFloat
-    let shared = UserAppliedFilter.shared
+class FilterView {
+    var viewModel: FilterViewModel?{
+        didSet{
+            minimumRatingText = viewModel?.getMinimumRatingText
+            sliderValue     = viewModel?.getSliderValue
+        }
+    }
     
-    //Mark:- VAR
     var sliderLabel         = GenericLabel(text: "Minimum Yelp Rating", size: 20)
     var sliderLeftLabel     = GenericLabel(text: "1")
     var sliderRightLabel    = GenericLabel(text: "5")
@@ -21,11 +23,13 @@ class FilterModel{
     var noPriceLabel        = GenericLabel(text: "Include if No Price Listed:", size: 18)
     var favoriteAtTopLabel  = GenericLabel(text: "Move favorites to top:", size: 18)
     
-    var dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+    var dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true,
+                                                   corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
     var dollarTwoButton     =  GenericSegmentButton(title: "$$")
     var dollarThreeButton   = GenericSegmentButton(title: "$$$")
-    var dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-
+    var dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true,
+                                                   corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    
     var defaultButton       = GenericButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
     var saveButton          = GenericButton(title: "SAVE", isCorner: true)
     var cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
@@ -33,11 +37,16 @@ class FilterModel{
     var noPriceSwitch       = GenericSwitch(onTintColor: .green)
     var favoriteAtTopSwitch = GenericSwitch(onTintColor: .green)
     
+    var minimumRatingText   : String!
+    var sliderValue         : Float!
+
+    
+    
     //MARK: Lazy VAR
     lazy var sliderValueLabel   = GenericLabel(text: minimumRatingText, size: 24, backgroundColor: .blue,
-                                        textColor: .white, corner: true)
-    lazy var distanceSlider     = GenericSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray,
-                                       maxColor: .black, thumbColor: .white)
+                                               textColor: .white, corner: true)
+    lazy var distanceSlider     = GenericSlider(min: 1.0, max: 5.0, value: sliderValue, minColor: .gray, maxColor: .black,
+                                                thumbColor: .white)
     
     func getFavoritesAtTopStack()->UIStackView{
         let isPriceListedStack =  GenericStack(spacing: 2, axis: .horizontal)
@@ -80,36 +89,3 @@ class FilterModel{
         return fullStack
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
