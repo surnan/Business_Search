@@ -36,20 +36,7 @@ class MainMenuController: UIViewController, UnBlurViewProtocol{
         addHandlers()
         [mainView.activityView, stack].forEach{view.addSubview($0)}
     }
-    
-    private func setupUI(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
-        self.navigationItem.titleView = mainView.titleImage
-        mainView.activityView.center = view.center
-        NSLayoutConstraint.activate([
-            stack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25),
-            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-            ])
-    }
 
-
-    
     func undoBlur() {
         removeDarkScreenBlur()
         navigationController?.setNavigationBarHidden(false, animated: true)

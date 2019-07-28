@@ -10,9 +10,9 @@ import Foundation
 import MapKit
 
 class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType {
-    let window          : UIWindow
-    let dataController  : DataController
-    let firstController : MainMenuController
+    private let window          : UIWindow
+    private let dataController  : DataController
+    private let firstController : MainMenuController
     
     init(router: RouterType, dataController: DataController, window: UIWindow, vc: MainMenuController) {
         self.dataController = dataController

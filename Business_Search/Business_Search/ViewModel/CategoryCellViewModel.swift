@@ -11,12 +11,22 @@ import CoreData
 
 struct CategoryCellViewModel {
     
-    var name: String!
-    var count: Int!
-    var originalColor: UIColor!
-    var latitude: Double!
-    var longitude: Double!
-    var dataController: DataController!
+    private var name: String!
+    var getName: String {return name}
+    
+    private var count: Int!
+    var getCountString: String {
+        let matches = count == 1 ? "match" : "matches"
+        let result = "\(count ?? 0) \(matches)\nfound"
+        return result
+    }
+    
+    private var originalColor: UIColor!
+    var getOriginalColor: UIColor {return originalColor}
+    
+    private var latitude: Double!
+    private var longitude: Double!
+    private var dataController: DataController!
     
     lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude!])
     lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude!])
@@ -29,6 +39,7 @@ struct CategoryCellViewModel {
         self.dataController = dataController
         test()
     }
+
     
     mutating func test(){
         let _fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()

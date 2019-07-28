@@ -12,17 +12,15 @@ class CategoryCell: UITableViewCell {
     
     var firstViewModel: CategoryCellViewModel! {
         didSet{
-            myLabel.text = firstViewModel.name
-            backColor = firstViewModel.originalColor
-            let count = firstViewModel.count ?? 0
-            let matches = count > 1 ? "matches" : "match"
-            countLabel.text = "\(count) \(matches)\nfound"
+            myLabel.text = firstViewModel.getName
+            backColor = firstViewModel.getOriginalColor
+            countLabel.text = firstViewModel.getCountString
         }
     }
 
     var backColor: UIColor!
     
-    let myLabel: UILabel = {
+    private let myLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.textColor = UIColor.black
@@ -32,7 +30,7 @@ class CategoryCell: UITableViewCell {
         return label
     }()
     
-    var countLabel: UILabel = {
+    private var countLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 2

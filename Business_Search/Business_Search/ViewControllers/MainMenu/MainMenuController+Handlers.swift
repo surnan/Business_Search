@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 extension MainMenuController {
     func addHandlers(){
@@ -14,8 +15,6 @@ extension MainMenuController {
             $0.addTarget(self, action: #selector(handleButtons(_:)), for: .touchUpInside)
         }
     }
-    
-
     
     @objc func handleButtons(_ sender: UIButton){
         determineMyCurrentLocation()
@@ -26,5 +25,15 @@ extension MainMenuController {
     @objc func handleSettings(){
         addDarkScreenBlur()
         coordinator?.loadSettings(delegate: self, max: nil)
+    }
+    
+    private func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate        = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
     }
 }

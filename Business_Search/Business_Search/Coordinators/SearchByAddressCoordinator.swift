@@ -10,8 +10,8 @@ import Foundation
 import MapKit
 
 class SearchByAddressCoordinator: Coordinator, SearchTableType {
-    let dataController: DataController
-    let location : CLLocation
+    private let dataController: DataController
+    private let location : CLLocation
     
     init(dataController: DataController, router: RouterType, location: CLLocation){
         self.dataController = dataController

@@ -67,6 +67,7 @@
 		847AE26E22EDCFA500774371 /* SearchByAddressController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE26D22EDCFA500774371 /* SearchByAddressController+UI.swift */; };
 		847AE27022EDD03500774371 /* SearchByAddressController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE26F22EDD03400774371 /* SearchByAddressController+Handlers.swift */; };
 		847AE27222EDD39200774371 /* BusinessDetailsController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27122EDD39200774371 /* BusinessDetailsController+Handlers.swift */; };
+		847AE27422EDDF9300774371 /* MainMenuController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27322EDDF9300774371 /* MainMenuController+UI.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -162,6 +163,7 @@
 		847AE26D22EDCFA500774371 /* SearchByAddressController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByAddressController+UI.swift"; sourceTree = "<group>"; };
 		847AE26F22EDD03400774371 /* SearchByAddressController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByAddressController+Handlers.swift"; sourceTree = "<group>"; };
 		847AE27122EDD39200774371 /* BusinessDetailsController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessDetailsController+Handlers.swift"; sourceTree = "<group>"; };
+		847AE27322EDDF9300774371 /* MainMenuController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+UI.swift"; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -600,6 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				848761CF227F176F000CECC7 /* MainMenuController.swift */,
+				847AE27322EDDF9300774371 /* MainMenuController+UI.swift */,
 				847AE25C22EAB4E000774371 /* MainMenuController+Handlers.swift */,
 				84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */,
 			);
@@ -894,6 +897,7 @@
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
 				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
 				84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */,
+				847AE27422EDDF9300774371 /* MainMenuController+UI.swift in Sources */,
 				848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */,
 				841CDF8C22E746A600FEB1D0 /* GroupsCoordinator.swift in Sources */,
 				848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */,

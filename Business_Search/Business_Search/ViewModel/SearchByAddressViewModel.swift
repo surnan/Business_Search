@@ -10,9 +10,9 @@ import UIKit
 
 class SearchByAddressViewModel{
     private var latitude: Double!
-    private var longitude: Double!
-    
     var getLatitude: Double {return latitude}
+    
+    private var longitude: Double!
     var getLongitude: Double{return longitude}
     
     init(latitude: Double, longitude: Double) {

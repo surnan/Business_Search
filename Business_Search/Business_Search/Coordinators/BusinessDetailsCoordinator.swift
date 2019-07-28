@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapType, OpenPhoneType {
-    let business: Business
+    private let business: Business
 
     init(router: RouterType, business: Business) {
         self.business = business

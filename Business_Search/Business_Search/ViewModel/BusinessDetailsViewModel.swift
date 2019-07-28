@@ -10,15 +10,30 @@ import UIKit
 
 struct BusinessDetailsViewModel {
     private var business: Business
-    var nameAttributedString        = NSAttributedString()
-    var addressAttributedString     = NSAttributedString()
-    var phoneNumberAttributedString = NSAttributedString()
-    var priceString                 = ""
-    var ratingString                = ""
-    var url                         : String?
-    var latitude                    : Double
-    var longitude                   : Double
+    private var nameAttributedString        = NSAttributedString()
+    var getNameAttributedString: NSAttributedString {return nameAttributedString}
     
+    private var addressAttributedString     = NSAttributedString()
+    var getAddressAttributedString: NSAttributedString {return addressAttributedString}
+    
+    private var phoneNumberAttributedString = NSAttributedString()
+    var getPhoneNumberAttributedString: NSAttributedString {return phoneNumberAttributedString}
+    
+    
+    private var priceString                 = ""
+    var getPriceString: String {return priceString}
+    
+    private var ratingString                = ""
+    var getRatingString: String {return ratingString}
+    
+    private var url                         : String?
+    var getUrlString: String? {return url}
+    
+    private var latitude                    : Double
+    var getLatitude: Double {return latitude}
+    
+    private var longitude                   : Double
+    var getLongitude: Double {return longitude}
     
     init(business: Business) {
         self.business = business

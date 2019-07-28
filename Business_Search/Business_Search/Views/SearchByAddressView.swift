@@ -10,8 +10,6 @@ import UIKit
 import MapKit
 
 class SearchByAddressView {
-    var possibleInsertLocationCoordinate: CLLocation!
-    
     var viewModel: SearchByAddressViewModel?{
         didSet{
             guard let viewModel = viewModel else {

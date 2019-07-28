@@ -19,10 +19,17 @@ struct BusinessCellViewModel {
         .strokeColor : UIColor.darkGray
     ]
     
-    var favoriteImage: UIImage!
-    var myLabelAttributedString: NSAttributedString!
-    var originalColor: UIColor!
-    var accessoryType: UITableViewCell.AccessoryType!
+    private var favoriteImage: UIImage!
+    var getFavoriteImage: UIImage {return favoriteImage}
+    
+    private var myLabelAttributedString: NSAttributedString!
+    var getMyLabelAttributedString: NSAttributedString {return myLabelAttributedString}
+    
+    private var originalColor: UIColor!
+    var getOriginalColor: UIColor {return originalColor}
+    
+    private var accessoryType: UITableViewCell.AccessoryType!
+    var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
     
     
     init(business: Business, colorIndex: IndexPath) {

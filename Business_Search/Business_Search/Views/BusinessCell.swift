@@ -11,16 +11,16 @@ import UIKit
 class BusinessCell: UITableViewCell {
     var firstViewModel: BusinessCellViewModel! {
         didSet {
-            myLabel.attributedText = firstViewModel.myLabelAttributedString
-            yelpImageView.image = firstViewModel.favoriteImage
-            backColor = firstViewModel.originalColor
-            accessoryType = firstViewModel.accessoryType
+            myLabel.attributedText = firstViewModel.getMyLabelAttributedString
+            yelpImageView.image = firstViewModel.getFavoriteImage
+            backColor = firstViewModel.getOriginalColor
+            accessoryType = firstViewModel.getAccessoryType
         }
     }
     
     var backColor: UIColor!
     
-    let yelpImageView: UIImageView = {
+    private let yelpImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "UnFavorite")
         imageView.contentMode = .scaleAspectFit
@@ -28,14 +28,12 @@ class BusinessCell: UITableViewCell {
         return imageView
     }()
     
-    let myLabel: UILabel = {
+    private let myLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = -1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

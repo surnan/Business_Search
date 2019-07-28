@@ -21,7 +21,7 @@ extension BusinessDetailsController {
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
-        if let urlStringExists = viewModel.url, urlStringExists._isValidURL {
+        if let urlStringExists = viewModel.getUrlString, urlStringExists._isValidURL {
             coordinator?.loadSafariBrowser(url: urlStringExists)
         } else {
             coordinator?.loadSafariBrowser(url: "https://www.yelp.com")
