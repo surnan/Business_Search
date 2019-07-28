@@ -11,7 +11,15 @@ import UIKit
 
 extension UIView {
     
-    func anchor(top: NSLayoutYAxisAnchor? = nil, leading: NSLayoutXAxisAnchor? = nil, trailing: NSLayoutXAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, padding: UIEdgeInsets = .zero, size: CGSize = .zero, centerX: Bool = false, centerY: Bool = false, widthX: CGFloat = CGFloat.zero, heightX: CGFloat = CGFloat.zero ){
+    func anchor(top: NSLayoutYAxisAnchor? = nil, topPadding: CGFloat? = CGFloat.zero,
+                leading: NSLayoutXAxisAnchor? = nil, leadingPadding: CGFloat? = CGFloat.zero,
+                trailing: NSLayoutXAxisAnchor? = nil, trailingPadding: CGFloat? = CGFloat.zero,
+                bottom: NSLayoutYAxisAnchor? = nil, bottomPadding: CGFloat? = CGFloat.zero,
+                padding: UIEdgeInsets = .zero,
+                size: CGSize = .zero,
+                centerX: Bool = false, centerY: Bool = false,
+                widthX: CGFloat = CGFloat.zero,
+                heightX: CGFloat = CGFloat.zero ){
         
         translatesAutoresizingMaskIntoConstraints = false
         if let top = top {topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true}
