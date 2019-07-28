@@ -30,16 +30,20 @@ extension BusinessDetailsController {
         
         [mainView.mapView, mainView.nameLabel, fullStackNoButtons, buttonStack].forEach{view.addSubview($0)}
         mainView.mapView.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor,
-                             padding: .init(top: 3, left: 3, bottom: 0, right: 3))
+                                padding: .init(top: 3, left: 3, bottom: 0, right: 3), y: safe.heightAnchor, yMultiply: 0.25)
 
 
         [mainView.nameLabel].forEach{$0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true}
         
         NSLayoutConstraint.activate([
-            mainView.mapView.heightAnchor.constraint(equalTo: safe.heightAnchor, multiplier: 0.25),
             mainView.nameLabel.topAnchor.constraint(equalTo: mainView.mapView.bottomAnchor, constant: 10),
             mainView.nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80),
             ])
+        
+        
+        
+        
+        
         
         fullStackNoButtons.anchor(top: mainView.nameLabel.bottomAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), centerX: true)
         buttonStack.anchor(top: fullStackNoButtons.bottomAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),
