@@ -15,31 +15,31 @@ class SettingsView {
                 print("SettingsView.ViewModel = NIL")
                 return
             }
-            
             myTextView.text = viewModel.getTextViewText
             distanceSlider.value = viewModel.getRadiusFloat
             sliderValueLabel.text = viewModel.getRadiusString
         }
     }
     
-    
     let sliderLeftLabel     = GenericLabel(text: "0", textColor: .white)
     let sliderRightLabel    = GenericLabel(text: "1000", textColor: .white)
-    let deleteAllLabel      = GenericLabel(text: "All saved business data deleted", size: 12, backgroundColor: .clear, textColor: .red)
-    let myTextViewLabel     = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
     let searchRadiusLabel   = GenericAttributedTextLabel(text: "Meters to Search for Business", attributes: whiteHelvetica_20_blackStroke)
     let saveButton          = GenericButton(title: "SAVE", isCorner: true)
     let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
     let defaultsButton      = GenericButton(title: "Reset to Defaults", isCorner: true)
+    let myTextViewLabel     = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
+
+    let deleteAllLabel: UILabel = {
+        let label     = GenericLabel(text: "All saved business data deleted", size: 12, backgroundColor: .clear, textColor: .red)
+        label.isHidden = true
+        return label
+    }()
     
+
     //MARK: Lazy VAR
-    //lazy var sliderValueLabel   = GenericLabel(text: "\(Int(radius))", size: 20, backgroundColor: .blue, textColor: .white, corner: true)
-    //lazy var distanceSlider     = GenericSlider(min: 0, max: 1000, value: Float(radius), minColor: .gray, maxColor: .black, thumbColor: .white)
-    
     lazy var sliderValueLabel   = GenericLabel(text: "", size: 20, backgroundColor: .blue, textColor: .white, corner: true)
     lazy var distanceSlider     = GenericSlider(min: 0, max: 1000, value: 0.0, minColor: .gray, maxColor: .black, thumbColor: .white)
-    
-    lazy var myTextView         = genericTextView(text: "", size: 12, corner: true)
+    lazy var myTextView         = GenericTextView(text: "", size: 12, corner: true)
     
     func getDistanceSliderStack()-> UIStackView {
         let stack = GenericStack(spacing: 10, axis: .horizontal)

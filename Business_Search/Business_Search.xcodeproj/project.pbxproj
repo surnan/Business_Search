@@ -34,7 +34,6 @@
 		84365CBA22C62AA40014E577 /* _Generic_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* _Generic_UIKit.swift */; };
 		84365CBC22C64A860014E577 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBB22C64A860014E577 /* CustomButton.swift */; };
 		84365CC022C7F2460014E577 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBF22C7F2460014E577 /* FilterModel.swift */; };
-		84365CC522C8658B0014E577 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CC422C8658B0014E577 /* SettingsModel.swift */; };
 		84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CC622C8897A0014E577 /* LocationNSFetchController.swift */; };
 		84365CD322C8EB5B0014E577 /* MainMenuController+CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */; };
 		84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD922C93D860014E577 /* MapController+Map.swift */; };
@@ -74,6 +73,8 @@
 		847AE27D22EDE7A300774371 /* SearchByMapController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */; };
 		847AE27F22EDEADB00774371 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE27E22EDEADB00774371 /* SettingsViewModel.swift */; };
 		847AE28122EDEAF600774371 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28022EDEAF600774371 /* SettingsView.swift */; };
+		847AE28422EE120400774371 /* SettingsController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28322EE120400774371 /* SettingsController+UI.swift */; };
+		847AE28622EE124100774371 /* SettingsController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28522EE124100774371 /* SettingsController+Handlers.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -136,7 +137,6 @@
 		84365CB922C62AA40014E577 /* _Generic_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Generic_UIKit.swift; sourceTree = "<group>"; };
 		84365CBB22C64A860014E577 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84365CBF22C7F2460014E577 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		84365CC422C8658B0014E577 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		84365CC622C8897A0014E577 /* LocationNSFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNSFetchController.swift; sourceTree = "<group>"; };
 		84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+CLLocation.swift"; sourceTree = "<group>"; };
 		84365CD922C93D860014E577 /* MapController+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapController+Map.swift"; sourceTree = "<group>"; };
@@ -176,6 +176,8 @@
 		847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByMapController+Handlers.swift"; sourceTree = "<group>"; };
 		847AE27E22EDEADB00774371 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		847AE28022EDEAF600774371 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		847AE28322EE120400774371 /* SettingsController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsController+UI.swift"; sourceTree = "<group>"; };
+		847AE28522EE124100774371 /* SettingsController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsController+Handlers.swift"; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -492,6 +494,7 @@
 				847AE23922E922DC00774371 /* CategoryCellViewModel.swift */,
 				847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */,
 				847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */,
+				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -508,10 +511,10 @@
 		847AE23F22E9458400774371 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				847AE28222EE11E700774371 /* Settings */,
 				847AE27922EDE76900774371 /* SearchByMap */,
 				847AE26C22EDCF8400774371 /* SearchByAddress */,
 				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
-				848761D1227F1779000CECC7 /* MainMenu */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -524,6 +527,8 @@
 				8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */,
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
 				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
+				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
+				848761D1227F1779000CECC7 /* MainMenu */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				847AE25522EAA6E800774371 /* MainMenuView.swift */,
 				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
 				847AE27722EDE1B100774371 /* SearchByMapView.swift */,
+				847AE28022EDEAF600774371 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -574,11 +580,6 @@
 		847AE26722EDA10900774371 /* ___ */ = {
 			isa = PBXGroup;
 			children = (
-				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
-				84365CC422C8658B0014E577 /* SettingsModel.swift */,
-				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
-				847AE28022EDEAF600774371 /* SettingsView.swift */,
-				84CC285C2297774800A82BBE /* SettingsController.swift */,
 			);
 			path = "___";
 			sourceTree = "<group>";
@@ -601,6 +602,16 @@
 				847AE27C22EDE7A300774371 /* SearchByMapController+Handlers.swift */,
 			);
 			path = SearchByMap;
+			sourceTree = "<group>";
+		};
+		847AE28222EE11E700774371 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				84CC285C2297774800A82BBE /* SettingsController.swift */,
+				847AE28322EE120400774371 /* SettingsController+UI.swift */,
+				847AE28522EE124100774371 /* SettingsController+Handlers.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		848761D1227F1779000CECC7 /* MainMenu */ = {
@@ -883,7 +894,6 @@
 				843F033922CE94A1002798C1 /* OpeningTableDataSource+TableView.swift in Sources */,
 				84365CBA22C62AA40014E577 /* _Generic_UIKit.swift in Sources */,
 				84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */,
-				84365CC522C8658B0014E577 /* SettingsModel.swift in Sources */,
 				84DC40D222697319003003C4 /* Error_Enums.swift in Sources */,
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
 				8408F0E822E60E1800DB55B6 /* Opening+NothingFound.swift in Sources */,
@@ -912,6 +922,7 @@
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				845A1D8522D02BE20066C17C /* UnBlurViewProtocol.swift in Sources */,
+				847AE28622EE124100774371 /* SettingsController+Handlers.swift in Sources */,
 				8408F0E622E60E0500DB55B6 /* Opening+Search.swift in Sources */,
 				841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */,
@@ -943,6 +954,7 @@
 				847AE25622EAA6E800774371 /* MainMenuView.swift in Sources */,
 				84365CB122C567A80014E577 /* Double+Extension.swift in Sources */,
 				84BDE31122642B27008C9B01 /* YelpClient.swift in Sources */,
+				847AE28422EE120400774371 /* SettingsController+UI.swift in Sources */,
 				8401127C22E51C9C00ECE0D5 /* SettingsCoordinator.swift in Sources */,
 				84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */,
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,

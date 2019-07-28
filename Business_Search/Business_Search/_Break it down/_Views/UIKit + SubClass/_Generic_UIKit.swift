@@ -109,7 +109,7 @@ class GenericSlider: UISlider {
     }
 }
 
-class genericTextView: UITextView {
+class GenericTextView: UITextView {
     init(text: String, size: CGFloat, textColor: UIColor = .black, background: UIColor = .white, corner: Bool) {
         super.init(frame: .zero, textContainer: nil)
         self.text = text
