@@ -15,8 +15,12 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var delegate            : UnBlurViewProtocol?   //Unblur
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
-    var coordinator         : Coordinator?
     var dismissController   : (()->Void)?
+    
+    var coordinator         : Coordinator?
+    var viewObject          : SettingsView!         //SearchByMapView!
+    var viewModel           : SettingsViewModel!    //SearchByMapViewModel!
+    
     
     lazy var fetchLocation  = LocationNSFetchController(dataController: dataController)
     lazy var model          = SettingsModel(maximumSliderValue: maximumSliderValue)

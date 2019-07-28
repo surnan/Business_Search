@@ -31,16 +31,22 @@ class SettingsCoordinator: Coordinator {
     }
         
     func start(parent: Coordinator){
-        let vc = SettingsController()
-        vc.dataController           = dataController
-        vc.delegate                 = unblurProtocol
-        vc.coordinator              = self
-        vc.modalPresentationStyle   = .overFullScreen
-        vc.dismissController = {[weak self] in
+        let newViewModel = SettingsViewModel()
+        let newViewObject = SettingsView()
+        newViewObject.viewModel = newViewModel
+        
+        let newController = SettingsController()
+        newController.dataController           = dataController
+        newController.viewObject               = newViewObject
+        newController.viewModel                = newViewModel
+        newController.delegate                 = unblurProtocol
+        newController.coordinator              = self
+        newController.modalPresentationStyle   = .overFullScreen
+        newController.dismissController = {[weak self] in
             self?.router.dismissModule(animated: true, completion: {
                 self?.unblurProtocol.undoBlur()
             })
         }
-        router.present(vc, animated: true)
+        router.present(newController, animated: true)
     }
 }

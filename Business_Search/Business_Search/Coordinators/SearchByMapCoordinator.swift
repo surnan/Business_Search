@@ -23,6 +23,7 @@ class SearchByMapCoordinator: Coordinator, SearchTableType {
         let coor = location.coordinate
         let newViewModel = SearchByMapViewModel(latitude: coor.latitude, longitude: coor.longitude)
         let newViewObject = SearchByMapView()
+        
         newViewObject.viewModel = newViewModel
         
         let newController = SearchByMapController()
