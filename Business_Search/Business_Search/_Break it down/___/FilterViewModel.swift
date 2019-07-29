@@ -30,6 +30,9 @@ struct FilterViewModel {
     private var noPriceSwitchIsOn: Bool!
     var getNoPriceSwitchIsOn: Bool {return noPriceSwitchIsOn}
     
+    private var favoritesAtTop: Bool!
+    var getFavoritesAtTop: Bool {return favoritesAtTop}
+    
 
     init(){
         let shared          = UserAppliedFilter.shared
@@ -43,5 +46,6 @@ struct FilterViewModel {
         dollarThreeButtonSelected  = shared.getThree
         dollarFourButtonSelected   = shared.getFour
         noPriceSwitchIsOn          = shared.getNoPrice
+        favoritesAtTop             = shared.getFavoritesAtTop
     }
 }

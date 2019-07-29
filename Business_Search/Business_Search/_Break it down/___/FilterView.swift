@@ -22,6 +22,7 @@ class FilterView {
             dollarThreeButton.isSelected =  viewModel.getDollarThreeButtonSelected
             dollarFourButton.isSelected =  viewModel.getDollarFourButtonSelected
             noPriceSwitch.isOn =   viewModel.getNoPriceSwitchIsOn
+            favoriteAtTopSwitch.isOn = viewModel.getFavoritesAtTop
         }
     }
     

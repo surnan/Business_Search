@@ -37,7 +37,6 @@ class OpeningTableDelegate: NSObject, UITableViewDelegate {
                 :delegate.deleteFavorite(business: currentBusiness)
             dd.resetBusinessController()
             delegate.reloadData()
-            // tableView.reloadRows(at: [indexPath], with: .automatic)
             myBool(true)                                //Dismiss the leading swipe from UI
         }
         action.image            = currentBusiness.isFavorite    ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")

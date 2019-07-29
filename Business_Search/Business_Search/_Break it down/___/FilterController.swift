@@ -74,7 +74,8 @@ class FilterController: UIViewController {
                                       dollarThree: viewObject.dollarThreeButton.isSelected,
                                       dollarFour: viewObject.dollarFourButton.isSelected,
                                       noPrices: viewObject.noPriceSwitch.isOn,
-                                      minimumRating: viewObject.sliderValueLabel.text ?? "0.0")
+                                      minimumRating: viewObject.sliderValueLabel.text ?? "0.0",
+                                      favoritesAtTop: viewObject.favoriteAtTopSwitch.isOn)
         saveDismissController?()
     }
     
