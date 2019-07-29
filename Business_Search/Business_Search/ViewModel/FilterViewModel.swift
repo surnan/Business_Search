@@ -35,17 +35,14 @@ struct FilterViewModel {
     
 
     init(){
-        let shared          = UserAppliedFilter.shared
-        minimumRatingText   = shared.getMinimumRatingString
-        sliderValue         = shared.getMinimumRatingFloat
-        
-        
-        
-        dollarOneButtonSelected    = shared.getOne
-        dollarTwoButtonSelected    = shared.getTwo
-        dollarThreeButtonSelected  = shared.getThree
-        dollarFourButtonSelected   = shared.getFour
-        noPriceSwitchIsOn          = shared.getNoPrice
-        favoritesAtTop             = shared.getFavoritesAtTop
+        let shared                  = UserAppliedFilter.shared
+        minimumRatingText           = shared.getMinimumRatingString
+        sliderValue                 = shared.getMinimumRatingFloat
+        dollarOneButtonSelected     = shared.getOne
+        dollarTwoButtonSelected     = shared.getTwo
+        dollarThreeButtonSelected   = shared.getThree
+        dollarFourButtonSelected    = shared.getFour
+        noPriceSwitchIsOn           = shared.getNoPrice
+        favoritesAtTop              = shared.getFavoritesAtTop
     }
 }

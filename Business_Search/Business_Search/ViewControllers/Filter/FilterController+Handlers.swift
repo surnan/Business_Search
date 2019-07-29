@@ -1,55 +1,14 @@
 //
-//  FilterController.swift
+//  FilterController+Handlers.swift
 //  Business_Search
 //
-//  Created by admin on 6/3/19.
+//  Created by admin on 7/28/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 
 import UIKit
-import CoreData
 
-class FilterController: UIViewController {
-    var delegate: UnBlurViewProtocol?   //Unblur
-    
-    let shared                  = UserAppliedFilter.shared
-    var coordinator             : FilterCoordinator?
-    var viewObject              : FilterView!
-    var viewModel               : FilterViewModel!
-    
-    var dismissController       : (()->Void)?
-    var saveDismissController   : (()->Void)?
-    lazy var allDollarButtons   = [viewObject.dollarOneButton, viewObject.dollarTwoButton,
-                                 viewObject.dollarThreeButton,viewObject.dollarFourButton]
-    
-    //MARK:- Override Functions
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.backgroundColor                = .clear
-//        viewObject.dollarOneButton.isSelected    = shared.getOne
-//        viewObject.dollarTwoButton.isSelected    = shared.getTwo
-//        viewObject.dollarThreeButton.isSelected  = shared.getThree
-//        viewObject.dollarFourButton.isSelected   = shared.getFour
-//        viewObject.noPriceSwitch.isOn            = shared.getNoPrice
-        allDollarButtons.forEach{$0.backgroundColor = $0.isSelected ? .white : .clear}
-        setupUI()
-        //shared.showMyResultsInNSUserDefaults(); print("***")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addHandlers()
-    }
-    
-    //MARK:- Functions
-    func setupUI(){
-        let fullStackView = viewObject.getFullStack()
-        view.addSubview(fullStackView)
-        fullStackView.centerToSuperView()
-        fullStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
-    }
-
-    //MARK: Handlers
+extension FilterController {
     func addHandlers(){
         viewObject.defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
         viewObject.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
@@ -65,7 +24,7 @@ class FilterController: UIViewController {
         viewObject.sliderValueLabel.text = "\(temp)"
     }
     
-  @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
+    @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismissController?()}
     
     @objc func handleSaveButton(){

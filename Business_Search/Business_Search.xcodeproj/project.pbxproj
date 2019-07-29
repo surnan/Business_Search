@@ -33,7 +33,6 @@
 		84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB722C569520014E577 /* UserAppliedFilter.swift */; };
 		84365CBA22C62AA40014E577 /* _Generic_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* _Generic_UIKit.swift */; };
 		84365CBC22C64A860014E577 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBB22C64A860014E577 /* CustomButton.swift */; };
-		84365CC022C7F2460014E577 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBF22C7F2460014E577 /* FilterModel.swift */; };
 		84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CC622C8897A0014E577 /* LocationNSFetchController.swift */; };
 		84365CD322C8EB5B0014E577 /* MainMenuController+CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */; };
 		84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD922C93D860014E577 /* MapController+Map.swift */; };
@@ -77,6 +76,8 @@
 		847AE28622EE124100774371 /* SettingsController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28522EE124100774371 /* SettingsController+Handlers.swift */; };
 		847AE28822EE473E00774371 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28722EE473E00774371 /* FilterViewModel.swift */; };
 		847AE28A22EE474B00774371 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28922EE474B00774371 /* FilterView.swift */; };
+		847AE28D22EE9A8A00774371 /* FilterController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28C22EE9A8A00774371 /* FilterController+UI.swift */; };
+		847AE28F22EE9A9A00774371 /* FilterController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28E22EE9A9900774371 /* FilterController+Handlers.swift */; };
 		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
@@ -138,7 +139,6 @@
 		84365CB722C569520014E577 /* UserAppliedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAppliedFilter.swift; sourceTree = "<group>"; };
 		84365CB922C62AA40014E577 /* _Generic_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Generic_UIKit.swift; sourceTree = "<group>"; };
 		84365CBB22C64A860014E577 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		84365CBF22C7F2460014E577 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84365CC622C8897A0014E577 /* LocationNSFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNSFetchController.swift; sourceTree = "<group>"; };
 		84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+CLLocation.swift"; sourceTree = "<group>"; };
 		84365CD922C93D860014E577 /* MapController+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapController+Map.swift"; sourceTree = "<group>"; };
@@ -182,6 +182,8 @@
 		847AE28522EE124100774371 /* SettingsController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsController+Handlers.swift"; sourceTree = "<group>"; };
 		847AE28722EE473E00774371 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		847AE28922EE474B00774371 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		847AE28C22EE9A8A00774371 /* FilterController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterController+UI.swift"; sourceTree = "<group>"; };
+		847AE28E22EE9A9900774371 /* FilterController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterController+Handlers.swift"; sourceTree = "<group>"; };
 		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -496,6 +498,7 @@
 				847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */,
 				847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */,
 				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
+				847AE28722EE473E00774371 /* FilterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 		847AE23F22E9458400774371 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				847AE28B22EE9A6F00774371 /* Filter */,
 				847AE28222EE11E700774371 /* Settings */,
 				847AE27922EDE76900774371 /* SearchByMap */,
 				847AE26C22EDCF8400774371 /* SearchByAddress */,
@@ -529,6 +533,7 @@
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
 				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
+				84684CA922E6466A00999599 /* FilterCoordinator.swift */,
 				848761D1227F1779000CECC7 /* MainMenu */,
 			);
 			path = Coordinators;
@@ -562,6 +567,7 @@
 				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
 				847AE27722EDE1B100774371 /* SearchByMapView.swift */,
 				847AE28022EDEAF600774371 /* SettingsView.swift */,
+				847AE28922EE474B00774371 /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -581,11 +587,6 @@
 		847AE26722EDA10900774371 /* ___ */ = {
 			isa = PBXGroup;
 			children = (
-				84684CA922E6466A00999599 /* FilterCoordinator.swift */,
-				84A5B02622A5DFDF009B96AD /* FilterController.swift */,
-				847AE28722EE473E00774371 /* FilterViewModel.swift */,
-				847AE28922EE474B00774371 /* FilterView.swift */,
-				84365CBF22C7F2460014E577 /* FilterModel.swift */,
 			);
 			path = "___";
 			sourceTree = "<group>";
@@ -618,6 +619,16 @@
 				847AE28522EE124100774371 /* SettingsController+Handlers.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		847AE28B22EE9A6F00774371 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				84A5B02622A5DFDF009B96AD /* FilterController.swift */,
+				847AE28C22EE9A8A00774371 /* FilterController+UI.swift */,
+				847AE28E22EE9A9900774371 /* FilterController+Handlers.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		848761D1227F1779000CECC7 /* MainMenu */ = {
@@ -875,6 +886,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847AE28F22EE9A9A00774371 /* FilterController+Handlers.swift in Sources */,
 				848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				843F032822CE64FD002798C1 /* OpeningModel.swift in Sources */,
@@ -947,10 +959,10 @@
 				84365CD322C8EB5B0014E577 /* MainMenuController+CLLocation.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				847AE26222EBE50B00774371 /* BusinessDetailsView.swift in Sources */,
-				84365CC022C7F2460014E577 /* FilterModel.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
 				843F033B22CE94B7002798C1 /* OpeningTableDataSource+Protocol.swift in Sources */,
 				845A1D8D22D0314D0066C17C /* Global Variables.swift in Sources */,
+				847AE28D22EE9A8A00774371 /* FilterController+UI.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
 				84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */,
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
