@@ -75,11 +75,6 @@ extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
     func listBusinesses(category: String){
         let items = getBusinessesFromCategoryName(category: category)
         coordinator?.loadTabController(businesses: items, categoryName: category)
-        
-//        let newVC = MyTabController()
-//        newVC.businesses = items
-//        newVC.categoryName = category
-//        navigationController?.pushViewController(newVC, animated: true)
     }
     
     func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
