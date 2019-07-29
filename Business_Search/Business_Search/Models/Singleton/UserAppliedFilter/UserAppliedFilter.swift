@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 class UserAppliedFilter {
     static let shared = UserAppliedFilter()
     
@@ -17,7 +18,7 @@ class UserAppliedFilter {
     private var dollarThree: Bool?
     private var dollarFour: Bool?
     private var priceExists: Bool?
-    private var ratingExists: Bool?
+    private var favoritesTop: Bool?
     private var minimumRating: String?
     
     var getOne: Bool {return dollarOne ?? false}
@@ -40,7 +41,8 @@ class UserAppliedFilter {
         UserDefaults.standard.set(true, forKey: AppConstants.dollarTwo.rawValue)
         UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
         UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
-        UserDefaults.standard.set(true, forKey: AppConstants.isPriceListed.rawValue)
+        UserDefaults.standard.set(false, forKey: AppConstants.isPriceListed.rawValue)
+        UserDefaults.standard.set(false, forKey: AppConstants.isFavoritesToTop.rawValue)
         UserDefaults.standard.set("1.0", forKey: AppConstants.minimumRating.rawValue)
     }
     
@@ -50,6 +52,7 @@ class UserAppliedFilter {
         dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
         dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
         priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
+        favoritesTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? false
         minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
     }
     
@@ -61,6 +64,7 @@ class UserAppliedFilter {
         UserDefaults.standard.set(dollarFour, forKey: AppConstants.dollarFour.rawValue)
         UserDefaults.standard.set(noPrices, forKey: AppConstants.isPriceListed.rawValue)
         UserDefaults.standard.set(minimumRating, forKey: AppConstants.minimumRating.rawValue)
+        UserDefaults.standard.set(favoritesTop, forKey: AppConstants.isFavoritesToTop.rawValue)
     }
     
     var isFilterOn: Bool {
