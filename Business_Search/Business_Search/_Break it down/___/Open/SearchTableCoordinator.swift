@@ -12,6 +12,8 @@ import MapKit
 class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
     private let dataController: DataController
     private let location : CLLocation
+    var getLatitude: Double {return location.coordinate.latitude}
+    var getLongitude: Double {return location.coordinate.longitude}
     
     init(dataController: DataController, router: RouterType, location: CLLocation){
         self.dataController = dataController
@@ -24,9 +26,13 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
 //        let newViewObject       = SearchTableView()
 //        let newController = SearchTableController()
         
-        let newViewModel  = OpenViewModel()
+        var newViewModel  = OpenViewModel()
         let newViewObject = OpenView()
         let newController = OpenController()
+        
+        newViewModel.dataController = dataController
+        newViewModel.latitude = getLatitude
+        newViewModel.longitude = getLongitude
         
         let coordinate = location.coordinate
         newViewObject.viewModel = newViewModel

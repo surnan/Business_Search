@@ -350,14 +350,14 @@
 		84365CAB22C564520014E577 /* SearchTable */ = {
 			isa = PBXGroup;
 			children = (
-				847AE29222EEA5C800774371 /* SearchTableView.swift */,
-				847AE29022EEA5B300774371 /* SearchTableViewModel.swift */,
 				846509B9227A0C06008ABA9F /* SearchTableController.swift */,
 				8408F0E722E60E1700DB55B6 /* SearchTableController+NothingFound.swift */,
 				8408F0E522E60E0500DB55B6 /* SearchTableController+Search.swift */,
 				843F033C22CE98ED002798C1 /* SearchTableController+TableView+Delegate.swift */,
 				842AD7D62284D80B00590B1A /* SearchTableController+Handler.swift */,
 				842AD7D42284D74D00590B1A /* SearchTableController+UI.swift */,
+				847AE29022EEA5B300774371 /* SearchTableViewModel.swift */,
+				847AE29222EEA5C800774371 /* SearchTableView.swift */,
 				84E27D0822EF6BB500D2CAE5 /* SearchController+TableView+Delegate2.swift */,
 				84684C9F22E60FCB00999599 /* TableView */,
 				8408F0DE22E60A4300DB55B6 /* Protocols */,
