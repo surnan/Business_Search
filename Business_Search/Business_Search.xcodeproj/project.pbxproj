@@ -262,14 +262,6 @@
 			path = _Protocols;
 			sourceTree = "<group>";
 		};
-		8408F0E122E60C0600DB55B6 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				8401127D22E51CE300ECE0D5 /* OpeningCoordinator.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
 		8414475D2266C49900A38AAB /* Yelp */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,25 +340,18 @@
 		84365CAB22C564520014E577 /* Opening */ = {
 			isa = PBXGroup;
 			children = (
-				8408F0E122E60C0600DB55B6 /* Coordinators */,
-				8408F0DE22E60A4300DB55B6 /* Protocols */,
-				843F033722CE93FF002798C1 /* SubClasses */,
+				8401127D22E51CE300ECE0D5 /* OpeningCoordinator.swift */,
+				843F032722CE64FC002798C1 /* OpeningModel.swift */,
 				846509B9227A0C06008ABA9F /* Opening.swift */,
 				842AD7D62284D80B00590B1A /* Opening+Handler.swift */,
 				8408F0E722E60E1700DB55B6 /* Opening+NothingFound.swift */,
 				8408F0E522E60E0500DB55B6 /* Opening+Search.swift */,
 				843F033C22CE98ED002798C1 /* Opening+TableView+Delegate.swift */,
 				842AD7D42284D74D00590B1A /* Opening+UI.swift */,
+				84684C9F22E60FCB00999599 /* TableView */,
+				8408F0DE22E60A4300DB55B6 /* Protocols */,
 			);
 			path = Opening;
-			sourceTree = "<group>";
-		};
-		84365CAC22C564710014E577 /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				84684CA822E6464100999599 /* Coordinators */,
-			);
-			path = Filter;
 			sourceTree = "<group>";
 		};
 		84365CAD22C565060014E577 /* UiKit */ = {
@@ -438,14 +423,6 @@
 			path = "Tabbed Controllers";
 			sourceTree = "<group>";
 		};
-		843F033722CE93FF002798C1 /* SubClasses */ = {
-			isa = PBXGroup;
-			children = (
-				84684C9F22E60FCB00999599 /* TableView */,
-			);
-			path = SubClasses;
-			sourceTree = "<group>";
-		};
 		845A1D8722D02D680066C17C /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,7 +434,6 @@
 		845A1D8822D02DB00066C17C /* View_Models */ = {
 			isa = PBXGroup;
 			children = (
-				843F032722CE64FC002798C1 /* OpeningModel.swift */,
 			);
 			path = View_Models;
 			sourceTree = "<group>";
@@ -480,13 +456,6 @@
 				8414475D2266C49900A38AAB /* Yelp */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		84684CA822E6464100999599 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		847AE23322E81D1E00774371 /* ViewModel */ = {
@@ -587,6 +556,7 @@
 		847AE26722EDA10900774371 /* ___ */ = {
 			isa = PBXGroup;
 			children = (
+				84365CAB22C564520014E577 /* Opening */,
 			);
 			path = "___";
 			sourceTree = "<group>";
@@ -720,8 +690,6 @@
 		84BDE3032263D373008C9B01 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				84365CAC22C564710014E577 /* Filter */,
-				84365CAB22C564520014E577 /* Opening */,
 				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
 			);
 			path = Controllers;
