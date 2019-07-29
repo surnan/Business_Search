@@ -23,7 +23,6 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         let newViewModel        = SearchTableViewModel()
         let newViewObject       = SearchTableView()      
         newViewObject.viewModel = newViewModel
-        
         let coordinate = location.coordinate
         let newController = SearchTableController()
         newController.dataController = dataController
@@ -32,9 +31,6 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         newController.coordinator = self
         newController.viewObject               = newViewObject
         newController.viewModel                = newViewModel
-        
-        
-        
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
@@ -48,7 +44,8 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
     }
     
     func loadSettings(delegate: UnBlurViewProtocol, max: Int?) {
-        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router, maximumSliderValue: radius)
+        let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController,
+                                              router: router, maximumSliderValue: radius)
         coordinator.start(parent: self)
     }
 

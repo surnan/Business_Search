@@ -12,7 +12,7 @@ extension SearchTableController: UISearchResultsUpdating {
     func resetAllFetchControllers() {
         tableDataSource.resetAllControllerAndPredicates()
         DispatchQueue.main.async {
-            self.model.tableView.reloadData()
+            self.viewObject.tableView.reloadData()
         }
     }
     
@@ -20,7 +20,7 @@ extension SearchTableController: UISearchResultsUpdating {
         tableDataSource.reloadBusinessController()
         tableDataSource.reloadCategoryNames()
         DispatchQueue.main.async {
-            self.model.tableView.reloadData()
+            self.viewObject.tableView.reloadData()
         }
     }
     
@@ -34,13 +34,13 @@ extension SearchTableController: UISearchResultsUpdating {
         tableDataSource.updateBusinessPredicate(searchString: searchString)
         tableDataSource.updateCategoryArrayNamesPredicate(searchString: searchString)
         reloadFetchControllers()
-        model.tableView.reloadData()
+        viewObject.tableView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         //This is called when user switches scopes
         tableDataSource.searchGroupIndex = selectedScope
-        model.tableView.reloadData()
+        viewObject.tableView.reloadData()
         ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
         animateResultsAreFilteredLabel()
     }

@@ -20,7 +20,6 @@ extension SearchTableController {
         coordinator?.loadFilter(unblurProtocol: self)
     }
     
-    
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!

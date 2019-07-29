@@ -15,11 +15,11 @@ class OpeningTableDataSource: NSObject, UITableViewDataSource{
     var latitude: Double!
     var longitude: Double!
     
-    var model: OpeningModel!
+    var model: SearchTableView!
     
     
     
-    init(dataController: DataController, latitude: Double, longitude: Double, model: OpeningModel) {
+    init(dataController: DataController, latitude: Double, longitude: Double, model: SearchTableView) {
         super.init()
         self.dataController = dataController
         self.latitude = latitude

@@ -38,7 +38,6 @@
 		84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD922C93D860014E577 /* MapController+Map.swift */; };
 		843C66F9227D25D7003A64D1 /* GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* GroupsController.swift */; };
 		843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* BusinessCell.swift */; };
-		843F032822CE64FD002798C1 /* OpeningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F032722CE64FC002798C1 /* OpeningModel.swift */; };
 		843F033922CE94A1002798C1 /* OpeningTableDataSource+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F033822CE94A1002798C1 /* OpeningTableDataSource+TableView.swift */; };
 		843F033B22CE94B7002798C1 /* OpeningTableDataSource+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F033A22CE94B7002798C1 /* OpeningTableDataSource+Protocol.swift */; };
 		843F033D22CE98ED002798C1 /* SearchTableController+TableView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F033C22CE98ED002798C1 /* SearchTableController+TableView+Delegate.swift */; };
@@ -146,7 +145,6 @@
 		84365CD922C93D860014E577 /* MapController+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapController+Map.swift"; sourceTree = "<group>"; };
 		843C66F8227D25D7003A64D1 /* GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsController.swift; sourceTree = "<group>"; };
 		843C66FA227DC97A003A64D1 /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		843F032722CE64FC002798C1 /* OpeningModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningModel.swift; sourceTree = "<group>"; };
 		843F033822CE94A1002798C1 /* OpeningTableDataSource+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningTableDataSource+TableView.swift"; sourceTree = "<group>"; };
 		843F033A22CE94B7002798C1 /* OpeningTableDataSource+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpeningTableDataSource+Protocol.swift"; sourceTree = "<group>"; };
 		843F033C22CE98ED002798C1 /* SearchTableController+TableView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchTableController+TableView+Delegate.swift"; sourceTree = "<group>"; };
@@ -344,15 +342,14 @@
 		84365CAB22C564520014E577 /* Opening */ = {
 			isa = PBXGroup;
 			children = (
-				843F032722CE64FC002798C1 /* OpeningModel.swift */,
-				847AE29222EEA5C800774371 /* SearchTableView.swift */,
 				8401127D22E51CE300ECE0D5 /* SearchTableCoordinator.swift */,
+				847AE29222EEA5C800774371 /* SearchTableView.swift */,
 				847AE29022EEA5B300774371 /* SearchTableViewModel.swift */,
 				846509B9227A0C06008ABA9F /* SearchTableController.swift */,
-				842AD7D62284D80B00590B1A /* SearchTableController+Handler.swift */,
 				8408F0E722E60E1700DB55B6 /* SearchTableController+NothingFound.swift */,
 				8408F0E522E60E0500DB55B6 /* SearchTableController+Search.swift */,
 				843F033C22CE98ED002798C1 /* SearchTableController+TableView+Delegate.swift */,
+				842AD7D62284D80B00590B1A /* SearchTableController+Handler.swift */,
 				842AD7D42284D74D00590B1A /* SearchTableController+UI.swift */,
 				84684C9F22E60FCB00999599 /* TableView */,
 				8408F0DE22E60A4300DB55B6 /* Protocols */,
@@ -863,7 +860,6 @@
 				847AE28F22EE9A9A00774371 /* FilterController+Handlers.swift in Sources */,
 				848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
-				843F032822CE64FD002798C1 /* OpeningModel.swift in Sources */,
 				847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				847AE27F22EDEADB00774371 /* SettingsViewModel.swift in Sources */,

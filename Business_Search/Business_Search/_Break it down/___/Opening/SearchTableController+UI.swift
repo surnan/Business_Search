@@ -17,7 +17,7 @@ extension SearchTableController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animateResultsAreFilteredLabel()
-        tableDelegate.reloadCellIfNecessary(tableView: model.tableView)
+        tableDelegate.reloadCellIfNecessary(tableView: viewObject.tableView)
     }
     
     override func viewDidLoad() {
@@ -25,16 +25,16 @@ extension SearchTableController {
         setupUI()
         readOrCreateLocation()
         setupNavigationMenu()
-        model.tableView.delegate      = tableDelegate
-        model.tableView.dataSource    = tableDataSource
+        viewObject.tableView.delegate      = tableDelegate
+        viewObject.tableView.dataSource    = tableDataSource
     }
     
     func setupUI(){
         view.backgroundColor = .lightRed
         definesPresentationContext = true
-        [model.tableView, model.nothingFoundView].forEach{view.addSubview($0)}
-        model.tableView.fillSafeSuperView()
-        model.nothingFoundView.centerToSuperView()                                      //UILabel When tableView is empty
+        [viewObject.tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
+        viewObject.tableView.fillSafeSuperView()
+        viewObject.nothingFoundView.centerToSuperView()                                      //UILabel When tableView is empty
     }
     
     func readOrCreateLocation(){  //Check if location exists or download

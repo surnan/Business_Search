@@ -22,14 +22,14 @@ extension SearchTableController{
     
     func animateResultsAreFilteredLabel(){
         if !UserAppliedFilter.shared.isFilterOn {return}
-        view.addSubview(model.resultsAreFilteredLabel)
+        view.addSubview(viewObject.resultsAreFilteredLabel)
         let safe = view.safeAreaLayoutGuide
-        model.resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
-        model.resultsAreFilteredLabel.alpha = 1
+        viewObject.resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
+        viewObject.resultsAreFilteredLabel.alpha = 1
         UIView.animate(withDuration: 1.5, animations: {
-            self.model.resultsAreFilteredLabel.alpha = 0
+            self.viewObject.resultsAreFilteredLabel.alpha = 0
         }) { (_) in
-            self.model.resultsAreFilteredLabel.removeFromSuperview()
+            self.viewObject.resultsAreFilteredLabel.removeFromSuperview()
         }
     }
     
@@ -37,15 +37,15 @@ extension SearchTableController{
         switch group {
         case TableIndex.business.rawValue:
             if tableDataSource.fetchBusinessController?.fetchedObjects?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-                model.showNothingFoundView()
+                viewObject.showNothingFoundView()
             } else {
-                model.hideNothingFoundView()
+                viewObject.hideNothingFoundView()
             }
         case TableIndex.category.rawValue:
             if tableDataSource.fetchCategoryNames?.count == 0 && searchController.isActive && !searchBarIsEmpty(){
-                model.showNothingFoundView()
+                viewObject.showNothingFoundView()
             } else {
-                model.hideNothingFoundView()
+                viewObject.hideNothingFoundView()
             }
         default:
             print("ShowNothingLabelIfNoResults --> is very unhappy")

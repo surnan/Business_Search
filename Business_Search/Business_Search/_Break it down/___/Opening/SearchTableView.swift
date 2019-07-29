@@ -11,7 +11,6 @@ import UIKit
 class SearchTableView {
     var viewModel: SearchTableViewModel?
         
-        
     let nothingFoundView: GenericAttributedTextLabel = {
         let myView = GenericAttributedTextLabel(text: "No matches found", attributes: greenHelvetica_30_greyStroke)
         myView.alpha = 0
@@ -39,10 +38,7 @@ class SearchTableView {
                                                size: 16,
                                                backgroundColor: UIColor.black)
 
-    func hideNothingFoundView(){
-        nothingFoundView.alpha = 0
-    }
-    
+    func hideNothingFoundView(){nothingFoundView.alpha = 0}
     func showNothingFoundView(){
         UIView.animate(withDuration: 1.0) {[unowned self] in
             self.nothingFoundView.alpha = 1

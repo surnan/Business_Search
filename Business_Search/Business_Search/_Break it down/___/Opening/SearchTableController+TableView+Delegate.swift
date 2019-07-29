@@ -13,7 +13,7 @@ import UIKit
 extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
     func loadBusinessDetails(currentBusiness: Business){coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)}
     func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
-    func reloadData(){model.tableView.reloadData()}
+    func reloadData(){viewObject.tableView.reloadData()}
     
     //MARK:- ROW RIGHT-SIDE ACTIONS
     func shareBusiness(business: Business){

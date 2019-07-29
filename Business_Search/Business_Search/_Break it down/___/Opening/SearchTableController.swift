@@ -19,9 +19,9 @@ class SearchTableController: UIViewController, UISearchControllerDelegate, UISea
     lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController,
                                                          latitude: latitude,
                                                          longitude: longitude,
-                                                         model: model)
+                                                         model: viewObject)
     lazy var tableDelegate      = OpeningTableDelegate(delegate: self, dataSourceDelegate: tableDataSource)
-    let model                   = OpeningModel()
+    //let viewObject                   = OpeningModel()
     
     var getDataController           : DataController {return dataController}
     var getLatitude                 : Double {return latitude}

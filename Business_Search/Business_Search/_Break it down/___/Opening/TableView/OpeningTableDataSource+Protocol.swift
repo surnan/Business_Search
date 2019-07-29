@@ -9,12 +9,10 @@
 import UIKit
 
 extension OpeningTableDataSource: OpeningTableDataSourceProtocol  {
-    
     func updateCoordinates(latitude: Double, longitude: Double){
         self.latitude = latitude
         self.longitude = longitude
     }
-    
     
     func getCategoryName(at index: Int) -> String {
         let categoryName = fetchCategoryNames![index]
@@ -26,18 +24,13 @@ extension OpeningTableDataSource: OpeningTableDataSourceProtocol  {
         let currentBusiness = fetchBusinessController!.object(at: indexPath)
         return currentBusiness
     }
-    
-    
+
     func isBusinessFavorite(at indexPath: IndexPath) -> Bool {
         // != nil.  Otherwise, tableView would be empty and can't have indexPath
         let currentBusiness = fetchBusinessController!.object(at: indexPath)
         return currentBusiness.isFavorite
     }
     
-    func resetBusinessController() {
-        fetchBusinessController = nil
-    }
-
     func updateBusinessPredicate(id: String){
         fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
         fetchBusinessController = nil
@@ -64,18 +57,10 @@ extension OpeningTableDataSource: OpeningTableDataSourceProtocol  {
         fetchCategoriesController = nil
     }
     
-    func reloadCategoryController(){
-        fetchCategoriesController = nil
-    }
-    
-    func reloadCategoryNames() {
-        fetchCategoryNames = nil
-    }
-    
-    
-    func reloadBusinessController(){
-        fetchBusinessController = nil
-    }
+    func resetBusinessController() {fetchBusinessController = nil}
+    func reloadCategoryController(){fetchCategoriesController = nil}
+    func reloadCategoryNames() {fetchCategoryNames = nil}
+    func reloadBusinessController(){fetchBusinessController = nil}
     
     func resetAllControllerAndPredicates() {
         fetchBusinessPredicate = nil
