@@ -29,7 +29,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
     }
     
     func loadSearchTable(location: CLLocation){
-        let coordinator = OpeningCoordinator(dataController: dataController, router: router, location: location)
+        let coordinator = SearchTableCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
         router.push(coordinator, animated: true) {[weak self, weak coordinator] in

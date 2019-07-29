@@ -12,6 +12,9 @@ import CoreData
 
 class SearchTableController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate, UnBlurViewProtocol {
     var coordinator: (SettingsType & BusinessDetailsType & FilterType & TabControllerType)?
+    var viewObject              : SearchTableView!
+    var viewModel               : SearchTableViewModel!
+    
     
     lazy var tableDataSource    = OpeningTableDataSource(dataController: dataController,
                                                          latitude: latitude,

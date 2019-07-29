@@ -9,10 +9,9 @@
 import Foundation
 import MapKit
 
-class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
-    
-    let dataController: DataController
-    let location : CLLocation
+class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
+    private let dataController: DataController
+    private let location : CLLocation
     
     init(dataController: DataController, router: RouterType, location: CLLocation){
         self.dataController = dataController
@@ -21,13 +20,22 @@ class OpeningCoordinator: Coordinator, SettingsType, BusinessDetailsType, Filter
     }
     
     func start(parent: Coordinator){
+        let newViewModel        = SearchTableViewModel()
+        let newViewObject       = SearchTableView()      
+        newViewObject.viewModel = newViewModel
+        
         let coordinate = location.coordinate
-        let vc = SearchTableController()
-        vc.dataController = dataController
-        vc.latitude = coordinate.latitude
-        vc.longitude = coordinate.longitude
-        vc.coordinator = self
-        router.push(vc, animated: true) {[weak self, weak parent] in
+        let newController = SearchTableController()
+        newController.dataController = dataController
+        newController.latitude = coordinate.latitude
+        newController.longitude = coordinate.longitude
+        newController.coordinator = self
+        newController.viewObject               = newViewObject
+        newController.viewModel                = newViewModel
+        
+        
+        
+        router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
         }
