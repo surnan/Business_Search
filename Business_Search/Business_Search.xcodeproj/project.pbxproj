@@ -108,6 +108,10 @@
 		84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */; };
 		84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40EA226BCB2C003003C4 /* DataController.swift */; };
 		84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC40EC226BFCC3003003C4 /* Location+Extension.swift */; };
+		84E27D0922EF6BB600D2CAE5 /* SearchController+TableView+Delegate2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0822EF6BB500D2CAE5 /* SearchController+TableView+Delegate2.swift */; };
+		84E27D0B22EF6C3000D2CAE5 /* OpenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0A22EF6C3000D2CAE5 /* OpenController.swift */; };
+		84E27D0E22EF6C5700D2CAE5 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */; };
+		84E27D1022EF6C6B00D2CAE5 /* OpenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0F22EF6C6B00D2CAE5 /* OpenViewModel.swift */; };
 		84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */; };
 		84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBC8C92277204B00833562 /* Category+Extension.swift */; };
 		F6809A7F1B4C3175D91AF6F7 /* Pods_Business_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C8014F6DDB1C3E40EBC947 /* Pods_Business_Search.framework */; };
@@ -217,6 +221,10 @@
 		84DC40E8226B7BD7003003C4 /* YelpData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YelpData.xcdatamodel; sourceTree = "<group>"; };
 		84DC40EA226BCB2C003003C4 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		84DC40EC226BFCC3003003C4 /* Location+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+Extension.swift"; sourceTree = "<group>"; };
+		84E27D0822EF6BB500D2CAE5 /* SearchController+TableView+Delegate2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchController+TableView+Delegate2.swift"; sourceTree = "<group>"; };
+		84E27D0A22EF6C3000D2CAE5 /* OpenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenController.swift; sourceTree = "<group>"; };
+		84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
+		84E27D0F22EF6C6B00D2CAE5 /* OpenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenViewModel.swift; sourceTree = "<group>"; };
 		84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAllCategoriesResponse.swift; sourceTree = "<group>"; };
 		84FBC8C92277204B00833562 /* Category+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Extension.swift"; sourceTree = "<group>"; };
 		961B70040D961DFBA66EB96C /* Pods-Business_Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Business_Search.release.xcconfig"; path = "Target Support Files/Pods-Business_Search/Pods-Business_Search.release.xcconfig"; sourceTree = "<group>"; };
@@ -339,10 +347,9 @@
 			path = "TAB CONTROLLER";
 			sourceTree = "<group>";
 		};
-		84365CAB22C564520014E577 /* Opening */ = {
+		84365CAB22C564520014E577 /* SearchTable */ = {
 			isa = PBXGroup;
 			children = (
-				8401127D22E51CE300ECE0D5 /* SearchTableCoordinator.swift */,
 				847AE29222EEA5C800774371 /* SearchTableView.swift */,
 				847AE29022EEA5B300774371 /* SearchTableViewModel.swift */,
 				846509B9227A0C06008ABA9F /* SearchTableController.swift */,
@@ -351,10 +358,11 @@
 				843F033C22CE98ED002798C1 /* SearchTableController+TableView+Delegate.swift */,
 				842AD7D62284D80B00590B1A /* SearchTableController+Handler.swift */,
 				842AD7D42284D74D00590B1A /* SearchTableController+UI.swift */,
+				84E27D0822EF6BB500D2CAE5 /* SearchController+TableView+Delegate2.swift */,
 				84684C9F22E60FCB00999599 /* TableView */,
 				8408F0DE22E60A4300DB55B6 /* Protocols */,
 			);
-			path = Opening;
+			path = SearchTable;
 			sourceTree = "<group>";
 		};
 		84365CAD22C565060014E577 /* UiKit */ = {
@@ -432,13 +440,6 @@
 				84365CB622C569200014E577 /* UserAppliedFilter */,
 			);
 			path = Singleton;
-			sourceTree = "<group>";
-		};
-		845A1D8822D02DB00066C17C /* View_Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View_Models;
 			sourceTree = "<group>";
 		};
 		84684C9F22E60FCB00999599 /* TableView */ = {
@@ -559,7 +560,8 @@
 		847AE26722EDA10900774371 /* ___ */ = {
 			isa = PBXGroup;
 			children = (
-				84365CAB22C564520014E577 /* Opening */,
+				84E27D0C22EF6C4100D2CAE5 /* Open */,
+				84365CAB22C564520014E577 /* SearchTable */,
 			);
 			path = "___";
 			sourceTree = "<group>";
@@ -683,7 +685,6 @@
 				847AE23622E892E000774371 /* Extensions */,
 				8408F0DF22E60A9100DB55B6 /* _Protocols */,
 				84365CCE22C8E30E0014E577 /* UIKit + SubClass */,
-				845A1D8822D02DB00066C17C /* View_Models */,
 				84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */,
 				84BDE2F62263D009008C9B01 /* Assets.xcassets */,
 			);
@@ -724,6 +725,17 @@
 				84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		84E27D0C22EF6C4100D2CAE5 /* Open */ = {
+			isa = PBXGroup;
+			children = (
+				8401127D22E51CE300ECE0D5 /* SearchTableCoordinator.swift */,
+				84E27D0A22EF6C3000D2CAE5 /* OpenController.swift */,
+				84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */,
+				84E27D0F22EF6C6B00D2CAE5 /* OpenViewModel.swift */,
+			);
+			path = Open;
 			sourceTree = "<group>";
 		};
 		B368EECBA97B6A31068D07BF /* Frameworks */ = {
@@ -868,6 +880,7 @@
 				8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */,
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */,
+				84E27D1022EF6C6B00D2CAE5 /* OpenViewModel.swift in Sources */,
 				847AE27622EDE14F00774371 /* SearchByMapViewModel.swift in Sources */,
 				845A1D8122D029C10066C17C /* OpeningControllerProtocol.swift in Sources */,
 				847AE23522E81D7600774371 /* BusinessCellViewModel.swift in Sources */,
@@ -905,6 +918,7 @@
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				8401126222E29F3400ECE0D5 /* Presentable.swift in Sources */,
 				848761CD227E856C000CECC7 /* MapController.swift in Sources */,
+				84E27D0B22EF6C3000D2CAE5 /* OpenController.swift in Sources */,
 				842AD7D52284D74D00590B1A /* SearchTableController+UI.swift in Sources */,
 				8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */,
 				844D358422CA7A1300D7E594 /* BusinessDetailsController+UI.swift in Sources */,
@@ -922,6 +936,7 @@
 				84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */,
 				842AD7D72284D80B00590B1A /* SearchTableController+Handler.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
+				84E27D0922EF6BB600D2CAE5 /* SearchController+TableView+Delegate2.swift in Sources */,
 				8401127A22E51C5C00ECE0D5 /* MainMenuCoordinator.swift in Sources */,
 				8474C43822CAFFCC0023BAD6 /* OpeningTableDataSource.swift in Sources */,
 				84BDE3082263D3CE008C9B01 /* UIColor+Extension.swift in Sources */,
@@ -949,6 +964,7 @@
 				8401127C22E51C9C00ECE0D5 /* SettingsCoordinator.swift in Sources */,
 				84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */,
 				84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */,
+				84E27D0E22EF6C5700D2CAE5 /* OpenView.swift in Sources */,
 				847AE26022EBE45500774371 /* BusinessDetailsViewModel.swift in Sources */,
 				847AE27022EDD03500774371 /* SearchByAddressController+Handlers.swift in Sources */,
 				847AE29322EEA5C800774371 /* SearchTableView.swift in Sources */,
