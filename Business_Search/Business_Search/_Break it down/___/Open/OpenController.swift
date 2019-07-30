@@ -17,6 +17,12 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     var latitude            : Double!
     var longitude           : Double!
     
+    var searchGroupIndex    = 0
+    var tableViewArrayType: Int { return searchGroupIndex }
+    enum TableIndex:Int { case business = 0, category }
+    
+    
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
@@ -40,29 +46,54 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     @objc func handleRightBarButton(){print("")}
     
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableViewArrayType {
+        case TableIndex.business.rawValue:
+            return businessViewModel.getCount
+        case TableIndex.category.rawValue:
+            return categoryViewModel.getCount
+        default:
+            print("numberOfRowsInSection --> WHOOOOOPS!!")
         }
+        return 0
+        //return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
+    }
     
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch tableViewArrayType {
+        case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
             guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
             cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
             return cell
+        case TableIndex.category.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+            guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
+                return UITableViewCell()
+            }
+            cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
+            return cell
+        default:
+            print("cellForRowAt --> WHOOOOOPS!!!")
+            return UITableViewCell()
         }
+        
+        
+    }
     
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return categoryViewModel.fetchCategoryNames?.count ?? 0
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-//        guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
-//            return UITableViewCell()
-//        }
-//        cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
-//        return cell
-//    }
+    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //        return categoryViewModel.fetchCategoryNames?.count ?? 0
+    //    }
+    //
+    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+    //        guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
+    //            return UITableViewCell()
+    //        }
+    //        cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
+    //        return cell
+    //    }
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -87,9 +118,16 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
 }
 
 
-
-
 extension OpenController {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        //This is called when user switches scopes
+        searchGroupIndex = selectedScope
+        tableView.reloadData()
+        //        ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
+        //        animateResultsAreFilteredLabel()
+    }
+    
+    
     func updateSearchResults(for searchController: UISearchController) {
         //Text typed into Search Bar
         if searchBarIsEmpty() {
@@ -120,10 +158,10 @@ extension OpenController {
     
     func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
     func reloadFetchControllers(){businessViewModel.fetchBusinessController = nil}
-//    func updateBusinessPredicate(searchString: String){
-//        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
-//        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
-//    }
+    //    func updateBusinessPredicate(searchString: String){
+    //        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
+    //        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
+    //    }
 }
 
 
