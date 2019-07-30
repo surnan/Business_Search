@@ -59,8 +59,8 @@ class MyTabCoordinator: Coordinator, UITabBarControllerDelegate {
     }
     
     func start(parent: Coordinator) {
-        //router.present(tabBarController, animated: true)
-        router.push(tabBarController, animated: true, completion: nil)
+        router.present(tabBarController, animated: true)
+//        router.push(tabBarController, animated: true, completion: nil)
     }
     
     func dismissTabController(){
