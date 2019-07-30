@@ -64,10 +64,10 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         case TableIndex.category.rawValue:
             guard let currentCategory = source.categoryViewModel.fetchCategoryNames?[indexPath.row] else {return}
             let items = getBusinessesFromCategoryName(category: currentCategory)
-            coordinator?.loadTabController(businesses: items, categoryName: currentCategory)
+            parent.coordinator?.loadTabController(businesses: items, categoryName: currentCategory)
         case TableIndex.business.rawValue:
             guard let currentBusiness = source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return}
-            coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
+            parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         default:
             print("Illegal Value inside tableViewArrayType")
         }

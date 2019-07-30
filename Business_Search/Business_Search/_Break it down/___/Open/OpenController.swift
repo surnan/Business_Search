@@ -9,7 +9,7 @@
 import UIKit
 
 //class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
-class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
+class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UISearchControllerDelegate {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryCountViewModel!
@@ -40,6 +40,7 @@ class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpda
         tableView.delegate = tableDelegate
         businessViewModel.fetchBusinessController   = nil
         categoryViewModel.fetchCategoryNames        = nil
+        definesPresentationContext = true
         navigationItem.searchController             = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
         [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}

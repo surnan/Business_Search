@@ -21,46 +21,49 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         super.init(router: router)
     }
                                    
-//    func start(parent: Coordinator){
-//        let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
-//        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
-//        let newViewObject           = OpenView()
-//        let newController           = OpenController()
-//
-//        newViewObject.viewModel         = newBusinessViewModel
-//
-//        newController.businessViewModel = newBusinessViewModel  //1
-//        newController.categoryViewModel = newCategoryViewModel  //2
-//
-//        newController.viewObject        = newViewObject
-//        newController.dataController    = dataController
-//        newController.latitude          = getLatitude
-//        newController.longitude         = getLongitude
-//        newController.coordinator       = self
-//
-//        router.push(newController, animated: true) {[weak self, weak parent] in
-//            parent?.removeChild(self)
-//            print("-2 popped -2")
-//        }
-//    }
+    func start(parent: Coordinator){
+        let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
+        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
+        
+        
+        let newViewObject           = OpenView()
+        let newController           = OpenController()
 
-        func start(parent: Coordinator){
-            let newViewModel        = SearchTableViewModel()
-            let newViewObject       = SearchTableView()
-            newViewObject.viewModel = newViewModel
-            let coordinate = location.coordinate
-            let newController = SearchTableController()
-            newController.dataController = dataController
-            newController.latitude = coordinate.latitude
-            newController.longitude = coordinate.longitude
-            newController.coordinator = self
-            newController.viewObject               = newViewObject
-            newController.viewModel                = newViewModel
-            router.push(newController, animated: true) {[weak self, weak parent] in
-                parent?.removeChild(self)
-                print("-2 popped -2")
-            }
+        newViewObject.viewModel         = newBusinessViewModel
+
+        newController.businessViewModel = newBusinessViewModel  //1
+        newController.categoryViewModel = newCategoryViewModel  //2
+
+        newController.viewObject        = newViewObject
+        newController.dataController    = dataController
+        newController.latitude          = getLatitude
+        newController.longitude         = getLongitude
+        newController.coordinator       = self
+
+        router.push(newController, animated: true) {[weak self, weak parent] in
+            parent?.removeChild(self)
+            print("-2 popped -2")
         }
+    }
+
+//        func _start(parent: Coordinator){
+//            let newViewModel        = SearchTableViewModel()
+//            let newViewObject       = SearchTableView()
+//            
+//            newViewObject.viewModel = newViewModel
+//            let coordinate = location.coordinate
+//            let newController = SearchTableController()
+//            newController.dataController = dataController
+//            newController.latitude = coordinate.latitude
+//            newController.longitude = coordinate.longitude
+//            newController.coordinator = self
+//            newController.viewObject               = newViewObject
+//            newController.viewModel                = newViewModel
+//            router.push(newController, animated: true) {[weak self, weak parent] in
+//                parent?.removeChild(self)
+//                print("-2 popped -2")
+//            }
+//        }
     
     func loadBusinessDetails(currentBusiness: Business){
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
