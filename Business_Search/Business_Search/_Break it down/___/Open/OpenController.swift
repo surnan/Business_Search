@@ -101,9 +101,13 @@ extension OpenController {
             return
         }
         guard let searchString = searchController.searchBar.text else {return}
-        updateBusinessPredicate(searchString: searchString)
-        //tableDataSource.updateCategoryArrayNamesPredicate(searchString: searchString)
-        reloadFetchControllers()
+        
+        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
+        businessViewModel.fetchBusinessController = nil
+
+        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
+        categoryViewModel.fetchCategoryNames = nil
+
         tableView.reloadData()
     }
     
@@ -125,7 +129,7 @@ extension OpenController {
     func reloadFetchControllers(){businessViewModel.fetchBusinessController = nil}
     func updateBusinessPredicate(searchString: String){
         businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
-        //        fetchCategoryNames = nil
+        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
     }
 }
 
