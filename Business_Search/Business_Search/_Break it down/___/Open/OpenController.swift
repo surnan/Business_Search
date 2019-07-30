@@ -8,7 +8,8 @@
 
 import UIKit
 
-class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
+//class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
+class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryViewModel!
@@ -22,12 +23,13 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     enum TableIndex         : Int { case business = 0, category }
 
     lazy var tableDataSource = Open_DataSource(parent: self)
+    lazy var tableDelegate = Open_Delegate(parent: self, source: tableDataSource)
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
-        tableView.delegate          = self
+        tableView.rowHeight = 70
         tableView.separatorColor    = UIColor.clear
         return tableView
     }()
@@ -35,6 +37,7 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = tableDataSource
+        tableView.delegate = tableDelegate
         businessViewModel.fetchBusinessController   = nil
         categoryViewModel.fetchCategoryNames        = nil
         navigationItem.searchController             = searchController
@@ -101,6 +104,3 @@ extension OpenController {
         }
     }
 }
-
-
-

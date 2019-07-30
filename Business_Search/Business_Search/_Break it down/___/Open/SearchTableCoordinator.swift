@@ -20,7 +20,7 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         self.location       = location
         super.init(router: router)
     }
-    
+                                   
     func start(parent: Coordinator){
         let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
         let newCategoryViewModel    = CategoryViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
