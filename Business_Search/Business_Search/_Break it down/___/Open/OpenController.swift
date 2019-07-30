@@ -9,7 +9,7 @@
 import UIKit
 
 //class OpenController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
-class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryViewModel!
@@ -17,6 +17,7 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     var dataController      : DataController!
     var latitude            : Double!
     var longitude           : Double!
+    
     
     var searchGroupIndex    = 0
     var tableViewArrayType  : Int { return searchGroupIndex }
