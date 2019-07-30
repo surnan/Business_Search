@@ -56,16 +56,16 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
         searchController.obscuresBackgroundDuringPresentation = false
         //searchController.searchBar.barStyle = .black
-        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.tintColor    = UIColor.white
         searchController.searchBar.barTintColor = UIColor.white
-        searchController.searchBar.placeholder = "Enter search term ..."
-        searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder  = "Enter search term ..."
+        searchController.searchBar.delegate     = self
+        searchController.searchResultsUpdater   = self
         //Setting background for search controller
         if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
             if let backgroundview = textfield.subviews.first {
-                backgroundview.backgroundColor = UIColor.white
-                backgroundview.layer.cornerRadius = 10
+                backgroundview.backgroundColor      = UIColor.white
+                backgroundview.layer.cornerRadius   = 10
                 backgroundview.clipsToBounds = true
             }
         }
