@@ -89,9 +89,11 @@ class OpeningTableDataSource: NSObject, UITableViewDataSource{
             if fetchCategoriesController == nil { //+3
                 fetchCategoriesController = {   //+4
                     let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+                    
                     if let _selectedPredicate = selectedCategoryPredicate {
                         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [_selectedPredicate])
                     }
+                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Category.title, ascending: true)
                     fetchRequest.sortDescriptors = [ sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,

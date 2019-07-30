@@ -24,7 +24,6 @@ class BusinessViewModel {
     }
     
     //MARK:- NON-Private
-    
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     
@@ -36,10 +35,10 @@ class BusinessViewModel {
 
     func search(search: String?){
         if let search = search {
-            fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [search])
+            fetchBusinessPredicate  = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [search])
             fetchBusinessController = nil
         } else {
-            fetchBusinessPredicate = nil
+            fetchBusinessPredicate  = nil
             fetchBusinessController = nil
         }
     }
@@ -52,6 +51,8 @@ class BusinessViewModel {
                     
                     var predicate: [NSPredicate] = [predicateBusinessLatitude, predicateBusinessLongitude]
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
+                    
+                    
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                     var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()
                     filterControllerPredicate.append(openingControllerPredicate)

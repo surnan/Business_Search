@@ -23,7 +23,7 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
                                    
     func start(parent: Coordinator){
         let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
-        let newCategoryViewModel    = CategoryViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
+        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
         let newViewObject           = OpenView()
         let newController           = OpenController()
         
@@ -62,8 +62,6 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
     }
     
     func loadTabController(businesses: [Business], categoryName: String){
-        //let coordinator = GroupsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
-        //let coordinator = MapsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         let coordinator = MyTabCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         coordinator.start(parent: self)
     }

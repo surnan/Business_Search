@@ -12,7 +12,7 @@ import UIKit
 class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
-    var categoryViewModel   : CategoryViewModel!
+    var categoryViewModel   : CategoryCountViewModel!
     var viewObject          : OpenView!
     var dataController      : DataController!
     var latitude            : Double!
@@ -70,10 +70,6 @@ class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpda
         }
         return searchController
     }()
-}
-
-extension OpenController {
-    
 }
 
 
