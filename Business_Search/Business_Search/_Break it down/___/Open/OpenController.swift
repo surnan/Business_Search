@@ -18,8 +18,8 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     var longitude           : Double!
     
     var searchGroupIndex    = 0
-    var tableViewArrayType: Int { return searchGroupIndex }
-    enum TableIndex:Int { case business = 0, category }
+    var tableViewArrayType  : Int { return searchGroupIndex }
+    enum TableIndex         : Int { case business = 0, category }
     
     
     
@@ -35,9 +35,9 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        businessViewModel.fetchBusinessController           = nil
-        categoryViewModel.fetchCategoryNames  = nil
-        navigationItem.searchController                     = searchController
+        businessViewModel.fetchBusinessController   = nil
+        categoryViewModel.fetchCategoryNames        = nil
+        navigationItem.searchController             = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
         view.addSubview(tableView)
         tableView.fillSafeSuperView()
@@ -56,7 +56,6 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("numberOfRowsInSection --> WHOOOOOPS!!")
         }
         return 0
-        //return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,22 +77,7 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("cellForRowAt --> WHOOOOOPS!!!")
             return UITableViewCell()
         }
-        
-        
     }
-    
-    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //        return categoryViewModel.fetchCategoryNames?.count ?? 0
-    //    }
-    //
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-    //        guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
-    //            return UITableViewCell()
-    //        }
-    //        cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
-    //        return cell
-    //    }
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
