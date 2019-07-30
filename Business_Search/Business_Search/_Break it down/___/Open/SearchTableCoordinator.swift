@@ -26,22 +26,28 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
 //        let newViewObject       = SearchTableView()
 //        let newController = SearchTableController()
         
-        var newViewModel  = OpenViewModel()
+        var newBusinessViewModel  = BusinessViewModel() //1
+        var newCategoryViewModel  = CategoryViewModel() //2
         let newViewObject = OpenView()
         let newController = OpenController()
         
-        newViewModel.dataController = dataController
-        newViewModel.latitude = getLatitude
-        newViewModel.longitude = getLongitude
+        newBusinessViewModel.dataController = dataController
+        newBusinessViewModel.latitude = getLatitude
+        newBusinessViewModel.longitude = getLongitude
         
-        let coordinate = location.coordinate
-        newViewObject.viewModel = newViewModel
+        newCategoryViewModel.dataController = dataController
+        newCategoryViewModel.latitude = getLatitude
+        newCategoryViewModel.longitude = getLongitude
         
-        newController.viewModel = newViewModel
+        newViewObject.viewModel = newBusinessViewModel
+
+        newController.businessViewModel = newBusinessViewModel  //1
+        newController.categoryViewModel = newCategoryViewModel  //2
+        
         newController.viewObject = newViewObject
         newController.dataController = dataController
-        newController.latitude = coordinate.latitude
-        newController.longitude = coordinate.longitude
+        newController.latitude = getLatitude
+        newController.longitude = getLongitude
         newController.coordinator = self
         
         

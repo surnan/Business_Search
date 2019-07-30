@@ -9,15 +9,13 @@
 import Foundation
 import CoreData
 
-struct OpenViewModel {
+struct BusinessViewModel {
     var dataController: DataController!
     var latitude: Double!
     var longitude: Double!
     
-    lazy var predicateBusinessLatitude =
-        NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
-    lazy var predicateBusinessLongitude =
-        NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude!])
+    lazy var predicateBusinessLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
+    lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude!])
     
     
     var fetchBusinessPredicate : NSPredicate? {
@@ -59,8 +57,4 @@ struct OpenViewModel {
             }   //-3
         }   //-2
     }   //-1
-    
 }
-
-
-

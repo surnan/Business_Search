@@ -9,5 +9,5 @@
 import UIKit
 
 class OpenView {
-    var viewModel: OpenViewModel?
+    var viewModel: BusinessViewModel?
 }
