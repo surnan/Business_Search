@@ -26,14 +26,10 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
 //        let newViewObject       = SearchTableView()
 //        let newController = SearchTableController()
         
-        var newBusinessViewModel  = BusinessViewModel() //1
+        let newBusinessViewModel  = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
         var newCategoryViewModel  = CategoryViewModel() //2
         let newViewObject = OpenView()
         let newController = OpenController()
-        
-        newBusinessViewModel.dataController = dataController
-        newBusinessViewModel.latitude = getLatitude
-        newBusinessViewModel.longitude = getLongitude
         
         newCategoryViewModel.dataController = dataController
         newCategoryViewModel.latitude = getLatitude
@@ -49,7 +45,6 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         newController.latitude = getLatitude
         newController.longitude = getLongitude
         newController.coordinator = self
-        
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

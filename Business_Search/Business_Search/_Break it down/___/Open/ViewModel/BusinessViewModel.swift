@@ -10,13 +10,19 @@ import Foundation
 import CoreData
 
 struct BusinessViewModel {
-    var dataController: DataController!
-    var latitude: Double!
-    var longitude: Double!
+    private var dataController: DataController
+    private var latitude: Double
+    private var longitude: Double
     
-    lazy var predicateBusinessLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude!])
-    lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude!])
     
+    init(dataController: DataController, lat: Double, lon: Double) {
+        self.dataController = dataController
+        self.latitude = lat
+        self.longitude = lon
+    }
+    
+    private lazy var predicateBusinessLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude])
+    private lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude])
     
     var fetchBusinessPredicate : NSPredicate? {
         didSet {

@@ -44,29 +44,29 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     @objc func handleRightBarButton(){print("")}
     
     
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-//        guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
-//        cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
-//        return cell
-//    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryViewModel.fetchCategoryNames?.count ?? 0
+        return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-        guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
-            return UITableViewCell()
-        }
-        cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
+        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+        guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
+        cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return categoryViewModel.fetchCategoryNames?.count ?? 0
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+//        guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
+//            return UITableViewCell()
+//        }
+//        cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
+//        return cell
+//    }
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
