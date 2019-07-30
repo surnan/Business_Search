@@ -9,14 +9,32 @@
 import Foundation
 import CoreData
 
-struct CategoryViewModel {
-    var dataController: DataController!
-    var latitude: Double!
-    var longitude: Double!
+class CategoryViewModel {
+    private var dataController: DataController
+    private var latitude: Double
+    private var longitude: Double
     
-    lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
-    lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude!])
-    lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude!])
+    private lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
+    private lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
+    private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    
+    
+    //MARK:- NON-Private
+    init(dataController: DataController, lat: Double, lon: Double) {
+        self.dataController = dataController
+        self.latitude = lat
+        self.longitude = lon
+    }
+    
+    func search(search: String?){
+        if let search = search {
+            fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])
+            fetchCategoryNames = nil
+        } else {
+            fetchCategoryArrayNamesPredicate = nil
+            fetchCategoryNames = nil
+        }
+    }
     
     var fetchCategoryNames: [String]? { //Populate Search Group listings
         didSet {

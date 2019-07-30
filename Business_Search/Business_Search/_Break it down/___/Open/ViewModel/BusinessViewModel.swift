@@ -9,25 +9,34 @@
 import Foundation
 import CoreData
 
-struct BusinessViewModel {
+class BusinessViewModel {
     private var dataController: DataController
     private var latitude: Double
     private var longitude: Double
     
+    private lazy var predicateBusinessLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude])
+    private lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude])
+    private var fetchBusinessPredicate : NSPredicate? {
+        didSet {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
+            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
+        }
+    }
     
+    //MARK:- NON-Private
     init(dataController: DataController, lat: Double, lon: Double) {
         self.dataController = dataController
         self.latitude = lat
         self.longitude = lon
     }
-    
-    private lazy var predicateBusinessLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude])
-    private lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude])
-    
-    var fetchBusinessPredicate : NSPredicate? {
-        didSet {
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
-            fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
+
+    func search(search: String?){
+        if let search = search {
+            fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [search])
+            fetchBusinessController = nil
+        } else {
+            fetchBusinessPredicate = nil
+            fetchBusinessController = nil
         }
     }
     

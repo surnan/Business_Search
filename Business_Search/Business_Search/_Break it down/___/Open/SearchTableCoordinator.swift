@@ -10,41 +10,33 @@ import Foundation
 import MapKit
 
 class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
-    private let dataController: DataController
-    private let location : CLLocation
-    var getLatitude: Double {return location.coordinate.latitude}
-    var getLongitude: Double {return location.coordinate.longitude}
+    private let dataController  : DataController
+    private let location        : CLLocation
+    var getLatitude             : Double {return location.coordinate.latitude}
+    var getLongitude            : Double {return location.coordinate.longitude}
     
     init(dataController: DataController, router: RouterType, location: CLLocation){
         self.dataController = dataController
-        self.location = location
+        self.location       = location
         super.init(router: router)
     }
     
     func start(parent: Coordinator){
-//        let newViewModel        = SearchTableViewModel()
-//        let newViewObject       = SearchTableView()
-//        let newController = SearchTableController()
+        let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
+        let newCategoryViewModel    = CategoryViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
+        let newViewObject           = OpenView()
+        let newController           = OpenController()
         
-        let newBusinessViewModel  = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
-        var newCategoryViewModel  = CategoryViewModel() //2
-        let newViewObject = OpenView()
-        let newController = OpenController()
+        newViewObject.viewModel         = newBusinessViewModel
         
-        newCategoryViewModel.dataController = dataController
-        newCategoryViewModel.latitude = getLatitude
-        newCategoryViewModel.longitude = getLongitude
-        
-        newViewObject.viewModel = newBusinessViewModel
-
         newController.businessViewModel = newBusinessViewModel  //1
         newController.categoryViewModel = newCategoryViewModel  //2
         
-        newController.viewObject = newViewObject
-        newController.dataController = dataController
-        newController.latitude = getLatitude
-        newController.longitude = getLongitude
-        newController.coordinator = self
+        newController.viewObject        = newViewObject
+        newController.dataController    = dataController
+        newController.latitude          = getLatitude
+        newController.longitude         = getLongitude
+        newController.coordinator       = self
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

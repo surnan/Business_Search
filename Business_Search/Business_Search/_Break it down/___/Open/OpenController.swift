@@ -7,9 +7,6 @@
 //
 
 import UIKit
-//import CoreData
-
-
 
 class OpenController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     var coordinator         : SearchTableCoordinator?
@@ -43,22 +40,21 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     @objc func handleRightBarButton(){print("")}
     
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
+        }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-        guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
-        cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
-        return cell
-    }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+            guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
+            cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
+            return cell
+        }
     
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return categoryViewModel.fetchCategoryNames?.count ?? 0
 //    }
-//
+//    
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
 //        guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
@@ -101,13 +97,8 @@ extension OpenController {
             return
         }
         guard let searchString = searchController.searchBar.text else {return}
-        
-        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
-        businessViewModel.fetchBusinessController = nil
-
-        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
-        categoryViewModel.fetchCategoryNames = nil
-
+        businessViewModel.search(search: searchString)
+        categoryViewModel.search(search: searchString)
         tableView.reloadData()
     }
     
@@ -117,8 +108,10 @@ extension OpenController {
     }
     
     func resetAllControllerAndPredicates() {
-        businessViewModel.fetchBusinessPredicate = nil
-        categoryViewModel.fetchCategoryArrayNamesPredicate = nil
+        businessViewModel.search(search: nil)
+        categoryViewModel.search(search: nil)
+        //        businessViewModel.fetchBusinessPredicate = nil
+        //        categoryViewModel.fetchCategoryArrayNamesPredicate = nil
         //        fetchBusinessController = nil
         //        fetchCategoryNames = nil
         //        fetchFavoritePredicate = nil
@@ -127,10 +120,10 @@ extension OpenController {
     
     func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
     func reloadFetchControllers(){businessViewModel.fetchBusinessController = nil}
-    func updateBusinessPredicate(searchString: String){
-        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
-        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
-    }
+//    func updateBusinessPredicate(searchString: String){
+//        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
+//        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
+//    }
 }
 
 
