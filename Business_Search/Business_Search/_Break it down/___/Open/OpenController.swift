@@ -8,7 +8,8 @@
 
 import UIKit
 
-class OpenController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+//class OpenController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryViewModel!
@@ -21,20 +22,22 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tableViewArrayType  : Int { return searchGroupIndex }
     enum TableIndex         : Int { case business = 0, category }
     
-    
+
+    lazy var tableDataSource = Open_DataSource(parent: self)
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
-        tableView.dataSource        = self
         tableView.delegate          = self
         tableView.separatorColor    = UIColor.clear
         return tableView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = tableDataSource
         businessViewModel.fetchBusinessController   = nil
         categoryViewModel.fetchCategoryNames        = nil
         navigationItem.searchController             = searchController
@@ -45,39 +48,7 @@ class OpenController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     @objc func handleRightBarButton(){print("")}
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableViewArrayType {
-        case TableIndex.business.rawValue:
-            return businessViewModel.getCount
-        case TableIndex.category.rawValue:
-            return categoryViewModel.getCount
-        default:
-            print("numberOfRowsInSection --> WHOOOOOPS!!")
-        }
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        switch tableViewArrayType {
-        case TableIndex.business.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-            guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
-            cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
-            return cell
-        case TableIndex.category.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-            guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
-                return UITableViewCell()
-            }
-            cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
-            return cell
-        default:
-            print("cellForRowAt --> WHOOOOOPS!!!")
-            return UITableViewCell()
-        }
-    }
+
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
