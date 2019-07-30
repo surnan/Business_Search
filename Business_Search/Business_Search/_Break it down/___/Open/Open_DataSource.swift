@@ -26,6 +26,9 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     let longitude           : Double
     let dataController      : DataController
     let parent              : DataSourceParent
+    var tableArrayType: Int {return parent.tableViewArrayType}
+    
+    
     
     init(parent: OpenController){
         self.parent             = parent
@@ -37,7 +40,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch parent.tableViewArrayType {
+        switch tableArrayType {
         case TableIndex.business.rawValue:
             parent.showNothingLabel(tableEmpty: businessViewModel.isEmpty)
             return businessViewModel.getCount
@@ -51,7 +54,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch parent.tableViewArrayType {
+        switch tableArrayType {
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
             guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
