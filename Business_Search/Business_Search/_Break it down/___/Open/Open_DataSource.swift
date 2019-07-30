@@ -10,36 +10,39 @@ import UIKit
 
 
 protocol DataSourceParent {
-    var businessViewModel: BusinessViewModel! {get}
-    var categoryViewModel: CategoryViewModel! {get}
-    var latitude: Double! {get}
-    var longitude: Double! {get}
-    var dataController: DataController! {get}
-    var tableViewArrayType: Int {get}
+    var businessViewModel   : BusinessViewModel! {get}
+    var categoryViewModel   : CategoryViewModel! {get}
+    var latitude            : Double! {get}
+    var longitude           : Double! {get}
+    var dataController      : DataController! {get}
+    var tableViewArrayType  : Int {get}
+    func showNothingLabel(tableEmpty: Bool)
 }
 
 class Open_DataSource: NSObject, UITableViewDataSource {
-    let businessViewModel: BusinessViewModel
-    let categoryViewModel: CategoryViewModel
-    let latitude: Double
-    let longitude: Double
-    let dataController: DataController
-    let parent: DataSourceParent
+    let businessViewModel   : BusinessViewModel
+    let categoryViewModel   : CategoryViewModel
+    let latitude            : Double
+    let longitude           : Double
+    let dataController      : DataController
+    let parent              : DataSourceParent
     
     init(parent: OpenController){
-        self.parent = parent
-        self.businessViewModel = parent.businessViewModel
-        self.categoryViewModel = parent.categoryViewModel
-        self.latitude = parent.latitude
-        self.longitude = parent.longitude
-        self.dataController = parent.dataController
+        self.parent             = parent
+        self.businessViewModel  = parent.businessViewModel
+        self.categoryViewModel  = parent.categoryViewModel
+        self.latitude           = parent.latitude
+        self.longitude          = parent.longitude
+        self.dataController     = parent.dataController
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch parent.tableViewArrayType {
         case TableIndex.business.rawValue:
+            parent.showNothingLabel(tableEmpty: businessViewModel.isEmpty)
             return businessViewModel.getCount
         case TableIndex.category.rawValue:
+            parent.showNothingLabel(tableEmpty: categoryViewModel.isEmpty)
             return categoryViewModel.getCount
         default:
             print("numberOfRowsInSection --> WHOOOOOPS!!")
@@ -56,9 +59,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
             return cell
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-            guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {
-                return UITableViewCell()
-            }
+            guard let currentCategoryName = categoryViewModel.fetchCategoryNames?[indexPath.row] else {return UITableViewCell()}
             cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
             return cell
         default:

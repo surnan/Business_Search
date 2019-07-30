@@ -21,6 +21,7 @@ class CategoryViewModel {
     
     //MARK:- NON-Private
     var getCount: Int {return fetchCategoryNames?.count ?? 0}
+    var isEmpty: Bool {return fetchCategoryNames?.count == 0}
     
     init(dataController: DataController, lat: Double, lon: Double) {
         self.dataController = dataController

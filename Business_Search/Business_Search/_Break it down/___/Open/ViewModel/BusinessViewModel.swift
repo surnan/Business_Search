@@ -26,6 +26,7 @@ class BusinessViewModel {
     //MARK:- NON-Private
     
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
+    var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     
     init(dataController: DataController, lat: Double, lon: Double) {
         self.dataController = dataController

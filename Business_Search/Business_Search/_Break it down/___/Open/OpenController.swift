@@ -8,7 +8,6 @@
 
 import UIKit
 
-//class OpenController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
 class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
@@ -18,11 +17,9 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     var latitude            : Double!
     var longitude           : Double!
     
-    
     var searchGroupIndex    = 0
     var tableViewArrayType  : Int { return searchGroupIndex }
     enum TableIndex         : Int { case business = 0, category }
-    
 
     lazy var tableDataSource = Open_DataSource(parent: self)
     
@@ -35,7 +32,6 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         return tableView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = tableDataSource
@@ -43,13 +39,13 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         categoryViewModel.fetchCategoryNames        = nil
         navigationItem.searchController             = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
-        view.addSubview(tableView)
+        [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
+        viewObject.nothingFoundView.centerToSuperView()
         tableView.fillSafeSuperView()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     @objc func handleRightBarButton(){print("")}
-
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -75,49 +71,36 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
 
 
 extension OpenController {
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        //This is called when user switches scopes
-        searchGroupIndex = selectedScope
-        tableView.reloadData()
-        //        ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
-        //        animateResultsAreFilteredLabel()
-    }
+//    func undoBlur() {
+//        removeDarkScreenBlur()
+//        navigationController?.setNavigationBarHidden(false, animated: true)
+//
+//        doesLocationEntityExist = false
+//        readOrCreateLocation()
+//        animateResultsAreFilteredLabel()
+//    }
     
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        //Text typed into Search Bar
-        if searchBarIsEmpty() {
-            resetAllFetchControllers()
-            return
+    func animateResultsAreFilteredLabel(){
+        if !UserAppliedFilter.shared.isFilterOn {return}
+        view.addSubview(viewObject.resultsAreFilteredLabel)
+        let safe = view.safeAreaLayoutGuide
+        viewObject.resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
+        viewObject.resultsAreFilteredLabel.alpha = 1
+        UIView.animate(withDuration: 1.5, animations: {
+            self.viewObject.resultsAreFilteredLabel.alpha = 0
+        }) { (_) in
+            self.viewObject.resultsAreFilteredLabel.removeFromSuperview()
         }
-        guard let searchString = searchController.searchBar.text else {return}
-        businessViewModel.search(search: searchString)
-        categoryViewModel.search(search: searchString)
-        tableView.reloadData()
     }
     
-    func resetAllFetchControllers() {
-        resetAllControllerAndPredicates()
-        DispatchQueue.main.async {self.tableView.reloadData()}
+    func showNothingLabel(tableEmpty: Bool){
+        if tableEmpty && searchController.isActive && !searchBarIsEmpty(){
+            viewObject.showNothingFoundView()
+        } else {
+            viewObject.hideNothingFoundView()
+        }
     }
-    
-    func resetAllControllerAndPredicates() {
-        businessViewModel.search(search: nil)
-        categoryViewModel.search(search: nil)
-        //        businessViewModel.fetchBusinessPredicate = nil
-        //        categoryViewModel.fetchCategoryArrayNamesPredicate = nil
-        //        fetchBusinessController = nil
-        //        fetchCategoryNames = nil
-        //        fetchFavoritePredicate = nil
-        //        fetchFavoritesController = nil
-    }
-    
-    func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
-    func reloadFetchControllers(){businessViewModel.fetchBusinessController = nil}
-    //    func updateBusinessPredicate(searchString: String){
-    //        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
-    //        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
-    //    }
 }
+
 
 
