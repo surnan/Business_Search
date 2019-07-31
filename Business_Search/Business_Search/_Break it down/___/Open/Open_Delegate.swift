@@ -44,16 +44,10 @@ class Open_Delegate: NSObject, UITableViewDelegate {
     
     
     private func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
-        viewModel.search(search: category)
         var businessArray = [Business]()    //Pushed into next ViewController
-        
-        //viewModel.fetchCategoriesController?.fetchedObjects?.forEach{businessArray.append($0.business!)}
-         viewModel.allObjects.forEach{
-            if let business = $0.business {
-                businessArray.append(business)
-            }
-        }
-        
+        viewModel.search(search: category)
+        viewModel.allObjects.forEach{
+            if let business = $0.business {businessArray.append(business)}}
         return businessArray
     }
     
@@ -62,7 +56,7 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         reloadCellAt = indexPath
         switch source.tableArrayType {
         case TableIndex.category.rawValue:
-            guard let currentCategory = source.categoryViewModel.fetchCategoryNames?[indexPath.row] else {return}
+            guard let currentCategory = source.categoryNameCountViewModel.fetchCategoryNames?[indexPath.row] else {return}
             let items = getBusinessesFromCategoryName(category: currentCategory)
             parent.coordinator?.loadTabController(businesses: items, categoryName: currentCategory)
         case TableIndex.business.rawValue:
@@ -74,3 +68,49 @@ class Open_Delegate: NSObject, UITableViewDelegate {
     }
 }
 
+extension Open_Delegate {
+    //MARK:- ROW RIGHT-SIDE ACTIONS
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let actionBusiness = UITableViewRowAction(style: .normal, title: "SHARE") {[unowned self] (action, indexPath) in
+            //guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
+            guard let currentBusiness = self.source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return}
+            self.shareBusiness(business: currentBusiness)
+        }
+        actionBusiness.backgroundColor = .darkBlue
+        let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") {[unowned self] (action, indexPath) in
+            //let currentCategory = self.dataDelegate.getCategoryName(at: indexPath.row)
+            let currentCategory = self.getCategoryName(at: indexPath.row)
+            
+            let items           = self.getBusinessesFromCategoryName(category: currentCategory)
+            let modder          = items.count - 1
+            let randomNumber    = Int.random(in: 0...modder)
+            self.parent.coordinator?.loadBusinessDetails(currentBusiness: items[randomNumber])
+        }
+        actionBusiness.backgroundColor = .red
+        actionCategory.backgroundColor = .blue
+        return source.tableArrayType == TableIndex.category.rawValue ? [actionCategory] : [actionBusiness]
+    }
+    
+    func getCategoryName(at index: Int) -> String {
+        //let categoryName = fetchCategoryNames![index]
+        let categoryName = source.categoryNameCountViewModel.fetchCategoryNames![index]
+        return categoryName
+    }
+    
+    func shareBusiness(business: Business){
+        let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
+            ?? "Please check this link. \n"
+        guard let temp = business.url else {return}
+        let items: [Any] = ["\(prependText) \(temp)"]
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {[unowned self](activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                return
+            }
+            //self.dismiss(animated: true, completion: nil)
+            self.parent.dismiss(animated: true, completion: nil)
+        }
+        //present(activityVC, animated: true)
+        parent.present(activityVC, animated: true)
+    }
+}

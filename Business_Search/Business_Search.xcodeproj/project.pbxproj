@@ -112,7 +112,7 @@
 		84E27D0B22EF6C3000D2CAE5 /* OpenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0A22EF6C3000D2CAE5 /* OpenController.swift */; };
 		84E27D0E22EF6C5700D2CAE5 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */; };
 		84E27D1022EF6C6B00D2CAE5 /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D0F22EF6C6B00D2CAE5 /* BusinessViewModel.swift */; };
-		84E27D1822EFD11C00D2CAE5 /* CategoryCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D1722EFD11B00D2CAE5 /* CategoryCountViewModel.swift */; };
+		84E27D1822EFD11C00D2CAE5 /* CategoryNameCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D1722EFD11B00D2CAE5 /* CategoryNameCountViewModel.swift */; };
 		84E27D1B22F0126100D2CAE5 /* Open_DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D1A22F0126100D2CAE5 /* Open_DataSource.swift */; };
 		84E27D1D22F0793C00D2CAE5 /* OpenController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D1C22F0793C00D2CAE5 /* OpenController+Search.swift */; };
 		84E27D1F22F08E7D00D2CAE5 /* Open_Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */; };
@@ -231,7 +231,7 @@
 		84E27D0A22EF6C3000D2CAE5 /* OpenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenController.swift; sourceTree = "<group>"; };
 		84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
 		84E27D0F22EF6C6B00D2CAE5 /* BusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModel.swift; sourceTree = "<group>"; };
-		84E27D1722EFD11B00D2CAE5 /* CategoryCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCountViewModel.swift; sourceTree = "<group>"; };
+		84E27D1722EFD11B00D2CAE5 /* CategoryNameCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameCountViewModel.swift; sourceTree = "<group>"; };
 		84E27D1A22F0126100D2CAE5 /* Open_DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open_DataSource.swift; sourceTree = "<group>"; };
 		84E27D1C22F0793C00D2CAE5 /* OpenController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenController+Search.swift"; sourceTree = "<group>"; };
 		84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open_Delegate.swift; sourceTree = "<group>"; };
@@ -758,7 +758,7 @@
 			isa = PBXGroup;
 			children = (
 				84E27D0F22EF6C6B00D2CAE5 /* BusinessViewModel.swift */,
-				84E27D1722EFD11B00D2CAE5 /* CategoryCountViewModel.swift */,
+				84E27D1722EFD11B00D2CAE5 /* CategoryNameCountViewModel.swift */,
 				84E27D2222F09EFB00D2CAE5 /* CategoryViewModel.swift */,
 			);
 			path = ViewModel;
@@ -897,7 +897,7 @@
 			files = (
 				847AE28F22EE9A9A00774371 /* FilterController+Handlers.swift in Sources */,
 				848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */,
-				84E27D1822EFD11C00D2CAE5 /* CategoryCountViewModel.swift in Sources */,
+				84E27D1822EFD11C00D2CAE5 /* CategoryNameCountViewModel.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
