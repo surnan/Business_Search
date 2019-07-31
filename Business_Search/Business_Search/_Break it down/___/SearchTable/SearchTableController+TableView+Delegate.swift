@@ -12,8 +12,41 @@ import UIKit
 //These functions are called by TableView Delegate
 extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
     func loadBusinessDetails(currentBusiness: Business){coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)}
-    func updateBusinessIsFavorite(business: Business)->Bool{return business.isFavoriteChange(context: dataController.viewContext)}
     func reloadData(){viewObject.tableView.reloadData()}
+    
+    //MARK:- Favorites
+    func updateBusinessIsFavorite(business: Business)->Bool{
+        return business.isFavoriteChange(context: dataController.viewContext)
+    }
+    
+    func deleteFavorite(business: Business){
+        tableDataSource.updateFavoritesPredicate(business: business)
+        tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+            dataController.viewContext.delete(item)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error)
+                print(error.localizedDescription)
+            }
+        })
+    }
+    
+    func createFavorite(business: Business){
+        let context = dataController.viewContext
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
+        do {
+            try context.save()
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////
     
     //MARK:- ROW RIGHT-SIDE ACTIONS
     func shareBusiness(business: Business){
@@ -45,31 +78,7 @@ extension SearchTableController: OpeningControllerProtocol, BusinessDetailsType{
         present(activityVC, animated: true)
     }
     
-    //MARK:- Favorites
-    func deleteFavorite(business: Business){
-        tableDataSource.updateFavoritesPredicate(business: business)
-        tableDataSource.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
-            dataController.viewContext.delete(item)
-            do {
-                try dataController.viewContext.save()
-            } catch {
-                print(error)
-                print(error.localizedDescription)
-            }
-        })
-    }
-    
-    func createFavorite(business: Business){
-        let context = dataController.viewContext
-        let newFavorite2 = Favorites(context: context)
-        newFavorite2.id = business.id
-        do {
-            try context.save()
-        } catch {
-            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
-            print("\n\nError saving newly created favorite - full error: \n\(error)")
-        }
-    }
+
     
     //MARK: - Row Action when Search Group = "Categories"
     func listBusinesses(category: String){

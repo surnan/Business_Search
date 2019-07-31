@@ -13,6 +13,7 @@ class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpda
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryNameCountViewModel!
+    var favoritesViewModel  : FavoritesViewModel!
     var viewObject          : OpenView!
     var dataController      : DataController!
     var latitude            : Double!

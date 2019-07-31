@@ -51,19 +51,49 @@ extension Open_Delegate {
 }
 
 extension Open_Delegate {
+    func updateBusinessIsFavorite(business: Business)->Bool{
+        return business.isFavoriteChange(context: dataController.viewContext)   //Core Data Extension
+    }
+    
+    func resetBusinessController(){
+        source.businessViewModel.fetchBusinessController = nil
+    }
+    
+    
+    func createFavorite(business: Business){
+        let context = dataController.viewContext
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
+        do {
+            try context.save()
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
+    }
+    
+    func deleteFavorite(business: Business){
+        source.favoriteViewModel.search(business: business)
+        source.favoriteViewModel.fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+            dataController.viewContext.delete(item)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error)
+                print(error.localizedDescription)
+            }
+        })
+    }
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        //if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
-        //let currentBusiness = dataDelegate.getBusiness(at: indexPath)
         if source.tableArrayType == TableIndex.category.rawValue {return nil}
         guard let currentBusiness = source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
-            //guard let self  = self, let dd = self.dataDelegate, let delegate = self.delegate else {return}
             guard let self = self else {return}
-            //            let isFavorite  = delegate.updateBusinessIsFavorite(business: currentBusiness)
-            //            isFavorite ? delegate.createFavorite(business: currentBusiness)
-            //                :delegate.deleteFavorite(business: currentBusiness)
-            //            dd.resetBusinessController()
-            //            delegate.reloadData()
+            let isFavorite  = self.updateBusinessIsFavorite(business: currentBusiness)
+            isFavorite ? self.createFavorite(business: currentBusiness) : self.deleteFavorite(business: currentBusiness)
+            self.resetBusinessController()
+            self.parent.tableView.reloadData()
             myBool(true)                                //Dismiss the leading swipe from UI
         }
         action.image            = currentBusiness.isFavorite    ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")

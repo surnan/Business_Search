@@ -22,6 +22,7 @@ protocol DataSourceParent {
 class Open_DataSource: NSObject, UITableViewDataSource {
     let businessViewModel           : BusinessViewModel
     let categoryNameCountViewModel  : CategoryNameCountViewModel
+    let favoriteViewModel           : FavoritesViewModel
     let latitude                    : Double
     let longitude                   : Double
     let dataController              : DataController
@@ -37,6 +38,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         self.latitude           = parent.latitude
         self.longitude          = parent.longitude
         self.dataController     = parent.dataController
+        self.favoriteViewModel  = parent.favoritesViewModel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

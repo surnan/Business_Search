@@ -24,7 +24,7 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
     func start(parent: Coordinator){
         let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
         let newCategoryViewModel    = CategoryNameCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
-        
+        let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
         
         let newViewObject           = OpenView()
         let newController           = OpenController()
@@ -33,6 +33,7 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         
         newController.businessViewModel = newBusinessViewModel  //1
         newController.categoryViewModel = newCategoryViewModel  //2
+        newController.favoritesViewModel = newFavoritesViewModel
         
         newController.viewObject        = newViewObject
         newController.dataController    = dataController
@@ -81,18 +82,6 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         router.present(activityVC, animated: true)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 //        func _start(parent: Coordinator){
 //            let newViewModel        = SearchTableViewModel()

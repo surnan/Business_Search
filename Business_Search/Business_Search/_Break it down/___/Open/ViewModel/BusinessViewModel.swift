@@ -43,6 +43,11 @@ class BusinessViewModel {
         }
     }
     
+    func isFavorite(at indexPath: IndexPath)->Bool{
+        let currentBusiness = fetchBusinessController?.object(at: indexPath)
+        return currentBusiness?.isFavorite ?? false
+    }
+    
     var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
             if fetchBusinessController == nil { //+3
