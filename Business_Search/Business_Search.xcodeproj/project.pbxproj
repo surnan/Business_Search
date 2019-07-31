@@ -18,6 +18,7 @@
 		8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */; };
 		8408F0E622E60E0500DB55B6 /* SearchTableController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408F0E522E60E0500DB55B6 /* SearchTableController+Search.swift */; };
 		8408F0E822E60E1800DB55B6 /* SearchTableController+NothingFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408F0E722E60E1700DB55B6 /* SearchTableController+NothingFound.swift */; };
+		840CC5FC22F1454500BAC72F /* Open_Delegate+RowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */; };
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
 		841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */; };
@@ -135,6 +136,7 @@
 		8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapCoordinator.swift; sourceTree = "<group>"; };
 		8408F0E522E60E0500DB55B6 /* SearchTableController+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchTableController+Search.swift"; sourceTree = "<group>"; };
 		8408F0E722E60E1700DB55B6 /* SearchTableController+NothingFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchTableController+NothingFound.swift"; sourceTree = "<group>"; };
+		840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Open_Delegate+RowAction.swift"; sourceTree = "<group>"; };
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabCoordinator.swift; sourceTree = "<group>"; };
@@ -282,6 +284,15 @@
 				845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */,
 			);
 			path = _Protocols;
+			sourceTree = "<group>";
+		};
+		840CC5FA22F144D000BAC72F /* TableView Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */,
+				840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */,
+			);
+			path = "TableView Delegate";
 			sourceTree = "<group>";
 		};
 		8414475D2266C49900A38AAB /* Yelp */ = {
@@ -748,8 +759,8 @@
 				84E27D1C22F0793C00D2CAE5 /* OpenController+Search.swift */,
 				84E27D2022F0963200D2CAE5 /* OpenController+UI.swift */,
 				84E27D1A22F0126100D2CAE5 /* Open_DataSource.swift */,
-				84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */,
 				84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */,
+				840CC5FA22F144D000BAC72F /* TableView Delegate */,
 			);
 			path = Open;
 			sourceTree = "<group>";
@@ -916,6 +927,7 @@
 				84E27D1D22F0793C00D2CAE5 /* OpenController+Search.swift in Sources */,
 				841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
+				840CC5FC22F1454500BAC72F /* Open_Delegate+RowAction.swift in Sources */,
 				849A934822CD032300DE6658 /* OpeningTableDelegate.swift in Sources */,
 				84365CB322C567B50014E577 /* Float+Extension.swift in Sources */,
 				8401126522E29FE800ECE0D5 /* Coordinators.swift in Sources */,
