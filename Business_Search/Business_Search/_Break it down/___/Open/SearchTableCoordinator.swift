@@ -45,25 +45,6 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
             print("-2 popped -2")
         }
     }
-
-//        func _start(parent: Coordinator){
-//            let newViewModel        = SearchTableViewModel()
-//            let newViewObject       = SearchTableView()
-//
-//            newViewObject.viewModel = newViewModel
-//            let coordinate = location.coordinate
-//            let newController = SearchTableController()
-//            newController.dataController = dataController
-//            newController.latitude = coordinate.latitude
-//            newController.longitude = coordinate.longitude
-//            newController.coordinator = self
-//            newController.viewObject               = newViewObject
-//            newController.viewModel                = newViewModel
-//            router.push(newController, animated: true) {[weak self, weak parent] in
-//                parent?.removeChild(self)
-//                print("-2 popped -2")
-//            }
-//        }
     
     func loadBusinessDetails(currentBusiness: Business){
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
@@ -87,3 +68,34 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         coordinator.start(parent: self)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        func _start(parent: Coordinator){
+//            let newViewModel        = SearchTableViewModel()
+//            let newViewObject       = SearchTableView()
+//
+//            newViewObject.viewModel = newViewModel
+//            let coordinate = location.coordinate
+//            let newController = SearchTableController()
+//            newController.dataController = dataController
+//            newController.latitude = coordinate.latitude
+//            newController.longitude = coordinate.longitude
+//            newController.coordinator = self
+//            newController.viewObject               = newViewObject
+//            newController.viewModel                = newViewModel
+//            router.push(newController, animated: true) {[weak self, weak parent] in
+//                parent?.removeChild(self)
+//                print("-2 popped -2")
+//            }
+//        }

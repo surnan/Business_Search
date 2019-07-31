@@ -72,13 +72,11 @@ extension Open_Delegate {
     //MARK:- ROW RIGHT-SIDE ACTIONS
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let actionBusiness = UITableViewRowAction(style: .normal, title: "SHARE") {[unowned self] (action, indexPath) in
-            //guard let currentBusiness = self.delegate.getModel.fetchBusinessController?.object(at: indexPath) else {return}
             guard let currentBusiness = self.source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return}
             self.shareBusiness(business: currentBusiness)
         }
         actionBusiness.backgroundColor = .darkBlue
         let actionCategory = UITableViewRowAction(style: .normal, title: "RANDOM") {[unowned self] (action, indexPath) in
-            //let currentCategory = self.dataDelegate.getCategoryName(at: indexPath.row)
             let currentCategory = self.getCategoryName(at: indexPath.row)
             
             let items           = self.getBusinessesFromCategoryName(category: currentCategory)
@@ -92,8 +90,8 @@ extension Open_Delegate {
     }
     
     func getCategoryName(at index: Int) -> String {
-        //let categoryName = fetchCategoryNames![index]
-        let categoryName = source.categoryNameCountViewModel.fetchCategoryNames![index]
+        guard let categoryNames = source.categoryNameCountViewModel.fetchCategoryNames else {return ""}
+        let categoryName = categoryNames[index]
         return categoryName
     }
     
@@ -107,10 +105,37 @@ extension Open_Delegate {
             if !completed {
                 return
             }
-            //self.dismiss(animated: true, completion: nil)
             self.parent.dismiss(animated: true, completion: nil)
         }
-        //present(activityVC, animated: true)
         parent.present(activityVC, animated: true)
     }
 }
+
+/*
+extension Open_Delegate {
+    //MARK:- ROW LEFT-SIDE ACTIONS
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //if delegate.getModel.tableViewArrayType == TableIndex.category.rawValue {return nil}
+        if source.tableArrayType == TableIndex.category.rawValue {return nil}
+        
+        
+        //let currentBusiness = dataDelegate.getBusiness(at: indexPath)
+        guard let currentBusiness = source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return nil}
+        
+        
+        let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
+            guard let self  = self, let dd = self.dataDelegate, let delegate = self.delegate else {return}
+            let isFavorite  = delegate.updateBusinessIsFavorite(business: currentBusiness)
+            isFavorite ? delegate.createFavorite(business: currentBusiness)
+                :delegate.deleteFavorite(business: currentBusiness)
+            dd.resetBusinessController()
+            delegate.reloadData()
+            myBool(true)                                //Dismiss the leading swipe from UI
+        }
+        action.image            = currentBusiness.isFavorite    ?  #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
+        action.backgroundColor  =  currentBusiness.isFavorite   ? .lightSteelBlue1 : .orange
+        let configuration       = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
+}
+*/
