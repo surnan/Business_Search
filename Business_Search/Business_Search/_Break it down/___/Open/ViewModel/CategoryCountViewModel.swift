@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CategoryNameCountViewModel {
+class CategoryCountViewModel {
     private var dataController: DataController
     private var latitude: Double
     private var longitude: Double

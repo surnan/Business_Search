@@ -9,9 +9,9 @@
 import UIKit
 
 class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
-    var coordinator         : SearchTableCoordinator?
+    var coordinator         : OpenCoordinator?
     var businessViewModel   : BusinessViewModel!
-    var categoryViewModel   : CategoryNameCountViewModel!
+    var categoryViewModel   : CategoryCountViewModel!
     var favoritesViewModel  : FavoritesViewModel!
     var viewObject          : OpenView!
     var dataController      : DataController!

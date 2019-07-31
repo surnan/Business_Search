@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
+class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
     private let dataController  : DataController
     private let location        : CLLocation
     var getLatitude             : Double {return location.coordinate.latitude}
@@ -19,11 +19,11 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         self.dataController = dataController
         self.location       = location
         super.init(router: router)
-    }                     
+    }
     
     func start(parent: Coordinator){
         let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
-        let newCategoryViewModel    = CategoryNameCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
+        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
         let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
         
         let newViewObject           = OpenView()
@@ -101,3 +101,29 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
 //                print("-2 popped -2")
 //            }
 //        }
+
+//func start(parent: Coordinator){
+//    let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
+//    let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
+//    let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
+//
+//    let newViewObject           = OpenView()
+//    let newController           = OpenController()
+//
+//    newViewObject.viewModel         = newBusinessViewModel
+//
+//    newController.businessViewModel = newBusinessViewModel  //1
+//    newController.categoryViewModel = newCategoryViewModel  //2
+//    newController.favoritesViewModel = newFavoritesViewModel
+//
+//    newController.viewObject        = newViewObject
+//    newController.dataController    = dataController
+//    newController.latitude          = getLatitude
+//    newController.longitude         = getLongitude
+//    newController.coordinator       = self
+//
+//    router.push(newController, animated: true) {[weak self, weak parent] in
+//        parent?.removeChild(self)
+//        print("-2 popped -2")
+//    }
+//}

@@ -11,7 +11,7 @@ import UIKit
 
 protocol DataSourceParent {
     var businessViewModel   : BusinessViewModel! {get}
-    var categoryViewModel   : CategoryNameCountViewModel! {get}
+    var categoryViewModel   : CategoryCountViewModel! {get}
     var latitude            : Double! {get}
     var longitude           : Double! {get}
     var dataController      : DataController! {get}
@@ -21,7 +21,7 @@ protocol DataSourceParent {
 
 class Open_DataSource: NSObject, UITableViewDataSource {
     let businessViewModel           : BusinessViewModel
-    let categoryNameCountViewModel  : CategoryNameCountViewModel
+    let categoryNameCountViewModel  : CategoryCountViewModel
     let favoriteViewModel           : FavoritesViewModel
     let latitude                    : Double
     let longitude                   : Double
