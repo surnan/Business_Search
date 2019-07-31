@@ -9,7 +9,7 @@
 import UIKit
 
 class Open_Delegate: NSObject, UITableViewDelegate {
-    private let coordinator: SearchTableCoordinator?
+    let coordinator: SearchTableCoordinator?
     let parent: OpenController
     let source: Open_DataSource
     private var reloadCellAt: IndexPath?

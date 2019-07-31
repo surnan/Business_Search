@@ -20,7 +20,7 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         self.location       = location
         super.init(router: router)
     }                     
-                                   
+    
     func start(parent: Coordinator){
         let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
         let newCategoryViewModel    = CategoryNameCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
@@ -28,18 +28,18 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
         
         let newViewObject           = OpenView()
         let newController           = OpenController()
-
+        
         newViewObject.viewModel         = newBusinessViewModel
-
+        
         newController.businessViewModel = newBusinessViewModel  //1
         newController.categoryViewModel = newCategoryViewModel  //2
-
+        
         newController.viewObject        = newViewObject
         newController.dataController    = dataController
         newController.latitude          = getLatitude
         newController.longitude         = getLongitude
         newController.coordinator       = self
-
+        
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
@@ -57,7 +57,7 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
                                               router: router, maximumSliderValue: radius)
         coordinator.start(parent: self)
     }
-
+    
     func loadFilter(unblurProtocol: UnBlurViewProtocol){
         let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
         coordinator.start(parent: self)
@@ -66,6 +66,19 @@ class SearchTableCoordinator: Coordinator, SettingsType, BusinessDetailsType, Fi
     func loadTabController(businesses: [Business], categoryName: String){
         let coordinator = MyTabCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         coordinator.start(parent: self)
+    }
+    
+    func shareItems(items: [Any]){
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityVC.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                return
+            }
+            activityVC.dismiss(animated: true, completion: {[weak self] in
+                self?.router.dismissModule(animated: true, completion: nil)
+            })
+        }
+        router.present(activityVC, animated: true)
     }
 }
 
