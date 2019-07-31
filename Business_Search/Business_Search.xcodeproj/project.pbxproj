@@ -19,6 +19,7 @@
 		8408F0E622E60E0500DB55B6 /* SearchTableController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408F0E522E60E0500DB55B6 /* SearchTableController+Search.swift */; };
 		8408F0E822E60E1800DB55B6 /* SearchTableController+NothingFound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8408F0E722E60E1700DB55B6 /* SearchTableController+NothingFound.swift */; };
 		840CC5FC22F1454500BAC72F /* Open_Delegate+RowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */; };
+		840CC5FE22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CC5FD22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift */; };
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
 		841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */; };
@@ -137,6 +138,7 @@
 		8408F0E522E60E0500DB55B6 /* SearchTableController+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchTableController+Search.swift"; sourceTree = "<group>"; };
 		8408F0E722E60E1700DB55B6 /* SearchTableController+NothingFound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SearchTableController+NothingFound.swift"; sourceTree = "<group>"; };
 		840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Open_Delegate+RowAction.swift"; sourceTree = "<group>"; };
+		840CC5FD22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Open_Delegate+LeadingSwype.swift"; sourceTree = "<group>"; };
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabCoordinator.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			children = (
 				84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */,
 				840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */,
+				840CC5FD22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift */,
 			);
 			path = "TableView Delegate";
 			sourceTree = "<group>";
@@ -1014,6 +1017,7 @@
 				847AE29322EEA5C800774371 /* SearchTableView.swift in Sources */,
 				847AE27822EDE1B100774371 /* SearchByMapView.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */,
+				840CC5FE22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
 				846509BA227A0C06008ABA9F /* SearchTableController.swift in Sources */,
 				847AE23A22E922DC00774371 /* CategoryCellViewModel.swift in Sources */,
