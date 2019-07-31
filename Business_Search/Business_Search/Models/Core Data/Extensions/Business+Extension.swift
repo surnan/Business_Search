@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+
+
+//ALL THESE CAN BE DELETED AFTER SearchTableController is deleted
 extension Business {
     func isFavoriteTrue(context: NSManagedObjectContext){
         self.isFavorite = true
@@ -41,5 +44,4 @@ extension Business {
             return false
         }
     }
-    
 }

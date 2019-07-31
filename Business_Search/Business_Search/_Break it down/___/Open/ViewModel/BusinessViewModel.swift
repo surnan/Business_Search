@@ -24,6 +24,10 @@ class BusinessViewModel {
     }
     
     //MARK:- NON-Private
+    func resetController(){
+        fetchBusinessController = nil
+    }
+    
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     

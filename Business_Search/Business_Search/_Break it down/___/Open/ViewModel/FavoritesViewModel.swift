@@ -18,6 +18,10 @@ class FavoritesViewModel {
     }
     
     //MARK:- NON-Private
+    func resetController(){
+        fetchFavoritesController = nil
+    }
+    
     func search(id: String){
         fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
     }
@@ -25,6 +29,18 @@ class FavoritesViewModel {
     func search(business: Business){
         guard let id = business.id else {return}
         fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
+    }
+    
+    func changeFavorite(business: Business)->Bool{
+        do {
+            business.isFavorite = !business.isFavorite
+            try dataController.viewContext.save()
+            return business.isFavorite
+        } catch {
+            print(error)
+            print(error.localizedDescription)
+            return business.isFavorite
+        }
     }
     
     func deleteFavorite(business: Business){
@@ -39,7 +55,6 @@ class FavoritesViewModel {
         })
     }
     
-    
     func createFavorite(business: Business){
         let context = dataController.viewContext
         let newFavorite2 = Favorites(context: context)
@@ -51,7 +66,6 @@ class FavoritesViewModel {
             print("\n\nError saving newly created favorite - full error: \n\(error)")
         }
     }
-    
 
     var fetchFavoritesController: NSFetchedResultsController<Favorites>?{
         didSet{

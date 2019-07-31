@@ -26,6 +26,10 @@ class CategoryViewModel {
     
     
     //MARK:- NON-Private
+    func resetController(){
+        fetchCategoriesController = nil
+    }
+    
     var getCount: Int {return fetchCategoriesController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchCategoriesController?.fetchedObjects?.count == 0}
     var allObjects: [Category] {return fetchCategoriesController?.fetchedObjects ?? []}

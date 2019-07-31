@@ -20,6 +20,10 @@ class CategoryNameCountViewModel {
     
     
     //MARK:- NON-Private
+    func resetController(){
+        fetchCategoryNames = nil
+    }
+    
     var getCount: Int {return fetchCategoryNames?.count ?? 0}
     var isEmpty: Bool {return fetchCategoryNames?.count == 0}
     

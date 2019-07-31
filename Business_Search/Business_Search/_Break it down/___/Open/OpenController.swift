@@ -8,8 +8,7 @@
 
 import UIKit
 
-//class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
-class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UISearchControllerDelegate {
+class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent {
     var coordinator         : SearchTableCoordinator?
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryNameCountViewModel!
@@ -18,10 +17,9 @@ class OpenController: UIViewController, UISearchBarDelegate, UISearchResultsUpda
     var dataController      : DataController!
     var latitude            : Double!
     var longitude           : Double!
-    
-    var searchGroupIndex    = 0
     var tableViewArrayType  : Int { return searchGroupIndex }
     enum TableIndex         : Int { case business = 0, category }
+    var searchGroupIndex    = 0
 
     lazy var tableDataSource = Open_DataSource(parent: self)
     lazy var tableDelegate = Open_Delegate(parent: self, source: tableDataSource)
