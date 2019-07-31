@@ -33,8 +33,7 @@ class OpeningTableDelegate: NSObject, UITableViewDelegate {
         let action = UIContextualAction(style: .normal, title: "Favorite") { [weak self] (action, view, myBool) in
             guard let self  = self, let dd = self.dataDelegate, let delegate = self.delegate else {return}
             let isFavorite  = delegate.updateBusinessIsFavorite(business: currentBusiness)
-            isFavorite ? delegate.createFavorite(business: currentBusiness)
-                :delegate.deleteFavorite(business: currentBusiness)
+            isFavorite ? delegate.createFavorite(business: currentBusiness) :delegate.deleteFavorite(business: currentBusiness)
             dd.resetBusinessController()
             delegate.reloadData()
             myBool(true)                                //Dismiss the leading swipe from UI
