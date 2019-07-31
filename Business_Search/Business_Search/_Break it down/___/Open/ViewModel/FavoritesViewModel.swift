@@ -27,6 +27,30 @@ class FavoritesViewModel {
         fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
     }
     
+    func deleteFavorite(business: Business){
+        fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+            dataController.viewContext.delete(item)
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print(error)
+                print(error.localizedDescription)
+            }
+        })
+    }
+    
+    
+    func createFavorite(business: Business){
+        let context = dataController.viewContext
+        let newFavorite2 = Favorites(context: context)
+        newFavorite2.id = business.id
+        do {
+            try context.save()
+        } catch {
+            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\n\nError saving newly created favorite - full error: \n\(error)")
+        }
+    }
     
 
     var fetchFavoritesController: NSFetchedResultsController<Favorites>?{
