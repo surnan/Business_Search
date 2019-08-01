@@ -25,7 +25,7 @@ extension OpenController {
         imageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = imageView
         troubleshootFromNavigationMenu()
-        //navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
     }
     
     @objc func handleShowSearch(){
@@ -39,22 +39,21 @@ extension OpenController {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //readOrCreateLocation() <-- maybe place it here to nail down the latitude & longitude?  Then create the TableDataSource? & maybe the viewModels?
-        
-        tableView.dataSource = tableDataSource
-        tableView.delegate = tableDelegate
-        businessViewModel.fetchBusinessController   = nil
-        categoryCountViewModel.fetchCategoryNames        = nil
+    func setupUI(){
+        setupNavigationMenu()
         definesPresentationContext = true
-        navigationItem.searchController             = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
         [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
         viewObject.nothingFoundView.centerToSuperView()
         tableView.fillSafeSuperView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        tableView.dataSource = tableDataSource
+        tableView.delegate = tableDelegate
         readOrCreateLocation()
-        setupNavigationMenu()
     }
     
     func readOrCreateLocation(){                                        //Check if location exists or download
@@ -69,10 +68,6 @@ extension OpenController {
                                          completion: handleGetNearbyBusinesses(inputData:result:))
             return
         }
-        
-        
-        
-        
         
         func updateCoordinates(latitude: Double, longitude: Double){
             self.latitude = latitude

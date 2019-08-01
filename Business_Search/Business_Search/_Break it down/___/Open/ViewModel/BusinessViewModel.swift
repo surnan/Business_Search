@@ -51,6 +51,8 @@ class BusinessViewModel {
         self.dataController = dataController
         self.latitude = lat
         self.longitude = lon
+        
+        fetchBusinessController = nil
     }
 
     func search(search: String?){

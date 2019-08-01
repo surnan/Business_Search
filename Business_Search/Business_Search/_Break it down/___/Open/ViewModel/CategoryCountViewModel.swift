@@ -40,6 +40,8 @@ class CategoryCountViewModel {
         self.dataController = dataController
         self.latitude = lat
         self.longitude = lon
+        
+        fetchCategoryNames = nil
     }
     
 
