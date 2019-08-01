@@ -67,7 +67,7 @@ extension OpenController {
         }
         
         func updateCoordinates(latitude: Double, longitude: Double){
-            self.updateLatLon(lat: latitude, lon: longitude)
+            self.updateCoordinate(lat: latitude, lon: longitude)
             coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
         }
         //While "return" can break out of the function
@@ -77,10 +77,9 @@ extension OpenController {
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
             if miles < 0.5 {
                 let lat = locationArray[index].latitude; let lon = locationArray[index].longitude
-                updateLatLon(lat: lat, lon: lon)
+                updateCoordinates(latitude: lat, longitude: lon)
                 updateCoordinates(latitude: getLatitude, longitude: getLongitude)
                 businessViewModel.reload()
-                //categoryCountViewModel.reload(lat: getLatitude, long: getLongitude)
                 categoryCountViewModel.reload()
                 return                           //Exit the function
             }

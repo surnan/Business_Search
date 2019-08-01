@@ -26,34 +26,22 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
     }
     
     func start(parent: Coordinator){
-        let newController           = OpenController(lat: getLatitude, lon: getLongitude)
-        let newBusinessViewModel    = BusinessViewModel(delegate: newController, dataController: dataController)
-        let newCategoryViewModel    = CategoryCountViewModel(delegate: newController, dataController: dataController)
+        let newController       = OpenController(lat: getLatitude, lon: getLongitude)
+        let businessViewModel   = BusinessViewModel(delegate: newController, dataController: dataController)
+        let categoryViewModel   = CategoryCountViewModel(delegate: newController, dataController: dataController)
+        let favoritesViewModel  = FavoritesViewModel(dataController: dataController)
+        let locationViewModel   = LocationViewModel(latitude: getLatitude, longitude: getLongitude, dataController: dataController)
+        let viewObject          = OpenView()
         
+        viewObject.viewModel    = businessViewModel
         
-        
-        
-        let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
-        
-        
-        
-        
-        
-        let newLocationViewModel    = LocationViewModel(latitude: getLatitude, longitude: getLongitude, dataController: dataController)
-        
-        let newViewObject           = OpenView()
-        
-        
-        newViewObject.viewModel     = newBusinessViewModel
-        
-        newController.businessViewModel     = newBusinessViewModel  //1
-        newController.categoryCountViewModel     = newCategoryViewModel  //2
-        newController.favoritesViewModel    = newFavoritesViewModel
-        newController.locationViewModel     = newLocationViewModel
-        
-        newController.viewObject        = newViewObject
-        newController.dataController    = dataController
-        newController.coordinator       = self
+        newController.businessViewModel     = businessViewModel
+        newController.categoryCountViewModel = categoryViewModel
+        newController.favoritesViewModel    = favoritesViewModel
+        newController.locationViewModel     = locationViewModel
+        newController.viewObject            = viewObject
+        newController.dataController        = dataController
+        newController.coordinator           = self
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

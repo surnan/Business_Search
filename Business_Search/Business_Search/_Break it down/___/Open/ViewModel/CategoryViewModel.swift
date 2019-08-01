@@ -13,6 +13,12 @@ class CategoryViewModel {
     private var dataController: DataController
     private var latitude    : Double
     private var longitude   : Double
+    
+    init(dataController: DataController, lat: Double, lon: Double) {
+        self.dataController = dataController
+        self.latitude       = lat
+        self.longitude      = lon
+    }
 
     private var predicateCategoryLatitude: NSPredicate {
        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
@@ -30,38 +36,23 @@ class CategoryViewModel {
     }
     
     //MARK:- NON-Private
-    func reload(){
-        fetchCategoriesController = nil
-    }
-    
-    func reload(lat: Double, long: Double){
-        self.latitude = lat
-        self.longitude = long
-        reload()
-    }
-    
     var getCount: Int {return fetchCategoriesController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchCategoriesController?.fetchedObjects?.count == 0}
     var allObjects: [Category] {return fetchCategoriesController?.fetchedObjects ?? []}
-    
-    init(dataController: DataController, lat: Double, lon: Double) {
-        self.dataController = dataController
-        self.latitude       = lat
-        self.longitude      = lon
-    }
+
+    func reload() {fetchCategoriesController = nil}
     
     func search(search: String?){
         if let search = search {
             selectedCategoryPredicate    = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])
-            fetchCategoriesController    = nil
+            reload()
         } else {
             selectedCategoryPredicate    = nil
-            fetchCategoriesController    = nil
+            reload()
         }
     }
-
     
-    var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
+    private var fetchCategoriesController: NSFetchedResultsController<Category>? { //+1
         didSet {    //+2
             if fetchCategoriesController == nil { //+3
                 fetchCategoriesController = {   //+4
@@ -93,4 +84,3 @@ class CategoryViewModel {
         }   //-2
     }   //-1
 }
-

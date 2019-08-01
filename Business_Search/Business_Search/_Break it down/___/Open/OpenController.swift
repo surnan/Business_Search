@@ -45,16 +45,9 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     enum TableIndex             : Int { case business = 0, category }
     var searchGroupIndex        = 0
     
-    
-    func updateLatLon(lat: Double, lon: Double){
-        self.latitude = lat
-        self.longitude = lon
-    }
-    
-    
     init(lat: Double, lon: Double) {
-        self.latitude   = lat
-        self.longitude  = lon
+        self.latitude           = lat
+        self.longitude          = lon
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -74,7 +67,6 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     }()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
-    @objc func handleRightBarButton(){print("")}
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -96,4 +88,9 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         }
         return searchController
     }()
+    
+    func updateCoordinate(lat: Double, lon: Double){
+        self.latitude = lat
+        self.longitude = lon
+    }
 }

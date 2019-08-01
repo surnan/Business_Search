@@ -38,8 +38,6 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         self.parent             = parent
         self.businessViewModel  = parent.businessViewModel
         self.categoryNameCountViewModel  = parent.categoryCountViewModel
-//        self.latitude           = parent.latitude
-//        self.longitude          = parent.longitude
         self.dataController     = parent.dataController
         self.favoriteViewModel  = parent.favoritesViewModel
     }
@@ -61,16 +59,18 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableArrayType {
         case TableIndex.business.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-            
-            //guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
-            let business = businessViewModel.objectAt(indexPath: indexPath)
+            let cell            = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+            let business        = businessViewModel.objectAt(indexPath: indexPath)
             cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
             return cell
         case TableIndex.category.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-            let currentCategoryName = categoryNameCountViewModel.objectAt(indexPath: indexPath)
-            cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: parent.getLatitude, longitude: parent.getLongitude, dataController: dataController)
+            let cell            = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
+            let categoryName    = categoryNameCountViewModel.objectAt(indexPath: indexPath)
+            cell.firstViewModel = CategoryCellViewModel(name: categoryName,
+                                                        colorIndex: indexPath,
+                                                        latitude: parent.getLatitude,
+                                                        longitude: parent.getLongitude,
+                                                        dataController: dataController)
             return cell
         default:
             print("cellForRowAt --> WHOOOOOPS!!!")

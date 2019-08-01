@@ -20,7 +20,6 @@ class Open_Delegate: NSObject, UITableViewDelegate {
                                                    lat: parent.getLatitude,
                                                    lon: parent.getLongitude)
     
-    
     init(parent: OpenController, source: Open_DataSource) {
         self.parent = parent
         self.source = source
@@ -34,12 +33,10 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         reloadCellAt = nil
     }
     
-    
     private func updateCategoryPredicate(category: String){
         selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
-        viewModel.fetchCategoriesController = nil
+        viewModel.reload()
     }
-    
     
     func getBusinessesFromCategoryName(category: String)-> [Business]{  //NOT shown in this tableView.
         var businessArray = [Business]()    //Pushed into next ViewController
@@ -48,7 +45,6 @@ class Open_Delegate: NSObject, UITableViewDelegate {
             if let business = $0.business {businessArray.append(business)}}
         return businessArray
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         reloadCellAt = indexPath
