@@ -16,19 +16,15 @@ class BusinessViewModel {
     init(delegate: OpenControllerDelegate, dataController: DataController) {
         self.dataController = dataController
         self.delegate = delegate
-        fetchBusinessController = nil
     }
 
-
-    var predicateBusinessLatitude: NSPredicate {
+    private var predicateBusinessLatitude: NSPredicate {
         return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), delegate.getLatitude])
     }
     
-    var predicateBusinessLongitude: NSPredicate {
+    private var predicateBusinessLongitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), delegate.getLongitude])
     }
-    
-    
     
     private var fetchBusinessPredicate : NSPredicate? {
         didSet {
@@ -38,28 +34,23 @@ class BusinessViewModel {
     }
     
     //MARK:- NON-Private
-    func reload(){
-        fetchBusinessController = nil
-    }
-
-    
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
-    
+    func reload(){fetchBusinessController = nil}
 
     func search(search: String?){
         if let search = search {
             fetchBusinessPredicate  = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [search])
-            fetchBusinessController = nil
+            reload()
         } else {
             fetchBusinessPredicate  = nil
-            fetchBusinessController = nil
+            reload()
         }
     }
     
     func search(id: String){
         fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
-        fetchBusinessController = nil
+        reload()
     }
     
     
