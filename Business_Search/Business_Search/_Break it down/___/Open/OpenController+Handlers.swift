@@ -141,8 +141,6 @@ extension OpenController {
         }
     }
     
-    
-    
     func searchFavorites(){
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1

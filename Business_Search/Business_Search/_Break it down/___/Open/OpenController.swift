@@ -91,5 +91,3 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         return searchController
     }()
 }
-
-

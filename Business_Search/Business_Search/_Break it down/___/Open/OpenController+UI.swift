@@ -12,13 +12,12 @@ import MapKit
 extension OpenController {
     func undoBlur() {
         removeDarkScreenBlur()
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        navigationController?.setNavigationBarHidden(false, animated: true)        
         doesLocationEntityExist = false //setup action inside 'readOrCreateLocation'
         readOrCreateLocation()
         animateResultsAreFilteredLabel()
     }
-    
+
     
     func setupNavigationMenu(){
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
@@ -42,7 +41,6 @@ extension OpenController {
     func setupUI(){
         setupNavigationMenu()
         definesPresentationContext = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
         [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
         viewObject.nothingFoundView.centerToSuperView()
         tableView.fillSafeSuperView()
