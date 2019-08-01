@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 class BusinessViewModel {
+    var delegate: OpenControllerDelegate?
     
     private var dataController: DataController
     private var latitude: Double

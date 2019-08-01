@@ -13,8 +13,8 @@ protocol DataSourceParent {
     
     var businessViewModel   : BusinessViewModel! {get}
     var categoryCountViewModel   : CategoryCountViewModel! {get}
-    var latitude            : Double! {get}
-    var longitude           : Double! {get}
+    var getLatitude: Double {get}
+    var getLongitude: Double {get}
     var dataController      : DataController! {get}
     var tableViewArrayType  : Int {get}
     func showNothingLabel(tableEmpty: Bool)
@@ -25,8 +25,8 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     let categoryNameCountViewModel  : CategoryCountViewModel
     let favoriteViewModel           : FavoritesViewModel
     
-    var latitude                    : Double
-    var longitude                   : Double
+//    var latitude                    : Double
+//    var longitude                   : Double
 
     let dataController              : DataController
     let parent                      : DataSourceParent
@@ -38,8 +38,8 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         self.parent             = parent
         self.businessViewModel  = parent.businessViewModel
         self.categoryNameCountViewModel  = parent.categoryCountViewModel
-        self.latitude           = parent.latitude
-        self.longitude          = parent.longitude
+//        self.latitude           = parent.latitude
+//        self.longitude          = parent.longitude
         self.dataController     = parent.dataController
         self.favoriteViewModel  = parent.favoritesViewModel
     }
@@ -68,7 +68,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
             guard let currentCategoryName = categoryNameCountViewModel.fetchCategoryNames?[indexPath.row] else {return UITableViewCell()}
-            cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: latitude, longitude: longitude, dataController: dataController)
+            cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: parent.getLatitude, longitude: parent.getLongitude, dataController: dataController)
             return cell
         default:
             print("cellForRowAt --> WHOOOOOPS!!!")

@@ -12,7 +12,7 @@ import MapKit
 extension OpenController {
     func undoBlur() {
         removeDarkScreenBlur()
-        navigationController?.setNavigationBarHidden(false, animated: true)        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         doesLocationEntityExist = false //setup action inside 'readOrCreateLocation'
         readOrCreateLocation()
         animateResultsAreFilteredLabel()
@@ -79,11 +79,9 @@ extension OpenController {
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
             if miles < 0.5 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
-                updateCoordinates(latitude: latitude, longitude: longitude)
-                businessViewModel.reload(lat: latitude, long: longitude)
-                categoryCountViewModel.reload(lat: latitude, long: longitude)
-                tableDataSource.longitude = longitude
-                tableDataSource.latitude = latitude
+                updateCoordinates(latitude: getLatitude, longitude: getLongitude)
+                businessViewModel.reload(lat: getLatitude, long: getLongitude)
+                categoryCountViewModel.reload(lat: getLatitude, long: getLongitude)
                 return                           //Exit the function
             }
             index += 1

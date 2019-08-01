@@ -10,15 +10,13 @@ import UIKit
 import CoreData
 
 
-protocol OpenControllerProtocol {
-    var latitude: Double! {get}
-    var longitude: Double! {get}
+protocol OpenControllerDelegate {
     var getLatitude: Double {get}
     var getLongitude: Double {get}
 }
 
 
-class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UnBlurViewProtocol{
+class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UnBlurViewProtocol, OpenControllerDelegate{
     
     
     

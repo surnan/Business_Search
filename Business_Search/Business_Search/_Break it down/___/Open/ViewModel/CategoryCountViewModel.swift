@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class CategoryCountViewModel {
-    
+    var delegate: OpenControllerDelegate?
     
     private var dataController: DataController
     private var latitude: Double
