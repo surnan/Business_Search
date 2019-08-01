@@ -13,20 +13,16 @@ class Open_Delegate: NSObject, UITableViewDelegate {
     let parent: OpenController
     let source: Open_DataSource
     private var reloadCellAt: IndexPath?
-    private let latitude: Double
-    private let longitude: Double
     let dataController: DataController
     private var selectedCategoryPredicate : NSPredicate?
     private lazy var viewModel = CategoryViewModel(dataController: dataController,
-                                                   lat: latitude,
-                                                   lon: longitude)
+                                                   lat: parent.getLatitude,
+                                                   lon: parent.getLongitude)
     
     init(parent: OpenController, source: Open_DataSource) {
         self.parent = parent
         self.source = source
         self.coordinator = parent.coordinator
-        self.latitude = parent.latitude
-        self.longitude = parent.longitude
         self.dataController = parent.dataController
     }
     

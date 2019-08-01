@@ -104,16 +104,16 @@ extension OpenController {
         //let yelpMaxPullCount = 1000
         let loopMax = min(recordCountAtLocation, yelpMaxPullCount)  //Yelp is limited to 1000 records on pull
         for index in stride(from: limit, to: loopMax, by: limit){
-            urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: latitude, longitude: longitude, offset: index))
+            urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: getLatitude, longitude: getLongitude, offset: index))
         }
-        downloadYelpBusinesses(latitiude: latitude, longitude: longitude)
+        downloadYelpBusinesses(latitiude: getLatitude, longitude: getLongitude)
     }
     
     func runDownloadAgain(){
         reloadFetchControllers()
         print("fetchBusiness.FetchedObject.count - ", businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", categoryCountViewModel.fetchCategoryNames?.count ?? -999)
-        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
-            self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [unowned self] timer in
+            self.downloadYelpBusinesses(latitiude: self.getLatitude, longitude: self.getLongitude)
         }
         timer.fire()
     }
@@ -125,7 +125,7 @@ extension OpenController {
         for (index, element) in urlsQueue.enumerated(){
             if index > 3 {break}
             dispatchGroup.enter()
-            _ = YelpClient.getBusinesses(latitude: latitude, longitude: longitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
+            _ = YelpClient.getBusinesses(latitude: getLatitude, longitude: getLongitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
                 defer {dispatchGroup.leave()}
                 self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
             })

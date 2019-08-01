@@ -37,14 +37,28 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     var locationViewModel       : LocationViewModel!
     
     var viewObject              : OpenView!
-    var latitude                : Double!
-    var longitude               : Double!
+    private var latitude                : Double!
+    private var longitude               : Double!
     var getLatitude             : Double {return latitude}
     var getLongitude            : Double  {return longitude}
     var tableViewArrayType      : Int { return searchGroupIndex }
     enum TableIndex             : Int { case business = 0, category }
     var searchGroupIndex        = 0
     
+    
+    func updateLatLon(lat: Double, lon: Double){
+        self.latitude = lat
+        self.longitude = lon
+    }
+    
+    
+    init(lat: Double, lon: Double) {
+        self.latitude   = lat
+        self.longitude  = lon
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
     
 
     lazy var tableDataSource    = Open_DataSource(parent: self)

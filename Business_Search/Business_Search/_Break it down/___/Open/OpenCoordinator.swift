@@ -26,7 +26,7 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
     }
     
     func start(parent: Coordinator){
-        let newController           = OpenController()
+        let newController           = OpenController(lat: getLatitude, lon: getLongitude)
         let newBusinessViewModel = BusinessViewModel(delegate: newController, dataController: dataController)
         
         
@@ -49,8 +49,6 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         
         newController.viewObject        = newViewObject
         newController.dataController    = dataController
-        newController.latitude          = getLatitude
-        newController.longitude         = getLongitude
         newController.coordinator       = self
         
         router.push(newController, animated: true) {[weak self, weak parent] in

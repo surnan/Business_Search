@@ -57,19 +57,18 @@ extension OpenController {
     func readOrCreateLocation(){                                        //Check if location exists or download
         locationViewModel.fetchLocationController = nil                 //Only time Locations should be loaded
         var index = 0
-        let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
+        let possibleInsertLocationCoordinate = CLLocation(latitude: getLatitude, longitude: getLongitude)
         let locationArray = locationViewModel.fetchLocationController?.fetchedObjects
         guard let _locationArray = locationArray else {return}
         if _locationArray.isEmpty {
-            _ = YelpClient.getBusinesses(latitude: latitude,
-                                         longitude: longitude,
+            _ = YelpClient.getBusinesses(latitude: getLatitude,
+                                         longitude: getLongitude,
                                          completion: handleGetNearbyBusinesses(inputData:result:))
             return
         }
         
         func updateCoordinates(latitude: Double, longitude: Double){
-            self.latitude = latitude
-            self.longitude = longitude
+            self.updateLatLon(lat: latitude, lon: longitude)
             coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
         }
         //While "return" can break out of the function
@@ -78,7 +77,8 @@ extension OpenController {
             let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
             if miles < 0.5 {
-                latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
+                let lat = _locationArray[index].latitude; let lon = _locationArray[index].longitude
+                updateLatLon(lat: lat, lon: lon)
                 updateCoordinates(latitude: getLatitude, longitude: getLongitude)
                 businessViewModel.reload()
                 categoryCountViewModel.reload(lat: getLatitude, long: getLongitude)
@@ -86,8 +86,8 @@ extension OpenController {
             }
             index += 1
         }
-        _ = YelpClient.getBusinesses(latitude: latitude,
-                                     longitude: longitude,
+        _ = YelpClient.getBusinesses(latitude: getLatitude,
+                                     longitude: getLongitude,
                                      completion: handleGetNearbyBusinesses(inputData:result:))
     }
 }
