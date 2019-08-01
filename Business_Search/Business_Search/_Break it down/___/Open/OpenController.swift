@@ -9,7 +9,19 @@
 import UIKit
 import CoreData
 
-class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UnBlurViewProtocol {
+
+protocol OpenControllerProtocol {
+    var latitude: Double! {get}
+    var longitude: Double! {get}
+    var getLatitude: Double {get}
+    var getLongitude: Double {get}
+}
+
+
+class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UnBlurViewProtocol{
+    
+    
+    
     var currentLocationID   : NSManagedObjectID?                               //Connects downloaded Business to Location
     var doesLocationEntityExist = false                                     //true after create/find location
     var urlsQueue               = [CreateYelpURLDuringLoopingStruct]()      //enumeration loop for semaphores

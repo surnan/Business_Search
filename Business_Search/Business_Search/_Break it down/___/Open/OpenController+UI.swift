@@ -10,14 +10,14 @@ import UIKit
 import MapKit
 
 extension OpenController {
-        func undoBlur() {
-            removeDarkScreenBlur()
-            navigationController?.setNavigationBarHidden(false, animated: true)
-    
-            doesLocationEntityExist = false //setup action inside 'readOrCreateLocation'
-            readOrCreateLocation()
-            animateResultsAreFilteredLabel()
-        }
+    func undoBlur() {
+        removeDarkScreenBlur()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        doesLocationEntityExist = false //setup action inside 'readOrCreateLocation'
+        readOrCreateLocation()
+        animateResultsAreFilteredLabel()
+    }
     
     
     func setupNavigationMenu(){
@@ -41,6 +41,8 @@ extension OpenController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //readOrCreateLocation() <-- maybe place it here to nail down the latitude & longitude?  Then create the TableDataSource? & maybe the viewModels?
+        
         tableView.dataSource = tableDataSource
         tableView.delegate = tableDelegate
         businessViewModel.fetchBusinessController   = nil

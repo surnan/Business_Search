@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 class BusinessViewModel {
+    
     private var dataController: DataController
     private var latitude: Double
     private var longitude: Double
