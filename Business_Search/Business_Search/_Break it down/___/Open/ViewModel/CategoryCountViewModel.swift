@@ -20,7 +20,7 @@ class CategoryCountViewModel {
     
     
     //MARK:- NON-Private
-    func resetController(){
+    func reload(){
         fetchCategoryNames = nil
     }
     

@@ -19,6 +19,26 @@ extension OpenController {
             animateResultsAreFilteredLabel()
         }
     
+    
+    func setupNavigationMenu(){
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
+        imageView.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = imageView
+        troubleshootFromNavigationMenu()
+        //navigationItem.searchController = searchController
+    }
+    
+    @objc func handleShowSearch(){
+        searchController.isActive = true
+    }
+    
+    func troubleshootFromNavigationMenu(){
+        let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
+        let composeBarButton    = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(handleFilter))
+        navigationItem.rightBarButtonItems = [composeBarButton, searchBarButton]
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = tableDataSource
@@ -32,6 +52,7 @@ extension OpenController {
         viewObject.nothingFoundView.centerToSuperView()
         tableView.fillSafeSuperView()
         readOrCreateLocation()
+        setupNavigationMenu()
     }
     
     func updateCoordinates(latitude: Double, longitude: Double){

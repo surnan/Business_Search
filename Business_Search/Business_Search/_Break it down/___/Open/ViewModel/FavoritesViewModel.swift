@@ -18,7 +18,7 @@ class FavoritesViewModel {
     }
     
     //MARK:- NON-Private
-    func resetController(){
+    func reload(){
         fetchFavoritesController = nil
     }
     

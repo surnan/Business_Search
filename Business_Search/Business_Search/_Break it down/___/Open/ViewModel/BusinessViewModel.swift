@@ -24,7 +24,7 @@ class BusinessViewModel {
     }
     
     //MARK:- NON-Private
-    func resetController(){
+    func reload(){
         fetchBusinessController = nil
     }
     

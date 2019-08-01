@@ -13,8 +13,6 @@ extension OpenController {
         //This is called when user switches scopes
         searchGroupIndex = selectedScope
         tableView.reloadData()
-        //        ShowNothingLabelIfNoResults(group: tableDataSource.tableViewArrayType)
-        //        animateResultsAreFilteredLabel()
     }
     
     
@@ -36,38 +34,18 @@ extension OpenController {
     }
     
     func resetAllControllerAndPredicates() {
-        businessViewModel.search(search: nil)
-        categoryCountViewModel.search(search: nil)
-        //        businessViewModel.fetchBusinessPredicate = nil
-        //        categoryViewModel.fetchCategoryArrayNamesPredicate = nil
-        //        fetchBusinessController = nil
-        //        fetchCategoryNames = nil
-        //        fetchFavoritePredicate = nil
-        //        fetchFavoritesController = nil
+        businessViewModel.reload()
+        categoryCountViewModel.reload()
     }
     
     func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
-    
-//    func reloadFetchControllers() {
-//        tableDataSource.reloadBusinessController()
-//        tableDataSource.reloadCategoryNames()
-//        DispatchQueue.main.async {
-//            self.viewObject.tableView.reloadData()
-//        }
-//    }
-    
+
     func reloadFetchControllers(){
-        //businessViewModel.fetchBusinessController = nil
-        businessViewModel.resetController()
-        categoryCountViewModel.resetController()
+        businessViewModel.reload()
+        categoryCountViewModel.reload()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-    
-    //    func updateBusinessPredicate(searchString: String){
-    //        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
-    //        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
-//        }
 }
 

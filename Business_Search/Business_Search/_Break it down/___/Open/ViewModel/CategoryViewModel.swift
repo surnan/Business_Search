@@ -26,7 +26,7 @@ class CategoryViewModel {
     
     
     //MARK:- NON-Private
-    func resetController(){
+    func reload(){
         fetchCategoriesController = nil
     }
     

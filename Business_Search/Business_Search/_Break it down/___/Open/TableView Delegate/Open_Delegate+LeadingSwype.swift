@@ -15,7 +15,7 @@ extension Open_Delegate {
         if source.tableArrayType == TableIndex.category.rawValue {return nil}
         guard let currentBusiness = source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return nil}
         let action = UIContextualAction(style: .normal, title: "Favorite") { [unowned self] (action, view, myBool) in
-            let reset       = {self.source.businessViewModel.resetController()}
+            let reset       = {self.source.businessViewModel.reload()}
             let isFavorite  = {self.source.favoriteViewModel.changeFavorite(business: currentBusiness)}
             let create      = {self.source.favoriteViewModel.createFavorite(business: currentBusiness)}
             let delete      = {self.source.favoriteViewModel.deleteFavorite(business: currentBusiness)}
