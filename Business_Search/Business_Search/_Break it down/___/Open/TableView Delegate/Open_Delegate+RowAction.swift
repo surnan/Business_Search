@@ -13,7 +13,7 @@ extension Open_Delegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         //
         let actionForBusiness = UITableViewRowAction(style: .normal, title: "SHARE") {[unowned self] (action, indexPath) in
-            guard let currentBusiness = self.source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return}
+            let currentBusiness = self.source.businessViewModel.objectAt(indexPath: indexPath)
             self.shareBusiness(business: currentBusiness)   //3
         }
         //

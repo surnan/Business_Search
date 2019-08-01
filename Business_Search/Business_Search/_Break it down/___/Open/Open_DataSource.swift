@@ -62,7 +62,9 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         switch tableArrayType {
         case TableIndex.business.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-            guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
+            
+            //guard let business = businessViewModel.fetchBusinessController?.object(at: indexPath) else {return UITableViewCell()}
+            let business = businessViewModel.objectAt(indexPath: indexPath)
             cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
             return cell
         case TableIndex.category.rawValue:

@@ -15,9 +15,11 @@ class Open_Delegate: NSObject, UITableViewDelegate {
     private var reloadCellAt: IndexPath?
     let dataController: DataController
     private var selectedCategoryPredicate : NSPredicate?
+    
     private lazy var viewModel = CategoryViewModel(dataController: dataController,
                                                    lat: parent.getLatitude,
                                                    lon: parent.getLongitude)
+    
     
     init(parent: OpenController, source: Open_DataSource) {
         self.parent = parent
@@ -56,7 +58,7 @@ class Open_Delegate: NSObject, UITableViewDelegate {
             let items = getBusinessesFromCategoryName(category: currentCategory)
             parent.coordinator?.loadTabController(businesses: items, categoryName: currentCategory)
         case TableIndex.business.rawValue:
-            guard let currentBusiness = source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return}
+            let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath)
             parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         default:
             print("Illegal Value inside tableViewArrayType")

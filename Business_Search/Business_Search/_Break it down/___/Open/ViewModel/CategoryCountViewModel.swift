@@ -10,46 +10,31 @@ import Foundation
 import CoreData
 
 class CategoryCountViewModel {
-    var delegate: OpenControllerDelegate?
-    
-    private var dataController: DataController
-    private var latitude: Double
-    private var longitude: Double
+    private var delegate        : OpenControllerDelegate
+    private var dataController  : DataController
+
+    init(delegate: OpenControllerDelegate, dataController: DataController) {
+        self.dataController = dataController
+        self.delegate       = delegate
+    }
     
     private lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
     
-    var predicateCategoryLatitude: NSPredicate {
-      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
+    private var predicateCategoryLatitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), delegate.getLatitude])
     }
     
-    var predicateCategoryLongitude: NSPredicate {
-        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    private var predicateCategoryLongitude: NSPredicate {
+        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), delegate.getLongitude])
     }
     
     
     
     //MARK:- NON-Private
-    func reload(){
-        fetchCategoryNames = nil
-    }
-    
+    func reload(){fetchCategoryNames = nil}
     var getCount: Int {return fetchCategoryNames?.count ?? 0}
     var isEmpty: Bool {return fetchCategoryNames?.count == 0}
-    
-    init(dataController: DataController, lat: Double, lon: Double) {
-        self.dataController = dataController
-        self.latitude = lat
-        self.longitude = lon
-        
-        fetchCategoryNames = nil
-    }
-    
 
-    func reload(lat: Double, long: Double){
-        self.latitude = lat
-        self.longitude = long
-        reload()
-    }
     
     func search(search: String?){
         if let search = search {

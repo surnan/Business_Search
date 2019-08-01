@@ -59,7 +59,17 @@ class BusinessViewModel {
         return currentBusiness?.isFavorite ?? false
     }
     
-    var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
+    
+    func objectAt(indexPath: IndexPath)-> Business {
+        return fetchBusinessController!.object(at: indexPath)   //It's OK for forced-unwrap because it has to exist at this stage
+    }
+    
+    
+    func fetchedObjects() -> [Business]{
+        return fetchBusinessController!.fetchedObjects ?? []
+    }
+    
+    private var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
             if fetchBusinessController == nil { //+3
                 fetchBusinessController = {   //+4

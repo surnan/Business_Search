@@ -81,7 +81,8 @@ extension OpenController {
                 updateLatLon(lat: lat, lon: lon)
                 updateCoordinates(latitude: getLatitude, longitude: getLongitude)
                 businessViewModel.reload()
-                categoryCountViewModel.reload(lat: getLatitude, long: getLongitude)
+                //categoryCountViewModel.reload(lat: getLatitude, long: getLongitude)
+                categoryCountViewModel.reload()
                 return                           //Exit the function
             }
             index += 1

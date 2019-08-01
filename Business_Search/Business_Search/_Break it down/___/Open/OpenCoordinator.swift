@@ -27,14 +27,18 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
     
     func start(parent: Coordinator){
         let newController           = OpenController(lat: getLatitude, lon: getLongitude)
-        let newBusinessViewModel = BusinessViewModel(delegate: newController, dataController: dataController)
+        let newBusinessViewModel    = BusinessViewModel(delegate: newController, dataController: dataController)
+        let newCategoryViewModel    = CategoryCountViewModel(delegate: newController, dataController: dataController)
         
-        
-        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude)   //2
         
         
         
         let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
+        
+        
+        
+        
+        
         let newLocationViewModel    = LocationViewModel(latitude: getLatitude, longitude: getLongitude, dataController: dataController)
         
         let newViewObject           = OpenView()

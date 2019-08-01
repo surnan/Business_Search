@@ -111,7 +111,8 @@ extension OpenController {
     
     func runDownloadAgain(){
         reloadFetchControllers()
-        print("fetchBusiness.FetchedObject.count - ", businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", categoryCountViewModel.fetchCategoryNames?.count ?? -999)
+        print("fetchBusiness.FetchedObject.count - ", businessViewModel.getCount,
+              "fetchCategoryArray.count - ", categoryCountViewModel.fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [unowned self] timer in
             self.downloadYelpBusinesses(latitiude: self.getLatitude, longitude: self.getLongitude)
         }
@@ -160,23 +161,11 @@ extension OpenController {
     
     func searchFavoritesIterations(){
         resetAllFetchControllers()
-        
-        //let allFavorites = tableDataSource.fetchFavoritesController?.fetchedObjects ?? []
         let allFavorites = favoritesViewModel.fetchFavoritesController?.fetchedObjects ?? []
-        
-        
         for ( _ , item) in allFavorites.enumerated() {
             guard let id = item.id else {return}
-            
-            
-            //tableDataSource.updateBusinessPredicate(id: id)
             businessViewModel.search(id: id)
-            
-            
-            //let results = tableDataSource.fetchBusinessController?.fetchedObjects ?? []
-            let results = businessViewModel.fetchBusinessController?.fetchedObjects ?? []
-            
-            
+            let results = businessViewModel.fetchedObjects()
             if results.isEmpty {
                 return
             } else {

@@ -13,7 +13,8 @@ extension Open_Delegate {
     //MARK:- ROW Left-SIDE ACTIONS
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if source.tableArrayType == TableIndex.category.rawValue {return nil}
-        guard let currentBusiness = source.businessViewModel.fetchBusinessController?.object(at: indexPath) else {return nil}
+        let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath)
+        
         let action = UIContextualAction(style: .normal, title: "Favorite") { [unowned self] (action, view, myBool) in
             let reset       = {self.source.businessViewModel.reload()}
             let isFavorite  = {self.source.favoriteViewModel.changeFavorite(business: currentBusiness)}

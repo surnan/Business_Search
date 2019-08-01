@@ -15,10 +15,6 @@ class CategoryViewModel {
     private var longitude   : Double
     
 
-    //private lazy var predicateCategoryLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
-    //private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
-    
-    
     var predicateCategoryLatitude: NSPredicate {
        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
     }
