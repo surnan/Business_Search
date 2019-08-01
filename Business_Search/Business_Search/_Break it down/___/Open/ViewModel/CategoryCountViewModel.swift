@@ -46,7 +46,15 @@ class CategoryCountViewModel {
         }
     }
     
-    var fetchCategoryNames: [String]? { //Populate Search Group listings
+    func objectAt(indexPath: IndexPath)-> String {
+        return fetchCategoryNames![indexPath.row]  //It's OK for forced-unwrap because it has to exist at this stage
+    }
+    
+    func fetchedObjects() -> [String]{
+        return fetchCategoryNames ?? []
+    }
+    
+    private var fetchCategoryNames: [String]? { //Populate Search Group listings
         didSet {
             if fetchCategoryNames == nil {
                 //By default, returns .ManagedObjectResultType = Actual Objects
