@@ -80,7 +80,7 @@ extension OpenController {
             if miles < 0.5 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
                 updateCoordinates(latitude: getLatitude, longitude: getLongitude)
-                businessViewModel.reload(lat: getLatitude, long: getLongitude)
+                businessViewModel.reload()
                 categoryCountViewModel.reload(lat: getLatitude, long: getLongitude)
                 return                           //Exit the function
             }

@@ -25,17 +25,20 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         location = CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    lazy var newBusinessViewModel2    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude)      //1
-    lazy var newCategoryViewModel2    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
-    
     func start(parent: Coordinator){
-        let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude)        //1
+        let newController           = OpenController()
+        let newBusinessViewModel = BusinessViewModel(delegate: newController, dataController: dataController)
+        
+        
         let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude)   //2
+        
+        
+        
         let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
         let newLocationViewModel    = LocationViewModel(latitude: getLatitude, longitude: getLongitude, dataController: dataController)
         
         let newViewObject           = OpenView()
-        let newController           = OpenController()
+        
         
         newViewObject.viewModel     = newBusinessViewModel
         

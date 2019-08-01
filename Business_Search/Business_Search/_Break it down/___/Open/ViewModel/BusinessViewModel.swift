@@ -10,19 +10,22 @@ import Foundation
 import CoreData
 
 class BusinessViewModel {
-    var delegate: OpenControllerDelegate?
-    
+    private var delegate: OpenControllerDelegate
     private var dataController: DataController
-    private var latitude: Double
-    private var longitude: Double
-    
+
+    init(delegate: OpenControllerDelegate, dataController: DataController) {
+        self.dataController = dataController
+        self.delegate = delegate
+        fetchBusinessController = nil
+    }
+
 
     var predicateBusinessLatitude: NSPredicate {
-        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude])
+        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), delegate.getLatitude])
     }
     
     var predicateBusinessLongitude: NSPredicate {
-      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude])
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), delegate.getLongitude])
     }
     
     
@@ -38,23 +41,11 @@ class BusinessViewModel {
     func reload(){
         fetchBusinessController = nil
     }
-    
-    func reload(lat: Double, long: Double){
-        self.latitude = lat
-        self.longitude = long
-        reload()
-    }
+
     
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     
-    init(dataController: DataController, lat: Double, lon: Double) {
-        self.dataController = dataController
-        self.latitude = lat
-        self.longitude = lon
-        
-        fetchBusinessController = nil
-    }
 
     func search(search: String?){
         if let search = search {
