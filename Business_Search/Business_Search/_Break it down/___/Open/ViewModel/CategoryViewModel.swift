@@ -15,8 +15,20 @@ class CategoryViewModel {
     private var longitude   : Double
     
 
-    private lazy var predicateCategoryLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
-    private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    //private lazy var predicateCategoryLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
+    //private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    
+    
+    var predicateCategoryLatitude: NSPredicate {
+       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
+    }
+    
+    var predicateCategoryLongitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    }
+    
+    
+    
     private var selectedCategoryPredicate: NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
@@ -28,6 +40,12 @@ class CategoryViewModel {
     //MARK:- NON-Private
     func reload(){
         fetchCategoriesController = nil
+    }
+    
+    func reload(lat: Double, long: Double){
+        self.latitude = lat
+        self.longitude = long
+        reload()
     }
     
     var getCount: Int {return fetchCategoriesController?.fetchedObjects?.count ?? 0}

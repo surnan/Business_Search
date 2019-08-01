@@ -15,8 +15,20 @@ class LocationViewModel {
     private var longitude: Double
     
     private lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
-    private lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.latitude), latitude])
-    private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.longitude), longitude])
+    
+    //private lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.latitude), latitude])
+    //private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.longitude), longitude])
+    
+    
+    
+    var predicateCategoryLatitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.latitude), latitude])
+    }
+    
+    var predicateCategoryLongitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.longitude), longitude])
+    }
+    
     
     
     //MARK:- NON-Private
@@ -24,6 +36,16 @@ class LocationViewModel {
         self.latitude = latitude
         self.longitude = longitude
         self.dataController = dataController
+    }
+    
+    func reload(){
+        fetchLocationController = nil
+    }
+    
+    func reload(lat: Double, long: Double){
+        self.latitude = lat
+        self.longitude = long
+        reload()
     }
     
     var fetchLocationController: NSFetchedResultsController<Location>? {

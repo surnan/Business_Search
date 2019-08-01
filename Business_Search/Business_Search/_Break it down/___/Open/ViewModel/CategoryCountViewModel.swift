@@ -15,8 +15,15 @@ class CategoryCountViewModel {
     private var longitude: Double
     
     private lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
-    private lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
-    private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    
+    var predicateCategoryLatitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
+    }
+    
+    var predicateCategoryLongitude: NSPredicate {
+        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    }
+    
     
     
     //MARK:- NON-Private
@@ -31,6 +38,13 @@ class CategoryCountViewModel {
         self.dataController = dataController
         self.latitude = lat
         self.longitude = lon
+    }
+    
+
+    func reload(lat: Double, long: Double){
+        self.latitude = lat
+        self.longitude = long
+        reload()
     }
     
     func search(search: String?){

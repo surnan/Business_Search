@@ -14,8 +14,17 @@ class BusinessViewModel {
     private var latitude: Double
     private var longitude: Double
     
-    private lazy var predicateBusinessLatitude  = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude])
-    private lazy var predicateBusinessLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude])
+
+    var predicateBusinessLatitude: NSPredicate {
+        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), latitude])
+    }
+    
+    var predicateBusinessLongitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), longitude])
+    }
+    
+    
+    
     private var fetchBusinessPredicate : NSPredicate? {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
@@ -26,6 +35,12 @@ class BusinessViewModel {
     //MARK:- NON-Private
     func reload(){
         fetchBusinessController = nil
+    }
+    
+    func reload(lat: Double, long: Double){
+        self.latitude = lat
+        self.longitude = long
+        reload()
     }
     
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}

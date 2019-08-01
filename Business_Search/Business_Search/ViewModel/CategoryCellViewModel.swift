@@ -11,7 +11,7 @@ import CoreData
 
 struct CategoryCellViewModel {
     
-    private var name: String!
+    private var name: String
     var getName: String {return name}
     
     private var count: Int!
@@ -24,12 +24,22 @@ struct CategoryCellViewModel {
     private var originalColor: UIColor!
     var getOriginalColor: UIColor {return originalColor}
     
-    private var latitude: Double!
-    private var longitude: Double!
-    private var dataController: DataController!
+    private var latitude: Double
+    private var longitude: Double
+    private var dataController: DataController
     
-    lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude!])
-    lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude!])
+    //lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude!])
+    //lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude!])
+    
+    var predicateCategoryLatitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
+    }
+    
+    var predicateCategoryLongitude: NSPredicate {
+      return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
+    }
+    
+    
     
     init(name: String, colorIndex: IndexPath, latitude: Double, longitude: Double, dataController: DataController) {
         self.name = name
@@ -38,6 +48,7 @@ struct CategoryCellViewModel {
         self.longitude = longitude
         self.dataController = dataController
         test()
+        print("")
     }
 
     

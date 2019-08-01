@@ -55,12 +55,6 @@ extension OpenController {
         setupNavigationMenu()
     }
     
-    func updateCoordinates(latitude: Double, longitude: Double){
-        self.latitude = latitude
-        self.longitude = longitude
-        coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
-    }
-    
     func readOrCreateLocation(){                                        //Check if location exists or download
         locationViewModel.fetchLocationController = nil                 //Only time Locations should be loaded
         var index = 0
@@ -73,6 +67,16 @@ extension OpenController {
                                          completion: handleGetNearbyBusinesses(inputData:result:))
             return
         }
+        
+        
+        
+        
+        
+        func updateCoordinates(latitude: Double, longitude: Double){
+            self.latitude = latitude
+            self.longitude = longitude
+            coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
+        }
         //While "return" can break out of the function
         while index < _locationArray.count {
             let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
@@ -81,7 +85,10 @@ extension OpenController {
             if miles < 0.5 {
                 latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
                 updateCoordinates(latitude: latitude, longitude: longitude)
-                reloadFetchControllers()
+                businessViewModel.reload(lat: latitude, long: longitude)
+                categoryCountViewModel.reload(lat: latitude, long: longitude)
+                tableDataSource.longitude = longitude
+                tableDataSource.latitude = latitude
                 return                           //Exit the function
             }
             index += 1
@@ -91,7 +98,3 @@ extension OpenController {
                                      completion: handleGetNearbyBusinesses(inputData:result:))
     }
 }
-
-
-
-

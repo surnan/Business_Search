@@ -54,6 +54,10 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         }
     }
     
+    
+    
+    
+    
     func loadBusinessDetails(currentBusiness: Business){
         let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
         addChild(coordinator)
