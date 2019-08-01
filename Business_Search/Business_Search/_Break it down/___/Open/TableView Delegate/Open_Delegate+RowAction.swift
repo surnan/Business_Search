@@ -29,11 +29,7 @@ extension Open_Delegate {
     }
     
     func getCategoryName(at index: Int) -> String {     //1
-        
-        //guard let categoryNames = source.categoryNameCountViewModel.fetchCategoryNames else {return ""}
         let categoryNames = source.categoryNameCountViewModel.fetchedObjects()
-        
-        
         let categoryName = categoryNames[index]
         return categoryName
     }

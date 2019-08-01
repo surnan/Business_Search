@@ -113,7 +113,6 @@ extension OpenController {
         reloadFetchControllers()
         print("fetchBusiness.FetchedObject.count - ", businessViewModel.getCount,
               "fetchCategoryArray.count - ", categoryCountViewModel.getCount)
-              //"fetchCategoryArray.count - ", categoryCountViewModel.fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [unowned self] timer in
             self.downloadYelpBusinesses(latitiude: self.getLatitude, longitude: self.getLongitude)
         }

@@ -54,9 +54,7 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         reloadCellAt = indexPath
         switch source.tableArrayType {
         case TableIndex.category.rawValue:
-            //guard let currentCategory = source.categoryNameCountViewModel.fetchCategoryNames?[indexPath.row] else {return}
             let currentCategory = source.categoryNameCountViewModel.objectAt(indexPath: indexPath)
-            
             let items = getBusinessesFromCategoryName(category: currentCategory)
             parent.coordinator?.loadTabController(businesses: items, categoryName: currentCategory)
         case TableIndex.business.rawValue:

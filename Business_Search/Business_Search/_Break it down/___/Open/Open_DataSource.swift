@@ -69,12 +69,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
             return cell
         case TableIndex.category.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell
-            
-            
-            //guard let currentCategoryName = categoryNameCountViewModel.fetchCategoryNames?[indexPath.row] else {return UITableViewCell()}
             let currentCategoryName = categoryNameCountViewModel.objectAt(indexPath: indexPath)
-            
-            
             cell.firstViewModel = CategoryCellViewModel(name: currentCategoryName, colorIndex: indexPath, latitude: parent.getLatitude, longitude: parent.getLongitude, dataController: dataController)
             return cell
         default:
