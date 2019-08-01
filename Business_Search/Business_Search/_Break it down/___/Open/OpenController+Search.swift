@@ -26,7 +26,7 @@ extension OpenController {
         }
         guard let searchString = searchController.searchBar.text else {return}
         businessViewModel.search(search: searchString)
-        categoryViewModel.search(search: searchString)
+        categoryCountViewModel.search(search: searchString)
         tableView.reloadData()
     }
     
@@ -37,7 +37,7 @@ extension OpenController {
     
     func resetAllControllerAndPredicates() {
         businessViewModel.search(search: nil)
-        categoryViewModel.search(search: nil)
+        categoryCountViewModel.search(search: nil)
         //        businessViewModel.fetchBusinessPredicate = nil
         //        categoryViewModel.fetchCategoryArrayNamesPredicate = nil
         //        fetchBusinessController = nil
@@ -47,10 +47,27 @@ extension OpenController {
     }
     
     func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
-    func reloadFetchControllers(){businessViewModel.fetchBusinessController = nil}
+    
+//    func reloadFetchControllers() {
+//        tableDataSource.reloadBusinessController()
+//        tableDataSource.reloadCategoryNames()
+//        DispatchQueue.main.async {
+//            self.viewObject.tableView.reloadData()
+//        }
+//    }
+    
+    func reloadFetchControllers(){
+        //businessViewModel.fetchBusinessController = nil
+        businessViewModel.resetController()
+        categoryCountViewModel.resetController()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     //    func updateBusinessPredicate(searchString: String){
     //        businessViewModel.fetchBusinessPredicate = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [searchString])
     //        categoryViewModel.fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [searchString])
-    //    }
+//        }
 }
 

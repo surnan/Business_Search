@@ -38,7 +38,7 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         newViewObject.viewModel     = newBusinessViewModel
         
         newController.businessViewModel     = newBusinessViewModel  //1
-        newController.categoryViewModel     = newCategoryViewModel  //2
+        newController.categoryCountViewModel     = newCategoryViewModel  //2
         newController.favoritesViewModel    = newFavoritesViewModel
         newController.locationViewModel     = newLocationViewModel
         

@@ -10,27 +10,28 @@ import UIKit
 import MapKit
 
 extension OpenController {
-    //    func undoBlur() {
-    //        removeDarkScreenBlur()
-    //        navigationController?.setNavigationBarHidden(false, animated: true)
-    //
-    //        doesLocationEntityExist = false
-    //        readOrCreateLocation()
-    //        animateResultsAreFilteredLabel()
-    //    }
+        func undoBlur() {
+            removeDarkScreenBlur()
+            navigationController?.setNavigationBarHidden(false, animated: true)
+    
+            doesLocationEntityExist = false //setup action inside 'readOrCreateLocation'
+            readOrCreateLocation()
+            animateResultsAreFilteredLabel()
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = tableDataSource
         tableView.delegate = tableDelegate
         businessViewModel.fetchBusinessController   = nil
-        categoryViewModel.fetchCategoryNames        = nil
+        categoryCountViewModel.fetchCategoryNames        = nil
         definesPresentationContext = true
         navigationItem.searchController             = searchController
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
         [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
         viewObject.nothingFoundView.centerToSuperView()
         tableView.fillSafeSuperView()
+        readOrCreateLocation()
     }
     
     func updateCoordinates(latitude: Double, longitude: Double){

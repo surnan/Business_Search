@@ -10,15 +10,15 @@ import UIKit
 
 extension OpenController {
     //MARK:- BreakPoint
-    @objc func handleSettings(){
-        addDarkScreenBlur()
-        coordinator?.loadSettings(delegate: self, max: radius)
-    }
+        @objc func handleSettings(){
+            addDarkScreenBlur()
+            coordinator?.loadSettings(delegate: self, max: radius)
+        }
     
-    @objc func handleFilter(){
-        addDarkScreenBlur()
-        coordinator?.loadFilter(unblurProtocol: self)
-    }
+        @objc func handleFilter(){
+            addDarkScreenBlur()
+            coordinator?.loadFilter(unblurProtocol: self)
+        }
     
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
@@ -111,7 +111,9 @@ extension OpenController {
     
     func runDownloadAgain(){
         reloadFetchControllers()
-        print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
+        
+        //print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
+        print("fetchBusiness.FetchedObject.count - ", businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", categoryCountViewModel.fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
         }
@@ -162,11 +164,23 @@ extension OpenController {
     
     func searchFavoritesIterations(){
         resetAllFetchControllers()
-        let allFavorites = tableDataSource.fetchFavoritesController?.fetchedObjects ?? []
+        
+        //let allFavorites = tableDataSource.fetchFavoritesController?.fetchedObjects ?? []
+        let allFavorites = favoritesViewModel.fetchFavoritesController?.fetchedObjects ?? []
+        
+        
         for ( _ , item) in allFavorites.enumerated() {
             guard let id = item.id else {return}
-            tableDataSource.updateBusinessPredicate(id: id)
-            let results = tableDataSource.fetchBusinessController?.fetchedObjects ?? []
+            
+            
+            //tableDataSource.updateBusinessPredicate(id: id)
+            businessViewModel.search(id: id)
+            
+            
+            //let results = tableDataSource.fetchBusinessController?.fetchedObjects ?? []
+            let results = businessViewModel.fetchBusinessController?.fetchedObjects ?? []
+            
+            
             if results.isEmpty {
                 return
             } else {

@@ -47,6 +47,12 @@ class BusinessViewModel {
         }
     }
     
+    func search(id: String){
+        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
+        fetchBusinessController = nil
+    }
+    
+    
     func isFavorite(at indexPath: IndexPath)->Bool{
         let currentBusiness = fetchBusinessController?.object(at: indexPath)
         return currentBusiness?.isFavorite ?? false
