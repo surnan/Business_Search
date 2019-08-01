@@ -31,6 +31,11 @@ extension SearchByAddressController {
                 guard let self = self else {return}
                 let newAnnotation = MKPointAnnotation()
                 newAnnotation.coordinate = (self.locationToForward.coordinate)
+                
+                
+                let old = self.mapView.annotations
+                self.mapView.removeAnnotations(old)
+                
                 self.mapView.addAnnotation(newAnnotation)
                 self.mapView.setCenter(newAnnotation.coordinate, animated: false)
                 let coord = self.mapView.centerCoordinate
