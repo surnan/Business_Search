@@ -111,8 +111,6 @@ extension OpenController {
     
     func runDownloadAgain(){
         reloadFetchControllers()
-        
-        //print("fetchBusiness.FetchedObject.count - ", tableDataSource.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", tableDataSource.fetchCategoryNames?.count ?? -999)
         print("fetchBusiness.FetchedObject.count - ", businessViewModel.fetchBusinessController?.fetchedObjects?.count ?? -999, "fetchCategoryArray.count - ", categoryCountViewModel.fetchCategoryNames?.count ?? -999)
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self] timer in
             self?.downloadYelpBusinesses(latitiude: self!.latitude, longitude: self!.longitude)
