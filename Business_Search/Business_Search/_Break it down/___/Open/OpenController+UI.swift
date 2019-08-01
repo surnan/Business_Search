@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 extension OpenController {
     //    func undoBlur() {
@@ -18,24 +19,57 @@ extension OpenController {
     //        animateResultsAreFilteredLabel()
     //    }
     
-    func animateResultsAreFilteredLabel(){
-        if !UserAppliedFilter.shared.isFilterOn {return}
-        view.addSubview(viewObject.resultsAreFilteredLabel)
-        let safe = view.safeAreaLayoutGuide
-        viewObject.resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
-        viewObject.resultsAreFilteredLabel.alpha = 1
-        UIView.animate(withDuration: 1.5, animations: {
-            self.viewObject.resultsAreFilteredLabel.alpha = 0
-        }) { (_) in
-            self.viewObject.resultsAreFilteredLabel.removeFromSuperview()
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.dataSource = tableDataSource
+        tableView.delegate = tableDelegate
+        businessViewModel.fetchBusinessController   = nil
+        categoryViewModel.fetchCategoryNames        = nil
+        definesPresentationContext = true
+        navigationItem.searchController             = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
+        [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
+        viewObject.nothingFoundView.centerToSuperView()
+        tableView.fillSafeSuperView()
     }
     
-    func showNothingLabel(tableEmpty: Bool){
-        if tableEmpty && searchController.isActive && !searchBarIsEmpty(){
-            viewObject.showNothingFoundView()
-        } else {
-            viewObject.hideNothingFoundView()
+    func updateCoordinates(latitude: Double, longitude: Double){
+        self.latitude = latitude
+        self.longitude = longitude
+        coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
+    }
+    
+    func readOrCreateLocation(){                                        //Check if location exists or download
+        locationViewModel.fetchLocationController = nil                 //Only time Locations should be loaded
+        var index = 0
+        let possibleInsertLocationCoordinate = CLLocation(latitude: latitude, longitude: longitude)
+        let locationArray = locationViewModel.fetchLocationController?.fetchedObjects
+        guard let _locationArray = locationArray else {return}
+        if _locationArray.isEmpty {
+            _ = YelpClient.getBusinesses(latitude: latitude,
+                                         longitude: longitude,
+                                         completion: handleGetNearbyBusinesses(inputData:result:))
+            return
         }
+        //While "return" can break out of the function
+        while index < _locationArray.count {
+            let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
+            let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
+            let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
+            if miles < 0.5 {
+                latitude = _locationArray[index].latitude; longitude = _locationArray[index].longitude
+                updateCoordinates(latitude: latitude, longitude: longitude)
+                reloadFetchControllers()
+                return                           //Exit the function
+            }
+            index += 1
+        }
+        _ = YelpClient.getBusinesses(latitude: latitude,
+                                     longitude: longitude,
+                                     completion: handleGetNearbyBusinesses(inputData:result:))
     }
 }
+
+
+
+

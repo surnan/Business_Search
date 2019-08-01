@@ -13,6 +13,8 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     var businessViewModel   : BusinessViewModel!
     var categoryViewModel   : CategoryCountViewModel!
     var favoritesViewModel  : FavoritesViewModel!
+    var locationViewModel   : LocationViewModel!
+    
     var viewObject          : OpenView!
     var dataController      : DataController!
     var latitude            : Double!
@@ -32,20 +34,6 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         tableView.separatorColor    = UIColor.clear
         return tableView
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.dataSource = tableDataSource
-        tableView.delegate = tableDelegate
-        businessViewModel.fetchBusinessController   = nil
-        categoryViewModel.fetchCategoryNames        = nil
-        definesPresentationContext = true
-        navigationItem.searchController             = searchController
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pause", style: .done, target: self, action: #selector(handleRightBarButton))
-        [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
-        viewObject.nothingFoundView.centerToSuperView()
-        tableView.fillSafeSuperView()
-    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     @objc func handleRightBarButton(){print("")}

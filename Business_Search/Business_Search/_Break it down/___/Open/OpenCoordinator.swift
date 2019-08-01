@@ -11,7 +11,7 @@ import MapKit
 
 class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterType, TabControllerType {
     private let dataController  : DataController
-    private let location        : CLLocation
+    private var location        : CLLocation
     var getLatitude             : Double {return location.coordinate.latitude}
     var getLongitude            : Double {return location.coordinate.longitude}
     
@@ -21,19 +21,26 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         super.init(router: router)
     }
     
+    func updateCoordinate(latitude: Double, longitude: Double){
+        location = CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    
     func start(parent: Coordinator){
-        let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //1
-        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude) //2
+        let newBusinessViewModel    = BusinessViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude)        //1
+        let newCategoryViewModel    = CategoryCountViewModel(dataController: dataController, lat: getLatitude, lon: getLongitude)   //2
         let newFavoritesViewModel   = FavoritesViewModel(dataController: dataController)
+        let newLocationViewModel    = LocationViewModel(latitude: getLatitude, longitude: getLongitude, dataController: dataController)
         
         let newViewObject           = OpenView()
         let newController           = OpenController()
         
-        newViewObject.viewModel         = newBusinessViewModel
+        newViewObject.viewModel     = newBusinessViewModel
         
-        newController.businessViewModel = newBusinessViewModel  //1
-        newController.categoryViewModel = newCategoryViewModel  //2
-        newController.favoritesViewModel = newFavoritesViewModel
+        newController.businessViewModel     = newBusinessViewModel  //1
+        newController.categoryViewModel     = newCategoryViewModel  //2
+        newController.favoritesViewModel    = newFavoritesViewModel
+        newController.locationViewModel     = newLocationViewModel
         
         newController.viewObject        = newViewObject
         newController.dataController    = dataController
