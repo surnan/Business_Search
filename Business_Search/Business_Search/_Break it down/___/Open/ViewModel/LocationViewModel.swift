@@ -14,22 +14,15 @@ class LocationViewModel {
     private var latitude: Double
     private var longitude: Double
     
-    private lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
-    
-    //private lazy var predicateCategoryLatitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.latitude), latitude])
-    //private lazy var predicateCategoryLongitude = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.longitude), longitude])
-    
-    
-    
-    var predicateCategoryLatitude: NSPredicate {
+    private var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
+
+    private var predicateCategoryLatitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.latitude), latitude])
     }
     
-    var predicateCategoryLongitude: NSPredicate {
+    private var predicateCategoryLongitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.longitude), longitude])
     }
-    
-    
     
     //MARK:- NON-Private
     init(latitude: Double, longitude: Double, dataController: DataController) {
@@ -38,17 +31,13 @@ class LocationViewModel {
         self.dataController = dataController
     }
     
-    func reload(){
-        fetchLocationController = nil
-    }
+    func reload(){fetchLocationController = nil}
     
-    func reload(lat: Double, long: Double){
-        self.latitude = lat
-        self.longitude = long
-        reload()
+    func getObjects() -> [Location]{
+        return fetchLocationController?.fetchedObjects ?? []
     }
-    
-    var fetchLocationController: NSFetchedResultsController<Location>? {
+        
+    private var fetchLocationController: NSFetchedResultsController<Location>? {
         didSet {
             if fetchLocationController == nil {
                 fetchLocationController = {

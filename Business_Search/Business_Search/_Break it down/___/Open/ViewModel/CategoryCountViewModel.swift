@@ -18,7 +18,7 @@ class CategoryCountViewModel {
         self.delegate       = delegate
     }
     
-    private lazy var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
+    private var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
     
     private var predicateCategoryLatitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), delegate.getLatitude])

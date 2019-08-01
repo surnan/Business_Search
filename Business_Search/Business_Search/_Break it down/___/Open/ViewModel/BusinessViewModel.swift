@@ -21,7 +21,7 @@ class BusinessViewModel {
     private var predicateBusinessLatitude: NSPredicate {
         return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), delegate.getLatitude])
     }
-    
+               
     private var predicateBusinessLongitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), delegate.getLongitude])
     }
@@ -46,13 +46,13 @@ class BusinessViewModel {
             fetchBusinessPredicate  = nil
             reload()
         }
+        reload()
     }
     
     func search(id: String){
         fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
         reload()
     }
-    
     
     func isFavorite(at indexPath: IndexPath)->Bool{
         let currentBusiness = fetchBusinessController?.object(at: indexPath)
@@ -77,7 +77,6 @@ class BusinessViewModel {
                     
                     var predicate: [NSPredicate] = [predicateBusinessLatitude, predicateBusinessLongitude]
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
-                    
                     
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                     var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()

@@ -13,17 +13,14 @@ class CategoryViewModel {
     private var dataController: DataController
     private var latitude    : Double
     private var longitude   : Double
-    
 
-    var predicateCategoryLatitude: NSPredicate {
+    private var predicateCategoryLatitude: NSPredicate {
        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
     }
     
-    var predicateCategoryLongitude: NSPredicate {
+    private var predicateCategoryLongitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), longitude])
     }
-    
-    
     
     private var selectedCategoryPredicate: NSPredicate? {
         didSet {
@@ -31,7 +28,6 @@ class CategoryViewModel {
             fetchCategoriesController?.fetchRequest.predicate = selectedCategoryPredicate
         }
     }
-    
     
     //MARK:- NON-Private
     func reload(){

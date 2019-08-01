@@ -37,7 +37,6 @@ extension OpenController {
         navigationItem.rightBarButtonItems = [composeBarButton, searchBarButton]
     }
     
-    
     func setupUI(){
         setupNavigationMenu()
         definesPresentationContext = true
@@ -55,12 +54,12 @@ extension OpenController {
     }
     
     func readOrCreateLocation(){                                        //Check if location exists or download
-        locationViewModel.fetchLocationController = nil                 //Only time Locations should be loaded
+        locationViewModel.reload()                                      //Only time Locations should be loaded
         var index = 0
         let possibleInsertLocationCoordinate = CLLocation(latitude: getLatitude, longitude: getLongitude)
-        let locationArray = locationViewModel.fetchLocationController?.fetchedObjects
-        guard let _locationArray = locationArray else {return}
-        if _locationArray.isEmpty {
+        
+        let locationArray = locationViewModel.getObjects()
+        if locationArray.isEmpty {
             _ = YelpClient.getBusinesses(latitude: getLatitude,
                                          longitude: getLongitude,
                                          completion: handleGetNearbyBusinesses(inputData:result:))
@@ -72,12 +71,12 @@ extension OpenController {
             coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
         }
         //While "return" can break out of the function
-        while index < _locationArray.count {
-            let tempLocation = CLLocation(latitude: _locationArray[index].latitude, longitude: _locationArray[index].longitude)
+        while index < locationArray.count {
+            let tempLocation = CLLocation(latitude: locationArray[index].latitude, longitude: locationArray[index].longitude)
             let distanceBetweenInputLocationAndCurrentLoopLocation = tempLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = distanceBetweenInputLocationAndCurrentLoopLocation * 0.000621371
             if miles < 0.5 {
-                let lat = _locationArray[index].latitude; let lon = _locationArray[index].longitude
+                let lat = locationArray[index].latitude; let lon = locationArray[index].longitude
                 updateLatLon(lat: lat, lon: lon)
                 updateCoordinates(latitude: getLatitude, longitude: getLongitude)
                 businessViewModel.reload()
