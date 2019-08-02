@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class FilterController: UIViewController {
-    var delegate: UnBlurViewProtocol?   //Unblur
+    var delegate: UnBlurViewType?   //Unblur
     
     let shared                  = UserAppliedFilter.shared
     var coordinator             : FilterCoordinator?

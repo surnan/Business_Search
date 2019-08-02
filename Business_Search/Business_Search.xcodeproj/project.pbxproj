@@ -38,7 +38,7 @@
 		843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* BusinessCell.swift */; };
 		844D358422CA7A1300D7E594 /* BusinessDetailsController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D358322CA7A1300D7E594 /* BusinessDetailsController+UI.swift */; };
 		844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Array+Extension.swift */; };
-		845A1D8522D02BE20066C17C /* UnBlurViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */; };
+		845A1D8522D02BE20066C17C /* UnBlurViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8422D02BE20066C17C /* UnBlurViewType.swift */; };
 		845A1D8D22D0314D0066C17C /* Global Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8C22D0314D0066C17C /* Global Variables.swift */; };
 		84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */; };
 		84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA922E6466A00999599 /* FilterCoordinator.swift */; };
@@ -80,6 +80,12 @@
 		848DEC5322F3DF3B00102E9B /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5222F3DF3B00102E9B /* Presentable.swift */; };
 		848DEC5522F3E02400102E9B /* RouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5422F3E02400102E9B /* RouterType.swift */; };
 		848DEC5722F3E0CD00102E9B /* Coordinator Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5622F3E0CD00102E9B /* Coordinator Protocols.swift */; };
+		848DEC5922F3E18800102E9B /* PresentableCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5822F3E18800102E9B /* PresentableCoordinatorType.swift */; };
+		848DEC5B22F3E1C000102E9B /* BaseCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5A22F3E1C000102E9B /* BaseCoordinatorType.swift */; };
+		848DEC5D22F3E1F100102E9B /* PresentableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5C22F3E1F100102E9B /* PresentableType.swift */; };
+		848DEC5F22F3E21D00102E9B /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5E22F3E21D00102E9B /* CoordinatorType.swift */; };
+		848DEC6122F3E3BF00102E9B /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC6022F3E3BF00102E9B /* DataSourceType.swift */; };
+		848DEC6322F3E4CB00102E9B /* OpenControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */; };
 		84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */; };
 		84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B01D22A58F7D009B96AD /* Business+Extension.swift */; };
 		84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */; };
@@ -147,7 +153,7 @@
 		843C66FA227DC97A003A64D1 /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844D358322CA7A1300D7E594 /* BusinessDetailsController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessDetailsController+UI.swift"; sourceTree = "<group>"; };
 		844F64B52277B3E0003E6A93 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnBlurViewProtocol.swift; sourceTree = "<group>"; };
+		845A1D8422D02BE20066C17C /* UnBlurViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnBlurViewType.swift; sourceTree = "<group>"; };
 		845A1D8C22D0314D0066C17C /* Global Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Variables.swift"; sourceTree = "<group>"; };
 		84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsCoordinator.swift; sourceTree = "<group>"; };
 		84684CA922E6466A00999599 /* FilterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCoordinator.swift; sourceTree = "<group>"; };
@@ -189,6 +195,12 @@
 		848DEC5222F3DF3B00102E9B /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		848DEC5422F3E02400102E9B /* RouterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterType.swift; sourceTree = "<group>"; };
 		848DEC5622F3E0CD00102E9B /* Coordinator Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Coordinator Protocols.swift"; sourceTree = "<group>"; };
+		848DEC5822F3E18800102E9B /* PresentableCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableCoordinatorType.swift; sourceTree = "<group>"; };
+		848DEC5A22F3E1C000102E9B /* BaseCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinatorType.swift; sourceTree = "<group>"; };
+		848DEC5C22F3E1F100102E9B /* PresentableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableType.swift; sourceTree = "<group>"; };
+		848DEC5E22F3E21D00102E9B /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		848DEC6022F3E3BF00102E9B /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
+		848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenControllerType.swift; sourceTree = "<group>"; };
 		84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapResponse.swift; sourceTree = "<group>"; };
 		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };
@@ -253,10 +265,16 @@
 		8408F0DF22E60A9100DB55B6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				845A1D8422D02BE20066C17C /* UnBlurViewProtocol.swift */,
-				848DEC5222F3DF3B00102E9B /* Presentable.swift */,
-				848DEC5422F3E02400102E9B /* RouterType.swift */,
+				848DEC5A22F3E1C000102E9B /* BaseCoordinatorType.swift */,
 				848DEC5622F3E0CD00102E9B /* Coordinator Protocols.swift */,
+				848DEC5E22F3E21D00102E9B /* CoordinatorType.swift */,
+				848DEC6022F3E3BF00102E9B /* DataSourceType.swift */,
+				848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */,
+				848DEC5222F3DF3B00102E9B /* Presentable.swift */,
+				848DEC5822F3E18800102E9B /* PresentableCoordinatorType.swift */,
+				848DEC5C22F3E1F100102E9B /* PresentableType.swift */,
+				848DEC5422F3E02400102E9B /* RouterType.swift */,
+				845A1D8422D02BE20066C17C /* UnBlurViewType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -850,7 +868,9 @@
 				848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */,
 				84E27D1822EFD11C00D2CAE5 /* CategoryCountViewModel.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
+				848DEC5922F3E18800102E9B /* PresentableCoordinatorType.swift in Sources */,
 				847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */,
+				848DEC5D22F3E1F100102E9B /* PresentableType.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
 				847AE27F22EDEADB00774371 /* SettingsViewModel.swift in Sources */,
 				848DEC5722F3E0CD00102E9B /* Coordinator Protocols.swift in Sources */,
@@ -890,8 +910,10 @@
 				848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */,
 				841CDF8C22E746A600FEB1D0 /* GroupsCoordinator.swift in Sources */,
 				848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */,
+				848DEC6122F3E3BF00102E9B /* DataSourceType.swift in Sources */,
 				8401127E22E51CE300ECE0D5 /* OpenCoordinator.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
+				848DEC5B22F3E1C000102E9B /* BaseCoordinatorType.swift in Sources */,
 				847AE28822EE473E00774371 /* FilterViewModel.swift in Sources */,
 				84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
@@ -902,7 +924,7 @@
 				847AE26922EDA37600774371 /* SearchByAddressView.swift in Sources */,
 				84DC40EB226BCB2C003003C4 /* DataController.swift in Sources */,
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
-				845A1D8522D02BE20066C17C /* UnBlurViewProtocol.swift in Sources */,
+				845A1D8522D02BE20066C17C /* UnBlurViewType.swift in Sources */,
 				847AE28622EE124100774371 /* SettingsController+Handlers.swift in Sources */,
 				841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */,
@@ -917,6 +939,7 @@
 				84E27D2322F09EFB00D2CAE5 /* CategoryViewModel.swift in Sources */,
 				84CC285D2297774800A82BBE /* SettingsController.swift in Sources */,
 				84365CD322C8EB5B0014E577 /* MainMenuController+CLLocation.swift in Sources */,
+				848DEC6322F3E4CB00102E9B /* OpenControllerType.swift in Sources */,
 				84DC40DD2269F7C0003003C4 /* YelpBusinessResponse.swift in Sources */,
 				847AE26222EBE50B00774371 /* BusinessDetailsView.swift in Sources */,
 				84DC40E9226B7BD7003003C4 /* YelpDataModels.xcdatamodeld in Sources */,
@@ -946,6 +969,7 @@
 				843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */,
 				840CC5FE22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift in Sources */,
 				84BDE30F2263E652008C9B01 /* UNSYNC.swift in Sources */,
+				848DEC5F22F3E21D00102E9B /* CoordinatorType.swift in Sources */,
 				847AE23A22E922DC00774371 /* CategoryCellViewModel.swift in Sources */,
 				847AE25D22EAB4E000774371 /* MainMenuController+Handlers.swift in Sources */,
 				848DEC5522F3E02400102E9B /* RouterType.swift in Sources */,

@@ -55,13 +55,13 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         coordinator.start(parent: self)
     }
     
-    func loadSettings(delegate: UnBlurViewProtocol, max: Int?) {
+    func loadSettings(delegate: UnBlurViewType, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController,
                                               router: router, maximumSliderValue: radius)
         coordinator.start(parent: self)
     }
     
-    func loadFilter(unblurProtocol: UnBlurViewProtocol){
+    func loadFilter(unblurProtocol: UnBlurViewType){
         let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
         coordinator.start(parent: self)
     }

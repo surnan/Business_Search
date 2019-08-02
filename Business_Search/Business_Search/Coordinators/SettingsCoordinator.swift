@@ -13,15 +13,15 @@ class SettingsCoordinator: Coordinator {
     private let dataController: DataController
     private var maximumSliderValue: Int?
     var getMaximumSliderValue: Int? {return maximumSliderValue}
-    private let unblurProtocol: UnBlurViewProtocol
+    private let unblurProtocol: UnBlurViewType
     
-    init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType) {
+    init(unblurProtocol: UnBlurViewType, dataController: DataController, router: RouterType) {
         self.unblurProtocol = unblurProtocol
         self.dataController = dataController
         super.init(router: router)
     }
     
-    init(unblurProtocol: UnBlurViewProtocol, dataController: DataController, router: RouterType, maximumSliderValue: Int? = nil) {
+    init(unblurProtocol: UnBlurViewType, dataController: DataController, router: RouterType, maximumSliderValue: Int? = nil) {
         self.unblurProtocol = unblurProtocol
         self.dataController = dataController
         self.maximumSliderValue = maximumSliderValue

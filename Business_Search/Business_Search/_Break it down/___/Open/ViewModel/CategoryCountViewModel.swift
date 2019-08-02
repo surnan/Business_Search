@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 class CategoryCountViewModel {
-    private var delegate        : OpenControllerDelegate
+    private var delegate        : OpenControllerType
     private var dataController  : DataController
 
-    init(delegate: OpenControllerDelegate, dataController: DataController) {
+    init(delegate: OpenControllerType, dataController: DataController) {
         self.dataController = dataController
         self.delegate       = delegate
     }

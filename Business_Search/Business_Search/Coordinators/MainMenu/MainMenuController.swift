@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class MainMenuController: UIViewController, UnBlurViewProtocol{
+class MainMenuController: UIViewController, UnBlurViewType{
     var locationManager         : CLLocationManager!
     var userLocation            : CLLocation!       //Provided via Apple GPS
     var previousCoordinate      : CLLocation?       /* Still Necessary */

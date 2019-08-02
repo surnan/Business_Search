@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 class BusinessViewModel {
-    private var delegate: OpenControllerDelegate
+    private var delegate: OpenControllerType
     private var dataController: DataController
 
-    init(delegate: OpenControllerDelegate, dataController: DataController) {
+    init(delegate: OpenControllerType, dataController: DataController) {
         self.dataController = dataController
         self.delegate = delegate
     }
@@ -21,7 +21,7 @@ class BusinessViewModel {
     private var predicateBusinessLatitude: NSPredicate {
         return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), delegate.getLatitude])
     }
-               
+    
     private var predicateBusinessLongitude: NSPredicate {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.longitude), delegate.getLongitude])
     }

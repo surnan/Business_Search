@@ -9,6 +9,6 @@
 import Foundation
 
 
-protocol UnBlurViewProtocol{
+protocol UnBlurViewType{
     func undoBlur()
 }

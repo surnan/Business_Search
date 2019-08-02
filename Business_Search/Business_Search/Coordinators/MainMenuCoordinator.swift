@@ -54,7 +54,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         }
     }
 
-    func loadSettings(delegate: UnBlurViewProtocol, max: Int?) {
+    func loadSettings(delegate: UnBlurViewType, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }

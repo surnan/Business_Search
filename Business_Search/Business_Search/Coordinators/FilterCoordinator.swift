@@ -10,9 +10,9 @@ import UIKit
 
 
 class FilterCoordinator: Coordinator {
-    private let unblurProtocol: UnBlurViewProtocol
+    private let unblurProtocol: UnBlurViewType
     
-    init(unblurProtocol: UnBlurViewProtocol, router: RouterType) {
+    init(unblurProtocol: UnBlurViewType, router: RouterType) {
         self.unblurProtocol = unblurProtocol
         super.init(router: router)
     }

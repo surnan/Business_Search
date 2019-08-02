@@ -8,23 +8,12 @@
 
 import UIKit
 
-
-protocol DataSourceParent {
-    var businessViewModel   : BusinessViewModel! {get}
-    var categoryCountViewModel   : CategoryCountViewModel! {get}
-    var getLatitude: Double {get}
-    var getLongitude: Double {get}
-    var dataController      : DataController! {get}
-    var tableViewArrayType  : Int {get}
-    func showNothingLabel(tableEmpty: Bool)
-}
-
 class Open_DataSource: NSObject, UITableViewDataSource {
     let businessViewModel           : BusinessViewModel
     let categoryNameCountViewModel  : CategoryCountViewModel
     let favoriteViewModel           : FavoritesViewModel
     let dataController              : DataController
-    let parent                      : DataSourceParent
+    let parent                      : DataSourceType
     var tableArrayType: Int {return parent.tableViewArrayType}
     
     init(parent: OpenController){

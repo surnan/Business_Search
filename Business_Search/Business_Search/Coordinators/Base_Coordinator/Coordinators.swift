@@ -9,23 +9,7 @@
 import UIKit
 import MapKit
 
-protocol BaseCoordinatorType: class {
-    func start()
-}
-
-protocol PresentableCoordinatorType: BaseCoordinatorType, Presentable {}
-
-class PresentableCoordinator: NSObject, PresentableCoordinatorType {
-    override init() {super.init()}
-    open func start() {}
-    open func toPresentable() -> UIViewController {fatalError("Must override toPresentable()")}
-}
-
-protocol CoordinatorType: PresentableCoordinatorType {
-    var router: RouterType { get }
-}
-
-class Coordinator: PresentableCoordinator, CoordinatorType  {
+class Coordinator: PresentableType, CoordinatorType  {
     var childCoordinators: [Coordinator] = []
     var router: RouterType
     init(router: RouterType) {

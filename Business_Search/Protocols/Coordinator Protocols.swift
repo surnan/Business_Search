@@ -12,12 +12,12 @@ import MapKit
 protocol SearchTableType    {func loadSearchTable    (location: CLLocation)}
 protocol SearchByMapType    {func loadSearchByMap    (location: CLLocation)}
 protocol SearchByAddressType{func loadSearchByAddress(location: CLLocation)}
-protocol SettingsType       {func loadSettings(delegate: UnBlurViewProtocol, max: Int?)}
+protocol SettingsType       {func loadSettings(delegate: UnBlurViewType, max: Int?)}
 
 
 
 protocol BusinessDetailsType{func loadBusinessDetails(currentBusiness: Business)}
-protocol FilterType         {func loadFilter(unblurProtocol: UnBlurViewProtocol)}
+protocol FilterType         {func loadFilter(unblurProtocol: UnBlurViewType)}
 protocol OpenPhoneType      {func loadPhoneCallScreen(number: String)}
 protocol OpenInSafariType   {func loadSafariBrowser(url: String)}
 protocol OpenAppleMapType   {func loadAppleMap(currentLocation: CLLocationCoordinate2D)}
