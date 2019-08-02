@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension SettingsController{
     func addHandlers(){
@@ -14,6 +15,19 @@ extension SettingsController{
         viewObject.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         viewObject.cancelButton.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
         viewObject.defaultsButton.addTarget(self, action: #selector(handleDefaultsButton), for: .touchUpInside)
+        viewObject.deleteFavoritesButton.addTarget(self, action: #selector(handleDeleteFavorites), for: .touchUpInside)
+    }
+    
+    @objc func handleDeleteFavorites(){
+        //let favoritesVM = FavoritesViewModel(dataController: dataController)
+        let context = dataController.viewContext
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+        do {
+            _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+        } catch {
+            print("Error deleting All \(error)")
+        }
     }
     
     @objc func handleDefaultsButton(){

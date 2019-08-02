@@ -39,6 +39,23 @@ class FavoritesViewModel {
     }
     
     func deleteFavorite(business: Business){
+        fetchFavoritesController = nil
+        guard let allFavorites = fetchFavoritesController?.fetchedObjects else {return}
+        for (_, item) in allFavorites.enumerated(){
+            if item.id == business.id {
+                dataController.viewContext.delete(item)
+                do {
+                    try dataController.viewContext.save()
+                } catch {
+                    print("Error when trying to delete: \(item.id ?? "")")
+                    return
+                }
+            }
+        }
+    }
+    
+    
+    func deleteAllFavorites(){
         fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
             dataController.viewContext.delete(item)
             do {
@@ -49,6 +66,7 @@ class FavoritesViewModel {
             }
         })
     }
+    
     
     func createFavorite(business: Business){
         let context = dataController.viewContext
