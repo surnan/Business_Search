@@ -8,14 +8,14 @@
 
 import UIKit
 
-class MapsCoordinator: Coordinator, BusinessDetailsType, DismissType {
+class GroupMapCoordinator: Coordinator, BusinessDetailsType, DismissType {
     let businesses      : [Business]
     let categoryName    : String
-    var parent          : MyTabCoordinator?  //because it's in a tab controller
+    var parent          : TabGroupCoordinator?  //because it's in a tab controller
     
     
-    lazy var myMapsController: MapController = {
-        let controller = MapController()
+    lazy var myMapsController: GroupMapController = {
+        let controller = GroupMapController()
         controller.businesses = businesses
         return controller
     }()

@@ -16,7 +16,7 @@ class BusinessPointAnnotation: MKPointAnnotation {
     }
 }
 
-class MapController: UIViewController, MKMapViewDelegate {
+class GroupMapController: UIViewController, MKMapViewDelegate {
     var currentBusinessAnnotation: Business?        //tapped Annotation
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"

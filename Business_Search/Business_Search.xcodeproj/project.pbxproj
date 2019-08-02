@@ -20,21 +20,21 @@
 		840CC60022F2044700BAC72F /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CC5FF22F2044700BAC72F /* FavoritesViewModel.swift */; };
 		8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */; };
 		8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417FCBC227B8A6D005BC240 /* CategoryCell.swift */; };
-		841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */; };
-		841CDF8C22E746A600FEB1D0 /* GroupsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8B22E746A600FEB1D0 /* GroupsCoordinator.swift */; };
-		841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8E22E7535200FEB1D0 /* MapCoordinate.swift */; };
+		841CDF8722E6BFEE00FEB1D0 /* TabGroupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */; };
+		841CDF8C22E746A600FEB1D0 /* GroupTableViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8B22E746A600FEB1D0 /* GroupTableViewCoordinator.swift */; };
+		841CDF8F22E7535200FEB1D0 /* GroupMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8E22E7535200FEB1D0 /* GroupMapCoordinator.swift */; };
 		8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */; };
 		842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D8228538B900590B1A /* BusinessDetailsController.swift */; };
 		84365CB122C567A80014E577 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB022C567A80014E577 /* Double+Extension.swift */; };
 		84365CB322C567B50014E577 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB222C567B50014E577 /* Float+Extension.swift */; };
 		84365CB522C5687E0014E577 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB422C5687E0014E577 /* String+Extension.swift */; };
 		84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB722C569520014E577 /* UserAppliedFilter.swift */; };
-		84365CBA22C62AA40014E577 /* _Generic_UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* _Generic_UIKit.swift */; };
+		84365CBA22C62AA40014E577 /* UIKit+Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB922C62AA40014E577 /* UIKit+Generics.swift */; };
 		84365CBC22C64A860014E577 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CBB22C64A860014E577 /* CustomButton.swift */; };
 		84365CC722C8897A0014E577 /* LocationNSFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CC622C8897A0014E577 /* LocationNSFetchController.swift */; };
 		84365CD322C8EB5B0014E577 /* MainMenuController+CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */; };
-		84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD922C93D860014E577 /* MapController+Map.swift */; };
-		843C66F9227D25D7003A64D1 /* GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* GroupsController.swift */; };
+		84365CDA22C93D860014E577 /* GroupMapController+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CD922C93D860014E577 /* GroupMapController+Map.swift */; };
+		843C66F9227D25D7003A64D1 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66F8227D25D7003A64D1 /* GroupTableViewController.swift */; };
 		843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C66FA227DC97A003A64D1 /* BusinessCell.swift */; };
 		844D358422CA7A1300D7E594 /* BusinessDetailsController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D358322CA7A1300D7E594 /* BusinessDetailsController+UI.swift */; };
 		844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Array+Extension.swift */; };
@@ -67,7 +67,7 @@
 		847AE28A22EE474B00774371 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28922EE474B00774371 /* FilterView.swift */; };
 		847AE28D22EE9A8A00774371 /* FilterController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28C22EE9A8A00774371 /* FilterController+UI.swift */; };
 		847AE28F22EE9A9A00774371 /* FilterController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE28E22EE9A9900774371 /* FilterController+Handlers.swift */; };
-		848761CD227E856C000CECC7 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* MapController.swift */; };
+		848761CD227E856C000CECC7 /* GroupMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CC227E856C000CECC7 /* GroupMapController.swift */; };
 		848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761CF227F176F000CECC7 /* MainMenuController.swift */; };
 		848761D3227F221D000CECC7 /* SearchByMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D2227F221D000CECC7 /* SearchByMapController.swift */; };
 		848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */; };
@@ -90,7 +90,7 @@
 		84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B01D22A58F7D009B96AD /* Business+Extension.swift */; };
 		84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */; };
 		84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02622A5DFDF009B96AD /* FilterController.swift */; };
-		84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* MyTabController.swift */; };
+		84B3CF8C2268A9030012A75C /* TabGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* TabGroupController.swift */; };
 		84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BDE2EF2263D007008C9B01 /* AppDelegate.swift */; };
 		84BDE2F72263D009008C9B01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84BDE2F62263D009008C9B01 /* Assets.xcassets */; };
 		84BDE2FA2263D009008C9B01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */; };
@@ -135,21 +135,21 @@
 		840CC5FF22F2044700BAC72F /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		8414475E2266C4D200A38AAB /* YelpAutoCompleteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAutoCompleteResponse.swift; sourceTree = "<group>"; };
 		8417FCBC227B8A6D005BC240 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabCoordinator.swift; sourceTree = "<group>"; };
-		841CDF8B22E746A600FEB1D0 /* GroupsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsCoordinator.swift; sourceTree = "<group>"; };
-		841CDF8E22E7535200FEB1D0 /* MapCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinate.swift; sourceTree = "<group>"; };
+		841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroupCoordinator.swift; sourceTree = "<group>"; };
+		841CDF8B22E746A600FEB1D0 /* GroupTableViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCoordinator.swift; sourceTree = "<group>"; };
+		841CDF8E22E7535200FEB1D0 /* GroupMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMapCoordinator.swift; sourceTree = "<group>"; };
 		8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotationView.swift; sourceTree = "<group>"; };
 		842AD7D8228538B900590B1A /* BusinessDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84365CB022C567A80014E577 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		84365CB222C567B50014E577 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		84365CB422C5687E0014E577 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		84365CB722C569520014E577 /* UserAppliedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAppliedFilter.swift; sourceTree = "<group>"; };
-		84365CB922C62AA40014E577 /* _Generic_UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Generic_UIKit.swift; sourceTree = "<group>"; };
+		84365CB922C62AA40014E577 /* UIKit+Generics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Generics.swift"; sourceTree = "<group>"; };
 		84365CBB22C64A860014E577 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		84365CC622C8897A0014E577 /* LocationNSFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNSFetchController.swift; sourceTree = "<group>"; };
 		84365CD222C8EB5B0014E577 /* MainMenuController+CLLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainMenuController+CLLocation.swift"; sourceTree = "<group>"; };
-		84365CD922C93D860014E577 /* MapController+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapController+Map.swift"; sourceTree = "<group>"; };
-		843C66F8227D25D7003A64D1 /* GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsController.swift; sourceTree = "<group>"; };
+		84365CD922C93D860014E577 /* GroupMapController+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupMapController+Map.swift"; sourceTree = "<group>"; };
+		843C66F8227D25D7003A64D1 /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		843C66FA227DC97A003A64D1 /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		844D358322CA7A1300D7E594 /* BusinessDetailsController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessDetailsController+UI.swift"; sourceTree = "<group>"; };
 		844F64B52277B3E0003E6A93 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		847AE28922EE474B00774371 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		847AE28C22EE9A8A00774371 /* FilterController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterController+UI.swift"; sourceTree = "<group>"; };
 		847AE28E22EE9A9900774371 /* FilterController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterController+Handlers.swift"; sourceTree = "<group>"; };
-		848761CC227E856C000CECC7 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		848761CC227E856C000CECC7 /* GroupMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761CF227F176F000CECC7 /* MainMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D2227F221D000CECC7 /* SearchByMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		848761D4227F8AE3000CECC7 /* SearchByAddressController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -205,7 +205,7 @@
 		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };
 		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		84B3CF8B2268A9030012A75C /* MyTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabController.swift; sourceTree = "<group>"; };
+		84B3CF8B2268A9030012A75C /* TabGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroupController.swift; sourceTree = "<group>"; };
 		84BDE2EC2263D007008C9B01 /* Business_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Business_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84BDE2EF2263D007008C9B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84BDE2F62263D009008C9B01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -311,60 +311,7 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		841CDF8522E6BFCA00FEB1D0 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8622E6BFEE00FEB1D0 /* MyTabCoordinator.swift */,
-				84365CD822C93D450014E577 /* Tabbed Controllers */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		841CDF8822E73C7C00FEB1D0 /* Groups */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8A22E745E600FEB1D0 /* Coordinators */,
-				843C66F8227D25D7003A64D1 /* GroupsController.swift */,
-			);
-			path = Groups;
-			sourceTree = "<group>";
-		};
-		841CDF8922E73C8C00FEB1D0 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8D22E7532700FEB1D0 /* Coordinators */,
-				848761CC227E856C000CECC7 /* MapController.swift */,
-				84365CD922C93D860014E577 /* MapController+Map.swift */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
-		841CDF8A22E745E600FEB1D0 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8B22E746A600FEB1D0 /* GroupsCoordinator.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		841CDF8D22E7532700FEB1D0 /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8E22E7535200FEB1D0 /* MapCoordinate.swift */,
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8522E6BFCA00FEB1D0 /* Coordinators */,
-				84B3CF8B2268A9030012A75C /* MyTabController.swift */,
-			);
-			path = "TAB CONTROLLER";
-			sourceTree = "<group>";
-		};
-		84365CAD22C565060014E577 /* UiKit */ = {
+		84365CAD22C565060014E577 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
 				848761D8227F8E5F000CECC7 /* UIButton+Extensions.swift */,
@@ -373,7 +320,7 @@
 				84BDE3042263D3CD008C9B01 /* UIView+Extensions.swift */,
 				84BDE3062263D3CE008C9B01 /* UIViewController+Extension.swift */,
 			);
-			path = UiKit;
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		84365CAE22C565BC0014E577 /* Extensions */ = {
@@ -386,7 +333,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		84365CAF22C566500014E577 /* Foundations */ = {
+		84365CAF22C566500014E577 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
 				844F64B52277B3E0003E6A93 /* Array+Extension.swift */,
@@ -394,7 +341,7 @@
 				84365CB222C567B50014E577 /* Float+Extension.swift */,
 				84365CB422C5687E0014E577 /* String+Extension.swift */,
 			);
-			path = Foundations;
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		84365CB622C569200014E577 /* UserAppliedFilter */ = {
@@ -416,22 +363,13 @@
 		84365CCE22C8E30E0014E577 /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
-				847AE25A22EAB46300774371 /* CLLocation+Extension.swift */,
-				84365CB922C62AA40014E577 /* _Generic_UIKit.swift */,
 				8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */,
+				847AE25A22EAB46300774371 /* CLLocation+Extension.swift */,
 				84365CBB22C64A860014E577 /* CustomButton.swift */,
 				84BDE30C2263DAE1008C9B01 /* CustomNavigationController.swift */,
+				84365CB922C62AA40014E577 /* UIKit+Generics.swift */,
 			);
 			path = SubClass;
-			sourceTree = "<group>";
-		};
-		84365CD822C93D450014E577 /* Tabbed Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				841CDF8822E73C7C00FEB1D0 /* Groups */,
-				841CDF8922E73C8C00FEB1D0 /* Map */,
-			);
-			path = "Tabbed Controllers";
 			sourceTree = "<group>";
 		};
 		845A1D8722D02D680066C17C /* Singleton */ = {
@@ -454,14 +392,14 @@
 		847AE23322E81D1E00774371 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				84E27D1922EFD81800D2CAE5 /* OpenViewModel */,
-				847AE23422E81D7600774371 /* BusinessCellViewModel.swift */,
-				847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */,
-				847AE23922E922DC00774371 /* CategoryCellViewModel.swift */,
-				847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */,
-				847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */,
-				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
-				847AE28722EE473E00774371 /* FilterViewModel.swift */,
+				848DEC6B22F4095300102E9B /* BusinessCell */,
+				848DEC6C22F4097800102E9B /* BusinessDetails */,
+				848DEC6D22F4098E00102E9B /* CategoryCell */,
+				848DEC6E22F409AC00102E9B /* Filter */,
+				84E27D1922EFD81800D2CAE5 /* Open */,
+				848DEC6F22F409C100102E9B /* SearchByAddress */,
+				848DEC7122F409DA00102E9B /* SearchByMap */,
+				848DEC7222F409E800102E9B /* Settings */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -469,8 +407,8 @@
 		847AE23622E892E000774371 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				84365CAD22C565060014E577 /* UiKit */,
-				84365CAF22C566500014E577 /* Foundations */,
+				84365CAF22C566500014E577 /* Foundation */,
+				84365CAD22C565060014E577 /* UIKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -478,12 +416,14 @@
 		847AE23F22E9458400774371 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				848DEC6422F3E76900102E9B /* OpenController */,
+				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
 				847AE28B22EE9A6F00774371 /* Filter */,
-				847AE28222EE11E700774371 /* Settings */,
+				848761D1227F1779000CECC7 /* MainMenu */,
+				848DEC6422F3E76900102E9B /* OpenController */,
+				848DEC6A22F407F700102E9B /* TabGroup */,
 				847AE27922EDE76900774371 /* SearchByMap */,
 				847AE26C22EDCF8400774371 /* SearchByAddress */,
-				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
+				847AE28222EE11E700774371 /* Settings */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -493,13 +433,16 @@
 			children = (
 				8401125E22E29F1400ECE0D5 /* Base_Coordinator */,
 				84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */,
+				848761CC227E856C000CECC7 /* GroupMapController.swift */,
+				84365CD922C93D860014E577 /* GroupMapController+Map.swift */,
+				843C66F8227D25D7003A64D1 /* GroupTableViewController.swift */,
 				8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */,
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
 				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
 				84684CA922E6466A00999599 /* FilterCoordinator.swift */,
 				8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */,
-				848761D1227F1779000CECC7 /* MainMenu */,
+				841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -518,22 +461,16 @@
 				843C66FA227DC97A003A64D1 /* BusinessCell.swift */,
 				847AE26122EBE50B00774371 /* BusinessDetailsView.swift */,
 				8417FCBC227B8A6D005BC240 /* CategoryCell.swift */,
+				847AE28922EE474B00774371 /* FilterView.swift */,
+				841CDF8E22E7535200FEB1D0 /* GroupMapCoordinator.swift */,
+				841CDF8B22E746A600FEB1D0 /* GroupTableViewCoordinator.swift */,
 				847AE25522EAA6E800774371 /* MainMenuView.swift */,
+				84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */,
 				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
 				847AE27722EDE1B100774371 /* SearchByMapView.swift */,
 				847AE28022EDEAF600774371 /* SettingsView.swift */,
-				847AE28922EE474B00774371 /* FilterView.swift */,
-				84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		847AE26622ED625100774371 /* _Break it down */ = {
-			isa = PBXGroup;
-			children = (
-				84BDE3032263D373008C9B01 /* Controllers */,
-			);
-			path = "_Break it down";
 			sourceTree = "<group>";
 		};
 		847AE26C22EDCF8400774371 /* SearchByAddress */ = {
@@ -620,12 +557,76 @@
 		848DEC6922F3E97C00102E9B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				845A1D8C22D0314D0066C17C /* Global Variables.swift */,
-				84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */,
 				84BDE2EF2263D007008C9B01 /* AppDelegate.swift */,
 				84BDE2F62263D009008C9B01 /* Assets.xcassets */,
+				845A1D8C22D0314D0066C17C /* Global Variables.swift */,
+				84BDE2F82263D009008C9B01 /* LaunchScreen.storyboard */,
 			);
 			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		848DEC6A22F407F700102E9B /* TabGroup */ = {
+			isa = PBXGroup;
+			children = (
+				84B3CF8B2268A9030012A75C /* TabGroupController.swift */,
+			);
+			path = TabGroup;
+			sourceTree = "<group>";
+		};
+		848DEC6B22F4095300102E9B /* BusinessCell */ = {
+			isa = PBXGroup;
+			children = (
+				847AE23422E81D7600774371 /* BusinessCellViewModel.swift */,
+			);
+			path = BusinessCell;
+			sourceTree = "<group>";
+		};
+		848DEC6C22F4097800102E9B /* BusinessDetails */ = {
+			isa = PBXGroup;
+			children = (
+				847AE25F22EBE45500774371 /* BusinessDetailsViewModel.swift */,
+			);
+			path = BusinessDetails;
+			sourceTree = "<group>";
+		};
+		848DEC6D22F4098E00102E9B /* CategoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				847AE23922E922DC00774371 /* CategoryCellViewModel.swift */,
+			);
+			path = CategoryCell;
+			sourceTree = "<group>";
+		};
+		848DEC6E22F409AC00102E9B /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				847AE28722EE473E00774371 /* FilterViewModel.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		848DEC6F22F409C100102E9B /* SearchByAddress */ = {
+			isa = PBXGroup;
+			children = (
+				847AE26A22EDA66800774371 /* SearchByAddressViewModel.swift */,
+			);
+			path = SearchByAddress;
+			sourceTree = "<group>";
+		};
+		848DEC7122F409DA00102E9B /* SearchByMap */ = {
+			isa = PBXGroup;
+			children = (
+				847AE27522EDE14F00774371 /* SearchByMapViewModel.swift */,
+			);
+			path = SearchByMap;
+			sourceTree = "<group>";
+		};
+		848DEC7222F409E800102E9B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		84A5AFDB22A21E50009B96AD /* Google */ = {
@@ -672,12 +673,11 @@
 				847AE26522ED612900774371 /* Views */,
 				847AE23F22E9458400774371 /* ViewControllers */,
 				847AE23322E81D1E00774371 /* ViewModel */,
+				847AE24022E945A600774371 /* Coordinators */,
 				848DEC6922F3E97C00102E9B /* Support Files */,
 				84365CCE22C8E30E0014E577 /* SubClass */,
 				8408F0DF22E60A9100DB55B6 /* Protocols */,
 				847AE23622E892E000774371 /* Extensions */,
-				847AE24022E945A600774371 /* Coordinators */,
-				847AE26622ED625100774371 /* _Break it down */,
 				84BDE2FB2263D009008C9B01 /* Info.plist */,
 			);
 			path = Business_Search;
@@ -691,14 +691,6 @@
 				845A1D8722D02D680066C17C /* Singleton */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		84BDE3032263D373008C9B01 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				8435B1D6227A4EFD00E95B4E /* TAB CONTROLLER */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		84CF692622755B0B00109C96 /* Yelp_Struct */ = {
@@ -729,7 +721,7 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		84E27D1922EFD81800D2CAE5 /* OpenViewModel */ = {
+		84E27D1922EFD81800D2CAE5 /* Open */ = {
 			isa = PBXGroup;
 			children = (
 				84E27D0F22EF6C6B00D2CAE5 /* BusinessViewModel.swift */,
@@ -738,7 +730,7 @@
 				84E27D2222F09EFB00D2CAE5 /* CategoryViewModel.swift */,
 				840CC5FF22F2044700BAC72F /* FavoritesViewModel.swift */,
 			);
-			path = OpenViewModel;
+			path = Open;
 			sourceTree = "<group>";
 		};
 		B368EECBA97B6A31068D07BF /* Frameworks */ = {
@@ -884,7 +876,7 @@
 				848DEC5722F3E0CD00102E9B /* Coordinator Protocols.swift in Sources */,
 				847AE26B22EDA66800774371 /* SearchByAddressViewModel.swift in Sources */,
 				84E27D1F22F08E7D00D2CAE5 /* Open_Delegate.swift in Sources */,
-				84365CDA22C93D860014E577 /* MapController+Map.swift in Sources */,
+				84365CDA22C93D860014E577 /* GroupMapController+Map.swift in Sources */,
 				8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */,
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */,
@@ -894,15 +886,15 @@
 				847AE23522E81D7600774371 /* BusinessCellViewModel.swift in Sources */,
 				840CC60022F2044700BAC72F /* FavoritesViewModel.swift in Sources */,
 				84E27D1D22F0793C00D2CAE5 /* OpenController+Search.swift in Sources */,
-				841CDF8F22E7535200FEB1D0 /* MapCoordinate.swift in Sources */,
+				841CDF8F22E7535200FEB1D0 /* GroupMapCoordinator.swift in Sources */,
 				84BDE3072263D3CE008C9B01 /* UIView+Extensions.swift in Sources */,
 				840CC5FC22F1454500BAC72F /* Open_Delegate+RowAction.swift in Sources */,
 				84365CB322C567B50014E577 /* Float+Extension.swift in Sources */,
 				8401126522E29FE800ECE0D5 /* Coordinators.swift in Sources */,
-				84B3CF8C2268A9030012A75C /* MyTabController.swift in Sources */,
+				84B3CF8C2268A9030012A75C /* TabGroupController.swift in Sources */,
 				847AE25B22EAB46300774371 /* CLLocation+Extension.swift in Sources */,
 				847AE28A22EE474B00774371 /* FilterView.swift in Sources */,
-				84365CBA22C62AA40014E577 /* _Generic_UIKit.swift in Sources */,
+				84365CBA22C62AA40014E577 /* UIKit+Generics.swift in Sources */,
 				84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */,
 				84DC40D222697319003003C4 /* Error_Enums.swift in Sources */,
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
@@ -916,7 +908,7 @@
 				84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */,
 				847AE27422EDDF9300774371 /* MainMenuController+UI.swift in Sources */,
 				848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */,
-				841CDF8C22E746A600FEB1D0 /* GroupsCoordinator.swift in Sources */,
+				841CDF8C22E746A600FEB1D0 /* GroupTableViewCoordinator.swift in Sources */,
 				848761D0227F176F000CECC7 /* MainMenuController.swift in Sources */,
 				848DEC6122F3E3BF00102E9B /* DataSourceType.swift in Sources */,
 				8401127E22E51CE300ECE0D5 /* OpenCoordinator.swift in Sources */,
@@ -925,7 +917,7 @@
 				847AE28822EE473E00774371 /* FilterViewModel.swift in Sources */,
 				84DC40ED226BFCC3003003C4 /* Location+Extension.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
-				848761CD227E856C000CECC7 /* MapController.swift in Sources */,
+				848761CD227E856C000CECC7 /* GroupMapController.swift in Sources */,
 				84E27D0B22EF6C3000D2CAE5 /* OpenController.swift in Sources */,
 				8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */,
 				844D358422CA7A1300D7E594 /* BusinessDetailsController+UI.swift in Sources */,
@@ -934,11 +926,11 @@
 				84BDE3092263D3CE008C9B01 /* UIViewController+Extension.swift in Sources */,
 				845A1D8522D02BE20066C17C /* UnBlurViewType.swift in Sources */,
 				847AE28622EE124100774371 /* SettingsController+Handlers.swift in Sources */,
-				841CDF8722E6BFEE00FEB1D0 /* MyTabCoordinator.swift in Sources */,
+				841CDF8722E6BFEE00FEB1D0 /* TabGroupCoordinator.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */,
 				848DEC4E22F2627800102E9B /* OpenController+Handlers.swift in Sources */,
 				847AE28122EDEAF600774371 /* SettingsView.swift in Sources */,
-				843C66F9227D25D7003A64D1 /* GroupsController.swift in Sources */,
+				843C66F9227D25D7003A64D1 /* GroupTableViewController.swift in Sources */,
 				84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */,
 				848761D5227F8AE3000CECC7 /* SearchByAddressController.swift in Sources */,
 				8401127A22E51C5C00ECE0D5 /* MainMenuCoordinator.swift in Sources */,

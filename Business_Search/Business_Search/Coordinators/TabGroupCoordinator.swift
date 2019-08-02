@@ -8,27 +8,27 @@
 
 import UIKit
 
-class MyTabCoordinator: Coordinator, UITabBarControllerDelegate {
+class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     var tabs = [UIViewController: Coordinator]()
     let tabBarController = UITabBarController()
     
     let businesses: [Business]
     let categoryName: String
     
-    lazy var groupsCoordinator: GroupsCoordinator = {
+    lazy var groupsCoordinator: GroupTableViewCoordinator = {
         let navigationController = UINavigationController()
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         let router = Router(navigationController: navigationController)
-        let coordinator = GroupsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = GroupTableViewCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         coordinator.parent = self
         return coordinator
     }()
     
-    lazy var mapCoordinator: MapsCoordinator = {
+    lazy var mapCoordinator: GroupMapCoordinator = {
         let navigationController = UINavigationController()
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads , tag: 1)
         let router = Router(navigationController: navigationController)
-        let coordinator = MapsCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = GroupMapCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         coordinator.parent = self
         return coordinator
     }()

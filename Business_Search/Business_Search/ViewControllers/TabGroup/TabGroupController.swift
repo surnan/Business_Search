@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyTabController: UITabBarController {
+class TabGroupController: UITabBarController {
     //MARK:- Injections START
     var category: String!
     var categoryName: String!  {didSet {navigationItem.title = categoryName}}

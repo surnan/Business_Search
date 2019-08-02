@@ -8,14 +8,14 @@
 
 import UIKit
 
-class GroupsCoordinator: Coordinator, BusinessDetailsType, DismissType {
+class GroupTableViewCoordinator: Coordinator, BusinessDetailsType, DismissType {
     
     let businesses      : [Business]
     let categoryName    : String
-    var parent          : MyTabCoordinator?  //because it's in a tab controller
+    var parent          : TabGroupCoordinator?  //because it's in a tab controller
     
-    lazy var myGroupsController: GroupsController  = {
-        let controller = GroupsController()
+    lazy var myGroupsController: GroupTableViewController  = {
+        let controller = GroupTableViewController()
         controller.businesses = businesses
         controller.categoryName = categoryName
         return controller

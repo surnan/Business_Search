@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class GroupsController: UITableViewController {
+class GroupTableViewController: UITableViewController {
     var businesses = [Business]()   //injected
     var categoryName: String!       //injected
     var coordinator: (BusinessDetailsType & DismissType)?

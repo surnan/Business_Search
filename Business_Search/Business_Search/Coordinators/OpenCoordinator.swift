@@ -67,7 +67,7 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
     }
     
     func loadTabController(businesses: [Business], categoryName: String){
-        let coordinator = MyTabCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = TabGroupCoordinator(businesses: businesses, categoryName: categoryName, router: router)
         coordinator.start(parent: self)
     }
     
