@@ -1,8 +1,8 @@
 //
-//  _Types.swift
+//  Coordinator Protocols.swift
 //  Business_Search
 //
-//  Created by admin on 7/22/19.
+//  Created by admin on 8/1/19.
 //  Copyright © 2019 admin. All rights reserved.
 //
 

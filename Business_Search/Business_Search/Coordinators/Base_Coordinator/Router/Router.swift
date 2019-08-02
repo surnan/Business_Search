@@ -1,18 +1,7 @@
 import UIKit
 
-protocol RouterType: class, Presentable {
-	var navigationController: UINavigationController { get }
-	var rootViewController: UIViewController? { get }
-	func present(_ module: Presentable, animated: Bool)
-	func dismissModule(animated: Bool, completion: (() -> Void)?)
-	func push(_ module: Presentable, animated: Bool, completion: (() -> Void)?)
-	func popModule(animated: Bool)
-	func setRootModule(_ module: Presentable, hideBar: Bool)
-	func popToRootModule(animated: Bool)
-}
 
-
-final class Router: NSObject, RouterType, UINavigationControllerDelegate {
+class Router: NSObject, RouterType, UINavigationControllerDelegate {
     //because it's dictionary, only one velue per key.
     private var completions: [UIViewController : () -> Void]
     let navigationController: UINavigationController

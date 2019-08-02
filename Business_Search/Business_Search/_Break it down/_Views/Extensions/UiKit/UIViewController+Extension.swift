@@ -47,3 +47,9 @@ extension UIViewController {
         present(myAlertController, animated: true)
     }
 }
+
+extension UIViewController: Presentable {
+    func toPresentable() -> UIViewController {
+        return self
+    }
+}
