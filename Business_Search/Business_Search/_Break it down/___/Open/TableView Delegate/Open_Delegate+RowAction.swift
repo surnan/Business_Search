@@ -28,20 +28,20 @@ extension Open_Delegate {
         return source.tableArrayType == TableIndex.category.rawValue ? [actionForCategory] : [actionForBusiness]
     }
     
-    func getCategoryName(at index: Int) -> String {     //1
+    private func getCategoryName(at index: Int) -> String {     //1
         let categoryNames = source.categoryNameCountViewModel.fetchedObjects()
         let categoryName = categoryNames[index]
         return categoryName
     }
     
-    func showRandomBusiness(businesses: [Business]){    //2
+    private func showRandomBusiness(businesses: [Business]){    //2
         if businesses.isEmpty {return}
         let modder          = businesses.count - 1
         let randomNumber    = Int.random(in: 0...modder)
         self.parent.coordinator?.loadBusinessDetails(currentBusiness: businesses[randomNumber])
     }
     
-    func shareBusiness(business: Business){             //3
+    private func shareBusiness(business: Business){             //3
         let prependText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
             ?? "Please check this link. \n"
         guard let temp = business.url else {return}

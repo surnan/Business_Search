@@ -10,15 +10,15 @@ import UIKit
 
 extension OpenController {
     //MARK:- BreakPoint
-        @objc func handleSettings(){
-            addDarkScreenBlur()
-            coordinator?.loadSettings(delegate: self, max: radius)
-        }
+    @objc func handleSettings(){
+        addDarkScreenBlur()
+        coordinator?.loadSettings(delegate: self, max: radius)
+    }
     
-        @objc func handleFilter(){
-            addDarkScreenBlur()
-            coordinator?.loadFilter(unblurProtocol: self)
-        }
+    @objc func handleFilter(){
+        addDarkScreenBlur()
+        coordinator?.loadFilter(unblurProtocol: self)
+    }
     
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call

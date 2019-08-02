@@ -10,9 +10,15 @@ import Foundation
 import CoreData
 
 class LocationViewModel {
-    private var dataController: DataController
-    private var latitude: Double
-    private var longitude: Double
+    private var dataController  : DataController
+    private var latitude        : Double
+    private var longitude       : Double
+    
+    init(latitude: Double, longitude: Double, dataController: DataController) {
+        self.latitude       = latitude
+        self.longitude      = longitude
+        self.dataController = dataController
+    }
     
     private var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
 
@@ -25,17 +31,8 @@ class LocationViewModel {
     }
     
     //MARK:- NON-Private
-    init(latitude: Double, longitude: Double, dataController: DataController) {
-        self.latitude = latitude
-        self.longitude = longitude
-        self.dataController = dataController
-    }
-    
     func reload(){fetchLocationController = nil}
-    
-    func getObjects() -> [Location]{
-        return fetchLocationController?.fetchedObjects ?? []
-    }
+    func getObjects() -> [Location]{return fetchLocationController?.fetchedObjects ?? []}
         
     private var fetchLocationController: NSFetchedResultsController<Location>? {
         didSet {

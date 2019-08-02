@@ -18,13 +18,8 @@ class FavoritesViewModel {
     }
     
     //MARK:- NON-Private
-    func reload(){
-        fetchFavoritesController = nil
-    }
-    
-    func search(id: String){
-        fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
-    }
+    func reload(){fetchFavoritesController = nil}
+    func search(id: String){fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])}
     
     func search(business: Business){
         guard let id = business.id else {return}

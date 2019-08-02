@@ -16,8 +16,8 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
     var getLongitude            : Double {return location.coordinate.longitude}
     
     init(dataController: DataController, router: RouterType, location: CLLocation){
-        self.dataController = dataController
-        self.location       = location
+        self.dataController     = dataController
+        self.location           = location
         super.init(router: router)
     }
     
@@ -35,13 +35,13 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         
         viewObject.viewModel    = businessViewModel
         
-        newController.businessViewModel     = businessViewModel
-        newController.categoryCountViewModel = categoryViewModel
-        newController.favoritesViewModel    = favoritesViewModel
-        newController.locationViewModel     = locationViewModel
-        newController.viewObject            = viewObject
-        newController.dataController        = dataController
-        newController.coordinator           = self
+        newController.businessViewModel         = businessViewModel
+        newController.categoryCountViewModel    = categoryViewModel
+        newController.favoritesViewModel        = favoritesViewModel
+        newController.locationViewModel         = locationViewModel
+        newController.viewObject                = viewObject
+        newController.dataController            = dataController
+        newController.coordinator               = self
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

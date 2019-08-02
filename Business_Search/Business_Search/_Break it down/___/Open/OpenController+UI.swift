@@ -21,21 +21,15 @@ extension OpenController {
     
     func setupNavigationMenu(){
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
-        imageView.contentMode = .scaleAspectFit
-        self.navigationItem.titleView = imageView
-        troubleshootFromNavigationMenu()
-        navigationItem.searchController = searchController
-    }
-    
-    @objc func handleShowSearch(){
-        searchController.isActive = true
-    }
-    
-    func troubleshootFromNavigationMenu(){
+        imageView.contentMode           = .scaleAspectFit
+        self.navigationItem.titleView   = imageView
         let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
         let composeBarButton    = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(handleFilter))
         navigationItem.rightBarButtonItems = [composeBarButton, searchBarButton]
+        navigationItem.searchController = searchController
     }
+    
+    @objc func handleShowSearch(){searchController.isActive = true}
     
     func setupUI(){
         setupNavigationMenu()

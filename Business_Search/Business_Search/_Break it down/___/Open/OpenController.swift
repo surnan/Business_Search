@@ -11,15 +11,15 @@ import CoreData
 
 
 protocol OpenControllerDelegate {
-    var getLatitude: Double {get}
+    var getLatitude : Double {get}
     var getLongitude: Double {get}
 }
 
 
 class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceParent, UnBlurViewProtocol, OpenControllerDelegate{
-    var currentLocationID   : NSManagedObjectID?                               //Connects downloaded Business to Location
-    var doesLocationEntityExist = false                                     //true after create/find location
-    var urlsQueue               = [CreateYelpURLDuringLoopingStruct]()      //enumeration loop for semaphores
+    var currentLocationID       : NSManagedObjectID?                      //Connects downloaded Business to Location
+    var doesLocationEntityExist = false                                   //true after create/find location
+    var urlsQueue               = [CreateYelpURLDuringLoopingStruct]()    //enumeration loop for semaphores
     var moc                     : NSManagedObjectContext!                 //Parent-Context
     var privateMoc              : NSManagedObjectContext!                 //Child-Context for CoreData Concurrency
     var dataController          : DataController!{                        //MARK: Injected
@@ -37,8 +37,8 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     var locationViewModel       : LocationViewModel!
     
     var viewObject              : OpenView!
-    private var latitude                : Double!
-    private var longitude               : Double!
+    private var latitude        : Double
+    private var longitude       : Double
     var getLatitude             : Double {return latitude}
     var getLongitude            : Double  {return longitude}
     var tableViewArrayType      : Int { return searchGroupIndex }
@@ -52,7 +52,6 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     }
     
     required init?(coder aDecoder: NSCoder) {fatalError("init(coder:) has not been implemented")}
-    
 
     lazy var tableDataSource    = Open_DataSource(parent: self)
     lazy var tableDelegate      = Open_Delegate(parent: self, source: tableDataSource)

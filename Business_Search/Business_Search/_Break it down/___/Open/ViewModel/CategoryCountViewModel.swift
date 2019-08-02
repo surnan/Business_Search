@@ -31,10 +31,13 @@ class CategoryCountViewModel {
     
     
     //MARK:- NON-Private
-    func reload(){fetchCategoryNames = nil}
-    var getCount: Int {return fetchCategoryNames?.count ?? 0}
-    var isEmpty: Bool {return fetchCategoryNames?.count == 0}
+    var getCount    : Int   {return fetchCategoryNames?.count ?? 0}
+    var isEmpty     : Bool  {return fetchCategoryNames?.count == 0}
 
+    //It's OK for forced-unwrap because it has to exist at this stage
+    func objectAt(indexPath: IndexPath)-> String {return fetchCategoryNames![indexPath.row]}
+    func fetchedObjects() -> [String]{return fetchCategoryNames ?? []}
+    func reload(){fetchCategoryNames = nil}
     
     func search(search: String?){
         if let search = search {
@@ -44,14 +47,6 @@ class CategoryCountViewModel {
             fetchCategoryArrayNamesPredicate = nil
             fetchCategoryNames = nil
         }
-    }
-    
-    func objectAt(indexPath: IndexPath)-> String {
-        return fetchCategoryNames![indexPath.row]  //It's OK for forced-unwrap because it has to exist at this stage
-    }
-    
-    func fetchedObjects() -> [String]{
-        return fetchCategoryNames ?? []
     }
     
     private var fetchCategoryNames: [String]? { //Populate Search Group listings

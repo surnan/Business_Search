@@ -9,12 +9,12 @@
 import UIKit
 
 class Open_Delegate: NSObject, UITableViewDelegate {
+    private var reloadCellAt: IndexPath?
+    private let dataController: DataController
+    private var selectedCategoryPredicate : NSPredicate?
     let coordinator: OpenCoordinator?
     let parent: OpenController
     let source: Open_DataSource
-    private var reloadCellAt: IndexPath?
-    let dataController: DataController
-    private var selectedCategoryPredicate : NSPredicate?
     
     private lazy var viewModel = CategoryViewModel(dataController: dataController,
                                                    lat: parent.getLatitude,

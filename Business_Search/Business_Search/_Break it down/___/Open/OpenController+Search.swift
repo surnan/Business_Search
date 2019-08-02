@@ -34,11 +34,14 @@ extension OpenController {
     }
     
     func resetAllControllerAndPredicates() {
+        categoryCountViewModel.reload()
         businessViewModel.reload()
         categoryCountViewModel.reload()
     }
     
-    func searchBarIsEmpty() -> Bool {return searchController.searchBar.text?.isEmpty ?? true}
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
 
     func reloadFetchControllers(){
         businessViewModel.reload()

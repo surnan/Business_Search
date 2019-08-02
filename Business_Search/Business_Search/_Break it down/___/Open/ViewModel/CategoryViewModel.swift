@@ -41,7 +41,6 @@ class CategoryViewModel {
     var allObjects: [Category] {return fetchCategoriesController?.fetchedObjects ?? []}
 
     func reload() {fetchCategoriesController = nil}
-    
     func search(search: String?){
         if let search = search {
             selectedCategoryPredicate    = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])

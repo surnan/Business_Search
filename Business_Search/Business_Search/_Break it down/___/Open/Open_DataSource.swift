@@ -10,7 +10,6 @@ import UIKit
 
 
 protocol DataSourceParent {
-    
     var businessViewModel   : BusinessViewModel! {get}
     var categoryCountViewModel   : CategoryCountViewModel! {get}
     var getLatitude: Double {get}
@@ -24,15 +23,9 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     let businessViewModel           : BusinessViewModel
     let categoryNameCountViewModel  : CategoryCountViewModel
     let favoriteViewModel           : FavoritesViewModel
-    
-//    var latitude                    : Double
-//    var longitude                   : Double
-
     let dataController              : DataController
     let parent                      : DataSourceParent
     var tableArrayType: Int {return parent.tableViewArrayType}
-    
-    
     
     init(parent: OpenController){
         self.parent             = parent
