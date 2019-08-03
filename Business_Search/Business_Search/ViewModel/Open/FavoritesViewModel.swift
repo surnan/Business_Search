@@ -54,18 +54,33 @@ class FavoritesViewModel {
         }
     }
     
-    
     func deleteAllFavorites(){
-        fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
-            dataController.viewContext.delete(item)
+        let context: NSManagedObjectContext!  = dataController.backGroundContext
+        context.perform {
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
             do {
-                try dataController.viewContext.save()
+                _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+                
             } catch {
-                print(error)
-                print(error.localizedDescription)
+                print("Error deleting All \(error)")
             }
-        })
+        }
     }
+    
+    
+    
+//    func deleteAllFavorites(){
+//        fetchFavoritesController?.fetchedObjects?.forEach({ (item) in
+//            dataController.viewContext.delete(item)
+//            do {
+//                try dataController.viewContext.save()
+//            } catch {
+//                print(error)
+//                print(error.localizedDescription)
+//            }
+//        })
+//    }
     
     
     func createFavorite(business: Business){

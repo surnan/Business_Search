@@ -19,15 +19,8 @@ extension SettingsController{
     }
     
     @objc func handleDeleteFavorites(){
-        //let favoritesVM = FavoritesViewModel(dataController: dataController)
-        let context = dataController.viewContext
-        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-        do {
-            _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
-        } catch {
-            print("Error deleting All \(error)")
-        }
+        let favoritesVM = FavoritesViewModel(dataController: dataController)
+        favoritesVM.deleteAllFavorites()
     }
     
     @objc func handleDefaultsButton(){
@@ -56,3 +49,16 @@ extension SettingsController{
         dismissController?()
     }
 }
+
+
+//@objc func handleDeleteFavorites(){
+//    //let favoritesVM = FavoritesViewModel(dataController: dataController)
+//    let context = dataController.viewContext
+//    let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
+//    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+//    do {
+//        _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+//    } catch {
+//        print("Error deleting All \(error)")
+//    }
+//}
