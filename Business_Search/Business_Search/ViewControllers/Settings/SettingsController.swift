@@ -12,14 +12,14 @@ import CoreData
 
 class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var dataController      : DataController!       //injected
-    var delegate            : UnBlurViewType?   //Unblur
+    var delegate            : UnBlurViewType?       //Unblur
     var newRadiusValue      : Int!
     var maximumSliderValue  : Int?
     var dismissController   : (()->Void)?
     var coordinator         : Coordinator?
     var viewObject          : SettingsView!         //SearchByMapView!
     var viewModel           : SettingsViewModel!    //SearchByMapViewModel!
-    lazy var fetchLocation  = LocationNSFetchController(dataController: dataController)
+    var locationsViewModel  : LocationViewModel!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -31,7 +31,6 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         addHandlers()
-        fetchLocation.controller?.delegate = self
     }
 }
 

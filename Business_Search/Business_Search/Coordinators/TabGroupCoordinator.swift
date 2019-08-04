@@ -37,8 +37,6 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
         self.businesses     = businesses
         self.categoryName   = categoryName
         super.init(router: router)
-        //router.setRootModule(tabBarController, hideBar: false)
-        //router.setRootModule(tabBarController, hideBar: true)
         tabBarController.delegate = self
         setTabs([groupsCoordinator, mapCoordinator])
     }
@@ -60,7 +58,6 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     
     func start(parent: Coordinator) {
         router.present(tabBarController, animated: true)
-//        router.push(tabBarController, animated: true, completion: nil)
     }
     
     func dismissTabController(){

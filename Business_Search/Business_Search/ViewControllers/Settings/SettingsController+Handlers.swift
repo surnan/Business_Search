@@ -26,7 +26,7 @@ extension SettingsController{
     @objc func handleDefaultsButton(){
         viewObject.myTextView.text = "Hi.  This is a link to a business that I am looking at: "
         UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
-        fetchLocation.deleteAllLocations()
+        locationsViewModel.deleteAllLocations()
         self.viewObject.deleteAllLabel.isHidden = false
     }
     
@@ -42,23 +42,10 @@ extension SettingsController{
     @objc func handleSaveButton(){
         if let newRadius = newRadiusValue {
             radius = newRadius
-            fetchLocation.deleteAllLocations()
+            locationsViewModel.deleteAllLocations()
             UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
         }
         UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
         dismissController?()
     }
 }
-
-
-//@objc func handleDeleteFavorites(){
-//    //let favoritesVM = FavoritesViewModel(dataController: dataController)
-//    let context = dataController.viewContext
-//    let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
-//    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
-//    do {
-//        _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
-//    } catch {
-//        print("Error deleting All \(error)")
-//    }
-//}

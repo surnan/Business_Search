@@ -14,7 +14,7 @@ class LocationViewModel {
     private var latitude        : Double
     private var longitude       : Double
     
-    init(latitude: Double, longitude: Double, dataController: DataController) {
+    init(latitude: Double = 0, longitude: Double = 0, dataController: DataController) {
         self.latitude       = latitude
         self.longitude      = longitude
         self.dataController = dataController
@@ -50,6 +50,19 @@ class LocationViewModel {
         }
     }
     
+    func deleteAllLocations(){
+        let context: NSManagedObjectContext!  = dataController.backGroundContext
+        context.perform {
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+            do {
+                _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+                
+            } catch {
+                print("Error deleting All \(error)")
+            }
+        }
+    }
     
     
     func addBusinessesAndCategories(location: Location, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){

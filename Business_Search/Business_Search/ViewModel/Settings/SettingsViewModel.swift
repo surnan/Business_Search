@@ -9,6 +9,7 @@
 import Foundation
 
 struct SettingsViewModel {
+    //Values come from NSUserDefaults not CoreData
     private var textViewText: String!
     var getTextViewText     : String {return textViewText}
     

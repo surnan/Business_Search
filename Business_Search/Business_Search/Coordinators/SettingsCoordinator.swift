@@ -32,8 +32,8 @@ class SettingsCoordinator: Coordinator {
         let newViewModel = SettingsViewModel()
         let newViewObject = SettingsView()
         newViewObject.viewModel = newViewModel
-        
         let newController = SettingsController()
+        newController.locationsViewModel = LocationViewModel(dataController: dataController)
         newController.dataController           = dataController
         newController.viewObject               = newViewObject
         newController.viewModel                = newViewModel
