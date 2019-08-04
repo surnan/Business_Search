@@ -20,28 +20,22 @@ extension OpenController {
         coordinator?.loadFilter(unblurProtocol: self)
     }
     
+    
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
         let backgroundContext = dataController.backGroundContext!
         backgroundContext.performAndWait {
-            //Synchronous to make sure //1 occurs before //2
-            let newLocation = Location(context: backgroundContext)
-            newLocation.latitude = data.region.center.latitude
-            newLocation.longitude = data.region.center.longitude
-            newLocation.totalBusinesses = Int32(data.total)
-            newLocation.radius = Int32(radius)  //AppDelegate
-            recordCountAtLocation = data.total  //Number of businesses @ this location with current radius
-            do {
-                try backgroundContext.save()    //Saves only Location-entity.  @ this stage business/categories = zero
-                self.currentLocationID = newLocation.objectID
-                self.checkLocationCount(data: data)
-            } catch {
-                print("Error saving func addLocation() --\n\(error)")
+            let temp = locationViewModel.createLocation(data: data, context: backgroundContext)
+            if let total = temp.total, let id = temp.objectID {
+                recordCountAtLocation = total
+                currentLocationID = id
+                self.verifyLocationBusinessCount(data: data)
+                
             }
         }
     }
     
-    func checkLocationCount(data: YelpBusinessResponse){
+    func verifyLocationBusinessCount(data: YelpBusinessResponse){
         if recordCountAtLocation > yelpMaxPullCount {
             navigationController?.setNavigationBarHidden(true, animated: true)
             let myAlertController = UIAlertController(title: "Not All Businesses Downloaded",
