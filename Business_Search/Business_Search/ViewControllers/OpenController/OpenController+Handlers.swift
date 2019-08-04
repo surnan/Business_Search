@@ -85,12 +85,7 @@ extension OpenController {
         privateMoc.performAndWait {[weak self] in
             guard let self = self else {return}
             let currentLocation = self.privateMoc.object(with: self.currentLocationID!) as! Location
-            currentLocation.saveBusinessesAndCategories(yelpData: data, context: self.privateMoc)
-            do {
-                try self.moc.save()
-            } catch {
-                print("Error saving parent context 'func queueForSavingBusinesses'")
-            }
+            locationViewModel.addBusinessesAndCategories(location: currentLocation, yelpData: data, context: privateMoc)
         }
     }
     
