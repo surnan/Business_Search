@@ -87,7 +87,6 @@
 		848DEC6122F3E3BF00102E9B /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC6022F3E3BF00102E9B /* DataSourceType.swift */; };
 		848DEC6322F3E4CB00102E9B /* OpenControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */; };
 		84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */; };
-		84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B01D22A58F7D009B96AD /* Business+Extension.swift */; };
 		84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */; };
 		84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02622A5DFDF009B96AD /* FilterController.swift */; };
 		84B3CF8C2268A9030012A75C /* TabGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B3CF8B2268A9030012A75C /* TabGroupController.swift */; };
@@ -117,7 +116,6 @@
 		84E27D2122F0963200D2CAE5 /* OpenController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D2022F0963200D2CAE5 /* OpenController+UI.swift */; };
 		84E27D2322F09EFB00D2CAE5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D2222F09EFB00D2CAE5 /* CategoryViewModel.swift */; };
 		84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */; };
-		84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBC8C92277204B00833562 /* Category+Extension.swift */; };
 		F6809A7F1B4C3175D91AF6F7 /* Pods_Business_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C8014F6DDB1C3E40EBC947 /* Pods_Business_Search.framework */; };
 /* End PBXBuildFile section */
 
@@ -202,7 +200,6 @@
 		848DEC6022F3E3BF00102E9B /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenControllerType.swift; sourceTree = "<group>"; };
 		84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapResponse.swift; sourceTree = "<group>"; };
-		84A5B01D22A58F7D009B96AD /* Business+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Business+Extension.swift"; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };
 		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84B3CF8B2268A9030012A75C /* TabGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroupController.swift; sourceTree = "<group>"; };
@@ -234,7 +231,6 @@
 		84E27D2022F0963200D2CAE5 /* OpenController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenController+UI.swift"; sourceTree = "<group>"; };
 		84E27D2222F09EFB00D2CAE5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAllCategoriesResponse.swift; sourceTree = "<group>"; };
-		84FBC8C92277204B00833562 /* Category+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+Extension.swift"; sourceTree = "<group>"; };
 		961B70040D961DFBA66EB96C /* Pods-Business_Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Business_Search.release.xcconfig"; path = "Target Support Files/Pods-Business_Search/Pods-Business_Search.release.xcconfig"; sourceTree = "<group>"; };
 		E2C8014F6DDB1C3E40EBC947 /* Pods_Business_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Business_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9B41562D11B512E79F2D91D /* Pods-Business_Search.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Business_Search.debug.xcconfig"; path = "Target Support Files/Pods-Business_Search/Pods-Business_Search.debug.xcconfig"; sourceTree = "<group>"; };
@@ -326,8 +322,6 @@
 		84365CAE22C565BC0014E577 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				84A5B01D22A58F7D009B96AD /* Business+Extension.swift */,
-				84FBC8C92277204B00833562 /* Category+Extension.swift */,
 				84DC40EC226BFCC3003003C4 /* Location+Extension.swift */,
 			);
 			path = Extensions;
@@ -903,9 +897,7 @@
 				8401126022E29F2600ECE0D5 /* Router.swift in Sources */,
 				8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
-				84A5B01E22A58F7D009B96AD /* Business+Extension.swift in Sources */,
 				847AE27D22EDE7A300774371 /* SearchByMapController+Handlers.swift in Sources */,
-				84FBC8CA2277204B00833562 /* Category+Extension.swift in Sources */,
 				847AE27422EDDF9300774371 /* MainMenuController+UI.swift in Sources */,
 				848761D9227F8E5F000CECC7 /* UIButton+Extensions.swift in Sources */,
 				841CDF8C22E746A600FEB1D0 /* GroupTableViewCoordinator.swift in Sources */,
