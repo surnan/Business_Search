@@ -41,6 +41,8 @@
 		845A1D8D22D0314D0066C17C /* Global Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8C22D0314D0066C17C /* Global Variables.swift */; };
 		84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */; };
 		84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA922E6466A00999599 /* FilterCoordinator.swift */; };
+		8477222C22F92F620080B586 /* FilterView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477222B22F92F620080B586 /* FilterView2.swift */; };
+		8477222E22F92F9B0080B586 /* FilterViewModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477222D22F92F9B0080B586 /* FilterViewModel2.swift */; };
 		847AE23522E81D7600774371 /* BusinessCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE23422E81D7600774371 /* BusinessCellViewModel.swift */; };
 		847AE23A22E922DC00774371 /* CategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE23922E922DC00774371 /* CategoryCellViewModel.swift */; };
 		847AE25622EAA6E800774371 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AE25522EAA6E800774371 /* MainMenuView.swift */; };
@@ -152,6 +154,8 @@
 		845A1D8C22D0314D0066C17C /* Global Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Variables.swift"; sourceTree = "<group>"; };
 		84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsCoordinator.swift; sourceTree = "<group>"; };
 		84684CA922E6466A00999599 /* FilterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCoordinator.swift; sourceTree = "<group>"; };
+		8477222B22F92F620080B586 /* FilterView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView2.swift; sourceTree = "<group>"; };
+		8477222D22F92F9B0080B586 /* FilterViewModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel2.swift; sourceTree = "<group>"; };
 		847AE23422E81D7600774371 /* BusinessCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCellViewModel.swift; sourceTree = "<group>"; };
 		847AE23922E922DC00774371 /* CategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellViewModel.swift; sourceTree = "<group>"; };
 		847AE25522EAA6E800774371 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -427,6 +431,7 @@
 				847AE26122EBE50B00774371 /* BusinessDetailsView.swift */,
 				8417FCBC227B8A6D005BC240 /* CategoryCell.swift */,
 				847AE28922EE474B00774371 /* FilterView.swift */,
+				8477222B22F92F620080B586 /* FilterView2.swift */,
 				847AE25522EAA6E800774371 /* MainMenuView.swift */,
 				84E27D0D22EF6C5700D2CAE5 /* OpenView.swift */,
 				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
@@ -567,6 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				847AE28722EE473E00774371 /* FilterViewModel.swift */,
+				8477222D22F92F9B0080B586 /* FilterViewModel2.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -864,6 +870,7 @@
 				84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */,
 				8401128022E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift in Sources */,
 				844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */,
+				8477222E22F92F9B0080B586 /* FilterViewModel2.swift in Sources */,
 				8401126022E29F2600ECE0D5 /* Router.swift in Sources */,
 				8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */,
 				84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */,
@@ -888,6 +895,7 @@
 				845A1D8522D02BE20066C17C /* UnBlurViewType.swift in Sources */,
 				847AE28622EE124100774371 /* SettingsController+Handlers.swift in Sources */,
 				841CDF8722E6BFEE00FEB1D0 /* TabGroupCoordinator.swift in Sources */,
+				8477222C22F92F620080B586 /* FilterView2.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */,
 				848DEC4E22F2627800102E9B /* OpenController+Handlers.swift in Sources */,
 				847AE28122EDEAF600774371 /* SettingsView.swift in Sources */,

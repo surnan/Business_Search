@@ -11,13 +11,13 @@ import CoreData
 
 
 struct AppliedFilter: Codable {
-    var dollar1         : Bool?
-    var dollar2         : Bool?
-    var dollar3         : Bool?
-    var dollar4         : Bool?
-    var priceExists     : Bool?
-    var favoritesAtTop  : Bool?
-    var minimumRating   : String?
+    var dollar1         : Bool
+    var dollar2         : Bool
+    var dollar3         : Bool
+    var dollar4         : Bool
+    var priceExists     : Bool
+    var favoritesAtTop  : Bool
+    var minimumRating   : String
 }
 
 
@@ -40,7 +40,8 @@ class UserAppliedFilter {
     }
     
     
-    func saveFilterStruct(){
+    func saveFilterStruct(aFilter: AppliedFilter){
+        appliedFilter = aFilter
         do {
             let savedData = try JSONEncoder().encode(appliedFilter)
             UserDefaults.standard.set(savedData, forKey: filterConstant)
