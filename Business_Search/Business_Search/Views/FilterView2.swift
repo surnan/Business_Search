@@ -16,7 +16,7 @@ class FilterView2 {
                 return
             }
             minimumRatingText               = viewModel.minimumRating
-            sliderValue                     = viewModel.sl
+            sliderValue                     = viewModel.getSliderValue
             dollarOneButton.isSelected      =  viewModel.dollarOne
             dollarTwoButton.isSelected      =  viewModel.dollarTwo
             dollarThreeButton.isSelected    =  viewModel.dollarThree

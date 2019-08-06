@@ -19,8 +19,15 @@ class FilterCoordinator: Coordinator {
     
     
     func start(parent: Coordinator){
-        let newViewModel    = FilterViewModel() //SettingsViewModel()
-        let newViewObject   = FilterView()      //SettingsView()
+//        let newViewModel    = FilterViewModel() //SettingsViewModel()
+//        let newViewObject   = FilterView()      //SettingsView()
+        
+        
+        let newViewModel    = FilterViewModel2() //SettingsViewModel()
+        let newViewObject   = FilterView2()      //SettingsView()
+        
+        
+        
         newViewObject.viewModel = newViewModel
         
         let newController = FilterController()
@@ -46,3 +53,33 @@ class FilterCoordinator: Coordinator {
         router.present(newController, animated: true)
     }
 }
+
+
+
+//func start(parent: Coordinator){
+//    let newViewModel    = FilterViewModel() //SettingsViewModel()
+//    let newViewObject   = FilterView()      //SettingsView()
+//    newViewObject.viewModel = newViewModel
+//
+//    let newController = FilterController()
+//    newController.viewObject               = newViewObject
+//    newController.viewModel                = newViewModel
+//    newController.delegate                 = unblurProtocol
+//    newController.coordinator              = self
+//    newController.modalPresentationStyle   = .overFullScreen
+//
+//    newController.dismissController = {[weak self] in
+//        self?.router.dismissModule(animated: true, completion: {
+//            self?.unblurProtocol.undoBlur()
+//        })
+//    }
+//
+//    newController.saveDismissController = {[weak self] in
+//        self?.router.dismissModule(animated: true){
+//            UserAppliedFilter.shared.load()
+//            self?.unblurProtocol.undoBlur()
+//            _ = UserAppliedFilter.shared.getBusinessPredicate()
+//        }
+//    }
+//    router.present(newController, animated: true)
+//}

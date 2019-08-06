@@ -27,6 +27,7 @@ struct FilterViewModel2 {
     var priceExist      = false
     var favoritesTop    = false
     var minimumRating           = "1.0"
+    var getSliderValue: Float!
     
     
     init(maximumSliderValue : Int? = nil) {
@@ -48,6 +49,10 @@ struct FilterViewModel2 {
         
         priceExist  = data.priceExists
         favoritesTop = data.priceExists
-        minimumRating       = data.minimumRating
+        var minimumRatingString = data.minimumRating
+        
+        getSliderValue = Float(minimumRatingString) ?? 1.0
+        
+        
     }
 }
