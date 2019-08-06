@@ -10,7 +10,55 @@ import UIKit
 import CoreData
 
 
+struct AppliedFilter: Codable {
+    var dollar1         : Bool?
+    var dollar2         : Bool?
+    var dollar3         : Bool?
+    var dollar4         : Bool?
+    var priceExists     : Bool?
+    var favoritesAtTop  : Bool?
+    var minimumRating   : String?
+}
+
+
+let filterConstant = "AppliedFilter"
+
 class UserAppliedFilter {
+    var appliedFilter: AppliedFilter!
+    
+    func loadFilterStruct(){
+        guard let savedData = UserDefaults.standard.data(forKey: filterConstant) else {
+            return
+        }
+        do {
+            let filterData = try JSONDecoder().decode(AppliedFilter.self, from: savedData)
+            appliedFilter = filterData
+            print("")
+        } catch {
+            print("filterData try Error: \(error.localizedDescription) \n \(error)")
+        }
+    }
+    
+    
+    func saveFilterStruct(){
+        do {
+            let savedData = try JSONEncoder().encode(appliedFilter)
+            UserDefaults.standard.set(savedData, forKey: filterConstant)
+            print("")
+        } catch {
+            print("filterData try Error: \(error.localizedDescription) \n \(error)")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     static let shared = UserAppliedFilter()
     
     private var dollarOne: Bool?
