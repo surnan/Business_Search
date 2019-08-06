@@ -12,6 +12,7 @@ import CoreData
 class FavoritesViewModel {
     private var dataController: DataController
     private var fetchFavoritePredicate: NSPredicate?
+    private var myPredicate: NSPredicate?
     
     init(dataController: DataController) {
         self.dataController = dataController
@@ -19,7 +20,6 @@ class FavoritesViewModel {
     
     //MARK:- NON-Private
     func reload(){fetchFavoritesController = nil}
-    func search(id: String){fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])}
     
     func search(business: Business){
         guard let id = business.id else {return}
@@ -69,6 +69,20 @@ class FavoritesViewModel {
     }
     
     
+    var idForPredicate: String?{
+        didSet {
+            if let id = idForPredicate {
+                fetchFavoritePredicate = NSPredicate(format: "id = %@", argumentArray: [id])
+            }
+        }
+    }
+    
+    func isFavorite(id: String)->Bool{
+        idForPredicate = id
+        fetchFavoritesController = nil
+        guard let count = fetchFavoritesController?.fetchedObjects else {return false}
+        return count.isEmpty ? false : true
+    }
     
 //    func deleteAllFavorites(){
 //        fetchFavoritesController?.fetchedObjects?.forEach({ (item) in

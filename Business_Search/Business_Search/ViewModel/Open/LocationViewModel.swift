@@ -13,6 +13,8 @@ class LocationViewModel {
     private var dataController  : DataController
     private var latitude        : Double
     private var longitude       : Double
+    private lazy var favoritesVM     = FavoritesViewModel(dataController: dataController)
+    
     
     init(latitude: Double = 0, longitude: Double = 0, dataController: DataController) {
         self.latitude       = latitude
@@ -74,6 +76,13 @@ class LocationViewModel {
             currentBusiness.displayPhone = item.display_phone
             currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
             currentBusiness.id = item.id
+            
+            
+            if let id = item.id, favoritesVM.isFavorite(id: id) {
+                currentBusiness.isFavorite = true
+            }
+            
+            
             currentBusiness.imageURL = item.image_url
             // currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
             currentBusiness.latitude = item.coordinates.latitude ?? 0.0

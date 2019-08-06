@@ -20,6 +20,7 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var viewObject          : SettingsView!         //SearchByMapView!
     var viewModel           : SettingsViewModel!    //SearchByMapViewModel!
     var locationsViewModel  : LocationViewModel!
+    var favoritesViewModel  : FavoritesViewModel!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
