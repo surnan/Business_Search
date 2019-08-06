@@ -48,7 +48,7 @@ struct FilterViewModel2 {
         dollarFour  = data.dollar4
         
         priceExist  = data.priceExists
-        favoritesTop = data.priceExists
+        favoritesTop = data.favoritesAtTop
         var minimumRatingString = data.minimumRating
         
         getSliderValue = Float(minimumRatingString) ?? 1.0
