@@ -51,15 +51,6 @@ class UserAppliedFilter {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     static let shared = UserAppliedFilter()
     
     private var dollarOne: Bool?
@@ -87,13 +78,19 @@ class UserAppliedFilter {
     
     
     func reset(){
-        UserDefaults.standard.set(true, forKey: AppConstants.dollarOne.rawValue)
-        UserDefaults.standard.set(true, forKey: AppConstants.dollarTwo.rawValue)
-        UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
-        UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
-        UserDefaults.standard.set(false, forKey: AppConstants.isPriceListed.rawValue)
-        UserDefaults.standard.set("1.0", forKey: AppConstants.minimumRating.rawValue)
-        UserDefaults.standard.set(false, forKey: AppConstants.isFavoritesToTop.rawValue)
+        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarOne.rawValue)
+        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarTwo.rawValue)
+        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
+        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
+        //        UserDefaults.standard.set(false, forKey: AppConstants.isPriceListed.rawValue)
+        //        UserDefaults.standard.set("1.0", forKey: AppConstants.minimumRating.rawValue)
+        //        UserDefaults.standard.set(false, forKey: AppConstants.isFavoritesToTop.rawValue)
+        //        let defaultFilter = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: 1.0)
+        
+        appliedFilter = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: "1.0")
+        saveFilterStruct(aFilter: appliedFilter)
+        
+        
     }
     
     func load(){

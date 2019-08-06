@@ -33,11 +33,6 @@ class FilterController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor                = .clear
         setupUI()
-        //shared.showMyResultsInNSUserDefaults(); print("***")
-        
-        
-        UserAppliedFilter.shared.loadFilterStruct()
-        
         addHandlers()
     }
 }

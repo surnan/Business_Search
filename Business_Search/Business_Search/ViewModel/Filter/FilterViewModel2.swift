@@ -49,10 +49,7 @@ struct FilterViewModel2 {
         
         priceExist  = data.priceExists
         favoritesTop = data.favoritesAtTop
-        var minimumRatingString = data.minimumRating
-        
+        let minimumRatingString = data.minimumRating
         getSliderValue = Float(minimumRatingString) ?? 1.0
-        
-        
     }
 }
