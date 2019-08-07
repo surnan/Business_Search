@@ -69,10 +69,15 @@ class LocationViewModel {
     }
     
     
-    func addBusinessesAndCategories(location: Location, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
+    //func addBusinessesAndCategories(location: Location, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
+    func saveBusinessesAndCategories(id: NSManagedObjectID?, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
+        
+        guard let id = id else {return}
+        let parent = context.object(with: id) as! Location
+        
         yelpData.businesses.forEach { (item) in //+1
             let currentBusiness = Business(context: context)
-            currentBusiness.parentLocation = location
+            currentBusiness.parentLocation = parent
             currentBusiness.alias = item.alias
             currentBusiness.displayAddress = item.location.display_address.joined(separator: "?")   //Assuming '?' isn't part of address anywhere on Yelp
             currentBusiness.displayPhone = item.display_phone

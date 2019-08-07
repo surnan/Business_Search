@@ -84,8 +84,9 @@ extension OpenController {
     func queueForSavingBusinesses(_ data: (YelpBusinessResponse)) {
         privateMoc.performAndWait {[weak self] in
             guard let self = self else {return}
-            let currentLocation = self.privateMoc.object(with: self.currentLocationID!) as! Location
-            locationViewModel.addBusinessesAndCategories(location: currentLocation, yelpData: data, context: privateMoc)
+//            let currentLocation = self.privateMoc.object(with: self.currentLocationID!) as! Location
+//            locationViewModel.addBusinessesAndCategories(location: currentLocation, yelpData: data, context: privateMoc)
+            self.locationViewModel.saveBusinessesAndCategories(id: self.currentLocationID, yelpData: data, context: self.privateMoc)
         }
     }
     
