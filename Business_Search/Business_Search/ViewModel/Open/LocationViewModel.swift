@@ -14,14 +14,6 @@ class LocationViewModel {
     private var latitude        : Double
     private var longitude       : Double
     private lazy var favoritesVM     = FavoritesViewModel(dataController: dataController)
-    
-    
-    init(latitude: Double = 0, longitude: Double = 0, dataController: DataController) {
-        self.latitude       = latitude
-        self.longitude      = longitude
-        self.dataController = dataController
-    }
-    
     private var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
 
     private var predicateCategoryLatitude: NSPredicate {
@@ -32,7 +24,35 @@ class LocationViewModel {
       return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Location.longitude), longitude])
     }
     
+    private var fetchLocationController: NSFetchedResultsController<Location>? {
+        didSet {
+            if fetchLocationController == nil {
+                fetchLocationController = {
+                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
+                    fetchRequest.sortDescriptors = [ sortDescriptor]
+                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                               managedObjectContext: dataController.viewContext,
+                                                                               sectionNameKeyPath: nil,
+                                                                               cacheName: nil)
+                    do {
+                        try aFetchedResultsController.performFetch()
+                    } catch let error {
+                        fatalError("Unresolved error \(error)")
+                    }
+                    return aFetchedResultsController
+                }()
+            }
+        }
+    }
+    
     //MARK:- NON-Private
+    init(latitude: Double = 0, longitude: Double = 0, dataController: DataController) {
+        self.latitude       = latitude
+        self.longitude      = longitude
+        self.dataController = dataController
+    }
+    
     func reload(){fetchLocationController = nil}
     func getObjects() -> [Location]{return fetchLocationController?.fetchedObjects ?? []}
     
@@ -43,7 +63,6 @@ class LocationViewModel {
         newLocation.longitude = center.longitude
         newLocation.radius = Int32(radius)
         newLocation.totalBusinesses = Int32(data.total)
-
         do {
             try context.save()
             return (data.total, newLocation.objectID)
@@ -68,13 +87,10 @@ class LocationViewModel {
         }
     }
     
-    
     //func addBusinessesAndCategories(location: Location, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
-    func saveBusinessesAndCategories(id: NSManagedObjectID?, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
-        
+    func downloadBusinessesAndCategories(id: NSManagedObjectID?, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
-        
         yelpData.businesses.forEach { (item) in //+1
             let currentBusiness = Business(context: context)
             currentBusiness.parentLocation = parent
@@ -84,11 +100,9 @@ class LocationViewModel {
             currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
             currentBusiness.id = item.id
             
-            
             if let id = item.id, favoritesVM.isFavorite(id: id) {
                 currentBusiness.isFavorite = true
             }
-            
             
             currentBusiness.imageURL = item.image_url
             // currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?
@@ -125,31 +139,4 @@ class LocationViewModel {
             }
         }
     }
-    
-    
-    
-    
-    
-    private var fetchLocationController: NSFetchedResultsController<Location>? {
-        didSet {
-            if fetchLocationController == nil {
-                fetchLocationController = {
-                    let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-                    let sortDescriptor = NSSortDescriptor(keyPath: \Location.latitude, ascending: true)
-                    fetchRequest.sortDescriptors = [ sortDescriptor]
-                    let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                               managedObjectContext: dataController.viewContext,
-                                                                               sectionNameKeyPath: nil,
-                                                                               cacheName: nil)
-                    do {
-                        try aFetchedResultsController.performFetch()
-                    } catch let error {
-                        fatalError("Unresolved error \(error)")
-                    }
-                    return aFetchedResultsController
-                }()
-            }
-        }
-    }
-    
 }

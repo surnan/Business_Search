@@ -13,12 +13,6 @@ class CategoryViewModel {
     private var dataController: DataController
     private var latitude    : Double
     private var longitude   : Double
-    
-    init(dataController: DataController, lat: Double, lon: Double) {
-        self.dataController = dataController
-        self.latitude       = lat
-        self.longitude      = lon
-    }
 
     private var predicateCategoryLatitude: NSPredicate {
        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.latitude), latitude])
@@ -32,22 +26,6 @@ class CategoryViewModel {
         didSet {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
             fetchCategoriesController?.fetchRequest.predicate = selectedCategoryPredicate
-        }
-    }
-    
-    //MARK:- NON-Private
-    var getCount: Int {return fetchCategoriesController?.fetchedObjects?.count ?? 0}
-    var isEmpty: Bool {return fetchCategoriesController?.fetchedObjects?.count == 0}
-    var allObjects: [Category] {return fetchCategoriesController?.fetchedObjects ?? []}
-
-    func reload() {fetchCategoriesController = nil}
-    func search(search: String?){
-        if let search = search {
-            selectedCategoryPredicate    = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])
-            reload()
-        } else {
-            selectedCategoryPredicate    = nil
-            reload()
         }
     }
     
@@ -82,4 +60,26 @@ class CategoryViewModel {
             }   //-3
         }   //-2
     }   //-1
+    
+    //MARK:- NON-Private
+    init(dataController: DataController, lat: Double, lon: Double) {
+        self.dataController = dataController
+        self.latitude       = lat
+        self.longitude      = lon
+    }
+    
+    var getCount: Int {return fetchCategoriesController?.fetchedObjects?.count ?? 0}
+    var isEmpty: Bool {return fetchCategoriesController?.fetchedObjects?.count == 0}
+    var allObjects: [Category] {return fetchCategoriesController?.fetchedObjects ?? []}
+
+    func reload() {fetchCategoriesController = nil}
+    func search(search: String?){
+        if let search = search {
+            selectedCategoryPredicate    = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])
+            reload()
+        } else {
+            selectedCategoryPredicate    = nil
+            reload()
+        }
+    }
 }

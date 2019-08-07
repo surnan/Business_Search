@@ -12,12 +12,6 @@ import CoreData
 class CategoryCountViewModel {
     private var delegate        : OpenControllerType
     private var dataController  : DataController
-
-    init(delegate: OpenControllerType, dataController: DataController) {
-        self.dataController = dataController
-        self.delegate       = delegate
-    }
-    
     private var fetchCategoryArrayNamesPredicate: NSPredicate? = nil
     
     private var predicateCategoryLatitude: NSPredicate {
@@ -26,27 +20,6 @@ class CategoryCountViewModel {
     
     private var predicateCategoryLongitude: NSPredicate {
         return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Category.business.parentLocation.longitude), delegate.getLongitude])
-    }
-    
-    
-    
-    //MARK:- NON-Private
-    var getCount    : Int   {return fetchCategoryNames?.count ?? 0}
-    var isEmpty     : Bool  {return fetchCategoryNames?.count == 0}
-
-    //It's OK for forced-unwrap because it has to exist at this stage
-    func objectAt(indexPath: IndexPath)-> String {return fetchCategoryNames![indexPath.row]}
-    func fetchedObjects() -> [String]{return fetchCategoryNames ?? []}
-    func reload(){fetchCategoryNames = nil}
-    
-    func search(search: String?){
-        if let search = search {
-            fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])
-            fetchCategoryNames = nil
-        } else {
-            fetchCategoryArrayNamesPredicate = nil
-            fetchCategoryNames = nil
-        }
     }
     
     private var fetchCategoryNames: [String]? { //Populate Search Group listings
@@ -89,6 +62,32 @@ class CategoryCountViewModel {
                     print("Fail to PerformFetch inside categoryFinalArray:")
                 }
             }
+        }
+    }
+    
+    //MARK:- NON-Private
+    var getCount    : Int   {return fetchCategoryNames?.count ?? 0}
+    var isEmpty     : Bool  {return fetchCategoryNames?.count == 0}
+
+    
+    init(delegate: OpenControllerType, dataController: DataController) {
+        self.dataController = dataController
+        self.delegate       = delegate
+    }
+    
+    
+    //It's OK for forced-unwrap because it has to exist at this stage
+    func objectAt(indexPath: IndexPath)-> String {return fetchCategoryNames![indexPath.row]}
+    func fetchedObjects() -> [String]{return fetchCategoryNames ?? []}
+    func reload(){fetchCategoryNames = nil}
+    
+    func search(search: String?){
+        if let search = search {
+            fetchCategoryArrayNamesPredicate = NSPredicate(format: "title CONTAINS[cd] %@", argumentArray: [search])
+            fetchCategoryNames = nil
+        } else {
+            fetchCategoryArrayNamesPredicate = nil
+            fetchCategoryNames = nil
         }
     }
 }

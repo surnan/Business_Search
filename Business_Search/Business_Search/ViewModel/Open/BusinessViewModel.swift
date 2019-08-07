@@ -13,11 +13,6 @@ class BusinessViewModel {
     private var delegate: OpenControllerType
     private var dataController: DataController
 
-    init(delegate: OpenControllerType, dataController: DataController) {
-        self.dataController = dataController
-        self.delegate = delegate
-    }
-
     private var predicateBusinessLatitude: NSPredicate {
         return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), delegate.getLatitude])
     }
@@ -31,42 +26,6 @@ class BusinessViewModel {
             NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: nil) //Just in case
             fetchBusinessController?.fetchRequest.predicate = fetchBusinessPredicate
         }
-    }
-    
-    //MARK:- NON-Private
-    var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
-    var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
-    func reload(){fetchBusinessController = nil}
-
-    func search(search: String?){
-        if let search = search {
-            fetchBusinessPredicate  = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [search])
-            reload()
-        } else {
-            fetchBusinessPredicate  = nil
-            reload()
-        }
-        reload()
-    }
-    
-    func search(id: String){
-        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
-        reload()
-    }
-    
-    func isFavorite(at indexPath: IndexPath)->Bool{
-        let currentBusiness = fetchBusinessController?.object(at: indexPath)
-        return currentBusiness?.isFavorite ?? false
-    }
-    
-    
-    func objectAt(indexPath: IndexPath)-> Business {
-        return fetchBusinessController!.object(at: indexPath)   //It's OK for forced-unwrap because it has to exist at this stage
-    }
-    
-    
-    func fetchedObjects() -> [Business]{
-        return fetchBusinessController!.fetchedObjects ?? []
     }
     
     private var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
@@ -102,4 +61,52 @@ class BusinessViewModel {
             }   //-3
         }   //-2
     }   //-1
+    
+    
+    //MARK:- NON-Private
+    init(delegate: OpenControllerType, dataController: DataController) {
+        self.dataController = dataController
+        self.delegate = delegate
+    }
+
+    var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
+    var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
+    func reload() {fetchBusinessController = nil}
+    func fetchedObjects() -> [Business]{return fetchBusinessController!.fetchedObjects ?? []}
+    func objectAt(indexPath: IndexPath)-> Business {return fetchBusinessController!.object(at: indexPath)} //It's OK for forced-unwrap because it has to exist at this stage
+
+    func verifyFavoriteStatus(favorite: Favorites){
+        guard let id = favorite.id else {return}
+        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
+        reload()
+        let results = fetchedObjects()
+        if !results.isEmpty {
+            results.first?.isFavorite = true
+            do {
+                try dataController.viewContext.save()
+            } catch {
+                print("Error saving favorite after finding match - \(error.localizedDescription)\n\(error)")
+            }
+        }
+    }
+    
+    func search(search: String?){
+        if let search = search {
+            fetchBusinessPredicate  = NSPredicate(format: "name CONTAINS[cd] %@", argumentArray: [search])
+            reload()
+        } else {
+            fetchBusinessPredicate  = nil
+            reload()
+        }
+    }
+    
+    func search(id: String){
+        fetchBusinessPredicate = NSPredicate(format: "id CONTAINS[cd] %@", argumentArray: [id])
+        reload()
+    }
+    
+    private func isFavorite(at indexPath: IndexPath)->Bool{
+        let currentBusiness = fetchBusinessController?.object(at: indexPath)
+        return currentBusiness?.isFavorite ?? false
+    }
 }

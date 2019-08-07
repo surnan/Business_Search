@@ -81,28 +81,11 @@ extension OpenController {
         }
     }
     
-//    func queueForSavingBusinesses(_ data: (YelpBusinessResponse)) {
-//        privateMoc.performAndWait {[weak self] in
-//            guard let self = self else {return}
-//            //            let currentLocation = self.privateMoc.object(with: self.currentLocationID!) as! Location
-//            //            currentLocation.saveBusinessesAndCategories(yelpData: data, context: self.privateMoc)
-//            locationViewModel.saveBusinessesAndCategories(id: self.currentLocationID, yelpData: data, context: self.privateMoc)
-//            do {
-//                try self.moc.save()
-//            } catch {
-//                print("Error saving parent context 'func queueForSavingBusinesses'")
-//            }
-//        }
-//    }
-    
-    
-    
+
     func queueForSavingBusinesses(_ data: (YelpBusinessResponse)) {
         privateMoc.performAndWait {[weak self] in
             guard let self = self else {return}
-//            let currentLocation = self.privateMoc.object(with: self.currentLocationID!) as! Location
-//            locationViewModel.addBusinessesAndCategories(location: currentLocation, yelpData: data, context: privateMoc)
-            self.locationViewModel.saveBusinessesAndCategories(id: self.currentLocationID, yelpData: data, context: self.privateMoc)
+            self.locationViewModel.downloadBusinessesAndCategories(id: self.currentLocationID, yelpData: data, context: self.privateMoc)
             do {
                 try self.moc.save()
             } catch {
@@ -112,7 +95,6 @@ extension OpenController {
     }
     
     func buildURLsQueueForDownloadingBusinesses(total: Int){
-        //let yelpMaxPullCount = 1000
         let loopMax = min(recordCountAtLocation, yelpMaxPullCount)  //Yelp is limited to 1000 records on pull
         for index in stride(from: limit, to: loopMax, by: limit){
             urlsQueue.append(CreateYelpURLDuringLoopingStruct(latitude: getLatitude, longitude: getLongitude, offset: index))
@@ -167,27 +149,13 @@ extension OpenController {
         
         block2.addDependency(block1)
         queue.addOperations([block1, block2], waitUntilFinished: false)
-        
     }
     
     func searchFavoritesIterations(){
         resetAllFetchControllers()
-        let allFavorites = favoritesViewModel.fetchFavoritesController?.fetchedObjects ?? []
+        let allFavorites = favoritesViewModel.fetchedObjects()
         for ( _ , item) in allFavorites.enumerated() {
-            guard let id = item.id else {return}
-            businessViewModel.search(id: id)
-            let results = businessViewModel.fetchedObjects()
-            if results.isEmpty {
-                return
-            } else {
-                results.first?.isFavorite = true
-                do {
-                    try dataController.viewContext.save()
-                    resetAllFetchControllers()
-                } catch {
-                    print("Error saving favorite after finding match - \(error)")
-                }
-            }
+            businessViewModel.verifyFavoriteStatus(favorite: item)
         }
     }
 }
