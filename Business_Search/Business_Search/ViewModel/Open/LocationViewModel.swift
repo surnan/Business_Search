@@ -42,6 +42,8 @@ class LocationViewModel {
         newLocation.latitude = center.latitude
         newLocation.longitude = center.longitude
         newLocation.radius = Int32(radius)
+        newLocation.totalBusinesses = Int32(data.total)
+
         do {
             try context.save()
             return (data.total, newLocation.objectID)
