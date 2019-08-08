@@ -34,6 +34,12 @@ class BusinessDetailsView {
         }
     }
     
+    let redView: UIView = {
+        let myView = UIView()
+        myView.backgroundColor = UIColor.lightRed
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        return myView
+    }()
     
     private var ratingLabel         = GenericLabel(text: "", size: 16, textColor: .black)
     private var priceLabel          = GenericLabel(text: "", size: 16, textColor: .black)
