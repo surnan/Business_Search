@@ -30,10 +30,44 @@ enum AppConstants:String {
 }
 
 
-let colorArray: [UIColor] = [ .lemonChiffon, .paleGreen, .white, .solidOrange,
-                              .grey227, .darkOrange, .greyOrange, .skyBlue4,
-                              .lightGray, .plum, .white, .tan,
-                              .ghostWhite, .teal, .steelBlue, .snowHalf, .steelBlue4]
+//let colorArray: [UIColor] = [ .lemonChiffon, .paleGreen, .white, .solidOrange,
+//                              .grey227, .darkOrange, .greyOrange, .skyBlue4,
+//                              .lightGray, .plum, .white, .tan,
+//                              .ghostWhite, .teal, .steelBlue, .snowHalf, .steelBlue4]
+
+
+let color1 = #colorLiteral(red: 0.927500844, green: 0.6378426552, blue: 0.6347927451, alpha: 1)
+let color2 = #colorLiteral(red: 0.4542378187, green: 0.9083048701, blue: 0.6431113482, alpha: 1)
+
+//let color3 = #colorLiteral(red: 0.9577568173, green: 0.9311154485, blue: 0.8224044442, alpha: 1)
+//let color3 = UIColor.white
+let color3 = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+let color4 = #colorLiteral(red: 0.2135981023, green: 0.7878811955, blue: 0.07630523294, alpha: 1)
+
+
+//color3,
+var colorArray: [UIColor] = [ .steelBlue4,
+                              #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1),
+                              #colorLiteral(red: 0.5808190107, green: 0.0884276256, blue: 0.3186392188, alpha: 1),
+                              #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1),
+                              #colorLiteral(red: 0.476841867, green: 0.5048075914, blue: 1, alpha: 1),
+                              #colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 1),
+                              .teal,
+                              color2,
+                              .plum,
+                              .paleGreen,
+                              .skyBlue4,
+                              .tan,
+                              .steelBlue,
+                              color1,
+                              #colorLiteral(red: 0.4094321132, green: 0.271243155, blue: 0.6080636978, alpha: 1),
+                              .black
+]
+
+
+
+
+
 
 
 let grey25textAttributes: [NSAttributedString.Key: Any] = [

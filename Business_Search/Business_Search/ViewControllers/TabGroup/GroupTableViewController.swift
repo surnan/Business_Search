@@ -16,17 +16,11 @@ class GroupTableViewController: UITableViewController {
     var coordinator: (BusinessDetailsType & DismissType)?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
-
     
     func sort(){
         businesses.sort { (first, second) -> Bool in
             return first.name ?? "" < second.name ?? ""
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -36,6 +30,7 @@ class GroupTableViewController: UITableViewController {
         tableView.separatorColor = UIColor.clear
         setupNavigationBar()
         sort()
+        tableView.reloadData()
     }
     
     func setupNavigationBar(){
