@@ -14,6 +14,7 @@ class TabGroupController: UITabBarController {
     var categoryName: String!  {didSet {navigationItem.title = categoryName}}
     var businesses = [Business]()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     
     override func viewDidLoad() {
         super.viewDidLoad()
