@@ -27,12 +27,12 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         self.dataController = parent.dataController
     }
     
-    private func reloadCellIfNecessary(tableView: UITableView) {
+    func reloadCellIfNecessary(tableView: UITableView) {
         guard let cellIndex = reloadCellAt else {return}
         tableView.reloadRows(at: [cellIndex], with: .none)
         reloadCellAt = nil
     }
-    
+
     private func updateCategoryPredicate(category: String){
         selectedCategoryPredicate = NSPredicate(format: "title BEGINSWITH[cd] %@", argumentArray: [category])
         viewModel.reload()
@@ -49,13 +49,13 @@ class Open_Delegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         reloadCellAt = indexPath
         switch source.tableArrayType {
+        case TableIndex.business.rawValue:
+            let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath)
+            parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         case TableIndex.category.rawValue:
             let currentCategory = source.categoryNameCountViewModel.objectAt(indexPath: indexPath)
             let items = getBusinessesFromCategoryName(category: currentCategory)
             parent.coordinator?.loadTabController(businesses: items, categoryName: currentCategory)
-        case TableIndex.business.rawValue:
-            let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath)
-            parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         default:
             print("Illegal Value inside tableViewArrayType")
         }

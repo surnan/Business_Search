@@ -41,6 +41,12 @@ extension OpenController {
         tableView.fillSafeSuperView()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableDelegate.reloadCellIfNecessary(tableView: tableView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
