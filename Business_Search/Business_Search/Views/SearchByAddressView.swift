@@ -22,6 +22,12 @@ class SearchByAddressView {
         }
     }
     
+    let redView: UIView = {
+        let myView = UIView()
+        myView.backgroundColor = UIColor.lightRed
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        return myView
+    }()
     
     let locationImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))

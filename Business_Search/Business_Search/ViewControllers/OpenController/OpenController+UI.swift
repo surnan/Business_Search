@@ -36,9 +36,17 @@ extension OpenController {
     func setupUI(){
         setupNavigationMenu()
         definesPresentationContext = true
-        [tableView, viewObject.nothingFoundView].forEach{view.addSubview($0)}
+        let redView = viewObject.redView
+        [tableView, viewObject.nothingFoundView, redView].forEach{view.addSubview($0)}
         viewObject.nothingFoundView.centerToSuperView()
         tableView.fillSafeSuperView()
+        
+        NSLayoutConstraint.activate([
+            redView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
+            redView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            redView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
     }
     
     

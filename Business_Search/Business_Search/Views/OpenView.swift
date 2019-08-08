@@ -11,6 +11,13 @@ import UIKit
 class OpenView {
     var viewModel: BusinessViewModel?
     
+    let redView: UIView = {
+        let myView = UIView()
+        myView.backgroundColor = UIColor.lightRed
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        return myView
+    }()
+    
     let nothingFoundView: GenericAttributedTextLabel = {
         let myView = GenericAttributedTextLabel(text: "No matches found", attributes: greenHelvetica_30_greyStroke)
         myView.alpha = 0

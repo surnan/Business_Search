@@ -22,6 +22,13 @@ class SearchByMapView{
         }
     }
     
+    let redView: UIView = {
+        let myView = UIView()
+        myView.backgroundColor = UIColor.lightRed
+        myView.translatesAutoresizingMaskIntoConstraints = false
+        return myView
+    }()
+    
     var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false

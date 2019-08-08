@@ -25,7 +25,7 @@ class SearchByAddressController: UIViewController, UITextFieldDelegate, MKMapVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .skyBlue4
+        view.backgroundColor = .white
         locationTextField.delegate = self
         setupUI()
         addHandlers()
