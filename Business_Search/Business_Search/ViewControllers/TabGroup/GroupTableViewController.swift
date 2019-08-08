@@ -16,11 +16,38 @@ class GroupTableViewController: UITableViewController {
     var coordinator: (BusinessDetailsType & DismissType)?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
+
+    
+    func sort(){
+        businesses.sort { (first, second) -> Bool in
+            return first.name ?? "" < second.name ?? ""
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        tableView.separatorColor = UIColor.clear
+        setupNavigationBar()
+        sort()
+    }
+    
+    func setupNavigationBar(){
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.title = categoryName
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self,
+                                                           action: #selector(handleDismiss))
+    }
+    
+    
+    
+    //MARK:-
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return businesses.count
@@ -36,20 +63,7 @@ class GroupTableViewController: UITableViewController {
         return 80
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
-        tableView.separatorColor = UIColor.clear
-        setupNavigationBar()
-    }
-    
-    func setupNavigationBar(){
-        navigationController?.isNavigationBarHidden = false
-        navigationItem.title = categoryName
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self,
-                                                           action: #selector(handleDismiss))
-    }
+
     
     @objc func handleDismiss(){
         coordinator?.handleDismiss()
