@@ -46,8 +46,7 @@ class GroupTableViewController: UITableViewController {
     
     func setupNavigationBar(){
         navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "categoryName1"
-        navigationController?.title = categoryName
+        navigationItem.title = categoryName
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self,
                                                            action: #selector(handleDismiss))
     }

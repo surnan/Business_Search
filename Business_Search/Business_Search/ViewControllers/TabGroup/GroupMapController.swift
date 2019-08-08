@@ -11,6 +11,7 @@ import MapKit
 
 class BusinessPointAnnotation: MKPointAnnotation {
     var business: Business!
+    
     init(business: Business) {
         self.business = business
     }
@@ -20,7 +21,8 @@ class GroupMapController: UIViewController, MKMapViewDelegate {
     var currentBusinessAnnotation: Business?        //tapped Annotation
     var businesses              = [Business]()      //injected
     let mapViewReuseID          = "mapViewReuseID"
- 
+    
+    var categoryName: String!       //injected
     var coordinator: (BusinessDetailsType & DismissType)?
     
 
@@ -43,8 +45,8 @@ class GroupMapController: UIViewController, MKMapViewDelegate {
     
     func setupNavigationBar(){
         navigationController?.isNavigationBarHidden = false
-        navigationItem.title = "categoryName2"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss 2", style: .plain, target: self,
+        navigationItem.title = categoryName
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .plain, target: self,
                                                            action: #selector(handleDismiss))
     }
     

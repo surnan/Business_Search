@@ -26,6 +26,7 @@ class GroupMapCoordinator: Coordinator, BusinessDetailsType, DismissType {
         super.init(router: router)
         router.setRootModule(myMapsController, hideBar: false)
         myMapsController.coordinator = self
+        myMapsController.categoryName = categoryName
     }
     
     
