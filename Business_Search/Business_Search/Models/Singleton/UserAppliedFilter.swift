@@ -52,15 +52,7 @@ class UserAppliedFilter {
     }
     
     static let shared = UserAppliedFilter()
-    
-//    private var dollarOne: Bool?
-//    private var dollarTwo: Bool?
-//    private var dollarThree: Bool?
-//    private var dollarFour: Bool?
-//    private var priceExists: Bool?
-//    private var favoritesAtTop: Bool?
-//    private var minimumRating: String?
-    
+
     var getOne: Bool {return appliedFilter?.dollar1 ?? false}
     var getTwo: Bool {return appliedFilter?.dollar2 ?? false}
     var getThree: Bool {return appliedFilter?.dollar3 ?? false}
@@ -75,15 +67,6 @@ class UserAppliedFilter {
     
     
     func reset(){
-        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarOne.rawValue)
-        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarTwo.rawValue)
-        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarThree.rawValue)
-        //        UserDefaults.standard.set(true, forKey: AppConstants.dollarFour.rawValue)
-        //        UserDefaults.standard.set(false, forKey: AppConstants.isPriceListed.rawValue)
-        //        UserDefaults.standard.set("1.0", forKey: AppConstants.minimumRating.rawValue)
-        //        UserDefaults.standard.set(false, forKey: AppConstants.isFavoritesToTop.rawValue)
-        //        let defaultFilter = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: 1.0)
-        
         let temp = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: "1.0")
         saveFilterStruct(aFilter: temp)
         
@@ -115,6 +98,14 @@ class UserAppliedFilter {
     var isFilterOn: Bool {
         return !getOne || !getTwo || !getThree || !getFour || !getNoPrice || !(getMinimumRatingFloat == 1.0)
     }
+    
+    
+    func getBusinessSortDescriptor()-> [NSSortDescriptor] {
+        let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
+        return getFavoritesAtTop ? [sortDescriptor2, sortDescriptor] : [sortDescriptor]
+    }
+    
     
     func getBusinessPredicate()->[NSCompoundPredicate]{
         var pricePredicates_OR_Compound = [NSPredicate]()
@@ -223,27 +214,3 @@ class UserAppliedFilter {
     }
 }
 
-
-
-//private var dollarOne: Bool?
-//private var dollarTwo: Bool?
-//private var dollarThree: Bool?
-//private var dollarFour: Bool?
-//private var priceExists: Bool?
-//private var favoritesAtTop: Bool?
-//private var minimumRating: String?
-//
-//var getOne: Bool {return dollarOne ?? false}
-//var getTwo: Bool {return dollarTwo ?? false}
-//var getThree: Bool {return dollarThree ?? false}
-//var getFour: Bool {return dollarFour ?? false}
-//var getNoPrice: Bool {return priceExists ?? false}
-//var getMinimumRatingString: String {return minimumRating ?? "0.0"}
-//var getFavoritesAtTop: Bool {return favoritesAtTop ?? true}
-//
-//var getMinimumRatingFloat: Float {
-//    if let _rating = minimumRating, let temp = Float(_rating){
-//        return temp
-//    }
-//    return 0.0
-//}

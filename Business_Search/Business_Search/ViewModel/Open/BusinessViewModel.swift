@@ -28,24 +28,27 @@ class BusinessViewModel {
         }
     }
     
+    private var businessSortDescriptor: [NSSortDescriptor] {
+        return UserAppliedFilter.shared.getBusinessSortDescriptor()
+    }
+    
     private var fetchBusinessController: NSFetchedResultsController<Business>? { //+1
         didSet {    //+2
             if fetchBusinessController == nil { //+3
                 fetchBusinessController = {   //+4
                     let fetchRequest: NSFetchRequest<Business> = Business.fetchRequest()
-                    
                     var predicate: [NSPredicate] = [predicateBusinessLatitude, predicateBusinessLongitude]
                     if let _predicate = fetchBusinessPredicate { predicate.append(_predicate)}
-                    
                     let openingControllerPredicate =  NSCompoundPredicate(andPredicateWithSubpredicates: predicate)
                     var filterControllerPredicate = UserAppliedFilter.shared.getBusinessPredicate()
                     filterControllerPredicate.append(openingControllerPredicate)
                     
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
+                    fetchRequest.sortDescriptors = businessSortDescriptor
                     
-                    let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
-                    let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
-                    fetchRequest.sortDescriptors = [sortDescriptor2, sortDescriptor]
+                    
+                    
+                    
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
                                                                                sectionNameKeyPath: nil,
