@@ -31,7 +31,7 @@ struct BusinessCellViewModel {
     private var accessoryType: UITableViewCell.AccessoryType!
     var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
     
-    
+
     init(business: Business, colorIndex: IndexPath) {
         if let displayAddress = business.displayAddress,
             let address = displayAddress.split(separator: "?").first,
@@ -42,8 +42,15 @@ struct BusinessCellViewModel {
             topString.append(bottomString)
             myLabelAttributedString = topString
         }
+        
+        
+        
         favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
-        originalColor = colorArray[colorIndex.row % colorArray.count]
+        
+        //originalColor = colorArray[colorIndex.row % colorArray.count]
+        originalColor = getColor(indexPath: colorIndex)
+        
+        
         accessoryType = .disclosureIndicator
     }
 }
