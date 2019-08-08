@@ -106,7 +106,7 @@ class FavoritesViewModel {
         return count.isEmpty ? false : true
     }
     
-    func fetchedObjects() -> [Favorites]{return fetchFavoritesController!.fetchedObjects ?? []}
+    func fetchedObjects() -> [Favorites]{return fetchFavoritesController?.fetchedObjects ?? []}
     
     func createFavorite(business: Business){
         let context = dataController.viewContext

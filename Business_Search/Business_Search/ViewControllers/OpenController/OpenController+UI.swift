@@ -16,6 +16,8 @@ extension OpenController {
         doesLocationEntityExist = false //setup action inside 'readOrCreateLocation'
         readOrCreateLocation()
         animateResultsAreFilteredLabel()
+        reloadFetchControllers()
+        
     }
 
     

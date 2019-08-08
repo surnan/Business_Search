@@ -24,7 +24,7 @@ struct AppliedFilter: Codable {
 let filterConstant = "AppliedFilter"
 
 class UserAppliedFilter {
-    var appliedFilter: AppliedFilter!
+    var appliedFilter: AppliedFilter?
     
     func loadFilterStruct(){
         guard let savedData = UserDefaults.standard.data(forKey: filterConstant) else {
@@ -53,27 +53,24 @@ class UserAppliedFilter {
     
     static let shared = UserAppliedFilter()
     
-    private var dollarOne: Bool?
-    private var dollarTwo: Bool?
-    private var dollarThree: Bool?
-    private var dollarFour: Bool?
-    private var priceExists: Bool?
-    private var favoritesAtTop: Bool?
-    private var minimumRating: String?
+//    private var dollarOne: Bool?
+//    private var dollarTwo: Bool?
+//    private var dollarThree: Bool?
+//    private var dollarFour: Bool?
+//    private var priceExists: Bool?
+//    private var favoritesAtTop: Bool?
+//    private var minimumRating: String?
     
-    var getOne: Bool {return dollarOne ?? false}
-    var getTwo: Bool {return dollarTwo ?? false}
-    var getThree: Bool {return dollarThree ?? false}
-    var getFour: Bool {return dollarFour ?? false}
-    var getNoPrice: Bool {return priceExists ?? false}
-    var getMinimumRatingString: String {return minimumRating ?? "0.0"}
-    var getFavoritesAtTop: Bool {return favoritesAtTop ?? true}
+    var getOne: Bool {return appliedFilter?.dollar1 ?? false}
+    var getTwo: Bool {return appliedFilter?.dollar2 ?? false}
+    var getThree: Bool {return appliedFilter?.dollar3 ?? false}
+    var getFour: Bool {return appliedFilter?.dollar4 ?? false}
+    var getNoPrice: Bool {return appliedFilter?.priceExists ?? false}
+    var getMinimumRatingString: String {return appliedFilter?.minimumRating ?? "0.0"}
+    var getFavoritesAtTop: Bool {return appliedFilter?.favoritesAtTop ?? true}
     
     var getMinimumRatingFloat: Float {
-        if let _rating = minimumRating, let temp = Float(_rating){
-            return temp
-        }
-        return 0.0
+        return Float(getMinimumRatingString) ?? 0.0
     }
     
     
@@ -87,20 +84,21 @@ class UserAppliedFilter {
         //        UserDefaults.standard.set(false, forKey: AppConstants.isFavoritesToTop.rawValue)
         //        let defaultFilter = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: 1.0)
         
-        appliedFilter = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: "1.0")
-        saveFilterStruct(aFilter: appliedFilter)
+        let temp = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: "1.0")
+        saveFilterStruct(aFilter: temp)
         
         
     }
     
     func load(){
-        dollarOne = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
-        dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
-        dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
-        dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
-        priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
-        minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
-        favoritesAtTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? false
+        let dollarOne = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
+        let dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
+        let dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
+        let dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
+        let priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
+        let minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
+        let favoritesAtTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? false
+        appliedFilter = AppliedFilter(dollar1: dollarOne, dollar2: dollarTwo, dollar3: dollarThree, dollar4: dollarFour, priceExists: priceExists, favoritesAtTop: favoritesAtTop, minimumRating: minimumRating)
     }
     
     
@@ -224,3 +222,28 @@ class UserAppliedFilter {
         print("\n***\ncount --> \(items.count)")
     }
 }
+
+
+
+//private var dollarOne: Bool?
+//private var dollarTwo: Bool?
+//private var dollarThree: Bool?
+//private var dollarFour: Bool?
+//private var priceExists: Bool?
+//private var favoritesAtTop: Bool?
+//private var minimumRating: String?
+//
+//var getOne: Bool {return dollarOne ?? false}
+//var getTwo: Bool {return dollarTwo ?? false}
+//var getThree: Bool {return dollarThree ?? false}
+//var getFour: Bool {return dollarFour ?? false}
+//var getNoPrice: Bool {return priceExists ?? false}
+//var getMinimumRatingString: String {return minimumRating ?? "0.0"}
+//var getFavoritesAtTop: Bool {return favoritesAtTop ?? true}
+//
+//var getMinimumRatingFloat: Float {
+//    if let _rating = minimumRating, let temp = Float(_rating){
+//        return temp
+//    }
+//    return 0.0
+//}
