@@ -16,7 +16,8 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     let categoryName: String
     
     lazy var groupsCoordinator: GroupTableViewCoordinator = {
-        let navigationController = UINavigationController()
+        //let navigationController = UINavigationController()
+        let navigationController = CustomNavigationController()
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         let router = Router(navigationController: navigationController)
         let coordinator = GroupTableViewCoordinator(businesses: businesses, categoryName: categoryName, router: router)
@@ -25,7 +26,8 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     }()
     
     lazy var mapCoordinator: GroupMapCoordinator = {
-        let navigationController = UINavigationController()
+        //let navigationController = UINavigationController()
+        let navigationController = CustomNavigationController()
         navigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads , tag: 1)
         let router = Router(navigationController: navigationController)
         let coordinator = GroupMapCoordinator(businesses: businesses, categoryName: categoryName, router: router)
