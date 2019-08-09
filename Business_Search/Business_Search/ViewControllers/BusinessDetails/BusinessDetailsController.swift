@@ -18,6 +18,7 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
     var viewObject              : BusinessDetailsView!
     var viewModel               : BusinessDetailsViewModel!
+    
 
     override func viewDidLoad() {
         setupUI()

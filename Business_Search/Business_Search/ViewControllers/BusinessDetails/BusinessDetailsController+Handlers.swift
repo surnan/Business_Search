@@ -13,7 +13,14 @@ extension BusinessDetailsController {
         viewObject.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
         viewObject.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
         viewObject.directionsButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
+        viewObject.markFavoriteButton.addTarget(self, action: #selector(handleUpdateFavorites(sender:)), for: .touchUpInside)
     }
+    
+    
+    @objc func handleUpdateFavorites(sender: UIButton){
+        print("Green Button tapped")
+    }
+    
     
     @objc func handlePhoneNumberButton(sender: UIButton){
         guard let numberString = sender.titleLabel?.text else {return}
