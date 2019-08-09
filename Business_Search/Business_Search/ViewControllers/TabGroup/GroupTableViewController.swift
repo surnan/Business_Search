@@ -25,7 +25,8 @@ class GroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        //view.backgroundColor    = .lightBlue
+        view.backgroundColor = .white
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.separatorColor = UIColor.clear
         setupNavigationBar()

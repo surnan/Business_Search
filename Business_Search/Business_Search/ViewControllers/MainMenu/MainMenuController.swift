@@ -25,10 +25,10 @@ class MainMenuController: UIViewController, UnBlurViewType{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.backgroundColor    = .lightBlue
+        view.backgroundColor    = .white
         coordinateFound         = false
         previousCoordinate      = nil
-        setupUI()
+        setupUI()   //Error if it's in ViewDidLoad
     }
     
     override func viewDidLoad() {

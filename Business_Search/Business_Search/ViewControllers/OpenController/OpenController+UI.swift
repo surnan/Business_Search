@@ -55,6 +55,7 @@ extension OpenController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableDelegate.reloadCellIfNecessary(tableView: tableView)
+        view.backgroundColor    = .lightBlue
     }
     
     override func viewDidLoad() {
