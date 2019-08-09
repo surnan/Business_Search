@@ -23,7 +23,7 @@ extension Open_Delegate {
             self.showRandomBusiness(businesses: items)  //2
         }
         //
-        actionForBusiness.backgroundColor = .red
+        actionForBusiness.backgroundColor = #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)
         actionForCategory.backgroundColor = .blue
         return source.tableArrayType == TableIndex.category.rawValue ? [actionForCategory] : [actionForBusiness]
     }
