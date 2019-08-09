@@ -26,7 +26,7 @@ extension OpenController {
         imageView.contentMode           = .scaleAspectFit
         self.navigationItem.titleView   = imageView
         let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
-        let composeBarButton    = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(handleFilter))
+        let composeBarButton    = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(handleFilter))
         navigationItem.rightBarButtonItems = [composeBarButton, searchBarButton]
         navigationItem.searchController = searchController
     }

@@ -48,7 +48,6 @@ func georgiaAttributes(color: UIColor, size: CGFloat)-> [NSAttributedString.Key:
     return myAttributes
 }
 
-
 let grey25textAttributes: [NSAttributedString.Key: Any] = [
     NSAttributedString.Key.foregroundColor : UIColor.gray,
     NSAttributedString.Key.font: UIFont(name: "Georgia", size: 25) as Any
