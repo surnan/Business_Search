@@ -12,7 +12,7 @@ extension BusinessDetailsController {
     func addHandlers(){
         viewObject.phoneNumberButton.addTarget(self, action: #selector(handlePhoneNumberButton(sender:)), for: .touchUpInside)
         viewObject.visitYelpPageButton.addTarget(self, action: #selector(handleVisitYelpPageButton(_:)), for: .touchUpInside)
-        viewObject.mapItButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
+        viewObject.directionsButton.addTarget(self, action: #selector(handleMapItButton(_:)), for: .touchUpInside)
     }
     
     @objc func handlePhoneNumberButton(sender: UIButton){

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class BusinessDetailsView {
-    var mapView             = GenericMapView(isZoom: false, isScroll: false)
+    var mapView             = GenericMapView(isZoom: true, isScroll: true)
     private var firstAnnotation     = MKPointAnnotation()
     
     var viewModel: BusinessDetailsViewModel? {
@@ -47,7 +47,8 @@ class BusinessDetailsView {
     var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
     var phoneNumberButton   = GenericButton(title: "", titleColor: .blue, backgroundColor: .white, isCorner: true)
     var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
-    var mapItButton         = GenericButton(title: " MAP IT ", titleColor: .white, backgroundColor: .red, isCorner: true)
+    var directionsButton         = GenericButton(title: " Get Directions ", titleColor: .white, backgroundColor: .red, isCorner: true)
+    var markFavoriteButton  = GenericButton(title: "---", titleColor: .white, backgroundColor: .green, isCorner: true)
     
     func getFullStack()->UIStackView {
         let buttonStack = GenericStack(spacing: 5)
@@ -56,8 +57,8 @@ class BusinessDetailsView {
     }
     
     func getButtonStack()-> UIStackView {
-        let buttonStack = GenericStack(spacing: 5)
-        [visitYelpPageButton, mapItButton].forEach{buttonStack.addArrangedSubview($0)}
+        let buttonStack = GenericStack(spacing: 10)
+        [visitYelpPageButton, directionsButton, markFavoriteButton].forEach{buttonStack.addArrangedSubview($0)}
         return buttonStack
     }
 }
