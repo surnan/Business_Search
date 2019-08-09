@@ -9,6 +9,7 @@
 import UIKit
 
 extension OpenController {
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         //This is called when user switches scopes
         searchGroupIndex = selectedScope
