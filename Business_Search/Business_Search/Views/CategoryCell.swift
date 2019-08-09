@@ -34,7 +34,7 @@ class CategoryCell: UITableViewCell {
         let label = UILabel()
         label.text = ""
         label.numberOfLines = 2
-        label.textColor = UIColor.darkGray
+        label.textColor = UIColor.white
         label.font = UIFont.italicSystemFont(ofSize: 11)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center

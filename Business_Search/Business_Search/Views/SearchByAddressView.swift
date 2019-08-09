@@ -45,7 +45,12 @@ class SearchByAddressView {
     
     var locationTextField: UITextField = {
         let textField = UITextField()
-        textField.attributedPlaceholder = NSMutableAttributedString(string: "Enter a Location", attributes: grey25textAttributes)
+        textField.attributedPlaceholder = NSMutableAttributedString(string: "Enter a Location",
+                                                                    //attributes: grey25textAttributes)
+            attributes: georgiaAttributes(color: .gray, size: 25))
+            
+            
+            
         textField.myStandardSetup(cornerRadiusSize: cornerRadiusSize, defaulAttributes: black25textAttributes)
         return textField
     }()

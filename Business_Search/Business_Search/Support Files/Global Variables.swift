@@ -39,6 +39,15 @@ func getColor(indexPath: IndexPath)->UIColor{
 }
 
 
+func georgiaAttributes(color: UIColor, size: CGFloat)-> [NSAttributedString.Key: Any]  {
+    let myAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.foregroundColor : color,
+        NSAttributedString.Key.font: UIFont(name: "Georgia", size: size) as Any
+    ]
+    return myAttributes
+}
+
+
 let grey25textAttributes: [NSAttributedString.Key: Any] = [
     NSAttributedString.Key.foregroundColor : UIColor.gray,
     NSAttributedString.Key.font: UIFont(name: "Georgia", size: 25) as Any
