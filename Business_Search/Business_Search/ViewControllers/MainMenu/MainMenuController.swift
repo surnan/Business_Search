@@ -23,23 +23,6 @@ class MainMenuController: UIViewController, UnBlurViewType{
         return .lightContent                        //Status bar sometimes black
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.backgroundColor    = .white
-        coordinateFound         = false
-        previousCoordinate      = nil
-        setupUI()   //Error if it's in ViewDidLoad
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addHandlers()
-        [stack].forEach{view.addSubview($0)}
-    }
 
-    func undoBlur() {
-        removeDarkScreenBlur()
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
 }
 

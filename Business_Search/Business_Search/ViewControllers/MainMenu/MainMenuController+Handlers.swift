@@ -45,6 +45,8 @@ extension MainMenuController {
         if CLLocationManager.locationServicesEnabled() {
             showNONPassThroughNetworkActivityView()
             locationManager.startUpdatingLocation()
+        } else {
+            
         }
     }
 }

@@ -106,7 +106,13 @@ class YelpClient{
         guard let verifiedResponse = response else {return nil}
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
-        print("Number of Yelp Calls left until GMT Midnight  ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
+        //print("Number of Yelp Calls left until GMT Midnight  ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
+        let tempString: String = httpResponse.allHeaderFields["ratelimit-remaining"] as? String ?? "** YELP not returning number of calls left **"
+        let tempNumber = httpResponse.allHeaderFields["ratelimit-remaining"] as? Int
+        
+        print("Number of Yelp Calls left until GMT Midnight  ==> \(tempString)")
+        if let callsLeft = tempNumber, callsLeft == 0 {fatalError("Daily network calls for this license reached")}
+    
         switch httpResponse.statusCode {
         case 200: return nil
         case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
