@@ -6,4 +6,5 @@ target 'Business_Search' do
   use_frameworks!
 
   pod 'GoogleMaps'
+  pod 'lottie-ios'
 end

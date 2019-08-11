@@ -35,8 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().barTintColor = UIColor.lightRed
         UITabBar.appearance().tintColor = UIColor.white
-        
         window = UIWindow()
+        
+        
+//        window?.rootViewController = TestVC()
+//        window?.makeKeyAndVisible()
+        
+        
         let appCoordinator = AppCoordinator(window: window, dataController: dataController)
         appCoordinator.start()
         return true

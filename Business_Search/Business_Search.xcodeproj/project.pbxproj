@@ -23,6 +23,8 @@
 		841CDF8722E6BFEE00FEB1D0 /* TabGroupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */; };
 		841CDF8C22E746A600FEB1D0 /* GroupTableViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8B22E746A600FEB1D0 /* GroupTableViewCoordinator.swift */; };
 		841CDF8F22E7535200FEB1D0 /* GroupMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841CDF8E22E7535200FEB1D0 /* GroupMapCoordinator.swift */; };
+		842181A92300573F009C4EE0 /* MyDownloader.json in Resources */ = {isa = PBXBuildFile; fileRef = 842181A82300573E009C4EE0 /* MyDownloader.json */; };
+		842181AB23005825009C4EE0 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842181AA23005825009C4EE0 /* TestVC.swift */; };
 		8424A074229A1D0100F8FAF3 /* BusinessAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */; };
 		842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AD7D8228538B900590B1A /* BusinessDetailsController.swift */; };
 		84365CB122C567A80014E577 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84365CB022C567A80014E577 /* Double+Extension.swift */; };
@@ -136,6 +138,8 @@
 		841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroupCoordinator.swift; sourceTree = "<group>"; };
 		841CDF8B22E746A600FEB1D0 /* GroupTableViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCoordinator.swift; sourceTree = "<group>"; };
 		841CDF8E22E7535200FEB1D0 /* GroupMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupMapCoordinator.swift; sourceTree = "<group>"; };
+		842181A82300573E009C4EE0 /* MyDownloader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyDownloader.json; sourceTree = "<group>"; };
+		842181AA23005825009C4EE0 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		8424A073229A1D0100F8FAF3 /* BusinessAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessAnnotationView.swift; sourceTree = "<group>"; };
 		842AD7D8228538B900590B1A /* BusinessDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84365CB022C567A80014E577 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
@@ -623,6 +627,8 @@
 			isa = PBXGroup;
 			children = (
 				84BDE30E2263E652008C9B01 /* UNSYNC.swift */,
+				842181A82300573E009C4EE0 /* MyDownloader.json */,
+				842181AA23005825009C4EE0 /* TestVC.swift */,
 				84BDE2EE2263D007008C9B01 /* Business_Search */,
 				84BDE2ED2263D007008C9B01 /* Products */,
 				EC8B6EA18000868FE245DDAB /* Pods */,
@@ -732,6 +738,7 @@
 				84BDE2E92263D007008C9B01 /* Frameworks */,
 				84BDE2EA2263D007008C9B01 /* Resources */,
 				CE4DBEC0AF0F41384584D6E7 /* [CP] Copy Pods Resources */,
+				D374CEF5A71B7E45FA8B1AD1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -781,6 +788,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84BDE2FA2263D009008C9B01 /* LaunchScreen.storyboard in Resources */,
+				842181A92300573F009C4EE0 /* MyDownloader.json in Resources */,
 				84BDE2F72263D009008C9B01 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -827,6 +835,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Business_Search/Pods-Business_Search-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D374CEF5A71B7E45FA8B1AD1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Business_Search/Pods-Business_Search-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Business_Search/Pods-Business_Search-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Business_Search/Pods-Business_Search-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -850,6 +875,7 @@
 				8401127822E51C2300ECE0D5 /* AppCoordinator.swift in Sources */,
 				84365CBC22C64A860014E577 /* CustomButton.swift in Sources */,
 				84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */,
+				842181AB23005825009C4EE0 /* TestVC.swift in Sources */,
 				84E27D1022EF6C6B00D2CAE5 /* BusinessViewModel.swift in Sources */,
 				847AE27622EDE14F00774371 /* SearchByMapViewModel.swift in Sources */,
 				84E27D1B22F0126100D2CAE5 /* Open_DataSource.swift in Sources */,
