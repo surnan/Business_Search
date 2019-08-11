@@ -16,10 +16,20 @@ extension MainMenuController {
         }
     }
     
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        showFinishNetworkRequest()
+    }
+    
+    
+    @objc func handleBlank(){
+    }
+    
     @objc func handleButtons(_ sender: UIButton){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(handleBlank))
         determineMyCurrentLocation()
         controllerIndex = sender.tag
-        mainView.activityView.startAnimating()
     }
     
     @objc func handleSettings(){
@@ -31,8 +41,9 @@ extension MainMenuController {
         locationManager = CLLocationManager()
         locationManager.delegate        = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
+            showNONPassThroughNetworkActivityView()
             locationManager.startUpdatingLocation()
         }
     }

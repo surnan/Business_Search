@@ -56,7 +56,7 @@ class YelpClient{
     }
     
     
-    class func getBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (CreateYelpURLDuringLoopingStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    class func getBusinesses(latitude: Double, longitude: Double, offset: Int = 0,completion: @escaping (CreateYelpURLDuringLoopingStruct?, Result<YelpBusinessResponse, NetworkError>)-> Void)-> URLSessionDataTask?{
         let url = Endpoints.loadUpBusinesses(latitude, longitude, offset).url
         let task = taskForYelpGetRequest(url: url, decoder: YelpBusinessResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
@@ -72,7 +72,7 @@ class YelpClient{
     }
     
     
-    class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask{
+    class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask?{
         let url = Endpoints.getAllCategories(locale).url
         print("GetAllCategories URL = \(url)")
         let task = taskForYelpGetRequest(url: url, decoder: YelpAllCategoriesResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
@@ -87,7 +87,7 @@ class YelpClient{
     }
     
     
-    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask{
+    class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask?{
         let url = Endpoints.autocomplete(text, latitude, longitude).url
         //print("url = \(url)")
         let task = taskForYelpGetRequest(url: url, decoder: YelpAutoCompleteResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
@@ -119,7 +119,7 @@ class YelpClient{
     //MARK: Generic Yelp Get Request utilized by all other Yelp Class Functions
     class private func taskForYelpGetRequest<Decoder: Decodable, ErrorDecoder: Decodable>(url: URL, decoder: Decoder.Type,
                                                                                           errorDecoder: ErrorDecoder.Type,
-                                                                                          completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask{
+                                                                                          completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask?{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
         

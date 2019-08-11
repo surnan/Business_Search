@@ -34,7 +34,7 @@ class MainMenuController: UIViewController, UnBlurViewType{
     override func viewDidLoad() {
         super.viewDidLoad()
         addHandlers()
-        [mainView.activityView, stack].forEach{view.addSubview($0)}
+        [stack].forEach{view.addSubview($0)}
     }
 
     func undoBlur() {

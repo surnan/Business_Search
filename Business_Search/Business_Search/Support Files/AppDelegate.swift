@@ -40,8 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        window?.rootViewController = TestVC()
 //        window?.makeKeyAndVisible()
-        
-        
         let appCoordinator = AppCoordinator(window: window, dataController: dataController)
         appCoordinator.start()
         return true

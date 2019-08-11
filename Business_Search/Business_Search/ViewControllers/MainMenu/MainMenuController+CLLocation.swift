@@ -23,7 +23,6 @@ extension MainMenuController: CLLocationManagerDelegate {
     
     private func pushController(){
         guard let coordinator = coordinator else {print("coordinator is NIL");return}
-        mainView.activityView.stopAnimating()
         if coordinateFound {return}
         coordinateFound = true
         switch controllerIndex {
