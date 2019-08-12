@@ -11,5 +11,5 @@ import UIKit
 class PresentableType: NSObject, PresentableCoordinatorType {
     override init() {super.init()}
     open func start() {}
-    open func toPresentable() -> UIViewController {fatalError("Must override toPresentable()")}
+    open func toPresentable() -> UIViewController {fatalError("Error 205A: Must override toPresentable()")}
 }

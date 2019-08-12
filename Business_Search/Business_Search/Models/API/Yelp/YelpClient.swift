@@ -111,7 +111,7 @@ class YelpClient{
         let tempNumber = httpResponse.allHeaderFields["ratelimit-remaining"] as? Int
         
         print("Number of Yelp Calls left until GMT Midnight  ==> \(tempString)")
-        if let callsLeft = tempNumber, callsLeft == 0 {fatalError("Daily network calls for this license reached")}
+        if let callsLeft = tempNumber, callsLeft == 0 {fatalError("Error 13A: Daily network calls for this license reached")}
     
         switch httpResponse.statusCode {
         case 200: return nil
@@ -158,7 +158,7 @@ class YelpClient{
             } catch let decodeError {
                 do {
                     let yelpErrorDecoded = try JSONDecoder().decode(YelpAPIErrorResponse.self, from: dataObject)
-                    if yelpErrorDecoded.error.code == "TOO_MANY_REQUESTS_PER_SECOND" {
+                    if yelpErrorDecoded.error.code == "Error 01A: TOO_MANY_REQUESTS_PER_SECOND" {
                         DispatchQueue.main.async {
                             completion(.failure(.tooManyRequestsPerSecond))
                         }
@@ -169,7 +169,7 @@ class YelpClient{
                     }
                     return
                 } catch {
-                    print("\nDecoding Error: \n\(decodeError) & \(String(describing: request.url))")
+                    print("\n01B: Decoding Error: \n\(decodeError) & \(String(describing: request.url))")
                     DispatchQueue.main.async {
                         completion(.failure(.unableToDecode))
                     }

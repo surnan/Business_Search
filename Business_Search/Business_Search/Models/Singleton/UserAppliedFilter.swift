@@ -35,7 +35,7 @@ class UserAppliedFilter {
             appliedFilter = filterData
             print("")
         } catch {
-            print("filterData try Error: \(error.localizedDescription) \n \(error)")
+            print("Error 02A: filterData try Error: \(error.localizedDescription) \n \(error)")
         }
     }
     
@@ -47,7 +47,7 @@ class UserAppliedFilter {
             UserDefaults.standard.set(savedData, forKey: filterConstant)
             print("")
         } catch {
-            print("filterData try Error: \(error.localizedDescription) \n \(error)")
+            print("Error 03A: filterData try Error: \(error.localizedDescription) \n \(error)")
         }
     }
     

@@ -18,6 +18,20 @@ enum NetworkError: Error {
     case unableToDecode
     case noData_noError
     case needToRetry
+    
+    var toString: String {
+        switch self {
+        case .badURL: return "ERROR: Invalid URL"
+        case .networkTimeOut:return "ERROR: Network Time Out"
+        case .networkConnectionGoodButUnableToConnect:return "ERROR: Unable to connect to Yelp endpoint"
+        case .connectSuccesfulDownloadDataFail:return "ERROR: Succesfully connect but unable to download data"
+        case .tooManyRequestsPerSecond:return "ERROR: Simultaneous download threshold exceeded"
+        case .yelpErrorDecoded:return "ERROR: Unable to decode Yelp downloaded data"
+        case .unableToDecode:return "ERROR: Unable to decode downloaded data"
+        case .noData_noError:return "ERROR: Data connection failed without error"
+        case .needToRetry:return "ERROR:  Retry might succeed"
+        }
+    }
 }
 
 

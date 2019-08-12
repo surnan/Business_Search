@@ -38,7 +38,7 @@ class LocationViewModel {
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
-                        fatalError("Unresolved error \(error)")
+                        fatalError("Error 08A: Unresolved error \(error)")
                     }
                     return aFetchedResultsController
                 }()
@@ -67,7 +67,7 @@ class LocationViewModel {
             try context.save()
             return (data.total, newLocation.objectID)
         } catch {
-            print("Error saving func addLocation() --\n\(error)")
+            print("Error 09A: Error saving func addLocation() --\n\(error)")
             print("Localized Error saving func addLocation() --\n\(error.localizedDescription)")
             return (nil, nil)
         }
@@ -82,7 +82,7 @@ class LocationViewModel {
                 _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
                 
             } catch {
-                print("Error deleting All \(error)")
+                print("Error 0AA: Error deleting All \(error)")
             }
         }
     }
@@ -134,7 +134,7 @@ class LocationViewModel {
             do {
                 try context.save()
             } catch {
-                print("Short Error: \(error.localizedDescription)")
+                print("Error 0BA: Short Error: \(error.localizedDescription)")
                 print("Error saving Business to Location Entity --> func Location.addBusinesses()\n\(error)")
             }
         }

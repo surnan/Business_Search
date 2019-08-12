@@ -15,7 +15,7 @@ class AppCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchB
     let firstVC         : MainMenuController
     
     init(window: UIWindow?, dataController: DataController) {
-        guard let window = window else {fatalError("Window creation needed in AppDelegate")}
+        guard let window = window else {fatalError("Error 204A: Window creation needed in AppDelegate")}
         self.window                     = window
         self.dataController             = dataController
         self.firstVC                    = MainMenuController()

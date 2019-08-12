@@ -60,9 +60,11 @@ extension OpenController {
         switch result {
         case .failure(let error):
             if error == NetworkError.needToRetry || error == NetworkError.tooManyRequestsPerSecond {
-                print("handleLoadBusiness --> Retry -> \(error))")
+                print("Error 201A: handleLoadBusiness --> Retry -> \(error))")
+                fatalError(error.toString)
             } else {
-                print("Error that is not 'needToRetry' --> error = \(error)")
+                print("Error 202A: that is not 'needToRetry' --> error = \(error)")
+                fatalError(error.toString)
             }
         case .success(let data):
             if !doesLocationEntityExist {
@@ -89,7 +91,7 @@ extension OpenController {
             do {
                 try self.moc.save()
             } catch {
-                print("Error saving parent context 'func queueForSavingBusinesses'")
+                print("Error 04A: Error saving parent context 'func queueForSavingBusinesses'")
             }
         }
     }
@@ -112,6 +114,7 @@ extension OpenController {
         timer.fire()
     }
     
+    
     func downloadYelpBusinesses(latitiude: Double, longitude: Double){
         if urlsQueue.isEmpty {return}
         let semaphore = DispatchSemaphore(value: 4)
@@ -119,9 +122,16 @@ extension OpenController {
         for (index, element) in urlsQueue.enumerated(){
             if index > 3 {break}
             dispatchGroup.enter()
+            //Don't need to store rturned 'URLSessionDataTask?' because .stop/.resume is being utilized
             _ = YelpClient.getBusinesses(latitude: getLatitude, longitude: getLongitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
-                defer {dispatchGroup.leave()}
-                self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
+                switch result {
+                case .success(let temp):
+                    print(temp)
+                    defer {dispatchGroup.leave()}
+                    self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
+                case .failure(let error):
+                    fatalError(error.toString)
+                }
             })
         }
         dispatchGroup.notify(queue: .main) {[weak self] in

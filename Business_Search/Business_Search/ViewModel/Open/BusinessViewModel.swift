@@ -57,7 +57,7 @@ class BusinessViewModel {
                         print("Performing Business Fetch with: \n   \(fetchRequest.predicate!)")
                         try aFetchedResultsController.performFetch()
                     } catch let error {
-                        fatalError("Unresolved error \(error)")
+                        fatalError("Error 06A: Unresolved error \(error)")
                     }
                     return aFetchedResultsController
                 }() //-4
@@ -88,7 +88,7 @@ class BusinessViewModel {
             do {
                 try dataController.viewContext.save()
             } catch {
-                print("Error saving favorite after finding match - \(error.localizedDescription)\n\(error)")
+                print("Error 07A: Error saving favorite after finding match - \(error.localizedDescription)\n\(error)")
             }
         }
     }

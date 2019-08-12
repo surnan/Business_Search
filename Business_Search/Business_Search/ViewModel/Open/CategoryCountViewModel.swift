@@ -59,7 +59,7 @@ class CategoryCountViewModel {
                     })
                     fetchCategoryNames = answer
                 } catch {
-                    print("Fail to PerformFetch inside categoryFinalArray:")
+                    print("Error 0CA: Fail to PerformFetch inside categoryFinalArray:")
                 }
             }
         }

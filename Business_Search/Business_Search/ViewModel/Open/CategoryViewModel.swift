@@ -53,7 +53,7 @@ class CategoryViewModel {
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
-                        fatalError("Unresolved error \(error)")
+                        fatalError("Error 0DA: Unresolved error \(error)")
                     }
                     return aFetchedResultsController
                 }() //-4

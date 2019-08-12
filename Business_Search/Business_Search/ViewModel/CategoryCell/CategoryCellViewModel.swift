@@ -65,7 +65,7 @@ struct CategoryCellViewModel {
             count = _count
         } catch {
             count = 0
-            print("Failed to get Count inside cellForRowAt: \n\(error)")
+            print("Error 05A: Failed to get Count inside cellForRowAt: \n\(error)")
         }
     }
 }

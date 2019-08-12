@@ -33,7 +33,7 @@ class FavoritesViewModel {
                     do {
                         try aFetchedResultsController.performFetch()
                     } catch let error {
-                        fatalError("Unresolved error \(error)")
+                        fatalError("Error 0EA: Unresolved error \(error)")
                     }
                     return aFetchedResultsController
                 }()
@@ -55,7 +55,7 @@ class FavoritesViewModel {
             try dataController.viewContext.save()
             return business.isFavorite
         } catch {
-            print(error)
+            print("Error 0FA: \(error)")
             print(error.localizedDescription)
             return business.isFavorite
         }
@@ -70,7 +70,7 @@ class FavoritesViewModel {
                 do {
                     try dataController.viewContext.save()
                 } catch {
-                    print("Error when trying to delete: \(item.id ?? "")")
+                    print("Error 10A: Error when trying to delete: \(item.id ?? "")")
                     return
                 }
             }
@@ -86,7 +86,7 @@ class FavoritesViewModel {
                 _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
                 
             } catch {
-                print("Error deleting All \(error)")
+                print("Error 11A: Error deleting All \(error)")
             }
         }
     }
@@ -115,7 +115,7 @@ class FavoritesViewModel {
         do {
             try context.save()
         } catch {
-            print("\nError saving newly created favorite - localized error: \n\(error.localizedDescription)")
+            print("\nError 12A: Error saving newly created favorite - localized error: \n\(error.localizedDescription)")
             print("\n\nError saving newly created favorite - full error: \n\(error)")
         }
     }
