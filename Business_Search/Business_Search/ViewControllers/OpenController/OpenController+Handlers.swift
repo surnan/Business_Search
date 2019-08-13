@@ -59,12 +59,8 @@ extension OpenController {
     func handleGetNearbyBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
         switch result {
         case .failure(let error):
-            if error == NetworkError.needToRetry || error == NetworkError.tooManyRequestsPerSecond {
-                print("Error 201A: handleLoadBusiness --> Retry -> \(error))")
-                fatalError(error.toString)
-            } else {
-                print("Error 202A: that is not 'needToRetry' --> error = \(error)")
-                fatalError(error.toString)
+            showAlertController(title: "ERROR", message: error.toString) {[weak self] _ in
+                self?.coordinator?.jumpToMenu()
             }
         case .success(let data):
             if !doesLocationEntityExist {
@@ -130,6 +126,7 @@ extension OpenController {
                     defer {dispatchGroup.leave()}
                     self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
                 case .failure(let error):
+                    print("---")
                     fatalError(error.toString)
                 }
             })

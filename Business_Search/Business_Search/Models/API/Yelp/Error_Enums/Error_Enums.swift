@@ -23,13 +23,13 @@ enum NetworkError: Error {
         switch self {
         case .badURL: return "ERROR: Invalid URL"
         case .networkTimeOut:return "ERROR: Network Time Out"
-        case .networkConnectionGoodButUnableToConnect:return "ERROR: Unable to connect to Yelp endpoint"
-        case .connectSuccesfulDownloadDataFail:return "ERROR: Succesfully connect but unable to download data"
-        case .tooManyRequestsPerSecond:return "ERROR: Simultaneous download threshold exceeded"
-        case .yelpErrorDecoded:return "ERROR: Unable to decode Yelp downloaded data"
-        case .unableToDecode:return "ERROR: Unable to decode downloaded data"
-        case .noData_noError:return "ERROR: Data connection failed without error"
-        case .needToRetry:return "ERROR:  Retry might succeed"
+        case .networkConnectionGoodButUnableToConnect:return "Unable to connect to Yelp endpoint"
+        case .connectSuccesfulDownloadDataFail:return "Succesfully connect but unable to download data"
+        case .tooManyRequestsPerSecond:return "Simultaneous download threshold exceeded"
+        case .yelpErrorDecoded:return "Unable to decode Yelp downloaded data"
+        case .unableToDecode:return "Unable to decode downloaded data"
+        case .noData_noError:return "Data connection failed without error"
+        case .needToRetry:return "Retry might succeed"
         }
     }
 }
@@ -41,4 +41,16 @@ enum YelpAPIError: Error {
     case UNAUTHORIZED
     case INTERNAL_SERVER_ERROR
     case UNKNOWN_ERROR
+    case OUT_Of_LICENSES
+    
+    var toString: String {
+        switch self {
+        case .INTERNAL_SERVER_ERROR: return "Yelp Internal Server Error"
+        case .OUT_Of_LICENSES: return "Daily network calls for this license reached"
+        case .UNAUTHORIZED: return "This application is currently not authorized to accessed Yelp data"
+        case .VALIDATION_ERROR: return "Authorization Error"
+        case .FIELD_REQUIRED: return "Incomplete fields in data request"
+        case .UNKNOWN_ERROR: return "Unknown Yelp error"
+        }
+    }
 }

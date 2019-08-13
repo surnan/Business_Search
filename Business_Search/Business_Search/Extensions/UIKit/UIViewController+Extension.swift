@@ -54,6 +54,7 @@ extension UIViewController {
         blurringScreenDark.removeFromSuperview()
     }
     
+    
     func showAlertController(title: String, message: String, okFunction: ((UIAlertAction) -> Void)? = nil) {
         let myAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         myAlertController.addAction(UIAlertAction(title: "OK", style: .default, handler: okFunction))

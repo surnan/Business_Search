@@ -407,14 +407,14 @@
 			children = (
 				8401125E22E29F1400ECE0D5 /* Base_Coordinator */,
 				84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */,
+				84684CA922E6466A00999599 /* FilterCoordinator.swift */,
 				841CDF8E22E7535200FEB1D0 /* GroupMapCoordinator.swift */,
 				841CDF8B22E746A600FEB1D0 /* GroupTableViewCoordinator.swift */,
 				8401127922E51C5C00ECE0D5 /* MainMenuCoordinator.swift */,
+				8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */,
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
 				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
-				84684CA922E6466A00999599 /* FilterCoordinator.swift */,
-				8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */,
 				841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */,
 			);
 			path = Coordinators;

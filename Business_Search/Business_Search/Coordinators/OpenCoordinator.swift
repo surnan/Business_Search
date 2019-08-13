@@ -83,5 +83,10 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         }
         router.present(activityVC, animated: true)
     }
+    
+    
+    func jumpToMenu(){
+        router.popToRootModule(animated: true)
+    }
 }
 

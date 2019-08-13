@@ -113,6 +113,10 @@ class YelpClient{
         print("Number of Yelp Calls left until GMT Midnight  ==> \(tempString)")
         if let callsLeft = tempNumber, callsLeft == 0 {fatalError("Error 13A: Daily network calls for this license reached")}
     
+        
+        
+        
+        
         switch httpResponse.statusCode {
         case 200: return nil
         case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
@@ -128,9 +132,7 @@ class YelpClient{
                                                                                           completion: @escaping (Result<Decoder, NetworkError>) -> Void) -> URLSessionDataTask?{
         var request = URLRequest(url: url)
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
-        
-        //print("\nurl = \(url)")
-        
+
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
             _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
             
