@@ -102,7 +102,30 @@ class YelpClient{
     }
 
     
-    class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> YelpAPIError?{
+//    class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> YelpAPIError?{
+//        guard let verifiedResponse = response else {return nil}
+//        let httpResponse = verifiedResponse as! HTTPURLResponse
+//
+//        //print("Number of Yelp Calls left until GMT Midnight  ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
+//        let tempString: String = httpResponse.allHeaderFields["ratelimit-remaining"] as? String ?? "** YELP not returning number of calls left **"
+//        let tempNumber = httpResponse.allHeaderFields["ratelimit-remaining"] as? Int
+//
+//        print("Number of Yelp Calls left until GMT Midnight  ==> \(tempString)")
+//        //fatalError("Error 13A: Daily network calls for this license reached")
+//        if let callsLeft = tempNumber, callsLeft == 0 {return YelpAPIError.YELP_OUT_Of_LICENSES}
+//
+//
+//        switch httpResponse.statusCode {
+//        case 200: return nil
+//        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.YELP_FIELD_REQUIRED
+//        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.YELP_UNAUTHORIZED
+//        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.YELP_INTERNAL_SERVER_ERROR
+//        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.YELP_UNKNOWN_ERROR
+//        }
+//    }
+    
+    
+    class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> NetworkError?{
         guard let verifiedResponse = response else {return nil}
         let httpResponse = verifiedResponse as! HTTPURLResponse
         
@@ -112,15 +135,16 @@ class YelpClient{
         
         print("Number of Yelp Calls left until GMT Midnight  ==> \(tempString)")
         //fatalError("Error 13A: Daily network calls for this license reached")
-        if let callsLeft = tempNumber, callsLeft == 0 {return YelpAPIError.YELP_OUT_Of_LICENSES}
+        //if let callsLeft = tempNumber, callsLeft == 0 {return YelpAPIError.YELP_OUT_Of_LICENSES}
+        if let callsLeft = tempNumber, callsLeft == 0 {return NetworkError.YELP_OUT_Of_LICENSES}
         
-    
+        
         switch httpResponse.statusCode {
         case 200: return nil
-        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.YELP_FIELD_REQUIRED
-        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.YELP_UNAUTHORIZED
-        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.YELP_INTERNAL_SERVER_ERROR
-        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.YELP_UNKNOWN_ERROR
+        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return NetworkError.YELP_FIELD_REQUIRED
+        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return NetworkError.YELP_UNAUTHORIZED
+        case 500: print("--> Yelp Error: 'Internal Server Error'"); return NetworkError.YELP_INTERNAL_SERVER_ERROR
+        default: print("--> Yelp Error: 'Undefined Error'"); return NetworkError.YELP_UNKNOWN_ERROR
         }
     }
     
@@ -132,7 +156,14 @@ class YelpClient{
         request.setValue("Bearer \(API_Key)", forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: request){ (data, resp, err) in
-            _ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
+            
+            //_ = checkYelpReturnedStatusCodes(response: resp)  //'resp' not in completion handler.  Check now.
+            if let yelpError = checkYelpReturnedStatusCodes(response: resp){  //'resp' not in completion handler.  Check now.
+                completion(.failure(yelpError))
+            }
+            
+            
+            
             
             if let error = err {
                 switch error._code {
