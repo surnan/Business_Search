@@ -19,6 +19,7 @@ enum NetworkError: Error {
     case noData_noError
     case needToRetry
     
+    
     var toString: String {
         switch self {
         case .badURL: return "ERROR: Invalid URL"
@@ -36,21 +37,21 @@ enum NetworkError: Error {
 
 
 enum YelpAPIError: Error {
-    case FIELD_REQUIRED
-    case VALIDATION_ERROR
-    case UNAUTHORIZED
-    case INTERNAL_SERVER_ERROR
-    case UNKNOWN_ERROR
-    case OUT_Of_LICENSES
+    case YELP_FIELD_REQUIRED
+    case YELP_VALIDATION_ERROR
+    case YELP_UNAUTHORIZED
+    case YELP_INTERNAL_SERVER_ERROR
+    case YELP_UNKNOWN_ERROR
+    case YELP_OUT_Of_LICENSES
     
     var toString: String {
         switch self {
-        case .INTERNAL_SERVER_ERROR: return "Yelp Internal Server Error"
-        case .OUT_Of_LICENSES: return "Daily network calls for this license reached"
-        case .UNAUTHORIZED: return "This application is currently not authorized to accessed Yelp data"
-        case .VALIDATION_ERROR: return "Authorization Error"
-        case .FIELD_REQUIRED: return "Incomplete fields in data request"
-        case .UNKNOWN_ERROR: return "Unknown Yelp error"
+        case .YELP_INTERNAL_SERVER_ERROR: return "Yelp: Internal Server Error"
+        case .YELP_OUT_Of_LICENSES: return "Yelp: Daily network calls for this license reached"
+        case .YELP_UNAUTHORIZED: return "Yelp: This application is currently not authorized to accessed Yelp data"
+        case .YELP_VALIDATION_ERROR: return "Yelp: Authorization Error"
+        case .YELP_FIELD_REQUIRED: return "Yelp: Incomplete fields in data request"
+        case .YELP_UNKNOWN_ERROR: return "Yelp: Unknown Error"
         }
     }
 }

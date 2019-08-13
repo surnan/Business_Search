@@ -111,18 +111,16 @@ class YelpClient{
         let tempNumber = httpResponse.allHeaderFields["ratelimit-remaining"] as? Int
         
         print("Number of Yelp Calls left until GMT Midnight  ==> \(tempString)")
-        if let callsLeft = tempNumber, callsLeft == 0 {fatalError("Error 13A: Daily network calls for this license reached")}
+        //fatalError("Error 13A: Daily network calls for this license reached")
+        if let callsLeft = tempNumber, callsLeft == 0 {return YelpAPIError.YELP_OUT_Of_LICENSES}
+        
     
-        
-        
-        
-        
         switch httpResponse.statusCode {
         case 200: return nil
-        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.FIELD_REQUIRED
-        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.UNAUTHORIZED
-        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.INTERNAL_SERVER_ERROR
-        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.UNKNOWN_ERROR
+        case 400: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.YELP_FIELD_REQUIRED
+        case 401: print("--> Yelp Error: 'Field Required' or 'Validation Error'"); return YelpAPIError.YELP_UNAUTHORIZED
+        case 500: print("--> Yelp Error: 'Internal Server Error'"); return YelpAPIError.YELP_INTERNAL_SERVER_ERROR
+        default: print("--> Yelp Error: 'Undefined Error'"); return YelpAPIError.YELP_UNKNOWN_ERROR
         }
     }
     
