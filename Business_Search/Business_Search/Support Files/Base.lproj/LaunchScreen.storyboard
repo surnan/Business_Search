@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdE-Ih-Tvd">
+                            <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdE-Ih-Tvd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="barTintColor" red="1" green="0.024170271520000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="0.0"/>
@@ -29,10 +28,12 @@
                                     <navigationItem title="Business Finder" id="yf4-k6-2GE"/>
                                 </items>
                             </navigationBar>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHJ-Wi-qhG">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="aOG-cu-DMk">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHJ-Wi-qhG">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="1" green="0.024170271520000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="1" green="0.023529411764705882" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="0.0"/>
                                 </textAttributes>
@@ -42,6 +43,18 @@
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="aOG-cu-DMk" firstAttribute="top" secondItem="qHJ-Wi-qhG" secondAttribute="bottom" id="5Xy-gd-ebV"/>
+                            <constraint firstItem="qHJ-Wi-qhG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gc4-Em-Tht"/>
+                            <constraint firstItem="SdE-Ih-Tvd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="IcM-re-lNa"/>
+                            <constraint firstItem="qHJ-Wi-qhG" firstAttribute="top" secondItem="SdE-Ih-Tvd" secondAttribute="bottom" id="JHv-Sh-XD6"/>
+                            <constraint firstItem="SdE-Ih-Tvd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MMd-I6-6Vt"/>
+                            <constraint firstItem="qHJ-Wi-qhG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fys-lZ-1cB"/>
+                            <constraint firstItem="SdE-Ih-Tvd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iRI-gt-1ZT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aOG-cu-DMk" secondAttribute="bottom" id="q3H-LN-Lya"/>
+                            <constraint firstItem="aOG-cu-DMk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vkI-AE-ziA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aOG-cu-DMk" secondAttribute="trailing" id="weC-LM-JJe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -50,4 +63,7 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchScreen.png" width="432" height="248"/>
+    </resources>
 </document>
