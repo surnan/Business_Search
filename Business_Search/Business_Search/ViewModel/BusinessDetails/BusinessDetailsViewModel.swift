@@ -37,7 +37,6 @@ struct BusinessDetailsViewModel {
     
     init(business: Business) {
         self.business = business
-        
         self.latitude = business.latitude
         self.longitude = business.longitude
         
@@ -78,9 +77,8 @@ struct BusinessDetailsViewModel {
                                                              attributes: attributes)
         }
         
-        self.url = business.url ?? ""
-        
-        if let price = business.price {priceString = "Price: \(price)"}
+        url = business.url ?? ""
         ratingString = "Rating: \(business.rating)"
+        if let price = business.price {priceString = "Price: \(price)"}
     }
 }

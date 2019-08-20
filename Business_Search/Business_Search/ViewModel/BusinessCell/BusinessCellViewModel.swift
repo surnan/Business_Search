@@ -43,14 +43,8 @@ struct BusinessCellViewModel {
             myLabelAttributedString = topString
         }
         
-        
-        
         favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
-        
-        //originalColor = colorArray[colorIndex.row % colorArray.count]
         originalColor = getColor(indexPath: colorIndex)
-        
-        
         accessoryType = .disclosureIndicator
     }
 }
