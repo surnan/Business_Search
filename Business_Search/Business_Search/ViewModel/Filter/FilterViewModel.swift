@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FilterViewModel2 {
+struct FilterViewModel {
     //Values come from NSUserDefaults not CoreData
     private var textViewText: String!
     var getTextViewText         : String {return textViewText}

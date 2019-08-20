@@ -14,8 +14,8 @@ class FilterController: UIViewController {
     
     let shared                  = UserAppliedFilter.shared
     var coordinator             : FilterCoordinator?
-    var viewObject              : FilterView2!
-    var viewModel               : FilterViewModel2!
+    var viewObject              : FilterView!
+    var viewModel               : FilterViewModel!
     
     var dismissController       : (()->Void)?
     var saveDismissController   : (()->Void)?

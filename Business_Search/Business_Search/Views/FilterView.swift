@@ -8,8 +8,8 @@
 
 import UIKit
 
-class FilterView2 {
-    var viewModel: FilterViewModel2?{
+class FilterView {
+    var viewModel: FilterViewModel?{
         didSet{
             guard let viewModel = viewModel else {
                 print("SettingsView.ViewModel = NIL")
@@ -33,15 +33,18 @@ class FilterView2 {
     private var priceLabel          = GenericLabel(text: "Price Filter Options",  size: 20)
     private var noPriceLabel        = GenericLabel(text: "Include if No Price Listed:", size: 18)
     private var favoriteAtTopLabel  = GenericLabel(text: "Move favorites to top:", size: 18)
-    var dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
-    var dollarTwoButton     = GenericSegmentButton(title: "$$")
-    var dollarThreeButton   = GenericSegmentButton(title: "$$$")
-    var dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-    var defaultButton       = GenericButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
-    var saveButton          = GenericButton(title: "SAVE", isCorner: true)
-    var cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
-    var noPriceSwitch       = GenericSwitch(onTintColor: .green)
-    var favoriteAtTopSwitch = GenericSwitch(onTintColor: .green)
+    
+    let dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
+    let dollarTwoButton     = GenericSegmentButton(title: "$$")
+    let dollarThreeButton   = GenericSegmentButton(title: "$$$")
+    let dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+    
+    let defaultButton       = GenericButton(title: "Reset to Defaults", titleColor: .black, backgroundColor: .white, isCorner: true)
+    let saveButton          = GenericButton(title: "SAVE", isCorner: true)
+    let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
+    let noPriceSwitch       = GenericSwitch(onTintColor: .green)
+    let favoriteAtTopSwitch = GenericSwitch(onTintColor: .green)
+    
     private var minimumRatingText   : String!
     private var sliderValue         : Float!
     

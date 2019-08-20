@@ -61,7 +61,7 @@ class CategoryCell: UITableViewCell {
         super.setHighlighted(highlighted, animated: animated)
         if isHighlighted {
             //contentView.backgroundColor = .darkBlue
-            backgroundColor = .darkBlue
+            backgroundColor = .lightRed
             myLabel.textColor = .white
         } else {
             myLabel.textColor = .black

@@ -23,8 +23,8 @@ class FilterCoordinator: Coordinator {
 //        let newViewObject   = FilterView()      //SettingsView()
         
         
-        let newViewModel    = FilterViewModel2() //SettingsViewModel()
-        let newViewObject   = FilterView2()      //SettingsView()
+        let newViewModel    = FilterViewModel() //SettingsViewModel()
+        let newViewObject   = FilterView()      //SettingsView()
         
         
         

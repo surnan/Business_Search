@@ -57,8 +57,8 @@ class BusinessCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         if isHighlighted {
-            contentView.backgroundColor = .darkBlue
-            backgroundColor = .darkBlue
+            contentView.backgroundColor = .lightRed
+            backgroundColor = .lightRed
             myLabel.textColor = .white
         } else {
             myLabel.textColor = .black
