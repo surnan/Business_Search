@@ -547,6 +547,7 @@
 		848DEC6922F3E97C00102E9B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				84B68104230C58E2000D89AB /* LaunchScreen.png */,
 				84BDE2EF2263D007008C9B01 /* AppDelegate.swift */,
 				84BDE2F62263D009008C9B01 /* Assets.xcassets */,
 				845A1D8C22D0314D0066C17C /* Global Variables.swift */,
@@ -645,7 +646,6 @@
 			children = (
 				84BDE30E2263E652008C9B01 /* UNSYNC.swift */,
 				842181A82300573E009C4EE0 /* MyDownloader.json */,
-				84B68104230C58E2000D89AB /* LaunchScreen.png */,
 				842181AA23005825009C4EE0 /* TestVC.swift */,
 				84BDE2EE2263D007008C9B01 /* Business_Search */,
 				84EE7B762303878600EB5FF7 /* Business_SearchTests */,

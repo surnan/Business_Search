@@ -29,7 +29,7 @@
                                 </items>
                             </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="aOG-cu-DMk">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHJ-Wi-qhG">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -44,7 +44,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aOG-cu-DMk" firstAttribute="top" secondItem="qHJ-Wi-qhG" secondAttribute="bottom" id="5Xy-gd-ebV"/>
+                            <constraint firstItem="aOG-cu-DMk" firstAttribute="top" secondItem="qHJ-Wi-qhG" secondAttribute="top" id="5Xy-gd-ebV"/>
                             <constraint firstItem="qHJ-Wi-qhG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gc4-Em-Tht"/>
                             <constraint firstItem="SdE-Ih-Tvd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="IcM-re-lNa"/>
                             <constraint firstItem="qHJ-Wi-qhG" firstAttribute="top" secondItem="SdE-Ih-Tvd" secondAttribute="bottom" id="JHv-Sh-XD6"/>
