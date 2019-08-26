@@ -21,13 +21,15 @@ class Business_SearchTests: XCTestCase {
         return dataController.viewContext
     }
     
-    var temp: YelpClient!
-    var temp2: AppliedFilter!
-    var temp3: LocationStruct!
+    var myLocation      = LocationStruct()
+    let categoryStruct1 = CategoryStruct(alias: "pizza", title: "Pizza")
+    let categoryStruct2 = CategoryStruct(alias: "bakery", title: "Bakery")
+    var myBusiness      = BusinessStruct(name: "Carve", displayAddress: "760 8th Ave")
     
     
-
-
+    func testCode(){
+        
+    }
     
     override func setUp() {
         super.setUp()

@@ -13,6 +13,14 @@ struct FavoriteStruct {
     var id: String
 }
 
+struct LocationStruct {
+    var latitude        : Double    = 250.0
+    var longitude       : Double    = 250.0
+    var radius          : Int       = -99
+    var totalBusinesses : Int       = -11
+    var businesses      : [BusinessStruct] = []
+}
+
 struct CategoryStruct {
     var alias: String = ""
     var title: String = ""
@@ -25,23 +33,7 @@ struct CategoryStruct {
 }
 
 
-let categoryStruct1 : [CategoryStruct] = [CategoryStruct(alias: "pizza", title: "Pizza")]
-let categoryStruct2 : [CategoryStruct] = [CategoryStruct(alias: "pizza", title: "Bakery")]
 
-//struct LocationStruct {
-//    var latitude        : Double    = 250.0
-//    var longitude       : Double    = 250.0
-//    var radius          : Int       = -99
-//    var totalBusinesses : Int       = -11
-//    var businesses      : [BusinessStruct] = []
-//
-////    init(lat: Double, lon: Double, radius: Int, count: Int) {
-////        self.latitude           = lat
-////        self.longitude          = lon
-////        self.radius             = radius
-////        self.totalBusinesses    = count
-////    }
-//}
 
 struct BusinessStruct {
     var alias           : String = ""
