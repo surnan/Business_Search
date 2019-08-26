@@ -9,6 +9,23 @@
 import UIKit
 import CoreData
 
+struct LocationStruct {
+    var latitude        : Double    = 250.0
+    var longitude       : Double    = 250.0
+    var radius          : Int       = -99
+    var totalBusinesses : Int       = -11
+    var businesses      : [BusinessStruct] = []
+    
+    //    init(lat: Double, lon: Double, radius: Int, count: Int) {
+    //        self.latitude           = lat
+    //        self.longitude          = lon
+    //        self.radius             = radius
+    //        self.totalBusinesses    = count
+    //    }
+}
+
+
+
 
 struct AppliedFilter: Codable {
     var dollar1         : Bool

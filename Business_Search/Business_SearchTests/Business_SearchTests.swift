@@ -8,8 +8,10 @@
 
 import XCTest
 import CoreData
+import UIKit
 
 @testable import Business_Search
+//@testable import "Business Search"
 
 
 
@@ -19,6 +21,14 @@ class Business_SearchTests: XCTestCase {
         return dataController.viewContext
     }
     
+    var temp: YelpClient!
+    var temp2: AppliedFilter!
+    var temp3: LocationStruct!
+    
+    
+
+
+    
     override func setUp() {
         super.setUp()
     }
@@ -27,12 +37,11 @@ class Business_SearchTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCoreData(){
-        
-    }
     
     
 
+    
+    
     
 
     func testRadiusCheck(){

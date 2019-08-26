@@ -7,43 +7,65 @@
 //
 
 import Foundation
+import CoreData
 
 struct FavoriteStruct {
     var id: String
 }
 
 struct CategoryStruct {
-    var alias: String
-    var title: String
-    var business: Business
+    var alias: String = ""
+    var title: String = ""
+    var business: Business?
+    
+    init(alias: String, title: String) {
+        self.alias = alias
+        self.title = title
+    }
 }
 
-struct LocationStruct {
-    var latitude        : Double
-    var longitude       : Double
-    var radius          : Int
-    var totalBusinesses : Int
-    var businesses      : [BusinessStruct] = []
-}
+
+let categoryStruct1 : [CategoryStruct] = [CategoryStruct(alias: "pizza", title: "Pizza")]
+let categoryStruct2 : [CategoryStruct] = [CategoryStruct(alias: "pizza", title: "Bakery")]
+
+//struct LocationStruct {
+//    var latitude        : Double    = 250.0
+//    var longitude       : Double    = 250.0
+//    var radius          : Int       = -99
+//    var totalBusinesses : Int       = -11
+//    var businesses      : [BusinessStruct] = []
+//
+////    init(lat: Double, lon: Double, radius: Int, count: Int) {
+////        self.latitude           = lat
+////        self.longitude          = lon
+////        self.radius             = radius
+////        self.totalBusinesses    = count
+////    }
+//}
 
 struct BusinessStruct {
-    var alias           : String? = nil
-    var displayAddress  : String? = nil
-    var displayPhone    : String? = nil
-    var distance        : Double
-    var id              : String
-    var imageURL        : String
-    var isDelivery      : Bool
-    var isFavorite      : Bool
-    var isPickup        : Bool
-    var latitude        : Double
-    var longitude       : Double
-    var name            : String
-    var price           : String
-    var rating          : Double
-    var reviewCount     : Int
-    var url             : String
+    var alias           : String = ""
+    var displayAddress  : String = ""
+    var displayPhone    : String = ""
+    var distance        : Double = 0.0
+    var id              : String = ""
+    var imageURL        : String = ""
+    var isDelivery      : Bool = false
+    var isFavorite      : Bool = false
+    var isPickup        : Bool = false
+    var latitude        : Double = 0.0
+    var longitude       : Double = 0.0
+    var name            : String = ""
+    var price           : String = ""
+    var rating          : Double = 0.0
+    var reviewCount     : Int    = 0
+    var url             : String = ""
     
     var categories      : [CategoryStruct] = []
-    var parentLocation  : LocationStruct
+    var parentLocation  : LocationStruct?
+    
+    init(name: String, displayAddress: String) {
+        self.name           = name
+        self.displayAddress = displayAddress
+    }
 }
