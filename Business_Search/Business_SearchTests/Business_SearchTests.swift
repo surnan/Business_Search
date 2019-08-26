@@ -7,11 +7,33 @@
 //
 
 import XCTest
+import CoreData
+
 @testable import Business_Search
 
 
 
 class Business_SearchTests: XCTestCase {
+    var dataController                  = DataController(modelName: "YelpDataModels")
+    var context: NSManagedObjectContext {
+        return dataController.viewContext
+    }
+    
+    override func setUp() {
+        super.setUp()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+    }
+    
+    func testCoreData(){
+        
+    }
+    
+    
+
+    
 
     func testRadiusCheck(){
         XCTAssert(radius < 1)

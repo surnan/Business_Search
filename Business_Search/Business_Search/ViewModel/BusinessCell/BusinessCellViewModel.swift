@@ -20,15 +20,13 @@ struct BusinessCellViewModel {
     ]
     
     private var favoriteImage: UIImage!
-    var getFavoriteImage: UIImage {return favoriteImage}
-    
     private var myLabelAttributedString: NSAttributedString!
-    var getMyLabelAttributedString: NSAttributedString {return myLabelAttributedString}
-    
     private var originalColor: UIColor!
-    var getOriginalColor: UIColor {return originalColor}
-    
     private var accessoryType: UITableViewCell.AccessoryType!
+    
+    var getFavoriteImage: UIImage {return favoriteImage}
+    var getMyLabelAttributedString: NSAttributedString {return myLabelAttributedString}
+    var getOriginalColor: UIColor {return originalColor}
     var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
     
 
@@ -42,7 +40,6 @@ struct BusinessCellViewModel {
             topString.append(bottomString)
             myLabelAttributedString = topString
         }
-        
         favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
         originalColor = getColor(indexPath: colorIndex)
         accessoryType = .disclosureIndicator

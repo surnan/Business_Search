@@ -116,6 +116,7 @@
 		84E27D1F22F08E7D00D2CAE5 /* Open_Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */; };
 		84E27D2122F0963200D2CAE5 /* OpenController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D2022F0963200D2CAE5 /* OpenController+UI.swift */; };
 		84E27D2322F09EFB00D2CAE5 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E27D2222F09EFB00D2CAE5 /* CategoryViewModel.swift */; };
+		84EC563C2313669B00560787 /* CoreData Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC563B2313669B00560787 /* CoreData Structs.swift */; };
 		84EE7B782303878600EB5FF7 /* Business_SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE7B772303878600EB5FF7 /* Business_SearchTests.swift */; };
 		84F1B472226DFFA200EDBABC /* YelpAllCategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */; };
 		F6809A7F1B4C3175D91AF6F7 /* Pods_Business_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C8014F6DDB1C3E40EBC947 /* Pods_Business_Search.framework */; };
@@ -217,7 +218,7 @@
 		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84B3CF8B2268A9030012A75C /* TabGroupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroupController.swift; sourceTree = "<group>"; };
 		84B68104230C58E2000D89AB /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
-		84BDE2EC2263D007008C9B01 /* Business_Search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Business_Search.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84BDE2EC2263D007008C9B01 /* Business Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Business Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84BDE2EF2263D007008C9B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84BDE2F62263D009008C9B01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84BDE2F92263D009008C9B01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -243,7 +244,8 @@
 		84E27D1E22F08E7D00D2CAE5 /* Open_Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Open_Delegate.swift; sourceTree = "<group>"; };
 		84E27D2022F0963200D2CAE5 /* OpenController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenController+UI.swift"; sourceTree = "<group>"; };
 		84E27D2222F09EFB00D2CAE5 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
-		84EE7B752303878600EB5FF7 /* Business_SearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Business_SearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84EC563B2313669B00560787 /* CoreData Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData Structs.swift"; sourceTree = "<group>"; };
+		84EE7B752303878600EB5FF7 /* Business FinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Business FinderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EE7B772303878600EB5FF7 /* Business_SearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business_SearchTests.swift; sourceTree = "<group>"; };
 		84EE7B792303878600EB5FF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F1B471226DFFA200EDBABC /* YelpAllCategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAllCategoriesResponse.swift; sourceTree = "<group>"; };
@@ -658,8 +660,8 @@
 		84BDE2ED2263D007008C9B01 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84BDE2EC2263D007008C9B01 /* Business_Search.app */,
-				84EE7B752303878600EB5FF7 /* Business_SearchTests.xctest */,
+				84BDE2EC2263D007008C9B01 /* Business Finder.app */,
+				84EE7B752303878600EB5FF7 /* Business FinderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -713,6 +715,7 @@
 				84DC40EA226BCB2C003003C4 /* DataController.swift */,
 				84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */,
 				84DC40E7226B7BD7003003C4 /* YelpDataModels.xcdatamodeld */,
+				84EC563B2313669B00560787 /* CoreData Structs.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -758,9 +761,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		84BDE2EB2263D007008C9B01 /* Business_Search */ = {
+		84BDE2EB2263D007008C9B01 /* Business Finder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84BDE2FE2263D009008C9B01 /* Build configuration list for PBXNativeTarget "Business_Search" */;
+			buildConfigurationList = 84BDE2FE2263D009008C9B01 /* Build configuration list for PBXNativeTarget "Business Finder" */;
 			buildPhases = (
 				160626C7AAA53DA6A232F2FD /* [CP] Check Pods Manifest.lock */,
 				84BDE2E82263D007008C9B01 /* Sources */,
@@ -773,14 +776,14 @@
 			);
 			dependencies = (
 			);
-			name = Business_Search;
+			name = "Business Finder";
 			productName = Business_Search;
-			productReference = 84BDE2EC2263D007008C9B01 /* Business_Search.app */;
+			productReference = 84BDE2EC2263D007008C9B01 /* Business Finder.app */;
 			productType = "com.apple.product-type.application";
 		};
-		84EE7B742303878600EB5FF7 /* Business_SearchTests */ = {
+		84EE7B742303878600EB5FF7 /* Business FinderTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84EE7B7C2303878600EB5FF7 /* Build configuration list for PBXNativeTarget "Business_SearchTests" */;
+			buildConfigurationList = 84EE7B7C2303878600EB5FF7 /* Build configuration list for PBXNativeTarget "Business FinderTests" */;
 			buildPhases = (
 				84EE7B712303878600EB5FF7 /* Sources */,
 				84EE7B722303878600EB5FF7 /* Frameworks */,
@@ -791,9 +794,9 @@
 			dependencies = (
 				84EE7B7B2303878600EB5FF7 /* PBXTargetDependency */,
 			);
-			name = Business_SearchTests;
+			name = "Business FinderTests";
 			productName = Business_SearchTests;
-			productReference = 84EE7B752303878600EB5FF7 /* Business_SearchTests.xctest */;
+			productReference = 84EE7B752303878600EB5FF7 /* Business FinderTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -815,7 +818,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 84BDE2E72263D006008C9B01 /* Build configuration list for PBXProject "Business_Search" */;
+			buildConfigurationList = 84BDE2E72263D006008C9B01 /* Build configuration list for PBXProject "Business Finder" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -828,8 +831,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84BDE2EB2263D007008C9B01 /* Business_Search */,
-				84EE7B742303878600EB5FF7 /* Business_SearchTests */,
+				84BDE2EB2263D007008C9B01 /* Business Finder */,
+				84EE7B742303878600EB5FF7 /* Business FinderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -968,6 +971,7 @@
 				8401127E22E51CE300ECE0D5 /* OpenCoordinator.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
 				848DEC5B22F3E1C000102E9B /* BaseCoordinatorType.swift in Sources */,
+				84EC563C2313669B00560787 /* CoreData Structs.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
 				848761CD227E856C000CECC7 /* GroupMapController.swift in Sources */,
 				84E27D0B22EF6C3000D2CAE5 /* OpenController.swift in Sources */,
@@ -1041,7 +1045,7 @@
 /* Begin PBXTargetDependency section */
 		84EE7B7B2303878600EB5FF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84BDE2EB2263D007008C9B01 /* Business_Search */;
+			target = 84BDE2EB2263D007008C9B01 /* Business Finder */;
 			targetProxy = 84EE7B7A2303878600EB5FF7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1229,7 +1233,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Business_Search.app/Business_Search";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Business Finder.app/Business Finder";
 			};
 			name = Debug;
 		};
@@ -1250,14 +1254,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Business_Search.app/Business_Search";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Business Finder.app/Business Finder";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		84BDE2E72263D006008C9B01 /* Build configuration list for PBXProject "Business_Search" */ = {
+		84BDE2E72263D006008C9B01 /* Build configuration list for PBXProject "Business Finder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84BDE2FC2263D009008C9B01 /* Debug */,
@@ -1266,7 +1270,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84BDE2FE2263D009008C9B01 /* Build configuration list for PBXNativeTarget "Business_Search" */ = {
+		84BDE2FE2263D009008C9B01 /* Build configuration list for PBXNativeTarget "Business Finder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84BDE2FF2263D009008C9B01 /* Debug */,
@@ -1275,7 +1279,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84EE7B7C2303878600EB5FF7 /* Build configuration list for PBXNativeTarget "Business_SearchTests" */ = {
+		84EE7B7C2303878600EB5FF7 /* Build configuration list for PBXNativeTarget "Business FinderTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84EE7B7D2303878600EB5FF7 /* Debug */,
