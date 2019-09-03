@@ -89,8 +89,8 @@ struct FavoriteStruct {
 }
 
 struct LocationStruct {
-    var latitude        : Double    = 250.0
-    var longitude       : Double    = 250.0
+    var latitude        : Double    = 250.01
+    var longitude       : Double    = 250.01
     var radius          : Int       = -99
     var totalBusinesses : Int       = -11
     var businesses      : [BusinessStruct] = []

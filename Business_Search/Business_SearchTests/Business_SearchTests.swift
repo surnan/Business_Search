@@ -46,9 +46,40 @@ class Business_SearchTests: XCTestCase {
         }
     }
     
+    func _deleteLocation(lat: Double, lon: Double){
+        dataController.load()
+        let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
+        let predicate = NSPredicate(format: "latitude == %@ AND longitude == %@", argumentArray: [lat, lon])
+        fetchRequest.predicate = predicate
+        
+//        do {
+//            let object = try context.fetch(fetchRequest)
+//            if let target = object.first {
+//                context.delete(target)
+//                try context.save()
+//            }
+//        } catch {
+//            print("Error fetching!!")
+//        }
+        
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+        do {
+            let result = try context.execute(batchDeleteRequest) as! NSBatchDeleteResult
+            try context.save()
+        } catch {
+            print("Error")
+        }
+    }
+    
+    func testDelete(){
+        _deleteLocation(lat: 250.01, lon: 250.01)
+    }
+    
     func testCode(){
         dataController.load()
-        _createLocation(locationStruct: myLocation, context: context)
+        let result = _createLocation(locationStruct: myLocation, context: context)
+        XCTAssertEqual(result, true)
     }
     
     override func setUp() {
