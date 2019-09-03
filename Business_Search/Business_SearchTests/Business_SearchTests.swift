@@ -51,24 +51,12 @@ class Business_SearchTests: XCTestCase {
         let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
         let predicate = NSPredicate(format: "latitude == %@ AND longitude == %@", argumentArray: [lat, lon])
         fetchRequest.predicate = predicate
-        
-//        do {
-//            let object = try context.fetch(fetchRequest)
-//            if let target = object.first {
-//                context.delete(target)
-//                try context.save()
-//            }
-//        } catch {
-//            print("Error fetching!!")
-//        }
-        
-        
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
         do {
-            let result = try context.execute(batchDeleteRequest) as! NSBatchDeleteResult
+            try context.execute(batchDeleteRequest)
             try context.save()
         } catch {
-            print("Error")
+            print("Error: Unable to delete CoreData in Unit Test \nLat = \(lat) ... Lon = \(lon)")
         }
     }
     
