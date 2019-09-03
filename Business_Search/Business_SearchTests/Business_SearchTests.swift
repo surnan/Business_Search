@@ -15,6 +15,9 @@ import UIKit
 
 
 
+// latitude max = 90
+// longitude max = 180
+
 class Business_SearchTests: XCTestCase {
     var dataController                  = DataController(modelName: "YelpDataModels")
     var context: NSManagedObjectContext {
@@ -26,9 +29,26 @@ class Business_SearchTests: XCTestCase {
     let categoryStruct2 = CategoryStruct(alias: "bakery", title: "Bakery")
     var myBusiness      = BusinessStruct(name: "Carve", displayAddress: "760 8th Ave")
     
+    func _createLocation(locationStruct: LocationStruct , context: NSManagedObjectContext)->Bool{
+        let item = locationStruct
+        let newLocation = Location(context: context)
+        newLocation.latitude = item.latitude
+        newLocation.longitude = item.longitude
+        newLocation.radius = Int32(item.radius)
+        newLocation.totalBusinesses = Int32(item.totalBusinesses)
+        do {
+            try context.save()
+            return true
+        } catch {
+            print("Error 09A: Error saving func addLocation() --\n\(error)")
+            print("Localized Error saving func addLocation() --\n\(error.localizedDescription)")
+            return false
+        }
+    }
     
     func testCode(){
-        
+        dataController.load()
+        _createLocation(locationStruct: myLocation, context: context)
     }
     
     override func setUp() {
