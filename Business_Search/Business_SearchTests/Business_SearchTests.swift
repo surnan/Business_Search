@@ -36,8 +36,10 @@ class Business_SearchTests: XCTestCase {
         newLocation.longitude = item.longitude
         newLocation.radius = Int32(item.radius)
         newLocation.totalBusinesses = Int32(item.totalBusinesses)
+        
         do {
             try context.save()
+            addBusiness(id: newLocation.objectID)
             return true
         } catch {
             print("Error 09A: Error saving func addLocation() --\n\(error)")
@@ -45,6 +47,59 @@ class Business_SearchTests: XCTestCase {
             return false
         }
     }
+    
+    
+    func testCode(){
+        dataController.load()
+        let result = _createLocation(locationStruct: myLocation, context: context)
+        XCTAssertEqual(result, true)
+    }
+    
+    
+    func addBusiness(id: NSManagedObjectID?){
+        guard let id = id else {return}
+        let parent = context.object(with: id) as! Location
+        let newBusiness = Business(context: context)
+        newBusiness.name = "asdf"
+        newBusiness.parentLocation = parent
+        newBusiness.alias = "asdf"
+        newBusiness.id = "asdf"
+        newBusiness.isDelivery = true
+        newBusiness.isFavorite = false
+        newBusiness.isPickup = true
+        newBusiness.latitude = 1111
+        newBusiness.longitude = 1111
+        
+        do {
+            try context.save()
+            addCategories(id: newBusiness.objectID)
+            print("")
+        } catch {
+            print("error")
+        }
+    }
+    
+    func addCategories(id: NSManagedObjectID?){
+        guard let id = id else {return}
+        let parent = context.object(with: id) as! Business
+        
+        let categories = [categoryStruct1, categoryStruct2]
+        
+        categories.forEach { (element) in
+            let newCategory = Category(context: context)
+            newCategory.title = element.title
+            newCategory.alias = element.alias
+            newCategory.business = parent
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Category error")
+        }
+        
+    }
+    
     
     func _deleteLocation(lat: Double, lon: Double){
         dataController.load()
@@ -64,11 +119,7 @@ class Business_SearchTests: XCTestCase {
         _deleteLocation(lat: 250.01, lon: 250.01)
     }
     
-    func testCode(){
-        dataController.load()
-        let result = _createLocation(locationStruct: myLocation, context: context)
-        XCTAssertEqual(result, true)
-    }
+
     
     override func setUp() {
         super.setUp()
