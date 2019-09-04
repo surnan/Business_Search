@@ -66,6 +66,7 @@ class Business_SearchTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        dataController.load()
         testPopulateCoreData()
     }
     
@@ -93,7 +94,6 @@ class Business_SearchTests: XCTestCase {
 extension Business_SearchTests {
     
     func testPopulateCoreData(){
-        dataController.load()
         let result = _createLocation(locationStruct: myLocation, context: context)
         XCTAssertEqual(result, true)
     }
