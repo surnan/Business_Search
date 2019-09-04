@@ -13,8 +13,6 @@ import UIKit
 @testable import Business_Search
 //@testable import "Business Search"
 
-
-
 // latitude max = 90
 // longitude max = 180
 
@@ -28,6 +26,51 @@ class Business_SearchTests: XCTestCase {
     let categoryStruct1 = CategoryStruct(alias: "pizza", title: "Pizza")
     let categoryStruct2 = CategoryStruct(alias: "bakery", title: "Bakery")
     var myBusiness      = BusinessStruct(name: "Carve", displayAddress: "760 8th Ave")
+    
+    var unitLocation    : Location?
+    var unitBusiness    : Business?
+    
+    
+    func testPopulateCoreData(){
+        dataController.load()
+        let result = _createLocation(locationStruct: myLocation, context: context)
+        XCTAssertEqual(result, true)
+    }
+    
+    func testDeleteCoreDataUnitTestEntities(){
+        _deleteLocation(lat: 250.01, lon: 250.01)
+    }
+    
+    func testNothing(){}
+
+    
+    override func setUp() {
+        super.setUp()
+        testPopulateCoreData()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        testDeleteCoreDataUnitTestEntities()
+    }
+    
+    func testRadiusCheck(){
+        XCTAssert(radius < 1)
+    }
+    
+    func testRadiusCheck2(){
+        XCTAssert(radius > 1)
+    }
+}
+
+//func testPerformanceExample() {
+//    // This is an example of a performance test case.
+//    self.measure {
+//        // Put the code you want to measure the time of here.
+//    }
+//}
+
+extension Business_SearchTests {
     
     func _createLocation(locationStruct: LocationStruct , context: NSManagedObjectContext)->Bool{
         let item = locationStruct
@@ -48,14 +91,6 @@ class Business_SearchTests: XCTestCase {
         }
     }
     
-    
-    func testCode(){
-        dataController.load()
-        let result = _createLocation(locationStruct: myLocation, context: context)
-        XCTAssertEqual(result, true)
-    }
-    
-    
     func addBusiness(id: NSManagedObjectID?){
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
@@ -69,6 +104,7 @@ class Business_SearchTests: XCTestCase {
         newBusiness.isPickup = true
         newBusiness.latitude = 1111
         newBusiness.longitude = 1111
+        newBusiness.displayAddress = "140 Broadway"
         
         do {
             try context.save()
@@ -82,27 +118,22 @@ class Business_SearchTests: XCTestCase {
     func addCategories(id: NSManagedObjectID?){
         guard let id = id else {return}
         let parent = context.object(with: id) as! Business
-        
         let categories = [categoryStruct1, categoryStruct2]
-        
         categories.forEach { (element) in
             let newCategory = Category(context: context)
             newCategory.title = element.title
             newCategory.alias = element.alias
             newCategory.business = parent
         }
-        
         do {
             try context.save()
         } catch {
             print("Category error")
         }
-        
     }
     
-    
     func _deleteLocation(lat: Double, lon: Double){
-        dataController.load()
+        //Can't add the same store twice - error if 'dataController.load' here
         let fetchRequest = NSFetchRequest<Location>(entityName: "Location")
         let predicate = NSPredicate(format: "latitude == %@ AND longitude == %@", argumentArray: [lat, lon])
         fetchRequest.predicate = predicate
@@ -114,57 +145,4 @@ class Business_SearchTests: XCTestCase {
             print("Error: Unable to delete CoreData in Unit Test \nLat = \(lat) ... Lon = \(lon)")
         }
     }
-    
-    func testDelete(){
-        _deleteLocation(lat: 250.01, lon: 250.01)
-    }
-    
-
-    
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-    
-    
-    
-
-    
-    
-    
-
-    func testRadiusCheck(){
-        XCTAssert(radius < 1)
-    }
-    
-    func testRadiusCheck2(){
-        XCTAssert(radius > 1)
-    }
 }
-
-
-
-
-
-//override func setUp() {
-//    // Put setup code here. This method is called before the invocation of each test method in the class.
-//}
-//
-//override func tearDown() {
-//    // Put teardown code here. This method is called after the invocation of each test method in the class.
-//}
-//
-//func testExample() {
-//    // This is an example of a functional test case.
-//    // Use XCTAssert and related functions to verify your tests produce the correct results.
-//}
-//
-//func testPerformanceExample() {
-//    // This is an example of a performance test case.
-//    self.measure {
-//        // Put the code you want to measure the time of here.
-//    }
-//}
