@@ -22,61 +22,21 @@ class Business_SearchTests: XCTestCase {
         return dataController.viewContext
     }
     
-    var myLocation      = LocationStruct()
-    let categoryStruct1 = CategoryStruct(alias: "pizza", title: "Pizza")
-    let categoryStruct2 = CategoryStruct(alias: "bakery", title: "Bakery")
-    var myBusiness      = BusinessStruct(name: "Carve", displayAddress: "760 8th Ave")
+    var myLocation              = LocationStruct()
+    let categoryStruct1         = CategoryStruct(alias: "pizza", title: "Pizza")
+    let categoryStruct2         = CategoryStruct(alias: "bakery", title: "Bakery")
+    var businessNotFavorite     = BusinessStruct(name: "Carve - not favorite", displayAddress: "760 8th Ave")
+    var businessIsFavorite      = BusinessStruct(name: "Tonka - is favorite", displayAddress: "140 Broadway", isFavorite: true)
     
     lazy var newLocation = Location(context: context)
     lazy var newBusiness = Business(context: context)
-    
     
     let index0      = IndexPath(row: 0, section: 0)
     let index1      = IndexPath(row: 1, section: 0)
     let index2      = IndexPath(row: 2, section: 0)
     let index3      = IndexPath(row: 3, section: 0)
-
-
     
     func testNothing(){}
-    
-    struct _BusinessCellViewModel {
-        private let topStringAttributes: [NSAttributedString.Key: Any]   = [
-            .font:UIFont.boldSystemFont(ofSize: 16),
-            .strokeColor:UIColor.blue
-        ]
-        
-        private let bottomStringAttributes: [NSAttributedString.Key: Any] = [
-            .font:UIFont.italicSystemFont(ofSize: 13),
-            .strokeColor : UIColor.darkGray
-        ]
-        
-        private var favoriteImage: UIImage!
-        private var myLabelAttributedString: NSAttributedString!
-        private var originalColor: UIColor!
-        private var accessoryType: UITableViewCell.AccessoryType!
-        
-        var getFavoriteImage: UIImage {return favoriteImage}
-        var getMyLabelAttributedString: NSAttributedString {return myLabelAttributedString}
-        var getOriginalColor: UIColor {return originalColor}
-        var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
-        
-        
-        init(business: Business, colorIndex: IndexPath) {
-            if let displayAddress = business.displayAddress,
-                let address = displayAddress.split(separator: "?").first,
-                let name = business.name {
-                let nameNewLine = "\(name)\n"
-                let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
-                let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
-                topString.append(bottomString)
-                myLabelAttributedString = topString
-            }
-            favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
-            originalColor = getColor(indexPath: colorIndex)
-            accessoryType = .disclosureIndicator
-        }
-    }
 
     func testBusinessCellViewModel(){
         let cellModel0  = BusinessCellViewModel(business: newBusiness, colorIndex: index0)
@@ -111,7 +71,7 @@ class Business_SearchTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
-        testDeleteCoreDataUnitTestEntities()
+        //testDeleteCoreDataUnitTestEntities()
     }
     
     func testRadiusCheck(){
@@ -161,6 +121,7 @@ extension Business_SearchTests {
     }
     
     func addBusiness(id: NSManagedObjectID?){
+        let businessArray = [businessNotFavorite, businessIsFavorite]
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
         newBusiness.name = "tempName"

@@ -128,7 +128,7 @@ struct BusinessStruct {
     var categories      : [CategoryStruct] = []
     var parentLocation  : LocationStruct?
     
-    init(name: String, displayAddress: String) {
+    init(name: String, displayAddress: String, isFavorite: Bool = false) {
         self.name           = name
         self.displayAddress = displayAddress
     }
