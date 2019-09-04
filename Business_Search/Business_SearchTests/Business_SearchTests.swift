@@ -124,16 +124,26 @@ extension Business_SearchTests {
         let businessArray = [businessNotFavorite, businessIsFavorite]
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
-        newBusiness.name = "tempName"
         newBusiness.parentLocation = parent
-        newBusiness.alias = "tempAlias"
-        newBusiness.id = "tempID"
+        
+        //newBusiness.name = "tempName"
+        newBusiness.name = businessIsFavorite.name
+        
+        //newBusiness.alias = "tempAlias"
+        newBusiness.alias = businessIsFavorite.alias
+        
+        //newBusiness.id = "tempID"
+        newBusiness.id = businessIsFavorite.id
+        
+        //newBusiness.displayAddress = "140 tempAvenue"
+        newBusiness.displayAddress = businessIsFavorite.displayAddress
+        
         newBusiness.isDelivery = true
         newBusiness.isFavorite = false
         newBusiness.isPickup = true
         newBusiness.latitude = 1111
         newBusiness.longitude = 1111
-        newBusiness.displayAddress = "140 tempAvenue"
+        
         
         do {
             try context.save()
