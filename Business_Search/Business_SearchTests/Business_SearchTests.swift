@@ -31,9 +31,11 @@ class Business_SearchTests: XCTestCase {
     lazy var newBusiness = Business(context: context)
     
     
-    let evenIndex   = IndexPath(row: 0, section: 0)
-    let oddIndex    = IndexPath(row: 1, section: 0)
-    
+    let index0      = IndexPath(row: 0, section: 0)
+    let index1      = IndexPath(row: 1, section: 0)
+    let index2      = IndexPath(row: 2, section: 0)
+    let index3      = IndexPath(row: 3, section: 0)
+
 
     
     func testNothing(){}
@@ -77,13 +79,29 @@ class Business_SearchTests: XCTestCase {
     }
 
     func testBusinessCellViewModel(){
-        let evenCellModel    = BusinessCellViewModel(business: newBusiness, colorIndex: evenIndex)
-        let oddCellModel     = BusinessCellViewModel(business: newBusiness, colorIndex: evenIndex)
+        let cellModel0  = BusinessCellViewModel(business: newBusiness, colorIndex: index0)
+        let cellModel1  = BusinessCellViewModel(business: newBusiness, colorIndex: index1)
+        let cellModel2  = BusinessCellViewModel(business: newBusiness, colorIndex: index2)
+        let cellModel3  = BusinessCellViewModel(business: newBusiness, colorIndex: index3)
         
-        evenCellModel.getMyLabelAttributedString.string =
+        //Label Text Check
+        if let name = newBusiness.name, let displayAddress = newBusiness.displayAddress {
+            let labelString = name + "\n" + displayAddress
+            XCTAssertEqual(cellModel0.getMyLabelAttributedString.string, labelString)
+        } else {
+            XCTAssertEqual(true, false)
+        }
 
-    
+        //BackGround Color Check odd numbers should be white
+        XCTAssertEqual(cellModel0.getOriginalColor, offWhite)
+        XCTAssertEqual(cellModel2.getOriginalColor, offWhite)
+
+        //BackGround Color Check odd numbers should be not be white
+        XCTAssertNotEqual(cellModel1.getOriginalColor, offWhite)
+        XCTAssertNotEqual(cellModel3.getOriginalColor, offWhite)
     }
+    
+    
     
     
     override func setUp() {
@@ -145,16 +163,16 @@ extension Business_SearchTests {
     func addBusiness(id: NSManagedObjectID?){
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
-        newBusiness.name = "asdf"
+        newBusiness.name = "tempName"
         newBusiness.parentLocation = parent
-        newBusiness.alias = "asdf"
-        newBusiness.id = "asdf"
+        newBusiness.alias = "tempAlias"
+        newBusiness.id = "tempID"
         newBusiness.isDelivery = true
         newBusiness.isFavorite = false
         newBusiness.isPickup = true
         newBusiness.latitude = 1111
         newBusiness.longitude = 1111
-        newBusiness.displayAddress = "140 Broadway"
+        newBusiness.displayAddress = "140 tempAvenue"
         
         do {
             try context.save()
