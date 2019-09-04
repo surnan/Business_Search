@@ -27,22 +27,64 @@ class Business_SearchTests: XCTestCase {
     let categoryStruct2 = CategoryStruct(alias: "bakery", title: "Bakery")
     var myBusiness      = BusinessStruct(name: "Carve", displayAddress: "760 8th Ave")
     
-    var unitLocation    : Location?
-    var unitBusiness    : Business?
+    lazy var newLocation = Location(context: context)
+    lazy var newBusiness = Business(context: context)
     
     
-    func testPopulateCoreData(){
-        dataController.load()
-        let result = _createLocation(locationStruct: myLocation, context: context)
-        XCTAssertEqual(result, true)
-    }
+    let evenIndex   = IndexPath(row: 0, section: 0)
+    let oddIndex    = IndexPath(row: 1, section: 0)
     
-    func testDeleteCoreDataUnitTestEntities(){
-        _deleteLocation(lat: 250.01, lon: 250.01)
-    }
+
     
     func testNothing(){}
+    
+    struct _BusinessCellViewModel {
+        private let topStringAttributes: [NSAttributedString.Key: Any]   = [
+            .font:UIFont.boldSystemFont(ofSize: 16),
+            .strokeColor:UIColor.blue
+        ]
+        
+        private let bottomStringAttributes: [NSAttributedString.Key: Any] = [
+            .font:UIFont.italicSystemFont(ofSize: 13),
+            .strokeColor : UIColor.darkGray
+        ]
+        
+        private var favoriteImage: UIImage!
+        private var myLabelAttributedString: NSAttributedString!
+        private var originalColor: UIColor!
+        private var accessoryType: UITableViewCell.AccessoryType!
+        
+        var getFavoriteImage: UIImage {return favoriteImage}
+        var getMyLabelAttributedString: NSAttributedString {return myLabelAttributedString}
+        var getOriginalColor: UIColor {return originalColor}
+        var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
+        
+        
+        init(business: Business, colorIndex: IndexPath) {
+            if let displayAddress = business.displayAddress,
+                let address = displayAddress.split(separator: "?").first,
+                let name = business.name {
+                let nameNewLine = "\(name)\n"
+                let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
+                let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
+                topString.append(bottomString)
+                myLabelAttributedString = topString
+            }
+            favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
+            originalColor = getColor(indexPath: colorIndex)
+            accessoryType = .disclosureIndicator
+        }
+    }
 
+    func testBusinessCellViewModel(){
+        let evenCellModel    = BusinessCellViewModel(business: newBusiness, colorIndex: evenIndex)
+        let oddCellModel     = BusinessCellViewModel(business: newBusiness, colorIndex: evenIndex)
+        
+        evenCellModel.getMyLabelAttributedString.string =
+
+    
+    }
+    
     
     override func setUp() {
         super.setUp()
@@ -72,9 +114,18 @@ class Business_SearchTests: XCTestCase {
 
 extension Business_SearchTests {
     
+    func testPopulateCoreData(){
+        dataController.load()
+        let result = _createLocation(locationStruct: myLocation, context: context)
+        XCTAssertEqual(result, true)
+    }
+    
+    func testDeleteCoreDataUnitTestEntities(){
+        _deleteLocation(lat: 250.01, lon: 250.01)
+    }
+    
     func _createLocation(locationStruct: LocationStruct , context: NSManagedObjectContext)->Bool{
         let item = locationStruct
-        let newLocation = Location(context: context)
         newLocation.latitude = item.latitude
         newLocation.longitude = item.longitude
         newLocation.radius = Int32(item.radius)
@@ -85,7 +136,7 @@ extension Business_SearchTests {
             addBusiness(id: newLocation.objectID)
             return true
         } catch {
-            print("Error 09A: Error saving func addLocation() --\n\(error)")
+            print("Unit Test Fail: Error saving func addLocation() --\n\(error)")
             print("Localized Error saving func addLocation() --\n\(error.localizedDescription)")
             return false
         }
@@ -94,7 +145,6 @@ extension Business_SearchTests {
     func addBusiness(id: NSManagedObjectID?){
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
-        let newBusiness = Business(context: context)
         newBusiness.name = "asdf"
         newBusiness.parentLocation = parent
         newBusiness.alias = "asdf"

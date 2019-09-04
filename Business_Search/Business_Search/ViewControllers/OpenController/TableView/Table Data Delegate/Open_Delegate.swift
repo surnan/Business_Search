@@ -50,7 +50,7 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         reloadCellAt = indexPath
         switch source.tableArrayType {
         case TableIndex.business.rawValue:
-            let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath)
+            guard let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath) else {return}
             parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         case TableIndex.category.rawValue:
             let currentCategory = source.categoryNameCountViewModel.objectAt(indexPath: indexPath)

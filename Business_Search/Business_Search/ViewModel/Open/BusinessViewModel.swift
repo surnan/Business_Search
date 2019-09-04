@@ -76,7 +76,7 @@ class BusinessViewModel {
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     func reload() {fetchBusinessController = nil}
     func fetchedObjects() -> [Business]{return fetchBusinessController!.fetchedObjects ?? []}
-    func objectAt(indexPath: IndexPath)-> Business {return fetchBusinessController!.object(at: indexPath)} //It's OK for forced-unwrap because it has to exist at this stage
+    func objectAt(indexPath: IndexPath)-> Business? {return fetchBusinessController?.object(at: indexPath)} //It's OK for forced-unwrap because it has to exist at this stage   //Sometimes objectAt returns NIL
 
     func verifyFavoriteStatus(favorite: Favorites){
         guard let id = favorite.id else {return}
