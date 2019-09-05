@@ -29,6 +29,7 @@ struct FilterViewModel {
     var minimumRating           = "1.0"
     var getSliderValue: Float!
 
+    
 
     init(maximumSliderValue : Int? = nil) {
         textViewText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String

@@ -9,6 +9,13 @@
 import UIKit
 
 class FilterView {
+    
+    private let topStringAttributes: [NSAttributedString.Key: Any]   = [
+        .font:UIFont.boldSystemFont(ofSize: 26),
+        .underlineStyle : NSUnderlineStyle.single.rawValue,
+        .foregroundColor: UIColor.white
+    ]
+    
     var viewModel: FilterViewModel?{
         didSet{
             guard let viewModel = viewModel else {
@@ -17,22 +24,32 @@ class FilterView {
             }
             minimumRatingText               = viewModel.minimumRating
             sliderValue                     = viewModel.getSliderValue
-            dollarOneButton.isSelected      =  viewModel.dollarOne
-            dollarTwoButton.isSelected      =  viewModel.dollarTwo
-            dollarThreeButton.isSelected    =  viewModel.dollarThree
-            dollarFourButton.isSelected     =  viewModel.dollarFour
+            dollarOneButton.isSelected      = viewModel.dollarOne
+            dollarTwoButton.isSelected      = viewModel.dollarTwo
+            dollarThreeButton.isSelected    = viewModel.dollarThree
+            dollarFourButton.isSelected     = viewModel.dollarFour
             noPriceSwitch.isOn              = viewModel.priceExist
             favoriteAtTopSwitch.isOn        = viewModel.favoritesTop
             updateButtonColors()
         }
     }
     
-    private var sliderLabel         = GenericLabel(text: "Minimum Yelp Rating", size: 20)
+    private var sliderLabel         = GenericLabel(text: "\nMinimum Yelp Rating", size: 20)
     private var sliderLeftLabel     = GenericLabel(text: "1")
     private var sliderRightLabel    = GenericLabel(text: "5")
-    private var priceLabel          = GenericLabel(text: "Price Filter Options",  size: 20)
-    private var noPriceLabel        = GenericLabel(text: "Include if No Price Listed:", size: 18)
-    private var favoriteAtTopLabel  = GenericLabel(text: "Move favorites to top:", size: 18)
+    private var priceLabel          = GenericLabel(text: "Yelp Price Categories:",  size: 20)
+    private var noPriceLabel        = GenericLabel(text: "Show if No Price Listed:", size: 18)
+    private var favoriteAtTopLabel  = GenericLabel(text: "Show Favorites at Top:", size: 18)
+    
+    
+    private var filterTitleLabel    = GenericLabel(text: "FILTER OPTIONS\n\n\n", size: 26)
+    private lazy var attribTitle         = GenericAttributedTextLabel(text: "FILTER OPTIONS\n\n\n",
+                                                                      attributes: topStringAttributes)
+    
+    
+    func getTitleLabel()->UILabel{
+        return filterTitleLabel
+    }
     
     let dollarOneButton     = GenericSegmentButton(title: "$", isCorner: true, corners: [.layerMinXMinYCorner, .layerMinXMaxYCorner])
     let dollarTwoButton     = GenericSegmentButton(title: "$$")
@@ -92,8 +109,11 @@ class FilterView {
     
     func getFullStack()->UIStackView{
         let fullStack = GenericStack(spacing: 20, axis: .vertical)
-        [priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(), getFavoritesAtTopStack(),
+        //filterTitleLabel
+        //attribTitle
+        [attribTitle, priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(), getFavoritesAtTopStack(),
          getNoPriceStack(), saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         return fullStack
     }
+    
 }
