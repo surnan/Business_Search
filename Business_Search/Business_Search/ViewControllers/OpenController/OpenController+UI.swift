@@ -17,26 +17,14 @@ extension OpenController {
         readOrCreateLocation()
         animateResultsAreFilteredLabel()
         reloadFetchControllers()
-        
+        setupNavigationMenu()
     }
 
-    
-    func setupNavigationMenu(){
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
-        imageView.contentMode           = .scaleAspectFit
-        self.navigationItem.titleView   = imageView
-        let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
-        let composeBarButton    = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(handleFilter))
-        navigationItem.rightBarButtonItems = [composeBarButton, searchBarButton]
-        navigationItem.searchController = searchController
-    }
-    
     @objc func handleShowSearch(){searchController.isActive = true}
     
     func setupUI(){
         setupNavigationMenu()
         definesPresentationContext = true
-        
         let redView = viewObject.redView
         let nothingFoundView = viewObject.nothingFoundView
         [tableView, nothingFoundView, redView].forEach{view.addSubview($0)}
@@ -49,13 +37,6 @@ extension OpenController {
             redView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableDelegate.reloadCellIfNecessary(tableView: tableView)
-        view.backgroundColor    = .lightBlue
     }
     
     override func viewDidLoad() {
@@ -101,5 +82,30 @@ extension OpenController {
         _ = YelpClient.getBusinesses(latitude: getLatitude,
                                      longitude: getLongitude,
                                      completion: handleGetNearbyBusinesses(inputData:result:))
+    }
+    
+    //MARK:- Setting up Right Bar Button
+    func setupNavigationMenu(){
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
+        imageView.contentMode           = .scaleAspectFit
+        self.navigationItem.titleView   = imageView
+        let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
+        navigationItem.rightBarButtonItems = [getFilterBarButton(), searchBarButton]
+        navigationItem.searchController = searchController
+    }
+    
+    private func getFilterBarButton()-> UIBarButtonItem {
+        if !UserAppliedFilter.shared.isFilterOn {
+            return UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(handleFilter))
+        } else {
+            return UIBarButtonItem(title: "Filtered", style: .plain, target: self, action: #selector(handleFilter))
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableDelegate.reloadCellIfNecessary(tableView: tableView)
+        view.backgroundColor    = .lightBlue
+        animateResultsAreFilteredLabel()
     }
 }
