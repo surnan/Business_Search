@@ -28,11 +28,31 @@ class MainMenuView {
         }
         return verticalStackView
     }
+    
+    func getNearMeButton()->UIButton{
+        return nearMeSearchButton
+    }
+    
+    func getByMapButton()->UIButton{
+        return searchByMapButton
+    }
+    
+    func getByAddressButton()->UIButton{
+        return searchByAddressButton
+    }
 }
 
 class MainMenuControllerButton: GenericButton {
     init(title: String, background: UIColor, tag: Int){
-        super.init(title: title, titleColor: .white, backgroundColor: background, isCorner: true, tag: tag)
+        super.init(title: title, titleColor: .white, backgroundColor: background, tag: tag)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor : UIColor.white,
+            .font: UIFont.boldSystemFont(ofSize: 20),
+        ]
+        
+        let newTitle = NSAttributedString(string: title, attributes: attributes)
+        self.setAttributedTitle(newTitle, for: .normal)
+        self.layer.cornerRadius = 15
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = 12

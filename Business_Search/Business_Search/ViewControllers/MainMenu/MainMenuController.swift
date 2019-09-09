@@ -17,12 +17,14 @@ class MainMenuController: UIViewController, UnBlurViewType{
     var coordinator             : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType)?
     var controllerIndex         = 0
     let mainView                = MainMenuView()
+    
     lazy var stack              = mainView.getButtonStack()
+    lazy var nearMeButton       = mainView.getNearMeButton()
+    lazy var byMapButton        = mainView.getByMapButton()
+    lazy var byAddressButton    = mainView.getByAddressButton()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent                        //Status bar sometimes black
     }
-    
-
 }
 

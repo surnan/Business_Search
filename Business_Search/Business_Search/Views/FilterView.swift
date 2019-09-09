@@ -34,7 +34,7 @@ class FilterView {
         }
     }
     
-    private var sliderLabel         = GenericLabel(text: "\nMinimum Yelp Rating", size: 20)
+    private var sliderLabel         = GenericLabel(text: "Minimum Yelp Rating", size: 20)
     private var sliderLeftLabel     = GenericLabel(text: "1")
     private var sliderRightLabel    = GenericLabel(text: "5")
     private var priceLabel          = GenericLabel(text: "Yelp Price Categories:",  size: 20)
