@@ -34,17 +34,20 @@ class FilterView {
         }
     }
     
-    private var sliderLabel         = GenericLabel(text: "Minimum Yelp Rating", size: 20)
+    private var sliderLabel         = GenericLabel(text: "Minimum Customer Rating", size: 20)
     private var sliderLeftLabel     = GenericLabel(text: "1")
     private var sliderRightLabel    = GenericLabel(text: "5")
-    private var priceLabel          = GenericLabel(text: "Yelp Price Categories:",  size: 20)
+    private var priceLabel          = GenericLabel(text: "Show Price Ranges:",  size: 20)
     private var noPriceLabel        = GenericLabel(text: "Show if No Price Listed:", size: 18)
     private var favoriteAtTopLabel  = GenericLabel(text: "Show Favorites at Top:", size: 18)
     
-    
+    private var fillerLabel         = GenericLabel(text: "+ ")
     private var filterTitleLabel    = GenericLabel(text: "FILTER OPTIONS\n\n\n", size: 26)
     private lazy var attribTitle         = GenericAttributedTextLabel(text: "FILTER OPTIONS\n\n\n",
                                                                       attributes: topStringAttributes)
+    
+    
+    
     
     
     func getTitleLabel()->UILabel{
@@ -108,12 +111,32 @@ class FilterView {
     }
     
     func getFullStack()->UIStackView{
-        let fullStack = GenericStack(spacing: 20, axis: .vertical)
-        //filterTitleLabel
-        //attribTitle
-        [attribTitle, priceLabel, getDollarStack(), sliderLabel, getSliderStack(), getSliderValueLabelStack(), getFavoritesAtTopStack(),
-         getNoPriceStack(), saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
+        let fullStack = GenericStack(spacing: 10, axis: .vertical)
+        let priceDollarsView: UIView = getDollarStack()
+        let noPriceView: UIView = getNoPriceStack()
+        let sliderValueView: UIView = getSliderValueLabelStack()
+        
+        
+        [attribTitle,
+         priceLabel, priceDollarsView,
+         sliderLabel, getSliderStack(), sliderValueView,
+         getFavoritesAtTopStack(), noPriceView,
+         saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
+        
+        fullStack.setCustomSpacing(40.0, after: attribTitle)
+        fullStack.setCustomSpacing(40.0, after: priceDollarsView)
+        fullStack.setCustomSpacing(40.0, after: sliderValueView)
+        fullStack.setCustomSpacing(40.0, after: noPriceView)
+
+        
+        
         return fullStack
     }
     
 }
+
+//[attribTitle,
+// priceLabel, getDollarStack(),
+// sliderLabel, getSliderStack(), getSliderValueLabelStack(),
+// getFavoritesAtTopStack(), getNoPriceStack(),
+// saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
