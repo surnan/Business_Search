@@ -34,10 +34,10 @@ class FilterView {
         }
     }
     
-    private var sliderLabel         = GenericLabel(text: "Minimum Customer Rating", size: 20)
+    private var sliderLabel         = GenericLabel(text: "Minimum Customer Rating:", size: 20)
     private var sliderLeftLabel     = GenericLabel(text: "1")
     private var sliderRightLabel    = GenericLabel(text: "5")
-    private var priceLabel          = GenericLabel(text: "Show Price Ranges:",  size: 20)
+    private var priceLabel          = GenericLabel(text: "Price Ranges:",  size: 20)
     private var noPriceLabel        = GenericLabel(text: "Show if No Price Listed:", size: 18)
     private var favoriteAtTopLabel  = GenericLabel(text: "Show Favorites at Top:", size: 18)
     
