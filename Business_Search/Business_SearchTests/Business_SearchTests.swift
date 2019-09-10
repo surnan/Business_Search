@@ -148,19 +148,16 @@ extension Business_SearchTests {
     func addBusiness(id: NSManagedObjectID?){
         guard let id = id else {return}
         let parent = context.object(with: id) as! Location
-        
-        newBusiness.parentLocation = parent
-        newBusiness.name = myBusiness.name
-        newBusiness.alias = myBusiness.alias
-        newBusiness.id = myBusiness.id
-        newBusiness.displayAddress = myBusiness.displayAddress
-        newBusiness.isDelivery = true
-        newBusiness.isFavorite = false
-        newBusiness.isPickup = true
-        newBusiness.latitude = 1111
-        newBusiness.longitude = 1111
-
-
+        newBusiness.parentLocation  = parent
+        newBusiness.name            = myBusiness.name
+        newBusiness.alias           = myBusiness.alias
+        newBusiness.id              = myBusiness.id
+        newBusiness.displayAddress  = myBusiness.displayAddress
+        newBusiness.isDelivery      = true
+        newBusiness.isFavorite      = false
+        newBusiness.isPickup        = true
+        newBusiness.latitude        = 1111  //not a valid Latitude value
+        newBusiness.longitude       = 1111  //not a valid Longitude value
         do {
             try context.save()
             addCategories(id: newBusiness.objectID)
@@ -181,16 +178,6 @@ extension Business_SearchTests {
             newCategory.alias = element.alias
             newCategory.business = parent
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         do {
             try context.save()
         } catch {

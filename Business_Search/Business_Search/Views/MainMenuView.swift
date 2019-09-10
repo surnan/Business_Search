@@ -12,7 +12,12 @@ import MapKit
 class MainMenuView {
     var nearMeSearchButton      = MainMenuControllerButton(title: "Search Near Me", background: .blue, tag: 0)
     var searchByMapButton       = MainMenuControllerButton(title: "Search By Map", background: .red, tag: 1)
-    var searchByAddressButton   = MainMenuControllerButton(title: "     Search By Address     ", background: .green, tag: 2)
+    //var searchByAddressButton   = MainMenuControllerButton(title: "     Search By Address     ", background: .green, tag: 2)
+    
+    
+    var searchByAddressButton   = MainMenuControllerButton(title: "Search By Address", colorLiteral: #colorLiteral(red: 0.09385261685, green: 0.4720010757, blue: 0.2862769961, alpha: 1), tag: 2)
+    
+    
     //let activityView            = GenericActivityIndicatorView()
     
     let titleImage: UIImageView = {
@@ -42,13 +47,21 @@ class MainMenuView {
     }
 }
 
+
+
 class MainMenuControllerButton: GenericButton {
-    init(title: String, background: UIColor, tag: Int){
-        super.init(title: title, titleColor: .white, backgroundColor: background, tag: tag)
+    init(title: String, background: UIColor = UIColor.clear, colorLiteral: UIColor = UIColor.clear, tag: Int){
+        
+        let bColor = background != .clear ? background : colorLiteral
+        
+        
+        super.init(title: title, titleColor: .white, backgroundColor: bColor, tag: tag)
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor : UIColor.white,
             .font: UIFont.boldSystemFont(ofSize: 20),
         ]
+        
+        
         
         let newTitle = NSAttributedString(string: title, attributes: attributes)
         self.setAttributedTitle(newTitle, for: .normal)
