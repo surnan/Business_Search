@@ -47,8 +47,6 @@ extension FilterController {
                                            minimumRating: viewObject.sliderValueLabel.text ?? "0.0")
         
         UserAppliedFilter.shared.saveFilterStruct(aFilter: tempFilterData)
-        print("")
-        
     }
     
     @objc func handleResetToDefaultsButton(){
@@ -59,6 +57,17 @@ extension FilterController {
             $0.isSelected = true
             $0.backgroundColor = .white
         }
+        
+        let tempFilterData = AppliedFilter(dollar1: viewObject.dollarOneButton.isSelected,
+                                           dollar2: viewObject.dollarTwoButton.isSelected,
+                                           dollar3: viewObject.dollarThreeButton.isSelected,
+                                           dollar4: viewObject.dollarFourButton.isSelected,
+                                           priceExists: viewObject.noPriceSwitch.isOn,
+                                           favoritesAtTop: viewObject.favoriteAtTopSwitch.isOn,
+                                           minimumRating: viewObject.sliderValueLabel.text ?? "0.0")
+        
+        UserAppliedFilter.shared.saveFilterStruct(aFilter: tempFilterData)
+        isFilteredLabel.isHidden = !UserAppliedFilter.shared.isFilterOn
     }
 }
 

@@ -20,6 +20,9 @@ class FilterController: UIViewController {
     var dismissController       : (()->Void)?
     var saveDismissController   : (()->Void)?
     
+    lazy var isFilteredLabel    = viewObject.isFilteredLabel
+    
+    
     lazy var allDollarButtons   = [viewObject.dollarOneButton, viewObject.dollarTwoButton,
                                    viewObject.dollarThreeButton,viewObject.dollarFourButton]
     

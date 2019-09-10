@@ -34,6 +34,13 @@ class FilterView {
         }
     }
     
+    var isFilteredLabel     = GenericLabel(text: "  Selected options are restricting results  ",
+                                                   backgroundColor: .red,
+                                                   textColor: .white,
+                                                   alignment: .center,
+                                                   numberOfLines: -1)
+    
+    
     private var sliderLabel         = GenericLabel(text: "Minimum Customer Rating:", size: 20)
     private var sliderLeftLabel     = GenericLabel(text: "1")
     private var sliderRightLabel    = GenericLabel(text: "5")
@@ -43,11 +50,8 @@ class FilterView {
     
     private var fillerLabel         = GenericLabel(text: "+ ")
     private var filterTitleLabel    = GenericLabel(text: "FILTER OPTIONS\n\n\n", size: 26)
-    private lazy var attribTitle         = GenericAttributedTextLabel(text: "FILTER OPTIONS\n\n\n",
-                                                                      attributes: topStringAttributes)
-    
-    
-    
+    private lazy var attribTitle    = GenericAttributedTextLabel(text: "FILTER OPTIONS\n\n\n",
+                                                                 attributes: topStringAttributes)
     
     
     func getTitleLabel()->UILabel{
@@ -116,27 +120,16 @@ class FilterView {
         let noPriceView: UIView = getNoPriceStack()
         let sliderValueView: UIView = getSliderValueLabelStack()
         
-        
         [attribTitle,
          priceLabel, priceDollarsView,
          sliderLabel, getSliderStack(), sliderValueView,
          getFavoritesAtTopStack(), noPriceView,
          saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
-        
         fullStack.setCustomSpacing(40.0, after: attribTitle)
         fullStack.setCustomSpacing(40.0, after: priceDollarsView)
         fullStack.setCustomSpacing(40.0, after: sliderValueView)
         fullStack.setCustomSpacing(40.0, after: noPriceView)
-
-        
-        
         return fullStack
     }
-    
 }
 
-//[attribTitle,
-// priceLabel, getDollarStack(),
-// sliderLabel, getSliderStack(), getSliderValueLabelStack(),
-// getFavoritesAtTopStack(), getNoPriceStack(),
-// saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
