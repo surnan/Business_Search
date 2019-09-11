@@ -24,6 +24,7 @@ class FilterView {
             }
             minimumRatingText               = viewModel.minimumRating
             sliderValue                     = viewModel.getSliderValue
+            sliderValueLabel.text           = "\(viewModel.getSliderValue ?? 1.0)"
             dollarOneButton.isSelected      = viewModel.dollarOne
             dollarTwoButton.isSelected      = viewModel.dollarTwo
             dollarThreeButton.isSelected    = viewModel.dollarThree
@@ -122,7 +123,10 @@ class FilterView {
         
         [attribTitle,
          priceLabel, priceDollarsView,
+         
          sliderLabel, getSliderStack(), sliderValueView,
+         //liderLabel, getSliderStack(), getSliderValueLabelStack(),
+            
          getFavoritesAtTopStack(), noPriceView,
          saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         fullStack.setCustomSpacing(40.0, after: attribTitle)
@@ -133,3 +137,22 @@ class FilterView {
     }
 }
 
+/*
+func getFullStack()->UIStackView{
+    let fullStack = GenericStack(spacing: 10, axis: .vertical)
+    let priceDollarsView: UIView = getDollarStack()
+    let noPriceView: UIView = getNoPriceStack()
+    let sliderValueView: UIView = getSliderValueLabelStack()
+    
+    [attribTitle,
+     priceLabel, priceDollarsView,
+     sliderLabel, getSliderStack(), sliderValueView,
+     getFavoritesAtTopStack(), noPriceView,
+     saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
+    fullStack.setCustomSpacing(40.0, after: attribTitle)
+    fullStack.setCustomSpacing(40.0, after: priceDollarsView)
+    fullStack.setCustomSpacing(40.0, after: sliderValueView)
+    fullStack.setCustomSpacing(40.0, after: noPriceView)
+    return fullStack
+}
+*/
