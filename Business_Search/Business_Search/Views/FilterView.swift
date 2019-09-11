@@ -117,6 +117,20 @@ class FilterView {
         return dollarStack
     }
     
+    private var favoritesTextMessage: UILabel = {
+        let textSting = "This option will not alter search results retrieved.  Only the display order is changed."
+        let myAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font : UIFont.italicSystemFont(ofSize: 13),
+                                                           NSAttributedString.Key.strokeColor : UIColor.white,
+                                                           NSAttributedString.Key.foregroundColor: UIColor.white
+        ]
+
+        
+
+        let textView = UILabel()
+        textView.numberOfLines = -1
+        textView.attributedText = NSAttributedString(string: textSting, attributes: myAttributes)
+        return textView
+    }()
     
     func getFullStack()->UIStackView{
         
@@ -127,25 +141,47 @@ class FilterView {
         let noPriceView: UIView = getNoPriceStack()
         let sliderValueView: UIView = getSliderValueLabelStack()
     
+
+        /*
+        let separatorLine: UIView = {
+            let lineView = UIView()
+            lineView.backgroundColor = UIColor.white
+            lineView.translatesAutoresizingMaskIntoConstraints = false
+            lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+            return lineView
+        }()
         
+        let lineView11 = separatorLine
+        let lineView22 = separatorLine
+        let lineView33 = separatorLine
+        */
         
         let lineView = UIView()
         lineView.backgroundColor = UIColor.white
         lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        
-        
+
+
         let lineView2 = UIView()
         lineView2.backgroundColor = UIColor.white
         lineView2.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-            
+        
+        let lineView3 = UIView()
+        lineView2.backgroundColor = UIColor.white
+        lineView2.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+
+
+        
+
+        
         [attribTitle,
          priceLabel, priceDollarsView, noPriceView,
          lineView,
          sliderLabel, getSliderStack(), sliderValueView,
          lineView2,
          
-        getFavoritesAtTopStack(),
-            
+        getFavoritesAtTopStack(), favoritesTextMessage,
+        
+        lineView3,
         saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         fullStack.setCustomSpacing(space * 4, after: attribTitle)
         fullStack.setCustomSpacing(space * 2, after: lineView)
