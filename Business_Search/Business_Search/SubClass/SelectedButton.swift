@@ -8,10 +8,19 @@
 
 import UIKit
 
-class CustomButton: UIButton {
+class SelectedButton: UIButton {
     override open var isHighlighted: Bool {
         didSet {
             backgroundColor = isSelected ? UIColor.white : UIColor.clear
+        }
+    }
+}
+
+class HighlightedButton: UIButton {
+    override open var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? UIColor.white : UIColor.clear
+            print("isHighlighted = \(isHighlighted)")
         }
     }
 }

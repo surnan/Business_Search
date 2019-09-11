@@ -24,7 +24,7 @@ extension FilterController {
         viewObject.sliderValueLabel.text = "\(temp)"
     }
     
-    @objc func handleDollarButtons(_ sender: CustomButton){sender.isSelected = !sender.isSelected}
+    @objc func handleDollarButtons(_ sender: SelectedButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismissController?()}
     
     @objc func handleSaveButton(){
