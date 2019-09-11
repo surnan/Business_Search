@@ -68,8 +68,20 @@ class FilterView {
     let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
     
     //selectedColor: UIColor = .clear
-    let defaultButton       : GenericButton = {
-        let button = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, highlightColor: .red, backgroundColor: .white, isCorner: true)
+//    let defaultButton       : GenericButton = {
+//        let button = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, highlightColor: .red, backgroundColor: .white, isCorner: true)
+//        return button
+//    }()
+
+    let defaultButton       : HighlightedButton = {
+        let button = HighlightedButton()
+        button.setTitle("   Reset to Defaults   ", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor.white
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth    = 1
+        button.layer.borderColor    = UIColor.white.cgColor
         return button
     }()
     
