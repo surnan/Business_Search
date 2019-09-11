@@ -43,11 +43,13 @@ class FilterView {
     
     
     private var sliderLabel         = GenericLabel(text: "Minimum Customer Rating:", size: 20)
-    private var sliderLeftLabel     = GenericLabel(text: "1")
-    private var sliderRightLabel    = GenericLabel(text: "5")
+    private var sliderLeftLabel     = GenericLabel(text: "1.0")
+    private var sliderRightLabel    = GenericLabel(text: "5.0")
     private var priceLabel          = GenericLabel(text: "Price Ranges:",  size: 20)
-    private var noPriceLabel        = GenericLabel(text: "Show if No Price Listed:", size: 18)
-    private var favoriteAtTopLabel  = GenericLabel(text: "Show Favorites at Top:", size: 18)
+    private var noPriceLabel        = GenericLabel(text: "Show if No Price Listed:", size: 18, alignment: .left)
+    private var favoriteAtTopLabel  = GenericLabel(text: "All Favorites at Top:", size: 18, alignment: .left)
+    
+    
     
     private var fillerLabel         = GenericLabel(text: "+ ")
     private var filterTitleLabel    = GenericLabel(text: "FILTER OPTIONS\n\n\n", size: 26)
@@ -126,26 +128,29 @@ class FilterView {
         
         let lineView = UIView()
         lineView.backgroundColor = UIColor.white
-        //lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         
         
         let lineView2 = UIView()
         lineView2.backgroundColor = UIColor.white
-        //lineView.translatesAutoresizingMaskIntoConstraints = false
         lineView2.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
             
         [attribTitle,
-         priceLabel, priceDollarsView,
+         priceLabel, priceDollarsView, noPriceView,
          lineView,
          sliderLabel, getSliderStack(), sliderValueView,
          lineView2,
-         getFavoritesAtTopStack(), noPriceView,
-         saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
+         
+         
+         //getFavoritesAtTopStack(), noPriceView,
+        getFavoritesAtTopStack(),
+            
+        saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
         fullStack.setCustomSpacing(40.0, after: attribTitle)
         fullStack.setCustomSpacing(20.0, after: lineView)
         fullStack.setCustomSpacing(20.0, after: lineView2)
-        fullStack.setCustomSpacing(40.0, after: noPriceView)
+        fullStack.setCustomSpacing(20.0, after: noPriceView)
+        fullStack.setCustomSpacing(20.0, after: sliderValueView)
         return fullStack
     }
 }
