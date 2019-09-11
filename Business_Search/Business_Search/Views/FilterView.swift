@@ -119,7 +119,10 @@ class FilterView {
     
     
     func getFullStack()->UIStackView{
-        let fullStack = GenericStack(spacing: 10, axis: .vertical)
+        
+        let space: CGFloat = 10
+        
+        let fullStack = GenericStack(spacing: space, axis: .vertical)
         let priceDollarsView: UIView = getDollarStack()
         let noPriceView: UIView = getNoPriceStack()
         let sliderValueView: UIView = getSliderValueLabelStack()
@@ -141,16 +144,14 @@ class FilterView {
          sliderLabel, getSliderStack(), sliderValueView,
          lineView2,
          
-         
-         //getFavoritesAtTopStack(), noPriceView,
         getFavoritesAtTopStack(),
             
         saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
-        fullStack.setCustomSpacing(40.0, after: attribTitle)
-        fullStack.setCustomSpacing(20.0, after: lineView)
-        fullStack.setCustomSpacing(20.0, after: lineView2)
-        fullStack.setCustomSpacing(20.0, after: noPriceView)
-        fullStack.setCustomSpacing(20.0, after: sliderValueView)
+        fullStack.setCustomSpacing(space * 4, after: attribTitle)
+        fullStack.setCustomSpacing(space * 2, after: lineView)
+        fullStack.setCustomSpacing(space * 2, after: lineView2)
+        fullStack.setCustomSpacing(space * 2, after: noPriceView)
+        fullStack.setCustomSpacing(space * 2, after: sliderValueView)
         return fullStack
     }
 }
