@@ -18,12 +18,9 @@ extension FilterController {
     
     func setupUI(){
         let fullStackView   = viewObject.getFilterOptionStack()
-        view.addSubview(fullStackView)
-//        fullStackView.centerToSuperView()
-        view.addSubview(isFilteredLabel)
-        
         let buttonStack = viewObject.getSaveCancelDefaultStack()
-        view.addSubview(buttonStack)
+        
+        [fullStackView, isFilteredLabel, buttonStack].forEach{view.addSubview($0)}
         
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([

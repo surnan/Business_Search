@@ -64,11 +64,16 @@ class GenericSegmentButton: CustomButton {
 }
 
 class GenericButton: UIButton {
-    init(title: String, titleColor: UIColor = .black, backgroundColor: UIColor = .white, borderWidth: CGFloat = 0,
+    init(title: String, titleColor: UIColor = .black, highlightColor: UIColor = .clear, backgroundColor: UIColor = .white, borderWidth: CGFloat = 0,
          isCorner: Bool = false, tag: Int = 0){
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
+        
+        if highlightColor != .clear {
+           self.setTitleColor(highlightColor, for: .highlighted)
+        }
+
         self.backgroundColor = backgroundColor
         self.translatesAutoresizingMaskIntoConstraints = false
         if isCorner {

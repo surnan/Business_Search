@@ -63,9 +63,17 @@ class FilterView {
     let dollarThreeButton   = GenericSegmentButton(title: "$$$")
     let dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
     
-    let defaultButton       = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, backgroundColor: .white, isCorner: true)
+    //let defaultButton       = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, backgroundColor: .white, isCorner: true)
     let saveButton          = GenericButton(title: "SAVE", isCorner: true)
     let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
+    
+    //selectedColor: UIColor = .clear
+    let defaultButton       : GenericButton = {
+        let button = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, highlightColor: .red, backgroundColor: .white, isCorner: true)
+        return button
+    }()
+    
+    
     let noPriceSwitch       = GenericSwitch(onTintColor: .green)
     let favoriteAtTopSwitch = GenericSwitch(onTintColor: .green)
     
@@ -145,8 +153,6 @@ class FilterView {
          lineView2,
          getFavoritesAtTopStack(), favoritesTextMessage,
          lineView3].forEach{fullStack.addArrangedSubview($0)}
-         //saveButton, cancelButton, defaultButton].forEach{fullStack.addArrangedSubview($0)}
-        
         fullStack.setCustomSpacing(space * 3, after: attribTitle)
         fullStack.setCustomSpacing(space * 1.5, after: lineView)
         fullStack.setCustomSpacing(space * 1.5, after: lineView2)
