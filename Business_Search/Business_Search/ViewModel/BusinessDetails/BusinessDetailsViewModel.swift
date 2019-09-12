@@ -68,7 +68,7 @@ struct BusinessDetailsViewModel {
         }
         
         if let phoneNumber = business.displayPhone {
-            let phoneText = "\(phoneNumber)"
+            let phoneText = "📞  \(phoneNumber)"
             let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor : UIColor.blue,
                 .font: UIFont(name: "Georgia", size: 25) as Any,
@@ -82,3 +82,4 @@ struct BusinessDetailsViewModel {
         if let price = business.price {priceString = "Price: \(price)"}
     }
 }
+

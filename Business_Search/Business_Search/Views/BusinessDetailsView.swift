@@ -45,7 +45,11 @@ class BusinessDetailsView {
     private var priceLabel          = GenericLabel(text: "", size: 16, textColor: .black)
     private var addressLabel        = GenericLabel(text: "", size: 16, textColor: .black)
     var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
+    
     var phoneNumberButton   = GenericButton(title: "", titleColor: .blue, backgroundColor: .white, isCorner: true)
+    
+    
+    
     var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
     var directionsButton         = GenericButton(title: " Get Directions ", titleColor: .white, backgroundColor: .red, isCorner: true)
     var markFavoriteButton  = GenericButton(title: "---", titleColor: .white, backgroundColor: .green, isCorner: true)
