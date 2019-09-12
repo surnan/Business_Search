@@ -62,16 +62,9 @@ class FilterView {
     let dollarTwoButton     = GenericSegmentButton(title: "$$")
     let dollarThreeButton   = GenericSegmentButton(title: "$$$")
     let dollarFourButton    = GenericSegmentButton(title: "$$$$", isCorner: true, corners: [.layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-    
-    //let defaultButton       = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, backgroundColor: .white, isCorner: true)
+
     let saveButton          = GenericButton(title: "SAVE", isCorner: true)
     let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
-    
-    //selectedColor: UIColor = .clear
-//    let defaultButton       : GenericButton = {
-//        let button = GenericButton(title: "   Reset to Defaults   ", titleColor: .black, highlightColor: .red, backgroundColor: .white, isCorner: true)
-//        return button
-//    }()
 
     let defaultButton       : HighlightedButton = {
         let button = HighlightedButton()

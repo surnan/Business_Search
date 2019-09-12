@@ -52,7 +52,7 @@ class BusinessDetailsView {
     
     
     var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
-    var directionsButton         = GenericButton(title: " Get Directions ", titleColor: .white, backgroundColor: .red, isCorner: true)
+    var directionsButton    = GenericButton(title: "Get Directions", titleColor: .white, backgroundColor: .red, isCorner: true)
     var markFavoriteButton  = GenericButton(title: "---", titleColor: .white, backgroundColor: .darkGreen, isCorner: true)
     
     func getFullStack()->UIStackView {
@@ -65,5 +65,10 @@ class BusinessDetailsView {
         let buttonStack = GenericStack(spacing: 10)
         [visitYelpPageButton, directionsButton, markFavoriteButton].forEach{buttonStack.addArrangedSubview($0)}
         return buttonStack
+    }
+    
+    func changeTitle(isFavorite: Bool){
+        let title = isFavorite ? "Delete from Favorites" : "8 as Favorite"
+        markFavoriteButton.setTitle(title, for: .normal)
     }
 }

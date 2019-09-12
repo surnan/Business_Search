@@ -18,11 +18,14 @@ extension BusinessDetailsController {
     
     
     @objc func handleUpdateFavorites(sender: UIButton){
+
         if let result = businessViewModel.changeFavorite(business: currentBusiness) {
             if result {
                 favoriteViewModel.createFavorite(business: currentBusiness)
+                viewObject.changeTitle(isFavorite: result)
             } else {
                 favoriteViewModel.deleteFavorite(business: currentBusiness)
+                viewObject.changeTitle(isFavorite: result)
             }
         } else {
             print("Error 77A: Unable to reset Favorite on currentBusiness")
