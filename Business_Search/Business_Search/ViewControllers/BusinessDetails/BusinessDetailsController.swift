@@ -17,8 +17,11 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var locationManager         = GenericCLLocationManager(desiredAccuracy: kCLLocationAccuracyBest)
     var coordinator             : (OpenInSafariType & OpenAppleMapType & OpenPhoneType)?
     var viewObject              : BusinessDetailsView!
-    var businessViewModel       : BusinessDetailsViewModel!
+    var viewModel               : BusinessDetailsViewModel!
+    
+    var businessViewModel       : BusinessViewModel!
     var favoriteViewModel       : FavoritesViewModel!
+    var currentBusiness         : Business!
 
     override func viewDidLoad() {
         setupUI()

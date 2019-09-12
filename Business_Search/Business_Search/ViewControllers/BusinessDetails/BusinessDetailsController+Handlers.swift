@@ -18,7 +18,15 @@ extension BusinessDetailsController {
     
     
     @objc func handleUpdateFavorites(sender: UIButton){
-        print("Green Button tapped")
+        if let result = businessViewModel.changeFavorite(business: currentBusiness) {
+            if result {
+                favoriteViewModel.createFavorite(business: currentBusiness)
+            } else {
+                favoriteViewModel.deleteFavorite(business: currentBusiness)
+            }
+        } else {
+            print("Error 77A: Unable to reset Favorite on currentBusiness")
+        }
     }
     
     
@@ -28,7 +36,7 @@ extension BusinessDetailsController {
     }
     
     @objc func handleVisitYelpPageButton(_ sender: UIButton){
-        if let urlStringExists = businessViewModel.getUrlString, urlStringExists._isValidURL {
+        if let urlStringExists = viewModel.getUrlString, urlStringExists._isValidURL {
             coordinator?.loadSafariBrowser(url: urlStringExists)
         } else {
             coordinator?.loadSafariBrowser(url: "https://www.yelp.com")

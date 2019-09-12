@@ -30,6 +30,7 @@ class Business_SearchTests: XCTestCase {
     lazy var newLocation    = Location(context: context)
     lazy var newBusiness    = Business(context: context)
     
+    let offWhite = UIColor.offWhite
     
     lazy var newCategory1   = Category(context: context)
     lazy var newCategory2   = Category(context: context)

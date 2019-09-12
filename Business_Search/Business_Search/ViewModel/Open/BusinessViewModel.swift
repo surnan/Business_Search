@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class BusinessViewModel {
-    private var delegate: OpenControllerType
+    private var delegate: OpenControllerType!
     private var dataController: DataController
 
     private var predicateBusinessLatitude: NSPredicate {
@@ -72,6 +72,11 @@ class BusinessViewModel {
         self.delegate = delegate
     }
 
+    init(dataController: DataController) {
+        //Used in BusinessDetails
+        self.dataController = dataController
+    }
+    
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     func reload() {fetchBusinessController = nil}
@@ -111,5 +116,20 @@ class BusinessViewModel {
     private func isFavorite(at indexPath: IndexPath)->Bool{
         let currentBusiness = fetchBusinessController?.object(at: indexPath)
         return currentBusiness?.isFavorite ?? false
+    }
+    
+    func changeFavorite(business: Business)->Bool?{
+        let objectID = business.objectID
+        
+        let currentBusiness = dataController.viewContext.object(with: objectID) as! Business
+        currentBusiness.isFavorite = !currentBusiness.isFavorite
+        
+        do {
+            try dataController.viewContext.save()
+            return currentBusiness.isFavorite
+        } catch {
+            print("Error 9Z11: Error changing Business Favorite Flag")
+            return nil
+        }
     }
 }

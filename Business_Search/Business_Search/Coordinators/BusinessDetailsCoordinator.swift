@@ -20,15 +20,20 @@ class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapTyp
     }
     
     func start(parent: Coordinator){
-        let newBusinessViewModel = BusinessDetailsViewModel(business: business)
+        let newViewModel = BusinessDetailsViewModel(business: business)
         let newFavoriteViewModel = FavoritesViewModel(dataController: dataController)
+        let newBusinessViewModel = BusinessViewModel(dataController: dataController)
+        
         let newView = BusinessDetailsView()
-        newView.viewModel = newBusinessViewModel
+        newView.viewModel = newViewModel
         let newController = BusinessDetailsController()
         newController.viewObject = newView
-        newController.businessViewModel = newBusinessViewModel
+        newController.viewModel = newViewModel
         newController.favoriteViewModel = newFavoriteViewModel
         newController.coordinator = self
+        newController.currentBusiness = business
+        newController.businessViewModel = newBusinessViewModel
+        
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("-2 popped -2")
