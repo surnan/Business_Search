@@ -43,4 +43,6 @@ extension UIColor {
     static let plum = UIColor(red: 221/255, green: 160/255, blue: 221/255, alpha: 1)
     static let tan = UIColor(red: 210/255, green: 180/255, blue: 140/255, alpha: 1)
     static let candyGreen = UIColor(red: 67.0/255.0, green: 205.0/255.0, blue: 135.0/255.0, alpha: 1.0)
+    static let darkGreen = #colorLiteral(red: 0.09385261685, green: 0.4720010757, blue: 0.2862769961, alpha: 1)
+    static let offWhite = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
 }

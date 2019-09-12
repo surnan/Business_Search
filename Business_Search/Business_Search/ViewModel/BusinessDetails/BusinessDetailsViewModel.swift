@@ -35,10 +35,20 @@ struct BusinessDetailsViewModel {
     private var longitude                   : Double
     var getLongitude: Double {return longitude}
     
+    
+    private var isFavorite: Bool
+    var getFavoriteButtonString: String {
+        let temp = isFavorite ? "Delete from Favorites" : "Save as Favorite"
+        return temp
+    }
+    
+    
     init(business: Business) {
         self.business = business
         self.latitude = business.latitude
         self.longitude = business.longitude
+        
+        isFavorite = business.isFavorite
         
         if let name = business.name {
             let attributes: [NSAttributedString.Key: Any] = [

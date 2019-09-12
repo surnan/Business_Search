@@ -25,6 +25,7 @@ class BusinessDetailsView {
             ratingLabel.text                        = viewModel.getRatingString
             firstAnnotation.coordinate.latitude     = viewModel.getLatitude
             firstAnnotation.coordinate.longitude    = viewModel.getLongitude
+            markFavoriteButton.setTitle(viewModel.getFavoriteButtonString, for: .normal)
             mapView.addAnnotation(firstAnnotation)
             mapView.region = MKCoordinateRegion(center: .init(latitude: viewModel.getLatitude,
                                                               longitude: viewModel.getLongitude),
@@ -52,7 +53,7 @@ class BusinessDetailsView {
     
     var visitYelpPageButton = GenericButton(title: "Visit Yelp Page", titleColor: .white, backgroundColor: .blue, isCorner: true)
     var directionsButton         = GenericButton(title: " Get Directions ", titleColor: .white, backgroundColor: .red, isCorner: true)
-    var markFavoriteButton  = GenericButton(title: "---", titleColor: .white, backgroundColor: .green, isCorner: true)
+    var markFavoriteButton  = GenericButton(title: "---", titleColor: .white, backgroundColor: .darkGreen, isCorner: true)
     
     func getFullStack()->UIStackView {
         let buttonStack = GenericStack(spacing: 5)
