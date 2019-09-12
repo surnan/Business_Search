@@ -14,12 +14,13 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     
     let businesses: [Business]
     let categoryName: String
+    let dataController: DataController
     
     lazy var groupsCoordinator: GroupTableViewCoordinator = {
         let navigationController = CustomNavigationController()
         navigationController.tabBarItem = UITabBarItem(title: "List", image: #imageLiteral(resourceName: "menu100B"), tag: 0)
         let router = Router(navigationController: navigationController)
-        let coordinator = GroupTableViewCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = GroupTableViewCoordinator(dataController: dataController, businesses: businesses, categoryName: categoryName, router: router)
         coordinator.parent = self
         return coordinator
     }()
@@ -28,12 +29,13 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
         let navigationController = CustomNavigationController()
         navigationController.tabBarItem = UITabBarItem(title: "Map", image: #imageLiteral(resourceName: "map100"), tag: 1)
         let router = Router(navigationController: navigationController)
-        let coordinator = GroupMapCoordinator(businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = GroupMapCoordinator(dataController: dataController, businesses: businesses, categoryName: categoryName, router: router)
         coordinator.parent = self
         return coordinator
     }()
     
-    init(businesses: [Business], categoryName: String, router: RouterType) {
+    init(dataController: DataController, businesses: [Business], categoryName: String, router: RouterType) {
+        self.dataController = dataController
         self.businesses     = businesses
         self.categoryName   = categoryName
         super.init(router: router)

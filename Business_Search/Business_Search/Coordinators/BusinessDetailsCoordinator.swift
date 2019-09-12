@@ -11,19 +11,23 @@ import MapKit
 
 class BusinessDetailsCoordinator: Coordinator, OpenInSafariType, OpenAppleMapType, OpenPhoneType {
     private let business: Business
+    private let dataController: DataController
 
-    init(router: RouterType, business: Business) {
+    init(dataController: DataController, router: RouterType, business: Business) {
+        self.dataController = dataController
         self.business = business
         super.init(router: router)
     }
     
     func start(parent: Coordinator){
-        let newViewModel = BusinessDetailsViewModel(business: business)
+        let newBusinessViewModel = BusinessDetailsViewModel(business: business)
+        let newFavoriteViewModel = FavoritesViewModel(dataController: dataController)
         let newView = BusinessDetailsView()
-        newView.viewModel = newViewModel
+        newView.viewModel = newBusinessViewModel
         let newController = BusinessDetailsController()
         newController.viewObject = newView
-        newController.viewModel = newViewModel
+        newController.businessViewModel = newBusinessViewModel
+        newController.favoriteViewModel = newFavoriteViewModel
         newController.coordinator = self
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

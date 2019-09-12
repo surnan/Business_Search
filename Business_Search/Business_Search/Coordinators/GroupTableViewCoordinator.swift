@@ -13,6 +13,7 @@ class GroupTableViewCoordinator: Coordinator, BusinessDetailsType, DismissType {
     let businesses      : [Business]
     let categoryName    : String
     var parent          : TabGroupCoordinator?  //because it's in a tab controller
+    let dataController  : DataController
     
     lazy var myGroupsController: GroupTableViewController  = {
         let controller = GroupTableViewController()
@@ -22,7 +23,8 @@ class GroupTableViewCoordinator: Coordinator, BusinessDetailsType, DismissType {
     }()
     
     
-    init(businesses: [Business], categoryName: String, router: RouterType) {
+    init(dataController: DataController, businesses: [Business], categoryName: String, router: RouterType) {
+        self.dataController = dataController
         self.businesses     = businesses
         self.categoryName   = categoryName
         super.init(router: router)
@@ -31,7 +33,7 @@ class GroupTableViewCoordinator: Coordinator, BusinessDetailsType, DismissType {
     }
     
     func loadBusinessDetails(currentBusiness: Business){
-        let coordinator = BusinessDetailsCoordinator(router: router, business: currentBusiness)
+        let coordinator = BusinessDetailsCoordinator(dataController: dataController, router: router, business: currentBusiness)
         addChild(coordinator)
         coordinator.start(parent: self)
     }
