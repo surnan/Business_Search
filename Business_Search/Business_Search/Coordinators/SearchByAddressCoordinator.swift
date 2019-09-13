@@ -30,7 +30,7 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
         newController.coordinator = self
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
-            print("-2 popped -2")
+            print("SearchByAddressCoordinator Popped")
         }
     }
     

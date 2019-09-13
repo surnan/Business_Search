@@ -33,7 +33,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
             parent.showNothingLabel(tableEmpty: categoryNameCountViewModel.isEmpty)
             return categoryNameCountViewModel.getCount
         default:
-            print("numberOfRowsInSection --> WHOOOOOPS!!")
+            print("TableIndex.business.rawValue --> Invalid Value = \(TableIndex.business.rawValue)")
         }
         return 0
     }
@@ -55,7 +55,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
                                                         dataController: dataController)
             return cell
         default:
-            print("cellForRowAt --> WHOOOOOPS!!!")
+            print("TableIndex.business.rawValue --> Invalid Value = \(TableIndex.business.rawValue)")
             return UITableViewCell()
         }
     }

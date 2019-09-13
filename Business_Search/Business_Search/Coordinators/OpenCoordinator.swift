@@ -45,7 +45,7 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
-            print("-2 popped -2")
+            print("OpenCoordinator Popped")
         }
     }
     

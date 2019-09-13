@@ -37,7 +37,6 @@ class UserAppliedFilter {
         do {
             let filterData = try JSONDecoder().decode(AppliedFilter.self, from: savedData)
             appliedFilter = filterData
-            print("")
         } catch {
             print("Error 02A: filterData try Error: \(error.localizedDescription) \n \(error)")
         }
@@ -49,7 +48,6 @@ class UserAppliedFilter {
         do {
             let savedData = try JSONEncoder().encode(appliedFilter)
             UserDefaults.standard.set(savedData, forKey: filterConstant)
-            print("")
         } catch {
             print("Error 03A: filterData try Error: \(error.localizedDescription) \n \(error)")
         }

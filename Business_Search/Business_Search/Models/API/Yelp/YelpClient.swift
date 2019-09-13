@@ -74,7 +74,6 @@ class YelpClient{
     
     class func getAllCategories(locale: String, completion: @escaping (Result<YelpAllCategoriesResponse, NetworkError>)->Void)->URLSessionDataTask?{
         let url = Endpoints.getAllCategories(locale).url
-        print("GetAllCategories URL = \(url)")
         let task = taskForYelpGetRequest(url: url, decoder: YelpAllCategoriesResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
@@ -89,7 +88,6 @@ class YelpClient{
     
     class func getAutoInputResults(text: String, latitude: Double, longitude: Double, completion: @escaping (Result<YelpAutoCompleteResponse, NetworkError>)-> Void)-> URLSessionDataTask?{
         let url = Endpoints.autocomplete(text, latitude, longitude).url
-        //print("url = \(url)")
         let task = taskForYelpGetRequest(url: url, decoder: YelpAutoCompleteResponse.self, errorDecoder: YelpAPIErrorResponse.self) { (result) in
             switch result {
             case .failure(let error):
@@ -105,8 +103,6 @@ class YelpClient{
     class private func checkYelpReturnedStatusCodes(response: URLResponse?)-> NetworkError?{
         guard let verifiedResponse = response else {return nil}
         let httpResponse = verifiedResponse as! HTTPURLResponse
-        
-        //print("Number of Yelp Calls left until GMT Midnight  ==> \(String(describing: httpResponse.allHeaderFields["ratelimit-remaining"]))")
         let tempString: String = httpResponse.allHeaderFields["ratelimit-remaining"] as? String ?? "** YELP not returning number of calls left **"
         let tempNumber = httpResponse.allHeaderFields["ratelimit-remaining"] as? Int
         

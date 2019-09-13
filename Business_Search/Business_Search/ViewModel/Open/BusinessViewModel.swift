@@ -54,7 +54,6 @@ class BusinessViewModel {
                                                                                sectionNameKeyPath: nil,
                                                                                cacheName: nil)
                     do {
-                        print("Performing Business Fetch with: \n   \(fetchRequest.predicate!)")
                         try aFetchedResultsController.performFetch()
                     } catch let error {
                         fatalError("Error 06A: Unresolved error \(error)")

@@ -39,6 +39,12 @@ extension OpenController {
             ])
     }
     
+
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -107,5 +113,6 @@ extension OpenController {
         tableDelegate.reloadCellIfNecessary(tableView: tableView)
         view.backgroundColor    = .lightBlue
         animateResultsAreFilteredLabel()
+        reloadFetchControllers()
     }
 }

@@ -18,18 +18,18 @@ class Coordinator: PresentableType, CoordinatorType  {
     }
     
     func addChild(_ coordinator: Coordinator) {
-        print("ChildCoordinators before append = \(childCoordinators.count)")
+        //print("ChildCoordinators before append = \(childCoordinators.count)")
         childCoordinators.append(coordinator)
-        print("ChildCoordinators after append = \(childCoordinators.count)")
+        //print("ChildCoordinators after append = \(childCoordinators.count)")
     }
     
     override func toPresentable() -> UIViewController {return router.toPresentable()}
     
     func removeChild(_ coordinator: Coordinator?) {
-        print("ChildCoordinators before removeChild = \(childCoordinators.count)")
+        //print("ChildCoordinators before removeChild = \(childCoordinators.count)")
         if let coordinator = coordinator, let index = childCoordinators.firstIndex(of: coordinator) {
             childCoordinators.remove(at: index)
-            print("ChildCoordinators after removeChild = \(childCoordinators.count)")
+            //print("ChildCoordinators after removeChild = \(childCoordinators.count)")
         }
         
     }

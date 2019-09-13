@@ -122,7 +122,7 @@ extension OpenController {
             _ = YelpClient.getBusinesses(latitude: getLatitude, longitude: getLongitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
                 switch result {
                 case .success(let temp):
-                    print(temp)
+                    //print(temp)
                     defer {dispatchGroup.leave()}
                     self?.handleGetNearbyBusinesses(inputData: yelpDataStruct, result: result)
                 case .failure(let error):
