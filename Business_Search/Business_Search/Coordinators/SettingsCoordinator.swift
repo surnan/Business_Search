@@ -32,6 +32,7 @@ class SettingsCoordinator: Coordinator {
         let newViewModel = SettingsViewModel()
         let newViewObject = SettingsView()
         let favoritesViewModel = FavoritesViewModel(dataController: dataController)
+        let businessViewModel = BusinessViewModel(dataController: dataController)
         
         newViewObject.viewModel = newViewModel
         let newController = SettingsController()
@@ -42,6 +43,7 @@ class SettingsCoordinator: Coordinator {
         newController.delegate                 = unblurProtocol
         newController.coordinator              = self
         newController.favoritesViewModel       = favoritesViewModel
+        newController.businessViewModel        = businessViewModel
         newController.modalPresentationStyle   = .overFullScreen
         newController.dismissController = {[weak self] in
             self?.router.dismissModule(animated: true, completion: {
