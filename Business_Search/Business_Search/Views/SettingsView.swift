@@ -21,13 +21,16 @@ class SettingsView {
         }
     }
     
-    let sliderLeftLabel         = GenericLabel(text: "0", textColor: .white)
-    let sliderRightLabel        = GenericLabel(text: "1000", textColor: .white)
     let searchRadiusLabel       = GenericAttributedTextLabel(text: "Meters to Search for Business", attributes: whiteHelvetica_20_blackStroke)
-    let saveButton              = GenericButton(title: "SAVE", isCorner: true)
-    let cancelButton            = GenericButton(title: "CANCEL", isCorner: true)
-    let defaultsButton          = GenericButton(title: "Reset to Defaults", isCorner: true)
-    let deleteFavoritesButton   = GenericButton(title: "Delete All Favorites", isCorner: true)
+    let sliderLeftLabel         = GenericLabel(text: "0"        , textColor: .white)
+    let sliderRightLabel        = GenericLabel(text: "1000"     , textColor: .white)
+    let saveButton              = GenericButton(title: "SAVE"   , isCorner: true)
+    let cancelButton            = GenericButton(title: "CANCEL" , isCorner: true)
+    
+
+    let defaultsButton          = GenericButton(title: "Reset to Defaults"      , highlightColor: .clear, borderWidth: 1, isCorner: true)
+    let deleteFavoritesButton   = GenericButton(title: "Delete All Favorites"   , highlightColor: .clear, borderWidth: 1, isCorner: true)
+    
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
 
     let deleteAllLabel: UILabel = {
