@@ -24,10 +24,9 @@ extension SettingsController{
     }
     
     @objc func handleDefaultsButton(){
-        viewObject.myTextView.text = "Hi.  This is a link to a business that I am looking at: "
-        UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
-        locationsViewModel.deleteAllLocations()
+        viewObject.resetDefaults()
         self.viewObject.deleteAllLabel.isHidden = false
+        saveChanges()
     }
     
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
@@ -40,12 +39,18 @@ extension SettingsController{
     }
     
     @objc func handleSaveButton(){
+        saveChanges()
+        dismissController?()
+    }
+    
+    private func saveChanges(){
         if let newRadius = newRadiusValue {
             radius = newRadius
             locationsViewModel.deleteAllLocations()
             UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
         }
         UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
-        dismissController?()
     }
+    
+    
 }

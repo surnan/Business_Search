@@ -74,7 +74,14 @@ class SettingsView {
     
     func getSaveCancelStack()-> UIStackView {
         let stack = GenericStack(spacing: 20)
-        [saveButton, cancelButton, defaultsButton, deleteAllLabel, deleteFavoritesButton].forEach{stack.addArrangedSubview($0)}
+        [saveButton, cancelButton, deleteFavoritesButton, defaultsButton, deleteAllLabel].forEach{stack.addArrangedSubview($0)}
         return stack
+    }
+    
+    func resetDefaults(){
+        radius = defaultRadius
+        myTextView.text = defaultOutgoingMessage
+        distanceSlider.value =  Float(defaultRadius)
+        sliderValueLabel.text = "\(defaultRadius)"
     }
 }

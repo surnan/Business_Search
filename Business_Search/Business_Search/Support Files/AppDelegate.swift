@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
-        radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? 350
+        radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? defaultRadius
         UserAppliedFilter.shared.load()
         
         //Print path to Documents folder to help browse for CoreData

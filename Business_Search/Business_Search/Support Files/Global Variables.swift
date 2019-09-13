@@ -11,6 +11,7 @@ import UIKit
 let limit = 50
 var offset = 50
 var radius = 350           // NSUserDefaults
+let defaultRadius = 350
 
 let cornerRadiusSize: CGFloat = 5.0
 let customUIHeightSize: CGFloat = 55
@@ -23,6 +24,9 @@ let businessCellID = "businessCellID"
 let categoryCellID = "categoryCellID"
 
 enum TableIndex:Int { case business = 0, category }
+
+
+let defaultOutgoingMessage =  "Hi.  This is a link to a business that I am looking at: "
 
 
 enum AppConstants:String {

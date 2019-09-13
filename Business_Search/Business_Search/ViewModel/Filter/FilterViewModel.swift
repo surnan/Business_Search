@@ -33,7 +33,7 @@ struct FilterViewModel {
 
     init(maximumSliderValue : Int? = nil) {
         textViewText = UserDefaults.standard.object(forKey: AppConstants.greetingMessage.rawValue) as? String
-            ?? "Hi.  This is the Yelp page for a business that I am looking at: "
+            ?? defaultOutgoingMessage
         self._radius = Float(radius)
         if let maximumSliderValue = maximumSliderValue {
             maxRadius = Float(maximumSliderValue)
