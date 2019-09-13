@@ -14,14 +14,26 @@ extension SettingsController{
         let textViewStack           = viewObject.getTextViewStack()
         let distanceSliderStack     = viewObject.getDistanceSliderStack()
         let verticalSearchStack     = viewObject.getSearchStack()
-        [distanceSliderStack, verticalSearchStack, textViewStack, saveCancelDeleteStack].forEach{view.addSubview($0)}
         
-        let safe = view.safeAreaLayoutGuide
-        viewObject.myTextView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        verticalSearchStack.anchor(top: safe.topAnchor, padding: .init(top: 70, left: 0, bottom: 0, right: 0),
-                                   centerX: true, x: view.widthAnchor, xMultiply: 0.8)
-        textViewStack.anchor(top: verticalSearchStack.bottomAnchor, padding: .init(top: 70, left: 0, bottom: 0, right: 0), centerX: true)
-        saveCancelDeleteStack.anchor(top: textViewStack.bottomAnchor, padding: .init(top: 70, left: 0, bottom: 0, right: 0), centerX: true)
+
+        viewObject.myTextView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
+        let myStack: UIStackView = {
+            let stack = UIStackView()
+            stack.axis = .vertical
+            stack.spacing = 50
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            return stack
+        }()
+        
+        [distanceSliderStack, verticalSearchStack, textViewStack, saveCancelDeleteStack].forEach{myStack.addArrangedSubview($0)}
+        
+        view.addSubview(myStack)
+        
+        NSLayoutConstraint.activate([
+            myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20)
+            ])
     }
 }
 

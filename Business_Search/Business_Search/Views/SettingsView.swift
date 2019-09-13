@@ -21,7 +21,13 @@ class SettingsView {
         }
     }
     
-    let searchRadiusLabel       = GenericAttributedTextLabel(text: "Meters to Search for Business", attributes: whiteHelvetica_20_blackStroke)
+    let searchRadiusLabel      : GenericAttributedTextLabel = {
+        let label = GenericAttributedTextLabel(text: "Business Search Radius\nin meters",
+                                               attributes: whiteHelvetica_20_blackStroke)
+        label.numberOfLines = -1
+        return label
+    }()
+    
     let sliderLeftLabel         = GenericLabel(text: "0"        , textColor: .white)
     let sliderRightLabel        = GenericLabel(text: "1000"     , textColor: .white)
     let saveButton              = GenericButton(title: "SAVE"   , isCorner: true)
