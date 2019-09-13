@@ -28,8 +28,8 @@ class SettingsView {
     let cancelButton            = GenericButton(title: "CANCEL" , isCorner: true)
     
 
-    let defaultsButton          = GenericButton(title: "Reset to Defaults"      , highlightColor: .clear, borderWidth: 1, isCorner: true)
-    let deleteFavoritesButton   = GenericButton(title: "Delete All Favorites"   , highlightColor: .clear, borderWidth: 1, isCorner: true)
+    let defaultsButton          = GenericButton(title: "Reset to Defaults"      , highlightColor: .red, borderWidth: 1, isCorner: true)
+    let deleteFavoritesButton   = GenericButton(title: "Delete All Favorites"   , highlightColor: .red, borderWidth: 1, isCorner: true)
     
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
 

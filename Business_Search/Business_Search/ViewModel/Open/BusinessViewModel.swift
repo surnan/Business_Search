@@ -133,7 +133,6 @@ class BusinessViewModel {
     }
     
     func removeAllFavorites(){
-        //let businessFetch = NSFetchRequest<Business>(entityName: "Business")
         let tempFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Business")
         var temp = [Business]()
         

@@ -64,15 +64,14 @@ class GenericSegmentButton: SelectedButton {
 }
 
 class GenericButton: UIButton {
-    init(title: String, titleColor: UIColor = .black, highlightColor: UIColor = .black, backgroundColor: UIColor = .white, borderWidth: CGFloat = 0,
+    init(title: String, titleColor: UIColor = .black, highlightColor: UIColor? = nil, backgroundColor: UIColor = .white, borderWidth: CGFloat = 0,
          isCorner: Bool = false, tag: Int = 0){
         super.init(frame: .zero)
         self.setTitle(title, for: .normal)
         self.setTitleColor(titleColor, for: .normal)
         
-        if highlightColor != .black {
-            self.setTitleColor(highlightColor, for: .highlighted)
-            self.layer.borderWidth = borderWidth
+        if let newColor = highlightColor {
+            self.setTitleColor(newColor, for: .highlighted)
         }
 
         self.backgroundColor = backgroundColor
