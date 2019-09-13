@@ -19,9 +19,8 @@ extension SettingsController{
     }
     
     @objc func handleDeleteFavorites(){
-        //let favoritesVM = FavoritesViewModel(dataController: dataController)
-        //favoritesVM.deleteAllFavorites()
         favoritesViewModel.deleteAllFavorites()
+        businessViewModel.removeAllFavorites()
     }
     
     @objc func handleDefaultsButton(){

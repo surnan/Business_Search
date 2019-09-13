@@ -131,4 +131,25 @@ class BusinessViewModel {
             return nil
         }
     }
+    
+    func removeAllFavorites(){
+        //let businessFetch = NSFetchRequest<Business>(entityName: "Business")
+        let tempFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Business")
+        var temp = [Business]()
+        
+        do {
+            temp = try dataController.viewContext.fetch(tempFetch) as! [Business]
+        } catch {
+            print("Error B12: Error retrieving all businesess")
+            return
+        }
+        
+        temp.forEach {$0.isFavorite = false}
+        
+        do {
+            try dataController.viewContext.save()
+        } catch {
+            print("Error B13: Error saving businesses after trying to reset all isFavorite")
+        }
+    }
 }
