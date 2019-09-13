@@ -23,12 +23,6 @@ extension SettingsController{
         businessViewModel.removeAllFavorites()
     }
     
-    @objc func handleDefaultsButton(){
-        viewObject.resetDefaults()
-        self.viewObject.deleteAllLabel.isHidden = false
-        saveChanges()
-    }
-    
     @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         newRadiusValue = Int(sender.value)
         viewObject.sliderValueLabel.text = "\(Int(sender.value))"
@@ -39,18 +33,25 @@ extension SettingsController{
     }
     
     @objc func handleSaveButton(){
-        saveChanges()
-        dismissController?()
-    }
-    
-    private func saveChanges(){
         if let newRadius = newRadiusValue {
             radius = newRadius
             locationsViewModel.deleteAllLocations()
             UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
         }
         UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
+        dismissController?()
     }
     
-    
+    @objc func handleDefaultsButton(){
+        viewObject.resetDefaults()
+        self.viewObject.deleteAllLabel.isHidden = false
+        newRadiusValue = defaultRadius
+        
+        if let newRadius = newRadiusValue {
+            radius = newRadius
+            UserDefaults.standard.set(radius, forKey: AppConstants.radius.rawValue)
+        }
+        UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
+        locationsViewModel.deleteAllLocations()
+    }
 }
