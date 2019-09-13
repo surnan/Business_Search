@@ -80,9 +80,17 @@ class SettingsView {
     
     func getSaveCancelStack()-> UIStackView {
         let stack = GenericStack(spacing: 20)
-        [saveButton, cancelButton, deleteFavoritesButton, defaultsButton, deleteAllLabel].forEach{stack.addArrangedSubview($0)}
+        [saveButton, cancelButton, deleteFavoritesButton, defaultsButton].forEach{stack.addArrangedSubview($0)}
         return stack
     }
+    
+    
+    //deleteAllLabel
+    
+    func getDeleteAllLabel()->UILabel{
+        return deleteAllLabel
+    }
+    
     
     func resetDefaults(){
         radius = defaultRadius
