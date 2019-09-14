@@ -28,10 +28,14 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
         newController.viewObject = newView
         newController.viewModel = newViewModel
         newController.coordinator = self
-        router.push(newController, animated: true) {[weak self, weak parent] in
-            parent?.removeChild(self)
-            print("SearchByAddressCoordinator Popped")
-        }
+        
+//        router.push(newController, animated: true) {[weak self, weak parent] in
+//            parent?.removeChild(self)
+//            print("SearchByAddressCoordinator Popped")
+//        }
+        router.push(LottieController(), animated: true, completion: nil)
+        
+        
     }
     
     func loadSearchTable(location: CLLocation){
