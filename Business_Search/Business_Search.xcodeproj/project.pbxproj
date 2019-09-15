@@ -40,7 +40,6 @@
 		844F64B62277B3E0003E6A93 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F64B52277B3E0003E6A93 /* Array+Extension.swift */; };
 		845A1D8522D02BE20066C17C /* UnBlurViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8422D02BE20066C17C /* UnBlurViewType.swift */; };
 		845A1D8D22D0314D0066C17C /* Global Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845A1D8C22D0314D0066C17C /* Global Variables.swift */; };
-		84625BD3232D41CE00071154 /* LottieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84625BD2232D41CE00071154 /* LottieController.swift */; };
 		84684CA322E613D200999599 /* BusinessDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */; };
 		84684CAA22E6466A00999599 /* FilterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84684CA922E6466A00999599 /* FilterCoordinator.swift */; };
 		8477222C22F92F620080B586 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477222B22F92F620080B586 /* FilterView.swift */; };
@@ -166,7 +165,6 @@
 		844F64B52277B3E0003E6A93 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		845A1D8422D02BE20066C17C /* UnBlurViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnBlurViewType.swift; sourceTree = "<group>"; };
 		845A1D8C22D0314D0066C17C /* Global Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Global Variables.swift"; sourceTree = "<group>"; };
-		84625BD2232D41CE00071154 /* LottieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieController.swift; sourceTree = "<group>"; };
 		84684CA222E613D200999599 /* BusinessDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailsCoordinator.swift; sourceTree = "<group>"; };
 		84684CA922E6466A00999599 /* FilterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCoordinator.swift; sourceTree = "<group>"; };
 		8477222B22F92F620080B586 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -373,14 +371,6 @@
 				84365CB722C569520014E577 /* UserAppliedFilter.swift */,
 			);
 			path = Singleton;
-			sourceTree = "<group>";
-		};
-		84625BD1232D41A900071154 /* Lottie */ = {
-			isa = PBXGroup;
-			children = (
-				84625BD2232D41CE00071154 /* LottieController.swift */,
-			);
-			path = Lottie;
 			sourceTree = "<group>";
 		};
 		84684CA022E6108C00999599 /* API */ = {
@@ -676,7 +666,6 @@
 		84BDE2EE2263D007008C9B01 /* Business_Search */ = {
 			isa = PBXGroup;
 			children = (
-				84625BD1232D41A900071154 /* Lottie */,
 				84BDE3012263D367008C9B01 /* Models */,
 				847AE26522ED612900774371 /* Views */,
 				847AE23F22E9458400774371 /* ViewControllers */,
@@ -1035,7 +1024,6 @@
 				848DEC5F22F3E21D00102E9B /* CoordinatorType.swift in Sources */,
 				847AE23A22E922DC00774371 /* CategoryCellViewModel.swift in Sources */,
 				847AE25D22EAB4E000774371 /* MainMenuController+Handlers.swift in Sources */,
-				84625BD3232D41CE00071154 /* LottieController.swift in Sources */,
 				848DEC5522F3E02400102E9B /* RouterType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

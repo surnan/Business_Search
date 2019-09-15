@@ -23,9 +23,6 @@ extension OpenController {
     
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
-        
-        
-        
         let backgroundContext = dataController.backGroundContext!
         backgroundContext.performAndWait {
             let temp = locationViewModel.createLocation(data: data, context: backgroundContext)
@@ -122,7 +119,7 @@ extension OpenController {
         for (index, element) in urlsQueue.enumerated(){
             if index > 3 {break}
             dispatchGroup.enter()
-            //Don't need to store rturned 'URLSessionDataTask?' because .stop/.resume is being utilized
+            //Don't need to store returned 'URLSessionDataTask?' because .stop/.resume is being utilized
             _ = YelpClient.getBusinesses(latitude: getLatitude, longitude: getLongitude, offset: element.offset ,completion: { [weak self] (yelpDataStruct, result) in
                 switch result {
                 case .success(let temp):

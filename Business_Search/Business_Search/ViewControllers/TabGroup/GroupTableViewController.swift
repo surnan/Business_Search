@@ -42,9 +42,6 @@ class GroupTableViewController: UITableViewController {
     }
     
     
-    
-    //MARK:-
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return businesses.count
     }

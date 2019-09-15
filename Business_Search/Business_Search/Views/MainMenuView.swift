@@ -12,13 +12,7 @@ import MapKit
 class MainMenuView {
     var nearMeSearchButton      = MainMenuControllerButton(title: "Search Near Me", background: .blue, tag: 0)
     var searchByMapButton       = MainMenuControllerButton(title: "Search By Map", background: .red, tag: 1)
-    //var searchByAddressButton   = MainMenuControllerButton(title: "     Search By Address     ", background: .green, tag: 2)
-    
-    
     var searchByAddressButton   = MainMenuControllerButton(title: "Search By Address", colorLiteral: #colorLiteral(red: 0.09385261685, green: 0.4720010757, blue: 0.2862769961, alpha: 1), tag: 2)
-    
-    
-    //let activityView            = GenericActivityIndicatorView()
     
     let titleImage: UIImageView = {
         let imageView           = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))

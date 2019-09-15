@@ -44,7 +44,5 @@ extension BusinessDetailsController {
             redView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
-        
-        
     }
 }

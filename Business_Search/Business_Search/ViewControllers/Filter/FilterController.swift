@@ -22,7 +22,6 @@ class FilterController: UIViewController {
     
     lazy var isFilteredLabel    = viewObject.isFilteredLabel
     
-    
     lazy var allDollarButtons   = [viewObject.dollarOneButton, viewObject.dollarTwoButton,
                                    viewObject.dollarThreeButton,viewObject.dollarFourButton]
     
