@@ -40,11 +40,6 @@ extension OpenController {
     }
     
 
-    
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -115,4 +110,18 @@ extension OpenController {
         animateResultsAreFilteredLabel()
         reloadFetchControllers()
     }
+    
+    func playAnimation(){
+        view.addSubview(animationView)
+        animationView.fillSafeSuperView()
+        animationView.setAnimation(named: "MyDownloader")
+        animationView.loopAnimation = true
+        animationView.play()
+    }
+    
+    func stopAnimation(){
+        animationView.stop()
+        animationView.removeFromSuperview()
+    }
+    
 }

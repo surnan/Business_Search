@@ -21,10 +21,6 @@ extension MainMenuController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addHandlers()
-        
-        
-
-        //[stack].forEach{view.addSubview($0)}
         [nearMeButton, byMapButton, byAddressButton].forEach{
             view.addSubview($0)
             $0.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
@@ -41,7 +37,6 @@ extension MainMenuController {
     func setupUI(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
         self.navigationItem.titleView = mainView.titleImage
-        
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             byMapButton.centerYAnchor.constraint(equalTo: safe.centerYAnchor, constant: -20),

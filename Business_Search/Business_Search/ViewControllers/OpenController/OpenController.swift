@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreData
+import Lottie
 
 class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceType, UnBlurViewType, OpenControllerType{
+    var animationView           = LOTAnimationView()
+    
     var currentLocationID       : NSManagedObjectID?                      //Connects downloaded Business to Location
     var doesLocationEntityExist = false                                   //true after create/find location
     var urlsQueue               = [CreateYelpURLDuringLoopingStruct]()    //enumeration loop for semaphores
