@@ -58,6 +58,7 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
         tableView.rowHeight = 70
         tableView.separatorColor = UIColor.clear
+        tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         return tableView
     }()
     

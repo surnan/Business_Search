@@ -365,12 +365,12 @@
 			path = SubClass;
 			sourceTree = "<group>";
 		};
-		845A1D8722D02D680066C17C /* Singleton */ = {
+		845A1D8722D02D680066C17C /* NUserDefaults Singleton */ = {
 			isa = PBXGroup;
 			children = (
 				84365CB722C569520014E577 /* UserAppliedFilter.swift */,
 			);
-			path = Singleton;
+			path = "NUserDefaults Singleton";
 			sourceTree = "<group>";
 		};
 		84684CA022E6108C00999599 /* API */ = {
@@ -685,7 +685,7 @@
 			children = (
 				84684CA022E6108C00999599 /* API */,
 				84DC40E6226B7B89003003C4 /* Core Data */,
-				845A1D8722D02D680066C17C /* Singleton */,
+				845A1D8722D02D680066C17C /* NUserDefaults Singleton */,
 			);
 			path = Models;
 			sourceTree = "<group>";

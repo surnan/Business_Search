@@ -76,13 +76,13 @@ class UserAppliedFilter {
     }
     
     func load(){
-        let dollarOne = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? false
-        let dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? false
-        let dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? false
-        let dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? false
-        let priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? false
-        let minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "0.0"
-        let favoritesAtTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? false
+        let dollarOne = UserDefaults.standard.object(forKey: AppConstants.dollarOne.rawValue) as? Bool ?? true
+        let dollarTwo = UserDefaults.standard.object(forKey: AppConstants.dollarTwo.rawValue) as? Bool ?? true
+        let dollarThree = UserDefaults.standard.object(forKey: AppConstants.dollarThree.rawValue) as? Bool ?? true
+        let dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? true
+        let priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? true
+        let minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "1.0"
+        let favoritesAtTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? true
         appliedFilter = AppliedFilter(dollar1: dollarOne, dollar2: dollarTwo, dollar3: dollarThree, dollar4: dollarFour, priceExists: priceExists, favoritesAtTop: favoritesAtTop, minimumRating: minimumRating)
     }
     
