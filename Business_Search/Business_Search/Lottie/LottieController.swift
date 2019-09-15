@@ -21,7 +21,7 @@ class LottieController: UIViewController {
     }
 
     func playAnimation(){
-        animationView.setAnimation(named: "MyDownloader")
+        animationView.setAnimation(named: downloadJSON)
         animationView.loopAnimation = true
         animationView.play()
     }

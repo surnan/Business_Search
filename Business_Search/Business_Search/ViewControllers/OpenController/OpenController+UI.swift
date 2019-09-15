@@ -122,7 +122,7 @@ extension OpenController {
             animationView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.3),
             ])
         
-        animationView.setAnimation(named: "MyDownloader")
+        animationView.setAnimation(named: downloadJSON)
         animationView.loopAnimation = true
         animationView.play()
     }

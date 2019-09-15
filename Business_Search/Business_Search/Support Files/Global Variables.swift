@@ -23,6 +23,8 @@ var yelpMaxPullCount = 1000
 let businessCellID = "businessCellID"
 let categoryCellID = "categoryCellID"
 
+let downloadJSON = "MyDownloader"
+
 enum TableIndex:Int { case business = 0, category }
 
 
