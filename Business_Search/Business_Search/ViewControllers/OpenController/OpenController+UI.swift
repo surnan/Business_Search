@@ -55,6 +55,7 @@ extension OpenController {
         
         let locationArray = locationViewModel.getObjects()
         if locationArray.isEmpty {
+            playAnimation()
             _ = YelpClient.getBusinesses(latitude: getLatitude,
                                          longitude: getLongitude,
                                          completion: handleGetNearbyBusinesses(inputData:result:))
@@ -80,6 +81,7 @@ extension OpenController {
             }
             index += 1
         }
+        playAnimation()
         _ = YelpClient.getBusinesses(latitude: getLatitude,
                                      longitude: getLongitude,
                                      completion: handleGetNearbyBusinesses(inputData:result:))
@@ -113,7 +115,13 @@ extension OpenController {
     
     func playAnimation(){
         view.addSubview(animationView)
-        animationView.fillSafeSuperView()
+        animationView.centerToSuperView()
+        
+        NSLayoutConstraint.activate([
+            animationView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.3),
+            animationView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.3),
+            ])
+        
         animationView.setAnimation(named: "MyDownloader")
         animationView.loopAnimation = true
         animationView.play()

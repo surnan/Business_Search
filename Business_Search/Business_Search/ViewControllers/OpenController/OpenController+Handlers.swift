@@ -23,6 +23,9 @@ extension OpenController {
     
     func createLocation(data: YelpBusinessResponse){
         //Save Location Entity and Business Entities for the same API Call
+        
+        
+        
         let backgroundContext = dataController.backGroundContext!
         backgroundContext.performAndWait {
             let temp = locationViewModel.createLocation(data: data, context: backgroundContext)
@@ -57,6 +60,7 @@ extension OpenController {
     }
     
     func handleGetNearbyBusinesses(inputData: CreateYelpURLDuringLoopingStruct?, result: Result<YelpBusinessResponse, NetworkError>){
+        stopAnimation()
         switch result {
         case .failure(let error):
             showAlertController(title: "ERROR", message: error.toString) {[weak self] _ in
