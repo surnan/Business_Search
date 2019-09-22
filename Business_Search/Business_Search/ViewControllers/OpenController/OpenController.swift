@@ -80,10 +80,10 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         differentColorSearchBar.layer.cornerRadius = 5
         differentColorSearchBar.clipsToBounds = true
         differentColorSearchBar.backgroundColor = UIColor.white
-        searchController.searchBar.delegate     = self
-        searchController.searchResultsUpdater   = self
         searchController.searchBar.setSearchFieldBackgroundImage(differentColorSearchBar.asImage(), for: .normal)
         definesPresentationContext = true
+        searchController.searchBar.delegate     = self
+        searchController.searchResultsUpdater   = self
         return searchController
     }()
 }
@@ -101,24 +101,3 @@ extension UIView {
     }
 }
 
-
-//    lazy var searchController2: UISearchController = {
-//        let searchController = UISearchController(searchResultsController: nil)
-//        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
-//        searchController.obscuresBackgroundDuringPresentation = false
-//        //searchController.searchBar.barStyle = .black
-//        searchController.searchBar.tintColor    = UIColor.white
-//        searchController.searchBar.barTintColor = UIColor.white
-//        searchController.searchBar.placeholder  = "Enter name ..."
-//        searchController.searchBar.delegate     = self
-//        searchController.searchResultsUpdater   = self
-//        //Setting background for search controller
-//        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-//            if let backgroundview = textfield.subviews.first {
-//                backgroundview.backgroundColor      = UIColor.white
-//                backgroundview.layer.cornerRadius   = 10
-//                backgroundview.clipsToBounds = true
-//            }
-//        }
-//        return searchController
-//    }()
