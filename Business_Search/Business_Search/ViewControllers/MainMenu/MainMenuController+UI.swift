@@ -15,6 +15,7 @@ extension MainMenuController {
         view.backgroundColor    = .white
         coordinateFound         = false
         previousCoordinate      = nil
+        self.title = "" //Removes the "Back" from navigation menu
         setupUI()   //Error if it's in ViewDidLoad & it resets MenuBarButton
     }
     
@@ -35,7 +36,7 @@ extension MainMenuController {
     }
     
     func setupUI(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
         self.navigationItem.titleView = mainView.titleImage
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([

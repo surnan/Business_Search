@@ -107,6 +107,7 @@ extension OpenController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.title = "" //Removes the "Back" from navigation menu
         tableDelegate.reloadCellIfNecessary(tableView: tableView)
         view.backgroundColor    = .lightBlue
         animateResultsAreFilteredLabel()

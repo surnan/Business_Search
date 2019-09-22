@@ -71,7 +71,7 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         //searchController.searchBar.barStyle = .black
         searchController.searchBar.tintColor    = UIColor.white
         searchController.searchBar.barTintColor = UIColor.white
-        searchController.searchBar.placeholder  = "Enter search term ..."
+        searchController.searchBar.placeholder  = "Enter name ..."
         searchController.searchBar.delegate     = self
         searchController.searchResultsUpdater   = self
         //Setting background for search controller
