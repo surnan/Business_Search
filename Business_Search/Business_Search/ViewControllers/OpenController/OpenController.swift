@@ -63,30 +63,62 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     }()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
-    
-    lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
-        searchController.obscuresBackgroundDuringPresentation = false
-        //searchController.searchBar.barStyle = .black
-        searchController.searchBar.tintColor    = UIColor.white
-        searchController.searchBar.barTintColor = UIColor.white
-        searchController.searchBar.placeholder  = "Enter name ..."
-        searchController.searchBar.delegate     = self
-        searchController.searchResultsUpdater   = self
-        //Setting background for search controller
-        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            if let backgroundview = textfield.subviews.first {
-                backgroundview.backgroundColor      = UIColor.white
-                backgroundview.layer.cornerRadius   = 10
-                backgroundview.clipsToBounds = true
-            }
-        }
-        return searchController
-    }()
-    
+
     func updateCoordinate(lat: Double, lon: Double){
         self.latitude = lat
         self.longitude = lon
     }
+    
+    
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
+        searchController.searchBar.placeholder = "Enter name ..."
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.searchBarStyle = .minimal
+        let differentColorSearchBar = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 36))
+        differentColorSearchBar.layer.cornerRadius = 5
+        differentColorSearchBar.clipsToBounds = true
+        differentColorSearchBar.backgroundColor = UIColor.white
+        searchController.searchBar.delegate     = self
+        searchController.searchResultsUpdater   = self
+        searchController.searchBar.setSearchFieldBackgroundImage(differentColorSearchBar.asImage(), for: .normal)
+        definesPresentationContext = true
+        return searchController
+    }()
 }
+
+
+
+
+
+extension UIView {
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
+
+//    lazy var searchController2: UISearchController = {
+//        let searchController = UISearchController(searchResultsController: nil)
+//        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
+//        searchController.obscuresBackgroundDuringPresentation = false
+//        //searchController.searchBar.barStyle = .black
+//        searchController.searchBar.tintColor    = UIColor.white
+//        searchController.searchBar.barTintColor = UIColor.white
+//        searchController.searchBar.placeholder  = "Enter name ..."
+//        searchController.searchBar.delegate     = self
+//        searchController.searchResultsUpdater   = self
+//        //Setting background for search controller
+//        if let textfield = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+//            if let backgroundview = textfield.subviews.first {
+//                backgroundview.backgroundColor      = UIColor.white
+//                backgroundview.layer.cornerRadius   = 10
+//                backgroundview.clipsToBounds = true
+//            }
+//        }
+//        return searchController
+//    }()
