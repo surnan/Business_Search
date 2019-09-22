@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,42 +13,17 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdE-Ih-Tvd">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <color key="barTintColor" red="1" green="0.024170271520000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="0.0"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Business_Search" id="yf4-k6-2GE"/>
-                                </items>
-                            </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="aOG-cu-DMk">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="34" width="414" height="828"/>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHJ-Wi-qhG">
-                                <rect key="frame" x="0.0" y="44" width="600" height="44"/>
-                                <color key="barTintColor" red="1" green="0.023529411764705882" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="0.0"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Business_Search" id="6Rr-YR-AgN"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aOG-cu-DMk" firstAttribute="top" secondItem="qHJ-Wi-qhG" secondAttribute="top" id="5Xy-gd-ebV"/>
-                            <constraint firstItem="qHJ-Wi-qhG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gc4-Em-Tht"/>
-                            <constraint firstItem="SdE-Ih-Tvd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="IcM-re-lNa"/>
-                            <constraint firstItem="qHJ-Wi-qhG" firstAttribute="top" secondItem="SdE-Ih-Tvd" secondAttribute="bottom" id="JHv-Sh-XD6"/>
-                            <constraint firstItem="SdE-Ih-Tvd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MMd-I6-6Vt"/>
-                            <constraint firstItem="qHJ-Wi-qhG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fys-lZ-1cB"/>
-                            <constraint firstItem="SdE-Ih-Tvd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iRI-gt-1ZT"/>
+                            <constraint firstItem="aOG-cu-DMk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Oby-zX-QD0"/>
+                            <constraint firstItem="aOG-cu-DMk" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iZG-M1-5dj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aOG-cu-DMk" secondAttribute="bottom" id="q3H-LN-Lya"/>
                             <constraint firstItem="aOG-cu-DMk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vkI-AE-ziA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aOG-cu-DMk" secondAttribute="trailing" id="weC-LM-JJe"/>
