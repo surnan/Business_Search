@@ -12,19 +12,22 @@ import MapKit
 class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType {
     private let window          : UIWindow
     private let dataController  : DataController
-    private let firstController : MainMenuController
+    private let newController   : MainMenuController
     
     init(router: RouterType, dataController: DataController, window: UIWindow, vc: MainMenuController) {
         self.dataController = dataController
         self.window         = window
-        firstController     = vc
+        newController       = vc
         super.init(router: router)
         router.setRootModule(vc, hideBar: false)
     }
     
     override func start(){
-        firstController.coordinator = self
-        window.rootViewController   = router.toPresentable()
+        let locationViewModel   = LocationViewModel(dataController: dataController)
+        
+        newController.coordinator       = self
+        newController.locationViewModel = locationViewModel
+        window.rootViewController       = router.toPresentable()
         window.makeKeyAndVisible()
     }
     

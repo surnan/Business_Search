@@ -22,6 +22,7 @@ class MainMenuController: UIViewController, UnBlurViewType{
     lazy var nearMeButton       = mainView.getNearMeButton()
     lazy var byMapButton        = mainView.getByMapButton()
     lazy var byAddressButton    = mainView.getByAddressButton()
+    var locationViewModel       : LocationViewModel!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent                        //Status bar sometimes black
