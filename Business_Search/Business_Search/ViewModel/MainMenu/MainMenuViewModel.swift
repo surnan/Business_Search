@@ -33,51 +33,31 @@ class MainMenuViewModel{
     
     func doesDateMatch(date: Date)->Bool{
         let formatingDate = getFormattedDate(date: date)
-        if formatingDate == today {
-            print("saveTodayDate matches .... \(today)")
+        if formatingDate == today{
             return true
         }
         UserDefaults.standard.set(formatingDate, forKey: todayNSConst)
         return false
     }
+
     
-    
-    func showMyResultsInNSUserDefaults2(){
-        let myIndex = ["minimumRating", "isFavoritesToTop"]
+    func showMyResultsInNSUserDefaults(){
+        let myIndex = [todayNSConst]
         var answers = [(key: String, value: Any)]()
         for item in Array(UserDefaults.standard.dictionaryRepresentation()) {
                         if myIndex.contains(item.key) {
                             answers.append(item)
                         }
         }
-        let items = Array(UserDefaults.standard.dictionaryRepresentation())
-        answers.forEach{print($0)}
-        print("\n***\ncount --> \(items.count)")
-    }
-    
-    
-    
-    
-    func showMyResultsInNSUserDefaults(){
-        let myIndex = ["dollarOne", "dollarTwo", "dollarThree", "dollarFour", "isPriceListed", "isRatingListed"]
-        var answers = [(key: String, value: Any)]()
-        for item in Array(UserDefaults.standard.dictionaryRepresentation()) {
-//                        if myIndex.contains(item.key) {
-//                            answers.append(item)
-//                        }
-            answers.append(item)
-        }
         answers.forEach{print($0)}
     }
-    
-    
-    //    let tempLocation = LocationViewModel(dataController: <#T##DataController#>)
-    //    tempLocation.deleteAllLocations()
-    //    UserDefaults.standard.set(formatingDate, forKey: todayNSConst)
-    
-    
+
     
     // Only for testing
+    func changeDate(){
+        UserDefaults.standard.set("01/01/2001", forKey: todayNSConst)
+    }
+    
     func resetToday(){
         UserDefaults.standard.set("", forKey: todayNSConst)
     }

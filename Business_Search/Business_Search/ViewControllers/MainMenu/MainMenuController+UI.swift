@@ -10,15 +10,13 @@ import UIKit
 
 extension MainMenuController {
     
-        
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .white
         coordinateFound         = false
         previousCoordinate      = nil
         self.title = "" //Removes the "Back" from navigation menu
-        setupUI()   //Error if it's in ViewDidLoad & it resets MenuBarButton
+        setupUI()       //Error if it's in ViewDidLoad & it resets MenuBarButton
     }
     
     override func viewDidLoad() {
@@ -33,16 +31,19 @@ extension MainMenuController {
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //[locationViewModel, viewModel] = NIL @ viewWillApear, viewDidLoad
-        viewModel.showMyResultsInNSUserDefaults()
+    private func deleteLocationsIfInvalid(){
+        viewModel.resetToday()
+        viewModel.changeDate()
         let today = Date()
         if !viewModel.doesDateMatch(date: today) {
             locationViewModel.deleteAllLocations()
         }
-        print("====")
-        viewModel.showMyResultsInNSUserDefaults2()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //[locationViewModel, viewModel] = NIL @ viewWillApear, viewDidLoad
+        deleteLocationsIfInvalid()
     }
     
     
