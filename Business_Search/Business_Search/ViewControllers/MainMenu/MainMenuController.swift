@@ -17,6 +17,8 @@ class MainMenuController: UIViewController, UnBlurViewType{
     var coordinator             : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType)?
     var controllerIndex         = 0
     let mainView                = MainMenuView()
+    var viewModel               : MainMenuViewModel!
+    
     
     lazy var stack              = mainView.getButtonStack()
     lazy var nearMeButton       = mainView.getNearMeButton()

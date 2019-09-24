@@ -24,9 +24,13 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
     
     override func start(){
         let locationViewModel   = LocationViewModel(dataController: dataController)
+        let newViewModel        = MainMenuViewModel(dataController: dataController)
+        
         
         newController.coordinator       = self
         newController.locationViewModel = locationViewModel
+        newController.viewModel         = newViewModel
+        
         window.rootViewController       = router.toPresentable()
         window.makeKeyAndVisible()
     }

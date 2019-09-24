@@ -10,6 +10,8 @@ import UIKit
 
 extension MainMenuController {
     
+        
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .white
@@ -28,6 +30,9 @@ extension MainMenuController {
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66).isActive = true
         }
+        
+        let today = Date()
+        
     }
     
     func undoBlur() {
