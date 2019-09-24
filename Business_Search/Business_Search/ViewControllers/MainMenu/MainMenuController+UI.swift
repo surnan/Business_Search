@@ -30,10 +30,21 @@ extension MainMenuController {
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.66).isActive = true
         }
-        
-        let today = Date()
-        
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //[locationViewModel, viewModel] = NIL @ viewWillApear, viewDidLoad
+        viewModel.showMyResultsInNSUserDefaults()
+        let today = Date()
+        if !viewModel.doesDateMatch(date: today) {
+            locationViewModel.deleteAllLocations()
+        }
+        print("====")
+        viewModel.showMyResultsInNSUserDefaults2()
+    }
+    
     
     func undoBlur() {
         removeDarkScreenBlur()

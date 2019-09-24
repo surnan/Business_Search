@@ -19,7 +19,6 @@ class MainMenuController: UIViewController, UnBlurViewType{
     let mainView                = MainMenuView()
     var viewModel               : MainMenuViewModel!
     
-    
     lazy var stack              = mainView.getButtonStack()
     lazy var nearMeButton       = mainView.getNearMeButton()
     lazy var byMapButton        = mainView.getByMapButton()

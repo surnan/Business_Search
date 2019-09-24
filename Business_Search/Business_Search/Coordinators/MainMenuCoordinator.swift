@@ -26,7 +26,6 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         let locationViewModel   = LocationViewModel(dataController: dataController)
         let newViewModel        = MainMenuViewModel(dataController: dataController)
         
-        
         newController.coordinator       = self
         newController.locationViewModel = locationViewModel
         newController.viewModel         = newViewModel
