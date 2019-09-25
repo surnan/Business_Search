@@ -26,7 +26,7 @@ extension Open_Delegate {
             myBool(true)                                //Dismiss the leading swipe from UI
         }
         action.image            = currentBusiness.isFavorite   ? #imageLiteral(resourceName: "cancel") : #imageLiteral(resourceName: "Favorite")
-        action.backgroundColor  = currentBusiness.isFavorite   ? .lightSteelBlue1 : .orange
+        action.backgroundColor  = currentBusiness.isFavorite   ? .lightSteelBlue1 : .lightSteelBlue2
         let configuration       = UISwipeActionsConfiguration(actions: [action])
         return configuration
     }

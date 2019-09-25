@@ -18,7 +18,7 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     
     lazy var groupsCoordinator: GroupTableViewCoordinator = {
         let navigationController = CustomNavigationController()
-        navigationController.tabBarItem = UITabBarItem(title: "List", image: #imageLiteral(resourceName: "menu100B"), tag: 0)
+        navigationController.tabBarItem = UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "menu100B"), tag: 0)
         let router = Router(navigationController: navigationController)
         let coordinator = GroupTableViewCoordinator(dataController: dataController, businesses: businesses, categoryName: categoryName, router: router)
         coordinator.parent = self
@@ -27,7 +27,7 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     
     lazy var mapCoordinator: GroupMapCoordinator = {
         let navigationController = CustomNavigationController()
-        navigationController.tabBarItem = UITabBarItem(title: "Map", image: #imageLiteral(resourceName: "map100"), tag: 1)
+        navigationController.tabBarItem = UITabBarItem(title: "MAP", image: #imageLiteral(resourceName: "map100"), tag: 1)
         let router = Router(navigationController: navigationController)
         let coordinator = GroupMapCoordinator(dataController: dataController, businesses: businesses, categoryName: categoryName, router: router)
         coordinator.parent = self
