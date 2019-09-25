@@ -50,7 +50,9 @@ extension FilterController {
     }
     
     @objc func handleResetToDefaultsButton(){
-        [viewObject.noPriceSwitch, viewObject.favoriteAtTopSwitch].forEach{$0.isOn = true}
+        [viewObject.noPriceSwitch].forEach{$0.isOn = true}
+        [viewObject.favoriteAtTopSwitch].forEach{$0.isOn = false}
+ 
         viewObject.distanceSlider.value = 1.0
         viewObject.sliderValueLabel.text = "1.0"
         allDollarButtons.forEach{

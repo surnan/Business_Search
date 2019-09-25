@@ -61,7 +61,7 @@ class UserAppliedFilter {
     var getFour: Bool {return appliedFilter?.dollar4 ?? false}
     var getNoPrice: Bool {return appliedFilter?.priceExists ?? false}
     var getMinimumRatingString: String {return appliedFilter?.minimumRating ?? "0.0"}
-    var getFavoritesAtTop: Bool {return appliedFilter?.favoritesAtTop ?? true}
+    var getFavoritesAtTop: Bool {return appliedFilter?.favoritesAtTop ?? false}
     
     var getMinimumRatingFloat: Float {
         return Float(getMinimumRatingString) ?? 0.0
@@ -69,7 +69,7 @@ class UserAppliedFilter {
     
     
     func reset(){
-        let temp = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: true, minimumRating: "1.0")
+        let temp = AppliedFilter(dollar1: true, dollar2: true, dollar3: true, dollar4: true, priceExists: false, favoritesAtTop: false, minimumRating: "1.0")
         saveFilterStruct(aFilter: temp)
         
         
@@ -82,7 +82,7 @@ class UserAppliedFilter {
         let dollarFour = UserDefaults.standard.object(forKey: AppConstants.dollarFour.rawValue) as? Bool ?? true
         let priceExists = UserDefaults.standard.object(forKey: AppConstants.isPriceListed.rawValue) as? Bool ?? true
         let minimumRating = UserDefaults.standard.object(forKey: AppConstants.minimumRating.rawValue) as? String ?? "1.0"
-        let favoritesAtTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? true
+        let favoritesAtTop = UserDefaults.standard.object(forKey: AppConstants.isFavoritesToTop.rawValue) as? Bool ?? false
         appliedFilter = AppliedFilter(dollar1: dollarOne, dollar2: dollarTwo, dollar3: dollarThree, dollar4: dollarFour, priceExists: priceExists, favoritesAtTop: favoritesAtTop, minimumRating: minimumRating)
     }
     
