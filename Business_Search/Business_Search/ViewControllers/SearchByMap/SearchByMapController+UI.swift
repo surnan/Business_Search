@@ -11,6 +11,8 @@ import UIKit
 extension SearchByMapController {
 
     func setupUI(){
+        navigationItem.title = "Search by Map"
+
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]
         let redView = viewObject.redView
         

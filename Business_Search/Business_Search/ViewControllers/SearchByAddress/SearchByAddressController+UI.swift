@@ -12,6 +12,9 @@ import MapKit
 
 extension SearchByAddressController {
     func setupUI(){
+        
+        navigationItem.title = "Search by Address"
+        
         view.backgroundColor = #colorLiteral(red: 0.93198663, green: 0.9809250236, blue: 0.9644866586, alpha: 1)
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]

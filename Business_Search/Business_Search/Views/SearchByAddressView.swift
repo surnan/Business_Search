@@ -30,11 +30,14 @@ class SearchByAddressView {
     }()
     
     let locationImageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "pin"))
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "roundPin128"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
+    
+    
+    //let locationLabel = GenericLabel(text: <#T##String#>, size: <#T##CGFloat#>, backgroundColor: <#T##UIColor#>, textColor: <#T##UIColor#>, alignment: <#T##NSTextAlignment#>, corner: <#T##Bool#>, numberOfLines: <#T##Int#>)
     
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
@@ -47,11 +50,10 @@ class SearchByAddressView {
         let textField = UITextField()
         textField.attributedPlaceholder = NSMutableAttributedString(string: "Enter a Location",
                                                                     //attributes: grey25textAttributes)
-            attributes: georgiaAttributes(color: .gray, size: 25))
-            
-            
-            
+            attributes: georgiaAttributes(color: .gray, size: 18))
         textField.myStandardSetup(cornerRadiusSize: cornerRadiusSize, defaulAttributes: black25textAttributes)
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
         return textField
     }()
     
@@ -59,7 +61,7 @@ class SearchByAddressView {
         let button = UIButton()
         button.backgroundColor = UIColor.steelBlue
         button.setTitle("FIND LOCATION", for: .normal)
-        button.setTitle("Searching...", for: .selected)
+        button.setTitle("Searching...", for: .highlighted)
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.cornerRadius = cornerRadiusSize
         button.clipsToBounds = true
