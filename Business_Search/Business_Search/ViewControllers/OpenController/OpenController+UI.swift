@@ -123,14 +123,17 @@ extension OpenController {
             animationView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.3),
             ])
         
-        animationView.setAnimation(named: downloadJSON)
-        animationView.loopAnimation = true
-        animationView.play()
+        DispatchQueue.main.async {
+            self.animationView.setAnimation(named: downloadJSON)
+            self.animationView.loopAnimation = true
+            self.animationView.play()
+        }
     }
     
     func stopAnimation(){
-        animationView.stop()
-        animationView.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.animationView.stop()
+            self.animationView.removeFromSuperview()
+        }
     }
-    
 }

@@ -43,7 +43,7 @@ extension MainMenuController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //[locationViewModel, viewModel] = NIL @ viewWillApear, viewDidLoad
-        deleteLocationsIfInvalid()
+        //deleteLocationsIfInvalid()
     }
     
     
