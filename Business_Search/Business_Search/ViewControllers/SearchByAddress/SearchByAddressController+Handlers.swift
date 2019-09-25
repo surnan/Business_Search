@@ -22,8 +22,8 @@ extension SearchByAddressController {
         view.endEditing(true)
         geoCoder.geocodeAddressString(locationTextField.text ?? "") { [weak self] (clplacement, error) in
             guard let placemarks = clplacement, let location = placemarks.first?.location else {
-                print("UNABLE to convert to CLL Coordinates")
                 sender.isSelected = false
+                self?.showAlertController(title: "Input Error", message: "Unable to find location on map")
                 return
             }
             self?.locationToForward = location
