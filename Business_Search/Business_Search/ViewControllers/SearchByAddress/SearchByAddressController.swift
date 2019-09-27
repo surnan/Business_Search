@@ -18,34 +18,21 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
     
     let geoCoder                = CLGeocoder()
     var locationToForward       = CLLocation()                //Pushing into newController()
+    var barButtonState          = ButtonState.disabled
+    var found                   = false
+    
     lazy var mapView            = viewObject.mapView
     lazy var locationImageView  = viewObject.locationImageView
     lazy var locationTextField  = viewObject.locationTextField
     lazy var findLocationButton = viewObject.findLocationButton
+    lazy var myTextView         = viewObject.myTextView
+    
     
     let textViewMaxHeight: CGFloat = 50
-    
-//    var myTextView: UITextView = {
-//        let textView = UITextView()
-//        textView.text = "Placeholder..."
-//        textView.font = UIFont(name: "Georgie", size: 25)
-//        textView.textColor = .lightGray
-//        textView.sizeToFit()
-//        textView.isScrollEnabled = false
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        return textView
-//    }()
-    
-    lazy var myTextView = viewObject.myTextView
-    
     
     enum ButtonState {
         case disabled, find, next
     }
-    
-    var barButtonState = ButtonState.disabled
-    
-    var found = false
 }
 
 
