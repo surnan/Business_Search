@@ -23,26 +23,6 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
     lazy var locationTextField  = viewObject.locationTextField
     lazy var findLocationButton = viewObject.findLocationButton
     
-    
-    
-    var barButtonState = ButtonState.disabled
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        locationTextField.delegate = self
-        myTextView.delegate = self
-        setupUI()
-        addHandlers()
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //barButtonState = ButtonState.disabled
-    }
-    
-    
     let textViewMaxHeight: CGFloat = 50
     
     var myTextView: UITextView = {
@@ -56,9 +36,13 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
         return textView
     }()
     
-    enum ButtonState: String {
+    enum ButtonState {
         case disabled, find, next
     }
+    
+    var barButtonState = ButtonState.disabled
+    
+    var found = false
 }
 
 
@@ -72,10 +56,12 @@ extension SearchByAddressController {
         var newFrame = myTextView.frame
         newFrame.size = CGSize(width: newSize.width, height: newSize.height)
         
-        if textView.contentSize.height >= self.textViewMaxHeight{
-            textView.isScrollEnabled = true
+        
+        if found {return}
+        if textView.text.isEmpty {
+            setRightBarButton(state: .disabled)
         } else {
-            textView.isScrollEnabled = false
+            setRightBarButton(state: .find)
         }
     }
     
@@ -86,37 +72,3 @@ extension SearchByAddressController {
         }
     }
 }
-
-
-
-
-/*
- //Need to run on phone to see if this is necessary
- func textViewDidEndEditing(_ textView: UITextView) {
- textView.resignFirstResponder()
- }
- */
-
-//    func textViewDidChange(_ textView: UITextView) {
-//
-//        if textView.contentSize.height >= self.textViewMaxHeight
-//        {
-//            textView.isScrollEnabled = true
-//            textView.sizeToFit()
-//            //textView.frame.size.height = textView.contentSize.height
-//        }
-//        else
-//        {
-//            textView.frame.size.height = textView.contentSize.height
-//            textView.isScrollEnabled = false
-//        }
-//    }
-
-
-//    func textViewDidChangeSelection(_ textView: UITextView) {
-//        if self.view.window != nil {
-//            if textView.textColor == UIColor.lightGray {
-//                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-//            }
-//        }
-//    }

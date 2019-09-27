@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 
 extension SearchByAddressController {
+    
     func addHandlers(){
         findLocationButton.addTarget(self, action: #selector(handleFindButton(_:)), for: .touchUpInside)
     }
@@ -37,6 +38,7 @@ extension SearchByAddressController {
                 self.mapView.setCenter(newAnnotation.coordinate, animated: false)
                 let coord = self.mapView.centerCoordinate
                 self.locationToForward =  CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+                self.setRightBarButton(state: .next)
             }
         }
     }
