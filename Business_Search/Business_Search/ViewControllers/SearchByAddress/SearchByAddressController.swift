@@ -25,16 +25,19 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
     
     let textViewMaxHeight: CGFloat = 50
     
-    var myTextView: UITextView = {
-        let textView = UITextView()
-        textView.text = "Placeholder..."
-        textView.font = UIFont(name: "Georgie", size: 25)
-        textView.textColor = .lightGray
-        textView.sizeToFit()
-        textView.isScrollEnabled = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
-    }()
+//    var myTextView: UITextView = {
+//        let textView = UITextView()
+//        textView.text = "Placeholder..."
+//        textView.font = UIFont(name: "Georgie", size: 25)
+//        textView.textColor = .lightGray
+//        textView.sizeToFit()
+//        textView.isScrollEnabled = false
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        return textView
+//    }()
+    
+    lazy var myTextView = viewObject.myTextView
+    
     
     enum ButtonState {
         case disabled, find, next

@@ -37,7 +37,17 @@ class SearchByAddressView {
     }()
     
     
-    //let locationLabel = GenericLabel(text: <#T##String#>, size: <#T##CGFloat#>, backgroundColor: <#T##UIColor#>, textColor: <#T##UIColor#>, alignment: <#T##NSTextAlignment#>, corner: <#T##Bool#>, numberOfLines: <#T##Int#>)
+    var myTextView: UITextView = {
+        let textView = UITextView()
+        textView.text = "Please enter address ..."
+        textView.font = UIFont(name: "Georgie", size: 25)
+        textView.textColor = .lightGray
+        textView.sizeToFit()
+        textView.isScrollEnabled = false
+        textView.layer.cornerRadius = 5
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
+    }()
     
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
