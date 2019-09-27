@@ -37,10 +37,11 @@ class SearchByAddressView {
     }()
     
     
+    
     var myTextView: UITextView = {
         let textView = UITextView()
         textView.text = "Please enter address ..."
-        textView.font = UIFont(name: "Georgie", size: 25)
+        textView.font = UIFont(name: "Georgie", size: 30)
         textView.textColor = .lightGray
         textView.sizeToFit()
         textView.isScrollEnabled = false
@@ -67,34 +68,15 @@ class SearchByAddressView {
         return textField
     }()
     
-    var findLocationButton: UIButton = {
+    var clearButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor.steelBlue
-        button.setTitle("FIND LOCATION", for: .normal)
-        button.setTitle("Searching...", for: .highlighted)
+        button.setTitle("  Clear  ", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.cornerRadius = cornerRadiusSize
         button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    func getStackView()-> UIStackView{
-        let stackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.alignment = .center
-            stack.distribution = .fill
-            stack.spacing = 15
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            return stack
-        }()
-        
-        [locationTextField, findLocationButton].forEach{
-            $0.heightAnchor.constraint(equalToConstant: customUIHeightSize).isActive = true
-            stackView.addArrangedSubview($0)
-        }
-        
-        return stackView
-    }
 }
 

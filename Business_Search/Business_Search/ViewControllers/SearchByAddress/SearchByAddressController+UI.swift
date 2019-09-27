@@ -53,20 +53,25 @@ extension SearchByAddressController {
         let safe = view.safeAreaLayoutGuide
         let redView = viewObject.redView
         
-        [myTextView, locationImageView, mapView, redView].forEach{view.addSubview($0)}
+        [myTextView, locationImageView, mapView, redView, clearButton].forEach{view.addSubview($0)}
 
 
         NSLayoutConstraint.activate([
             locationImageView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 15),
             locationImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             myTextView.topAnchor.constraint(equalTo: locationImageView.bottomAnchor, constant: 20),
-            myTextView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
+            myTextView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.80),
             myTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             myTextView.heightAnchor.constraint(lessThanOrEqualToConstant: textViewMaxHeight),
             
+            
+            clearButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            clearButton.topAnchor.constraint(equalTo: myTextView.bottomAnchor, constant: 15),
+            
+            
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.topAnchor.constraint(equalTo: myTextView.bottomAnchor, constant: 15),
+            mapView.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: 15),
             mapView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
             
             

@@ -24,7 +24,7 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
     lazy var mapView            = viewObject.mapView
     lazy var locationImageView  = viewObject.locationImageView
     lazy var locationTextField  = viewObject.locationTextField
-    lazy var findLocationButton = viewObject.findLocationButton
+    lazy var clearButton = viewObject.clearButton
     lazy var myTextView         = viewObject.myTextView
     
     

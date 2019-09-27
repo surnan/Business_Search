@@ -12,11 +12,16 @@ import MapKit
 extension SearchByAddressController {
     
     func addHandlers(){
-        findLocationButton.addTarget(self, action: #selector(handleFindButton(_:)), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(handleClearButon), for: .touchUpInside)
     }
     
     @objc func handleRightBarButton(){
         coordinator?.loadSearchTable(location: locationToForward)
+    }
+    
+    
+    @objc func handleClearButon(){
+        myTextView.text = "Please enter address ..."
     }
     
     @objc func handleFindButton(_ sender: UIButton){
