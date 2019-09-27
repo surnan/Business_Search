@@ -23,6 +23,7 @@ extension SearchByAddressController {
     @objc func handleClearButon(){
         myTextView.text = "Please enter address ..."
         myTextView.textColor = .lightGray
+        setRightBarButton(state: .disabled)
     }
     
     @objc func handleFindButton(_ sender: UIButton){

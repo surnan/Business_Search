@@ -10,15 +10,29 @@ import UIKit
 
 extension SearchByAddressController {
     
-    //MARK:- TextField Delegate
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        view.endEditing(true)
-    }
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        return true
-    }
+    func textViewDidChange(_ textView: UITextView) {
 
+        
+//        textView.text.isEmpty ? setRightBarButton(state: .disabled) : setRightBarButton(state: .find)
+        
+        if textView.text.isEmpty || textView.textColor == .lightGray {
+            setRightBarButton(state: .disabled)
+        } else {
+            setRightBarButton(state: .find)
+        }
+        
+        
+//        if textView.text.isEmpty {
+//            setRightBarButton(state: .disabled)
+//        } else {
+//            setRightBarButton(state: .find)
+//        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
 }

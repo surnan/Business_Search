@@ -38,27 +38,4 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
 
 
 
-extension SearchByAddressController {
-    
-    func textViewDidChange(_ textView: UITextView) {
-        let fixedWidth = myTextView.frame.size.width
-        let newSize: CGSize = myTextView.sizeThatFits(CGSize(width: fixedWidth, height: textViewMaxHeight))
-        var newFrame = myTextView.frame
-        newFrame.size = CGSize(width: newSize.width, height: newSize.height)
-        
-        
-        if found {return}
-        if textView.text.isEmpty {
-            setRightBarButton(state: .disabled)
-        } else {
-            setRightBarButton(state: .find)
-        }
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-}
+
