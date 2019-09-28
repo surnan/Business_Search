@@ -12,11 +12,7 @@ import MapKit
 extension SearchByAddressController {
     
     func addHandlers(){
-        //clearButton.addTarget(self, action: #selector(handleClearButon), for: .touchUpInside)
-        
         myButton.addTarget(self, action: #selector(handleFindButton(_:)), for: .touchUpInside)
-        
-        
     }
     
     @objc func handleRightBarButton(){
@@ -25,7 +21,6 @@ extension SearchByAddressController {
     
     
     @objc func handleClearButon(){
-//        myTextView.text = ""
         setRightBarButton(state: .disabled)
     }
     

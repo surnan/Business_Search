@@ -20,7 +20,7 @@ extension SearchByAddressController {
         myTextField.delegate = self
         
         
-        //myTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        myTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         barButtonState = ButtonState.disabled   //likely don't need this
         

@@ -11,14 +11,7 @@ import UIKit
 
 extension SearchByAddressController {
     @objc func textFieldDidChange(_ textField: UITextField) {
-        
-        let curretText = textField.text ?? ""
-        
-        if curretText.isEmpty {
             setRightBarButton(state: .disabled)
-        } else {
-            setRightBarButton(state: .find)
-        }
     }
 }
 
