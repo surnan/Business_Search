@@ -68,7 +68,7 @@ class BusinessDetailsView {
     }
     
     func changeTitle(isFavorite: Bool){
-        let title = isFavorite ? "Delete from Favorites" : "8 as Favorite"
+        let title = isFavorite ? "Delete from Favorites" : "Save as Favorite"
         markFavoriteButton.setTitle(title, for: .normal)
     }
 }
