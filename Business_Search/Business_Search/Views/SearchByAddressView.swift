@@ -48,17 +48,27 @@ class SearchByAddressView {
         return textField
     }()
     
-    var myTextView: UITextView = {
-        let textView = UITextView()
-        textView.text = " Please enter address ..."
-        textView.font = UIFont(name: "Georgie", size: 30)
-        textView.textColor = .lightGray
-        textView.sizeToFit()
-        textView.isScrollEnabled = false
-        textView.layer.cornerRadius = 5
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
+    var myButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("   Locate Address   ", for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.layer.cornerRadius = 7
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
+    
+    
+//    var myTextView: UITextView = {
+//        let textView = UITextView()
+//        textView.text = " Please enter address ..."
+//        textView.font = UIFont(name: "Georgie", size: 30)
+//        textView.textColor = .lightGray
+//        textView.sizeToFit()
+//        textView.isScrollEnabled = false
+//        textView.layer.cornerRadius = 5
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        return textView
+//    }()
     
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()

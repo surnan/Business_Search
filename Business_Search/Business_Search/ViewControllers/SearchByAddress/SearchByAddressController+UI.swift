@@ -16,11 +16,11 @@ extension SearchByAddressController {
         super.viewDidLoad()
         view.backgroundColor = .white
         locationTextField.delegate = self
-        myTextView.delegate = self
+//        myTextView.delegate = self
         myTextField.delegate = self
         
         
-        myTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        //myTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         barButtonState = ButtonState.disabled   //likely don't need this
         
@@ -57,7 +57,7 @@ extension SearchByAddressController {
         let safe = view.safeAreaLayoutGuide
         let redView = viewObject.redView
         
-        [myTextField, locationImageView, mapView, redView].forEach{view.addSubview($0)}
+        [myButton, myTextField, locationImageView, mapView, redView].forEach{view.addSubview($0)}
 
         NSLayoutConstraint.activate([
             locationImageView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 15),
@@ -68,9 +68,15 @@ extension SearchByAddressController {
             myTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
             myTextField.heightAnchor.constraint(equalToConstant: 30),
             
+            
+            myButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            myButton.topAnchor.constraint(equalTo: myTextField.bottomAnchor, constant: 15),
+            
+            
+            
+            mapView.topAnchor.constraint(equalTo: myButton.bottomAnchor, constant: 15),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.topAnchor.constraint(equalTo: myTextField.bottomAnchor, constant: 15),
             mapView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
             
             redView.topAnchor.constraint(equalTo: mapView.bottomAnchor),
