@@ -48,6 +48,12 @@ extension SearchByAddressController {
     
     
     func setupUI(){
+        
+        let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        myTextField.leftView = paddingView
+        myTextField.leftViewMode = .always
+        
+        
         view.backgroundColor = .lightBlue
         navigationItem.title = "Search by Address"
         setRightBarButton(state: .disabled)
