@@ -19,11 +19,6 @@ extension SearchByAddressController {
         coordinator?.loadSearchTable(location: locationToForward)
     }
     
-    
-    @objc func handleClearButon(){
-        setRightBarButton(state: .disabled)
-    }
-    
     @objc func handleFindButton(_ sender: UIButton){
         view.endEditing(true)
         geoCoder.geocodeAddressString(myTextField.text ?? "") { [weak self] (clplacement, error) in

@@ -14,21 +14,13 @@ extension SearchByAddressController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         locationTextField.delegate = self
-//        myTextView.delegate = self
         myTextField.delegate = self
-        
-        
         myTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        
         barButtonState = ButtonState.disabled   //likely don't need this
-        
         setupUI()
         addHandlers()
     }
-    
-    
     
     func setRightBarButton(state: ButtonState){
         let nextAction =  UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))
@@ -46,20 +38,17 @@ extension SearchByAddressController {
         }
     }
     
-    
     func setupUI(){
         
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         myTextField.leftView = paddingView
         myTextField.leftViewMode = .always
+
+        view.backgroundColor = #colorLiteral(red: 0.8286596725, green: 0.9669024038, blue: 1, alpha: 1)
         
-        
-        view.backgroundColor = .lightBlue
         navigationItem.title = "Search by Address"
         setRightBarButton(state: .disabled)
-        
-        
-        
+
         let safe = view.safeAreaLayoutGuide
         let redView = viewObject.redView
         
@@ -74,11 +63,8 @@ extension SearchByAddressController {
             myTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
             myTextField.heightAnchor.constraint(equalToConstant: 30),
             
-            
             myButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             myButton.topAnchor.constraint(equalTo: myTextField.bottomAnchor, constant: 15),
-            
-            
             
             mapView.topAnchor.constraint(equalTo: myButton.bottomAnchor, constant: 15),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

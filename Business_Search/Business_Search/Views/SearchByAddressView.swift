@@ -51,24 +51,14 @@ class SearchByAddressView {
     var myButton: UIButton = {
        let button = UIButton()
         button.setTitle("   Locate Address   ", for: .normal)
-        button.backgroundColor = UIColor.blue
+//        button.backgroundColor = UIColor.blue
+        
+        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        
         button.layer.cornerRadius = 7
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    
-//    var myTextView: UITextView = {
-//        let textView = UITextView()
-//        textView.text = " Please enter address ..."
-//        textView.font = UIFont(name: "Georgie", size: 30)
-//        textView.textColor = .lightGray
-//        textView.sizeToFit()
-//        textView.isScrollEnabled = false
-//        textView.layer.cornerRadius = 5
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        return textView
-//    }()
     
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
@@ -86,17 +76,6 @@ class SearchByAddressView {
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1
         return textField
-    }()
-    
-    var clearButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor.steelBlue
-        button.setTitle("  Clear  ", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.cornerRadius = cornerRadiusSize
-        button.clipsToBounds = true
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
 }
 
