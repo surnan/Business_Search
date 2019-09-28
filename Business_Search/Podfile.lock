@@ -1,24 +1,16 @@
 PODS:
-  - GoogleMaps (3.0.2):
-    - GoogleMaps/Maps (= 3.0.2)
-  - GoogleMaps/Base (3.0.2)
-  - GoogleMaps/Maps (3.0.2):
-    - GoogleMaps/Base
   - lottie-ios (2.5.2)
 
 DEPENDENCIES:
-  - GoogleMaps
   - lottie-ios
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - GoogleMaps
+  https://github.com/CocoaPods/Specs.git:
     - lottie-ios
 
 SPEC CHECKSUMS:
-  GoogleMaps: 941cd655e009b4d8e42df19a3d749bc3fccec973
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
 
-PODFILE CHECKSUM: bb20f2dc4e0e7dfb8c32a19e774d10aed03f6241
+PODFILE CHECKSUM: 09738ce1eee98b3df187cc92c37cd13ca6f9a7cc
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.1

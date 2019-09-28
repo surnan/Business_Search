@@ -5,6 +5,6 @@ target 'Business_Search' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'GoogleMaps'
+  #pod 'GoogleMaps'
   pod 'lottie-ios'
 end

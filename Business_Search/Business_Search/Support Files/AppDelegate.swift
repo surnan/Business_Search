@@ -8,7 +8,7 @@
 
 
 import UIKit
-import GoogleMaps
+//import GoogleMaps
 
 
 @UIApplicationMain
@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")
+        //GMSServices.provideAPIKey("AIzaSyDGg9KrIhBikjHA--5OTYlRufyTfQl2N7w")  //Google Key
         radius = UserDefaults.standard.object(forKey: AppConstants.radius.rawValue) as? Int ?? defaultRadius
         UserAppliedFilter.shared.load()
         
