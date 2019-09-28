@@ -27,7 +27,7 @@ extension SearchByAddressController {
     
     @objc func handleFindButton(_ sender: UIButton){
         view.endEditing(true)
-        geoCoder.geocodeAddressString(myTextView.text ?? "") { [weak self] (clplacement, error) in
+        geoCoder.geocodeAddressString(myTextField.text ?? "") { [weak self] (clplacement, error) in
             guard let placemarks = clplacement, let location = placemarks.first?.location else {
                 sender.isSelected = false
                 self?.showAlertController(title: "Input Error", message: "Unable to find location on map")

@@ -37,10 +37,20 @@ class SearchByAddressView {
     }()
     
     
+    var myTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = " Enter address ...."
+        textField.clearButtonMode = .whileEditing
+        textField.backgroundColor = .white
+        textField.adjustsFontSizeToFitWidth = true
+        textField.layer.cornerRadius = 5
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
     
     var myTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "Please enter address ..."
+        textView.text = " Please enter address ..."
         textView.font = UIFont(name: "Georgie", size: 30)
         textView.textColor = .lightGray
         textView.sizeToFit()

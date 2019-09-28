@@ -24,8 +24,9 @@ class SearchByAddressController: UIViewController, UITextViewDelegate, UITextFie
     lazy var mapView            = viewObject.mapView
     lazy var locationImageView  = viewObject.locationImageView
     lazy var locationTextField  = viewObject.locationTextField
-    lazy var clearButton = viewObject.clearButton
+    lazy var clearButton        = viewObject.clearButton
     lazy var myTextView         = viewObject.myTextView
+    lazy var myTextField        = viewObject.myTextField
     
     
     let textViewMaxHeight: CGFloat = 50
