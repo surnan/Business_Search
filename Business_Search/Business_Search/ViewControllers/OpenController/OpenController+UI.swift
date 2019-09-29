@@ -46,7 +46,22 @@ extension OpenController {
         tableView.dataSource = tableDataSource
         tableView.delegate = tableDelegate
         readOrCreateLocation()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    
+    
+    @objc func keyboardWillShow(notification:NSNotification) {
+        tableView.alpha = 0.5
+    }
+     
+    @objc func keyboardWillHide(notification:NSNotification) {
+        tableView.alpha = 1
+    }
+    
     
     func readOrCreateLocation(){                                        //Check if location exists or download
         locationViewModel.reload()                                      //Only time Locations should be loaded

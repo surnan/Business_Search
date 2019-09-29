@@ -69,7 +69,6 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         self.longitude = lon
     }
     
-    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
