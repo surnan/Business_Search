@@ -85,6 +85,9 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         searchController.searchResultsUpdater   = self
         return searchController
     }()
+    
+    var tempStringForSearchField = ""
+    
 }
 
 

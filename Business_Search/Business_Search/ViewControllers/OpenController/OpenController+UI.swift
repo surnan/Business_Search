@@ -59,6 +59,7 @@ extension OpenController {
     }
      
     @objc func keyboardWillHide(notification:NSNotification) {
+        searchController.searchBar.text = tempStringForSearchField
         tableView.alpha = 1
     }
     

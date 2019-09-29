@@ -10,10 +10,24 @@ import UIKit
 
 extension OpenController {
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        tempStringForSearchField = searchBar.text ?? ""
+
+    }
+    
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         //This is called when user switches scopes
         searchGroupIndex = selectedScope
         tableView.reloadData()
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+                    resetAllControllerAndPredicates()
+                    tableView.reloadData()
+        }
     }
     
     
