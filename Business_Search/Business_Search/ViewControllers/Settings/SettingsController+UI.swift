@@ -26,18 +26,18 @@ extension SettingsController{
             return stack
         }()
         
-        [distanceSliderStack, verticalSearchStack, textViewStack, saveCancelDeleteStack].forEach{myStack.addArrangedSubview($0)}
-        
+        [distanceSliderStack, verticalSearchStack, textViewStack].forEach{myStack.addArrangedSubview($0)}
         let deleteAllLabel = viewObject.getDeleteAllLabel()
         
-        view.addSubview(myStack)
-        view.addSubview(deleteAllLabel)
+        [myStack, deleteAllLabel, saveCancelDeleteStack].forEach{view.addSubview($0)}
         
         NSLayoutConstraint.activate([
             myStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            myStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
+            myStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+            saveCancelDeleteStack.topAnchor.constraint(equalTo: myStack.bottomAnchor, constant: 20),
+            saveCancelDeleteStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             deleteAllLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            deleteAllLabel.topAnchor.constraint(equalTo: myStack.bottomAnchor, constant: 15)
+            deleteAllLabel.topAnchor.constraint(equalTo: saveCancelDeleteStack.bottomAnchor, constant: 15)
             ])
     }
 }

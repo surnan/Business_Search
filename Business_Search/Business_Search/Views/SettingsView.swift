@@ -30,20 +30,25 @@ class SettingsView {
     
     let sliderLeftLabel         = GenericLabel(text: "0"        , textColor: .white)
     let sliderRightLabel        = GenericLabel(text: "1000"     , textColor: .white)
-    let saveButton              = GenericButton(title: "SAVE"   , isCorner: true)
-    let cancelButton            = GenericButton(title: "CANCEL" , isCorner: true)
-    
-
-    let defaultsButton          = GenericButton(title: "Reset to Defaults"      , highlightColor: .red, borderWidth: 1, isCorner: true)
-    let deleteFavoritesButton   = GenericButton(title: "Delete All Favorites"   , highlightColor: .red, borderWidth: 1, isCorner: true)
+    let saveButton              = GenericButton(title: "SAVE"   , titleColor: .white, backgroundColor: .darkBlue, isCorner: true)
+    let cancelButton            = GenericButton(title: "CANCEL" , titleColor: .white, backgroundColor: .red, isCorner: true)
+    let defaultsButton          = GenericButton(title: "   Reset to Defaults   "      , highlightColor: .red, backgroundColor: .veryLightGreen ,borderWidth: 1, isCorner: true)
+    let deleteFavoritesButton   = GenericButton(title: "Delete Favorites"   , highlightColor: .red, backgroundColor: .lightSteelBlue1 ,borderWidth: 1, isCorner: true)
     
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
 
     let deleteAllLabel: UILabel = {
-        let label     = GenericLabel(text: "All saved business data deleted", size: 12, backgroundColor: .clear, textColor: .red)
+        let label     = GenericLabel(text: "All favorites and saved business data deleted", size: 12, backgroundColor: .clear, textColor: .red)
         label.isHidden = true
         return label
     }()
+    
+    let deleteFavoritesLabel: UILabel = {
+        let label     = GenericLabel(text: "All favorite deleted", size: 12, backgroundColor: .clear, textColor: .red)
+        label.isHidden = true
+        return label
+    }()
+    
     
 
     //MARK: Lazy VAR
