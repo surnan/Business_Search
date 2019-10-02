@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType {
+class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType, FilterType {
     private let window          : UIWindow
     private let dataController  : DataController
     private let newController   : MainMenuController
@@ -62,6 +62,12 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
 
     func loadSettings(delegate: UnBlurViewType, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
+        coordinator.start(parent: self)
+    }
+    
+    
+    func loadFilter(unblurProtocol: UnBlurViewType){
+        let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
         coordinator.start(parent: self)
     }
 }

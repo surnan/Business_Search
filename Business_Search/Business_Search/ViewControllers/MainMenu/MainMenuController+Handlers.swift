@@ -22,6 +22,10 @@ extension MainMenuController {
         showFinishNetworkRequest()
     }
     
+    @objc func handleFilter(){
+        addDarkScreenBlur()
+        coordinator?.loadFilter(unblurProtocol: self)
+    }
     
     @objc func handleBlank(){
     }

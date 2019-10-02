@@ -53,7 +53,17 @@ extension MainMenuController {
     }
     
     func setupUI(){
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
+        let settingsBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"),
+                                                style: .done,
+                                                target: self,
+                                                action: #selector(handleSettings))
+        
+        let filterBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleFilter))
+        
+        navigationItem.leftBarButtonItem    = settingsBarButton
+        navigationItem.rightBarButtonItem   = filterBarButton
+        
+        
         self.navigationItem.titleView = mainView.titleImage
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
