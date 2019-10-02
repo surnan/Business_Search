@@ -15,24 +15,18 @@ extension SettingsController{
         viewObject.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         viewObject.cancelButton.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
         viewObject.defaultsButton.addTarget(self, action: #selector(handleDefaultsButton), for: .touchUpInside)
-        //viewObject.deleteFavoritesButton.addTarget(self, action: #selector(handleDeleteFavorites), for: .touchUpInside)
     }
     
-    @objc func handleDeleteFavorites(){
-        favoritesViewModel.deleteAllFavorites()
-        businessViewModel.removeAllFavorites()
-    }
-    
-    @objc func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
+    @objc private func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){
         newRadiusValue = Int(sender.value)
         viewObject.sliderValueLabel.text = "\(Int(sender.value))"
     }
     
-    @objc func handlecancelButton(){
+    @objc private func handlecancelButton(){
         dismissController?()
     }
     
-    @objc func handleSaveButton(){
+    @objc private func handleSaveButton(){
         if let newRadius = newRadiusValue {
             radius = newRadius
             locationsViewModel.deleteAllLocations()
@@ -42,12 +36,12 @@ extension SettingsController{
         dismissController?()
     }
     
-    func deleteAllFavorites(){
+    private func deleteAllFavorites(){
         favoritesViewModel.deleteAllFavorites()
         businessViewModel.removeAllFavorites()
     }
     
-    @objc func handleDefaultsButton(){
+    @objc private func handleDefaultsButton(){
         viewObject.resetDefaults()
         self.viewObject.deleteAllLabel.isHidden = false
         newRadiusValue = defaultRadius
