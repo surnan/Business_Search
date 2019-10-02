@@ -109,17 +109,19 @@ extension OpenController {
         imageView.contentMode           = .scaleAspectFit
         self.navigationItem.titleView   = imageView
         let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
-        navigationItem.rightBarButtonItems = [getFilterBarButton(), searchBarButton]
+        let filterBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleFilter))
+        
+        navigationItem.rightBarButtonItems = [filterBarButton, searchBarButton]
         navigationItem.searchController = searchController
     }
     
-    private func getFilterBarButton()-> UIBarButtonItem {
-        if !UserAppliedFilter.shared.isFilterOn {
-            return UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(handleFilter))
-        } else {
-            return UIBarButtonItem(title: "Filtered", style: .plain, target: self, action: #selector(handleFilter))
-        }
-    }
+//    private func getFilterBarButton()-> UIBarButtonItem {
+//        if !UserAppliedFilter.shared.isFilterOn {
+//            return UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(handleFilter))
+//        } else {
+//            return UIBarButtonItem(title: "Filtered", style: .plain, target: self, action: #selector(handleFilter))
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
