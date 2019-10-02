@@ -15,7 +15,7 @@ extension SettingsController{
         viewObject.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         viewObject.cancelButton.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
         viewObject.defaultsButton.addTarget(self, action: #selector(handleDefaultsButton), for: .touchUpInside)
-        viewObject.deleteFavoritesButton.addTarget(self, action: #selector(handleDeleteFavorites), for: .touchUpInside)
+        //viewObject.deleteFavoritesButton.addTarget(self, action: #selector(handleDeleteFavorites), for: .touchUpInside)
     }
     
     @objc func handleDeleteFavorites(){
@@ -42,6 +42,11 @@ extension SettingsController{
         dismissController?()
     }
     
+    func deleteAllFavorites(){
+        favoritesViewModel.deleteAllFavorites()
+        businessViewModel.removeAllFavorites()
+    }
+    
     @objc func handleDefaultsButton(){
         viewObject.resetDefaults()
         self.viewObject.deleteAllLabel.isHidden = false
@@ -53,5 +58,6 @@ extension SettingsController{
         }
         UserDefaults.standard.set(viewObject.myTextView.text, forKey: AppConstants.greetingMessage.rawValue)
         locationsViewModel.deleteAllLocations()
+        deleteAllFavorites()
     }
 }

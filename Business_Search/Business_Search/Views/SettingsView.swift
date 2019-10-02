@@ -33,8 +33,8 @@ class SettingsView {
     let saveButton              = GenericButton(title: "SAVE"   , titleColor: .white, backgroundColor: .darkBlue, isCorner: true)
     let cancelButton            = GenericButton(title: "CANCEL" , titleColor: .white, backgroundColor: .red, isCorner: true)
     let defaultsButton          = GenericButton(title: "   Reset to Defaults   "      , highlightColor: .red, backgroundColor: .veryLightGreen ,borderWidth: 1, isCorner: true)
-    let deleteFavoritesButton   = GenericButton(title: "Delete Favorites"   , highlightColor: .red, backgroundColor: .lightSteelBlue1 ,borderWidth: 1, isCorner: true)
-    
+//    let deleteFavoritesButton   = GenericButton(title: "Delete Favorites"   , highlightColor: .red, backgroundColor: .lightSteelBlue1 ,borderWidth: 1, isCorner: true)
+//
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
 
     let deleteAllLabel: UILabel = {
@@ -85,7 +85,8 @@ class SettingsView {
     
     func getSaveCancelStack()-> UIStackView {
         let stack = GenericStack(spacing: 20)
-        [saveButton, cancelButton, deleteFavoritesButton, defaultsButton].forEach{stack.addArrangedSubview($0)}
+        //[saveButton, cancelButton, deleteFavoritesButton, defaultsButton].forEach{stack.addArrangedSubview($0)}
+        [saveButton, cancelButton, defaultsButton].forEach{stack.addArrangedSubview($0)}
         return stack
     }
     

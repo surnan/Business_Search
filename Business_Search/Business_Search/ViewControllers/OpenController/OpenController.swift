@@ -71,7 +71,7 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.scopeButtonTitles = ["Business", "Category"]
+        searchController.searchBar.scopeButtonTitles = ["Name", "Category"]
         searchController.searchBar.placeholder = "Enter name ..."
         searchController.searchBar.tintColor = .white
         searchController.searchBar.searchBarStyle = .minimal
