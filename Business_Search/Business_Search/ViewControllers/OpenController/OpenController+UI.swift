@@ -108,10 +108,17 @@ extension OpenController {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode           = .scaleAspectFit
         self.navigationItem.titleView   = imageView
-        let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
+//        let searchBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearch))
+        
+        let settingsBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"),
+                                                style: .done,
+                                                target: self,
+                                                action: #selector(handleSettings))
+        
+        
         let filterBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleFilter))
         
-        navigationItem.rightBarButtonItems = [filterBarButton, searchBarButton]
+        navigationItem.rightBarButtonItems = [filterBarButton, settingsBarButton]
         navigationItem.searchController = searchController
     }
     
