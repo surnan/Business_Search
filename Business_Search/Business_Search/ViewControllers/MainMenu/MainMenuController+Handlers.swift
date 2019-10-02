@@ -31,7 +31,6 @@ extension MainMenuController {
     }
     
     @objc func handleButtons(_ sender: UIButton){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(handleBlank))
         determineMyCurrentLocation()
         controllerIndex = sender.tag
     }
@@ -49,8 +48,6 @@ extension MainMenuController {
         if CLLocationManager.locationServicesEnabled() {
             showNONPassThroughNetworkActivityView()
             locationManager.startUpdatingLocation()
-        } else {
-            
-        }
+        } 
     }
 }
