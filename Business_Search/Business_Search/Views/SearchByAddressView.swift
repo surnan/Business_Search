@@ -51,10 +51,7 @@ class SearchByAddressView {
     var myButton: UIButton = {
        let button = UIButton()
         button.setTitle("   Locate Address   ", for: .normal)
-//        button.backgroundColor = UIColor.blue
-        
         button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        
         button.layer.cornerRadius = 7
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -70,8 +67,7 @@ class SearchByAddressView {
     var locationTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSMutableAttributedString(string: "Enter a Location",
-                                                                    //attributes: grey25textAttributes)
-            attributes: georgiaAttributes(color: .gray, size: 18))
+                                                                    attributes: georgiaAttributes(color: .gray, size: 18))
         textField.myStandardSetup(cornerRadiusSize: cornerRadiusSize, defaulAttributes: black25textAttributes)
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1

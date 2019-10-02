@@ -32,7 +32,7 @@ class SettingsView {
     let sliderRightLabel        = GenericLabel(text: "1000"     , textColor: .white)
     let saveButton              = GenericButton(title: "SAVE"   , titleColor: .white, backgroundColor: .darkBlue, isCorner: true)
     let cancelButton            = GenericButton(title: "CANCEL" , titleColor: .white, backgroundColor: .red, isCorner: true)
-    let defaultsButton          = GenericButton(title: "   Reset to Defaults   "      , highlightColor: .red, backgroundColor: .veryLightGreen ,borderWidth: 1, isCorner: true)
+    let defaultsButton          = GenericButton(title: "   Delete Saved Data   "      , titleColor: .white, highlightColor: .red, backgroundColor: .darkGreen ,borderWidth: 1, isCorner: true)
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
 
     let deleteAllLabel: UILabel = {
