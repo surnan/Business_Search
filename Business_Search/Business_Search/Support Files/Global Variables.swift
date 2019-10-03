@@ -28,7 +28,7 @@ let downloadJSON = "MyDownloader"
 enum TableIndex:Int { case business = 0, category }
 
 
-let defaultOutgoingMessage =  "Hi.  This is a link to a business that I am looking at: "
+let defaultOutgoingMessage =  "Hi.  This the Yelp page to a business that I am looking at: "
 
 
 enum AppConstants:String {

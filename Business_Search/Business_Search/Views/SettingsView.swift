@@ -22,7 +22,7 @@ class SettingsView {
     }
     
     let searchRadiusLabel      : GenericAttributedTextLabel = {
-        let label = GenericAttributedTextLabel(text: "Business Search Radius\nin meters",
+        let label = GenericAttributedTextLabel(text: "Search Radius\nin meters",
                                                attributes: whiteHelvetica_20_blackStroke)
         label.numberOfLines = -1
         return label
