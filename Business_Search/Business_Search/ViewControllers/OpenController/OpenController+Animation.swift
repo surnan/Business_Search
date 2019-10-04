@@ -15,7 +15,7 @@ extension OpenController {
         let safe = view.safeAreaLayoutGuide
         viewObject.resultsAreFilteredLabel.anchor(top: safe.topAnchor, leading: safe.leadingAnchor, trailing: safe.trailingAnchor)
         viewObject.resultsAreFilteredLabel.alpha = 1
-        UIView.animate(withDuration: 1.5, animations: {
+        UIView.animate(withDuration: 7.0, animations: {
             self.viewObject.resultsAreFilteredLabel.alpha = 0
         }) { (_) in
             self.viewObject.resultsAreFilteredLabel.removeFromSuperview()

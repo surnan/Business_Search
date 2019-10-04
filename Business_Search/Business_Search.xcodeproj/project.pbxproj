@@ -76,7 +76,7 @@
 		84888595233BC0EF00427740 /* SearchByAddressController+TextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84888594233BC0EF00427740 /* SearchByAddressController+TextDelegate.swift */; };
 		848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */; };
 		848DEC4A22F255A900102E9B /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC4922F255A900102E9B /* LocationViewModel.swift */; };
-		848DEC4C22F2619D00102E9B /* OpenController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC4B22F2619D00102E9B /* OpenController+Extension.swift */; };
+		848DEC4C22F2619D00102E9B /* OpenController+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC4B22F2619D00102E9B /* OpenController+Animation.swift */; };
 		848DEC4E22F2627800102E9B /* OpenController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC4D22F2627800102E9B /* OpenController+Handlers.swift */; };
 		848DEC5322F3DF3B00102E9B /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5222F3DF3B00102E9B /* Presentable.swift */; };
 		848DEC5522F3E02400102E9B /* RouterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5422F3E02400102E9B /* RouterType.swift */; };
@@ -204,7 +204,7 @@
 		84888594233BC0EF00427740 /* SearchByAddressController+TextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchByAddressController+TextDelegate.swift"; sourceTree = "<group>"; };
 		848B8E0F227202B000F761F5 /* CreateYelpURLDuringLooping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateYelpURLDuringLooping.swift; sourceTree = "<group>"; };
 		848DEC4922F255A900102E9B /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
-		848DEC4B22F2619D00102E9B /* OpenController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenController+Extension.swift"; sourceTree = "<group>"; };
+		848DEC4B22F2619D00102E9B /* OpenController+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenController+Animation.swift"; sourceTree = "<group>"; };
 		848DEC4D22F2627800102E9B /* OpenController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenController+Handlers.swift"; sourceTree = "<group>"; };
 		848DEC5222F3DF3B00102E9B /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		848DEC5422F3E02400102E9B /* RouterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterType.swift; sourceTree = "<group>"; };
@@ -531,7 +531,7 @@
 				84E27D1C22F0793C00D2CAE5 /* OpenController+Search.swift */,
 				84E27D2022F0963200D2CAE5 /* OpenController+UI.swift */,
 				848DEC4D22F2627800102E9B /* OpenController+Handlers.swift */,
-				848DEC4B22F2619D00102E9B /* OpenController+Extension.swift */,
+				848DEC4B22F2619D00102E9B /* OpenController+Animation.swift */,
 			);
 			path = OpenController;
 			sourceTree = "<group>";
@@ -1018,7 +1018,7 @@
 				847AE26022EBE45500774371 /* BusinessDetailsViewModel.swift in Sources */,
 				847AE27022EDD03500774371 /* SearchByAddressController+Handlers.swift in Sources */,
 				848DEC5322F3DF3B00102E9B /* Presentable.swift in Sources */,
-				848DEC4C22F2619D00102E9B /* OpenController+Extension.swift in Sources */,
+				848DEC4C22F2619D00102E9B /* OpenController+Animation.swift in Sources */,
 				847AE27822EDE1B100774371 /* SearchByMapView.swift in Sources */,
 				843C66FB227DC97A003A64D1 /* BusinessCell.swift in Sources */,
 				840CC5FE22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift in Sources */,

@@ -60,8 +60,7 @@ extension MainMenuController {
         
         let filterBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleFilter))
         
-        navigationItem.leftBarButtonItem    = settingsBarButton
-        navigationItem.rightBarButtonItem   = filterBarButton
+        navigationItem.rightBarButtonItems = [filterBarButton, settingsBarButton]
         
         
         self.navigationItem.titleView = mainView.titleImage
