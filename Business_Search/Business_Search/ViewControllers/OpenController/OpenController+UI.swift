@@ -114,10 +114,9 @@ extension OpenController {
                                                 target: self,
                                                 action: #selector(handleSettings))
         
+        let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
+        navigationItem.rightBarButtonItems = [myButton, settingsBarButton]
         
-        let filterBarButton     = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleFilter))
-        
-        navigationItem.rightBarButtonItems = [filterBarButton, settingsBarButton]
         navigationItem.searchController = searchController
     }
     

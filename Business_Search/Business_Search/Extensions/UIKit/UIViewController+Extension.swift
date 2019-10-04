@@ -106,3 +106,16 @@ extension UIViewController: Presentable {
     }
 }
 
+//MARK:- App Specific
+func getFilterButton(target: Any?, selector: Selector)->UIBarButtonItem{
+    let buttonName = UserAppliedFilter.shared.isFilterOn ?
+        AppConstants.filterOn.rawValue : AppConstants.filterOff.rawValue
+    
+    let button = UIBarButtonItem(image: #imageLiteral(resourceName: buttonName),
+                                 style: .done,
+                                 target: target,
+                                 action: selector)
+    
+    return button
+}
+

@@ -44,12 +44,13 @@ extension MainMenuController {
         super.viewDidAppear(animated)
         //[locationViewModel, viewModel] = NIL @ viewWillApear, viewDidLoad
         //deleteLocationsIfInvalid()
+        setupUI()
     }
-    
     
     func undoBlur() {
         removeDarkScreenBlur()
         navigationController?.setNavigationBarHidden(false, animated: true)
+        setupUI()
     }
     
     func setupUI(){
@@ -57,14 +58,10 @@ extension MainMenuController {
                                                 style: .done,
                                                 target: self,
                                                 action: #selector(handleSettings))
-        
-  
-        let filterBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filterA_40"),
-                                              style: .done,
-                                              target: self,
-                                              action: #selector(handleFilter))
 
-        navigationItem.rightBarButtonItems = [filterBarButton, settingsBarButton]
+        let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
+        
+        navigationItem.rightBarButtonItems = [myButton, settingsBarButton]
         
         self.navigationItem.titleView = mainView.titleImage
         let safe = view.safeAreaLayoutGuide
