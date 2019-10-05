@@ -112,6 +112,14 @@ class BusinessViewModel {
         reload()
     }
     
+    
+    func search(business: Business){
+        let nameToFind = business.name ?? ""
+        fetchBusinessPredicate = NSPredicate(format: "name MATCHES %@", argumentArray: [nameToFind])
+        reload()
+    }
+    
+    
     private func isFavorite(at indexPath: IndexPath)->Bool{
         let currentBusiness = fetchBusinessController?.object(at: indexPath)
         return currentBusiness?.isFavorite ?? false

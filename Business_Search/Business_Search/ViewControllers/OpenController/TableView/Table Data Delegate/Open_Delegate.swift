@@ -8,13 +8,16 @@
 
 import UIKit
 
-class Open_Delegate: NSObject, UITableViewDelegate {
+class Open_Delegate: NSObject, UITableViewDelegate, OpenControllerType {
     private var reloadCellAt: IndexPath?
     private let dataController: DataController
     private var selectedCategoryPredicate : NSPredicate?
     let coordinator: OpenCoordinator?
     let parent: OpenController
     let source: Open_DataSource
+    
+    var getLatitude: Double {return parent.getLatitude}
+    var getLongitude: Double {return parent.getLongitude}
     
     private lazy var viewModel = CategoryViewModel(dataController: dataController,
                                                    lat: parent.getLatitude,
@@ -51,6 +54,9 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         switch source.tableArrayType {
         case TableIndex.business.rawValue:
             guard let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath) else {return}
+            
+            findMatchingNames(business: currentBusiness)
+            
             parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
         case TableIndex.category.rawValue:
             let currentCategory = source.categoryNameCountViewModel.objectAt(indexPath: indexPath)
@@ -59,5 +65,18 @@ class Open_Delegate: NSObject, UITableViewDelegate {
         default:
             print("Illegal Value inside tableViewArrayType")
         }
+    }
+    
+    
+    func findMatchingNames(business: Business){
+        //let tempController = BusinessViewModel(dataController: dataController)
+        
+        
+        let tempController = BusinessViewModel(delegate: self, dataController: dataController)
+        tempController.search(business: business)
+        let allMatchingBusinesses = tempController.fetchedObjects()
+        
+        print("allMatchingBusinesses.count = \(allMatchingBusinesses.count)")
+    
     }
 }
