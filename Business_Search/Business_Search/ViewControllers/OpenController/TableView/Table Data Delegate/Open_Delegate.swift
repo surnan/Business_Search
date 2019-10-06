@@ -54,10 +54,13 @@ class Open_Delegate: NSObject, UITableViewDelegate, OpenControllerType {
         switch source.tableArrayType {
         case TableIndex.business.rawValue:
             guard let currentBusiness = source.businessViewModel.objectAt(indexPath: indexPath) else {return}
-            
-            findMatchingNames(business: currentBusiness)
-            
-            parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
+            let matchingBusinesses = findMatchingNames(business: currentBusiness)
+            if matchingBusinesses.count == 1 {
+                parent.coordinator?.loadBusinessDetails(currentBusiness: currentBusiness)
+            } else {
+                parent.duplicateBusinessAlertController(business: currentBusiness, businesses: matchingBusinesses)
+                //parent.coordinator?.loadTabController(businesses: matchingBusinesses, categoryName: "ABC")
+            }
         case TableIndex.category.rawValue:
             let currentCategory = source.categoryNameCountViewModel.objectAt(indexPath: indexPath)
             let items = getBusinessesFromCategoryName(category: currentCategory)
@@ -68,15 +71,11 @@ class Open_Delegate: NSObject, UITableViewDelegate, OpenControllerType {
     }
     
     
-    func findMatchingNames(business: Business){
-        //let tempController = BusinessViewModel(dataController: dataController)
-        
-        
+    private func findMatchingNames(business: Business) -> [Business]{
         let tempController = BusinessViewModel(delegate: self, dataController: dataController)
         tempController.search(business: business)
         let allMatchingBusinesses = tempController.fetchedObjects()
-        
-        print("allMatchingBusinesses.count = \(allMatchingBusinesses.count)")
-    
+        //print("allMatchingBusinesses.count = \(allMatchingBusinesses.count)")
+        return allMatchingBusinesses
     }
 }
