@@ -11,19 +11,33 @@ import UIKit
 extension SearchByMapController {
 
     func setupUI(){
+        view.backgroundColor = .black
         navigationItem.title = "Search by Map"
+        
+        [myTextField, myButton].forEach{addressBarStack.addArrangedSubview($0)}
+        
 
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]
         let redView = viewObject.redView
         
-        [mapView, pinImageView, redView, showHideAddressBarButton].forEach{view.addSubview($0)}
+        [mapView, pinImageView, redView, showHideAddressBarButton, addressBarStack].forEach{view.addSubview($0)}
         //mapView.fillSafeSuperView()
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
             showHideAddressBarButton.topAnchor.constraint(equalTo: safe.topAnchor),
             showHideAddressBarButton.widthAnchor.constraint(equalTo: view.widthAnchor),
             
-            mapView.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor),
+            addressBarStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addressBarStack.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor, constant: 10),
+            myTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
+            
+            
+            
+            
+            
+            //mapView.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor),
+            mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 10),
+            
             mapView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),

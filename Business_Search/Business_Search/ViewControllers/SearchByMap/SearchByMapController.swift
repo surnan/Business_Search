@@ -22,7 +22,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     lazy var showHideAddressBarButton  : UIButton = {
         let button = UIButton()
-        button.backgroundColor = .lightSteelBlue1
+        button.backgroundColor = .darkGreen
         button.setTitle("Hide Address Bar", for: .normal)
         button.addTarget(self, action: #selector(handleShowHideAddressBarButton(_:)), for: .touchDown)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -36,12 +36,38 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             return
         }
         
-        sender.backgroundColor = .lightSteelBlue1
+        sender.backgroundColor = UIColor.darkGreen
         sender.setTitle("Hide Address Bar", for: .normal)
     }
     
     
+    var myButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("   Locate Address   ", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.layer.cornerRadius = 7
+        //button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    var myTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = " Enter address ...."
+        textField.clearButtonMode = .whileEditing
+        textField.backgroundColor = .white
+        textField.adjustsFontSizeToFitWidth = true
+        textField.layer.cornerRadius = 5
+        //textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
     
+    lazy var addressBarStack: UIStackView = {
+        var stack = UIStackView()
+        stack.spacing = 10
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
     
     
     
@@ -59,3 +85,4 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         locationToForward = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
     }
 }
+

@@ -64,14 +64,14 @@ class SearchByAddressView {
         return mapView
     }()
     
-    var locationTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSMutableAttributedString(string: "Enter a Location",
-                                                                    attributes: georgiaAttributes(color: .gray, size: 18))
-        textField.myStandardSetup(cornerRadiusSize: cornerRadiusSize, defaulAttributes: black25textAttributes)
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.borderWidth = 1
-        return textField
-    }()
+//    var locationTextField: UITextField = {
+//        let textField = UITextField()
+//        textField.attributedPlaceholder = NSMutableAttributedString(string: "Enter a Location",
+//                                                                    attributes: georgiaAttributes(color: .gray, size: 18))
+//        textField.myStandardSetup(cornerRadiusSize: cornerRadiusSize, defaulAttributes: black25textAttributes)
+//        textField.layer.borderColor = UIColor.black.cgColor
+//        textField.layer.borderWidth = 1
+//        return textField
+//    }()
 }
 
