@@ -16,9 +16,19 @@ extension SearchByMapController {
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]
         let redView = viewObject.redView
         
-        [mapView, pinImageView, redView].forEach{view.addSubview($0)}
-        mapView.fillSafeSuperView()
+        [mapView, pinImageView, redView, showHideAddressBarButton].forEach{view.addSubview($0)}
+        //mapView.fillSafeSuperView()
+        let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
+            showHideAddressBarButton.topAnchor.constraint(equalTo: safe.topAnchor),
+            showHideAddressBarButton.widthAnchor.constraint(equalTo: view.widthAnchor),
+            
+            mapView.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor),
+            mapView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
+            
+            
             pinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
             redView.topAnchor.constraint(equalTo: mapView.bottomAnchor),

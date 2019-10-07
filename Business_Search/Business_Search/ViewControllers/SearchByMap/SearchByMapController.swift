@@ -20,6 +20,31 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var locationToForward       = CLLocation()                //Pushing into newController()
 
     
+    lazy var showHideAddressBarButton  : UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .lightSteelBlue1
+        button.setTitle("Hide Address Bar", for: .normal)
+        button.addTarget(self, action: #selector(handleShowHideAddressBarButton(_:)), for: .touchDown)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc func handleShowHideAddressBarButton(_ sender: UIButton){
+        if sender.title(for: .normal) == "Hide Address Bar" {
+            sender.backgroundColor = .darkBlue
+            sender.setTitle("Show Address Bar", for: .normal)
+            return
+        }
+        
+        sender.backgroundColor = .lightSteelBlue1
+        sender.setTitle("Hide Address Bar", for: .normal)
+    }
+    
+    
+    
+    
+    
+    
     //MARK:- UI
     override func viewDidLoad() {
         super.viewDidLoad()
