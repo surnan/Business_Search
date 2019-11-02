@@ -36,7 +36,7 @@ extension SearchByMapController {
             
             
             //mapView.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor),
-            mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 10),
+            //mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 10),
             
             mapView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
@@ -50,5 +50,10 @@ extension SearchByMapController {
             redView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
+        
+        
+        /////////////
+        setupUI2()
+        showAddressButton()
     }
 }

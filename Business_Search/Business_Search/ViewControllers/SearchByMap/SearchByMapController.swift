@@ -30,14 +30,17 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     }()
     
     @objc func handleShowHideAddressBarButton(_ sender: UIButton){
+        show = !show
         if sender.title(for: .normal) == "Hide Address Bar" {
             sender.backgroundColor = .darkBlue
             sender.setTitle("Show Address Bar", for: .normal)
+            toggleLocateAddressButton(show: show)
             return
         }
         
         sender.backgroundColor = UIColor.darkGreen
         sender.setTitle("Hide Address Bar", for: .normal)
+        toggleLocateAddressButton(show: show)
     }
     
     
@@ -50,6 +53,19 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         return button
     }()
 
+    var show = true {
+        didSet {
+            addressBarStack.isHidden = !addressBarStack.isHidden
+        }
+    }
+    
+    
+    @objc   func handleMyButton(){
+//        show = !show
+//        toggleLocateAddressButton(show: show)
+    }
+    
+    
     var myTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = " Enter address ...."
@@ -76,13 +92,45 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         super.viewDidLoad()
         view.backgroundColor = .white
         mapView.delegate = self
+        myButton.addTarget(self, action: #selector(handleMyButton), for: .touchDown)
         setupUI()
     }
+    
+    var anchorMapTop_SafeAreaTop: NSLayoutConstraint?
+    var anchorMapTop_ShiftMapToShowLocateAddressButton: NSLayoutConstraint?
    
 
     //MARK:- Map Delegate Function
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         locationToForward = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
     }
+    
+    //MARK:- Move to UI extension
+    func toggleLocateAddressButton(show: Bool){
+        show ? showAddressButton() : hideAddressButton()
+        UIView.animate(withDuration: 0.15,
+                       animations: {self.view.layoutIfNeeded()},
+                       completion: nil)
+    }
+    
+    func setupUI2(){
+        let safe = view.safeAreaLayoutGuide
+        anchorMapTop_ShiftMapToShowLocateAddressButton = mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 10)
+        anchorMapTop_SafeAreaTop = mapView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20)
+    }
+    
+    func hideAddressButton(){
+        anchorMapTop_SafeAreaTop?.isActive = false
+        anchorMapTop_ShiftMapToShowLocateAddressButton?.isActive = true
+    }
+    
+    func showAddressButton(){
+        anchorMapTop_ShiftMapToShowLocateAddressButton?.isActive = false
+        anchorMapTop_SafeAreaTop?.isActive = true
+    }
+    
+    
+    
+    
 }
 
