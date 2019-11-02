@@ -55,7 +55,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
 
     var show = true {
         didSet {
-            addressBarStack.isHidden = !addressBarStack.isHidden
+            //addressBarStack.isHidden = !addressBarStack.isHidden
+            addressBarStack.isHidden = show
         }
     }
     
@@ -114,9 +115,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     }
     
     func setupUI2(){
-        let safe = view.safeAreaLayoutGuide
-        anchorMapTop_ShiftMapToShowLocateAddressButton = mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 10)
-        anchorMapTop_SafeAreaTop = mapView.topAnchor.constraint(equalTo: safe.topAnchor, constant: 20)
+        anchorMapTop_ShiftMapToShowLocateAddressButton = mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 5)
+        anchorMapTop_SafeAreaTop = mapView.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor)
     }
     
     func hideAddressButton(){
@@ -128,9 +128,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         anchorMapTop_ShiftMapToShowLocateAddressButton?.isActive = false
         anchorMapTop_SafeAreaTop?.isActive = true
     }
-    
-    
-    
     
 }
 

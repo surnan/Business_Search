@@ -23,6 +23,12 @@ extension SearchByMapController {
         [pinImageView, redView, showHideAddressBarButton, addressBarStack, mapView].forEach{view.addSubview($0)}
         //mapView.fillSafeSuperView()
         let safe = view.safeAreaLayoutGuide
+        
+//        /////////////
+//        setupUI2()
+//        showAddressButton()
+
+        
         NSLayoutConstraint.activate([
             showHideAddressBarButton.topAnchor.constraint(equalTo: safe.topAnchor),
             showHideAddressBarButton.widthAnchor.constraint(equalTo: view.widthAnchor),
@@ -30,18 +36,11 @@ extension SearchByMapController {
             addressBarStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addressBarStack.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor, constant: 10),
             myTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
-            
-            
-            
-            
-            
-            //mapView.topAnchor.constraint(equalTo: showHideAddressBarButton.bottomAnchor),
-            //mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 10),
-            
+            myTextField.heightAnchor.constraint(equalTo: showHideAddressBarButton.heightAnchor),
+    
             mapView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: safe.bottomAnchor),
-            
             
             pinImageView.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
