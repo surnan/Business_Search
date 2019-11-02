@@ -20,7 +20,7 @@ extension SearchByMapController {
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]
         let redView = viewObject.redView
         
-        [mapView, pinImageView, redView, showHideAddressBarButton, addressBarStack].forEach{view.addSubview($0)}
+        [pinImageView, redView, showHideAddressBarButton, addressBarStack, mapView].forEach{view.addSubview($0)}
         //mapView.fillSafeSuperView()
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
