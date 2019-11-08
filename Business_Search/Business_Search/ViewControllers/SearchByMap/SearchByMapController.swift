@@ -10,15 +10,13 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
 class SearchByMapController: UIViewController, MKMapViewDelegate{
-    var coordinator: SearchTableType?
+    var coordinator             : SearchTableType?
     var viewObject              : SearchByMapView!
     var viewModel               : SearchByMapViewModel!
     lazy var pinImageView       = viewObject.pinImageView
     lazy var mapView            = viewObject.mapView
     var locationToForward       = CLLocation()                //Pushing into newController()
-
     
     lazy var showHideAddressBarButton  : UIButton = {
         let button = UIButton()
@@ -63,8 +61,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     @objc   func handleMyButton(){
         print("")
-//        show = !show
-//        toggleLocateAddressButton(show: show)
     }
     
     
@@ -77,7 +73,6 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         textField.layer.cornerRadius = 5
         textField.layer.borderColor = UIColor.black.cgColor
         textField.layer.borderWidth = 1
-        //textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -131,6 +126,4 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         anchorMapTop_ShiftMapToShowLocateAddressButton?.isActive = false
         anchorMapTop_SafeAreaTop?.isActive = true
     }
-    
 }
-
