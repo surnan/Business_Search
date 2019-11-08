@@ -11,24 +11,17 @@ import UIKit
 extension SearchByMapController {
 
     func setupUI(){
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         navigationItem.title = "Search by Map"
         
         [myTextField, myButton].forEach{addressBarStack.addArrangedSubview($0)}
-        
 
         navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(handleRightBarButton))]
         let redView = viewObject.redView
         
         [pinImageView, redView, showHideAddressBarButton, addressBarStack, mapView].forEach{view.addSubview($0)}
-        //mapView.fillSafeSuperView()
         let safe = view.safeAreaLayoutGuide
-        
-//        /////////////
-//        setupUI2()
-//        showAddressButton()
 
-        
         NSLayoutConstraint.activate([
             showHideAddressBarButton.topAnchor.constraint(equalTo: safe.topAnchor),
             showHideAddressBarButton.widthAnchor.constraint(equalTo: view.widthAnchor),
@@ -50,10 +43,7 @@ extension SearchByMapController {
             redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
         
-        
-        /////////////
         setupUI2()
-        //showAddressButton()
         toggleLocateAddressButton(show: hideAddressBar)
     }
 }

@@ -22,8 +22,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     lazy var showHideAddressBarButton  : UIButton = {
         let button = UIButton()
-        button.setTitle("Show Address Bar", for: .normal)
-        button.backgroundColor = .darkBlue
+        button.setTitle("Hide Address Bar", for: .normal)
+        button.backgroundColor = .darkGreen
         
         button.addTarget(self, action: #selector(handleShowHideAddressBarButton(_:)), for: .touchDown)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -56,13 +56,13 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
 
     var hideAddressBar = false {
         didSet {
-            //addressBarStack.isHidden = !addressBarStack.isHidden
             addressBarStack.isHidden = hideAddressBar
         }
     }
     
     
     @objc   func handleMyButton(){
+        print("")
 //        show = !show
 //        toggleLocateAddressButton(show: show)
     }
@@ -75,6 +75,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         textField.backgroundColor = .white
         textField.adjustsFontSizeToFitWidth = true
         textField.layer.cornerRadius = 5
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
         //textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
