@@ -22,8 +22,9 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     lazy var showHideAddressBarButton  : UIButton = {
         let button = UIButton()
-        button.backgroundColor = .darkGreen
-        button.setTitle("Hide Address Bar", for: .normal)
+        button.setTitle("Show Address Bar", for: .normal)
+        button.backgroundColor = .darkBlue
+        
         button.addTarget(self, action: #selector(handleShowHideAddressBarButton(_:)), for: .touchDown)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
