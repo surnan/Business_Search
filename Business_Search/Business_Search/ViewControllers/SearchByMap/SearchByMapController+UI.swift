@@ -53,6 +53,7 @@ extension SearchByMapController {
         
         /////////////
         setupUI2()
-        showAddressButton()
+        //showAddressButton()
+        toggleLocateAddressButton(show: hideAddressBar)
     }
 }
