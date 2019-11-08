@@ -31,17 +31,17 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     }()
     
     @objc func handleShowHideAddressBarButton(_ sender: UIButton){
-        show = !show
+        hideAddressBar = !hideAddressBar
         if sender.title(for: .normal) == "Hide Address Bar" {
             sender.backgroundColor = .darkBlue
             sender.setTitle("Show Address Bar", for: .normal)
-            toggleLocateAddressButton(show: show)
+            toggleLocateAddressButton(show: hideAddressBar)
             return
         }
         
         sender.backgroundColor = UIColor.darkGreen
         sender.setTitle("Hide Address Bar", for: .normal)
-        toggleLocateAddressButton(show: show)
+        toggleLocateAddressButton(show: hideAddressBar)
     }
     
     
@@ -54,10 +54,10 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         return button
     }()
 
-    var show = true {
+    var hideAddressBar = false {
         didSet {
             //addressBarStack.isHidden = !addressBarStack.isHidden
-            addressBarStack.isHidden = show
+            addressBarStack.isHidden = hideAddressBar
         }
     }
     
