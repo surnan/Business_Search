@@ -18,7 +18,7 @@ extension SearchByMapController {
     
     func setupUI(){
         view.backgroundColor = .white
-        navigationItem.title = "Search by Map"
+        navigationItem.title = "Specify Location"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next",
                                                             style: .done,
                                                             target: self,

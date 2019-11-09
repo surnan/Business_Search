@@ -45,9 +45,13 @@ class SearchByMapView{
         return imageView
     }()
     
-    var showHideAddressBarButton  : UIButton = {
+    
+    let hideAddressBarTxt = "Hide Address Text Input"
+    let showAddressBarTxt = "Enter Address Manually"
+    
+    lazy var showHideAddressBarButton  : UIButton = {
         let button = UIButton()
-        button.setTitle("Hide Address Bar", for: .normal)
+        button.setTitle(hideAddressBarTxt, for: .normal)
         button.backgroundColor = .darkGreen
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

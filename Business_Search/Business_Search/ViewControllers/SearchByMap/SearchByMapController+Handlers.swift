@@ -35,14 +35,14 @@ extension SearchByMapController {
     
     @objc func handleShowHideAddressBarButton(_ sender: UIButton){
         hideAddressBar = !hideAddressBar
-        if sender.title(for: .normal) == "Hide Address Bar" {
+        if sender.title(for: .normal) == hideAddressBarTxt {
             sender.backgroundColor = .darkBlue
-            sender.setTitle("Show Address Bar", for: .normal)
+            sender.setTitle(showAddressBarTxt, for: .normal)
             toggleLocateAddressButton(show: hideAddressBar)
             return
         }
         sender.backgroundColor = UIColor.darkGreen
-        sender.setTitle("Hide Address Bar", for: .normal)
+        sender.setTitle(hideAddressBarTxt, for: .normal)
         toggleLocateAddressButton(show: hideAddressBar)
     }
     

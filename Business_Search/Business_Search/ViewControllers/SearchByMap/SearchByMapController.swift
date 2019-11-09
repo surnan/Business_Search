@@ -12,7 +12,7 @@ import CoreLocation
 
 class SearchByMapController: UIViewController, MKMapViewDelegate{
     var coordinator             : SearchTableType?          //injected
-    
+
     //MARK:- ViewObject + ViewModel Var
     var viewObject              : SearchByMapView!
     var viewModel               : SearchByMapViewModel! {
@@ -23,6 +23,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             pinImageView        = viewObject.pinImageView
             mapView             = viewObject.mapView
             belowSafeView       = viewObject.redView
+            hideAddressBarTxt   = viewObject.hideAddressBarTxt
+            showAddressBarTxt   = viewObject.showAddressBarTxt
         }
     }
     
@@ -34,6 +36,8 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var anchorMap_SafeAreaTop   : NSLayoutConstraint?
     var anchorMap_ShowHideButton: NSLayoutConstraint?
     var belowSafeView           : UIView!
+    var hideAddressBarTxt       : String!
+    var showAddressBarTxt       : String!
 
     //MARK:- Local Var
     var locationToForward       = CLLocation()                //Pushed to newController()
