@@ -17,10 +17,21 @@ extension SearchByMapController {
     @objc func handleRightBarButton(){
         coordinator?.loadSearchTable(location: locationToForward)
     }
-    
-//    @objc func handleLocateAddressButton(){
-//        print("")
-//    }
+
+    @objc func handleLocateAddressButton(){
+        geoCoder.geocodeAddressString(myTextField.text ?? "") { [weak self] (clplacement, error) in
+            guard let placemarks = clplacement, let location = placemarks.first?.location else {
+                self?.showAlertController(title: "Input Error", message: "Unable to find location on map")
+                return
+            }
+            self?.locationToForward = location
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else {return}
+                let newCoordinates = self.locationToForward.coordinate
+                self.mapView.setCenter(newCoordinates, animated: true)
+            }
+        }
+    }
     
     @objc func handleShowHideAddressBarButton(_ sender: UIButton){
         hideAddressBar = !hideAddressBar
