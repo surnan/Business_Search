@@ -45,7 +45,39 @@ class SearchByMapView{
         return imageView
     }()
     
+    var showHideAddressBarButton  : UIButton = {
+        let button = UIButton()
+        button.setTitle("Hide Address Bar", for: .normal)
+        button.backgroundColor = .darkGreen
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
+    var myTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = " Enter address ...."
+        textField.clearButtonMode = .whileEditing
+        textField.backgroundColor = .white
+        textField.adjustsFontSizeToFitWidth = true
+        textField.layer.cornerRadius = 5
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderWidth = 1
+        return textField
+    }()
     
+    var locateAddressButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("   Locate Address   ", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.layer.cornerRadius = 7
+        return button
+    }()
     
+    lazy var addressBarStack: UIStackView = {
+        var stack = UIStackView()
+        stack.spacing = 10
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
 }
