@@ -25,7 +25,7 @@ extension SearchByMapController {
                                                             action: #selector(handleRightBarButton))
         
         [myTextField, locateAddressButton].forEach{addressBarStack.addArrangedSubview($0)}
-        [pinImageView, belowSafeView, showHideButton, addressBarStack, mapView].forEach{view.addSubview($0)}
+        [belowSafeView, showHideButton, addressBarStack, mapView, pinImageView].forEach{view.addSubview($0)}
         
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
