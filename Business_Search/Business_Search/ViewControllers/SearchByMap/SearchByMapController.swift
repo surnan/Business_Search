@@ -58,6 +58,36 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         addHandlers()
         setupUI()
     }
+    
+    ///MARK NEW STUFF
+    let geoCoder                = CLGeocoder()
+    
+    @objc func handleLocateAddressButton(){
+        print("")
+        
+        geoCoder.geocodeAddressString(myTextField.text ?? "") { [weak self] (clplacement, error) in
+            guard let placemarks = clplacement, let location = placemarks.first?.location else {
+                self?.showAlertController(title: "Input Error", message: "Unable to find location on map")
+                return
+            }
+            self?.locationToForward = location
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else {return}
+//                let newAnnotation = MKPointAnnotation()
+//                newAnnotation.coordinate = (self.locationToForward.coordinate)
+//                let oldAnnotations = self.mapView.annotations
+//                self.mapView.removeAnnotations(oldAnnotations)
+//                self.mapView.addAnnotation(newAnnotation)
+//                self.mapView.setCenter(newAnnotation.coordinate, animated: false)
+//                let coord = self.mapView.centerCoordinate
+//                self.locationToForward =  CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+                
+                let temp2 = self.locationToForward.coordinate
+                //let temp = CLLocationCoordinate2D(latitude: <#T##CLLocationDegrees#>, longitude: <#T##CLLocationDegrees#>)
+                self.mapView.setCenter(temp2, animated: true)
+            }
+        }
+    }
 }
 
 extension SearchByMapController {

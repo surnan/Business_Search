@@ -18,9 +18,9 @@ extension SearchByMapController {
         coordinator?.loadSearchTable(location: locationToForward)
     }
     
-    @objc func handleLocateAddressButton(){
-        print("")
-    }
+//    @objc func handleLocateAddressButton(){
+//        print("")
+//    }
     
     @objc func handleShowHideAddressBarButton(_ sender: UIButton){
         hideAddressBar = !hideAddressBar
