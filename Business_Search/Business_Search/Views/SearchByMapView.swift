@@ -48,11 +48,14 @@ class SearchByMapView{
     
     let hideAddressBarTxt = "Hide Address Text Input"
     let showAddressBarTxt = "Enter Address Manually"
+    let hideAddressColor  = UIColor.royalBlue //UIColor.darkBlue
+    
+    let showAddressColor  = UIColor.dodgerBlue4
     
     lazy var showHideAddressBarButton  : UIButton = {
         let button = UIButton()
         button.setTitle(hideAddressBarTxt, for: .normal)
-        button.backgroundColor = .darkGreen
+        button.backgroundColor = hideAddressColor
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -72,7 +75,7 @@ class SearchByMapView{
     var locateAddressButton: UIButton = {
         let button = UIButton()
         button.setTitle("   Locate Address   ", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.backgroundColor = .royalBlue
         button.layer.cornerRadius = 7
         return button
     }()

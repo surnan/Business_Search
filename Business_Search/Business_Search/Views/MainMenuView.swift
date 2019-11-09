@@ -12,7 +12,7 @@ import MapKit
 class MainMenuView {
     
     var nearMeSearchButton      = MainMenuControllerButton(title: "Nearby Businesses", background: .blue, tag: 0)
-    var searchByMapButton       = MainMenuControllerButton(title: "Specify Search Location", colorLiteral: .red, tag: 1)
+    var searchByMapButton       = MainMenuControllerButton(title: "Specify Location", colorLiteral: .red, tag: 1)
     var searchByAddressButton   = MainMenuControllerButton(title: "Show Favorites", colorLiteral: #colorLiteral(red: 0.09385261685, green: 0.4720010757, blue: 0.2862769961, alpha: 1), tag: 2)
     
     let titleImage: UIImageView = {

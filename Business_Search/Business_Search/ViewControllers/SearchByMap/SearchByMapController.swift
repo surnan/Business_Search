@@ -17,7 +17,7 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var viewObject              : SearchByMapView!
     var viewModel               : SearchByMapViewModel! {
         didSet{
-            showHideButton      = viewObject.showHideAddressBarButton
+            showHideButtonInput = viewObject.showHideAddressBarButton
             locateAddressButton = viewObject.locateAddressButton
             myTextField         = viewObject.myTextField
             pinImageView        = viewObject.pinImageView
@@ -25,12 +25,14 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
             belowSafeView       = viewObject.redView
             hideAddressBarTxt   = viewObject.hideAddressBarTxt
             showAddressBarTxt   = viewObject.showAddressBarTxt
+            hideAddressColor    = viewObject.hideAddressColor
+            showAddressColor     = viewObject.showAddressColor
         }
     }
     
     var pinImageView            : UIImageView!
     var mapView                 : MKMapView!
-    var showHideButton          : UIButton!
+    var showHideButtonInput          : UIButton!
     var locateAddressButton     : UIButton!
     var myTextField             : UITextField!
     var anchorMap_SafeAreaTop   : NSLayoutConstraint?
@@ -38,7 +40,9 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     var belowSafeView           : UIView!
     var hideAddressBarTxt       : String!
     var showAddressBarTxt       : String!
-
+    var hideAddressColor        : UIColor!
+    var showAddressColor        : UIColor!
+    
     //MARK:- Local Var
     var locationToForward       = CLLocation()                //Pushed to newController()
     let geoCoder                = CLGeocoder()
@@ -52,13 +56,14 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
         var stack = UIStackView()
         stack.spacing = 10
         stack.axis = .vertical
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .lightBlue
         mapView.delegate = self
         addHandlers()
         setupUI()

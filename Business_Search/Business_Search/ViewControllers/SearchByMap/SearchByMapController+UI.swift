@@ -12,12 +12,11 @@ extension SearchByMapController {
 
     private func setupDynamicConstraints(){
         anchorMap_ShowHideButton = mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 5)
-        anchorMap_SafeAreaTop = mapView.topAnchor.constraint(equalTo: showHideButton.bottomAnchor)
+        anchorMap_SafeAreaTop = mapView.topAnchor.constraint(equalTo: showHideButtonInput.bottomAnchor)
     }
     
     
     func setupUI(){
-        view.backgroundColor = .white
         navigationItem.title = "Specify Location"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next",
                                                             style: .done,
@@ -25,17 +24,21 @@ extension SearchByMapController {
                                                             action: #selector(handleRightBarButton))
         
         [myTextField, locateAddressButton].forEach{addressBarStack.addArrangedSubview($0)}
-        [belowSafeView, showHideButton, addressBarStack, mapView, pinImageView].forEach{view.addSubview($0)}
+        [belowSafeView, showHideButtonInput, addressBarStack, mapView, pinImageView].forEach{view.addSubview($0)}
         
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            showHideButton.topAnchor.constraint(equalTo: safe.topAnchor),
-            showHideButton.widthAnchor.constraint(equalTo: view.widthAnchor),
+            showHideButtonInput.topAnchor.constraint(equalTo: safe.topAnchor),
+            showHideButtonInput.widthAnchor.constraint(equalTo: view.widthAnchor),
+            
             
             addressBarStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addressBarStack.topAnchor.constraint(equalTo: showHideButton.bottomAnchor, constant: 10),
+            addressBarStack.topAnchor.constraint(equalTo: showHideButtonInput.bottomAnchor, constant: 10),
+            myTextField.heightAnchor.constraint(equalTo: showHideButtonInput.heightAnchor),
             myTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
-            myTextField.heightAnchor.constraint(equalTo: showHideButton.heightAnchor),
+            locateAddressButton.widthAnchor.constraint(equalTo: myTextField.widthAnchor, multiplier: 0.6),
+            
+            
     
             mapView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),

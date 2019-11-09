@@ -10,7 +10,7 @@ import UIKit
 
 extension SearchByMapController {
     func addHandlers(){
-        showHideButton.addTarget(self, action: #selector(handleShowHideAddressBarButton(_:)), for: .touchDown)
+        showHideButtonInput.addTarget(self, action: #selector(handleShowHideAddressBarButton(_:)), for: .touchDown)
         locateAddressButton.addTarget(self, action: #selector(handleLocateAddressButton), for: .touchDown)
     }
     
@@ -36,12 +36,12 @@ extension SearchByMapController {
     @objc func handleShowHideAddressBarButton(_ sender: UIButton){
         hideAddressBar = !hideAddressBar
         if sender.title(for: .normal) == hideAddressBarTxt {
-            sender.backgroundColor = .darkBlue
+            sender.backgroundColor = showAddressColor
             sender.setTitle(showAddressBarTxt, for: .normal)
             toggleLocateAddressButton(show: hideAddressBar)
             return
         }
-        sender.backgroundColor = UIColor.darkGreen
+        sender.backgroundColor = hideAddressColor
         sender.setTitle(hideAddressBarTxt, for: .normal)
         toggleLocateAddressButton(show: hideAddressBar)
     }
