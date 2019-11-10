@@ -87,6 +87,10 @@
 		848DEC5F22F3E21D00102E9B /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC5E22F3E21D00102E9B /* CoordinatorType.swift */; };
 		848DEC6122F3E3BF00102E9B /* DataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC6022F3E3BF00102E9B /* DataSourceType.swift */; };
 		848DEC6322F3E4CB00102E9B /* OpenControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */; };
+		84A1B78A23788EFA00C5918D /* ShowFavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1B78923788EFA00C5918D /* ShowFavoritesController.swift */; };
+		84A1B78C2378903600C5918D /* ShowFavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1B78B2378903600C5918D /* ShowFavoritesCoordinator.swift */; };
+		84A1B78E237890BE00C5918D /* ShowFavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1B78D237890BE00C5918D /* ShowFavoritesViewModel.swift */; };
+		84A1B7902378910200C5918D /* ShowFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1B78F2378910200C5918D /* ShowFavoritesView.swift */; };
 		84A5AFDD22A21E71009B96AD /* GoogleMapResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */; };
 		84A5B02222A5D55C009B96AD /* ManagedObjectCloner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */; };
 		84A5B02722A5DFDF009B96AD /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A5B02622A5DFDF009B96AD /* FilterController.swift */; };
@@ -216,6 +220,10 @@
 		848DEC5E22F3E21D00102E9B /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		848DEC6022F3E3BF00102E9B /* DataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSourceType.swift; sourceTree = "<group>"; };
 		848DEC6222F3E4CB00102E9B /* OpenControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenControllerType.swift; sourceTree = "<group>"; };
+		84A1B78923788EFA00C5918D /* ShowFavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFavoritesController.swift; sourceTree = "<group>"; };
+		84A1B78B2378903600C5918D /* ShowFavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFavoritesCoordinator.swift; sourceTree = "<group>"; };
+		84A1B78D237890BE00C5918D /* ShowFavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFavoritesViewModel.swift; sourceTree = "<group>"; };
+		84A1B78F2378910200C5918D /* ShowFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFavoritesView.swift; sourceTree = "<group>"; };
 		84A5AFDC22A21E71009B96AD /* GoogleMapResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapResponse.swift; sourceTree = "<group>"; };
 		84A5B02122A5D55C009B96AD /* ManagedObjectCloner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectCloner.swift; sourceTree = "<group>"; };
 		84A5B02622A5DFDF009B96AD /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -419,6 +427,7 @@
 		847AE23F22E9458400774371 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				84A1B78823788EEB00C5918D /* Show Favorites */,
 				84A5AFDE22A368E2009B96AD /* BusinessDetails */,
 				847AE28B22EE9A6F00774371 /* Filter */,
 				848761D1227F1779000CECC7 /* MainMenu */,
@@ -633,6 +642,17 @@
 				847AE27E22EDEADB00774371 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		84A1B78823788EEB00C5918D /* Show Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				84A1B78B2378903600C5918D /* ShowFavoritesCoordinator.swift */,
+				84A1B78923788EFA00C5918D /* ShowFavoritesController.swift */,
+				84A1B78D237890BE00C5918D /* ShowFavoritesViewModel.swift */,
+				84A1B78F2378910200C5918D /* ShowFavoritesView.swift */,
+			);
+			path = "Show Favorites";
 			sourceTree = "<group>";
 		};
 		84A5AFDB22A21E50009B96AD /* Google */ = {
@@ -970,6 +990,7 @@
 				848DEC6122F3E3BF00102E9B /* DataSourceType.swift in Sources */,
 				8401127E22E51CE300ECE0D5 /* OpenCoordinator.swift in Sources */,
 				84BDE2F02263D007008C9B01 /* AppDelegate.swift in Sources */,
+				84A1B78C2378903600C5918D /* ShowFavoritesCoordinator.swift in Sources */,
 				848DEC5B22F3E1C000102E9B /* BaseCoordinatorType.swift in Sources */,
 				84EC563C2313669B00560787 /* CoreData Structs.swift in Sources */,
 				8414475F2266C4D200A38AAB /* YelpAutoCompleteResponse.swift in Sources */,
@@ -985,6 +1006,7 @@
 				841CDF8722E6BFEE00FEB1D0 /* TabGroupCoordinator.swift in Sources */,
 				8477222C22F92F620080B586 /* FilterView.swift in Sources */,
 				842AD7D9228538B900590B1A /* BusinessDetailsController.swift in Sources */,
+				84A1B7902378910200C5918D /* ShowFavoritesView.swift in Sources */,
 				848DEC4E22F2627800102E9B /* OpenController+Handlers.swift in Sources */,
 				847AE28122EDEAF600774371 /* SettingsView.swift in Sources */,
 				843C66F9227D25D7003A64D1 /* GroupTableViewController.swift in Sources */,
@@ -1004,8 +1026,10 @@
 				847AE28D22EE9A8A00774371 /* FilterController+UI.swift in Sources */,
 				84EC8CAE2339AB3E00D35B4F /* MainMenuViewModel.swift in Sources */,
 				84BDE30D2263DAE1008C9B01 /* CustomNavigationController.swift in Sources */,
+				84A1B78E237890BE00C5918D /* ShowFavoritesViewModel.swift in Sources */,
 				84365CB822C569520014E577 /* UserAppliedFilter.swift in Sources */,
 				848B8E10227202B000F761F5 /* CreateYelpURLDuringLooping.swift in Sources */,
+				84A1B78A23788EFA00C5918D /* ShowFavoritesController.swift in Sources */,
 				848761DB227F8E7B000CECC7 /* UITextField+Extensions.swift in Sources */,
 				847AE27222EDD39200774371 /* BusinessDetailsController+Handlers.swift in Sources */,
 				848DEC4A22F255A900102E9B /* LocationViewModel.swift in Sources */,
