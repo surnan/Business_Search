@@ -8,20 +8,23 @@
 
 import UIKit
 
-//let coor = location.coordinate
-//let newViewModel = SearchByAddressViewModel(latitude: coor.latitude, longitude: coor.longitude)
-//let newView = SearchByAddressView()
-//newView.viewModel = newViewModel
-//let newController = SearchByAddressController()
-//newController.viewObject = newView
-//newController.viewModel = newViewModel
-//newController.coordinator = self
 
 class ShowFavoritesController: UITableViewController {
     var coordinator : Coordinator?
     var viewModel   : ShowFavoritesViewModel!
     var viewObject  : ShowFavoritesView!
     var favoritesVM : FavoritesViewModel!
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "PAUSE", style: .done, target: self, action: #selector(handleRightBarButton))
+    }
+    
+    @objc func handleRightBarButton(){
+        print("")
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
@@ -32,6 +35,7 @@ class ShowFavoritesController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        favoritesVM.reload()
         return favoritesVM.fetchedObjects().count
     }
     

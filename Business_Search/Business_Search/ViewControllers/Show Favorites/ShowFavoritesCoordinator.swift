@@ -9,8 +9,7 @@
 import Foundation
 
 class ShowFavoritesCoordinator: Coordinator {
-    private let dataController: DataController!
-    
+    private let dataController: DataController
     
     init(dataController: DataController, router: RouterType){
         self.dataController = dataController
@@ -25,18 +24,11 @@ class ShowFavoritesCoordinator: Coordinator {
         newController.viewObject = newView
         newController.viewModel = newViewModel
         newController.coordinator = self
-        
-        
         newController.favoritesVM = FavoritesViewModel(dataController: dataController)
-        
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("ShowFavoritesCoordinator Popped")
         }
-        
-        
     }
-    
-    
 }
