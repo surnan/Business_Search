@@ -49,34 +49,6 @@ class FavoritesViewModel {
         fetchFavoritePredicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Favorites.id), id])
     }
     
-    func changeFavorite(business: Business)->Bool{
-        do {
-            business.isFavorite = !business.isFavorite
-            try dataController.viewContext.save()
-            return business.isFavorite
-        } catch {
-            print("Error 0FA: \(error)")
-            print(error.localizedDescription)
-            return business.isFavorite
-        }
-    }
-    
-    func deleteFavorite(business: Business){
-        fetchFavoritesController = nil
-        guard let allFavorites = fetchFavoritesController?.fetchedObjects else {return}
-        for (_, item) in allFavorites.enumerated(){
-            if item.id == business.id {
-                dataController.viewContext.delete(item)
-                do {
-                    try dataController.viewContext.save()
-                } catch {
-                    print("Error 10A: Error when trying to delete: \(item.id ?? "")")
-                    return
-                }
-            }
-        }
-    }
-    
     func deleteAllFavorites(){
         let context: NSManagedObjectContext!  = dataController.backGroundContext
         context.perform {
@@ -108,6 +80,21 @@ class FavoritesViewModel {
     
     func fetchedObjects() -> [Favorites]{return fetchFavoritesController?.fetchedObjects ?? []}
     
+
+    
+    //MARK:- Business Entity Function Parameter
+    func changeFavoriteOnBusinessEntity(business: Business)->Bool{
+        do {
+            business.isFavorite = !business.isFavorite
+            try dataController.viewContext.save()
+            return business.isFavorite
+        } catch {
+            print("Error 0FA: \(error)")
+            print(error.localizedDescription)
+            return business.isFavorite
+        }
+    }
+    
     func createFavorite(business: Business){
         let context = dataController.viewContext
         let newFavorite2 = Favorites(context: context)
@@ -119,4 +106,21 @@ class FavoritesViewModel {
             print("\n\nError saving newly created favorite - full error: \n\(error)")
         }
     }
+    
+    func deleteFavorite(business: Business){
+        fetchFavoritesController = nil
+        guard let allFavorites = fetchFavoritesController?.fetchedObjects else {return}
+        for (_, item) in allFavorites.enumerated(){
+            if item.id == business.id {
+                dataController.viewContext.delete(item)
+                do {
+                    try dataController.viewContext.save()
+                } catch {
+                    print("Error 10A: Error when trying to delete: \(item.id ?? "")")
+                    return
+                }
+            }
+        }
+    }
+    
 }

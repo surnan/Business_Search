@@ -17,7 +17,7 @@ extension Open_Delegate {
         
         let action = UIContextualAction(style: .normal, title: "Favorite") { [unowned self] (action, view, myBool) in
             let reset       = {self.source.businessViewModel.reload()}
-            let isFavorite  = {self.source.favoriteViewModel.changeFavorite(business: currentBusiness)}
+            let isFavorite  = {self.source.favoriteViewModel.changeFavoriteOnBusinessEntity(business: currentBusiness)}
             let create      = {self.source.favoriteViewModel.createFavorite(business: currentBusiness)}
             let delete      = {self.source.favoriteViewModel.deleteFavorite(business: currentBusiness)}
             isFavorite() ? create() : delete()
