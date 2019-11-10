@@ -17,15 +17,6 @@ class ShowFavoritesCoordinator: Coordinator {
         super.init(router: router)
     }
     
-    //let coor = location.coordinate
-    //let newViewModel = SearchByAddressViewModel(latitude: coor.latitude, longitude: coor.longitude)
-    //let newView = SearchByAddressView()
-    //newView.viewModel = newViewModel
-    //let newController = SearchByAddressController()
-    //newController.viewObject = newView
-    //newController.viewModel = newViewModel
-    //newController.coordinator = self
-    
     func start(parent: Coordinator){
         let newViewModel    = ShowFavoritesViewModel()
         let newView         = ShowFavoritesView()

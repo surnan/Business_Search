@@ -28,7 +28,8 @@ extension MainMenuController: CLLocationManagerDelegate {
         switch controllerIndex {
         case 0: coordinator.loadSearchTable(location: userLocation)
         case 1: coordinator.loadSearchByMap(location: userLocation)
-        case 2: coordinator.loadSearchByAddress(location: userLocation)
+        //case 2: coordinator.loadSearchByAddress(location: userLocation)
+        case 2: coordinator.loadShowFavorites(location: userLocation)
         default:    break
         }
     }

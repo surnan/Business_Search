@@ -12,6 +12,8 @@ import MapKit
 protocol SearchTableType    {func loadSearchTable    (location: CLLocation)}
 protocol SearchByMapType    {func loadSearchByMap    (location: CLLocation)}
 protocol SearchByAddressType{func loadSearchByAddress(location: CLLocation)}
+protocol ShowFavoritesType  {func loadShowFavorites(location: CLLocation)}
+
 protocol SettingsType       {func loadSettings(delegate: UnBlurViewType, max: Int?)}
 
 

@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType, FilterType {
+class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchByMapType, SettingsType, FilterType, ShowFavoritesType {
     private let window          : UIWindow
     private let dataController  : DataController
     private let newController   : MainMenuController
@@ -59,12 +59,21 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
             self?.removeChild(coordinator)
         }
     }
+    
+    func loadShowFavorites(location: CLLocation){
+        let coordinator = ShowFavoritesCoordinator(dataController: dataController, router: router)
+        addChild(coordinator)
+        coordinator.start(parent: self)
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
+    }
 
+    
     func loadSettings(delegate: UnBlurViewType, max: Int?) {
         let coordinator = SettingsCoordinator(unblurProtocol: delegate, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }
-    
     
     func loadFilter(unblurProtocol: UnBlurViewType){
         let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)

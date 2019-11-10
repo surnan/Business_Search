@@ -14,7 +14,7 @@ class MainMenuController: UIViewController, UnBlurViewType{
     var userLocation            : CLLocation!       //Provided via Apple GPS
     var previousCoordinate      : CLLocation?       /* Still Necessary */
     var coordinateFound         : Bool!             //Prevent locationManger multi-fire 'func pushNextController'
-    var coordinator             : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType & FilterType)?
+    var coordinator             : (SearchTableType & SearchByMapType & SearchByAddressType & SettingsType & FilterType & ShowFavoritesType)?
     var controllerIndex         = 0
     let mainView                = MainMenuView()
     var viewModel               : MainMenuViewModel!
