@@ -402,6 +402,7 @@
 		847AE23322E81D1E00774371 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				84A1B7922378C68300C5918D /* ShowFavoritesViewModel */,
 				84EC8CAF2339AB4A00D35B4F /* MainMenuViewModel */,
 				848DEC6B22F4095300102E9B /* BusinessCell */,
 				848DEC6C22F4097800102E9B /* BusinessDetails */,
@@ -453,6 +454,7 @@
 				8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */,
 				8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */,
 				8401127B22E51C9C00ECE0D5 /* SettingsCoordinator.swift */,
+				84A1B78B2378903600C5918D /* ShowFavoritesCoordinator.swift */,
 				841CDF8622E6BFEE00FEB1D0 /* TabGroupCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -478,6 +480,7 @@
 				847AE26822EDA37600774371 /* SearchByAddressView.swift */,
 				847AE27722EDE1B100774371 /* SearchByMapView.swift */,
 				847AE28022EDEAF600774371 /* SettingsView.swift */,
+				84A1B78F2378910200C5918D /* ShowFavoritesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -647,12 +650,17 @@
 		84A1B78823788EEB00C5918D /* Show Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				84A1B78B2378903600C5918D /* ShowFavoritesCoordinator.swift */,
 				84A1B78923788EFA00C5918D /* ShowFavoritesController.swift */,
-				84A1B78D237890BE00C5918D /* ShowFavoritesViewModel.swift */,
-				84A1B78F2378910200C5918D /* ShowFavoritesView.swift */,
 			);
 			path = "Show Favorites";
+			sourceTree = "<group>";
+		};
+		84A1B7922378C68300C5918D /* ShowFavoritesViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				84A1B78D237890BE00C5918D /* ShowFavoritesViewModel.swift */,
+			);
+			path = ShowFavoritesViewModel;
 			sourceTree = "<group>";
 		};
 		84A5AFDB22A21E50009B96AD /* Google */ = {
