@@ -48,12 +48,13 @@ func createFavoriteBusiness(business: Business, context: NSManagedObjectContext)
     favoriteBusiness.displayAddress = business.displayAddress
     
     business.categories?.forEach({ (currentItem) in
-        if let currentCategoryItem = currentItem as? FavoriteCategory {
+        if let currentCategoryItem = currentItem as? Category {
             let favoriteCategory = FavoriteCategory(context: context)
             favoriteCategory.alias = currentCategoryItem.alias
             favoriteCategory.title = currentCategoryItem.title
             favoriteCategory.favoriteBusiness = favoriteBusiness
         }
+        try? context.save()
     })
     
     do {
