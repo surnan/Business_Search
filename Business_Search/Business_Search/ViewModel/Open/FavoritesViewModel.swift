@@ -95,25 +95,18 @@ class FavoritesViewModel {
         }
     }
     
-//    func createFavorite(business: Business){
-//        let context = dataController.viewContext
-//        let newFavorite2 = Favorites(context: context)
-//        newFavorite2.id = business.id
-//        do {
-//            try context.save()
-//        } catch {
-//            print("\nError 12A: Error saving newly created favorite - localized error: \n\(error.localizedDescription)")
-//            print("\n\nError saving newly created favorite - full error: \n\(error)")
-//        }
-//    }
-
-    
     func createFavorite(business: Business){
         let context = dataController.viewContext
         let newFavorite2 = Favorites(context: context)
         newFavorite2.id = business.id
+
+        ////////
+        //createFavoriteBusiness(business: business, context: context)
+        let showFavoritesVM = ShowFavoritesViewModel(dataController: dataController)
+        showFavoritesVM.createFavoriteBusinessAndCategories(business: business)
+        ////////
         
-        createFavoriteBusiness(business: business, context: context)
+        
         
         do {
             try context.save()

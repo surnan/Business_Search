@@ -63,8 +63,6 @@ func createFavoriteBusiness(business: Business, context: NSManagedObjectContext)
         print("Error 14A: Short Error: \(error.localizedDescription)")
         print("Error saving, creating 'createFavoriteBusiness' --> func createFavoriteBusiness()\n\(error)")
     }
-    
-    
 }
 
 
