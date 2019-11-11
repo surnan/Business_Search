@@ -9,16 +9,6 @@
 import Foundation
 import CoreData
 
-//let coor = location.coordinate
-//let newViewModel = SearchByAddressViewModel(latitude: coor.latitude, longitude: coor.longitude)
-//let newView = SearchByAddressView()
-//newView.viewModel = newViewModel
-//let newController = SearchByAddressController()
-//newController.viewObject = newView
-//newController.viewModel = newViewModel
-//newController.coordinator = self
-
-
 class ShowFavoritesViewModel {
     private var dataController: DataController
     private var business: Business?
@@ -29,8 +19,8 @@ class ShowFavoritesViewModel {
     }
     
     private var fetchPredicateBusinessID: NSPredicate? {
-        guard let business = business else {return nil}
-        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(FavoriteBusiness.id), business.id])
+        guard let business = business, let id = business.id else {return nil}
+        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(FavoriteBusiness.id), id])
     }
     
     
@@ -39,14 +29,9 @@ class ShowFavoritesViewModel {
             if fetchShowFavoritesController == nil {
                 fetchShowFavoritesController = {
                     let fetchRequest: NSFetchRequest<FavoriteBusiness> = FavoriteBusiness.fetchRequest()
-                    
-                    //fetchRequest.predicate = fetchFavoritePredicate
-                    
                     if let fetchPredicateBusinessID = fetchPredicateBusinessID {
                         fetchRequest.predicate = fetchPredicateBusinessID
                     }
-                    
-                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Favorites.id, ascending: true)
                     fetchRequest.sortDescriptors = [sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -113,9 +98,12 @@ class ShowFavoritesViewModel {
             let itemToDelete = allObjects.first else {return}
         
         dataController.viewContext.delete(itemToDelete)
-        try? dataController.viewContext.save()
         
-        
-        
+        do {
+            try dataController.viewContext.save()
+        } catch {
+            print("Error 15A: Short Error: \(error.localizedDescription)")
+            print("Error deleting, 'deleteFavoriteBusiness' --> func deleteFavoriteBusiness()\n\(error)")
+        }
     }
 }
