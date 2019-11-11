@@ -27,6 +27,46 @@ func createLocation(locationStruct: LocationStruct , context: NSManagedObjectCon
 }
 
 
+func createFavoriteBusiness(business: Business, context: NSManagedObjectContext){
+    let favoriteBusiness = FavoriteBusiness(context: context)
+    
+    favoriteBusiness.url         = business.url
+    favoriteBusiness.reviewCount = business.reviewCount
+    favoriteBusiness.rating      = business.rating
+    favoriteBusiness.price       = business.price
+    favoriteBusiness.name        = business.name
+    favoriteBusiness.longitude   = business.longitude
+    favoriteBusiness.latitude    = business.latitude
+    favoriteBusiness.isPickup    = business.isPickup
+    favoriteBusiness.isFavorite  = business.isFavorite
+    favoriteBusiness.isDelivery  = business.isDelivery
+    favoriteBusiness.imageURL    = business.imageURL
+    favoriteBusiness.id          = business.id
+    favoriteBusiness.distance    = business.distance
+    favoriteBusiness.alias       = business.alias
+    favoriteBusiness.displayPhone   = business.displayPhone
+    favoriteBusiness.displayAddress = business.displayAddress
+    
+    business.categories?.forEach({ (currentItem) in
+        if let currentCategoryItem = currentItem as? FavoriteCategory {
+            let favoriteCategory = FavoriteCategory(context: context)
+            favoriteCategory.alias = currentCategoryItem.alias
+            favoriteCategory.title = currentCategoryItem.title
+            favoriteCategory.favoriteBusiness = favoriteBusiness
+        }
+    })
+    
+    do {
+        try context.save()
+    } catch {
+        print("Error 14A: Short Error: \(error.localizedDescription)")
+        print("Error saving, creating 'createFavoriteBusiness' --> func createFavoriteBusiness()\n\(error)")
+    }
+    
+    
+}
+
+
 
 func downloadBusinessesAndCategories(id: NSManagedObjectID?, yelpData: YelpBusinessResponse, context: NSManagedObjectContext){
     guard let id = id else {return}
@@ -39,10 +79,6 @@ func downloadBusinessesAndCategories(id: NSManagedObjectID?, yelpData: YelpBusin
         currentBusiness.displayPhone = item.display_phone
         currentBusiness.distance = item.distance!   //EXPLICIT.  Please confirm
         currentBusiness.id = item.id
-        
-        //if let id = item.id, favoritesVM.isFavorite(id: id) {
-        //    currentBusiness.isFavorite = true
-        //}
         
         currentBusiness.imageURL = item.image_url
         // currentBusiness.isClosed //NEEDS TO BE CALCULATE EVERY CALL?

@@ -17,7 +17,7 @@ class ShowFavoritesCoordinator: Coordinator {
     }
     
     func start(parent: Coordinator){
-        let newViewModel    = ShowFavoritesViewModel()
+        let newViewModel    = ShowFavoritesViewModel(dataController: dataController)
         let newView         = ShowFavoritesView()
         let newController   = ShowFavoritesController()
     
