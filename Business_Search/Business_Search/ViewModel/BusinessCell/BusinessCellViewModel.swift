@@ -30,18 +30,38 @@ struct BusinessCellViewModel {
     var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
     
 
-    init(business: Business, colorIndex: IndexPath) {
-        if let displayAddress = business.displayAddress,
-            let address = displayAddress.split(separator: "?").first,
-            let name = business.name {
-            let nameNewLine = "\(name)\n"
-            let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
-            let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
-            topString.append(bottomString)
-            myLabelAttributedString = topString
+    init(business: Business? = nil, favoriteBusiness: FavoriteBusiness? = nil, colorIndex: IndexPath) {
+        
+        if let business = business {
+            if let displayAddress = business.displayAddress,
+                let address = displayAddress.split(separator: "?").first,
+                let name = business.name {
+                let nameNewLine = "\(name)\n"
+                let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
+                let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
+                topString.append(bottomString)
+                myLabelAttributedString = topString
+            }
+            favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
+            originalColor = getColor(indexPath: colorIndex)
+            accessoryType = .disclosureIndicator
         }
-        favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
-        originalColor = getColor(indexPath: colorIndex)
-        accessoryType = .disclosureIndicator
+        
+        if let favoriteBusiness = favoriteBusiness {
+            if let displayAddress = favoriteBusiness.displayAddress,
+                let address = displayAddress.split(separator: "?").first,
+                let name = favoriteBusiness.name {
+                let nameNewLine = "\(name)\n"
+                let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
+                let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
+                topString.append(bottomString)
+                myLabelAttributedString = topString
+            }
+            favoriteImage = favoriteBusiness.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
+            originalColor = getColor(indexPath: colorIndex)
+            accessoryType = .disclosureIndicator
+        }
+        
+        
     }
 }
