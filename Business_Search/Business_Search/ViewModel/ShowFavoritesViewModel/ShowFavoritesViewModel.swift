@@ -21,17 +21,32 @@ import CoreData
 
 class ShowFavoritesViewModel {
     private var dataController: DataController
+    private var business: Business?
     
-    init(dataController: DataController) {
+    init(dataController: DataController, business: Business? = nil) {
         self.dataController = dataController
+        self.business = business
     }
+    
+    private var fetchPredicateBusinessID: NSPredicate? {
+        guard let business = business else {return nil}
+        return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(FavoriteBusiness.id), business.id])
+    }
+    
     
     private var fetchShowFavoritesController: NSFetchedResultsController<FavoriteBusiness>?{
         didSet{
             if fetchShowFavoritesController == nil {
                 fetchShowFavoritesController = {
                     let fetchRequest: NSFetchRequest<FavoriteBusiness> = FavoriteBusiness.fetchRequest()
+                    
                     //fetchRequest.predicate = fetchFavoritePredicate
+                    
+                    if let fetchPredicateBusinessID = fetchPredicateBusinessID {
+                        fetchRequest.predicate = fetchPredicateBusinessID
+                    }
+                    
+                    
                     let sortDescriptor = NSSortDescriptor(keyPath: \Favorites.id, ascending: true)
                     fetchRequest.sortDescriptors = [sortDescriptor]
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -91,6 +106,16 @@ class ShowFavoritesViewModel {
     }
     
     func deleteFavoriteBusiness(business: Business){
+        self.business = business
+        fetchShowFavoritesController = nil
+        guard let fetchController = fetchShowFavoritesController,
+            let allObjects = fetchController.fetchedObjects,
+            let itemToDelete = allObjects.first else {return}
+        
+        dataController.viewContext.delete(itemToDelete)
+        try? dataController.viewContext.save()
+        
+        
         
     }
 }

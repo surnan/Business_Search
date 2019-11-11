@@ -106,8 +106,6 @@ class FavoritesViewModel {
         showFavoritesVM.createFavoriteBusinessAndCategories(business: business)
         ////////
         
-        
-        
         do {
             try context.save()
         } catch {
@@ -116,8 +114,6 @@ class FavoritesViewModel {
         }
     }
 
-    
-    
     
     func deleteFavorite(business: Business){
         fetchFavoritesController = nil
