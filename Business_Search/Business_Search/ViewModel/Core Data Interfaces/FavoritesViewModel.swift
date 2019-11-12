@@ -102,7 +102,7 @@ class FavoritesViewModel {
 
         ////////
         //createFavoriteBusiness(business: business, context: context)
-        let showFavoritesVM = ShowFavoritesViewModel(dataController: dataController)
+        let showFavoritesVM = FavoriteBusinessViewModel(dataController: dataController)
         showFavoritesVM.createFavoriteBusinessAndCategories(business: business)
         ////////
         
@@ -124,7 +124,7 @@ class FavoritesViewModel {
                 
                 ////////
                 //createFavoriteBusiness(business: business, context: context)
-                let showFavoritesVM = ShowFavoritesViewModel(dataController: dataController)
+                let showFavoritesVM = FavoriteBusinessViewModel(dataController: dataController)
                 showFavoritesVM.deleteFavoriteBusiness(business: business)
                 //showFavoritesVM.createFavoriteBusinessAndCategories(business: business)
                 ////////

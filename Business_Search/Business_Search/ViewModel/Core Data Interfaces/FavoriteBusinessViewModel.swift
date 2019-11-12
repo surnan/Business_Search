@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class ShowFavoritesViewModel {
+class FavoriteBusinessViewModel {
     private var dataController: DataController
     private var business: Business?
     

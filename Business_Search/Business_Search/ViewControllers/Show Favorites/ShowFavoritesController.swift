@@ -11,7 +11,7 @@ import UIKit
 
 class ShowFavoritesController: UITableViewController {
     var coordinator : Coordinator?
-    var viewModel   : ShowFavoritesViewModel!
+    var viewModel   : FavoriteBusinessViewModel!
     var viewObject  : ShowFavoritesView!
     var favoritesVM : FavoritesViewModel!
 
