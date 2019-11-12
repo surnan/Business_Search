@@ -29,6 +29,8 @@ class ShowFavoritesController: UITableViewController {
     
     @objc func handleRightBarButton(){
         print("")
+        viewModel.deleteAllFavorites()
+        favoritesVM.deleteAllFavorites()
     }
     
     

@@ -82,8 +82,19 @@ class FavoriteBusinessViewModel {
                 favoriteCategory.alias = currentCategoryItem.alias
                 favoriteCategory.title = currentCategoryItem.title
                 favoriteCategory.favoriteBusiness = favoriteBusiness
+                do {
+                    try context.save()
+                } catch {
+                    print("Error 15A: Short Error: \(error.localizedDescription)")
+                    print("Error saving, creating 'createFavoriteBusinessAndCategories' --> func createFavoriteBusinessAndCategories()\n\(error)")
+                }
             }
-            try? context.save()
+            
+//            do {
+//                try context.save()
+//            } catch {
+//                print("Error ZZZ: on catch")
+//            }
         })
         
         do {
@@ -113,5 +124,22 @@ class FavoriteBusinessViewModel {
             print("Error 15A: Short Error: \(error.localizedDescription)")
             print("Error deleting, 'deleteFavoriteBusiness' --> func deleteFavoriteBusiness()\n\(error)")
         }
+    }
+    
+    func deleteAllFavorites(){
+        let context: NSManagedObjectContext!  = dataController.backGroundContext
+        context.perform {
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteBusiness")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
+            do {
+                _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
+                
+            } catch {
+                print("Error 11A: Error deleting All \(error)")
+            }
+        }
+        
+
+        
     }
 }

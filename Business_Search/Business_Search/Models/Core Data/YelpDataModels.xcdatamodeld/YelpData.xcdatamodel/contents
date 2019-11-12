@@ -42,7 +42,7 @@
         <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="reviewCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="favoriteCategory" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FavoriteCategory" inverseName="favoriteBusiness" inverseEntity="FavoriteCategory" syncable="YES"/>
+        <relationship name="favoriteCategory" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FavoriteCategory" inverseName="favoriteBusiness" inverseEntity="FavoriteCategory" syncable="YES"/>
     </entity>
     <entity name="FavoriteCategory" representedClassName="FavoriteCategory" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String" syncable="YES"/>

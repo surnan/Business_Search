@@ -51,6 +51,12 @@ class FavoritesViewModel {
     
     func deleteAllFavorites(){
         let context: NSManagedObjectContext!  = dataController.backGroundContext
+        ////////
+        //createFavoriteBusiness(business: business, context: context)
+        let showFavoritesVM = FavoriteBusinessViewModel(dataController: dataController)
+        showFavoritesVM.deleteAllFavorites()
+        ////////
+        
         context.perform {
             let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorites")
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
