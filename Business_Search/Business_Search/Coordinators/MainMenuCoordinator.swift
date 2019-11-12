@@ -61,7 +61,7 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
     }
     
     func loadShowFavorites(location: CLLocation){
-        let coordinator = ShowFavoritesCoordinator(dataController: dataController, router: router)
+        let coordinator = ShowFavoritesCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
         router.push(coordinator, animated: true) {[weak self, weak coordinator] in

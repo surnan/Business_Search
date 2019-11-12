@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import MapKit
 
 class ShowFavoritesCoordinator: Coordinator {
     private let dataController: DataController
+    private let location : CLLocation
     
-    init(dataController: DataController, router: RouterType){
+    init(dataController: DataController, router: RouterType, location: CLLocation){
         self.dataController = dataController
+        self.location = location
         super.init(router: router)
     }
     
@@ -21,10 +24,12 @@ class ShowFavoritesCoordinator: Coordinator {
         let newView         = ShowFavoritesView()
         let newController   = ShowFavoritesController()
     
-        newController.viewObject = newView
-        newController.viewModel = newViewModel
-        newController.coordinator = self
-        newController.favoritesVM = FavoritesViewModel(dataController: dataController)
+        newController.viewObject        = newView
+        newController.viewModel         = newViewModel
+        newController.coordinator       = self
+        newController.currentLatitude   = location.coordinate.latitude
+        newController.currentLongitude  = location.coordinate.longitude
+        newController.favoritesVM       = FavoritesViewModel(dataController: dataController)
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

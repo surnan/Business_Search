@@ -16,6 +16,12 @@ class ShowFavoritesController: UITableViewController {
     var favoritesVM : FavoritesViewModel!
 
     
+    /////////////////////////////////////////////////
+    var currentLatitude : Double!
+    var currentLongitude: Double!
+    /////////////////////////////////////////////////
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.reload()
