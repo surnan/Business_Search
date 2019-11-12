@@ -121,6 +121,14 @@ class FavoritesViewModel {
         for (_, item) in allFavorites.enumerated(){
             if item.id == business.id {
                 dataController.viewContext.delete(item)
+                
+                ////////
+                //createFavoriteBusiness(business: business, context: context)
+                let showFavoritesVM = ShowFavoritesViewModel(dataController: dataController)
+                showFavoritesVM.deleteFavoriteBusiness(business: business)
+                //showFavoritesVM.createFavoriteBusinessAndCategories(business: business)
+                ////////
+                
                 do {
                     try dataController.viewContext.save()
                 } catch {
