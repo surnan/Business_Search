@@ -24,6 +24,10 @@ class ShowFavoritesViewModel {
     }
     
     
+    func reload(){
+        fetchShowFavoritesController = nil
+    }
+    
     private var fetchShowFavoritesController: NSFetchedResultsController<FavoriteBusiness>?{
         didSet{
             if fetchShowFavoritesController == nil {
@@ -89,6 +93,10 @@ class ShowFavoritesViewModel {
             print("Error saving, creating 'createFavoriteBusinessAndCategories' --> func createFavoriteBusinessAndCategories()\n\(error)")
         }
     }
+    
+    func objectAt(indexPath: IndexPath)-> FavoriteBusiness? {return fetchShowFavoritesController?.object(at: indexPath)} //It's OK for forced-unwrap because it has to exist at this stage   //Sometimes objectAt returns NIL
+    
+    func fetchedObjects() -> [FavoriteBusiness]{return fetchShowFavoritesController!.fetchedObjects ?? []}
     
     func deleteFavoriteBusiness(business: Business){
         self.business = business

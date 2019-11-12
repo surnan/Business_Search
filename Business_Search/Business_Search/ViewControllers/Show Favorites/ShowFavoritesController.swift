@@ -18,7 +18,13 @@ class ShowFavoritesController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "PAUSE", style: .done, target: self, action: #selector(handleRightBarButton))
+        viewModel.reload()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "PAUSE",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(handleRightBarButton))
+        tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
+        tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
     }
     
     @objc func handleRightBarButton(){
@@ -27,17 +33,15 @@ class ShowFavoritesController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = .yellow
-        cell.textLabel?.text = "asdf"
+        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
+        guard let business  = viewModel.objectAt(indexPath: indexPath) else {return UITableViewCell()}
+        cell.firstViewModel = BusinessCellViewModel(favoriteBusiness: business, colorIndex: indexPath)
         return cell
+        
     }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        favoritesVM.reload()
-        return favoritesVM.fetchedObjects().count
+        return viewModel.fetchedObjects().count
     }
-    
-    
 }
