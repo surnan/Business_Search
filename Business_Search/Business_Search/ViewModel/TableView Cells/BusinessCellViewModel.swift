@@ -58,8 +58,7 @@ struct BusinessCellViewModel {
                 let coordinateB = CLLocation(latitude: favoriteBusiness.latitude, longitude: global_Lon)
                 
                 let distanceInMeters = coordinateA.distance(from: coordinateB) // result is in meter
-                //let nameNewLine = "\(name) - \(favoriteBusiness.distance2)\n"
-                let nameNewLine = "\(name) - (m)\(Int(distanceInMeters))\n"
+                let nameNewLine = "\(name) - (m)\(favoriteBusiness.distance3))\n"
                 
                 
                 let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)

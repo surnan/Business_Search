@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 class ManagedObjectCloner: NSObject {
     
@@ -41,7 +42,13 @@ class ManagedObjectCloner: NSObject {
 
 extension FavoriteBusiness {
     var distance2: Double {
-        let lat = latitude
         return 20.0
+    }
+    
+    var distance3: Int {
+        let coordinateA = CLLocation(latitude: global_Lat, longitude: global_Lon)
+        let coordinateB = CLLocation(latitude: latitude, longitude: longitude)
+        let distanceInMeters = coordinateA.distance(from: coordinateB) // result is in meter
+        return Int(distanceInMeters) 
     }
 }
