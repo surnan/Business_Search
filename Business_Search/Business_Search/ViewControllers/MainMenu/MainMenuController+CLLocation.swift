@@ -25,6 +25,10 @@ extension MainMenuController: CLLocationManagerDelegate {
         guard let coordinator = coordinator else {print("coordinator is NIL");return}
         if coordinateFound {return}
         coordinateFound = true
+        
+        global_Lat = userLocation.coordinate.latitude
+        global_Lon = userLocation.coordinate.longitude
+        
         switch controllerIndex {
         case 0: coordinator.loadSearchTable(location: userLocation)
         case 1: coordinator.loadSearchByMap(location: userLocation)

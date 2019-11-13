@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 struct BusinessCellViewModel {
     private let topStringAttributes: [NSAttributedString.Key: Any]   = [
@@ -51,7 +52,16 @@ struct BusinessCellViewModel {
             if let displayAddress = favoriteBusiness.displayAddress,
                 let address = displayAddress.split(separator: "?").first,
                 let name = favoriteBusiness.name {
-                let nameNewLine = "\(name)\n"
+                
+                
+                let coordinateA = CLLocation(latitude: global_Lat, longitude: global_Lon)
+                let coordinateB = CLLocation(latitude: favoriteBusiness.latitude, longitude: global_Lon)
+                
+                let distanceInMeters = coordinateA.distance(from: coordinateB) // result is in meter
+                //let nameNewLine = "\(name) - \(favoriteBusiness.distance2)\n"
+                let nameNewLine = "\(name) - (m)\(Int(distanceInMeters))\n"
+                
+                
                 let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
                 let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
                 topString.append(bottomString)
@@ -61,7 +71,10 @@ struct BusinessCellViewModel {
             originalColor = getColor(indexPath: colorIndex)
             accessoryType = .disclosureIndicator
         }
-        
-        
     }
+    
+    
+    
+    
+    
 }

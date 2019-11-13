@@ -52,4 +52,11 @@ class ShowFavoritesController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.fetchedObjects().count
     }
+    
+    
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("")
+    }
+    
 }

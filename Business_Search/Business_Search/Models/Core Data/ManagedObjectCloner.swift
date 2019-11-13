@@ -38,3 +38,10 @@ class ManagedObjectCloner: NSObject {
         return cloned
     }
 }
+
+extension FavoriteBusiness {
+    var distance2: Double {
+        let lat = latitude
+        return 20.0
+    }
+}
