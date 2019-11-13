@@ -52,3 +52,17 @@ extension FavoriteBusiness {
         return Int(distanceInMeters) 
     }
 }
+
+
+extension Business {
+    var distance2: Double {
+        return 20.0
+    }
+    
+    var distance3: Int {
+        let coordinateA = CLLocation(latitude: global_Lat, longitude: global_Lon)
+        let coordinateB = CLLocation(latitude: latitude, longitude: longitude)
+        let distanceInMeters = coordinateA.distance(from: coordinateB) // result is in meter
+        return Int(distanceInMeters)
+    }
+}

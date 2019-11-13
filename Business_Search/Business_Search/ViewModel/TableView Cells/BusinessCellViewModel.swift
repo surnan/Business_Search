@@ -37,7 +37,7 @@ struct BusinessCellViewModel {
             if let displayAddress = business.displayAddress,
                 let address = displayAddress.split(separator: "?").first,
                 let name = business.name {
-                let nameNewLine = "\(name)\n"
+                let nameNewLine = "\(name)- (m)\(business.distance3)\n"
                 let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
                 let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
                 topString.append(bottomString)
