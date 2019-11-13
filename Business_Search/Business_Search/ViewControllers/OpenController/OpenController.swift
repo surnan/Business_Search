@@ -87,12 +87,7 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     }()
     
     var tempStringForSearchField = ""
-    
 }
-
-
-
-
 
 extension UIView {
     func asImage() -> UIImage {

@@ -12,7 +12,6 @@ extension OpenController {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         tempStringForSearchField = searchBar.text ?? ""
-
     }
     
     
