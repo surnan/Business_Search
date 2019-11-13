@@ -16,6 +16,7 @@ var global_Lon = 0.0
 ////////////////////////////////////////////////////////////////
 
 
+var locationEntityRadiusMax = 10.0    //If GPS returns new coordinates within this radius, No call is made to Yelp API
 
 let limit = 50
 var offset = 50

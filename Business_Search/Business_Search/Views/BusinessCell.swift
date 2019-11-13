@@ -14,7 +14,8 @@ class BusinessCell: UITableViewCell {
             myLabel.attributedText = firstViewModel.getMyLabelAttributedString
             yelpImageView.image = firstViewModel.getFavoriteImage
             backColor = firstViewModel.getOriginalColor
-            accessoryType = firstViewModel.getAccessoryType
+            distanceLabel.text = firstViewModel.getDistanceString
+            //accessoryType = firstViewModel.getAccessoryType
         }
     }
     
@@ -35,11 +36,25 @@ class BusinessCell: UITableViewCell {
         return label
     }()
     
+    private var distanceLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.numberOfLines = 2
+        label.textColor = UIColor.darkGray
+        label.font = UIFont.italicSystemFont(ofSize: 11)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        [yelpImageView, myLabel].forEach{addSubview($0)}
+        [distanceLabel, yelpImageView, myLabel].forEach{addSubview($0)}
 
         NSLayoutConstraint.activate([
+            distanceLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            distanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
             yelpImageView.centerYAnchor.constraint  (equalTo: centerYAnchor),
             yelpImageView.leadingAnchor.constraint  (equalTo: leadingAnchor),
             yelpImageView.heightAnchor.constraint   (equalTo: heightAnchor, multiplier: 0.85),
