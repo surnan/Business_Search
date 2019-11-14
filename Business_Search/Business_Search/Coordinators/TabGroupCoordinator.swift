@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     var tabs = [UIViewController: Coordinator]()
@@ -15,12 +16,13 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
     let businesses: [Business]
     let categoryName: String
     let dataController: DataController
+    var location: CLLocation!
     
     lazy var groupsCoordinator: GroupTableViewCoordinator = {
         let navigationController = CustomNavigationController()
         navigationController.tabBarItem = UITabBarItem(title: "LIST", image: #imageLiteral(resourceName: "menu100B"), tag: 0)
         let router = Router(navigationController: navigationController)
-        let coordinator = GroupTableViewCoordinator(dataController: dataController, businesses: businesses, categoryName: categoryName, router: router)
+        let coordinator = GroupTableViewCoordinator(dataController: dataController, businesses: businesses, categoryName: categoryName, router: router, location: location)
         coordinator.parent = self
         return coordinator
     }()
@@ -34,10 +36,11 @@ class TabGroupCoordinator: Coordinator, UITabBarControllerDelegate {
         return coordinator
     }()
     
-    init(dataController: DataController, businesses: [Business], categoryName: String, router: RouterType) {
+    init(dataController: DataController, businesses: [Business], categoryName: String, router: RouterType, location: CLLocation) {
         self.dataController = dataController
         self.businesses     = businesses
         self.categoryName   = categoryName
+        self.location = location
         super.init(router: router)
         tabBarController.delegate = self
         setTabs([groupsCoordinator, mapCoordinator])

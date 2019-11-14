@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class GroupTableViewCoordinator: Coordinator, BusinessDetailsType, DismissType {
     
@@ -14,19 +15,22 @@ class GroupTableViewCoordinator: Coordinator, BusinessDetailsType, DismissType {
     let categoryName    : String
     var parent          : TabGroupCoordinator?  //because it's in a tab controller
     let dataController  : DataController
+    var location: CLLocation!
     
     lazy var myGroupsController: GroupTableViewController  = {
         let controller = GroupTableViewController()
         controller.businesses = businesses
         controller.categoryName = categoryName
+        controller.location = location
         return controller
     }()
     
     
-    init(dataController: DataController, businesses: [Business], categoryName: String, router: RouterType) {
+    init(dataController: DataController, businesses: [Business], categoryName: String, router: RouterType, location: CLLocation) {
         self.dataController = dataController
         self.businesses     = businesses
         self.categoryName   = categoryName
+        self.location = location
         super.init(router: router)
         router.setRootModule(myGroupsController, hideBar: false)
         myGroupsController.coordinator = self

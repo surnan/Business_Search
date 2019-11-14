@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class Open_Delegate: NSObject, UITableViewDelegate, OpenControllerType {
     private var reloadCellAt: IndexPath?
@@ -72,10 +73,10 @@ class Open_Delegate: NSObject, UITableViewDelegate, OpenControllerType {
     
     
     private func findMatchingNames(business: Business) -> [Business]{
-        let tempController = BusinessViewModel(delegate: self, dataController: dataController)
+        let newLocation = CLLocation(latitude: getLatitude, longitude: getLongitude)
+        let tempController = BusinessViewModel(delegate: self, dataController: dataController, gpsLocation: newLocation)
         tempController.search(business: business)
         let allMatchingBusinesses = tempController.fetchedObjects()
-        //print("allMatchingBusinesses.count = \(allMatchingBusinesses.count)")
         return allMatchingBusinesses
     }
 }

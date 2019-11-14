@@ -32,8 +32,8 @@ struct BusinessCellViewModel {
     var getAccessoryType: UITableViewCell.AccessoryType {return accessoryType}
     var getDistanceString: String {return distanceString}
     
-    
-    init(business: Business, colorIndex: IndexPath, location: CLLocation? = nil) {
+   
+    init(business: Business, colorIndex: IndexPath, location: CLLocation) {
             if let displayAddress = business.displayAddress,
                 let address = displayAddress.split(separator: "?").first,
                 let name = business.name {
@@ -49,7 +49,10 @@ struct BusinessCellViewModel {
             
             
             let temp = CLLocation(latitude: business.latitude, longitude: business.longitude)
-            let distance = location?.distance(from: temp) ?? 0.0
+        
+        
+            //let distance = location?.distance(from: temp) ?? 0.0
+            let distance = location.distance(from: temp)
             
             switch distance {
             case 0..<160:

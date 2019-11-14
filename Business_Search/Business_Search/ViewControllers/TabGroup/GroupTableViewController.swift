@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 
 class GroupTableViewController: UITableViewController {
     var businesses = [Business]()   //injected
     var categoryName: String!       //injected
     var coordinator: (BusinessDetailsType & DismissType)?
+    var location:   CLLocation!
 
     override var preferredStatusBarStyle: UIStatusBarStyle {return .lightContent}
     
@@ -48,7 +50,12 @@ class GroupTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-        cell.firstViewModel = BusinessCellViewModel(business: businesses[indexPath.row],colorIndex: indexPath)
+     
+        
+        //cell.firstViewModel = BusinessCellViewModel(business: businesses[indexPath.row],colorIndex: indexPath)
+        cell.firstViewModel = BusinessCellViewModel(business: businesses[indexPath.row], colorIndex: indexPath, location: location)
+        
+        
         return cell
     }
     
