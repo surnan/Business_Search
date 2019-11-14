@@ -46,7 +46,7 @@ class ShowFavoritesController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         guard let business  = viewModel.objectAt(indexPath: indexPath) else {return UITableViewCell()}
-        cell.firstViewModel = BusinessCellViewModel(favoriteBusiness: business, colorIndex: indexPath, location: location)
+        cell.firstViewModel = BusinessCellViewModel(business: business, colorIndex: indexPath, location: location)
         return cell
     }
     
