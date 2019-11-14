@@ -39,7 +39,7 @@ struct BusinessCellViewModel {
             if let displayAddress = business.displayAddress,
                 let address = displayAddress.split(separator: "?").first,
                 let name = business.name {
-                let nameNewLine = "\(name)- (m)\(business.distance3)\n"
+                let nameNewLine = "\(name)\n"
                 let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
                 let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
                 topString.append(bottomString)
@@ -49,14 +49,14 @@ struct BusinessCellViewModel {
             originalColor = getColor(indexPath: colorIndex)
             accessoryType = .disclosureIndicator
             
-            //loopLocation.distance(from: possibleInsertLocationCoordinate)
+            
             let temp = CLLocation(latitude: business.latitude, longitude: business.longitude)
             let distance = location?.distance(from: temp) ?? 0.0
             
             switch distance {
             case 0..<160:
                 let metersToFeet = Int(distance * 3.28)                   //Meters to Feet
-                distanceString = "\(metersToFeet)\n feet"
+                distanceString = "\(metersToFeet) feet"
             default:
                 let metersToMiles = distance * 0.000621371                //Meters to Miles
                 let roundedValue = Double(round(metersToMiles * 100)/100)   // 2-digits after decimal
@@ -68,7 +68,7 @@ struct BusinessCellViewModel {
             if let displayAddress = business.displayAddress,
                 let address = displayAddress.split(separator: "?").first,
                 let name = business.name {
-                let nameNewLine = "\(name)- (m)\(business.distance3)\n"
+                let nameNewLine = "\(name)\n"
                 let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
                 let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
                 topString.append(bottomString)
