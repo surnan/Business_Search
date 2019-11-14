@@ -103,7 +103,11 @@ class UserAppliedFilter {
     
     
     func getBusinessSortDescriptor()-> [NSSortDescriptor] {
-        let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
+        
+        //let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
+        let sortDescriptor = NSSortDescriptor(keyPath: \Business.newDistance, ascending: true)
+        
+        
         let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
         return getFavoritesAtTop ? [sortDescriptor2, sortDescriptor] : [sortDescriptor]
     }
