@@ -35,8 +35,8 @@ class SearchByAddressCoordinator: Coordinator, SearchTableType {
         //router.push(LottieController(), animated: true, completion: nil)  //Testing Lottie
     }
     
-    func loadSearchTable(location: CLLocation){
-        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+    func loadOpenCoordinator(newLocation: CLLocation){
+        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: newLocation)
         addChild(coordinator)
         coordinator.start(parent: self)
     }

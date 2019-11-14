@@ -88,15 +88,16 @@ extension OpenController {
             self.updateCoordinate(lat: latitude, lon: longitude)
             coordinator?.updateCoordinate(latitude: latitude, longitude: longitude)
         }
+        
         //While "return" can break out of the function
         while index < locationArray.count {
             let loopLocation = CLLocation(latitude: locationArray[index].latitude, longitude: locationArray[index].longitude)
             let userLocationToLoopLocations = loopLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = userLocationToLoopLocations * 0.000621371 //Convert meters to Miles
-            if miles < 0.5 {
+            if miles < 1.0 {
                 let lat = locationArray[index].latitude; let lon = locationArray[index].longitude
                 updateCoordinates(latitude: lat, longitude: lon)
-                updateCoordinates(latitude: getLatitude, longitude: getLongitude)
+                //updateCoordinates(latitude: getLatitude, longitude: getLongitude)
                 businessViewModel.reload()
                 categoryCountViewModel.reload()
                 return                           //Exit the function

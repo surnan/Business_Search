@@ -30,7 +30,7 @@ class AppCoordinator: Coordinator, SearchTableType, SearchByAddressType, SearchB
     }
     
     func handlSettings(self viewController: UnBlurViewType, dataController: DataController) {}
-    func loadSearchTable(location: CLLocation){}
+    func loadOpenCoordinator(newLocation: CLLocation){}
     func loadSearchByMap(location: CLLocation){}
     func loadSearchByAddress(location: CLLocation){}
 }

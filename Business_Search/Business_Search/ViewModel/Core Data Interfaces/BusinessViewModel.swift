@@ -8,10 +8,12 @@
 
 import Foundation
 import CoreData
+import MapKit
 
 class BusinessViewModel {
     private var delegate: OpenControllerType!
     private var dataController: DataController
+    private var gpsLocation: CLLocation!
 
     private var predicateBusinessLatitude: NSPredicate {
         return NSPredicate(format: "%K == %@", argumentArray: [#keyPath(Business.parentLocation.latitude), delegate.getLatitude])
@@ -66,20 +68,57 @@ class BusinessViewModel {
     
     
     //MARK:- NON-Private
-    init(delegate: OpenControllerType, dataController: DataController) {
+    init(delegate: OpenControllerType, dataController: DataController, gpsLocation: CLLocation? = nil) {
         self.dataController = dataController
         self.delegate = delegate
+        if let gpsLocation = gpsLocation {
+            self.gpsLocation = gpsLocation
+            calculateNewDistances(gpsLocation: gpsLocation)
+        }
     }
 
-    init(dataController: DataController) {
+    init(dataController: DataController, gpsLocation: CLLocation? = nil) {
         //Used in BusinessDetails
         self.dataController = dataController
+        
+        
+        if let gpsLocation = gpsLocation {
+            self.gpsLocation = gpsLocation
+            calculateNewDistances(gpsLocation: gpsLocation)
+        }
+    }
+    
+    
+    func calculateNewDistances(gpsLocation: CLLocation){
+        self.gpsLocation = gpsLocation
+
+        let allBusinesses = fetchedObjects()
+        
+        for item in allBusinesses {
+            let businessLocation = CLLocation(latitude: item.latitude, longitude: item.longitude)
+            let newDistance = gpsLocation.distance(from: businessLocation)
+            item.newDistance = newDistance
+        }
+        
+        
+        do {
+            try dataController.viewContext.save()
+            reload()
+        } catch {
+            print("Error 16A: Unable to save updates to Business.NewDistance")
+            print(error)
+            print(error.localizedDescription)
+        }
+        
+        
+        
+        
     }
     
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
     var isEmpty: Bool {return fetchBusinessController?.fetchedObjects?.count == 0}
     func reload() {fetchBusinessController = nil}
-    func fetchedObjects() -> [Business]{return fetchBusinessController!.fetchedObjects ?? []}
+    func fetchedObjects() -> [Business]{fetchBusinessController = nil; return fetchBusinessController!.fetchedObjects ?? []}
     func objectAt(indexPath: IndexPath)-> Business? {return fetchBusinessController?.object(at: indexPath)} //It's OK for forced-unwrap because it has to exist at this stage   //Sometimes objectAt returns NIL
 
     func verifyFavoriteStatus(favorite: Favorites){

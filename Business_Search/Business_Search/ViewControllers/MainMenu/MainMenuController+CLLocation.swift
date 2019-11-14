@@ -30,7 +30,7 @@ extension MainMenuController: CLLocationManagerDelegate {
         global_Lon = userLocation.coordinate.longitude
         
         switch controllerIndex {
-        case 0: coordinator.loadSearchTable(location: userLocation)
+        case 0: coordinator.loadOpenCoordinator(newLocation: userLocation)
         case 1: coordinator.loadSearchByMap(location: userLocation)
         //case 2: coordinator.loadSearchByAddress(location: userLocation)
         case 2: coordinator.loadShowFavorites(location: userLocation)

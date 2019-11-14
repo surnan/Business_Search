@@ -34,16 +34,8 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         window.makeKeyAndVisible()
     }
     
-    func loadSearchTable(location: CLLocation){
-        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
-        addChild(coordinator)
-        coordinator.start(parent: self)
-        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
-            self?.removeChild(coordinator)
-        }
-    }
-    func loadSearchByMap(location: CLLocation){
-        let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
+    func loadOpenCoordinator(newLocation: CLLocation){
+        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: newLocation)
         addChild(coordinator)
         coordinator.start(parent: self)
         router.push(coordinator, animated: true) {[weak self, weak coordinator] in
@@ -51,8 +43,8 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
         }
     }
     
-    func loadSearchByAddress(location: CLLocation){
-        let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
+    func loadSearchByMap(location: CLLocation){
+        let coordinator = SearchByMapCoordinator(dataController: dataController, router: router, location: location)
         addChild(coordinator)
         coordinator.start(parent: self)
         router.push(coordinator, animated: true) {[weak self, weak coordinator] in
@@ -78,5 +70,15 @@ class MenuCoordinator: Coordinator, SearchTableType, SearchByAddressType, Search
     func loadFilter(unblurProtocol: UnBlurViewType){
         let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
         coordinator.start(parent: self)
+    }
+    
+    //MARK:- WILL BE DELETED
+    func loadSearchByAddress(location: CLLocation){
+        let coordinator = SearchByAddressCoordinator(dataController: dataController, router: router, location: location)
+        addChild(coordinator)
+        coordinator.start(parent: self)
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
     }
 }

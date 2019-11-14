@@ -36,10 +36,13 @@ class SearchByMapCoordinator: Coordinator, SearchTableType {
         }
     }
     
-    func loadSearchTable(location: CLLocation){
-        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: location)
+    func loadOpenCoordinator(newLocation: CLLocation){
+        let coordinator = OpenCoordinator(dataController: dataController, router: router, location: newLocation)
         addChild(coordinator)
         coordinator.start(parent: self)
+        router.push(coordinator, animated: true) {[weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+        }
     }
 }
 

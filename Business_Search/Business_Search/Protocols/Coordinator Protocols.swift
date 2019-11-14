@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-protocol SearchTableType    {func loadSearchTable    (location: CLLocation)}
+protocol SearchTableType    {func loadOpenCoordinator    (newLocation: CLLocation)}
 protocol SearchByMapType    {func loadSearchByMap    (location: CLLocation)}
 protocol SearchByAddressType{func loadSearchByAddress(location: CLLocation)}
 protocol ShowFavoritesType  {func loadShowFavorites(location: CLLocation)}

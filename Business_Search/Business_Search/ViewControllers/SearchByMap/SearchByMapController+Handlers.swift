@@ -15,7 +15,7 @@ extension SearchByMapController {
     }
     
     @objc func handleRightBarButton(){
-        coordinator?.loadSearchTable(location: locationToForward)
+        coordinator?.loadOpenCoordinator(newLocation: locationToForward)
     }
 
     @objc func handleLocateAddressButton(){
