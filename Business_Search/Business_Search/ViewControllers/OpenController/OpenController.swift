@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Lottie
+import MapKit
 
 class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceType, UnBlurViewType, OpenControllerType{
     var animationView           = LOTAnimationView()
@@ -41,6 +42,9 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     enum TableIndex             : Int { case business = 0, category }
     var searchGroupIndex        = 0
     
+    var location                : CLLocation!
+
+    
     init(lat: Double, lon: Double) {
         self.latitude           = lat
         self.longitude          = lon
@@ -59,6 +63,8 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         tableView.rowHeight = 70
         tableView.separatorColor = UIColor.clear
         tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+        //        tableView.dataSource = tableDataSource    //ViewDidLoad
+        //        tableView.delegate = tableDelegate        //ViewDidLoad
         return tableView
     }()
     

@@ -33,7 +33,7 @@ struct BusinessCellViewModel {
     var getDistanceString: String {return distanceString}
     
     
-    init(business: Business? = nil, favoriteBusiness: FavoriteBusiness? = nil, colorIndex: IndexPath) {
+    init(business: Business? = nil, favoriteBusiness: FavoriteBusiness? = nil, colorIndex: IndexPath, location: CLLocation? = nil) {
         
         if let business = business {
             if let displayAddress = business.displayAddress,
@@ -44,20 +44,24 @@ struct BusinessCellViewModel {
                 let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
                 topString.append(bottomString)
                 myLabelAttributedString = topString
-                let myDistance = business.distance
-                switch myDistance {
-                case 0..<30:
-                    let metersToFeet = Int(myDistance * 3.28)                   //Meters to Feet
-                    distanceString = "\(metersToFeet)\n feet"
-                default:
-                    let metersToMiles = myDistance * 0.000621371                //Meters to Miles
-                    let roundedValue = Double(round(metersToMiles * 100)/100)   // 2-digits after decimal
-                    distanceString = "\(roundedValue)\n miles"
-                }
             }
             favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
             originalColor = getColor(indexPath: colorIndex)
             accessoryType = .disclosureIndicator
+            
+            //loopLocation.distance(from: possibleInsertLocationCoordinate)
+            let temp = CLLocation(latitude: business.latitude, longitude: business.longitude)
+            let distance = location?.distance(from: temp) ?? 0.0
+            
+            switch distance {
+            case 0..<160:
+                let metersToFeet = Int(distance * 3.28)                   //Meters to Feet
+                distanceString = "\(metersToFeet)\n feet"
+            default:
+                let metersToMiles = distance * 0.000621371                //Meters to Miles
+                let roundedValue = Double(round(metersToMiles * 100)/100)   // 2-digits after decimal
+                distanceString = "\(roundedValue)\n miles"
+            }
         }
 
         if let business = favoriteBusiness {
@@ -69,41 +73,24 @@ struct BusinessCellViewModel {
                 let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
                 topString.append(bottomString)
                 myLabelAttributedString = topString
-                let myDistance = business.distance
-                switch myDistance {
-                case 0..<30:
-                    let metersToFeet = Int(myDistance * 3.28)                   //Meters to Feet
-                    distanceString = "\(metersToFeet)\n feet"
-                default:
-                    let metersToMiles = myDistance * 0.000621371                //Meters to Miles
-                    let roundedValue = Double(round(metersToMiles * 100)/100)   // 2-digits after decimal
-                    distanceString = "\(roundedValue)\n miles"
-                }
             }
             favoriteImage = business.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
             originalColor = getColor(indexPath: colorIndex)
             accessoryType = .disclosureIndicator
+            
+            
+            let temp = CLLocation(latitude: business.latitude, longitude: business.longitude)
+            let distance = location?.distance(from: temp) ?? 0.0
+            
+            switch distance {
+            case 0..<160:
+                let metersToFeet = Int(distance * 3.28)                   //Meters to Feet
+                distanceString = "\(metersToFeet)\n feet"
+            default:
+                let metersToMiles = distance * 0.000621371                //Meters to Miles
+                let roundedValue = Double(round(metersToMiles * 100)/100)   // 2-digits after decimal
+                distanceString = "\(roundedValue)\n miles"
+            }
         }
-        
-        
-        
-//        if let favoriteBusiness = favoriteBusiness {
-//            if let displayAddress = favoriteBusiness.displayAddress,
-//                let address = displayAddress.split(separator: "?").first,
-//                let name = favoriteBusiness.name {
-//
-//                let nameNewLine = "\(name) - (m)\(favoriteBusiness.distance3))\n"
-//
-//                let topString = NSMutableAttributedString(string: nameNewLine, attributes: topStringAttributes)
-//                let bottomString = NSMutableAttributedString(string: String(address), attributes: bottomStringAttributes)
-//                topString.append(bottomString)
-//                myLabelAttributedString = topString
-//            }
-//            favoriteImage = favoriteBusiness.isFavorite ? #imageLiteral(resourceName: "Favorite") : #imageLiteral(resourceName: "UnFavorite")
-//            originalColor = getColor(indexPath: colorIndex)
-//            accessoryType = .disclosureIndicator
-//        }
-        
-        
     }
 }

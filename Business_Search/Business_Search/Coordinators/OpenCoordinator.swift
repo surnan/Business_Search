@@ -42,6 +42,7 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
         newController.viewObject                = viewObject
         newController.dataController            = dataController
         newController.coordinator               = self
+        newController.location                  = location
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)

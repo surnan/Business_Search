@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class Open_DataSource: NSObject, UITableViewDataSource {
     let businessViewModel           : BusinessViewModel
@@ -15,6 +16,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
     let dataController              : DataController
     let parent                      : DataSourceType
     var tableArrayType: Int {return parent.tableViewArrayType}
+    var location                    : CLLocation!
     
     init(parent: OpenController){
         self.parent             = parent
@@ -22,6 +24,7 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         self.categoryNameCountViewModel  = parent.categoryCountViewModel
         self.dataController     = parent.dataController
         self.favoriteViewModel  = parent.favoritesViewModel
+        self.location           = parent.location
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,7 +46,11 @@ class Open_DataSource: NSObject, UITableViewDataSource {
         case TableIndex.business.rawValue:
             let cell            = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
             guard let business  = businessViewModel.objectAt(indexPath: indexPath) else {return UITableViewCell()}
-            cell.firstViewModel = BusinessCellViewModel(business: business,colorIndex: indexPath)
+
+            cell.firstViewModel = BusinessCellViewModel(business: business,
+                                                        colorIndex: indexPath,
+                                                        location: location)
+            
             return cell
         case TableIndex.category.rawValue:
             let cell            = tableView.dequeueReusableCell(withIdentifier: categoryCellID, for: indexPath) as! CategoryCell

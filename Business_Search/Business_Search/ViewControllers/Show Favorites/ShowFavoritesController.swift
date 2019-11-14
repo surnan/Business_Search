@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 
 class ShowFavoritesController: UITableViewController {
@@ -19,6 +20,7 @@ class ShowFavoritesController: UITableViewController {
     /////////////////////////////////////////////////
     var currentLatitude : Double!
     var currentLongitude: Double!
+    var location        : CLLocation!
     /////////////////////////////////////////////////
     
     
@@ -31,6 +33,7 @@ class ShowFavoritesController: UITableViewController {
                                                             action: #selector(handleRightBarButton))
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)
         tableView.register(BusinessCell.self, forCellReuseIdentifier: businessCellID)
+        location = CLLocation(latitude: currentLatitude, longitude: currentLongitude)
     }
     
     @objc func handleRightBarButton(){
@@ -43,9 +46,8 @@ class ShowFavoritesController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
         guard let business  = viewModel.objectAt(indexPath: indexPath) else {return UITableViewCell()}
-        cell.firstViewModel = BusinessCellViewModel(favoriteBusiness: business, colorIndex: indexPath)
+        cell.firstViewModel = BusinessCellViewModel(favoriteBusiness: business, colorIndex: indexPath, location: location)
         return cell
-        
     }
     
     

@@ -93,7 +93,7 @@ extension OpenController {
             let loopLocation = CLLocation(latitude: locationArray[index].latitude, longitude: locationArray[index].longitude)
             let userLocationToLoopLocations = loopLocation.distance(from: possibleInsertLocationCoordinate)
             let miles = userLocationToLoopLocations * 0.000621371 //Convert meters to Miles
-            if miles < 0.1 {
+            if miles < 0.5 {
                 let lat = locationArray[index].latitude; let lon = locationArray[index].longitude
                 updateCoordinates(latitude: lat, longitude: lon)
                 updateCoordinates(latitude: getLatitude, longitude: getLongitude)
