@@ -29,6 +29,39 @@ let filterConstant = "AppliedFilter"
 
 class UserAppliedFilter {
     var appliedFilter: AppliedFilter?
+    var businessSortAttribute: String?
+    
+    
+    func getBusinessSortDescriptor()-> [NSSortDescriptor] {
+        
+        let sortFavoritesAtTop = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
+        var finalSortDescriptor = getFavoritesAtTop ? [sortFavoritesAtTop] : [NSSortDescriptor]()
+        
+        let sortingAttribute = UserDefaults.standard.object(forKey: BusinessAttributes.sortAttribute.rawValue) as? String ?? BusinessAttributes.name.rawValue
+        //sortingAttribute = "newDistance"
+        
+        switch sortingAttribute {
+        case BusinessAttributes.newDistance.rawValue:
+            let temp = NSSortDescriptor(keyPath: \Business.newDistance, ascending: true)
+            finalSortDescriptor.append(temp)
+        default:
+            let temp = NSSortDescriptor(keyPath: \Business.name, ascending: true)
+            finalSortDescriptor.append(temp)
+        }
+        return finalSortDescriptor
+    }
+    
+    
+    func updateBusinessSortDescriptor(){
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     func loadFilterStruct(){
         guard let savedData = UserDefaults.standard.data(forKey: filterConstant) else {
@@ -100,18 +133,6 @@ class UserAppliedFilter {
     var isFilterOn: Bool {
         return !getOne || !getTwo || !getThree || !getFour || !getNoPrice || !(getMinimumRatingFloat == 1.0)
     }
-    
-    
-    func getBusinessSortDescriptor()-> [NSSortDescriptor] {
-        
-        //let sortDescriptor = NSSortDescriptor(keyPath: \Business.name, ascending: true)
-        let sortDescriptor = NSSortDescriptor(keyPath: \Business.newDistance, ascending: true)
-        
-        
-        let sortDescriptor2 = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
-        return getFavoritesAtTop ? [sortDescriptor2, sortDescriptor] : [sortDescriptor]
-    }
-    
     
     func getBusinessPredicate()->[NSCompoundPredicate]{
         var pricePredicates_OR_Compound = [NSPredicate]()
