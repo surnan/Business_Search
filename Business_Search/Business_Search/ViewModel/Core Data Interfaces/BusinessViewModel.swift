@@ -31,6 +31,9 @@ class BusinessViewModel {
     }
     
     private var businessSortDescriptor: [NSSortDescriptor] {
+        
+        print(UserAppliedFilter.shared.getBusinessSortDescriptor())
+        print("---")
         return UserAppliedFilter.shared.getBusinessSortDescriptor()
     }
     

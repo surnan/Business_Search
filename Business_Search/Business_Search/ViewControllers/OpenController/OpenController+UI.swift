@@ -122,9 +122,21 @@ extension OpenController {
                                                 action: #selector(handleSettings))
         
         let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
-        navigationItem.rightBarButtonItems = [myButton, settingsBarButton]
+        //navigationItem.rightBarButtonItems = [myButton, settingsBarButton]
+        
+        let orderSortBarButton = UIBarButtonItem(title: "A→Z", style: .done, target: self, action: #selector(handleOrderSortBarButton))
+        navigationItem.rightBarButtonItems = [orderSortBarButton, settingsBarButton]
+        
+        
+        
         
         navigationItem.searchController = searchController
+    }
+    
+    
+    @objc func handleOrderSortBarButton(){
+        UserAppliedFilter.shared.updateBusinessSortDescriptor()
+        reloadFetchControllers()
     }
     
     override func viewWillAppear(_ animated: Bool) {

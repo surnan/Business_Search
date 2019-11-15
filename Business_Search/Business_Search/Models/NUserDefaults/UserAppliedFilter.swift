@@ -29,40 +29,39 @@ let filterConstant = "AppliedFilter"
 
 class UserAppliedFilter {
     var appliedFilter: AppliedFilter?
-    var businessSortAttribute: String?
+    //var businessSortAttribute: String?
     
+    
+    func getSortDescriptor()->NSSortDescriptor {
+        let sortingAttribute = UserDefaults.standard.object(forKey: BusinessAttributes.sortAttribute.rawValue) as? String ?? BusinessAttributes.name.rawValue
+        
+        if sortingAttribute == BusinessAttributes.newDistance.rawValue {
+            return NSSortDescriptor(keyPath: \Business.newDistance, ascending: true)
+        } else {
+            return NSSortDescriptor(keyPath: \Business.name, ascending: true)
+        }
+    }
     
     func getBusinessSortDescriptor()-> [NSSortDescriptor] {
-        
         let sortFavoritesAtTop = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
-        var finalSortDescriptor = getFavoritesAtTop ? [sortFavoritesAtTop] : [NSSortDescriptor]()
-        
-        let sortingAttribute = UserDefaults.standard.object(forKey: BusinessAttributes.sortAttribute.rawValue) as? String ?? BusinessAttributes.name.rawValue
-        //sortingAttribute = "newDistance"
-        
-        switch sortingAttribute {
-        case BusinessAttributes.newDistance.rawValue:
-            let temp = NSSortDescriptor(keyPath: \Business.newDistance, ascending: true)
-            finalSortDescriptor.append(temp)
-        default:
-            let temp = NSSortDescriptor(keyPath: \Business.name, ascending: true)
-            finalSortDescriptor.append(temp)
-        }
+        let finalSortDescriptor = getFavoritesAtTop ? [sortFavoritesAtTop, getSortDescriptor()] : [getSortDescriptor()]
         return finalSortDescriptor
     }
     
     
     func updateBusinessSortDescriptor(){
+        var sortingAttribute = UserDefaults.standard.object(forKey: BusinessAttributes.sortAttribute.rawValue) as? String ?? BusinessAttributes.name.rawValue
         
+        if sortingAttribute == BusinessAttributes.name.rawValue {
+            sortingAttribute = BusinessAttributes.newDistance.rawValue
+        } else {
+            sortingAttribute = BusinessAttributes.name.rawValue
+        }
+        
+        UserDefaults.standard.set(sortingAttribute, forKey: BusinessAttributes.sortAttribute.rawValue)
     }
     
-    
-    
-    
-    
-    
-    
-    
+
     func loadFilterStruct(){
         guard let savedData = UserDefaults.standard.data(forKey: filterConstant) else {
             return
