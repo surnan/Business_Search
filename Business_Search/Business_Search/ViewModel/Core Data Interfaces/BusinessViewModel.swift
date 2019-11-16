@@ -31,9 +31,6 @@ class BusinessViewModel {
     }
     
     private var businessSortDescriptor: [NSSortDescriptor] {
-        
-        print(UserAppliedFilter.shared.getBusinessSortDescriptor())
-        print("---")
         return UserAppliedFilter.shared.getBusinessSortDescriptor()
     }
     
@@ -50,9 +47,6 @@ class BusinessViewModel {
                     
                     fetchRequest.predicate = NSCompoundPredicate(type: .and, subpredicates: filterControllerPredicate)
                     fetchRequest.sortDescriptors = businessSortDescriptor
-                    
-                    
-                    
                     
                     let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                managedObjectContext: dataController.viewContext,
