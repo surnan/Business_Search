@@ -29,11 +29,17 @@ let filterConstant = "AppliedFilter"
 
 class UserAppliedFilter {
     var appliedFilter: AppliedFilter?
-    //var businessSortAttribute: String?
+    
+    
+    
+    func getSortAttribute()->String{
+        let temp = UserDefaults.standard.object(forKey: BusinessAttributes.sortAttribute.rawValue) as? String ?? BusinessAttributes.name.rawValue
+        return temp
+    }
     
     
     func getSortDescriptor()->NSSortDescriptor {
-        let sortingAttribute = UserDefaults.standard.object(forKey: BusinessAttributes.sortAttribute.rawValue) as? String ?? BusinessAttributes.name.rawValue
+        let sortingAttribute = getSortAttribute()
         
         if sortingAttribute == BusinessAttributes.newDistance.rawValue {
             return NSSortDescriptor(keyPath: \Business.newDistance, ascending: true)

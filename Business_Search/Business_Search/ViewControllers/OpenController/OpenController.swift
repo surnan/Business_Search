@@ -56,6 +56,16 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
     lazy var tableDataSource    = Open_DataSource(parent: self)
     lazy var tableDelegate      = Open_Delegate(parent: self, source: tableDataSource)
     
+    
+    
+    lazy var settingsBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"),
+                                            style: .done,
+                                            target: self,
+                                            action: #selector(handleSettings))
+    
+    lazy var filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
+    
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(CategoryCell.self, forCellReuseIdentifier: categoryCellID)

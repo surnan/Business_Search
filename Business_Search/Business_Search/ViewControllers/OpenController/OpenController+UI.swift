@@ -112,32 +112,31 @@ extension OpenController {
     
     //MARK:- Setting up Right Bar Button
     func setupNavigationMenu(){
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
-        imageView.contentMode           = .scaleAspectFit
-        self.navigationItem.titleView   = imageView
-
-        let settingsBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"),
-                                                style: .done,
-                                                target: self,
-                                                action: #selector(handleSettings))
-        
-        let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
-        //navigationItem.rightBarButtonItems = [myButton, settingsBarButton]
-        
-        let orderSortBarButton = UIBarButtonItem(title: "A→Z", style: .done, target: self, action: #selector(handleOrderSortBarButton))
-        navigationItem.rightBarButtonItems = [orderSortBarButton, settingsBarButton]
-        
-        
-        
-        
-        navigationItem.searchController = searchController
+        let imageView                       = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
+        imageView.contentMode               = .scaleAspectFit
+        self.navigationItem.titleView       = imageView
+        navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
+        navigationItem.searchController     = searchController
     }
     
+    func getOrderSortButton()->UIBarButtonItem{
+        let temp = UserAppliedFilter.shared.getSortAttribute()
+        
+        if temp != "name" {
+            return UIBarButtonItem(title: "A→Z", style: .done, target: self, action: #selector(handleOrderSortBarButton))
+        } else {
+            return UIBarButtonItem(title: "0→9", style: .done, target: self, action: #selector(handleOrderSortBarButton))
+        }
+    }
     
+
     @objc func handleOrderSortBarButton(){
         UserAppliedFilter.shared.updateBusinessSortDescriptor()
         reloadFetchControllers()
+        navigationItem.rightBarButtonItems = [getOrderSortButton(), settingsBarButton, filterButton]
     }
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
