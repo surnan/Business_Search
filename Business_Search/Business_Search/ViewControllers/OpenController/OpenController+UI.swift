@@ -115,9 +115,18 @@ extension OpenController {
         let imageView                       = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode               = .scaleAspectFit
         self.navigationItem.titleView       = imageView
-        navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
+        
+        //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
+        
+        let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
+        navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, myButton]
+        
         navigationItem.searchController     = searchController
     }
+    
+    //lazy var filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
+    //lazy var settingsBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
+    
     
     func getOrderSortButton()->UIBarButtonItem{
         let temp = UserAppliedFilter.shared.getSortAttribute()

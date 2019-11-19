@@ -42,7 +42,11 @@ let defaultOutgoingMessage =  "Hi.  This the Yelp page to a business that I am l
 
 
 enum AppConstants:String {
-    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, isPriceListed, minimumRating, greetingMessage, isFavoritesToTop, today, dateFormat  = "MM/dd/yyyy", filterOn = "filterA_40", filterOff = "filterC_40"
+    case limit, offset, radius, recordCountAtLocation, yelpMaxPullCount, dollarOne, dollarTwo, dollarThree, dollarFour, isPriceListed, minimumRating, greetingMessage, isFavoritesToTop, today, dateFormat  = "MM/dd/yyyy", filterOff = "Filter_Off", filterOn = "Filter_On"
+    
+    
+    //filterOn = "filterA_40",
+    
 }
 
 

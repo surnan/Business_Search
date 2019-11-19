@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "FilterC_48.png",
+      "filename" : "Filter_On_28.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Filter_On_56.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Filter_On_84.png",
       "scale" : "3x"
     }
   ],
