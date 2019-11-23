@@ -25,3 +25,6 @@ protocol OpenInSafariType   {func loadSafariBrowser(url: String)}
 protocol OpenAppleMapType   {func loadAppleMap(currentLocation: CLLocationCoordinate2D)}
 protocol TabControllerType  {func loadTabController(businesses: [Business], categoryName: String)}
 protocol DismissType        {func handleDismiss()}
+
+
+protocol LoadFilterType     {func loadFilterController()}

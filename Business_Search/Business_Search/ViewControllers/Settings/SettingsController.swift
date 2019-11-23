@@ -22,7 +22,14 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var locationsViewModel  : LocationViewModel!
     var favoritesViewModel  : FavoritesViewModel!
     var businessViewModel   : BusinessViewModel!
-
+    
+    
+    var dismissCleanly      : (()->Void)?
+    var loadFilter          : (()->Void)?
+    
+    var filterType: LoadFilterType!
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .clear

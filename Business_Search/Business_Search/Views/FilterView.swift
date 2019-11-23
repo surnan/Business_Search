@@ -47,7 +47,7 @@ class FilterView {
     private var priceLabel          = GenericLabel(text: "Price Ranges:",  size: 20)
     private var noPriceLabel        = GenericLabel(text: "Show if No Price Listed:", size: 18, alignment: .left)
     private var favoriteAtTopLabel  = GenericLabel(text: "All Favorites at Top:", size: 18, alignment: .left)
-    
+
     private var fillerLabel         = GenericLabel(text: "+ ")
     private var filterTitleLabel    = GenericLabel(text: "FILTER OPTIONS\n\n\n", size: 26)
     private lazy var attribTitle    = GenericAttributedTextLabel(text: "FILTER OPTIONS\n\n\n",

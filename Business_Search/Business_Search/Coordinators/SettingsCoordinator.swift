@@ -9,11 +9,12 @@
 import Foundation
 import MapKit
 
-class SettingsCoordinator: Coordinator {
+class SettingsCoordinator: Coordinator, LoadFilterType {
     private let dataController: DataController
     private var maximumSliderValue: Int?
     var getMaximumSliderValue: Int? {return maximumSliderValue}
     private let unblurProtocol: UnBlurViewType
+    private var parent: Coordinator!
     
     init(unblurProtocol: UnBlurViewType, dataController: DataController, router: RouterType) {
         self.unblurProtocol = unblurProtocol
@@ -34,6 +35,13 @@ class SettingsCoordinator: Coordinator {
         let favoritesViewModel = FavoritesViewModel(dataController: dataController)
         let businessViewModel = BusinessViewModel(dataController: dataController)
         
+        
+        /////
+        self.parent = parent
+        ////
+        
+        
+        
         newViewObject.viewModel = newViewModel
         let newController = SettingsController()
         newController.locationsViewModel = LocationViewModel(dataController: dataController)
@@ -50,6 +58,28 @@ class SettingsCoordinator: Coordinator {
                 self?.unblurProtocol.undoBlur()
             })
         }
+        
+        
+        ///////////
+        newController.dismissCleanly = {[weak self] in
+            self?.router.dismissModule(animated: false, completion: {
+                //self?.unblurProtocol.undoBlur()
+                self?.loadFilterController()
+            })
+        }
         router.present(newController, animated: true)
+        
+        
+        newController.filterType = self
+        
+        
     }
+    
+    
+    func loadFilterController(){
+        let coord = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
+        coord.start(parent: parent)
+    }
+    
+    
 }

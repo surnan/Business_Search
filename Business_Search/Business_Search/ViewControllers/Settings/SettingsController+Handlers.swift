@@ -26,6 +26,11 @@ extension SettingsController{
         dismissController?()
     }
     
+    @objc func handleNewButton(){
+        dismissController?()
+        filterType.loadFilterController()
+    }
+    
     @objc private func handleSaveButton(){
         if let newRadius = newRadiusValue {
             radius = newRadius

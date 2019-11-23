@@ -39,6 +39,28 @@ extension SettingsController{
             deleteAllLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             deleteAllLabel.topAnchor.constraint(equalTo: saveCancelDeleteStack.bottomAnchor, constant: 15)
             ])
+        
+        
+        let newButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Load Filter", for: .normal)
+            button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+            button.addTarget(self, action: #selector(handleNewButton), for: .touchDown)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+        
+        
+        view.addSubview(newButton)
+        newButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newButton.topAnchor.constraint(equalTo: deleteAllLabel.bottomAnchor, constant: 15).isActive = true
     }
+    
+
+    
+    
+    
+    
+    
 }
 
