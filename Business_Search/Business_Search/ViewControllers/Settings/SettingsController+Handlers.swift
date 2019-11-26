@@ -26,9 +26,10 @@ extension SettingsController{
         dismissController?()
     }
     
-    @objc func handleNewButton(){
-        dismissController?()
-        filterType.loadFilterController()
+    @objc func handleLoadFilterButton(){
+        //dismissController?()
+        //filterType.loadFilterController()
+        dismissCleanly?()
     }
     
     @objc private func handleSaveButton(){

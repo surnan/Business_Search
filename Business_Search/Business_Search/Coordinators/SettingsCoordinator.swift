@@ -29,7 +29,7 @@ class SettingsCoordinator: Coordinator, LoadFilterType {
         super.init(router: router)
     }
         
-    func start(parent: Coordinator){
+    func start(parent: Coordinator, animationType: Bool = true){
         let newViewModel = SettingsViewModel()
         let newViewObject = SettingsView()
         let favoritesViewModel = FavoritesViewModel(dataController: dataController)
@@ -62,7 +62,7 @@ class SettingsCoordinator: Coordinator, LoadFilterType {
         
         ///////////
         newController.dismissCleanly = {[weak self] in
-            self?.router.dismissModule(animated: false, completion: {
+            self?.router.dismissModule(animated: true, completion: {
                 //self?.unblurProtocol.undoBlur()
                 self?.loadFilterController()
             })

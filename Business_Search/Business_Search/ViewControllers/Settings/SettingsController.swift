@@ -29,6 +29,14 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var filterType: LoadFilterType!
     
+    let loadFilterbutton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Load Filter", for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+        button.addTarget(self, action: #selector(handleLoadFilterButton), for: .touchDown)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
