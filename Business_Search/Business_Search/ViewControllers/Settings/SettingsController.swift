@@ -25,15 +25,16 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     
     
     var saveCancelDeleteStack: UIStackView!
-    var textViewStack: UIStackView!
-    var distanceSliderStack: UIStackView!
-    var verticalSearchStack: UIStackView!
-    var myTextView: GenericTextView!
-    var distanceSlider: GenericSlider!
-    var saveButton: GenericButton!
-    var cancelButton: GenericButton!
-    var defaultsButton: GenericButton!
-    var loadFilterButton: GenericButton!
+    var textViewStack       : UIStackView!
+    var distanceSliderStack : UIStackView!
+    var verticalSearchStack : UIStackView!
+    
+    var myTextView          : GenericTextView!
+    var distanceSlider      : GenericSlider!
+    var saveButton          : GenericButton!
+    var cancelButton        : GenericButton!
+    var defaultsButton      : GenericButton!
+    var loadFilterButton    : GenericButton!
     
     
     
@@ -47,11 +48,11 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             verticalSearchStack     = viewObject.getSearchStack()
             myTextView              = viewObject.myTextView
             
-            distanceSlider = viewObject.distanceSlider
-            saveButton = viewObject.saveButton
-            cancelButton = viewObject.cancelButton
-            defaultsButton = viewObject.defaultsButton
-            loadFilterButton = viewObject.loadFilterButton
+            distanceSlider          = viewObject.distanceSlider
+            saveButton              = viewObject.saveButton
+            cancelButton            = viewObject.cancelButton
+            defaultsButton          = viewObject.defaultsButton
+            loadFilterButton        = viewObject.loadFilterButton
         }
     }
     
@@ -72,4 +73,3 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
         addHandlers()
     }
 }
-
