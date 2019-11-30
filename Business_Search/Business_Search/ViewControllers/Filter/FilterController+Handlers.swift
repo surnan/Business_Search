@@ -28,23 +28,23 @@ extension FilterController {
     @objc func handleCancelButton(){dismissController?()}
     
     @objc func handleSaveButton(){
-        UserAppliedFilter.shared.save(dollarOne: viewObject.dollarOneButton.isSelected,
-                                      dollarTwo: viewObject.dollarTwoButton.isSelected,
-                                      dollarThree: viewObject.dollarThreeButton.isSelected,
-                                      dollarFour: viewObject.dollarFourButton.isSelected,
-                                      noPrices: viewObject.noPriceSwitch.isOn,
-                                      minimumRating: viewObject.sliderValueLabel.text ?? "0.0",
-                                      favoritesAtTop: viewObject.favoriteAtTopSwitch.isOn)
+        UserAppliedFilter.shared.save(dollarOne: dollarOneButton.isSelected,
+                                      dollarTwo: dollarTwoButton.isSelected,
+                                      dollarThree: dollarThreeButton.isSelected,
+                                      dollarFour: dollarFourButton.isSelected,
+                                      noPrices: noPriceSwitch.isOn,
+                                      minimumRating: sliderValueLabel.text ?? "0.0",
+                                      favoritesAtTop: favoriteAtTopSwitch.isOn)
         saveDismissController?()
         
         
-        let tempFilterData = AppliedFilter(dollar1: viewObject.dollarOneButton.isSelected,
-                                           dollar2: viewObject.dollarTwoButton.isSelected,
-                                           dollar3: viewObject.dollarThreeButton.isSelected,
-                                           dollar4: viewObject.dollarFourButton.isSelected,
-                                           priceExists: viewObject.noPriceSwitch.isOn,
-                                           favoritesAtTop: viewObject.favoriteAtTopSwitch.isOn,
-                                           minimumRating: viewObject.sliderValueLabel.text ?? "0.0")
+        let tempFilterData = AppliedFilter(dollar1: dollarOneButton.isSelected,
+                                           dollar2: dollarTwoButton.isSelected,
+                                           dollar3: dollarThreeButton.isSelected,
+                                           dollar4: dollarFourButton.isSelected,
+                                           priceExists: noPriceSwitch.isOn,
+                                           favoritesAtTop: favoriteAtTopSwitch.isOn,
+                                           minimumRating: sliderValueLabel.text ?? "0.0")
         
         UserAppliedFilter.shared.saveFilterStruct(aFilter: tempFilterData)
     }
@@ -60,17 +60,15 @@ extension FilterController {
             $0.backgroundColor = .white
         }
         
-        let tempFilterData = AppliedFilter(dollar1: viewObject.dollarOneButton.isSelected,
-                                           dollar2: viewObject.dollarTwoButton.isSelected,
-                                           dollar3: viewObject.dollarThreeButton.isSelected,
-                                           dollar4: viewObject.dollarFourButton.isSelected,
-                                           priceExists: viewObject.noPriceSwitch.isOn,
-                                           favoritesAtTop: viewObject.favoriteAtTopSwitch.isOn,
-                                           minimumRating: viewObject.sliderValueLabel.text ?? "0.0")
+        let tempFilterData = AppliedFilter(dollar1: dollarOneButton.isSelected,
+                                           dollar2: dollarTwoButton.isSelected,
+                                           dollar3: dollarThreeButton.isSelected,
+                                           dollar4: dollarFourButton.isSelected,
+                                           priceExists: noPriceSwitch.isOn,
+                                           favoritesAtTop: favoriteAtTopSwitch.isOn,
+                                           minimumRating: sliderValueLabel.text ?? "0.0")
         
         UserAppliedFilter.shared.saveFilterStruct(aFilter: tempFilterData)
         isFilteredLabel.isHidden = !UserAppliedFilter.shared.isFilterOn
     }
 }
-
-

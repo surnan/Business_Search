@@ -14,16 +14,44 @@ class FilterController: UIViewController {
     
     let shared                  = UserAppliedFilter.shared
     var coordinator             : FilterCoordinator?
-    var viewObject              : FilterView!
+    
     var viewModel               : FilterViewModel!
     
     var dismissController       : (()->Void)?
     var saveDismissController   : (()->Void)?
     
-    lazy var isFilteredLabel    = viewObject.isFilteredLabel
+    var isFilteredLabel     : GenericLabel!
     
-    lazy var allDollarButtons   = [viewObject.dollarOneButton, viewObject.dollarTwoButton,
+    
+    var allDollarButtons    = [GenericSegmentButton]()
+
+    
+    var dollarOneButton     : GenericSegmentButton!
+    var dollarTwoButton     : GenericSegmentButton!
+    var dollarThreeButton   : GenericSegmentButton!
+    var dollarFourButton    : GenericSegmentButton!
+    
+    var noPriceSwitch       : GenericSwitch!
+    var favoriteAtTopSwitch : GenericSwitch!
+    var sliderValueLabel    : GenericLabel!
+    
+    
+    
+    var viewObject              : FilterView! {
+        didSet{
+            isFilteredLabel     = viewObject.isFilteredLabel
+            allDollarButtons    = [viewObject.dollarOneButton, viewObject.dollarTwoButton,
                                    viewObject.dollarThreeButton,viewObject.dollarFourButton]
+            dollarOneButton     = viewObject.dollarOneButton
+            dollarTwoButton     = viewObject.dollarTwoButton
+            dollarThreeButton   = viewObject.dollarThreeButton
+            dollarFourButton    = viewObject.dollarFourButton
+            noPriceSwitch       = viewObject.noPriceSwitch
+            favoriteAtTopSwitch = viewObject.favoriteAtTopSwitch
+            sliderValueLabel    = viewObject.sliderValueLabel
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
