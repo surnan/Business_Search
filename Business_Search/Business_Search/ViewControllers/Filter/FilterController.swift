@@ -20,6 +20,8 @@ class FilterController: UIViewController {
     var dismissController       : (()->Void)?
     var saveDismissController   : (()->Void)?
     
+    var dismissCleanly      : (()->Void)?
+    
     var isFilteredLabel     : GenericLabel!
     
     
@@ -36,6 +38,12 @@ class FilterController: UIViewController {
     var sliderValueLabel    : GenericLabel!
     
     
+    var defaultButton : HighlightedButton!
+    var saveButton: GenericButton!
+    var cancelButton: GenericButton!
+    var distanceSlider: GenericSlider!
+    
+    
     
     var viewObject              : FilterView! {
         didSet{
@@ -49,6 +57,12 @@ class FilterController: UIViewController {
             noPriceSwitch       = viewObject.noPriceSwitch
             favoriteAtTopSwitch = viewObject.favoriteAtTopSwitch
             sliderValueLabel    = viewObject.sliderValueLabel
+            
+            defaultButton = viewObject.defaultButton
+            saveButton = viewObject.saveButton
+            cancelButton = viewObject.cancelButton
+            distanceSlider = viewObject.distanceSlider
+            
         }
     }
     

@@ -79,7 +79,7 @@ class OpenCoordinator: Coordinator, SettingsType, BusinessDetailsType, FilterTyp
     }
     
     func loadFilter(unblurProtocol: UnBlurViewType){
-        let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
+        let coordinator = FilterCoordinator(unblurProtocol: unblurProtocol, dataController: dataController, router: router)
         coordinator.start(parent: self)
     }
     

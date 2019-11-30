@@ -9,11 +9,15 @@
 import UIKit
 
 extension FilterController {
-    func addHandlers(){
-        viewObject.defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
-        viewObject.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
-        viewObject.cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
-        viewObject.distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+    func addHandlers(){        
+        
+        defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
+        distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
+        
+        
+        
         allDollarButtons.forEach{
             $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
         }

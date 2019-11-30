@@ -11,14 +11,20 @@ import UIKit
 
 class FilterCoordinator: Coordinator {
     private let unblurProtocol: UnBlurViewType
+    private var parent: Coordinator!
+    private let dataController: DataController
     
-    init(unblurProtocol: UnBlurViewType, router: RouterType) {
+    init(unblurProtocol: UnBlurViewType, dataController: DataController, router: RouterType) {
         self.unblurProtocol = unblurProtocol
+        self.dataController = dataController
         super.init(router: router)
     }
     
     
-    func start(parent: Coordinator){
+    func start(parent: Coordinator, animationType: Bool = true){
+        
+        
+        
         let newViewModel    = FilterViewModel() //SettingsViewModel()
         let newViewObject   = FilterView()      //SettingsView()
         
@@ -29,6 +35,12 @@ class FilterCoordinator: Coordinator {
         newController.delegate                  = unblurProtocol
         newController.coordinator               = self
         newController.modalPresentationStyle    = .overFullScreen
+        
+        
+        /////
+        self.parent = parent
+        ////
+        
         
         newController.dismissController = {[weak self] in
             self?.router.dismissModule(animated: true, completion: {
@@ -43,6 +55,23 @@ class FilterCoordinator: Coordinator {
                 _ = UserAppliedFilter.shared.getBusinessPredicate()
             }
         }
+        
+        newController.dismissCleanly = {[weak self] in
+            self?.router.dismissModule(animated: true, completion: {
+                //self?.unblurProtocol.undoBlur()
+                self?.loadSettingsController()
+            })
+        }
         router.present(newController, animated: true)
     }
+    
+    
+    func loadSettingsController(){
+        
+//        let coord = SettingsCoordinator(unblurProtocol: unblurProtocol, dataController: <#T##DataController#>, router: router)
+//        let coord2 = SettingsCoordinator(unblurProtocol: unblurProtocol, dataController: <#T##DataController#>, router: router, maximumSliderValue: <#T##Int?#>)
+//
+//        coord.start(parent: parent)
+    }
+    
 }

@@ -77,7 +77,7 @@ class SettingsCoordinator: Coordinator, LoadFilterType {
     
     
     func loadFilterController(){
-        let coord = FilterCoordinator(unblurProtocol: unblurProtocol, router: router)
+        let coord = FilterCoordinator(unblurProtocol: unblurProtocol, dataController: dataController, router: router)
         coord.start(parent: parent)
     }
     
