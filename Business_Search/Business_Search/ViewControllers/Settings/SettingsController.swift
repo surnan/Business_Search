@@ -29,6 +29,15 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var distanceSliderStack: UIStackView!
     var verticalSearchStack: UIStackView!
     var myTextView: GenericTextView!
+    var distanceSlider: GenericSlider!
+    var saveButton: GenericButton!
+    var cancelButton: GenericButton!
+    var defaultsButton: GenericButton!
+    var loadFilterButton: GenericButton!
+    
+    
+    
+    
     
     var viewObject          : SettingsView! {
         didSet {
@@ -37,6 +46,12 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
             distanceSliderStack     = viewObject.getDistanceSliderStack()
             verticalSearchStack     = viewObject.getSearchStack()
             myTextView              = viewObject.myTextView
+            
+            distanceSlider = viewObject.distanceSlider
+            saveButton = viewObject.saveButton
+            cancelButton = viewObject.cancelButton
+            defaultsButton = viewObject.defaultsButton
+            loadFilterButton = viewObject.loadFilterButton
         }
     }
     
