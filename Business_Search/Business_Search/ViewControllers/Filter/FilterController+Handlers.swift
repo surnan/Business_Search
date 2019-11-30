@@ -9,14 +9,13 @@
 import UIKit
 
 extension FilterController {
-    func addHandlers(){        
-        
+    func addHandlers(){
         defaultButton.addTarget(self, action: #selector(handleResetToDefaultsButton), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
         distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
         
-        
+        settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
         
         allDollarButtons.forEach{
             $0.addTarget(self, action: #selector(handleDollarButtons(_:)), for: .touchDown)
@@ -31,12 +30,15 @@ extension FilterController {
     @objc func handleDollarButtons(_ sender: SelectedButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismissController?()}
     
+    @objc func handleSettingsButton(){dismissCleanly?()}
+    
+    
     @objc func handleSaveButton(){
-        UserAppliedFilter.shared.save(dollarOne: dollarOneButton.isSelected,
-                                      dollarTwo: dollarTwoButton.isSelected,
-                                      dollarThree: dollarThreeButton.isSelected,
-                                      dollarFour: dollarFourButton.isSelected,
-                                      noPrices: noPriceSwitch.isOn,
+        UserAppliedFilter.shared.save(dollarOne:    dollarOneButton.isSelected,
+                                      dollarTwo:    dollarTwoButton.isSelected,
+                                      dollarThree:  dollarThreeButton.isSelected,
+                                      dollarFour:   dollarFourButton.isSelected,
+                                      noPrices:     noPriceSwitch.isOn,
                                       minimumRating: sliderValueLabel.text ?? "0.0",
                                       favoritesAtTop: favoriteAtTopSwitch.isOn)
         saveDismissController?()

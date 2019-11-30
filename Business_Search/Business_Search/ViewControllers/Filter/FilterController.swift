@@ -38,10 +38,11 @@ class FilterController: UIViewController {
     var sliderValueLabel    : GenericLabel!
     
     
-    var defaultButton : HighlightedButton!
-    var saveButton: GenericButton!
-    var cancelButton: GenericButton!
-    var distanceSlider: GenericSlider!
+    var defaultButton   : HighlightedButton!
+    var saveButton      : GenericButton!
+    var cancelButton    : GenericButton!
+    var settingsButton  : GenericButton!
+    var distanceSlider  : GenericSlider!
     
     
     
@@ -58,11 +59,12 @@ class FilterController: UIViewController {
             favoriteAtTopSwitch = viewObject.favoriteAtTopSwitch
             sliderValueLabel    = viewObject.sliderValueLabel
             
-            defaultButton = viewObject.defaultButton
-            saveButton = viewObject.saveButton
-            cancelButton = viewObject.cancelButton
-            distanceSlider = viewObject.distanceSlider
+            defaultButton       = viewObject.defaultButton
+            saveButton          = viewObject.saveButton
+            cancelButton        = viewObject.cancelButton
+            distanceSlider      = viewObject.distanceSlider
             
+            settingsButton      = viewObject.settingsButton
         }
     }
     

@@ -68,10 +68,10 @@ class FilterCoordinator: Coordinator {
     
     func loadSettingsController(){
         
-//        let coord = SettingsCoordinator(unblurProtocol: unblurProtocol, dataController: <#T##DataController#>, router: router)
-//        let coord2 = SettingsCoordinator(unblurProtocol: unblurProtocol, dataController: <#T##DataController#>, router: router, maximumSliderValue: <#T##Int?#>)
-//
-//        coord.start(parent: parent)
+        
+        let coord = SettingsCoordinator(unblurProtocol: unblurProtocol, dataController: dataController, router: router)
+
+        coord.start(parent: parent)
     }
     
 }
