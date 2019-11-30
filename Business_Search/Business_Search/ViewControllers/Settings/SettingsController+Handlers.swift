@@ -15,7 +15,7 @@ extension SettingsController{
         saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(handlecancelButton), for: .touchUpInside)
         defaultsButton.addTarget(self, action: #selector(handleDefaultsButton), for: .touchUpInside)
-        loadFilterButton.addTarget(self, action: #selector(handleLoadFilterButton), for: .touchUpInside) 
+        loadFilterButton.addTarget(self, action: #selector(handleLoadFilterButton), for: .touchUpInside)
     }
     
     @objc private func handleSliderValueChange(_ sender: UISlider, forEvent event: UIEvent){

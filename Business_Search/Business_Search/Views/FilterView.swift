@@ -65,6 +65,7 @@ class FilterView {
 
     let saveButton          = GenericButton(title: "SAVE", isCorner: true)
     let cancelButton        = GenericButton(title: "CANCEL", isCorner: true)
+    let settingsButton      = GenericButton(title: "Edit Settings", isCorner: true)
 
     let defaultButton       : HighlightedButton = {
         let button = HighlightedButton()
@@ -170,7 +171,7 @@ class FilterView {
         stack.axis = .vertical
         stack.spacing = 10
         stack.translatesAutoresizingMaskIntoConstraints = false
-        [saveButton, cancelButton, defaultButton].forEach{stack.addArrangedSubview($0)}
+        [saveButton, cancelButton, defaultButton, settingsButton].forEach{stack.addArrangedSubview($0)}
         return stack
     }
 }

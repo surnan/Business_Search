@@ -36,7 +36,7 @@ class SettingsView {
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
     
     
-    let loadFilterButton = GenericButton(title: "  Change Filter Settings  ", titleColor: .white, backgroundColor: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), isCorner: true)
+    let loadFilterButton = GenericButton(title: "  Edit Filters ", titleColor: .white, backgroundColor: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), isCorner: true)
     
     
     
