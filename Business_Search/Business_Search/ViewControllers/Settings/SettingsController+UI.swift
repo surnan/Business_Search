@@ -10,13 +10,7 @@ import UIKit
 
 extension SettingsController{
     func setupUI(){
-        let saveCancelDeleteStack   = viewObject.getSaveCancelStack()
-        let textViewStack           = viewObject.getTextViewStack()
-        let distanceSliderStack     = viewObject.getDistanceSliderStack()
-        let verticalSearchStack     = viewObject.getSearchStack()
-        
-
-        viewObject.myTextView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        myTextView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
         let myStack: UIStackView = {
             let stack = UIStackView()
@@ -39,21 +33,6 @@ extension SettingsController{
             deleteAllLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             deleteAllLabel.topAnchor.constraint(equalTo: saveCancelDeleteStack.bottomAnchor, constant: 15)
             ])
-        
-        
-
-        
-        
-        view.addSubview(loadFilterbutton)
-        loadFilterbutton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        loadFilterbutton.topAnchor.constraint(equalTo: deleteAllLabel.bottomAnchor, constant: 15).isActive = true
     }
-    
-
-    
-    
-    
-    
-    
 }
 

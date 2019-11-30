@@ -17,27 +17,34 @@ class SettingsController: UIViewController, NSFetchedResultsControllerDelegate {
     var maximumSliderValue  : Int?
     var dismissController   : (()->Void)?
     var coordinator         : Coordinator?
-    var viewObject          : SettingsView!         //SearchByMapView!
+    
     var viewModel           : SettingsViewModel!    //SearchByMapViewModel!
     var locationsViewModel  : LocationViewModel!
     var favoritesViewModel  : FavoritesViewModel!
     var businessViewModel   : BusinessViewModel!
     
     
+    var saveCancelDeleteStack: UIStackView!
+    var textViewStack: UIStackView!
+    var distanceSliderStack: UIStackView!
+    var verticalSearchStack: UIStackView!
+    var myTextView: GenericTextView!
+    
+    var viewObject          : SettingsView! {
+        didSet {
+            saveCancelDeleteStack   = viewObject.getSaveCancelStack()
+            textViewStack           = viewObject.getTextViewStack()
+            distanceSliderStack     = viewObject.getDistanceSliderStack()
+            verticalSearchStack     = viewObject.getSearchStack()
+            myTextView              = viewObject.myTextView
+        }
+    }
+    
     var dismissCleanly      : (()->Void)?
     var loadFilter          : (()->Void)?
     
     var filterType: LoadFilterType!
-    
-    let loadFilterbutton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Load Filter", for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
-        button.addTarget(self, action: #selector(handleLoadFilterButton), for: .touchDown)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor    = .clear

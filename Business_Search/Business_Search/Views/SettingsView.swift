@@ -34,7 +34,12 @@ class SettingsView {
     let cancelButton            = GenericButton(title: "CANCEL" , titleColor: .white, backgroundColor: .red, isCorner: true)
     let defaultsButton          = GenericButton(title: "   Delete Saved Data   "      , titleColor: .white, highlightColor: .red, backgroundColor: .darkGreen ,borderWidth: 1, isCorner: true)
     let myTextViewLabel         = GenericAttributedTextLabel(text: "All outgoing messages include:", attributes: whiteHelvetica_20_blackStroke)
-
+    
+    
+    let loadFilterButton = GenericButton(title: "  Change Filter Settings  ", titleColor: .white, backgroundColor: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), isCorner: true)
+    
+    
+    
     let deleteAllLabel: UILabel = {
         let label     = GenericLabel(text: "All favorites and saved business data deleted", size: 12, backgroundColor: .clear, textColor: .red)
         label.isHidden = true
@@ -83,7 +88,7 @@ class SettingsView {
     
     func getSaveCancelStack()-> UIStackView {
         let stack = GenericStack(spacing: 20)
-        [saveButton, cancelButton, defaultsButton].forEach{stack.addArrangedSubview($0)}
+        [saveButton, cancelButton, defaultsButton, loadFilterButton].forEach{stack.addArrangedSubview($0)}
         return stack
     }
     
