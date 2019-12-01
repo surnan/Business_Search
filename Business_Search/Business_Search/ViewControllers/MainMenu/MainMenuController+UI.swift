@@ -59,9 +59,9 @@ extension MainMenuController {
                                                 target: self,
                                                 action: #selector(handleSettings))
 
-        let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
+        let filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
         
-        navigationItem.rightBarButtonItems = [myButton, settingsBarButton]
+        navigationItem.rightBarButtonItems = [settingsBarButton, filterButton]
         
         self.navigationItem.titleView = mainView.titleImage
         let safe = view.safeAreaLayoutGuide

@@ -118,8 +118,9 @@ extension OpenController {
         
         //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
         
-        let myButton = getFilterButton(target: self, selector: #selector(handleFilter))
-        navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, myButton]
+        let filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
+        //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
+        navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
         
         navigationItem.searchController     = searchController
     }
@@ -142,7 +143,8 @@ extension OpenController {
     @objc func handleOrderSortBarButton(){
         UserAppliedFilter.shared.updateBusinessSortDescriptor()
         reloadFetchControllers()
-        navigationItem.rightBarButtonItems = [getOrderSortButton(), settingsBarButton, filterButton]
+        //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
+        navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
     }
 
     

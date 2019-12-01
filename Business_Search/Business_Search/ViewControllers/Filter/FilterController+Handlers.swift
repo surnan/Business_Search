@@ -14,7 +14,6 @@ extension FilterController {
         saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
         distanceSlider.addTarget(self, action: #selector(handleSliderValueChange(_:forEvent:)), for: .valueChanged)
-        
         settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
         
         allDollarButtons.forEach{
@@ -29,7 +28,6 @@ extension FilterController {
     
     @objc func handleDollarButtons(_ sender: SelectedButton){sender.isSelected = !sender.isSelected}
     @objc func handleCancelButton(){dismissController?()}
-    
     @objc func handleSettingsButton(){dismissCleanly?()}
     
     
