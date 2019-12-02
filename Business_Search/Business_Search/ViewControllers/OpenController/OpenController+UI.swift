@@ -97,7 +97,6 @@ extension OpenController {
             if miles < 1.0 {
                 let lat = locationArray[index].latitude; let lon = locationArray[index].longitude
                 updateCoordinates(latitude: lat, longitude: lon)
-                //updateCoordinates(latitude: getLatitude, longitude: getLongitude)
                 businessViewModel.reload()
                 categoryCountViewModel.reload()
                 return                           //Exit the function
@@ -119,15 +118,10 @@ extension OpenController {
         //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
         
         let filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
-        //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
         navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
         
         navigationItem.searchController     = searchController
     }
-    
-    //lazy var filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
-    //lazy var settingsBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "settings"), style: .done, target: self, action: #selector(handleSettings))
-    
     
     func getOrderSortButton()->UIBarButtonItem{
         let temp = UserAppliedFilter.shared.getSortAttribute()
@@ -143,7 +137,6 @@ extension OpenController {
     @objc func handleOrderSortBarButton(){
         UserAppliedFilter.shared.updateBusinessSortDescriptor()
         reloadFetchControllers()
-        //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
         navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
     }
 
