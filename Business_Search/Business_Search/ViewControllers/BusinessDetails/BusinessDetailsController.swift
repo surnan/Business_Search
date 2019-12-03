@@ -54,5 +54,4 @@ class BusinessDetailsController: UIViewController, MKMapViewDelegate, CLLocation
     var redView     : UIView!
     var nameLabel   : UILabel!
     var mapView     : GenericMapView!
-    
 }

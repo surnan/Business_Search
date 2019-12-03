@@ -15,7 +15,6 @@ extension MainMenuController {
         view.backgroundColor    = .white
         coordinateFound         = false
         previousCoordinate      = nil
-        self.title = "" //Removes the "Back" from navigation menu
         setupUI()       //Error if it's in ViewDidLoad & it resets MenuBarButton
     }
     
@@ -60,7 +59,7 @@ extension MainMenuController {
                                                 action: #selector(handleSettings))
 
         let filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
-        
+        clearBackButton()
         navigationItem.rightBarButtonItems = [settingsBarButton, filterButton]
         
         self.navigationItem.titleView = mainView.titleImage

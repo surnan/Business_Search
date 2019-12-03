@@ -111,6 +111,7 @@ extension OpenController {
     
     //MARK:- Setting up Right Bar Button
     func setupNavigationMenu(){
+        clearBackButton()
         let imageView                       = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode               = .scaleAspectFit
         self.navigationItem.titleView       = imageView

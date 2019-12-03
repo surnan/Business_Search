@@ -52,3 +52,10 @@ extension BusinessDetailsController {
             ])
     }
 }
+
+extension UIViewController {
+    func clearBackButton(){
+        //removed "BACK" from the left bar button title after navigation push.
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+}
