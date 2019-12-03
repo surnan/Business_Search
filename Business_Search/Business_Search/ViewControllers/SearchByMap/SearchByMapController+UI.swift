@@ -12,7 +12,7 @@ extension SearchByMapController {
 
     private func setupDynamicConstraints(){
         anchorMap_ShowHideButton = mapView.topAnchor.constraint(equalTo: addressBarStack.bottomAnchor, constant: 7)
-        anchorMap_SafeAreaTop = mapView.topAnchor.constraint(equalTo: showHideButtonInput.bottomAnchor)
+        anchorMap_SafeAreaTop = mapView.topAnchor.constraint(equalTo: showHideButtonInput.bottomAnchor, constant: 7)
     }
     
     
@@ -28,16 +28,18 @@ extension SearchByMapController {
         
         let safe = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            showHideButtonInput.topAnchor.constraint(equalTo: safe.topAnchor),
-            showHideButtonInput.widthAnchor.constraint(equalTo: view.widthAnchor),
+            showHideButtonInput.topAnchor.constraint(equalTo: safe.topAnchor, constant: 7),
+            
+            //showHideButtonInput.widthAnchor.constraint(equalTo: view.widthAnchor),
+            showHideButtonInput.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            showHideButtonInput.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
             addressBarStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addressBarStack.topAnchor.constraint(equalTo: showHideButtonInput.bottomAnchor, constant: 7),
             myTextField.heightAnchor.constraint(equalTo: showHideButtonInput.heightAnchor),
             myTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
-            
-            //locateAddressButton.widthAnchor.constraint(equalTo: myTextField.widthAnchor, multiplier: 0.6),
+
             
     
             mapView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),

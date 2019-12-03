@@ -46,7 +46,7 @@ class SearchByMapView{
     }()
     
     
-    let hideAddressBarTxt = "Show Map Only ⬆︎"
+    let hideAddressBarTxt = "Tap to Maximize Map ⬆︎"
     let showAddressBarTxt = "Tap to Enter Address ⬇︎"
     
     //let hideAddressColor  = UIColor.royalBlue //UIColor.darkBlue
@@ -54,13 +54,21 @@ class SearchByMapView{
     
     let showAddressColor  = UIColor.dodgerBlue4
     
-    lazy var showHideAddressBarButton  : UIButton = {
-        let button = UIButton()
-        button.setTitle(hideAddressBarTxt, for: .normal)
-        button.backgroundColor = hideAddressColor
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+//    lazy var showHideAddressBarButton  : UIButton = {
+//        let button = UIButton()
+//        button.setTitle(hideAddressBarTxt, for: .normal)
+//        button.backgroundColor = hideAddressColor
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    
+    
+    
+    lazy var showHideAddressBarButton : GenericButton = {
+       let temp = GenericButton(title: hideAddressBarTxt, titleColor: .white, highlightColor: .dodgerBlue4, backgroundColor: .dodgerBlue4, isCorner: true)
+        return temp
     }()
+    
     
     var myTextField: UITextField = {
         let textField = UITextField()
