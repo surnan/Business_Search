@@ -46,9 +46,11 @@ class SearchByMapView{
     }()
     
     
-    let hideAddressBarTxt = "Hide Address Text Input"
-    let showAddressBarTxt = "Enter Address Manually"
-    let hideAddressColor  = UIColor.royalBlue //UIColor.darkBlue
+    let hideAddressBarTxt = "Show Map Only ⬆︎"
+    let showAddressBarTxt = "Tap to Enter Address ⬇︎"
+    
+    //let hideAddressColor  = UIColor.royalBlue //UIColor.darkBlue
+    let hideAddressColor  = UIColor.dodgerBlue4 //UIColor.darkBlue
     
     let showAddressColor  = UIColor.dodgerBlue4
     
@@ -74,8 +76,8 @@ class SearchByMapView{
     
     var locateAddressButton: UIButton = {
         let button = UIButton()
-        button.setTitle("   Locate Address   ", for: .normal)
-        button.backgroundColor = .royalBlue
+        button.setTitle(" GO ", for: .normal)
+        button.backgroundColor = .dodgerBlue4
         button.layer.cornerRadius = 7
         return button
     }()

@@ -54,8 +54,9 @@ class SearchByMapController: UIViewController, MKMapViewDelegate{
     
     var addressBarStack: UIStackView = {
         var stack = UIStackView()
-        stack.spacing = 10
-        stack.axis = .vertical
+        stack.spacing = 5
+        //stack.axis = .vertical
+        stack.axis = .horizontal
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
