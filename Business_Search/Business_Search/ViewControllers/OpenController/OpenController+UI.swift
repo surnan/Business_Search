@@ -114,9 +114,6 @@ extension OpenController {
         let imageView                       = UIImageView(image: #imageLiteral(resourceName: "BUSINESS_Finder"))
         imageView.contentMode               = .scaleAspectFit
         self.navigationItem.titleView       = imageView
-        
-        //navigationItem.rightBarButtonItems  = [getOrderSortButton(), settingsBarButton, filterButton]
-        
         let filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
         navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
         
@@ -127,9 +124,9 @@ extension OpenController {
         let temp = UserAppliedFilter.shared.getSortAttribute()
         
         if temp != "name" {
-            return UIBarButtonItem(title: "A→Z", style: .done, target: self, action: #selector(handleOrderSortBarButton))
+            return UIBarButtonItem(image: UIImage(named: "alphabetSort"), style: .done, target: self, action: #selector(handleOrderSortBarButton))
         } else {
-            return UIBarButtonItem(title: "0→9", style: .done, target: self, action: #selector(handleOrderSortBarButton))
+            return UIBarButtonItem(image: UIImage(named: "number2Sort"), style: .done, target: self, action: #selector(handleOrderSortBarButton))
         }
     }
     
@@ -144,7 +141,7 @@ extension OpenController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "" //Removes the "Back" from navigation menu
+        //self.title = "" //Removes the "Back" from navigation menu
         tableDelegate.reloadCellIfNecessary(tableView: tableView)
         view.backgroundColor    = .lightBlue
         animateResultsAreFilteredLabel()
