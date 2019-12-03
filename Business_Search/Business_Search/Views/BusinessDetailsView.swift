@@ -45,7 +45,17 @@ class BusinessDetailsView {
     private var ratingLabel         = GenericLabel(text: "", size: 16, textColor: .black)
     private var priceLabel          = GenericLabel(text: "", size: 16, textColor: .black)
     private var addressLabel        = GenericLabel(text: "", size: 16, textColor: .black)
-    var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
+    
+    //var nameLabel           = GenericLabel(text: "", size: 16, textColor: .black)
+    
+    var nameLabel           : GenericLabel = {
+       let label = GenericLabel(text: "", size: 16, textColor: .black)
+        label.numberOfLines = -1
+        return label
+    }()
+    
+    
+    
     
     var phoneNumberButton   = GenericButton(title: "", titleColor: .blue, backgroundColor: .white, isCorner: true)
     

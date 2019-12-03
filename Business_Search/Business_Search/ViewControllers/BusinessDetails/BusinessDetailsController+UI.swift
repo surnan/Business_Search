@@ -12,16 +12,22 @@ import MapKit
 import CoreLocation
 
 extension BusinessDetailsController {
+    
+    override func viewDidLoad() {
+        setupUI()
+        addHandlers()
+        setupLocationManager()
+    }
+    
+    func setupLocationManager(){
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
+
     func setupUI(){
         view.backgroundColor = UIColor.white
         let safe        = view.safeAreaLayoutGuide
-        let buttonStack = viewObject.getButtonStack()
-        let infoStack   = viewObject.getFullStack()
-        let redView = viewObject.redView
-        let nameLabel = viewObject.nameLabel
-        let mapView = viewObject.mapView
-        
-        
+
         
         [mapView, nameLabel, infoStack, buttonStack, redView].forEach{view.addSubview($0)}
         
@@ -29,11 +35,11 @@ extension BusinessDetailsController {
                                 padding: .init(top: 3, left: 3, bottom: 0, right: 3),
                                 y: safe.heightAnchor, yMultiply: 0.40)
         
-        nameLabel.anchor(top: viewObject.mapView.bottomAnchor,
+        nameLabel.anchor(top: mapView.bottomAnchor,
                                   padding: .init(top: 15, left: 0, bottom: 0, right: 0),
                                   centerX: true, x: view.widthAnchor, xMultiply: 0.8)
         
-        infoStack.anchor(top: viewObject.nameLabel.bottomAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), centerX: true)
+        infoStack.anchor(top: nameLabel.bottomAnchor, padding: .init(top: 15, left: 0, bottom: 0, right: 0), centerX: true)
         buttonStack.anchor(top: infoStack.bottomAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0),
                            centerX: true, x: view.widthAnchor, xMultiply: 0.66)
         
