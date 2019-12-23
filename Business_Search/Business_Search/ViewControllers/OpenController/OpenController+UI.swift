@@ -116,26 +116,15 @@ extension OpenController {
         imageView.contentMode               = .scaleAspectFit
         self.navigationItem.titleView       = imageView
         let filterButton = getFilterButton(target: self, selector: #selector(handleFilter))
-        navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
-        
+        navigationItem.rightBarButtonItems    = [getSortOrderBarButton(selector: #selector(handleOrderSortBarButton)), filterButton]
         navigationItem.searchController     = searchController
-    }
-    
-    func getOrderSortButton()->UIBarButtonItem{
-        let temp = UserAppliedFilter.shared.getSortAttribute()
-        
-        if temp != "name" {
-            return UIBarButtonItem(image: UIImage(named: "alphabetSort"), style: .done, target: self, action: #selector(handleOrderSortBarButton))
-        } else {
-            return UIBarButtonItem(image: UIImage(named: "number2Sort"), style: .done, target: self, action: #selector(handleOrderSortBarButton))
-        }
     }
     
 
     @objc func handleOrderSortBarButton(){
         UserAppliedFilter.shared.updateBusinessSortDescriptor()
         reloadFetchControllers()
-        navigationItem.rightBarButtonItems  = [getOrderSortButton(), filterButton]
+        navigationItem.rightBarButtonItems    = [getSortOrderBarButton(selector: #selector(handleOrderSortBarButton)), filterButton]
     }
 
     
@@ -169,6 +158,18 @@ extension OpenController {
         DispatchQueue.main.async {
             self.animationView.stop()
             self.animationView.removeFromSuperview()
+        }
+    }
+}
+
+extension UIViewController {
+    func getSortOrderBarButton(selector: Selector)->UIBarButtonItem{
+        let sortAttribute = UserAppliedFilter.shared.getSortAttribute()
+
+        if sortAttribute == "name" {
+            return UIBarButtonItem(image: UIImage(named: "alphabetSort"), style: .done, target: self, action: selector)
+        } else {
+            return UIBarButtonItem(image: UIImage(named: "number2Sort"), style: .done, target: self, action: selector)
         }
     }
 }

@@ -15,19 +15,6 @@ class Favorite_DataSource: NSObject, UITableViewDataSource {
     let favoriteViewModel   : FavoriteBusinessViewModel
     var location            : CLLocation!
     
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 3
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        cell.backgroundColor = .white
-//        cell.textLabel?.text = "Hello World"
-//        cell.textLabel?.textColor = .black
-//        return cell
-//    }
-    
-    
     init(parent: ShowFavoritesController){
         self.favoriteViewModel = parent.viewModel
         self.location = parent.location
@@ -79,8 +66,6 @@ class ShowFavoritesController: UIViewController, UITableViewDelegate {
     }()
     /////////////////////////////////////////////////
     
-//    lazy var tableDataSource    = Open_DataSource(parent: self)
-//    lazy var tableDelegate      = Open_Delegate(parent: self, source: tableDataSource)
     lazy var tableDataSource    = Favorite_DataSource(parent: self)
     
     
