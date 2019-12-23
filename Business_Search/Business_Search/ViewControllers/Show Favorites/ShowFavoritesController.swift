@@ -10,38 +10,6 @@ import UIKit
 import MapKit
 
 
-class Favorite_DataSource: NSObject, UITableViewDataSource {
-    
-    let favoriteViewModel   : FavoriteBusinessViewModel
-    var location            : CLLocation!
-    
-    init(parent: ShowFavoritesController){
-        self.favoriteViewModel = parent.viewModel
-        self.location = parent.location
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-        guard let business  = favoriteViewModel.objectAt(indexPath: indexPath) else {return UITableViewCell()}
-        cell.firstViewModel = BusinessCellViewModel(business: business, colorIndex: indexPath, location: location)
-        return cell
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteViewModel.fetchedObjects().count
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("")
-    }
-    
-    
-}
-
-//class ShowFavoritesController: UITableViewController {
 class ShowFavoritesController: UIViewController, UITableViewDelegate {
     var coordinator : Coordinator?
     var viewModel   : FavoriteBusinessViewModel!
@@ -98,24 +66,4 @@ class ShowFavoritesController: UIViewController, UITableViewDelegate {
         viewModel.deleteAllFavorites()
         favoritesVM.deleteAllFavorites()
     }
-    
-    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: businessCellID, for: indexPath) as! BusinessCell
-//        guard let business  = viewModel.objectAt(indexPath: indexPath) else {return UITableViewCell()}
-//        cell.firstViewModel = BusinessCellViewModel(business: business, colorIndex: indexPath, location: location)
-//        return cell
-//    }
-//
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.fetchedObjects().count
-//    }
-//
-//
-//
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("")
-//    }
-    
 }
