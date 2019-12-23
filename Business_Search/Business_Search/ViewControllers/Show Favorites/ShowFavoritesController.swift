@@ -46,19 +46,26 @@ class ShowFavoritesController: UIViewController, UITableViewDelegate {
         //tableView.delegate = tableDelegate
         
         viewModel.reload()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "PAUSE",
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(handleRightBarButton))
+
         location = CLLocation(latitude: currentLatitude, longitude: currentLongitude)
     }
     
     
     func setupUI(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "PAUSE",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(handleRightBarButton))
+        
+        //navigationItem.rightBarButtonItems    = [getSortOrderBarButton(selector: #selector(tempFunction)), filterButton]
+        navigationItem.rightBarButtonItems    = [getSortOrderBarButton(selector: #selector(tempFunction))]
+        
         [tableView].forEach{view.addSubview($0)}
         tableView.fillSafeSuperView()
     }
     
+    
+    @objc func tempFunction(){}
     
     
     @objc func handleRightBarButton(){
