@@ -106,10 +106,6 @@ class BusinessViewModel {
             print(error)
             print(error.localizedDescription)
         }
-        
-        
-        
-        
     }
     
     var getCount: Int {return fetchBusinessController?.fetchedObjects?.count ?? 0}
