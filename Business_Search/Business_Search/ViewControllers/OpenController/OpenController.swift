@@ -73,8 +73,6 @@ class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate
         tableView.rowHeight = 70
         tableView.separatorColor = UIColor.clear
         tableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
-        //        tableView.dataSource = tableDataSource    //ViewDidLoad
-        //        tableView.delegate = tableDelegate        //ViewDidLoad
         return tableView
     }()
     

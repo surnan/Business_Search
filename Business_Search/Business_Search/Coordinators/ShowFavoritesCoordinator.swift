@@ -30,6 +30,7 @@ class ShowFavoritesCoordinator: Coordinator {
         newController.currentLatitude   = location.coordinate.latitude
         newController.currentLongitude  = location.coordinate.longitude
         newController.favoritesVM       = FavoritesViewModel(dataController: dataController)
+        newController.location          = location
         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
