@@ -8,15 +8,45 @@
 
 import Foundation
 import CoreData
+import MapKit
 
 class FavoriteBusinessViewModel {
     private var dataController: DataController
     private var business: Business?
+    private var gpsLocation: CLLocation!
     
-    init(dataController: DataController, business: Business? = nil) {
+    init(dataController: DataController, business: Business? = nil, gpsLocation: CLLocation? = nil) {
         self.dataController = dataController
-        self.business = business
+        self.business       = business
+        
+        if let gpsLocation = gpsLocation {
+            self.gpsLocation = gpsLocation
+            calculateNewDistances(gpsLocation: gpsLocation)
+        }
     }
+    
+    
+    func calculateNewDistances(gpsLocation: CLLocation){
+        self.gpsLocation = gpsLocation
+        let allBusinesses = fetchedObjects()
+        for item in allBusinesses {
+            let businessLocation = CLLocation(latitude: item.latitude, longitude: item.longitude)
+            let newDistance = gpsLocation.distance(from: businessLocation)
+            item.newDistance = newDistance
+        }
+        
+        
+        do {
+            try dataController.viewContext.save()
+            reload()
+        } catch {
+            print("Error 16A: Unable to save updates to Business.NewDistance")
+            print(error)
+            print(error.localizedDescription)
+        }
+    }
+    
+    
     
     private var fetchPredicateBusinessID: NSPredicate? {
         guard let business = business, let id = business.id else {return nil}
@@ -54,7 +84,6 @@ class FavoriteBusinessViewModel {
     }
     
     
-    //func createFavoriteBusinessAndCategories(business: Business, context: NSManagedObjectContext){
     func createFavoriteBusinessAndCategories(business: Business){
         let context = dataController.viewContext
         let favoriteBusiness = FavoriteBusiness(context: context)
@@ -73,6 +102,7 @@ class FavoriteBusinessViewModel {
         favoriteBusiness.id          = business.id
         favoriteBusiness.distance    = business.distance
         favoriteBusiness.alias       = business.alias
+        favoriteBusiness.newDistance = business.newDistance
         favoriteBusiness.displayPhone   = business.displayPhone
         favoriteBusiness.displayAddress = business.displayAddress
         
@@ -89,12 +119,6 @@ class FavoriteBusinessViewModel {
                     print("Error saving, creating 'createFavoriteBusinessAndCategories' --> func createFavoriteBusinessAndCategories()\n\(error)")
                 }
             }
-            
-//            do {
-//                try context.save()
-//            } catch {
-//                print("Error ZZZ: on catch")
-//            }
         })
         
         do {
@@ -107,7 +131,8 @@ class FavoriteBusinessViewModel {
     
     func objectAt(indexPath: IndexPath)-> FavoriteBusiness? {return fetchShowFavoritesController?.object(at: indexPath)} //It's OK for forced-unwrap because it has to exist at this stage   //Sometimes objectAt returns NIL
     
-    func fetchedObjects() -> [FavoriteBusiness]{return fetchShowFavoritesController!.fetchedObjects ?? []}
+    //func fetchedObjects() -> [FavoriteBusiness]{return fetchShowFavoritesController!.fetchedObjects ?? []}
+    func fetchedObjects() -> [FavoriteBusiness]{return fetchShowFavoritesController?.fetchedObjects ?? []}
     
     func deleteFavoriteBusiness(business: Business){
         self.business = business
@@ -133,13 +158,9 @@ class FavoriteBusinessViewModel {
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetch)
             do {
                 _  = try context.execute(deleteRequest) as! NSBatchDeleteResult
-                
             } catch {
                 print("Error 11A: Error deleting All \(error)")
             }
         }
-        
-
-        
     }
 }

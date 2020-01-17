@@ -20,7 +20,7 @@ class ShowFavoritesCoordinator: Coordinator {
     }
     
     func start(parent: Coordinator){
-        let newViewModel    = FavoriteBusinessViewModel(dataController: dataController)
+        let newViewModel    = FavoriteBusinessViewModel(dataController: dataController, gpsLocation: location)
         let newView         = ShowFavoritesView()
         let newController   = ShowFavoritesController()
     
@@ -29,6 +29,8 @@ class ShowFavoritesCoordinator: Coordinator {
         newController.coordinator       = self
         newController.currentLatitude   = location.coordinate.latitude
         newController.currentLongitude  = location.coordinate.longitude
+        
+        //newController.favoritesVM       = FavoritesViewModel(dataController: dataController)
         newController.favoritesVM       = FavoritesViewModel(dataController: dataController)
         newController.location          = location
         

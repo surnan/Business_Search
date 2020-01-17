@@ -48,11 +48,23 @@ class UserAppliedFilter {
         }
     }
     
+    
+    func getFavoriteBusinessSortDescriptor()-> [NSSortDescriptor] {
+        let sortingAttribute = getSortAttribute()
+        
+        if sortingAttribute == BusinessAttributes.newDistance.rawValue {
+            return [NSSortDescriptor(keyPath: \FavoriteBusiness.newDistance, ascending: true)]
+        } else {
+            return [NSSortDescriptor(keyPath: \FavoriteBusiness.name, ascending: true)]
+        }
+    }
+    
     func getBusinessSortDescriptor()-> [NSSortDescriptor] {
         let sortFavoritesAtTop = NSSortDescriptor(keyPath: \Business.isFavorite, ascending: false)
         let finalSortDescriptor = getFavoritesAtTop ? [sortFavoritesAtTop, getSortDescriptor()] : [getSortDescriptor()]
         return finalSortDescriptor
     }
+    
     
     
     func updateBusinessSortDescriptor(){

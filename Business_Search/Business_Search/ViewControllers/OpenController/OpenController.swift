@@ -12,6 +12,7 @@ import Lottie
 import MapKit
 
 class OpenController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating, DataSourceType, UnBlurViewType, OpenControllerType{
+    
     var animationView           = LOTAnimationView()
     
     var currentLocationID       : NSManagedObjectID?                      //Connects downloaded Business to Location
