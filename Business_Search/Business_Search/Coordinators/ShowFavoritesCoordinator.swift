@@ -9,6 +9,35 @@
 import Foundation
 import MapKit
 
+
+//   func start(parent: Coordinator){
+//       let newController       = OpenController(lat: getLatitude, lon: getLongitude)
+//       let businessViewModel   = BusinessViewModel(delegate: newController,
+//                                                   dataController: dataController,
+//                                                   gpsLocation: location)
+//
+//       let categoryViewModel   = CategoryCountViewModel(delegate: newController, dataController: dataController)
+//       let favoritesViewModel  = FavoritesViewModel(dataController: dataController)
+//       let locationViewModel   = LocationViewModel(latitude: getLatitude, longitude: getLongitude, dataController: dataController)
+//       let viewObject          = OpenView()
+//
+//       viewObject.viewModel    = businessViewModel
+//
+//       newController.businessViewModel         = businessViewModel
+//       newController.categoryCountViewModel    = categoryViewModel
+//       newController.favoritesViewModel        = favoritesViewModel
+//       newController.locationViewModel         = locationViewModel
+//       newController.viewObject                = viewObject
+//       newController.dataController            = dataController
+//       newController.coordinator               = self
+//       newController.location                  = location
+//
+//       router.push(newController, animated: true) {[weak self, weak parent] in
+//           parent?.removeChild(self)
+//           print("OpenCoordinator Popped")
+//       }
+//   }
+
 class ShowFavoritesCoordinator: Coordinator {
     private let dataController: DataController
     private let location : CLLocation
@@ -16,6 +45,7 @@ class ShowFavoritesCoordinator: Coordinator {
     init(dataController: DataController, router: RouterType, location: CLLocation){
         self.dataController = dataController
         self.location = location
+        
         super.init(router: router)
     }
     
@@ -33,7 +63,7 @@ class ShowFavoritesCoordinator: Coordinator {
         //newController.favoritesVM       = FavoritesViewModel(dataController: dataController)
         newController.favoritesVM       = FavoritesViewModel(dataController: dataController)
         newController.location          = location
-        
+         
         router.push(newController, animated: true) {[weak self, weak parent] in
             parent?.removeChild(self)
             print("ShowFavoritesCoordinator Popped")

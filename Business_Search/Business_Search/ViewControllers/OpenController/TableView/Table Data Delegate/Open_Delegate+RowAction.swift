@@ -9,6 +9,7 @@
 import UIKit
 
 extension Open_Delegate {
+    
     //MARK:- ROW RIGHT-SIDE ACTIONS
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         

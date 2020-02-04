@@ -15,6 +15,7 @@
 		8401127E22E51CE300ECE0D5 /* OpenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */; };
 		8401128022E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */; };
 		8401128222E51D5200ECE0D5 /* SearchByMapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */; };
+		8404E7D623D15F2D00392C2C /* ShowFavorites+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8404E7D523D15F2C00392C2C /* ShowFavorites+TableViewDelegate.swift */; };
 		840B4B4D232E73BE00D42715 /* MyDownloader.json in Resources */ = {isa = PBXBuildFile; fileRef = 840B4B4C232E73BD00D42715 /* MyDownloader.json */; };
 		840CC5FC22F1454500BAC72F /* Open_Delegate+RowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */; };
 		840CC5FE22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840CC5FD22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift */; };
@@ -149,6 +150,7 @@
 		8401127D22E51CE300ECE0D5 /* OpenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCoordinator.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		8401127F22E51D2B00ECE0D5 /* SearchByAddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByAddressCoordinator.swift; sourceTree = "<group>"; };
 		8401128122E51D5200ECE0D5 /* SearchByMapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchByMapCoordinator.swift; sourceTree = "<group>"; };
+		8404E7D523D15F2C00392C2C /* ShowFavorites+TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowFavorites+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		840B4B4C232E73BD00D42715 /* MyDownloader.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyDownloader.json; sourceTree = "<group>"; };
 		840CC5FB22F1454500BAC72F /* Open_Delegate+RowAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Open_Delegate+RowAction.swift"; sourceTree = "<group>"; };
 		840CC5FD22F1F7E800BAC72F /* Open_Delegate+LeadingSwype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Open_Delegate+LeadingSwype.swift"; sourceTree = "<group>"; };
@@ -383,6 +385,31 @@
 			path = SubClass;
 			sourceTree = "<group>";
 		};
+		8454F4A023EA295900A270B0 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				8454F4A123EA296400A270B0 /* Table Data Source */,
+				8454F4A223EA298500A270B0 /* Table Data Delegate */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		8454F4A123EA296400A270B0 /* Table Data Source */ = {
+			isa = PBXGroup;
+			children = (
+				8446553623B0F90200D46D1E /* ShowFavoritesController+DataSource.swift */,
+			);
+			path = "Table Data Source";
+			sourceTree = "<group>";
+		};
+		8454F4A223EA298500A270B0 /* Table Data Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				8404E7D523D15F2C00392C2C /* ShowFavorites+TableViewDelegate.swift */,
+			);
+			path = "Table Data Delegate";
+			sourceTree = "<group>";
+		};
 		845A1D8722D02D680066C17C /* NUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,7 +617,7 @@
 			isa = PBXGroup;
 			children = (
 				84A1B78923788EFA00C5918D /* ShowFavoritesController.swift */,
-				8446553623B0F90200D46D1E /* ShowFavoritesController+DataSource.swift */,
+				8454F4A023EA295900A270B0 /* TableView */,
 			);
 			path = "Show Favorites";
 			sourceTree = "<group>";
@@ -901,6 +928,7 @@
 				84E27D1822EFD11C00D2CAE5 /* CategoryCountViewModel.swift in Sources */,
 				8417FCBD227B8A6D005BC240 /* CategoryCell.swift in Sources */,
 				848DEC5922F3E18800102E9B /* PresentableCoordinatorType.swift in Sources */,
+				8404E7D623D15F2D00392C2C /* ShowFavorites+TableViewDelegate.swift in Sources */,
 				847AE27B22EDE79600774371 /* SearchByMapController+UI.swift in Sources */,
 				848DEC5D22F3E1F100102E9B /* PresentableType.swift in Sources */,
 				84DC40D022693AA8003003C4 /* YelpAPIErrorResponse.swift in Sources */,
